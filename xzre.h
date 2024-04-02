@@ -5,6 +5,7 @@
 #define __XZRE_H
 
 #include <assert.h>
+#include <stddef.h>
 #include <stdint.h>
 
 typedef uint8_t u8;
@@ -29,14 +30,12 @@ enum DasmFlags {
 	DF_REX = 0x20
 };
 
-typedef struct {
-	/* 0x0 */
+#define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
+
+typedef struct __attribute((packed)) {
 	u64 first_instruction;
-	/* 0x8 */
 	u64 instruction_size;
-	/* 0x10 */
 	u8 flags;
-	/* 0x18 */
 	u8 flags2;
 	u8 _unk0[2]; // likely padding
 	u8 lock_byte;
@@ -44,21 +43,34 @@ typedef struct {
 	u8 last_prefix;
 	u8 _unk2[4];
 	u8 rex_byte;
-	/* 0x1C */
 	u8 modrm;
 	u8 byte_1c;
 	u8 byte_1d;
 	u8 reg;
 	u8 _unk3[4];
 	u8 byte_24;
+	u8 _unk4[3];
 	u32 opcode;
 	u8 _unk5[4];
 	u64 mem_offset;
-	u64 _unk7;
+	u64 operand;
+	u64 _unk6[2];
 	u8 insn_offset;
-	u8 _unk8[56];
+	u8 _unk8[47];
 } dasm_ctx_t;
 
+assert_offset(dasm_ctx_t, first_instruction, 0);
+assert_offset(dasm_ctx_t, instruction_size, 8);
+assert_offset(dasm_ctx_t, flags, 0x10);
+assert_offset(dasm_ctx_t, flags2, 0x11);
+assert_offset(dasm_ctx_t, lock_byte, 0x14);
+assert_offset(dasm_ctx_t, last_prefix, 0x16);
+assert_offset(dasm_ctx_t, rex_byte, 0x1B);
+assert_offset(dasm_ctx_t, modrm, 0x1C);
+assert_offset(dasm_ctx_t, opcode, 0x28);
+assert_offset(dasm_ctx_t, mem_offset, 0x30);
+assert_offset(dasm_ctx_t, operand, 0x38);
+assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
 
 #include "util.h"
