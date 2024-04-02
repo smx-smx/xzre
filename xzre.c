@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-extern int x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);
-
 extern void dasm_sample(void);
 extern void dasm_sample_end();
 
@@ -19,10 +17,12 @@ int main(int argc, char *argv[]){
 		if(!res) break;
 		//hexdump(&ctx, sizeof(ctx));
 		printf(
-			"[%2d]: opcode: 0x%08x  (l: %2ld) -- "
-			"modrm: 0x%02x, reg:%d, mem_offset: %lx\n", i,
-			XZDASM_OPC(ctx.opcode), ctx.instruction_size, ctx.modrm,
-			ctx.reg, ctx.mem_offset);
+			"[%2d]: opcode: 0x%08x (orig:0x%08X)  (l: %2ld) -- "
+			"modrm: 0x%02x, reg:%d, operand: %lx, mem_offset: %lx\n", i,
+			XZDASM_OPC(ctx.opcode), ctx.opcode,
+			ctx.instruction_size, ctx.modrm,
+			ctx.reg, ctx.operand,
+			ctx.mem_offset);
 	};
 
 	return 0;

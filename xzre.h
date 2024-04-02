@@ -53,6 +53,7 @@ typedef struct __attribute((packed)) {
 	u32 opcode;
 	u8 _unk5[4];
 	u64 mem_offset;
+	// e.g. in CALL
 	u64 operand;
 	u64 _unk6[2];
 	u8 insn_offset;
@@ -72,6 +73,19 @@ assert_offset(dasm_ctx_t, mem_offset, 0x30);
 assert_offset(dasm_ctx_t, operand, 0x38);
 assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
+
+extern int x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);
+
+/**
+ * @brief finds a call instruction
+ *
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param call_target optional call target address. pass 0 to find any call
+ * @param dctx empty disassembler context to hold the state
+ * @return int TRUE if found, FALSE otherwise
+ */
+extern int find_call_instruction(uint8_t *code_start, uint8_t *code_end, uint8_t *call_target, dasm_ctx_t *dctx);
 
 #include "util.h"
 #endif

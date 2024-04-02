@@ -10,10 +10,12 @@
 
 dasm_sample:
 	nop
+	nop dword ptr [rax+2]
 	xor rbx, rsi
 	add edi, [edi+2]
 	movdqa  xmm8, xmmword ptr [rsp+0x100]
 	inc ax
+	call .
 	ret
 
 dasm_sample_end:
