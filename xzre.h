@@ -53,7 +53,7 @@ typedef struct {
 	u8 byte_24;
 	u32 opcode;
 	u8 _unk5[4];
-	u64 _unk6;
+	u64 mem_offset;
 	u64 _unk7;
 	u8 insn_offset;
 	u8 _unk8[56];

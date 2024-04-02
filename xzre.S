@@ -11,6 +11,7 @@
 dasm_sample:
 	nop
 	xor rbx, rsi
+	add edi, [edi+2]
 	movdqa  xmm8, xmmword ptr [rsp+0x100]
 	inc ax
 	ret
