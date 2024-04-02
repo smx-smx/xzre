@@ -3,8 +3,6 @@
  **/
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
-#include <stdint.h>
 
 void hexdump(void *address, long lSize) {
 	char buffer[100];
