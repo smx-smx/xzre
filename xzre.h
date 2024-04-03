@@ -266,7 +266,7 @@ extern BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, Fu
  * @param p_flags the segment protection flags (PF_*)
  * @return BOOL TRUE if found, FALSE otherwise
  */
-extern BOOL elf_contains_segment(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags, int step);
+extern BOOL elf_contains_segment(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);
 
 /**
  * @brief Parses the given in-memory ELF file into elf_info
