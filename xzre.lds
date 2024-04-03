@@ -22,6 +22,8 @@ SECTIONS {
         *(.text.crc64_generia);
         "secret_data_append_if_flags" = ".";
         *(.text.lzma_check_inia);
+        "find_reg2reg_instruction" = ".";
+        *(.text.lzma_block_total_siza);
 
     }
 } INSERT AFTER .text;
