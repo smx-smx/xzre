@@ -3,10 +3,12 @@
  **/
 #include "xzre.h"
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 extern void dasm_sample(void);
 extern void dasm_sample_end();
+extern void dasm_sample_dummy_location();
 
 int main(int argc, char *argv[]){
 	puts("xzre 0.1 by Smx :)");
@@ -18,12 +20,11 @@ int main(int argc, char *argv[]){
 		//hexdump(&ctx, sizeof(ctx));
 		printf(
 			"[%2d]: opcode: 0x%08x (orig:0x%08X)  (l: %2ld) -- "
-			"modrm: 0x%02x, reg:%d, operand: %lx, mem_offset: %lx\n", i,
+			"modrm: 0x%02x, reg:%d, operand: %lx, mem_disp: %lx\n", i,
 			XZDASM_OPC(ctx.opcode), ctx.opcode,
 			ctx.instruction_size, ctx.modrm,
 			ctx.reg, ctx.operand,
-			ctx.mem_offset);
+			ctx.mem_disp);
 	};
-
 	return 0;
 }

@@ -7,10 +7,13 @@
 .section .text
 .globl dasm_sample
 .globl dasm_sample_end
+.globl dasm_sample_dummy_location
 
 dasm_sample:
 	nop
+	call dasm_sample_dummy_location
 	nop dword ptr [rax+2]
+	lea r8, [r9 + 0xbeef]
 	xor rbx, rsi
 	add edi, [edi+2]
 	movdqa  xmm8, xmmword ptr [rsp+0x100]
@@ -20,3 +23,6 @@ dasm_sample:
 
 dasm_sample_end:
 	.byte 0
+
+dasm_sample_dummy_location:
+	ret

@@ -52,7 +52,7 @@ typedef struct __attribute((packed)) {
 	u8 _unk4[3];
 	u32 opcode;
 	u8 _unk5[4];
-	u64 mem_offset;
+	u64 mem_disp;
 	// e.g. in CALL
 	u64 operand;
 	u64 _unk6[2];
@@ -69,7 +69,7 @@ assert_offset(dasm_ctx_t, last_prefix, 0x16);
 assert_offset(dasm_ctx_t, rex_byte, 0x1B);
 assert_offset(dasm_ctx_t, modrm, 0x1C);
 assert_offset(dasm_ctx_t, opcode, 0x28);
-assert_offset(dasm_ctx_t, mem_offset, 0x30);
+assert_offset(dasm_ctx_t, mem_disp, 0x30);
 assert_offset(dasm_ctx_t, operand, 0x38);
 assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
@@ -93,7 +93,17 @@ extern int x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);
  * @param dctx empty disassembler context to hold the state
  * @return int TRUE if found, FALSE otherwise
  */
-extern int find_call_instruction(uint8_t *code_start, uint8_t *code_end, uint8_t *call_target, dasm_ctx_t *dctx);
+extern int find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx);
+
+/**
+ * @brief finds a lea instruction
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param displacement the memory displacement operand of the target lea instruction
+ * @return int TRUE if found, FALSE otherwise
+ */
+extern int find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
 
 #include "util.h"
 #endif
