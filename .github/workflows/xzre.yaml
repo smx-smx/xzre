@@ -32,12 +32,8 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       if: ${{ false }}
-
-    - name: Doxygen Action
-      uses: mattnotmitt/doxygen-action@1.9.8
             
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
