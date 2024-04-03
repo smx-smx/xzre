@@ -14,6 +14,8 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uintptr_t uptr;
 
+#include <lzma.h>
+
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
 #define PTRDIFF(a, b) (UPTR(a) - UPTR(b))
@@ -123,6 +125,13 @@ extern int find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
  * @return int TRUE if found, FALSE otherwise
  */
 extern int find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);
+
+/**
+ * @brief gets the fake LZMA allocator, used for imports resolution
+ * 
+ * @return lzma_allocator* 
+ */
+extern lzma_allocator *get_lzma_allocator();
 
 #include "util.h"
 #endif

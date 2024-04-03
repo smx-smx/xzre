@@ -8,5 +8,7 @@ SECTIONS {
         *(.text.lzma_raw_encodea);
         "find_function_prologue" = ".";
         *(.text.lzma_raw_coder_memusaga);
+        "get_lzma_allocator" = ".";
+        *(.text.stream_decoder_memconfia);
     }
 } INSERT AFTER .text;

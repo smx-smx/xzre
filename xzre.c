@@ -26,5 +26,17 @@ int main(int argc, char *argv[]){
 			ctx.reg, ctx.operand,
 			ctx.mem_disp);
 	};
+
+	lzma_allocator *fake_allocator = get_lzma_allocator();
+	printf(
+		"fake_allocator: %p\n"
+		" - alloc: %p\n"
+		" - free: %p\n"
+		" - opaque: %p\n",
+		fake_allocator,
+		fake_allocator->alloc,
+		fake_allocator->free,
+		fake_allocator->opaque
+	);
 	return 0;
 }
