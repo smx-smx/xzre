@@ -301,15 +301,32 @@ extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
 extern lzma_allocator *get_lzma_allocator();
 
 /**
- * @brief Shifts data in the secret data store, after validation of \p code.
- * this function is intended to be invoked only once for each \p operation_id value.
- * \p operation_id will be used as an index into a global array of flags,
- * so that multiple calls with the same value will be a NO-OP.
+ * @brief Calls @ref secret_data_append_singleton, if @p flags are non-zero
  *
- * the \p code will be verified to check if the shift operation should be allowed or not.
+ * @param shift_cursor the initial shift index
+ * @param operation_index identification for this shift operation
+ * @param reg2reg_instruction_count number of"reg2reg" instructions expected in the function pointed to by @p code
+ * @param flags must be non-zero in order for the operation to be executed
+ * @param code pointer to code that will be checked by the function, to "authorize" the data load
+ * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
+ */
+extern BOOL secret_data_append_if_flags(
+	secret_data_shift_cursor shift_cursor,
+	unsigned operation_index,
+	unsigned reg2reg_instruction_count,
+	int flags, u8 *code);
+
+/**
+ * @brief Shifts data in the secret data store, after validation of @p code.
+ * this function is intended to be invoked only once for each @p operation_index value.
+ * @p operation_index will be used as an index into a global array of flags,
+ * so that multiple calls with the same value will be a NO-OP.
+ * 
+ * the @p code will be verified to check if the shift operation should be allowed or not.
  * the algorithm will:
  * - locate the beginning of the function, by scanning for the `endbr64` instruction
- * - search for \p reg2reg_instruction_count number of "reg2reg" functions (explained below)
+ *    and making sure that the code lies between a pre-defined code range (TODO: figure out where the range is set)
+ * - search for @p reg2reg_instruction_count number of "reg2reg" functions (explained below)
  * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
  * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop.
  *
@@ -319,18 +336,28 @@ extern lzma_allocator *get_lzma_allocator();
  *  opcode_check = opcode - 0x83;
  *  if ( opcode_check > 0x2E || ((0x410100000101 >> opcode_value) & 1) == 0 )
  *
- * additionally, checks outlined in @see find_reg2reg_instruction must also pass
+ * additionally, checks outlined in @ref find_reg2reg_instruction must also pass
  * NOTE: the opcode in 'opcode' is the actual opcode +0x80 
  * TODO: inspect x64 manual to find the exact filter
  *
- * @param shift_index the initial shift index
- * @param operation_id identification for this shift operation
- * @param reg2reg_instruction_count the number of "reg2reg" instructions expected in the function pointed to by \p code
- * @param flags must be non-zero in order for the operation to be executed
+ * if @p call_site is supplied, a preliminary check will be conducted to see if the caller function
+ * contains a CALL-relative instruction.
+ * several functions have a CALL in the prologue which serves a dual purpose:
+ * - push more data in the secret data store
+ * - check if the call is authorized (the code is in the authorized range, and starts with a CALL-relative instruction)
+ *
+ *
+ * @param call_site if supplied, it will be checked if it contains a valid CALL-relative instruction
  * @param code pointer to code that will be checked by the function, to "authorize" the data load
- * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
+ * @param shift_cursor the initial shift index
+ * @param reg2reg_instruction_count number of"reg2reg" instructions expected in the function pointed to by @p code
+ * @param operation_index index/id of shit shift operation
+ * @return BOOL 
  */
-extern BOOL secret_data_append_if_flags(secret_data_shift_cursor shifter, unsigned operation_id, unsigned mov_count, int flags, u8 *code);
+extern BOOL secret_data_append_singleton(
+	u8 *call_site, u8 *code,
+	secret_data_shift_cursor shift_cursor,
+	unsigned reg2reg_instruction_count, unsigned operation_index);
 
 #include "util.h"
 #endif

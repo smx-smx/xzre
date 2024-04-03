@@ -24,6 +24,7 @@ SECTIONS {
         *(.text.lzma_check_inia);
         "find_reg2reg_instruction" = ".";
         *(.text.lzma_block_total_siza);
-
+        "secret_data_append_singleton" = ".";
+        *(.text.rc_read_inis);
     }
 } INSERT AFTER .text;
