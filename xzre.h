@@ -1,6 +1,9 @@
-/*
- * Copyright (C) 2024 Stefano Moioli <smxdev4@gmail.com>
- **/
+/**
+ * @file xzre.h
+ * @author Stefano Moioli (smxdev4@gmail.com)
+ * @brief XZ backdoor structures and functions
+ * 
+ */
 #ifndef __XZRE_H
 #define __XZRE_H
 
