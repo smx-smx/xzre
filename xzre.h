@@ -182,7 +182,7 @@ assert_offset(elf_info_t, gnu_hash_bloom, 0xe8);
 assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
-typedef struct {
+typedef struct __attribute__((packed)) {
 	PADDING(8);
 	/**
 	 * @brief 
@@ -213,7 +213,7 @@ typedef struct {
 	 * holds the shift operation states
 	 * written by @ref secret_data_append_singleton
 	 */
-	u8 shift_operations[28];
+	u8 shift_operations[31];
 	/**
 	 * @brief 
 	 * cumulative number of reg2reg instructions 
