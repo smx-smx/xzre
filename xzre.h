@@ -15,6 +15,7 @@ typedef uint64_t u64;
 typedef uintptr_t uptr;
 
 #include <lzma.h>
+#include <openssl/rsa.h>
 
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
@@ -23,14 +24,31 @@ typedef uintptr_t uptr;
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
 
+typedef int BOOL;
+
 typedef enum {
 	// has lock prefix
 	DF_LOCK = 1,
+	// has es-segment override
+	DF_ESEG = 2,
+	// has operand size override
+	DF_OSIZE = 4,
 	// has address size override
 	DF_ASIZE = 8,
 	// has rex
 	DF_REX = 0x20
 } DasmFlags;
+
+typedef enum {
+	// register-indirect addressing or no displacement
+	MRM_I_REG, // 00
+	// indirect with one byte displacement
+	MRM_I_DISP1, // 01
+	// indirect with four byte displacement
+	MRM_I_DISP4, // 10
+	// direct-register addressing
+	MRM_D_REG // 11
+} ModRm_Mod;
 
 typedef enum {
 	// find function beginning by looking for endbr64
@@ -43,7 +61,7 @@ typedef enum {
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 
 typedef struct __attribute((packed)) {
-	u64 first_instruction;
+	u8* first_instruction;
 	u64 instruction_size;
 	u8 flags;
 	u8 flags2;
@@ -54,9 +72,9 @@ typedef struct __attribute((packed)) {
 	u8 _unk2[4];
 	u8 rex_byte;
 	u8 modrm;
-	u8 byte_1c;
-	u8 byte_1d;
-	u8 reg;
+	u8 modrm_mod;
+	u8 modrm_reg;
+	u8 modrm_rm;
 	u8 _unk3[4];
 	u8 byte_24;
 	u8 _unk4[3];
@@ -78,6 +96,9 @@ assert_offset(dasm_ctx_t, lock_byte, 0x14);
 assert_offset(dasm_ctx_t, last_prefix, 0x16);
 assert_offset(dasm_ctx_t, rex_byte, 0x1B);
 assert_offset(dasm_ctx_t, modrm, 0x1C);
+assert_offset(dasm_ctx_t, modrm_mod, 0x1D);
+assert_offset(dasm_ctx_t, modrm_reg, 0x1E);
+assert_offset(dasm_ctx_t, modrm_rm, 0x1F);
 assert_offset(dasm_ctx_t, opcode, 0x28);
 assert_offset(dasm_ctx_t, mem_disp, 0x30);
 assert_offset(dasm_ctx_t, operand, 0x38);
@@ -101,9 +122,9 @@ extern int x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);
  * @param code_end address to stop searching at
  * @param call_target optional call target address. pass 0 to find any call
  * @param dctx empty disassembler context to hold the state
- * @return int TRUE if found, FALSE otherwise
+ * @return BOOL TRUE if found, FALSE otherwise
  */
-extern int find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx);
+extern BOOL find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx);
 
 /**
  * @brief finds a lea instruction
@@ -111,9 +132,9 @@ extern int find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target, 
  * @param code_start address to start searching from
  * @param code_end address to stop searching at
  * @param displacement the memory displacement operand of the target lea instruction
- * @return int TRUE if found, FALSE otherwise
+ * @return BOOL TRUE if found, FALSE otherwise
  */
-extern int find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
+extern BOOL find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
 
 /**
  * @brief locates the function prologue
@@ -122,9 +143,9 @@ extern int find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
  * @param code_end address to stop searching at
  * @param output pointer to receive the resulting prologue address, if found
  * @param find_mode prologue search mode/strategy
- * @return int TRUE if found, FALSE otherwise
+ * @return BOOL TRUE if found, FALSE otherwise
  */
-extern int find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);
+extern BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);
 
 /**
  * @brief gets the fake LZMA allocator, used for imports resolution

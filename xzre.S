@@ -10,6 +10,20 @@
 .globl dasm_sample_dummy_location
 
 dasm_sample:
+	endbr64
+	push r15
+	sub rsp, 0xC0
+	add rbp, 1234
+	push rdi
+	mov edi, 0x85
+	push rsi
+	mov esi, 0x12
+	call check_call_site
+	test eax, eax
+	jz 2f
+
+	push rbp
+	mov rbp, rsp
 	nop
 	call dasm_sample_dummy_location
 	nop dword ptr [rax+2]
@@ -19,6 +33,9 @@ dasm_sample:
 	movdqa  xmm8, xmmword ptr [rsp+0x100]
 	inc ax
 	call .
+2:
+	add rsp, 0xc0
+	pop rbp
 	ret
 
 dasm_sample_end:

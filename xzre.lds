@@ -10,5 +10,7 @@ SECTIONS {
         *(.text.lzma_raw_coder_memusaga);
         "get_lzma_allocator" = ".";
         *(.text.stream_decoder_memconfia);
+        "check_call_site" = ".";
+        *(.text.lzma_index_iter_rewina);
     }
 } INSERT AFTER .text;
