@@ -1,6 +1,6 @@
 SECTIONS {
     .lzma : {
-		"x86_dasm" = .;
+        "x86_dasm" = .;
         *(.text.x86_codd);
 
         "find_call_instruction" = .;

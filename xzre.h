@@ -182,6 +182,53 @@ assert_offset(elf_info_t, gnu_hash_bloom, 0xe8);
 assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
+typedef struct {
+	PADDING(8);
+	/**
+	 * @brief 
+	 * pointer to the structure containing resolved OpenSSL and system functions
+	 */
+	void *imported_funcs;
+	PADDING(0x70);
+	/**
+	 * @brief 
+	 * the shifter will use this address as the minimum search address
+	 * any instruction below this address will be rejected
+	 */
+	u64 code_range_start;
+	/**
+	 * @brief 
+	 * the shifter will use this address as the maximum search address
+	 * any instruction beyond this address will be rejected
+	 */
+	u64 code_range_end;
+	PADDING(0x78);
+	/**
+	 * @brief 
+	 * holds the secret data used for the chacha key generation
+	 */
+	u8 secret_data[57];
+	/**
+	 * @brief
+	 * holds the shift operation states
+	 * written by @ref secret_data_append_singleton
+	 */
+	u8 shift_operations[28];
+	/**
+	 * @brief 
+	 * cumulative number of reg2reg instructions 
+	 * successfully validated by the data shifter
+	 */
+	u32 reg2reg_instructions_count;
+} global_context_t;
+
+assert_offset(global_context_t, imported_funcs, 8);
+assert_offset(global_context_t, code_range_start, 0x80);
+assert_offset(global_context_t, code_range_end, 0x88);
+assert_offset(global_context_t, secret_data, 0x108);
+assert_offset(global_context_t, shift_operations, 0x141);
+assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
+
 /**
  * @brief represents a shift register, which will shift 
  * a '1' into the secret data array.
