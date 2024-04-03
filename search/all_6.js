@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['x86_5fdasm_16',['x86_dasm',['../xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f',1,'xzre.h']]],
-  ['xzre_17',['xzre',['../md_README.html',1,'']]],
-  ['xzre_2eh_18',['xzre.h',['../xzre_8h.html',1,'']]]
+  ['reg2reg_5finstructions_5fcount_17',['reg2reg_instructions_count',['../structglobal__context__t.html#ac1d01738ca5f41afe7285ef5ac4ebf75',1,'global_context_t']]]
 ];
