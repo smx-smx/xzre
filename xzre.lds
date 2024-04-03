@@ -20,5 +20,8 @@ SECTIONS {
         *(.text.crc_inia);
         "elf_symbol_get_addr" = ".";
         *(.text.crc64_generia);
+        "secret_data_append_if_flags" = ".";
+        *(.text.lzma_check_inia);
+
     }
 } INSERT AFTER .text;

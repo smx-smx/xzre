@@ -176,6 +176,22 @@ assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
 /**
+ * @brief represents a shift register, which will shift 
+ * a '1' into the secret data array.
+ * the low 3 bits represent the bit index, while the rest represents the byte index
+ * this is convenient, since a simple increment will increment the buffer position correctly
+ */
+typedef union {
+	struct {
+		/** NOTE: little endian bitfield ordering */
+		u32 bit_index : 3;
+		u32 byte_index : 29;
+	};
+	/** the initial value */
+	u32 index;
+} secret_data_shift_cursor;
+
+/**
  * @brief disassembles the given x64 code
  *
  * @param ctx empty disassembler context to hold the state
@@ -262,6 +278,36 @@ extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
  * @return lzma_allocator* 
  */
 extern lzma_allocator *get_lzma_allocator();
+
+/**
+ * @brief Shifts data in the secret data store, after validation of \p code.
+ * this function is intended to be invoked only once for each \p operation_id value.
+ * \p operation_id will be used as an index into a global array of flags,
+ * so that multiple calls with the same value will be a NO-OP.
+ *
+ * the \p code will be verified to check if the shift operation should be allowed or not.
+ * the algorithm will:
+ * - locate the beginning of the function, by scanning for the `endbr64` instruction
+ * - search for \p reg2reg_instruction_count number of "reg2reg" functions (explained below)
+ * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
+ * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop.
+ *
+ * a reg2reg instruction is an x64 instruction with one of the following characteristics:
+ * - primary opcode of 0x89 (MOV) or 0x3B (CMP)
+ * or, alternatively, an opcode that passes the following validation
+ *  opcode_check = opcode - 0x83;
+ *  if ( opcode_check > 0x2E || ((0x410100000101 >> opcode_value) & 1) == 0 )
+ * NOTE: the opcode in 'opcode' is the actual opcode +0x80 
+ * TODO: inspect x64 manual to find the exact filter)
+ *
+ * @param shift_index the initial shift index
+ * @param operation_id identification for this shift operation
+ * @param reg2reg_instruction_count the number of "reg2reg" instructions expected in the function pointed to by \p code
+ * @param flags must be non-zero in order for the operation to be executed
+ * @param code pointer to code that will be checked by the function, to "authorize" the data load
+ * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
+ */
+extern BOOL secret_data_append_if_flags(secret_data_shift_cursor shifter, unsigned operation_id, unsigned mov_count, int flags, u8 *code);
 
 #include "util.h"
 #endif
