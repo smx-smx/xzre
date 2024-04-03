@@ -21,14 +21,22 @@ typedef uintptr_t uptr;
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
 
-enum DasmFlags {
+typedef enum {
 	// has lock prefix
 	DF_LOCK = 1,
 	// has address size override
 	DF_ASIZE = 8,
 	// has rex
 	DF_REX = 0x20
-};
+} DasmFlags;
+
+typedef enum {
+	// find function beginning by looking for endbr64
+	FIND_ENDBR64,
+	// find function beginning by looking for padding,
+	// then getting the instruction after it
+	FIND_NOP
+} FuncFindType;
 
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 
@@ -104,6 +112,17 @@ extern int find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target, 
  * @return int TRUE if found, FALSE otherwise
  */
 extern int find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
+
+/**
+ * @brief locates the function prologue
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param output pointer to receive the resulting prologue address, if found
+ * @param find_mode prologue search mode/strategy
+ * @return int TRUE if found, FALSE otherwise
+ */
+extern int find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);
 
 #include "util.h"
 #endif
