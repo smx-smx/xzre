@@ -71,32 +71,36 @@ typedef enum {
 
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 
+#define CONCAT(x, y) x ## y
+#define EXPAND(x, y) CONCAT(x, y)
+#define PADDING(size) u8 EXPAND(_unknown, __LINE__)[size]
+
 typedef struct __attribute__((packed)) {
 	u8* first_instruction;
 	u64 instruction_size;
 	u8 flags;
 	u8 flags2;
-	u8 _unk0[2]; // likely padding
+	PADDING(2);
 	u8 lock_byte;
 	u8 _unk1;
 	u8 last_prefix;
-	u8 _unk2[4];
+	PADDING(4);
 	u8 rex_byte;
 	u8 modrm;
 	u8 modrm_mod;
 	u8 modrm_reg;
 	u8 modrm_rm;
-	u8 _unk3[4];
+	PADDING(4);
 	u8 byte_24;
-	u8 _unk4[3];
+	PADDING(3);
 	u32 opcode;
-	u8 _unk5[4];
+	PADDING(4);
 	u64 mem_disp;
 	// e.g. in CALL
 	u64 operand;
-	u64 _unk6[2];
+	PADDING(16);
 	u8 insn_offset;
-	u8 _unk8[47];
+	PADDING(47);
 } dasm_ctx_t;
 
 assert_offset(dasm_ctx_t, first_instruction, 0);
@@ -138,13 +142,13 @@ typedef struct __attribute__((packed)) {
 	u32 _unused0;
 	Elf64_Relr *relr_relocs;
 	u32 relr_relocs_num;
-	u8 _unknown0[60];
+	PADDING(60);
 	u8 flags;
-	u8 _unknown1[7];
+	PADDING(7);
 	u32 gnu_hash_nbuckets;
 	u32 gnu_hash_last_bloom;
 	u32 gnu_hash_bloom_shift;
-	u8 _unused1[4];
+	PADDING(4);
 	u64 *gnu_hash_bloom;
 	u32 *gnu_hash_buckets;
 	u32 *gnu_hash_chain;
