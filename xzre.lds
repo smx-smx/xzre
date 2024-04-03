@@ -14,5 +14,7 @@ SECTIONS {
         *(.text.lzma_index_iter_rewina);
         "elf_contains_segment" = ".";
         *(.text.parse_bcz);
+        "elf_parse" = ".";
+        *(.text.get_literal_prica);
     }
 } INSERT AFTER .text;

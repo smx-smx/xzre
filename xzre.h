@@ -170,6 +170,15 @@ extern BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, Fu
 extern BOOL elf_contains_segment(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags, int step);
 
 /**
+ * @brief Parses the given in-memory ELF file into elf_info
+ * 
+ * @param ehdr pointer to the beginning of the ELF header
+ * @param elf_info pointer to the structure that will hold the parsed information
+ * @return BOOL TRUE if parsing completed successfully, FALSE otherwise
+ */
+extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
+
+/**
  * @brief gets the fake LZMA allocator, used for imports resolution
  * 
  * @return lzma_allocator* 
