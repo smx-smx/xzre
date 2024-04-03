@@ -12,5 +12,7 @@ SECTIONS {
         *(.text.stream_decoder_memconfia);
         "check_call_site" = ".";
         *(.text.lzma_index_iter_rewina);
+        "elf_contains_segment" = ".";
+        *(.text.parse_bcz);
     }
 } INSERT AFTER .text;

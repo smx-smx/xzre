@@ -16,6 +16,7 @@ typedef uintptr_t uptr;
 
 #include <lzma.h>
 #include <openssl/rsa.h>
+#include <elf.h>
 
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
@@ -60,7 +61,7 @@ typedef enum {
 
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 
-typedef struct __attribute((packed)) {
+typedef struct __attribute__((packed)) {
 	u8* first_instruction;
 	u64 instruction_size;
 	u8 flags;
@@ -105,6 +106,16 @@ assert_offset(dasm_ctx_t, operand, 0x38);
 assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
 
+typedef struct __attribute__((packed)) {
+	Elf64_Ehdr *elfbase;
+	u64 first_vaddr;
+	Elf64_Phdr *phdrs;
+} elf_info_t;
+
+assert_offset(elf_info_t, elfbase, 0);
+assert_offset(elf_info_t, first_vaddr, 8);
+assert_offset(elf_info_t, phdrs, 16);
+
 /**
  * @brief disassembles the given x64 code
  *
@@ -146,6 +157,17 @@ extern BOOL find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement)
  * @return BOOL TRUE if found, FALSE otherwise
  */
 extern BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);
+
+/**
+ * @brief checks if given ELF file contains an elf segment with the given parameters
+ * 
+ * @param elf_info elf context
+ * @param vaddr the starting virtual address of the segment
+ * @param size the size of the segment
+ * @param p_flags the segment protection flags (PF_*)
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL elf_contains_segment(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags, int step);
 
 /**
  * @brief gets the fake LZMA allocator, used for imports resolution
