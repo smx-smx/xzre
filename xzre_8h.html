@@ -303,6 +303,9 @@ struct&#160;</td><td class="memItemRight" valign="bottom"><b>__attribute__</b> (
 <tr class="memitem:a81a6f3d01ea6057c942052321b92c533"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a> (u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode)</td></tr>
 <tr class="memdesc:a81a6f3d01ea6057c942052321b92c533"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates the function prologue  <a href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">More...</a><br /></td></tr>
 <tr class="separator:a81a6f3d01ea6057c942052321b92c533"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b09699385091684d71bf8a278e0372d"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a> (u8 *code_start, u8 *func_start_0, u8 *func_start_1, u8 *search_base, u8 *code_end, FuncFindType find_mode)</td></tr>
+<tr class="memdesc:a5b09699385091684d71bf8a278e0372d"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates the function prologue. it will try to backtrack and synchronize the code stream, calling <a class="el" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a> for each iteration  <a href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">More...</a><br /></td></tr>
+<tr class="separator:a5b09699385091684d71bf8a278e0372d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a484c7f2d91a4774ef5c9de803c9fcfa5"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a484c7f2d91a4774ef5c9de803c9fcfa5">elf_contains_segment</a> (elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags)</td></tr>
 <tr class="memdesc:a484c7f2d91a4774ef5c9de803c9fcfa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains an elf segment with the given parameters  <a href="xzre_8h.html#a484c7f2d91a4774ef5c9de803c9fcfa5">More...</a><br /></td></tr>
 <tr class="separator:a484c7f2d91a4774ef5c9de803c9fcfa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -612,6 +615,72 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a5b09699385091684d71bf8a278e0372d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b09699385091684d71bf8a278e0372d">&#9670;&nbsp;</a></span>find_function_prologue_ex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL find_function_prologue_ex </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>func_start_0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>func_start_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>search_base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FuncFindType&#160;</td>
+          <td class="paramname"><em>find_mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>locates the function prologue. it will try to backtrack and synchronize the code stream, calling <a class="el" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a> for each iteration </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>address to start searching from </td></tr>
+    <tr><td class="paramname">func_start_0</td><td>if provided, will be filled with the address of the first candidate match, obtained by starting the search at <code>code_start</code> + 0 </td></tr>
+    <tr><td class="paramname">func_start_1</td><td>if provided, will be filled with the address of the second candidate match, obtained by starting the search at <code>code_start</code> + 1 </td></tr>
+    <tr><td class="paramname">search_base</td><td>lowest address, where backtracking is stopped </td></tr>
+    <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
+    <tr><td class="paramname">find_mode</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
 
 </div>
 </div>
