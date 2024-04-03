@@ -8,6 +8,8 @@ SECTIONS {
         *(.text.lzma_raw_encodea);
         "find_function_prologue" = ".";
         *(.text.lzma_raw_coder_memusaga);
+        "find_function_prologue_ex" = ".";
+        *(.text.lzma2_encoder_inia);
         "get_lzma_allocator" = ".";
         *(.text.stream_decoder_memconfia);
         "check_call_site" = ".";

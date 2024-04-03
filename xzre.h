@@ -188,7 +188,7 @@ typedef union {
 	struct {
 		/** bit index in the current byte indicated by @ref byte_index */
 		u32 bit_index : 3;
-		/** byte index into the secret data array*/
+		/** byte index into the secret data array */
 		u32 byte_index : 29;
 	};
 	/** the initial value */
@@ -257,6 +257,27 @@ extern BOOL find_reg2reg_instruction(u8 *code_start, u8 *code_end, dasm_ctx_t *d
  * @return BOOL TRUE if found, FALSE otherwise
  */
 extern BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);
+
+/**
+ * @brief locates the function prologue.
+ * it will try to backtrack and synchronize the code stream, calling @ref find_function_prologue
+ * for each iteration
+ * 
+ * @param code_start address to start searching from
+ * @param func_start_0 if provided, will be filled with the address of the first candidate match, obtained by starting the search at @p code_start + 0
+ * @param func_start_1 if provided, will be filled with the address of the second candidate match, obtained by starting the search at @p code_start + 1
+ * @param search_base lowest address, where backtracking is stopped
+ * @param code_end address to stop searching at
+ * @param find_mode 
+ * @return BOOL 
+ */
+extern BOOL find_function_prologue_ex(
+	u8 *code_start,
+	u8 *func_start_0,
+	u8 *func_start_1,
+	u8 *search_base,
+	u8 *code_end,
+	FuncFindType find_mode);
 
 /**
  * @brief checks if given ELF file contains an elf segment with the given parameters
