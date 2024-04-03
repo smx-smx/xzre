@@ -230,6 +230,7 @@ extern BOOL find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement)
  * or, alternatively, passing the following filter:
  * - ((0x505050500000505uLL >> (((dctx->opcode) & 0xFF) + 0x7F)) & 1) != 0
  * NOTE: the opcode in 'dctx->opcode' is the actual opcode +0x80 
+ * TODO: inspect x64 manual to find the exact filter
  *
  * the instruction must also satisfy the following conditions:
  * - NOT have REX.B and REX.R set (no extension bits)
@@ -317,8 +318,10 @@ extern lzma_allocator *get_lzma_allocator();
  * or, alternatively, an opcode that passes the following validation
  *  opcode_check = opcode - 0x83;
  *  if ( opcode_check > 0x2E || ((0x410100000101 >> opcode_value) & 1) == 0 )
+ *
+ * additionally, checks outlined in @see find_reg2reg_instruction must also pass
  * NOTE: the opcode in 'opcode' is the actual opcode +0x80 
- * TODO: inspect x64 manual to find the exact filter)
+ * TODO: inspect x64 manual to find the exact filter
  *
  * @param shift_index the initial shift index
  * @param operation_id identification for this shift operation
