@@ -16,5 +16,7 @@ SECTIONS {
         *(.text.parse_bcz);
         "elf_parse" = ".";
         *(.text.get_literal_prica);
+        "elf_symbol_get" = ".";
+        *(.text.crc_inia);
     }
 } INSERT AFTER .text;

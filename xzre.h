@@ -238,6 +238,16 @@ extern BOOL elf_contains_segment(elf_info_t *elf_info, u64 vaddr, u64 size, u32 
 extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
 
 /**
+ * @brief Looks up an ELF symbol from a parsed ELF
+ * 
+ * @param elf_info the parsed ELF context
+ * @param encoded_string_id string ID of the symbol name
+ * @param sym_version optional string representing the symbol version (e.g. "GLIBC_2.2.5")
+ * @return Elf64_Sym* pointer to the ELF symbol, or NULL if not found
+ */
+extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, const char *sym_version);
+
+/**
  * @brief gets the fake LZMA allocator, used for imports resolution
  * 
  * @return lzma_allocator* 
