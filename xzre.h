@@ -248,6 +248,15 @@ extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
 extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, const char *sym_version);
 
 /**
+ * @brief Looks up an ELF symbol from a parsed ELF, and returns its memory address
+ * 
+ * @param elf_info the parsed ELF context
+ * @param encoded_string_id string ID of the symbol name
+ * @return void* the address of the symbol
+ */
+extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
+
+/**
  * @brief gets the fake LZMA allocator, used for imports resolution
  * 
  * @return lzma_allocator* 

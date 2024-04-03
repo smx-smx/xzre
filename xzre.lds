@@ -18,5 +18,7 @@ SECTIONS {
         *(.text.get_literal_prica);
         "elf_symbol_get" = ".";
         *(.text.crc_inia);
+        "elf_symbol_get_addr" = ".";
+        *(.text.crc64_generia);
     }
 } INSERT AFTER .text;
