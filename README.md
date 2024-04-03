@@ -1,7 +1,7 @@
 # xzre
 Reverse engineering of the XZ backdoor
 
-The goal of this project is to document the functions, data structures and inner working of the XZ backdoor malware, with the goal of understanding how it works, understanding the tricks used, and serve as a reference for other analyses.
+The goal of this project is to document the functions, data structures and inner working of the XZ backdoor malware, with the goal of understanding how it works, the tricks used, and serve as a reference for other analyses.
 
 **NOTE**: this repository includes a copy of the original `liblzma_la-crc64-fast.o` found in liblzma 5.6.1
 
