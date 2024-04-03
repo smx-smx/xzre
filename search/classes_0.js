@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['global_5fcontext_5ft_26',['global_context_t',['../structglobal__context__t.html',1,'']]]
+  ['secret_5fdata_5fshift_5fcursor_20',['secret_data_shift_cursor',['../unionsecret__data__shift__cursor.html',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bit_5findex_0',['bit_index',['../unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144',1,'secret_data_shift_cursor']]],
-  ['byte_5findex_1',['byte_index',['../unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31',1,'secret_data_shift_cursor']]]
+  ['_5f_5fattribute_5f_5f_0',['__attribute__',['../xzre_8h.html#ab898071398b359603a35c202e9c65f3b',1,'xzre.h']]]
 ];
