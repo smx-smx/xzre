@@ -108,6 +108,15 @@ Macros</h2></td></tr>
 <tr class="memitem:aa5fd0af1f78d21cfc6f8c25bef9f14bc"><td class="memItemLeft" align="right" valign="top"><a id="aa5fd0af1f78d21cfc6f8c25bef9f14bc"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b>(t,  f,  o)&#160;&#160;&#160;static_assert(offsetof(t, f) == o)</td></tr>
 <tr class="separator:aa5fd0af1f78d21cfc6f8c25bef9f14bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f18db18bca26cafa95e9719de4a41ef"><td class="memItemLeft" align="right" valign="top"><a id="a2f18db18bca26cafa95e9719de4a41ef"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONCAT</b>(x,  y)&#160;&#160;&#160;x ## y</td></tr>
+<tr class="separator:a2f18db18bca26cafa95e9719de4a41ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5af923cb05ed3e3ff98866990b79752d"><td class="memItemLeft" align="right" valign="top"><a id="a5af923cb05ed3e3ff98866990b79752d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>EXPAND</b>(x,  y)&#160;&#160;&#160;CONCAT(x, y)</td></tr>
+<tr class="separator:a5af923cb05ed3e3ff98866990b79752d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a353d32e52768fa413b9d1f381a201efa"><td class="memItemLeft" align="right" valign="top"><a id="a353d32e52768fa413b9d1f381a201efa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b>(size)&#160;&#160;&#160;u8 EXPAND(_unknown, __LINE__)[size]</td></tr>
+<tr class="separator:a353d32e52768fa413b9d1f381a201efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
