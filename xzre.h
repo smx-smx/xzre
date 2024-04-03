@@ -41,6 +41,13 @@ typedef enum {
 } DasmFlags;
 
 typedef enum {
+	// ELF has DT_VERSYM
+	X_ELF_VERSYM = 0x10,
+	// ELF has DF_1_NOW
+	X_ELF_NOW = 0x20
+} ElfFlags;
+
+typedef enum {
 	// register-indirect addressing or no displacement
 	MRM_I_REG, // 00
 	// indirect with one byte displacement
@@ -110,11 +117,63 @@ typedef struct __attribute__((packed)) {
 	Elf64_Ehdr *elfbase;
 	u64 first_vaddr;
 	Elf64_Phdr *phdrs;
+	u64 e_phnum;
+	Elf64_Dyn *dyn;
+	u64 dyn_num_entries;
+	char *strtab;
+	Elf64_Sym *symtab;
+	Elf64_Rela *plt_relocs;
+	u32 plt_relocs_num;
+	BOOL gnurelro_found;
+	u64 gnurelro_vaddr;
+	u64 gnurelro_memsize;
+	Elf64_Verdef *verdef;
+	u64 verdef_num;
+	Elf64_Versym *versym;
+	Elf64_Rela *rela_relocs;
+	u32 rela_relocs_num;
+	u32 _unused0;
+	Elf64_Relr *relr_relocs;
+	u32 relr_relocs_num;
+	u8 _unknown0[60];
+	u8 flags;
+	u8 _unknown1[7];
+	u32 gnu_hash_nbuckets;
+	u32 gnu_hash_last_bloom;
+	u32 gnu_hash_bloom_shift;
+	u8 _unused1[4];
+	u64 *gnu_hash_bloom;
+	u32 *gnu_hash_buckets;
+	u32 *gnu_hash_chain;
 } elf_info_t;
 
-assert_offset(elf_info_t, elfbase, 0);
-assert_offset(elf_info_t, first_vaddr, 8);
-assert_offset(elf_info_t, phdrs, 16);
+assert_offset(elf_info_t, elfbase, 0x0);
+assert_offset(elf_info_t, first_vaddr, 0x8);
+assert_offset(elf_info_t, phdrs, 0x10);
+assert_offset(elf_info_t, e_phnum, 0x18);
+assert_offset(elf_info_t, dyn, 0x20);
+assert_offset(elf_info_t, dyn_num_entries, 0x28);
+assert_offset(elf_info_t, strtab, 0x30);
+assert_offset(elf_info_t, symtab, 0x38);
+assert_offset(elf_info_t, plt_relocs, 0x40);
+assert_offset(elf_info_t, plt_relocs_num, 0x48);
+assert_offset(elf_info_t, gnurelro_found, 0x4C);
+assert_offset(elf_info_t, gnurelro_vaddr, 0x50);
+assert_offset(elf_info_t, gnurelro_memsize, 0x58);
+assert_offset(elf_info_t, verdef, 0x60);
+assert_offset(elf_info_t, verdef_num, 0x68);
+assert_offset(elf_info_t, versym, 0x70);
+assert_offset(elf_info_t, rela_relocs, 0x78);
+assert_offset(elf_info_t, rela_relocs_num, 0x80);
+assert_offset(elf_info_t, relr_relocs, 0x88);
+assert_offset(elf_info_t, relr_relocs_num, 0x90);
+assert_offset(elf_info_t, flags, 0xD0);
+assert_offset(elf_info_t, gnu_hash_nbuckets, 0xd8);
+assert_offset(elf_info_t, gnu_hash_last_bloom, 0xdc);
+assert_offset(elf_info_t, gnu_hash_bloom_shift, 0xe0);
+assert_offset(elf_info_t, gnu_hash_bloom, 0xe8);
+assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
+assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
 /**
  * @brief disassembles the given x64 code
