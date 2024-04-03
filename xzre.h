@@ -186,8 +186,9 @@ assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
  */
 typedef union {
 	struct {
-		/** NOTE: little endian bitfield ordering */
+		/** bit index in the current byte indicated by @ref byte_index */
 		u32 bit_index : 3;
+		/** byte index into the secret data array*/
 		u32 byte_index : 29;
 	};
 	/** the initial value */
