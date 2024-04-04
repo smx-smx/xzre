@@ -245,77 +245,175 @@ $(function() {
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;assert_offset(elf_info_t, gnu_hash_chain, 0xf8);</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="xzre_8h.html#ab898071398b359603a35c202e9c65f3b">__attribute__</a>((packed)) {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    PADDING(8);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordtype">void</span> *imported_funcs;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    PADDING(0x70);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    u64 code_range_start;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    u64 code_range_end;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    PADDING(0x78);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    u8 secret_data[57];</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    u8 shift_operations[31];</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    u32 reg2reg_instructions_count;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;} global_context_t;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;assert_offset(global_context_t, imported_funcs, 8);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;assert_offset(global_context_t, code_range_start, 0x80);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;assert_offset(global_context_t, code_range_end, 0x88);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;assert_offset(global_context_t, secret_data, 0x108);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;assert_offset(global_context_t, shift_operations, 0x141);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;assert_offset(global_context_t, reg2reg_instructions_count, 0x160);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html">  238</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">  241</a></span>&#160;        u32 <a class="code" href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">bit_index</a> : 3;</div>
-<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">  243</a></span>&#160;        u32 <a class="code" href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">byte_index</a> : 29;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    };</div>
-<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">  246</a></span>&#160;    u32 <a class="code" href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">index</a>;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;} <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a>;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">  257</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a>(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno"><a class="line" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">  268</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">find_call_instruction</a>(u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">  278</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">find_lea_instruction</a>(u8 *code_start, u8 *code_end, u64 displacement);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">  299</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a>(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">  310</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a>(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">  325</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a>(</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    u8 *code_start,</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    u8 *func_start_0,</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    u8 *func_start_1,</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    u8 *search_base,</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    u8 *code_end,</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    FuncFindType find_mode);</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="xzre_8h.html#a484c7f2d91a4774ef5c9de803c9fcfa5">  342</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a484c7f2d91a4774ef5c9de803c9fcfa5">elf_contains_segment</a>(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">  351</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a>(Elf64_Ehdr *ehdr, elf_info_t *elf_info);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">  361</a></span>&#160;<span class="keyword">extern</span> Elf64_Sym *<a class="code" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a>(elf_info_t *elf_info, u32 encoded_string_id, <span class="keyword">const</span> <span class="keywordtype">char</span> *sym_version);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">  370</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno"><a class="line" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">  377</a></span>&#160;<span class="keyword">extern</span> lzma_allocator *<a class="code" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a>();</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">  389</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">secret_data_append_if_flags</a>(</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordtype">unsigned</span> operation_index,</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count,</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordtype">int</span> flags, u8 *code);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00433"></a><span class="lineno"><a class="line" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">  433</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a>(</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    u8 *call_site, u8 *code,</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count, <span class="keywordtype">unsigned</span> operation_index);</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="preprocessor">#include &quot;util.h&quot;</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aunionsecret__data__shift__cursor_html"><div class="ttname"><a href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a></div><div class="ttdoc">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits repres...</div><div class="ttdef"><b>Definition:</b> xzre.h:238</div></div>
-<div class="ttc" id="aunionsecret__data__shift__cursor_html_a9b139f7265c8349205b28aa6f8d894e0"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">secret_data_shift_cursor::index</a></div><div class="ttdeci">u32 index</div><div class="ttdef"><b>Definition:</b> xzre.h:246</div></div>
-<div class="ttc" id="aunionsecret__data__shift__cursor_html_ab2196dad3c7284cb18383a894058d144"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">secret_data_shift_cursor::bit_index</a></div><div class="ttdeci">u32 bit_index</div><div class="ttdef"><b>Definition:</b> xzre.h:241</div></div>
-<div class="ttc" id="aunionsecret__data__shift__cursor_html_abc6b87bb67fca21d9db17a1dfd4ddd31"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">secret_data_shift_cursor::byte_index</a></div><div class="ttdeci">u32 byte_index</div><div class="ttdef"><b>Definition:</b> xzre.h:243</div></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    u32 resolved_imports_count;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    PADDING(12);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    uid_t (*getuid)(void);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    void (*exit)(<span class="keywordtype">int</span> status);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    int (*setresgid)(gid_t rgid, gid_t egid, gid_t sgid); </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    int (*setresuid)(uid_t ruid, uid_t euid, uid_t suid);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    int (*system)(<span class="keyword">const</span> <span class="keywordtype">char</span> *command);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    ssize_t (*write)(<span class="keywordtype">int</span> fd, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, <span class="keywordtype">size_t</span> count);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    int (*pselect)(</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordtype">int</span> nfds, fd_set *readfds, fd_set *writefds,</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        fd_set *exceptfds, <span class="keyword">const</span> <span class="keyword">struct </span>timespec *timeout,</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keyword">const</span> sigset_t *sigmask);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    PADDING(0x10);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    int (*setlogmask)(<span class="keywordtype">int</span> mask);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    int (*shutdown)(<span class="keywordtype">int</span> sockfd, <span class="keywordtype">int</span> how);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;} system_imports_t;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;assert_offset(system_imports_t, resolved_imports_count, 0);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;assert_offset(system_imports_t, getuid, 0x10);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;assert_offset(system_imports_t, exit, 0x18);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;assert_offset(system_imports_t, setresgid, 0x20);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;assert_offset(system_imports_t, setresuid, 0x28);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;assert_offset(system_imports_t, system, 0x30);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;assert_offset(system_imports_t, write, 0x38);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;assert_offset(system_imports_t, pselect, 0x40);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;assert_offset(system_imports_t, setlogmask, 0x58);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;assert_offset(system_imports_t, shutdown, 0x60);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="xzre_8h.html#ab898071398b359603a35c202e9c65f3b">__attribute__</a>((packed)) {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    int (*RSA_public_decrypt)(</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordtype">int</span> flen, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *from,</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *to, RSA *rsa, <span class="keywordtype">int</span> padding);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    PADDING(0x58);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    void (*RSA_get0_key)(</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keyword">const</span> RSA *r,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keyword">const</span> BIGNUM **n,</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="keyword">const</span> BIGNUM **e,</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keyword">const</span> BIGNUM **d);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    int (*BN_num_bits)(<span class="keyword">const</span> BIGNUM *a);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    EVP_PKEY *(*EVP_PKEY_new_raw_public_key)(</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordtype">int</span> type, ENGINE *e,</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *key, <span class="keywordtype">size_t</span> keylen);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    EVP_MD_CTX *(*EVP_MD_CTX_new)(void);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    int (*EVP_DigestVerifyInit)(</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keyword">const</span> EVP_MD *type, ENGINE *e, EVP_PKEY *pkey);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    PADDING(0x8);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    void (*EVP_MD_CTX_free)(EVP_MD_CTX *ctx);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    void (*EVP_PKEY_free)(EVP_PKEY *key);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    EVP_CIPHER_CTX *(*EVP_CIPHER_CTX_new)(void);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    int (*EVP_DecryptInit_ex)(</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        EVP_CIPHER_CTX *ctx, <span class="keyword">const</span> EVP_CIPHER *type,</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        ENGINE *impl, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *key, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *iv);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    int (*EVP_DecryptUpdate)(</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        EVP_CIPHER_CTX *ctx, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *out,</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordtype">int</span> *outl, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *in, <span class="keywordtype">int</span> inl);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    PADDING(8);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    void (*EVP_CIPHER_CTX_free)(EVP_CIPHER_CTX *ctx);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    EVP_CIPHER *(*EVP_chacha20)(void);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    RSA *(*RSA_new)(void);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    BIGNUM *(*BN_dup)(<span class="keyword">const</span> BIGNUM *from);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    BIGNUM (*BN_bin2bn)(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *s, <span class="keywordtype">int</span> len, BIGNUM *ret);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    PADDING(16);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    int (*RSA_sign)(</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordtype">int</span> type,</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *m, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_len,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *sigret, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *siglen, RSA *rsa);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    int (*BN_bn2bin)(<span class="keyword">const</span> BIGNUM *a, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *to);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    void (*RSA_free)(RSA *rsa);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    void (*BN_free)(BIGNUM *a);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    system_imports_t *system;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    u32 resolved_imports_count;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;} imported_funcs_t;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;assert_offset(imported_funcs_t, RSA_public_decrypt, 0);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;assert_offset(imported_funcs_t, RSA_get0_key, 0x60);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;assert_offset(imported_funcs_t, BN_num_bits, 0x68);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;assert_offset(imported_funcs_t, EVP_PKEY_new_raw_public_key, 0x70);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;assert_offset(imported_funcs_t, EVP_MD_CTX_new, 0x78);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;assert_offset(imported_funcs_t, EVP_DigestVerifyInit, 0x80);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;assert_offset(imported_funcs_t, EVP_MD_CTX_free, 0x90);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;assert_offset(imported_funcs_t, EVP_PKEY_free, 0x98);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;assert_offset(imported_funcs_t, EVP_CIPHER_CTX_new, 0xA0);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;assert_offset(imported_funcs_t, EVP_DecryptInit_ex, 0xA8);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;assert_offset(imported_funcs_t, EVP_DecryptUpdate, 0xB0);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;assert_offset(imported_funcs_t, EVP_CIPHER_CTX_free, 0xC0);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;assert_offset(imported_funcs_t, EVP_chacha20, 0xC8);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;assert_offset(imported_funcs_t, RSA_new, 0xD0);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;assert_offset(imported_funcs_t, BN_dup, 0xD8);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;assert_offset(imported_funcs_t, BN_bin2bn, 0xE0);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;assert_offset(imported_funcs_t, RSA_sign, 0xF8);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;assert_offset(imported_funcs_t, BN_bn2bin, 0x100);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;assert_offset(imported_funcs_t, RSA_free, 0x108);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;assert_offset(imported_funcs_t, BN_free, 0x110);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;assert_offset(imported_funcs_t, system, 0x118);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;assert_offset(imported_funcs_t, resolved_imports_count, 0x120);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="xzre_8h.html#ab898071398b359603a35c202e9c65f3b">__attribute__</a>((packed)) {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    PADDING(8);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordtype">void</span> *imported_funcs;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    PADDING(0x70);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    u64 code_range_start;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    u64 code_range_end;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    PADDING(0x78);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    u8 secret_data[57];</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    u8 shift_operations[31];</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    u32 reg2reg_instructions_count;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;} global_context_t;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;assert_offset(global_context_t, imported_funcs, 8);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;assert_offset(global_context_t, code_range_start, 0x80);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;assert_offset(global_context_t, code_range_end, 0x88);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;assert_offset(global_context_t, secret_data, 0x108);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;assert_offset(global_context_t, shift_operations, 0x141);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;assert_offset(global_context_t, reg2reg_instructions_count, 0x160);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html">  336</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">  339</a></span>&#160;        u32 <a class="code" href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">bit_index</a> : 3;</div>
+<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">  341</a></span>&#160;        u32 <a class="code" href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">byte_index</a> : 29;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    };</div>
+<div class="line"><a name="l00344"></a><span class="lineno"><a class="line" href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">  344</a></span>&#160;    u32 <a class="code" href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">index</a>;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;} <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a>;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno"><a class="line" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">  355</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a>(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno"><a class="line" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">  366</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">find_call_instruction</a>(u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">  376</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">find_lea_instruction</a>(u8 *code_start, u8 *code_end, u64 displacement);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00397"></a><span class="lineno"><a class="line" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">  397</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a>(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx);</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00408"></a><span class="lineno"><a class="line" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">  408</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a>(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
+<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">  423</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a>(</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    u8 *code_start,</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    u8 *func_start_0,</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    u8 *func_start_1,</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    u8 *search_base,</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    u8 *code_end,</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    FuncFindType find_mode);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno"><a class="line" href="xzre_8h.html#a484c7f2d91a4774ef5c9de803c9fcfa5">  440</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a484c7f2d91a4774ef5c9de803c9fcfa5">elf_contains_segment</a>(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
+<div class="line"><a name="l00449"></a><span class="lineno"><a class="line" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">  449</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a>(Elf64_Ehdr *ehdr, elf_info_t *elf_info);</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno"><a class="line" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">  459</a></span>&#160;<span class="keyword">extern</span> Elf64_Sym *<a class="code" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a>(elf_info_t *elf_info, u32 encoded_string_id, <span class="keyword">const</span> <span class="keywordtype">char</span> *sym_version);</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
+<div class="line"><a name="l00468"></a><span class="lineno"><a class="line" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">  468</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00475"></a><span class="lineno"><a class="line" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">  475</a></span>&#160;<span class="keyword">extern</span> lzma_allocator *<a class="code" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a>();</div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno"><a class="line" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">  487</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">secret_data_append_if_flags</a>(</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    <span class="keywordtype">unsigned</span> operation_index,</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count,</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    <span class="keywordtype">int</span> flags, u8 *code);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160; </div>
+<div class="line"><a name="l00531"></a><span class="lineno"><a class="line" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">  531</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a>(</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    u8 *call_site, u8 *code,</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count, <span class="keywordtype">unsigned</span> operation_index);</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160; </div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;<span class="preprocessor">#include &quot;util.h&quot;</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aunionsecret__data__shift__cursor_html"><div class="ttname"><a href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a></div><div class="ttdoc">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits repres...</div><div class="ttdef"><b>Definition:</b> xzre.h:336</div></div>
+<div class="ttc" id="aunionsecret__data__shift__cursor_html_a9b139f7265c8349205b28aa6f8d894e0"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">secret_data_shift_cursor::index</a></div><div class="ttdeci">u32 index</div><div class="ttdef"><b>Definition:</b> xzre.h:344</div></div>
+<div class="ttc" id="aunionsecret__data__shift__cursor_html_ab2196dad3c7284cb18383a894058d144"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">secret_data_shift_cursor::bit_index</a></div><div class="ttdeci">u32 bit_index</div><div class="ttdef"><b>Definition:</b> xzre.h:339</div></div>
+<div class="ttc" id="aunionsecret__data__shift__cursor_html_abc6b87bb67fca21d9db17a1dfd4ddd31"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">secret_data_shift_cursor::byte_index</a></div><div class="ttdeci">u32 byte_index</div><div class="ttdef"><b>Definition:</b> xzre.h:341</div></div>
 <div class="ttc" id="axzre_8h_html_a049328971f4e99ce954d5e0346fee6d7"><div class="ttname"><a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a></div><div class="ttdeci">BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info)</div><div class="ttdoc">Parses the given in-memory ELF file into elf_info.</div></div>
 <div class="ttc" id="axzre_8h_html_a20700a81cc5921ecba31766edd9c3f4f"><div class="ttname"><a href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a></div><div class="ttdeci">void * elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id)</div><div class="ttdoc">Looks up an ELF symbol from a parsed ELF, and returns its memory address.</div></div>
 <div class="ttc" id="axzre_8h_html_a36a945c9790681a50af0a1a0cd72a269"><div class="ttname"><a href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a></div><div class="ttdeci">BOOL secret_data_append_singleton(u8 *call_site, u8 *code, secret_data_shift_cursor shift_cursor, unsigned reg2reg_instruction_count, unsigned operation_index)</div><div class="ttdoc">Shifts data in the secret data store, after validation of code. this function is intended to be invok...</div></div>
