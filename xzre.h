@@ -142,7 +142,10 @@ typedef struct __attribute__((packed)) {
 	u32 _unused0;
 	Elf64_Relr *relr_relocs;
 	u32 relr_relocs_num;
-	PADDING(60);
+	PADDING(4);
+	u64 code_segment_start;
+	u64 code_segment_size;
+	PADDING(0x28);
 	u8 flags;
 	PADDING(7);
 	u32 gnu_hash_nbuckets;
@@ -174,6 +177,8 @@ assert_offset(elf_info_t, rela_relocs, 0x78);
 assert_offset(elf_info_t, rela_relocs_num, 0x80);
 assert_offset(elf_info_t, relr_relocs, 0x88);
 assert_offset(elf_info_t, relr_relocs_num, 0x90);
+assert_offset(elf_info_t, code_segment_start, 0x98);
+assert_offset(elf_info_t, code_segment_size, 0xA0);
 assert_offset(elf_info_t, flags, 0xD0);
 assert_offset(elf_info_t, gnu_hash_nbuckets, 0xd8);
 assert_offset(elf_info_t, gnu_hash_last_bloom, 0xdc);
@@ -286,7 +291,7 @@ typedef struct __attribute__((packed)) {
 	 * @brief 
 	 * pointer to the structure containing resolved OpenSSL and system functions
 	 */
-	void *imported_funcs;
+	imported_funcs_t *imported_funcs;
 	PADDING(0x70);
 	/**
 	 * @brief 
@@ -466,6 +471,15 @@ extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, co
  * @return void* the address of the symbol
  */
 extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
+
+/**
+ * @brief Obtains the size of the first executable page in the given ELF file
+ * 
+ * @param elf_info the parsed ELF context, which will be updated with the address and size of the code segment
+ * @param pSize variable that will hold the page-aligned segment size
+ * @return BOOL TRUE on success, FALSE if the executable segment wasn't found
+ */
+extern BOOL elf_get_code_size(elf_info_t *elf_info, u64 *pSize);
 
 /**
  * @brief gets the fake LZMA allocator, used for imports resolution

@@ -33,6 +33,9 @@ SECTIONS {
         "elf_symbol_get_addr" = ".";
         *(.text.crc64_generia);
 
+        "elf_get_code_size" = ".";
+        *(.text.lzma_check_updata);
+
         "secret_data_append_if_flags" = ".";
         *(.text.lzma_check_inia);
 
