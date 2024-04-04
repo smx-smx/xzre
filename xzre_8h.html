@@ -275,6 +275,12 @@ Functions</h2></td></tr>
 <tr class="memitem:aa2c9ae3b66e5bf8e842d53e80ce09e3d"><td class="memItemLeft" align="right" valign="top"><a id="aa2c9ae3b66e5bf8e842d53e80ce09e3d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, relr_relocs_num, 0x90)</td></tr>
 <tr class="separator:aa2c9ae3b66e5bf8e842d53e80ce09e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc38efd72107eade4c9671f6518c36d"><td class="memItemLeft" align="right" valign="top"><a id="a9fc38efd72107eade4c9671f6518c36d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, code_segment_start, 0x98)</td></tr>
+<tr class="separator:a9fc38efd72107eade4c9671f6518c36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0937aa24d26b1d0ff613762ed91b4f"><td class="memItemLeft" align="right" valign="top"><a id="adb0937aa24d26b1d0ff613762ed91b4f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, code_segment_size, 0xA0)</td></tr>
+<tr class="separator:adb0937aa24d26b1d0ff613762ed91b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad454efb2e2e28c7efd261a691d1248a1"><td class="memItemLeft" align="right" valign="top"><a id="ad454efb2e2e28c7efd261a691d1248a1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, flags, 0xD0)</td></tr>
 <tr class="separator:ad454efb2e2e28c7efd261a691d1248a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -440,6 +446,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a20700a81cc5921ecba31766edd9c3f4f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a> (elf_info_t *elf_info, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:a20700a81cc5921ecba31766edd9c3f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up an ELF symbol from a parsed ELF, and returns its memory address.  <a href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">More...</a><br /></td></tr>
 <tr class="separator:a20700a81cc5921ecba31766edd9c3f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a> (elf_info_t *elf_info, u64 *pSize)</td></tr>
+<tr class="memdesc:af3f0d23e5fece210bdf4945c65e3a10a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the first executable page in the given ELF file.  <a href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">More...</a><br /></td></tr>
+<tr class="separator:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc618a02e31b94194ce03b0c4a2b3597"><td class="memItemLeft" align="right" valign="top">lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a> ()</td></tr>
 <tr class="memdesc:abc618a02e31b94194ce03b0c4a2b3597"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the fake LZMA allocator, used for imports resolution  <a href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">More...</a><br /></td></tr>
 <tr class="separator:abc618a02e31b94194ce03b0c4a2b3597"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -487,6 +496,25 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>pointed to the ELF base address in memory</p>
+<p>virtual address of the first program header</p>
+<p>pointer to the ELF program headers array in memory</p>
+<p>copy of the ELF program header count from the ELF header</p>
+<p>pointer to the ELF dynamic segment</p>
+<p>number of entries in the ELF dynamic segment</p>
+<p>pointer to the ELF string table</p>
+<p>pointer to the ELF symbol table</p>
+<p>pointer to the ELF PLT relocations table</p>
+<p>number of entries in the PLT relocation table</p>
+<p>whether the loaded ELF contains PT_GNU_RELRO or not which specifies the location and size of a segment which may be made read-only after relocations have been processed.</p>
+<p>location of the GNU relro segment</p>
+<p>size of the GNU relro segment</p>
+<p>pointer to the EFL symbol versioning (from DT_VERDEF)</p>
+<p>number of entries in the symbol versioning table</p>
+<p>page-aligned virtual address of the first executable ELF segment</p>
+<p>page-aligned virtual size of the first executable ELF segment</p>
+<p>number of GNU hash buckets (from DT_GNU_HASH)</p>
+<p>last valid bloom value</p>
 <p>pointer to the structure containing resolved OpenSSL and system functions</p>
 <p>the shifter will use this address as the minimum search address any instruction below this address will be rejected</p>
 <p>the shifter will use this address as the maximum search address any instruction beyond this address will be rejected</p>
@@ -545,6 +573,44 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="af3f0d23e5fece210bdf4945c65e3a10a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3f0d23e5fece210bdf4945c65e3a10a">&#9670;&nbsp;</a></span>elf_get_code_segment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u64 elf_get_code_segment </td>
+          <td>(</td>
+          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>pSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtains the address and size of the first executable page in the given ELF file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elf_info</td><td>the parsed ELF context, which will be updated with the address and size of the code segment </td></tr>
+    <tr><td class="paramname">pSize</td><td>variable that will be populated with the page-aligned segment size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the page-aligned virtual address of the executable code segment </dd></dl>
 
 </div>
 </div>
