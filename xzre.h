@@ -121,20 +121,67 @@ assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
 
 typedef struct __attribute__((packed)) {
+	/**
+	 * @brief pointed to the ELF base address in memory
+	 */
 	Elf64_Ehdr *elfbase;
+	/**
+	 * @brief virtual address of the first program header
+	 */
 	u64 first_vaddr;
+	/**
+	 * @brief pointer to the ELF program headers array in memory
+	 */
 	Elf64_Phdr *phdrs;
+	/**
+	 * @brief copy of the ELF program header count from the ELF header
+	 */
 	u64 e_phnum;
+	/**
+	 * @brief pointer to the ELF dynamic segment
+	 */
 	Elf64_Dyn *dyn;
+	/**
+	 * @brief number of entries in the ELF dynamic segment
+	 */
 	u64 dyn_num_entries;
+	/**
+	 * @brief pointer to the ELF string table
+	 */
 	char *strtab;
+	/**
+	 * @brief pointer to the ELF symbol table
+	 */
 	Elf64_Sym *symtab;
+	/**
+	 * @brief pointer to the ELF PLT relocations table
+	 */
 	Elf64_Rela *plt_relocs;
+	/**
+	 * @brief number of entries in the PLT relocation table
+	 */
 	u32 plt_relocs_num;
+	/**
+	 * @brief whether the loaded ELF contains PT_GNU_RELRO or not
+	 * which specifies the location and size of a segment which
+	 * may be made read-only after relocations have been processed.
+	 */
 	BOOL gnurelro_found;
+	/**
+	 * @brief location of the GNU relro segment
+	 */
 	u64 gnurelro_vaddr;
+	/**
+	 * @brief size of the GNU relro segment
+	 */
 	u64 gnurelro_memsize;
+	/**
+	 * @brief pointer to the EFL symbol versioning  (from DT_VERDEF)
+	 */
 	Elf64_Verdef *verdef;
+	/**
+	 * @brief number of entries in the symbol versioning table
+	 */
 	u64 verdef_num;
 	Elf64_Versym *versym;
 	Elf64_Rela *rela_relocs;
@@ -143,12 +190,26 @@ typedef struct __attribute__((packed)) {
 	Elf64_Relr *relr_relocs;
 	u32 relr_relocs_num;
 	PADDING(4);
+	/**
+	 * @brief
+	 * page-aligned virtual address of the first executable ELF segment
+	 */
 	u64 code_segment_start;
+	/**
+	 * @brief 
+	 * page-aligned virtual size of the first executable ELF segment
+	 */
 	u64 code_segment_size;
 	PADDING(0x28);
 	u8 flags;
 	PADDING(7);
+	/**
+	 * @brief number of GNU hash buckets (from DT_GNU_HASH)
+	 */
 	u32 gnu_hash_nbuckets;
+	/**
+	 * @brief last valid bloom value
+	 */
 	u32 gnu_hash_last_bloom;
 	u32 gnu_hash_bloom_shift;
 	PADDING(4);
