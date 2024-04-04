@@ -79,6 +79,9 @@ $(function() {
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;lzma.h&gt;</code><br />
+<code>#include &lt;openssl/dsa.h&gt;</code><br />
+<code>#include &lt;openssl/ec.h&gt;</code><br />
+<code>#include &lt;openssl/evp.h&gt;</code><br />
 <code>#include &lt;openssl/rsa.h&gt;</code><br />
 <code>#include &lt;elf.h&gt;</code><br />
 <code>#include &quot;util.h&quot;</code><br />
@@ -311,6 +314,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abc32326378a17f44f0532b01d8094041"><td class="memItemLeft" align="right" valign="top"><a id="abc32326378a17f44f0532b01d8094041"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, resolved_imports_count, 0)</td></tr>
 <tr class="separator:abc32326378a17f44f0532b01d8094041"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dec4e6f90337d3c8bd77de8354f4a0"><td class="memItemLeft" align="right" valign="top"><a id="ac8dec4e6f90337d3c8bd77de8354f4a0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, malloc_usable_size, 8)</td></tr>
+<tr class="separator:ac8dec4e6f90337d3c8bd77de8354f4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3b08e5289d2b2c696dc0eaa36f2da91"><td class="memItemLeft" align="right" valign="top"><a id="ab3b08e5289d2b2c696dc0eaa36f2da91"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, getuid, 0x10)</td></tr>
 <tr class="separator:ab3b08e5289d2b2c696dc0eaa36f2da91"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -341,6 +347,36 @@ Functions</h2></td></tr>
 <tr class="memitem:ac4c84e3eaafa66db192ff467575c07ef"><td class="memItemLeft" align="right" valign="top"><a id="ac4c84e3eaafa66db192ff467575c07ef"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_public_decrypt, 0)</td></tr>
 <tr class="separator:ac4c84e3eaafa66db192ff467575c07ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3beabfccb127a01cf309d42324b6aaf8"><td class="memItemLeft" align="right" valign="top"><a id="a3beabfccb127a01cf309d42324b6aaf8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_PKEY_set1_RSA_null, 8)</td></tr>
+<tr class="separator:a3beabfccb127a01cf309d42324b6aaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a686404ffefa47e862382092121bfc0b8"><td class="memItemLeft" align="right" valign="top"><a id="a686404ffefa47e862382092121bfc0b8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_get0_key_null, 0x10)</td></tr>
+<tr class="separator:a686404ffefa47e862382092121bfc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32e42958ca639e3cd3531f33de364d6"><td class="memItemLeft" align="right" valign="top"><a id="ab32e42958ca639e3cd3531f33de364d6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_public_decrypt_hook_ptr, 0x18)</td></tr>
+<tr class="separator:ab32e42958ca639e3cd3531f33de364d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d16ae52dff2aab526ba5bffdf0b4a3d"><td class="memItemLeft" align="right" valign="top"><a id="a5d16ae52dff2aab526ba5bffdf0b4a3d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20)</td></tr>
+<tr class="separator:a5d16ae52dff2aab526ba5bffdf0b4a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c9f2e4f61e09a793cbda8478f9e982"><td class="memItemLeft" align="right" valign="top"><a id="ab4c9f2e4f61e09a793cbda8478f9e982"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_get0_key_hook_ptr_null, 0x28)</td></tr>
+<tr class="separator:ab4c9f2e4f61e09a793cbda8478f9e982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memItemLeft" align="right" valign="top"><a id="a4204d0c32a5ccc55ab1a298d689bd4fb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, DSA_get0_pqg, 0x30)</td></tr>
+<tr class="separator:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18134fb834fe77fbdaf346f5a6ee7549"><td class="memItemLeft" align="right" valign="top"><a id="a18134fb834fe77fbdaf346f5a6ee7549"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, DSA_get0_pub_key, 0x38)</td></tr>
+<tr class="separator:a18134fb834fe77fbdaf346f5a6ee7549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd75328fa4e18f7af8e5dc822202c2b"><td class="memItemLeft" align="right" valign="top"><a id="afdd75328fa4e18f7af8e5dc822202c2b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EC_POINT_point2oct, 0x40)</td></tr>
+<tr class="separator:afdd75328fa4e18f7af8e5dc822202c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d189f2eb6f3a41e228a04ac75d3aae"><td class="memItemLeft" align="right" valign="top"><a id="ae4d189f2eb6f3a41e228a04ac75d3aae"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EC_KEY_get0_public_key, 0x48)</td></tr>
+<tr class="separator:ae4d189f2eb6f3a41e228a04ac75d3aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd622db624e55e081943d52838837d1f"><td class="memItemLeft" align="right" valign="top"><a id="acd622db624e55e081943d52838837d1f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EC_KEY_get0_group, 0x50)</td></tr>
+<tr class="separator:acd622db624e55e081943d52838837d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7615b76f76544beead47d64ef914859"><td class="memItemLeft" align="right" valign="top"><a id="ad7615b76f76544beead47d64ef914859"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_sha256, 0x58)</td></tr>
 <tr class="separator:ad7615b76f76544beead47d64ef914859"><td class="memSeparator" colspan="2">&#160;</td></tr>
