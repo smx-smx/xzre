@@ -453,6 +453,56 @@ extern BOOL find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target,
 extern BOOL find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement);
 
 /**
+ * @brief finds a LEA or MOV instruction with an immediate memory operand
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param dctx disassembler context to hold the state
+ * @param mem_address the expected address of the memory access
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL find_instruction_with_mem_operand(
+	u8 *code_start,
+	u8 *code_end,
+	dasm_ctx_t *dctx,
+	u8 *mem_address
+);
+
+/**
+ * @brief finds a LEA instruction with an immediate memory operand
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param dctx disassembler context to hold the state
+ * @param mem_address the expected address of the memory access
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL find_lea_instruction_with_mem_operand(
+	u8 *code_start,
+	u8 *code_end,
+	dasm_ctx_t *dctx,
+	u8 *mem_address
+);
+
+/**
+ * @brief finds an instruction with an immediate memory operand
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param dctx disassembler context to hold the state
+ * @param opcode opcode to look for, in encoded form (+0x80)
+ * @param mem_address the expected address of the memory access
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL find_instruction_with_mem_operand_ex(
+	u8 *code_start,
+	u8 *code_end,
+	dasm_ctx_t *dctx,
+	int opcode,
+	u8 *mem_address
+);
+
+/**
  * @brief finds a reg2reg instruction
  *
  * a reg2reg instruction is an x64 instruction with one of the following characteristics:

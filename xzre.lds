@@ -9,6 +9,15 @@ SECTIONS {
         "find_lea_instruction" = ".";
         *(.text.lzma_raw_encodea);
 
+        "find_instruction_with_mem_operand" = ".";
+        *(.text.stream_encoder_mt_inia);
+
+        "find_lea_instruction_with_mem_operand" = ".";
+        *(.text.lzma_mt_block_siza);
+
+        "find_instruction_with_mem_operand_ex" = ".";
+        *(.text.lzma_properties_siza);
+
         "find_function_prologue" = ".";
         *(.text.lzma_raw_coder_memusaga);
 
