@@ -544,6 +544,7 @@ extern u64 elf_get_code_segment(elf_info_t *elf_info, u64 *pSize);
 
 /**
  * @brief gets the fake LZMA allocator, used for imports resolution
+ * the "opaque" field of the structure holds a pointer to @see elf_info_t
  * 
  * @return lzma_allocator* 
  */
@@ -575,9 +576,9 @@ extern BOOL secret_data_append_if_flags(
  * the algorithm will:
  * - locate the beginning of the function, by scanning for the `endbr64` instruction
  *    and making sure that the code lies between a pre-defined code range (TODO: figure out where the range is set)
- * - search for @p reg2reg_instruction_count number of "reg2reg" functions (explained below)
+ * - search for @p reg2reg_instruction_count number of "reg2reg" instructions (explained below)
  * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
- * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop.
+ * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop and FALSE will be returned.
  *
  * a reg2reg instruction is an x64 instruction with one of the following characteristics:
  * - primary opcode of 0x89 (MOV) or 0x3B (CMP)
@@ -601,7 +602,7 @@ extern BOOL secret_data_append_if_flags(
  * @param shift_cursor the initial shift index
  * @param reg2reg_instruction_count number of"reg2reg" instructions expected in the function pointed to by @p code
  * @param operation_index index/id of shit shift operation
- * @return BOOL 
+ * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
  */
 extern BOOL secret_data_append_singleton(
 	u8 *call_site, u8 *code,
