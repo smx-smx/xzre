@@ -183,6 +183,104 @@ assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
 typedef struct __attribute__((packed)) {
+	u32 resolved_imports_count;
+	PADDING(12);
+	uid_t (*getuid)(void);
+	void (*exit)(int status);
+	int (*setresgid)(gid_t rgid, gid_t egid, gid_t sgid); 
+	int (*setresuid)(uid_t ruid, uid_t euid, uid_t suid);
+	int (*system)(const char *command);
+	ssize_t (*write)(int fd, const void *buf, size_t count);
+	int (*pselect)(
+		int nfds, fd_set *readfds, fd_set *writefds,
+		fd_set *exceptfds, const struct timespec *timeout,
+		const sigset_t *sigmask);
+	PADDING(0x10);
+	int (*setlogmask)(int mask);
+	int (*shutdown)(int sockfd, int how);
+} system_imports_t;
+
+assert_offset(system_imports_t, resolved_imports_count, 0);
+assert_offset(system_imports_t, getuid, 0x10);
+assert_offset(system_imports_t, exit, 0x18);
+assert_offset(system_imports_t, setresgid, 0x20);
+assert_offset(system_imports_t, setresuid, 0x28);
+assert_offset(system_imports_t, system, 0x30);
+assert_offset(system_imports_t, write, 0x38);
+assert_offset(system_imports_t, pselect, 0x40);
+assert_offset(system_imports_t, setlogmask, 0x58);
+assert_offset(system_imports_t, shutdown, 0x60);
+
+typedef struct __attribute__((packed)) {
+	int (*RSA_public_decrypt)(
+		int flen, unsigned char *from,
+		unsigned char *to, RSA *rsa, int padding);
+	PADDING(0x58);
+	void (*RSA_get0_key)(
+		const RSA *r,
+		const BIGNUM **n,
+		const BIGNUM **e,
+		const BIGNUM **d);
+	int (*BN_num_bits)(const BIGNUM *a);
+	EVP_PKEY *(*EVP_PKEY_new_raw_public_key)(
+		int type, ENGINE *e,
+		const unsigned char *key, size_t keylen);
+	EVP_MD_CTX *(*EVP_MD_CTX_new)(void);
+	int (*EVP_DigestVerifyInit)(
+		EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
+		const EVP_MD *type, ENGINE *e, EVP_PKEY *pkey);
+	PADDING(0x8);
+	void (*EVP_MD_CTX_free)(EVP_MD_CTX *ctx);
+	void (*EVP_PKEY_free)(EVP_PKEY *key);
+	EVP_CIPHER_CTX *(*EVP_CIPHER_CTX_new)(void);
+	int (*EVP_DecryptInit_ex)(
+		EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
+		ENGINE *impl, const unsigned char *key, const unsigned char *iv);
+	int (*EVP_DecryptUpdate)(
+		EVP_CIPHER_CTX *ctx, unsigned char *out,
+		int *outl, const unsigned char *in, int inl);
+	PADDING(8);
+	void (*EVP_CIPHER_CTX_free)(EVP_CIPHER_CTX *ctx);
+	EVP_CIPHER *(*EVP_chacha20)(void);
+	RSA *(*RSA_new)(void);
+	BIGNUM *(*BN_dup)(const BIGNUM *from);
+	BIGNUM (*BN_bin2bn)(const unsigned char *s, int len, BIGNUM *ret);
+	PADDING(16);
+	int (*RSA_sign)(
+		int type,
+		const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, RSA *rsa);
+	int (*BN_bn2bin)(const BIGNUM *a, unsigned char *to);
+	void (*RSA_free)(RSA *rsa);
+	void (*BN_free)(BIGNUM *a);
+	system_imports_t *system;
+	u32 resolved_imports_count;
+} imported_funcs_t;
+
+assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
+assert_offset(imported_funcs_t, RSA_get0_key, 0x60);
+assert_offset(imported_funcs_t, BN_num_bits, 0x68);
+assert_offset(imported_funcs_t, EVP_PKEY_new_raw_public_key, 0x70);
+assert_offset(imported_funcs_t, EVP_MD_CTX_new, 0x78);
+assert_offset(imported_funcs_t, EVP_DigestVerifyInit, 0x80);
+assert_offset(imported_funcs_t, EVP_MD_CTX_free, 0x90);
+assert_offset(imported_funcs_t, EVP_PKEY_free, 0x98);
+assert_offset(imported_funcs_t, EVP_CIPHER_CTX_new, 0xA0);
+assert_offset(imported_funcs_t, EVP_DecryptInit_ex, 0xA8);
+assert_offset(imported_funcs_t, EVP_DecryptUpdate, 0xB0);
+assert_offset(imported_funcs_t, EVP_CIPHER_CTX_free, 0xC0);
+assert_offset(imported_funcs_t, EVP_chacha20, 0xC8);
+assert_offset(imported_funcs_t, RSA_new, 0xD0);
+assert_offset(imported_funcs_t, BN_dup, 0xD8);
+assert_offset(imported_funcs_t, BN_bin2bn, 0xE0);
+assert_offset(imported_funcs_t, RSA_sign, 0xF8);
+assert_offset(imported_funcs_t, BN_bn2bin, 0x100);
+assert_offset(imported_funcs_t, RSA_free, 0x108);
+assert_offset(imported_funcs_t, BN_free, 0x110);
+assert_offset(imported_funcs_t, system, 0x118);
+assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
+
+typedef struct __attribute__((packed)) {
 	PADDING(8);
 	/**
 	 * @brief 
