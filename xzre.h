@@ -18,6 +18,9 @@ typedef uint64_t u64;
 typedef uintptr_t uptr;
 
 #include <lzma.h>
+#include <openssl/dsa.h>
+#include <openssl/ec.h>
+#include <openssl/evp.h>
 #include <openssl/rsa.h>
 #include <elf.h>
 
@@ -256,7 +259,8 @@ assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
 typedef struct __attribute__((packed)) {
 	u32 resolved_imports_count;
-	PADDING(12);
+	PADDING(4);
+	size_t (*malloc_usable_size)(void *ptr);
 	uid_t (*getuid)(void);
 	void (*exit)(int status);
 	int (*setresgid)(gid_t rgid, gid_t egid, gid_t sgid); 
@@ -273,6 +277,7 @@ typedef struct __attribute__((packed)) {
 } system_imports_t;
 
 assert_offset(system_imports_t, resolved_imports_count, 0);
+assert_offset(system_imports_t, malloc_usable_size, 8);
 assert_offset(system_imports_t, getuid, 0x10);
 assert_offset(system_imports_t, exit, 0x18);
 assert_offset(system_imports_t, setresgid, 0x20);
@@ -287,7 +292,23 @@ typedef struct __attribute__((packed)) {
 	int (*RSA_public_decrypt)(
 		int flen, unsigned char *from,
 		unsigned char *to, RSA *rsa, int padding);
-	PADDING(0x50);
+	int (*EVP_PKEY_set1_RSA_null)(EVP_PKEY *pkey, struct rsa_st *key);
+	void (*RSA_get0_key_null)(
+		const RSA *r, const BIGNUM **n,
+		const BIGNUM **e, const BIGNUM **d);
+	void *RSA_public_decrypt_hook_ptr;
+	void *EVP_PKEY_set1_RSA_hook_ptr_null;
+	void *RSA_get0_key_hook_ptr_null;
+	void (*DSA_get0_pqg)(
+		const DSA *d, const BIGNUM **p,
+		const BIGNUM **q, const BIGNUM **g);
+	const BIGNUM *(*DSA_get0_pub_key)(const DSA *d);
+	size_t (*EC_POINT_point2oct)(
+		const EC_GROUP *group, const EC_POINT *p,
+		point_conversion_form_t form, unsigned char *buf,
+		size_t len, BN_CTX *ctx);
+	EC_POINT *(*EC_KEY_get0_public_key)(const EC_KEY *key);
+	const EC_GROUP *(*EC_KEY_get0_group)(const EC_KEY *key);
 	EVP_MD *(*EVP_sha256)(void);
 	void (*RSA_get0_key)(
 		const RSA *r,
@@ -332,6 +353,16 @@ typedef struct __attribute__((packed)) {
 } imported_funcs_t;
 
 assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
+assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_null, 8);
+assert_offset(imported_funcs_t, RSA_get0_key_null, 0x10);
+assert_offset(imported_funcs_t, RSA_public_decrypt_hook_ptr, 0x18);
+assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20);
+assert_offset(imported_funcs_t, RSA_get0_key_hook_ptr_null, 0x28);
+assert_offset(imported_funcs_t, DSA_get0_pqg, 0x30);
+assert_offset(imported_funcs_t, DSA_get0_pub_key, 0x38);
+assert_offset(imported_funcs_t, EC_POINT_point2oct, 0x40);
+assert_offset(imported_funcs_t, EC_KEY_get0_public_key, 0x48);
+assert_offset(imported_funcs_t, EC_KEY_get0_group, 0x50);
 assert_offset(imported_funcs_t, EVP_sha256, 0x58);
 assert_offset(imported_funcs_t, RSA_get0_key, 0x60);
 assert_offset(imported_funcs_t, BN_num_bits, 0x68);
