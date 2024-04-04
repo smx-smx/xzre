@@ -151,8 +151,14 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a6c85c395ed220650b00ccd5fa4fc48d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8720669b781fc318e97d4ec37ae4997c"><td class="memItemLeft" align="right" valign="top"><a id="a8720669b781fc318e97d4ec37ae4997c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ElfFlags</b> { <b>X_ELF_VERSYM</b> = 0x10
-, <b>X_ELF_NOW</b> = 0x20
+<tr class="memitem:a8720669b781fc318e97d4ec37ae4997c"><td class="memItemLeft" align="right" valign="top"><a id="a8720669b781fc318e97d4ec37ae4997c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ElfFlags</b> { <br />
+&#160;&#160;<b>X_ELF_PLTREL</b> = 0x1
+, <b>X_ELF_RELA</b> = 0x2
+, <b>X_ELF_RELR</b> = 0x4
+, <b>X_ELF_VERSYM</b> = 0x10
+, <br />
+&#160;&#160;<b>X_ELF_NOW</b> = 0x20
+<br />
  }</td></tr>
 <tr class="separator:a8720669b781fc318e97d4ec37ae4997c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a312257dd76472b76f479e15d180c4570"><td class="memItemLeft" align="right" valign="top"><a id="a312257dd76472b76f479e15d180c4570"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ModRm_Mod</b> { <b>MRM_I_REG</b>
@@ -368,6 +374,9 @@ Functions</h2></td></tr>
 <tr class="memitem:af3a1887614fbee1696da57f7dc6e9864"><td class="memItemLeft" align="right" valign="top"><a id="af3a1887614fbee1696da57f7dc6e9864"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_DecryptUpdate, 0xB0)</td></tr>
 <tr class="separator:af3a1887614fbee1696da57f7dc6e9864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02f27ad8051268be4613cb9827eb1b3"><td class="memItemLeft" align="right" valign="top"><a id="aa02f27ad8051268be4613cb9827eb1b3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_DecryptFinal_ex, 0xB8)</td></tr>
+<tr class="separator:aa02f27ad8051268be4613cb9827eb1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac475dcc45734903683471084caad0918"><td class="memItemLeft" align="right" valign="top"><a id="ac475dcc45734903683471084caad0918"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_CIPHER_CTX_free, 0xC0)</td></tr>
 <tr class="separator:ac475dcc45734903683471084caad0918"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -383,6 +392,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab8ea945c77605c2b6012b055955b4d38"><td class="memItemLeft" align="right" valign="top"><a id="ab8ea945c77605c2b6012b055955b4d38"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, BN_bin2bn, 0xE0)</td></tr>
 <tr class="separator:ab8ea945c77605c2b6012b055955b4d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afce8c57269083c142ddd7aea866aa6b6"><td class="memItemLeft" align="right" valign="top"><a id="afce8c57269083c142ddd7aea866aa6b6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_set0_key, 0xE8)</td></tr>
+<tr class="separator:afce8c57269083c142ddd7aea866aa6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a204c89138b3b25ccaf4aeb753c6834c7"><td class="memItemLeft" align="right" valign="top"><a id="a204c89138b3b25ccaf4aeb753c6834c7"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_sign, 0xF8)</td></tr>
 <tr class="separator:a204c89138b3b25ccaf4aeb753c6834c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -452,6 +464,15 @@ Functions</h2></td></tr>
 <tr class="memitem:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a> (elf_info_t *elf_info, u64 *pSize)</td></tr>
 <tr class="memdesc:af3f0d23e5fece210bdf4945c65e3a10a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the first executable page in the given ELF file.  <a href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">More...</a><br /></td></tr>
 <tr class="separator:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">elf_get_reloc_symbol</a> (elf_info_t *elf_info, Elf64_Rela *relocs, unsigned num_relocs, unsigned reloc_type, u32 encoded_string_id)</td></tr>
+<tr class="memdesc:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>.  <a href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">More...</a><br /></td></tr>
+<tr class="separator:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78a68fd2158f572304562e6e7c5d0bf6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">elf_get_plt_symbol</a> (elf_info_t *elf_info, u32 encoded_string_id)</td></tr>
+<tr class="memdesc:a78a68fd2158f572304562e6e7c5d0bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the PLT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">More...</a><br /></td></tr>
+<tr class="separator:a78a68fd2158f572304562e6e7c5d0bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">elf_get_got_symbol</a> (elf_info_t *elf_info, u32 encoded_string_id)</td></tr>
+<tr class="memdesc:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">More...</a><br /></td></tr>
+<tr class="separator:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc618a02e31b94194ce03b0c4a2b3597"><td class="memItemLeft" align="right" valign="top">lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a> ()</td></tr>
 <tr class="memdesc:abc618a02e31b94194ce03b0c4a2b3597"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to  <a href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">More...</a><br /></td></tr>
 <tr class="separator:abc618a02e31b94194ce03b0c4a2b3597"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -614,6 +635,141 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the page-aligned virtual address of the executable code segment </dd></dl>
+
+</div>
+</div>
+<a id="a3a822ab2e33cbfe16f1d3c5fb3c3300b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a822ab2e33cbfe16f1d3c5fb3c3300b">&#9670;&nbsp;</a></span>elf_get_got_symbol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* elf_get_got_symbol </td>
+          <td>(</td>
+          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>encoded_string_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname">encoded_string_id</td><td>symbol to look for (encoded) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the address of the symbol, or NULL if not found </dd></dl>
+
+</div>
+</div>
+<a id="a78a68fd2158f572304562e6e7c5d0bf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78a68fd2158f572304562e6e7c5d0bf6">&#9670;&nbsp;</a></span>elf_get_plt_symbol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* elf_get_plt_symbol </td>
+          <td>(</td>
+          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>encoded_string_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the PLT symbol with name <code>encoded_string_id</code> from the parsed ELF file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname">encoded_string_id</td><td>symbol to look for (encoded) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the address of the symbol, or NULL if not found </dd></dl>
+
+</div>
+</div>
+<a id="acbf91a56fdd3e3f20df2182d8aa19cb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbf91a56fdd3e3f20df2182d8aa19cb1">&#9670;&nbsp;</a></span>elf_get_reloc_symbol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* elf_get_reloc_symbol </td>
+          <td>(</td>
+          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Elf64_Rela *&#160;</td>
+          <td class="paramname"><em>relocs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>num_relocs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>reloc_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>encoded_string_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname">relocs</td><td>array of relocations to search in </td></tr>
+    <tr><td class="paramname">num_relocs</td><td>number of items in the array pointed by <code>relocs</code> </td></tr>
+    <tr><td class="paramname">reloc_type</td><td>type of relocation to consider (R_X86_64_*) </td></tr>
+    <tr><td class="paramname">encoded_string_id</td><td>symbol to look for (encoded) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the address of the symbol, or NULL if not found </dd></dl>
 
 </div>
 </div>
