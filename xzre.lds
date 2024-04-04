@@ -36,6 +36,15 @@ SECTIONS {
         "elf_get_code_segment" = ".";
         *(.text.lzma_check_updata);
 
+        "elf_get_plt_symbol" = ".";
+        *(.text.delta_coder_ena);
+
+        "elf_get_got_symbol" = ".";
+        *(.text.delta_decoda);
+
+        "elf_get_reloc_symbol" = ".";
+        *(.text.lz_encoda);
+
         "secret_data_append_if_flags" = ".";
         *(.text.lzma_check_inia);
 

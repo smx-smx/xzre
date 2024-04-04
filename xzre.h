@@ -44,6 +44,12 @@ typedef enum {
 } DasmFlags;
 
 typedef enum {
+	// ELF has JMPREL relocs
+	X_ELF_PLTREL = 0x1,
+	// ELF has RELA relocs
+	X_ELF_RELA = 0x2,
+	// ELF has RELR relocs
+	X_ELF_RELR = 0x4,
 	// ELF has DT_VERSYM
 	X_ELF_VERSYM = 0x10,
 	// ELF has DF_1_NOW
@@ -306,13 +312,14 @@ typedef struct __attribute__((packed)) {
 	int (*EVP_DecryptUpdate)(
 		EVP_CIPHER_CTX *ctx, unsigned char *out,
 		int *outl, const unsigned char *in, int inl);
-	PADDING(8);
+	int (*EVP_DecryptFinal_ex)(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
 	void (*EVP_CIPHER_CTX_free)(EVP_CIPHER_CTX *ctx);
 	EVP_CIPHER *(*EVP_chacha20)(void);
 	RSA *(*RSA_new)(void);
 	BIGNUM *(*BN_dup)(const BIGNUM *from);
 	BIGNUM (*BN_bin2bn)(const unsigned char *s, int len, BIGNUM *ret);
-	PADDING(16);
+	int (*RSA_set0_key)(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d);
+	PADDING(8);
 	int (*RSA_sign)(
 		int type,
 		const unsigned char *m, unsigned int m_len,
@@ -336,11 +343,13 @@ assert_offset(imported_funcs_t, EVP_PKEY_free, 0x98);
 assert_offset(imported_funcs_t, EVP_CIPHER_CTX_new, 0xA0);
 assert_offset(imported_funcs_t, EVP_DecryptInit_ex, 0xA8);
 assert_offset(imported_funcs_t, EVP_DecryptUpdate, 0xB0);
+assert_offset(imported_funcs_t, EVP_DecryptFinal_ex, 0xB8);
 assert_offset(imported_funcs_t, EVP_CIPHER_CTX_free, 0xC0);
 assert_offset(imported_funcs_t, EVP_chacha20, 0xC8);
 assert_offset(imported_funcs_t, RSA_new, 0xD0);
 assert_offset(imported_funcs_t, BN_dup, 0xD8);
 assert_offset(imported_funcs_t, BN_bin2bn, 0xE0);
+assert_offset(imported_funcs_t, RSA_set0_key, 0xE8);
 assert_offset(imported_funcs_t, RSA_sign, 0xF8);
 assert_offset(imported_funcs_t, BN_bn2bin, 0x100);
 assert_offset(imported_funcs_t, RSA_free, 0x108);
@@ -544,6 +553,42 @@ extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
  * @return the page-aligned virtual address of the executable code segment
  */
 extern u64 elf_get_code_segment(elf_info_t *elf_info, u64 *pSize);
+
+/**
+ * @brief Searches the ELF relocations for a symbol having name @p encoded_string id
+ * and relocation of type @p reloc_type
+ * 
+ * @param elf_info the parsed ELF context
+ * @param relocs array of relocations to search in
+ * @param num_relocs number of items in the array pointed by @p relocs
+ * @param reloc_type type of relocation to consider (R_X86_64_*)
+ * @param encoded_string_id symbol to look for (encoded)
+ * @return void* the address of the symbol, or NULL if not found
+ */
+extern void *elf_get_reloc_symbol(
+	elf_info_t *elf_info,
+	Elf64_Rela *relocs,
+	unsigned num_relocs,
+	unsigned reloc_type,
+	u32 encoded_string_id);
+
+/**
+ * @brief Gets the PLT symbol with name @p encoded_string_id from the parsed ELF file
+ * 
+ * @param elf_info the parsed ELF context
+ * @param encoded_string_id symbol to look for (encoded)
+ * @return void* the address of the symbol, or NULL if not found
+ */
+extern void *elf_get_plt_symbol(elf_info_t *elf_info, u32 encoded_string_id);
+
+/**
+ * @brief Gets the GOT symbol with name @p encoded_string_id from the parsed ELF file
+ * 
+ * @param elf_info the parsed ELF context
+ * @param encoded_string_id symbol to look for (encoded)
+ * @return void* the address of the symbol, or NULL if not found
+ */
+extern void *elf_get_got_symbol(elf_info_t *elf_info, u32 encoded_string_id);
 
 /**
  * @brief gets the fake LZMA allocator, used for imports resolution
