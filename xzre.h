@@ -534,13 +534,13 @@ extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, co
 extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
 
 /**
- * @brief Obtains the size of the first executable page in the given ELF file
+ * @brief Obtains the address and size of the first executable page in the given ELF file
  * 
  * @param elf_info the parsed ELF context, which will be updated with the address and size of the code segment
- * @param pSize variable that will hold the page-aligned segment size
- * @return BOOL TRUE on success, FALSE if the executable segment wasn't found
+ * @param pSize variable that will be populated with the page-aligned segment size
+ * @return the page-aligned virtual address of the executable code segment
  */
-extern BOOL elf_get_code_size(elf_info_t *elf_info, u64 *pSize);
+extern u64 elf_get_code_segment(elf_info_t *elf_info, u64 *pSize);
 
 /**
  * @brief gets the fake LZMA allocator, used for imports resolution
