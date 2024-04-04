@@ -281,7 +281,8 @@ typedef struct __attribute__((packed)) {
 	int (*RSA_public_decrypt)(
 		int flen, unsigned char *from,
 		unsigned char *to, RSA *rsa, int padding);
-	PADDING(0x58);
+	PADDING(0x50);
+	EVP_MD *(*EVP_sha256)(void);
 	void (*RSA_get0_key)(
 		const RSA *r,
 		const BIGNUM **n,
@@ -324,6 +325,7 @@ typedef struct __attribute__((packed)) {
 } imported_funcs_t;
 
 assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
+assert_offset(imported_funcs_t, EVP_sha256, 0x58);
 assert_offset(imported_funcs_t, RSA_get0_key, 0x60);
 assert_offset(imported_funcs_t, BN_num_bits, 0x68);
 assert_offset(imported_funcs_t, EVP_PKEY_new_raw_public_key, 0x70);
@@ -495,15 +497,16 @@ extern BOOL find_function_prologue_ex(
 	FuncFindType find_mode);
 
 /**
- * @brief checks if given ELF file contains an elf segment with the given parameters
+ * @brief checks if given ELF file contains the range [vaddr, vaddr+size)
+ * in a segment with the specified memory protection flags
  * 
  * @param elf_info elf context
- * @param vaddr the starting virtual address of the segment
- * @param size the size of the segment
- * @param p_flags the segment protection flags (PF_*)
+ * @param vaddr starting memory address
+ * @param size memory size
+ * @param p_flags the expected segment protection flags (PF_*)
  * @return BOOL TRUE if found, FALSE otherwise
  */
-extern BOOL elf_contains_segment(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);
+extern BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);
 
 /**
  * @brief Parses the given in-memory ELF file into elf_info

@@ -21,7 +21,7 @@ SECTIONS {
         "check_call_site" = ".";
         *(.text.lzma_index_iter_rewina);
 
-        "elf_contains_segment" = ".";
+        "elf_contains_vaddr" = ".";
         *(.text.parse_bcz);
 
         "elf_parse" = ".";
