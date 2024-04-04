@@ -391,59 +391,82 @@ $(function() {
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
 <div class="line"><a name="l00453"></a><span class="lineno"><a class="line" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">  453</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">find_lea_instruction</a>(u8 *code_start, u8 *code_end, u64 displacement);</div>
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
-<div class="line"><a name="l00474"></a><span class="lineno"><a class="line" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">  474</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a>(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx);</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
-<div class="line"><a name="l00485"></a><span class="lineno"><a class="line" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">  485</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a>(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);</div>
+<div class="line"><a name="l00464"></a><span class="lineno"><a class="line" href="xzre_8h.html#a64b647bb6cc1dbef0ebc134fb43019c2">  464</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a64b647bb6cc1dbef0ebc134fb43019c2">find_instruction_with_mem_operand</a>(</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    u8 *code_start,</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    u8 *code_end,</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    dasm_ctx_t *dctx,</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    u8 *mem_address</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;);</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno"><a class="line" href="xzre_8h.html#af7ef6e95ce13c8ac2ebfac2a4d30d0ad">  480</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#af7ef6e95ce13c8ac2ebfac2a4d30d0ad">find_lea_instruction_with_mem_operand</a>(</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    u8 *code_start,</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    u8 *code_end,</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    dasm_ctx_t *dctx,</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    u8 *mem_address</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;);</div>
 <div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
-<div class="line"><a name="l00500"></a><span class="lineno"><a class="line" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">  500</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a>(</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    u8 *code_start,</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    u8 *func_start_0,</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;    u8 *func_start_1,</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;    u8 *search_base,</div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;    u8 *code_end,</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;    FuncFindType find_mode);</div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
-<div class="line"><a name="l00518"></a><span class="lineno"><a class="line" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">  518</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a>(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160; </div>
-<div class="line"><a name="l00527"></a><span class="lineno"><a class="line" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">  527</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a>(Elf64_Ehdr *ehdr, elf_info_t *elf_info);</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
-<div class="line"><a name="l00537"></a><span class="lineno"><a class="line" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">  537</a></span>&#160;<span class="keyword">extern</span> Elf64_Sym *<a class="code" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a>(elf_info_t *elf_info, u32 encoded_string_id, <span class="keyword">const</span> <span class="keywordtype">char</span> *sym_version);</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160; </div>
-<div class="line"><a name="l00546"></a><span class="lineno"><a class="line" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">  546</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; </div>
-<div class="line"><a name="l00555"></a><span class="lineno"><a class="line" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">  555</a></span>&#160;<span class="keyword">extern</span> u64 <a class="code" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a>(elf_info_t *elf_info, u64 *pSize);</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160; </div>
-<div class="line"><a name="l00568"></a><span class="lineno"><a class="line" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">  568</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">elf_get_reloc_symbol</a>(</div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;    elf_info_t *elf_info,</div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;    Elf64_Rela *relocs,</div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;    <span class="keywordtype">unsigned</span> num_relocs,</div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;    <span class="keywordtype">unsigned</span> reloc_type,</div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;    u32 encoded_string_id);</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160; </div>
-<div class="line"><a name="l00582"></a><span class="lineno"><a class="line" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">  582</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">elf_get_plt_symbol</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; </div>
-<div class="line"><a name="l00591"></a><span class="lineno"><a class="line" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">  591</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">elf_get_got_symbol</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160; </div>
-<div class="line"><a name="l00599"></a><span class="lineno"><a class="line" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">  599</a></span>&#160;<span class="keyword">extern</span> lzma_allocator *<a class="code" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a>();</div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160; </div>
-<div class="line"><a name="l00611"></a><span class="lineno"><a class="line" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">  611</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">secret_data_append_if_flags</a>(</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    <span class="keywordtype">unsigned</span> operation_index,</div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count,</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="keywordtype">int</span> flags, u8 *code);</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160; </div>
-<div class="line"><a name="l00655"></a><span class="lineno"><a class="line" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">  655</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a>(</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;    u8 *call_site, u8 *code,</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count, <span class="keywordtype">unsigned</span> operation_index);</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160; </div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="preprocessor">#include &quot;util.h&quot;</span></div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno"><a class="line" href="xzre_8h.html#a09a9a10f2e0f4ebc554b695cd1dd89fe">  497</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a09a9a10f2e0f4ebc554b695cd1dd89fe">find_instruction_with_mem_operand_ex</a>(</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;    u8 *code_start,</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    u8 *code_end,</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    dasm_ctx_t *dctx,</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    <span class="keywordtype">int</span> opcode,</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    u8 *mem_address</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;);</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
+<div class="line"><a name="l00524"></a><span class="lineno"><a class="line" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">  524</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a>(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx);</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160; </div>
+<div class="line"><a name="l00535"></a><span class="lineno"><a class="line" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">  535</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a>(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode);</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160; </div>
+<div class="line"><a name="l00550"></a><span class="lineno"><a class="line" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">  550</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a>(</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;    u8 *code_start,</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    u8 *func_start_0,</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    u8 *func_start_1,</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;    u8 *search_base,</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;    u8 *code_end,</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    FuncFindType find_mode);</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; </div>
+<div class="line"><a name="l00568"></a><span class="lineno"><a class="line" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">  568</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a>(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160; </div>
+<div class="line"><a name="l00577"></a><span class="lineno"><a class="line" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">  577</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a>(Elf64_Ehdr *ehdr, elf_info_t *elf_info);</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160; </div>
+<div class="line"><a name="l00587"></a><span class="lineno"><a class="line" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">  587</a></span>&#160;<span class="keyword">extern</span> Elf64_Sym *<a class="code" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a>(elf_info_t *elf_info, u32 encoded_string_id, <span class="keyword">const</span> <span class="keywordtype">char</span> *sym_version);</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160; </div>
+<div class="line"><a name="l00596"></a><span class="lineno"><a class="line" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">  596</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; </div>
+<div class="line"><a name="l00605"></a><span class="lineno"><a class="line" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">  605</a></span>&#160;<span class="keyword">extern</span> u64 <a class="code" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a>(elf_info_t *elf_info, u64 *pSize);</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160; </div>
+<div class="line"><a name="l00618"></a><span class="lineno"><a class="line" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">  618</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">elf_get_reloc_symbol</a>(</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;    elf_info_t *elf_info,</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    Elf64_Rela *relocs,</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keywordtype">unsigned</span> num_relocs,</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    <span class="keywordtype">unsigned</span> reloc_type,</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    u32 encoded_string_id);</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160; </div>
+<div class="line"><a name="l00632"></a><span class="lineno"><a class="line" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">  632</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">elf_get_plt_symbol</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
+<div class="line"><a name="l00641"></a><span class="lineno"><a class="line" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">  641</a></span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> *<a class="code" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">elf_get_got_symbol</a>(elf_info_t *elf_info, u32 encoded_string_id);</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160; </div>
+<div class="line"><a name="l00649"></a><span class="lineno"><a class="line" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">  649</a></span>&#160;<span class="keyword">extern</span> lzma_allocator *<a class="code" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a>();</div>
+<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160; </div>
+<div class="line"><a name="l00661"></a><span class="lineno"><a class="line" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">  661</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">secret_data_append_if_flags</a>(</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;    <span class="keywordtype">unsigned</span> operation_index,</div>
+<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count,</div>
+<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    <span class="keywordtype">int</span> flags, u8 *code);</div>
+<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
+<div class="line"><a name="l00705"></a><span class="lineno"><a class="line" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">  705</a></span>&#160;<span class="keyword">extern</span> BOOL <a class="code" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a>(</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    u8 *call_site, u8 *code,</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    <a class="code" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor,</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;    <span class="keywordtype">unsigned</span> reg2reg_instruction_count, <span class="keywordtype">unsigned</span> operation_index);</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160; </div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="preprocessor">#include &quot;util.h&quot;</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aunionsecret__data__shift__cursor_html"><div class="ttname"><a href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a></div><div class="ttdoc">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits repres...</div><div class="ttdef"><b>Definition:</b> xzre.h:413</div></div>
 <div class="ttc" id="aunionsecret__data__shift__cursor_html_a9b139f7265c8349205b28aa6f8d894e0"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0">secret_data_shift_cursor::index</a></div><div class="ttdeci">u32 index</div><div class="ttdef"><b>Definition:</b> xzre.h:421</div></div>
 <div class="ttc" id="aunionsecret__data__shift__cursor_html_ab2196dad3c7284cb18383a894058d144"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#ab2196dad3c7284cb18383a894058d144">secret_data_shift_cursor::bit_index</a></div><div class="ttdeci">u32 bit_index</div><div class="ttdef"><b>Definition:</b> xzre.h:416</div></div>
 <div class="ttc" id="aunionsecret__data__shift__cursor_html_abc6b87bb67fca21d9db17a1dfd4ddd31"><div class="ttname"><a href="unionsecret__data__shift__cursor.html#abc6b87bb67fca21d9db17a1dfd4ddd31">secret_data_shift_cursor::byte_index</a></div><div class="ttdeci">u32 byte_index</div><div class="ttdef"><b>Definition:</b> xzre.h:418</div></div>
 <div class="ttc" id="axzre_8h_html_a049328971f4e99ce954d5e0346fee6d7"><div class="ttname"><a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a></div><div class="ttdeci">BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info)</div><div class="ttdoc">Parses the given in-memory ELF file into elf_info.</div></div>
+<div class="ttc" id="axzre_8h_html_a09a9a10f2e0f4ebc554b695cd1dd89fe"><div class="ttname"><a href="xzre_8h.html#a09a9a10f2e0f4ebc554b695cd1dd89fe">find_instruction_with_mem_operand_ex</a></div><div class="ttdeci">BOOL find_instruction_with_mem_operand_ex(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, int opcode, u8 *mem_address)</div><div class="ttdoc">finds an instruction with an immediate memory operand</div></div>
 <div class="ttc" id="axzre_8h_html_a20700a81cc5921ecba31766edd9c3f4f"><div class="ttname"><a href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a></div><div class="ttdeci">void * elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id)</div><div class="ttdoc">Looks up an ELF symbol from a parsed ELF, and returns its memory address.</div></div>
 <div class="ttc" id="axzre_8h_html_a2a09d15b1c506e0f29ee9433771ad8db"><div class="ttname"><a href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a></div><div class="ttdeci">BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags)</div><div class="ttdoc">checks if given ELF file contains the range [vaddr, vaddr+size) in a segment with the specified memor...</div></div>
 <div class="ttc" id="axzre_8h_html_a36a945c9790681a50af0a1a0cd72a269"><div class="ttname"><a href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a></div><div class="ttdeci">BOOL secret_data_append_singleton(u8 *call_site, u8 *code, secret_data_shift_cursor shift_cursor, unsigned reg2reg_instruction_count, unsigned operation_index)</div><div class="ttdoc">Shifts data in the secret data store, after validation of code. this function is intended to be invok...</div></div>
@@ -451,6 +474,7 @@ $(function() {
 <div class="ttc" id="axzre_8h_html_a41fada894916f4c67d59090ff57aead1"><div class="ttname"><a href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">find_call_instruction</a></div><div class="ttdeci">BOOL find_call_instruction(u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx)</div><div class="ttdoc">finds a call instruction</div></div>
 <div class="ttc" id="axzre_8h_html_a52d510f0bbb31de19d8d20bf1acaeb5f"><div class="ttname"><a href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a></div><div class="ttdeci">int x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end)</div><div class="ttdoc">disassembles the given x64 code</div></div>
 <div class="ttc" id="axzre_8h_html_a5b09699385091684d71bf8a278e0372d"><div class="ttname"><a href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a></div><div class="ttdeci">BOOL find_function_prologue_ex(u8 *code_start, u8 *func_start_0, u8 *func_start_1, u8 *search_base, u8 *code_end, FuncFindType find_mode)</div><div class="ttdoc">locates the function prologue. it will try to backtrack and synchronize the code stream,...</div></div>
+<div class="ttc" id="axzre_8h_html_a64b647bb6cc1dbef0ebc134fb43019c2"><div class="ttname"><a href="xzre_8h.html#a64b647bb6cc1dbef0ebc134fb43019c2">find_instruction_with_mem_operand</a></div><div class="ttdeci">BOOL find_instruction_with_mem_operand(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, u8 *mem_address)</div><div class="ttdoc">finds a LEA or MOV instruction with an immediate memory operand</div></div>
 <div class="ttc" id="axzre_8h_html_a78a68fd2158f572304562e6e7c5d0bf6"><div class="ttname"><a href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">elf_get_plt_symbol</a></div><div class="ttdeci">void * elf_get_plt_symbol(elf_info_t *elf_info, u32 encoded_string_id)</div><div class="ttdoc">Gets the PLT symbol with name encoded_string_id from the parsed ELF file.</div></div>
 <div class="ttc" id="axzre_8h_html_a81a6f3d01ea6057c942052321b92c533"><div class="ttname"><a href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a></div><div class="ttdeci">BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode)</div><div class="ttdoc">locates the function prologue</div></div>
 <div class="ttc" id="axzre_8h_html_ab898071398b359603a35c202e9c65f3b"><div class="ttname"><a href="xzre_8h.html#ab898071398b359603a35c202e9c65f3b">__attribute__</a></div><div class="ttdeci">struct __attribute__((packed))</div><div class="ttdef"><b>Definition:</b> xzre.h:84</div></div>
@@ -461,6 +485,7 @@ $(function() {
 <div class="ttc" id="axzre_8h_html_aea85a14166f11bb956c7862c2a66571e"><div class="ttname"><a href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">find_lea_instruction</a></div><div class="ttdeci">BOOL find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement)</div><div class="ttdoc">finds a lea instruction</div></div>
 <div class="ttc" id="axzre_8h_html_aed0391d07e4413f5a13e1ec2940c94ea"><div class="ttname"><a href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a></div><div class="ttdeci">BOOL find_reg2reg_instruction(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx)</div><div class="ttdoc">finds a reg2reg instruction</div></div>
 <div class="ttc" id="axzre_8h_html_af3f0d23e5fece210bdf4945c65e3a10a"><div class="ttname"><a href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a></div><div class="ttdeci">u64 elf_get_code_segment(elf_info_t *elf_info, u64 *pSize)</div><div class="ttdoc">Obtains the address and size of the first executable page in the given ELF file.</div></div>
+<div class="ttc" id="axzre_8h_html_af7ef6e95ce13c8ac2ebfac2a4d30d0ad"><div class="ttname"><a href="xzre_8h.html#af7ef6e95ce13c8ac2ebfac2a4d30d0ad">find_lea_instruction_with_mem_operand</a></div><div class="ttdeci">BOOL find_lea_instruction_with_mem_operand(u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, u8 *mem_address)</div><div class="ttdoc">finds a LEA instruction with an immediate memory operand</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
