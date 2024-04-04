@@ -442,14 +442,14 @@ assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
  * this is convenient, since a simple increment will increment the buffer position correctly
  */
 typedef union {
+	/** the initial value */
+	u32 index;
 	struct {
 		/** bit index in the current byte indicated by @ref byte_index */
 		u32 bit_index : 3;
 		/** byte index into the secret data array */
 		u32 byte_index : 29;
 	};
-	/** the initial value */
-	u32 index;
 } secret_data_shift_cursor;
 
 /**
@@ -496,7 +496,7 @@ extern BOOL find_instruction_with_mem_operand(
 	u8 *code_start,
 	u8 *code_end,
 	dasm_ctx_t *dctx,
-	u8 *mem_address
+	void *mem_address
 );
 
 /**
@@ -512,7 +512,7 @@ extern BOOL find_lea_instruction_with_mem_operand(
 	u8 *code_start,
 	u8 *code_end,
 	dasm_ctx_t *dctx,
-	u8 *mem_address
+	void *mem_address
 );
 
 /**
@@ -530,7 +530,7 @@ extern BOOL find_instruction_with_mem_operand_ex(
 	u8 *code_end,
 	dasm_ctx_t *dctx,
 	int opcode,
-	u8 *mem_address
+	void *mem_address
 );
 
 /**
