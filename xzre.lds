@@ -65,5 +65,8 @@ SECTIONS {
 
         "backdoor_setup" = ".";
         *(.text.microlzma_encoder_inia);
+
+        "resolve_libc_imports" = ".";
+        *(.text.lzma_index_buffer_encoda);
     }
 } INSERT AFTER .text;

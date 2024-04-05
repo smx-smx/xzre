@@ -23,6 +23,7 @@ typedef uintptr_t uptr;
 #include <openssl/evp.h>
 #include <openssl/rsa.h>
 #include <elf.h>
+#include <link.h>
 
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
@@ -876,6 +877,20 @@ extern BOOL secret_data_append_singleton(
  * @return BOOL unused
  */
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
+
+/**
+ * @brief parses the libc ELF from the supplied link map, and resolves its imports
+ * 
+ * @param libc the loaded libc's link map (obtained by traversing r_debug->r_map)
+ * @param libc_info pointer to an ELF context that will be populated with the parsed ELF information
+ * @param imports pointer to libc imports that will be populated with resolved libc function pointers
+ * @return BOOL TRUE if successful, FALSE otherwise
+ */
+extern BOOL resolve_libc_imports(
+	struct link_map *libc,
+	elf_info_t *libc_info,
+	libc_imports_t *imports
+);
 
 #include "util.h"
 #endif
