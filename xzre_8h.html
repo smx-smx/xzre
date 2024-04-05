@@ -66,8 +66,7 @@ $(function() {
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">xzre.h File Reference</div>  </div>
 </div><!--header-->
@@ -90,6 +89,29 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__globals__t.html">backdoor_shared_globals_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__info.html">elf_info</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlibc__imports.html">libc_imports</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsystem__imports__t.html">system_imports_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structimported__funcs__t.html">imported_funcs_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html">global_context</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__lib__info__t.html">elf_lib_info_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a>  <a href="structbackdoor__data__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits represent the bit index, while the rest represents the byte index this is convenient, since a simple increment will increment the buffer position correctly  <a href="unionsecret__data__shift__cursor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +163,15 @@ typedef uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><b>uptr</b>
 <tr class="memitem:a050c65e107f0c828f856a231f4b4e788"><td class="memItemLeft" align="right" valign="top"><a id="a050c65e107f0c828f856a231f4b4e788"></a>
 typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL</b></td></tr>
 <tr class="separator:a050c65e107f0c828f856a231f4b4e788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a958fbc6aa42d63f2a2fd296bf0e586e4"><td class="memItemLeft" align="right" valign="top"><a id="a958fbc6aa42d63f2a2fd296bf0e586e4"></a>
+typedef struct <a class="el" href="structelf__info.html">elf_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>elf_info_t</b></td></tr>
+<tr class="separator:a958fbc6aa42d63f2a2fd296bf0e586e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa318f8aef631765be09c477436487c54"><td class="memItemLeft" align="right" valign="top"><a id="aa318f8aef631765be09c477436487c54"></a>
+typedef struct <a class="el" href="structlibc__imports.html">libc_imports</a>&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports_t</b></td></tr>
+<tr class="separator:aa318f8aef631765be09c477436487c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2390d675ac7d2f897005a15e2564c755"><td class="memItemLeft" align="right" valign="top"><a id="a2390d675ac7d2f897005a15e2564c755"></a>
+typedef struct <a class="el" href="structglobal__context.html">global_context</a>&#160;</td><td class="memItemRight" valign="bottom"><b>global_context_t</b></td></tr>
+<tr class="separator:a2390d675ac7d2f897005a15e2564c755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -177,367 +208,364 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af1ebad6aef2db9942e46865bbe1134bd"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af1ebad6aef2db9942e46865bbe1134bd">__attribute__</a> ((packed)) backdoor_data</td></tr>
-<tr class="memdesc:af1ebad6aef2db9942e46865bbe1134bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a>  <a href="xzre_8h.html#af1ebad6aef2db9942e46865bbe1134bd">More...</a><br /></td></tr>
-<tr class="separator:af1ebad6aef2db9942e46865bbe1134bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memItemLeft" align="right" valign="top"><a id="a07340e0f8ca9df744bc24ed6a6d2414c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, symbol_ptr, 0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>, symbol_ptr, 0)</td></tr>
 <tr class="separator:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e543602ec7511d624f8f3f7b83a1ee8"><td class="memItemLeft" align="right" valign="top"><a id="a4e543602ec7511d624f8f3f7b83a1ee8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, got_ptr, 8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>, got_ptr, 8)</td></tr>
 <tr class="separator:a4e543602ec7511d624f8f3f7b83a1ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a238dfcc13519ae09f6ae9097691f41b9"><td class="memItemLeft" align="right" valign="top"><a id="a238dfcc13519ae09f6ae9097691f41b9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, return_address, 0x10)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>, return_address, 0x10)</td></tr>
 <tr class="separator:a238dfcc13519ae09f6ae9097691f41b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66d3cb2e332731ec072e1462a85884df"><td class="memItemLeft" align="right" valign="top"><a id="a66d3cb2e332731ec072e1462a85884df"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, cpuid_fn, 0x18)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>, cpuid_fn, 0x18)</td></tr>
 <tr class="separator:a66d3cb2e332731ec072e1462a85884df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b5b3403c2bfcb1ad17f541f7c58761"><td class="memItemLeft" align="right" valign="top"><a id="a12b5b3403c2bfcb1ad17f541f7c58761"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, got_offset, 0x20)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>, got_offset, 0x20)</td></tr>
 <tr class="separator:a12b5b3403c2bfcb1ad17f541f7c58761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade42a29d7f52bd39f36766d5af17978e"><td class="memItemLeft" align="right" valign="top"><a id="ade42a29d7f52bd39f36766d5af17978e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, caller_locals, 0x28)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>, caller_locals, 0x28)</td></tr>
 <tr class="separator:ade42a29d7f52bd39f36766d5af17978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94c3fff16b704f8d529ce25798073af3"><td class="memItemLeft" align="right" valign="top"><a id="a94c3fff16b704f8d529ce25798073af3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_shared_globals_t, globals, 0x10)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__globals__t.html">backdoor_shared_globals_t</a>, globals, 0x10)</td></tr>
 <tr class="separator:a94c3fff16b704f8d529ce25798073af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b25e68f96fef005e33fd1f93f1cce3d"><td class="memItemLeft" align="right" valign="top"><a id="a0b25e68f96fef005e33fd1f93f1cce3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_setup_params_t, shared, 0x8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a>, shared, 0x8)</td></tr>
 <tr class="separator:a0b25e68f96fef005e33fd1f93f1cce3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5a94e874d57beee98370fe9e1cefd58"><td class="memItemLeft" align="right" valign="top"><a id="af5a94e874d57beee98370fe9e1cefd58"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_setup_params_t, entry_ctx, 0x80)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a>, entry_ctx, 0x80)</td></tr>
 <tr class="separator:af5a94e874d57beee98370fe9e1cefd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92053ded261b5ab5e5625e7b48f1d13d"><td class="memItemLeft" align="right" valign="top"><a id="a92053ded261b5ab5e5625e7b48f1d13d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, first_instruction, 0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, first_instruction, 0)</td></tr>
 <tr class="separator:a92053ded261b5ab5e5625e7b48f1d13d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1eb145f12c67a4be49fbaa6e3099992"><td class="memItemLeft" align="right" valign="top"><a id="ab1eb145f12c67a4be49fbaa6e3099992"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, instruction_size, 8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, instruction_size, 8)</td></tr>
 <tr class="separator:ab1eb145f12c67a4be49fbaa6e3099992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79e1a7055dcef8979c2b23a65ba621bb"><td class="memItemLeft" align="right" valign="top"><a id="a79e1a7055dcef8979c2b23a65ba621bb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, flags, 0x10)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, flags, 0x10)</td></tr>
 <tr class="separator:a79e1a7055dcef8979c2b23a65ba621bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8376690511def56513ab02a0fb86b164"><td class="memItemLeft" align="right" valign="top"><a id="a8376690511def56513ab02a0fb86b164"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, flags2, 0x11)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, flags2, 0x11)</td></tr>
 <tr class="separator:a8376690511def56513ab02a0fb86b164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a712dd0741cd0f1f19762f77f7ee7a6fc"><td class="memItemLeft" align="right" valign="top"><a id="a712dd0741cd0f1f19762f77f7ee7a6fc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, lock_byte, 0x14)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, lock_byte, 0x14)</td></tr>
 <tr class="separator:a712dd0741cd0f1f19762f77f7ee7a6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa8191a6eeda3f4475fc1e5726a555cd"><td class="memItemLeft" align="right" valign="top"><a id="aaa8191a6eeda3f4475fc1e5726a555cd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, last_prefix, 0x16)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, last_prefix, 0x16)</td></tr>
 <tr class="separator:aaa8191a6eeda3f4475fc1e5726a555cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e9aff34162fef534b67b1607f2c0393"><td class="memItemLeft" align="right" valign="top"><a id="a1e9aff34162fef534b67b1607f2c0393"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, rex_byte, 0x1B)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, rex_byte, 0x1B)</td></tr>
 <tr class="separator:a1e9aff34162fef534b67b1607f2c0393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd204ec028d99bfdd5f4442789667f60"><td class="memItemLeft" align="right" valign="top"><a id="acd204ec028d99bfdd5f4442789667f60"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, modrm, 0x1C)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, modrm, 0x1C)</td></tr>
 <tr class="separator:acd204ec028d99bfdd5f4442789667f60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38fd5334ee76d701cb9ea5ed59edb20a"><td class="memItemLeft" align="right" valign="top"><a id="a38fd5334ee76d701cb9ea5ed59edb20a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, modrm_mod, 0x1D)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, modrm_mod, 0x1D)</td></tr>
 <tr class="separator:a38fd5334ee76d701cb9ea5ed59edb20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6195f64611e4619231a2565746d292a"><td class="memItemLeft" align="right" valign="top"><a id="ac6195f64611e4619231a2565746d292a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, modrm_reg, 0x1E)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, modrm_reg, 0x1E)</td></tr>
 <tr class="separator:ac6195f64611e4619231a2565746d292a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2834cafae7e8ef36218929187afe78e5"><td class="memItemLeft" align="right" valign="top"><a id="a2834cafae7e8ef36218929187afe78e5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, modrm_rm, 0x1F)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, modrm_rm, 0x1F)</td></tr>
 <tr class="separator:a2834cafae7e8ef36218929187afe78e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92f57bfeaa7959d5aabe4d3de379448a"><td class="memItemLeft" align="right" valign="top"><a id="a92f57bfeaa7959d5aabe4d3de379448a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, opcode, 0x28)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, opcode, 0x28)</td></tr>
 <tr class="separator:a92f57bfeaa7959d5aabe4d3de379448a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3de11c95cc0fe9586d7125c3aa0a1ff2"><td class="memItemLeft" align="right" valign="top"><a id="a3de11c95cc0fe9586d7125c3aa0a1ff2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, mem_disp, 0x30)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, mem_disp, 0x30)</td></tr>
 <tr class="separator:a3de11c95cc0fe9586d7125c3aa0a1ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63e08f3940f8ef224f578ed0107e3651"><td class="memItemLeft" align="right" valign="top"><a id="a63e08f3940f8ef224f578ed0107e3651"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, operand, 0x38)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, operand, 0x38)</td></tr>
 <tr class="separator:a63e08f3940f8ef224f578ed0107e3651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb3f2de7b7e5754295e89cbf02531246"><td class="memItemLeft" align="right" valign="top"><a id="abb3f2de7b7e5754295e89cbf02531246"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, insn_offset, 0x50)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a>, insn_offset, 0x50)</td></tr>
 <tr class="separator:abb3f2de7b7e5754295e89cbf02531246"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5416f420fcca6102d1bd2f242c6af3bc"><td class="memItemLeft" align="right" valign="top"><a id="a5416f420fcca6102d1bd2f242c6af3bc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, elfbase, 0x0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, elfbase, 0x0)</td></tr>
 <tr class="separator:a5416f420fcca6102d1bd2f242c6af3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab61bf638327c66988e78d20f8c93aa2a"><td class="memItemLeft" align="right" valign="top"><a id="ab61bf638327c66988e78d20f8c93aa2a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, first_vaddr, 0x8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, first_vaddr, 0x8)</td></tr>
 <tr class="separator:ab61bf638327c66988e78d20f8c93aa2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4421b8b37fd7c599f6be0c195a56d792"><td class="memItemLeft" align="right" valign="top"><a id="a4421b8b37fd7c599f6be0c195a56d792"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, phdrs, 0x10)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, phdrs, 0x10)</td></tr>
 <tr class="separator:a4421b8b37fd7c599f6be0c195a56d792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e34f0eff9b6da18356194d477baaf91"><td class="memItemLeft" align="right" valign="top"><a id="a2e34f0eff9b6da18356194d477baaf91"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, e_phnum, 0x18)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, e_phnum, 0x18)</td></tr>
 <tr class="separator:a2e34f0eff9b6da18356194d477baaf91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64f4220b000ba672c282eb0a305df6e5"><td class="memItemLeft" align="right" valign="top"><a id="a64f4220b000ba672c282eb0a305df6e5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, dyn, 0x20)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, dyn, 0x20)</td></tr>
 <tr class="separator:a64f4220b000ba672c282eb0a305df6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2f6b3ca1019cccb9253cb29f4b3e5c1"><td class="memItemLeft" align="right" valign="top"><a id="ac2f6b3ca1019cccb9253cb29f4b3e5c1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, dyn_num_entries, 0x28)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, dyn_num_entries, 0x28)</td></tr>
 <tr class="separator:ac2f6b3ca1019cccb9253cb29f4b3e5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af538d756521ed0fc4a0f91ca0f6602d5"><td class="memItemLeft" align="right" valign="top"><a id="af538d756521ed0fc4a0f91ca0f6602d5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, strtab, 0x30)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, strtab, 0x30)</td></tr>
 <tr class="separator:af538d756521ed0fc4a0f91ca0f6602d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6468e4e51c4a23ba1324a87265abbde6"><td class="memItemLeft" align="right" valign="top"><a id="a6468e4e51c4a23ba1324a87265abbde6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, symtab, 0x38)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, symtab, 0x38)</td></tr>
 <tr class="separator:a6468e4e51c4a23ba1324a87265abbde6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a81e057eb2ac23075ac7e4b87f3d08"><td class="memItemLeft" align="right" valign="top"><a id="ac0a81e057eb2ac23075ac7e4b87f3d08"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, plt_relocs, 0x40)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, plt_relocs, 0x40)</td></tr>
 <tr class="separator:ac0a81e057eb2ac23075ac7e4b87f3d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c7d54c9d562655bef4411005c91ce5d"><td class="memItemLeft" align="right" valign="top"><a id="a0c7d54c9d562655bef4411005c91ce5d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, plt_relocs_num, 0x48)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, plt_relocs_num, 0x48)</td></tr>
 <tr class="separator:a0c7d54c9d562655bef4411005c91ce5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2649eefdb981092a4966acff10794356"><td class="memItemLeft" align="right" valign="top"><a id="a2649eefdb981092a4966acff10794356"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnurelro_found, 0x4C)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnurelro_found, 0x4C)</td></tr>
 <tr class="separator:a2649eefdb981092a4966acff10794356"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a657018488217b8f085e4ad037df4428b"><td class="memItemLeft" align="right" valign="top"><a id="a657018488217b8f085e4ad037df4428b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnurelro_vaddr, 0x50)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnurelro_vaddr, 0x50)</td></tr>
 <tr class="separator:a657018488217b8f085e4ad037df4428b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75da95cf5fb8a74215d3071e7c7e2147"><td class="memItemLeft" align="right" valign="top"><a id="a75da95cf5fb8a74215d3071e7c7e2147"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnurelro_memsize, 0x58)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnurelro_memsize, 0x58)</td></tr>
 <tr class="separator:a75da95cf5fb8a74215d3071e7c7e2147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada2bbbbb7ab077575dd68942d8b2326b"><td class="memItemLeft" align="right" valign="top"><a id="ada2bbbbb7ab077575dd68942d8b2326b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, verdef, 0x60)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, verdef, 0x60)</td></tr>
 <tr class="separator:ada2bbbbb7ab077575dd68942d8b2326b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ab7213d4e836b9835119a782d04aca0"><td class="memItemLeft" align="right" valign="top"><a id="a5ab7213d4e836b9835119a782d04aca0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, verdef_num, 0x68)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, verdef_num, 0x68)</td></tr>
 <tr class="separator:a5ab7213d4e836b9835119a782d04aca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d8aa794e4dab4d1187810d207e7e577"><td class="memItemLeft" align="right" valign="top"><a id="a9d8aa794e4dab4d1187810d207e7e577"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, versym, 0x70)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, versym, 0x70)</td></tr>
 <tr class="separator:a9d8aa794e4dab4d1187810d207e7e577"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad19909828dce0a610b733166946cdbdb"><td class="memItemLeft" align="right" valign="top"><a id="ad19909828dce0a610b733166946cdbdb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, rela_relocs, 0x78)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, rela_relocs, 0x78)</td></tr>
 <tr class="separator:ad19909828dce0a610b733166946cdbdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ff5c8a654bc51cc441e1d9089604933"><td class="memItemLeft" align="right" valign="top"><a id="a8ff5c8a654bc51cc441e1d9089604933"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, rela_relocs_num, 0x80)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, rela_relocs_num, 0x80)</td></tr>
 <tr class="separator:a8ff5c8a654bc51cc441e1d9089604933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1d9bebf57801454f1008a16df5cab08"><td class="memItemLeft" align="right" valign="top"><a id="ab1d9bebf57801454f1008a16df5cab08"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, relr_relocs, 0x88)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, relr_relocs, 0x88)</td></tr>
 <tr class="separator:ab1d9bebf57801454f1008a16df5cab08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2c9ae3b66e5bf8e842d53e80ce09e3d"><td class="memItemLeft" align="right" valign="top"><a id="aa2c9ae3b66e5bf8e842d53e80ce09e3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, relr_relocs_num, 0x90)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, relr_relocs_num, 0x90)</td></tr>
 <tr class="separator:aa2c9ae3b66e5bf8e842d53e80ce09e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fc38efd72107eade4c9671f6518c36d"><td class="memItemLeft" align="right" valign="top"><a id="a9fc38efd72107eade4c9671f6518c36d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, code_segment_start, 0x98)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, code_segment_start, 0x98)</td></tr>
 <tr class="separator:a9fc38efd72107eade4c9671f6518c36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb0937aa24d26b1d0ff613762ed91b4f"><td class="memItemLeft" align="right" valign="top"><a id="adb0937aa24d26b1d0ff613762ed91b4f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, code_segment_size, 0xA0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, code_segment_size, 0xA0)</td></tr>
 <tr class="separator:adb0937aa24d26b1d0ff613762ed91b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad454efb2e2e28c7efd261a691d1248a1"><td class="memItemLeft" align="right" valign="top"><a id="ad454efb2e2e28c7efd261a691d1248a1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, flags, 0xD0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, flags, 0xD0)</td></tr>
 <tr class="separator:ad454efb2e2e28c7efd261a691d1248a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a040344add144ce988d0be2ae515ddf7b"><td class="memItemLeft" align="right" valign="top"><a id="a040344add144ce988d0be2ae515ddf7b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnu_hash_nbuckets, 0xd8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_nbuckets, 0xd8)</td></tr>
 <tr class="separator:a040344add144ce988d0be2ae515ddf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae30d2c21ea86fb45f43bed0226bfd3a0"><td class="memItemLeft" align="right" valign="top"><a id="ae30d2c21ea86fb45f43bed0226bfd3a0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnu_hash_last_bloom, 0xdc)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_last_bloom, 0xdc)</td></tr>
 <tr class="separator:ae30d2c21ea86fb45f43bed0226bfd3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d95d2a44dc4ce9586cbfdf0ee27a103"><td class="memItemLeft" align="right" valign="top"><a id="a8d95d2a44dc4ce9586cbfdf0ee27a103"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnu_hash_bloom_shift, 0xe0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_bloom_shift, 0xe0)</td></tr>
 <tr class="separator:a8d95d2a44dc4ce9586cbfdf0ee27a103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b6b4eeccbfa4914e8ea44d25257a925"><td class="memItemLeft" align="right" valign="top"><a id="a6b6b4eeccbfa4914e8ea44d25257a925"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnu_hash_bloom, 0xe8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_bloom, 0xe8)</td></tr>
 <tr class="separator:a6b6b4eeccbfa4914e8ea44d25257a925"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50cc50a23e084b091c63a9fb46e2b580"><td class="memItemLeft" align="right" valign="top"><a id="a50cc50a23e084b091c63a9fb46e2b580"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnu_hash_buckets, 0xf0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_buckets, 0xf0)</td></tr>
 <tr class="separator:a50cc50a23e084b091c63a9fb46e2b580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad70f3e20103f9ba5f86dd4797fee165"><td class="memItemLeft" align="right" valign="top"><a id="aad70f3e20103f9ba5f86dd4797fee165"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_info_t, gnu_hash_chain, 0xf8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_chain, 0xf8)</td></tr>
 <tr class="separator:aad70f3e20103f9ba5f86dd4797fee165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc32326378a17f44f0532b01d8094041"><td class="memItemLeft" align="right" valign="top"><a id="abc32326378a17f44f0532b01d8094041"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, resolved_imports_count, 0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, resolved_imports_count, 0)</td></tr>
 <tr class="separator:abc32326378a17f44f0532b01d8094041"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8dec4e6f90337d3c8bd77de8354f4a0"><td class="memItemLeft" align="right" valign="top"><a id="ac8dec4e6f90337d3c8bd77de8354f4a0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, malloc_usable_size, 8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, malloc_usable_size, 8)</td></tr>
 <tr class="separator:ac8dec4e6f90337d3c8bd77de8354f4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3b08e5289d2b2c696dc0eaa36f2da91"><td class="memItemLeft" align="right" valign="top"><a id="ab3b08e5289d2b2c696dc0eaa36f2da91"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, getuid, 0x10)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, getuid, 0x10)</td></tr>
 <tr class="separator:ab3b08e5289d2b2c696dc0eaa36f2da91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11a48fe14bd49bba7fa1651a51656dea"><td class="memItemLeft" align="right" valign="top"><a id="a11a48fe14bd49bba7fa1651a51656dea"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, exit, 0x18)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, exit, 0x18)</td></tr>
 <tr class="separator:a11a48fe14bd49bba7fa1651a51656dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe4f7d2c329aa8a3f5e4edcce36105d7"><td class="memItemLeft" align="right" valign="top"><a id="abe4f7d2c329aa8a3f5e4edcce36105d7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, setresgid, 0x20)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, setresgid, 0x20)</td></tr>
 <tr class="separator:abe4f7d2c329aa8a3f5e4edcce36105d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c4accafeb1cf9e9ef39f80129350180"><td class="memItemLeft" align="right" valign="top"><a id="a7c4accafeb1cf9e9ef39f80129350180"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, setresuid, 0x28)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, setresuid, 0x28)</td></tr>
 <tr class="separator:a7c4accafeb1cf9e9ef39f80129350180"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40a0f65d00594dd819c52d96be2516fd"><td class="memItemLeft" align="right" valign="top"><a id="a40a0f65d00594dd819c52d96be2516fd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, system, 0x30)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, system, 0x30)</td></tr>
 <tr class="separator:a40a0f65d00594dd819c52d96be2516fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab22a2c42c56c322999ac10a7f6bb48f"><td class="memItemLeft" align="right" valign="top"><a id="aab22a2c42c56c322999ac10a7f6bb48f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, write, 0x38)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, write, 0x38)</td></tr>
 <tr class="separator:aab22a2c42c56c322999ac10a7f6bb48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3c7b9913acccce6854b7863750d372"><td class="memItemLeft" align="right" valign="top"><a id="a9b3c7b9913acccce6854b7863750d372"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, pselect, 0x40)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, pselect, 0x40)</td></tr>
 <tr class="separator:a9b3c7b9913acccce6854b7863750d372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a272c4eaec094d5131d24f6c09e9585f5"><td class="memItemLeft" align="right" valign="top"><a id="a272c4eaec094d5131d24f6c09e9585f5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, setlogmask, 0x58)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, setlogmask, 0x58)</td></tr>
 <tr class="separator:a272c4eaec094d5131d24f6c09e9585f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ea3f1a9ef5322ce2920f560f502be2f"><td class="memItemLeft" align="right" valign="top"><a id="a5ea3f1a9ef5322ce2920f560f502be2f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (system_imports_t, shutdown, 0x60)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, shutdown, 0x60)</td></tr>
 <tr class="separator:a5ea3f1a9ef5322ce2920f560f502be2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c84e3eaafa66db192ff467575c07ef"><td class="memItemLeft" align="right" valign="top"><a id="ac4c84e3eaafa66db192ff467575c07ef"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_public_decrypt, 0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_public_decrypt, 0)</td></tr>
 <tr class="separator:ac4c84e3eaafa66db192ff467575c07ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3beabfccb127a01cf309d42324b6aaf8"><td class="memItemLeft" align="right" valign="top"><a id="a3beabfccb127a01cf309d42324b6aaf8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_PKEY_set1_RSA_null, 8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_null, 8)</td></tr>
 <tr class="separator:a3beabfccb127a01cf309d42324b6aaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a686404ffefa47e862382092121bfc0b8"><td class="memItemLeft" align="right" valign="top"><a id="a686404ffefa47e862382092121bfc0b8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_get0_key_null, 0x10)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_get0_key_null, 0x10)</td></tr>
 <tr class="separator:a686404ffefa47e862382092121bfc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab32e42958ca639e3cd3531f33de364d6"><td class="memItemLeft" align="right" valign="top"><a id="ab32e42958ca639e3cd3531f33de364d6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_public_decrypt_hook_ptr, 0x18)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_public_decrypt_hook_ptr, 0x18)</td></tr>
 <tr class="separator:ab32e42958ca639e3cd3531f33de364d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d16ae52dff2aab526ba5bffdf0b4a3d"><td class="memItemLeft" align="right" valign="top"><a id="a5d16ae52dff2aab526ba5bffdf0b4a3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20)</td></tr>
 <tr class="separator:a5d16ae52dff2aab526ba5bffdf0b4a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4c9f2e4f61e09a793cbda8478f9e982"><td class="memItemLeft" align="right" valign="top"><a id="ab4c9f2e4f61e09a793cbda8478f9e982"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_get0_key_hook_ptr_null, 0x28)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_get0_key_hook_ptr_null, 0x28)</td></tr>
 <tr class="separator:ab4c9f2e4f61e09a793cbda8478f9e982"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memItemLeft" align="right" valign="top"><a id="a4204d0c32a5ccc55ab1a298d689bd4fb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, DSA_get0_pqg, 0x30)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, DSA_get0_pqg, 0x30)</td></tr>
 <tr class="separator:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18134fb834fe77fbdaf346f5a6ee7549"><td class="memItemLeft" align="right" valign="top"><a id="a18134fb834fe77fbdaf346f5a6ee7549"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, DSA_get0_pub_key, 0x38)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, DSA_get0_pub_key, 0x38)</td></tr>
 <tr class="separator:a18134fb834fe77fbdaf346f5a6ee7549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdd75328fa4e18f7af8e5dc822202c2b"><td class="memItemLeft" align="right" valign="top"><a id="afdd75328fa4e18f7af8e5dc822202c2b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EC_POINT_point2oct, 0x40)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EC_POINT_point2oct, 0x40)</td></tr>
 <tr class="separator:afdd75328fa4e18f7af8e5dc822202c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4d189f2eb6f3a41e228a04ac75d3aae"><td class="memItemLeft" align="right" valign="top"><a id="ae4d189f2eb6f3a41e228a04ac75d3aae"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EC_KEY_get0_public_key, 0x48)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EC_KEY_get0_public_key, 0x48)</td></tr>
 <tr class="separator:ae4d189f2eb6f3a41e228a04ac75d3aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd622db624e55e081943d52838837d1f"><td class="memItemLeft" align="right" valign="top"><a id="acd622db624e55e081943d52838837d1f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EC_KEY_get0_group, 0x50)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EC_KEY_get0_group, 0x50)</td></tr>
 <tr class="separator:acd622db624e55e081943d52838837d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7615b76f76544beead47d64ef914859"><td class="memItemLeft" align="right" valign="top"><a id="ad7615b76f76544beead47d64ef914859"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_sha256, 0x58)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_sha256, 0x58)</td></tr>
 <tr class="separator:ad7615b76f76544beead47d64ef914859"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaace0e1ca20316181905ff732b2eb0fb"><td class="memItemLeft" align="right" valign="top"><a id="aaace0e1ca20316181905ff732b2eb0fb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_get0_key, 0x60)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_get0_key, 0x60)</td></tr>
 <tr class="separator:aaace0e1ca20316181905ff732b2eb0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a306bfc6358dc48cff25f872096df386b"><td class="memItemLeft" align="right" valign="top"><a id="a306bfc6358dc48cff25f872096df386b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, BN_num_bits, 0x68)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, BN_num_bits, 0x68)</td></tr>
 <tr class="separator:a306bfc6358dc48cff25f872096df386b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf26f8ccf05b46f22b7fc7aa077905a9"><td class="memItemLeft" align="right" valign="top"><a id="aaf26f8ccf05b46f22b7fc7aa077905a9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_PKEY_new_raw_public_key, 0x70)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_new_raw_public_key, 0x70)</td></tr>
 <tr class="separator:aaf26f8ccf05b46f22b7fc7aa077905a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ea84ab683be032441e50ffd0bb60e27"><td class="memItemLeft" align="right" valign="top"><a id="a9ea84ab683be032441e50ffd0bb60e27"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_MD_CTX_new, 0x78)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_MD_CTX_new, 0x78)</td></tr>
 <tr class="separator:a9ea84ab683be032441e50ffd0bb60e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5361f6713ec771fba1da20f1527ee09"><td class="memItemLeft" align="right" valign="top"><a id="ae5361f6713ec771fba1da20f1527ee09"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_DigestVerifyInit, 0x80)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_DigestVerifyInit, 0x80)</td></tr>
 <tr class="separator:ae5361f6713ec771fba1da20f1527ee09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5271d6a4cbc70ff5992fd17319b3cd95"><td class="memItemLeft" align="right" valign="top"><a id="a5271d6a4cbc70ff5992fd17319b3cd95"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_MD_CTX_free, 0x90)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_MD_CTX_free, 0x90)</td></tr>
 <tr class="separator:a5271d6a4cbc70ff5992fd17319b3cd95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45f8a45c924a6f26f414d592033c9f7d"><td class="memItemLeft" align="right" valign="top"><a id="a45f8a45c924a6f26f414d592033c9f7d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_PKEY_free, 0x98)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_free, 0x98)</td></tr>
 <tr class="separator:a45f8a45c924a6f26f414d592033c9f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdd8da9c279377f086aab6d205f6844b"><td class="memItemLeft" align="right" valign="top"><a id="acdd8da9c279377f086aab6d205f6844b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_CIPHER_CTX_new, 0xA0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_CIPHER_CTX_new, 0xA0)</td></tr>
 <tr class="separator:acdd8da9c279377f086aab6d205f6844b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdb57a8f4309629adfcf8c842c503176"><td class="memItemLeft" align="right" valign="top"><a id="afdb57a8f4309629adfcf8c842c503176"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_DecryptInit_ex, 0xA8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_DecryptInit_ex, 0xA8)</td></tr>
 <tr class="separator:afdb57a8f4309629adfcf8c842c503176"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3a1887614fbee1696da57f7dc6e9864"><td class="memItemLeft" align="right" valign="top"><a id="af3a1887614fbee1696da57f7dc6e9864"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_DecryptUpdate, 0xB0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_DecryptUpdate, 0xB0)</td></tr>
 <tr class="separator:af3a1887614fbee1696da57f7dc6e9864"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa02f27ad8051268be4613cb9827eb1b3"><td class="memItemLeft" align="right" valign="top"><a id="aa02f27ad8051268be4613cb9827eb1b3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_DecryptFinal_ex, 0xB8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_DecryptFinal_ex, 0xB8)</td></tr>
 <tr class="separator:aa02f27ad8051268be4613cb9827eb1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac475dcc45734903683471084caad0918"><td class="memItemLeft" align="right" valign="top"><a id="ac475dcc45734903683471084caad0918"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_CIPHER_CTX_free, 0xC0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_CIPHER_CTX_free, 0xC0)</td></tr>
 <tr class="separator:ac475dcc45734903683471084caad0918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae63f8a206a3f03f7fb8260f6fe606438"><td class="memItemLeft" align="right" valign="top"><a id="ae63f8a206a3f03f7fb8260f6fe606438"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, EVP_chacha20, 0xC8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_chacha20, 0xC8)</td></tr>
 <tr class="separator:ae63f8a206a3f03f7fb8260f6fe606438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03e5c50bca35bcc32f1859f2b2ddb7b8"><td class="memItemLeft" align="right" valign="top"><a id="a03e5c50bca35bcc32f1859f2b2ddb7b8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_new, 0xD0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_new, 0xD0)</td></tr>
 <tr class="separator:a03e5c50bca35bcc32f1859f2b2ddb7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adce484d36308b289a9cc3bd3a5a2dda4"><td class="memItemLeft" align="right" valign="top"><a id="adce484d36308b289a9cc3bd3a5a2dda4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, BN_dup, 0xD8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, BN_dup, 0xD8)</td></tr>
 <tr class="separator:adce484d36308b289a9cc3bd3a5a2dda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8ea945c77605c2b6012b055955b4d38"><td class="memItemLeft" align="right" valign="top"><a id="ab8ea945c77605c2b6012b055955b4d38"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, BN_bin2bn, 0xE0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, BN_bin2bn, 0xE0)</td></tr>
 <tr class="separator:ab8ea945c77605c2b6012b055955b4d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afce8c57269083c142ddd7aea866aa6b6"><td class="memItemLeft" align="right" valign="top"><a id="afce8c57269083c142ddd7aea866aa6b6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_set0_key, 0xE8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_set0_key, 0xE8)</td></tr>
 <tr class="separator:afce8c57269083c142ddd7aea866aa6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a204c89138b3b25ccaf4aeb753c6834c7"><td class="memItemLeft" align="right" valign="top"><a id="a204c89138b3b25ccaf4aeb753c6834c7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_sign, 0xF8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_sign, 0xF8)</td></tr>
 <tr class="separator:a204c89138b3b25ccaf4aeb753c6834c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a643d3a39abf92b1a5c4cd89435ab51ab"><td class="memItemLeft" align="right" valign="top"><a id="a643d3a39abf92b1a5c4cd89435ab51ab"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, BN_bn2bin, 0x100)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, BN_bn2bin, 0x100)</td></tr>
 <tr class="separator:a643d3a39abf92b1a5c4cd89435ab51ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a455ac4af3eb01b235e75df7043c6384f"><td class="memItemLeft" align="right" valign="top"><a id="a455ac4af3eb01b235e75df7043c6384f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, RSA_free, 0x108)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_free, 0x108)</td></tr>
 <tr class="separator:a455ac4af3eb01b235e75df7043c6384f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9f62e7e684eb1f90580b1f9c7e39d9e"><td class="memItemLeft" align="right" valign="top"><a id="ae9f62e7e684eb1f90580b1f9c7e39d9e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, BN_free, 0x110)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, BN_free, 0x110)</td></tr>
 <tr class="separator:ae9f62e7e684eb1f90580b1f9c7e39d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1facd828751d33e7f43fbc03a197e3b"><td class="memItemLeft" align="right" valign="top"><a id="ad1facd828751d33e7f43fbc03a197e3b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, system, 0x118)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, system, 0x118)</td></tr>
 <tr class="separator:ad1facd828751d33e7f43fbc03a197e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41f247c8e977b275256102c5a2af23c7"><td class="memItemLeft" align="right" valign="top"><a id="a41f247c8e977b275256102c5a2af23c7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (imported_funcs_t, resolved_imports_count, 0x120)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, resolved_imports_count, 0x120)</td></tr>
 <tr class="separator:a41f247c8e977b275256102c5a2af23c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7fbe48e7391456ba960d7f26714f170"><td class="memItemLeft" align="right" valign="top"><a id="ac7fbe48e7391456ba960d7f26714f170"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, imported_funcs, 8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, imported_funcs, 8)</td></tr>
 <tr class="separator:ac7fbe48e7391456ba960d7f26714f170"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35276b37081a5e5f24ca625ede71186e"><td class="memItemLeft" align="right" valign="top"><a id="a35276b37081a5e5f24ca625ede71186e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, code_range_start, 0x80)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, code_range_start, 0x80)</td></tr>
 <tr class="separator:a35276b37081a5e5f24ca625ede71186e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf8465f266dbb363e75fa20d4263bee4"><td class="memItemLeft" align="right" valign="top"><a id="aaf8465f266dbb363e75fa20d4263bee4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, code_range_end, 0x88)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, code_range_end, 0x88)</td></tr>
 <tr class="separator:aaf8465f266dbb363e75fa20d4263bee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f40ad493b38891682b414abc9b70a32"><td class="memItemLeft" align="right" valign="top"><a id="a8f40ad493b38891682b414abc9b70a32"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, secret_data, 0x108)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, secret_data, 0x108)</td></tr>
 <tr class="separator:a8f40ad493b38891682b414abc9b70a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a376bd60de48e9143dd59f2cb1a121619"><td class="memItemLeft" align="right" valign="top"><a id="a376bd60de48e9143dd59f2cb1a121619"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, shift_operations, 0x141)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, shift_operations, 0x141)</td></tr>
 <tr class="separator:a376bd60de48e9143dd59f2cb1a121619"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a07630769c5ccfca03eafcb006f3f62"><td class="memItemLeft" align="right" valign="top"><a id="a5a07630769c5ccfca03eafcb006f3f62"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, reg2reg_instructions_count, 0x160)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, reg2reg_instructions_count, 0x160)</td></tr>
 <tr class="separator:a5a07630769c5ccfca03eafcb006f3f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4096ca2e75a2f3606e02ad675ef48ca3"><td class="memItemLeft" align="right" valign="top"><a id="a4096ca2e75a2f3606e02ad675ef48ca3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_lib_info_t, lib_elf_info, 0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__lib__info__t.html">elf_lib_info_t</a>, lib_elf_info, 0)</td></tr>
 <tr class="separator:a4096ca2e75a2f3606e02ad675ef48ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71d38e26d433240674b1ece8db943367"><td class="memItemLeft" align="right" valign="top"><a id="a71d38e26d433240674b1ece8db943367"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_lib_info_t, elf_info, 8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__lib__info__t.html">elf_lib_info_t</a>, <a class="el" href="structelf__info.html">elf_info</a>, 8)</td></tr>
 <tr class="separator:a71d38e26d433240674b1ece8db943367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85f7e82fdf74e1baea02f1f75809a2a6"><td class="memItemLeft" align="right" valign="top"><a id="a85f7e82fdf74e1baea02f1f75809a2a6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libc, 0x40)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, libc, 0x40)</td></tr>
 <tr class="separator:a85f7e82fdf74e1baea02f1f75809a2a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9793875a5fcf985456491fc0024ef8e8"><td class="memItemLeft" align="right" valign="top"><a id="a9793875a5fcf985456491fc0024ef8e8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libcrypto, 0x50)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, libcrypto, 0x50)</td></tr>
 <tr class="separator:a9793875a5fcf985456491fc0024ef8e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a4053fbbd30f6e722605f9b0a686ec4"><td class="memItemLeft" align="right" valign="top"><a id="a2a4053fbbd30f6e722605f9b0a686ec4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libc_info, 0x268)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, libc_info, 0x268)</td></tr>
 <tr class="separator:a2a4053fbbd30f6e722605f9b0a686ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fe5fa8a2a464ceeef178a3bfee0febb"><td class="memItemLeft" align="right" valign="top"><a id="a3fe5fa8a2a464ceeef178a3bfee0febb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libcrypto_info, 0x468)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, libcrypto_info, 0x468)</td></tr>
 <tr class="separator:a3fe5fa8a2a464ceeef178a3bfee0febb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acea945d4b1eb08cb3d5826e9bf5418ab"><td class="memItemLeft" align="right" valign="top"><a id="acea945d4b1eb08cb3d5826e9bf5418ab"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libc_imports, 0x568)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, <a class="el" href="structlibc__imports.html">libc_imports</a>, 0x568)</td></tr>
 <tr class="separator:acea945d4b1eb08cb3d5826e9bf5418ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80339b10786531e6061e8087045c92d9"><td class="memItemLeft" align="right" valign="top"><a id="a80339b10786531e6061e8087045c92d9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, import_resolver, 0x950)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, import_resolver, 0x950)</td></tr>
 <tr class="separator:a80339b10786531e6061e8087045c92d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a> (dasm_ctx_t *ctx, u8 *code_start, u8 *code_end)</td></tr>
+<tr class="memitem:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
 <tr class="memdesc:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">More...</a><br /></td></tr>
 <tr class="separator:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41fada894916f4c67d59090ff57aead1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">find_call_instruction</a> (u8 *code_start, u8 *code_end, u8 *call_target, dasm_ctx_t *dctx)</td></tr>
+<tr class="memitem:a41fada894916f4c67d59090ff57aead1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">find_call_instruction</a> (u8 *code_start, u8 *code_end, u8 *call_target, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx)</td></tr>
 <tr class="memdesc:a41fada894916f4c67d59090ff57aead1"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a call instruction  <a href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">More...</a><br /></td></tr>
 <tr class="separator:a41fada894916f4c67d59090ff57aead1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea85a14166f11bb956c7862c2a66571e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">find_lea_instruction</a> (u8 *code_start, u8 *code_end, u64 displacement)</td></tr>
 <tr class="memdesc:aea85a14166f11bb956c7862c2a66571e"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a lea instruction  <a href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">More...</a><br /></td></tr>
 <tr class="separator:aea85a14166f11bb956c7862c2a66571e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60c226501adb1a2d3213484f651ff23b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60c226501adb1a2d3213484f651ff23b">find_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, void *mem_address)</td></tr>
+<tr class="memitem:a60c226501adb1a2d3213484f651ff23b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60c226501adb1a2d3213484f651ff23b">find_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, void *mem_address)</td></tr>
 <tr class="memdesc:a60c226501adb1a2d3213484f651ff23b"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA or MOV instruction with an immediate memory operand  <a href="xzre_8h.html#a60c226501adb1a2d3213484f651ff23b">More...</a><br /></td></tr>
 <tr class="separator:a60c226501adb1a2d3213484f651ff23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e76946a37fb256974942a542373e421"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6e76946a37fb256974942a542373e421">find_lea_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, void *mem_address)</td></tr>
+<tr class="memitem:a6e76946a37fb256974942a542373e421"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6e76946a37fb256974942a542373e421">find_lea_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, void *mem_address)</td></tr>
 <tr class="memdesc:a6e76946a37fb256974942a542373e421"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA instruction with an immediate memory operand  <a href="xzre_8h.html#a6e76946a37fb256974942a542373e421">More...</a><br /></td></tr>
 <tr class="separator:a6e76946a37fb256974942a542373e421"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, int opcode, void *mem_address)</td></tr>
+<tr class="memitem:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, int opcode, void *mem_address)</td></tr>
 <tr class="memdesc:a1c8a36d89bf4e57077a56611e9aeb470"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction with an immediate memory operand  <a href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">More...</a><br /></td></tr>
 <tr class="separator:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx)</td></tr>
+<tr class="memitem:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx)</td></tr>
 <tr class="memdesc:aed0391d07e4413f5a13e1ec2940c94ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a reg2reg instruction  <a href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">More...</a><br /></td></tr>
 <tr class="separator:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81a6f3d01ea6057c942052321b92c533"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a> (u8 *code_start, u8 *code_end, u8 **output, FuncFindType find_mode)</td></tr>
@@ -546,28 +574,28 @@ Functions</h2></td></tr>
 <tr class="memitem:a5b09699385091684d71bf8a278e0372d"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">find_function_prologue_ex</a> (u8 *code_start, u8 *func_start_0, u8 *func_start_1, u8 *search_base, u8 *code_end, FuncFindType find_mode)</td></tr>
 <tr class="memdesc:a5b09699385091684d71bf8a278e0372d"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates the function prologue. it will try to backtrack and synchronize the code stream, calling <a class="el" href="xzre_8h.html#a81a6f3d01ea6057c942052321b92c533">find_function_prologue</a> for each iteration  <a href="xzre_8h.html#a5b09699385091684d71bf8a278e0372d">More...</a><br /></td></tr>
 <tr class="separator:a5b09699385091684d71bf8a278e0372d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a> (elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags)</td></tr>
+<tr class="memitem:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 vaddr, u64 size, u32 p_flags)</td></tr>
 <tr class="memdesc:a2a09d15b1c506e0f29ee9433771ad8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains the range [vaddr, vaddr+size) in a segment with the specified memory protection flags  <a href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">More...</a><br /></td></tr>
 <tr class="separator:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a049328971f4e99ce954d5e0346fee6d7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a> (Elf64_Ehdr *ehdr, elf_info_t *elf_info)</td></tr>
-<tr class="memdesc:a049328971f4e99ce954d5e0346fee6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given in-memory ELF file into elf_info.  <a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">More...</a><br /></td></tr>
+<tr class="memitem:a049328971f4e99ce954d5e0346fee6d7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a> (Elf64_Ehdr *ehdr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>)</td></tr>
+<tr class="memdesc:a049328971f4e99ce954d5e0346fee6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given in-memory ELF file into <a class="el" href="structelf__info.html">elf_info</a>.  <a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">More...</a><br /></td></tr>
 <tr class="separator:a049328971f4e99ce954d5e0346fee6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memItemLeft" align="right" valign="top">Elf64_Sym *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a> (elf_info_t *elf_info, u32 encoded_string_id, const char *sym_version)</td></tr>
+<tr class="memitem:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memItemLeft" align="right" valign="top">Elf64_Sym *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id, const char *sym_version)</td></tr>
 <tr class="memdesc:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up an ELF symbol from a parsed ELF.  <a href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">More...</a><br /></td></tr>
 <tr class="separator:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20700a81cc5921ecba31766edd9c3f4f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a> (elf_info_t *elf_info, u32 encoded_string_id)</td></tr>
+<tr class="memitem:a20700a81cc5921ecba31766edd9c3f4f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:a20700a81cc5921ecba31766edd9c3f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up an ELF symbol from a parsed ELF, and returns its memory address.  <a href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">More...</a><br /></td></tr>
 <tr class="separator:a20700a81cc5921ecba31766edd9c3f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a> (elf_info_t *elf_info, u64 *pSize)</td></tr>
+<tr class="memitem:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 *pSize)</td></tr>
 <tr class="memdesc:af3f0d23e5fece210bdf4945c65e3a10a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the first executable page in the given ELF file.  <a href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">More...</a><br /></td></tr>
 <tr class="separator:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">elf_get_reloc_symbol</a> (elf_info_t *elf_info, Elf64_Rela *relocs, unsigned num_relocs, unsigned reloc_type, u32 encoded_string_id)</td></tr>
+<tr class="memitem:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">elf_get_reloc_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, Elf64_Rela *relocs, unsigned num_relocs, unsigned reloc_type, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>.  <a href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">More...</a><br /></td></tr>
 <tr class="separator:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78a68fd2158f572304562e6e7c5d0bf6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">elf_get_plt_symbol</a> (elf_info_t *elf_info, u32 encoded_string_id)</td></tr>
+<tr class="memitem:a78a68fd2158f572304562e6e7c5d0bf6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">elf_get_plt_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:a78a68fd2158f572304562e6e7c5d0bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the PLT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6">More...</a><br /></td></tr>
 <tr class="separator:a78a68fd2158f572304562e6e7c5d0bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">elf_get_got_symbol</a> (elf_info_t *elf_info, u32 encoded_string_id)</td></tr>
+<tr class="memitem:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">elf_get_got_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">More...</a><br /></td></tr>
 <tr class="separator:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc618a02e31b94194ce03b0c4a2b3597"><td class="memItemLeft" align="right" valign="top">lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a> ()</td></tr>
@@ -579,110 +607,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a36a945c9790681a50af0a1a0cd72a269"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a> (u8 *call_site, u8 *code, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned reg2reg_instruction_count, unsigned operation_index)</td></tr>
 <tr class="memdesc:a36a945c9790681a50af0a1a0cd72a269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts data in the secret data store, after validation of <code>code</code>. this function is intended to be invoked only once for each <code>operation_index</code> value. <code>operation_index</code> will be used as an index into a global array of flags, so that multiple calls with the same value will be a NO-OP.  <a href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">More...</a><br /></td></tr>
 <tr class="separator:a36a945c9790681a50af0a1a0cd72a269"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a229ee0bd4111363061bc4230bc1f6423"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> (backdoor_setup_params_t *params)</td></tr>
+<tr class="memitem:a229ee0bd4111363061bc4230bc1f6423"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> (<a class="el" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a> *params)</td></tr>
 <tr class="memdesc:a229ee0bd4111363061bc4230bc1f6423"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor main method  <a href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">More...</a><br /></td></tr>
 <tr class="separator:a229ee0bd4111363061bc4230bc1f6423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a11edc39e63592598459a35646423aae2"><td class="memItemLeft" align="right" valign="top"><a id="a11edc39e63592598459a35646423aae2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>elf_entry_ctx_t</b></td></tr>
-<tr class="separator:a11edc39e63592598459a35646423aae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aece108e6c595a83b632f4601820f78f4"><td class="memItemLeft" align="right" valign="top"><a id="aece108e6c595a83b632f4601820f78f4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_shared_globals_t</b></td></tr>
-<tr class="separator:aece108e6c595a83b632f4601820f78f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7f33c33fb959da8e8184a6a6612d881"><td class="memItemLeft" align="right" valign="top"><a id="aa7f33c33fb959da8e8184a6a6612d881"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_setup_params_t</b></td></tr>
-<tr class="separator:aa7f33c33fb959da8e8184a6a6612d881"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76a424a545b635af08f8ccfb3f45a2ad"><td class="memItemLeft" align="right" valign="top"><a id="a76a424a545b635af08f8ccfb3f45a2ad"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>dasm_ctx_t</b></td></tr>
-<tr class="separator:a76a424a545b635af08f8ccfb3f45a2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c8b2449b24222bfafa6bdea31f4bb31"><td class="memItemLeft" align="right" valign="top"><a id="a1c8b2449b24222bfafa6bdea31f4bb31"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>elf_info_t</b></td></tr>
-<tr class="separator:a1c8b2449b24222bfafa6bdea31f4bb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76b323e5fc65850dbf3a14e531c5daa4"><td class="memItemLeft" align="right" valign="top"><a id="a76b323e5fc65850dbf3a14e531c5daa4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports_t</b></td></tr>
-<tr class="separator:a76b323e5fc65850dbf3a14e531c5daa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf6745d87532e89e5edc539f53fc35a5"><td class="memItemLeft" align="right" valign="top"><a id="aaf6745d87532e89e5edc539f53fc35a5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>system_imports_t</b></td></tr>
-<tr class="separator:aaf6745d87532e89e5edc539f53fc35a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab55b45340579399a1e631c11206cd3b6"><td class="memItemLeft" align="right" valign="top"><a id="ab55b45340579399a1e631c11206cd3b6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>imported_funcs_t</b></td></tr>
-<tr class="separator:ab55b45340579399a1e631c11206cd3b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68492e6c725b2e440b3cda27fcb121ce"><td class="memItemLeft" align="right" valign="top"><a id="a68492e6c725b2e440b3cda27fcb121ce"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>global_context_t</b></td></tr>
-<tr class="separator:a68492e6c725b2e440b3cda27fcb121ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a934c25dd67c5443a5652a497feb0e7bc"><td class="memItemLeft" align="right" valign="top"><a id="a934c25dd67c5443a5652a497feb0e7bc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>elf_lib_info_t</b></td></tr>
-<tr class="separator:a934c25dd67c5443a5652a497feb0e7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50e722e3f2064bb5d4aeefd741ce0f33"><td class="memItemLeft" align="right" valign="top"><a id="a50e722e3f2064bb5d4aeefd741ce0f33"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_data_t</b></td></tr>
-<tr class="separator:a50e722e3f2064bb5d4aeefd741ce0f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>XZ backdoor structures and functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefano Moioli (<a href="#" onclick="location.href='mai'+'lto:'+'smx'+'de'+'v4@'+'gm'+'ail'+'.c'+'om'; return false;">smxde<span style="display: none;">.nosp@m.</span>v4@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af1ebad6aef2db9942e46865bbe1134bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1ebad6aef2db9942e46865bbe1134bd">&#9670;&nbsp;</a></span>__attribute__()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct __attribute__ </td>
-          <td>(</td>
-          <td class="paramtype">(packed)&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> </p>
-<dl class="section return"><dt>Returns</dt><dd>typedef struct </dd></dl>
-<p>points to a symbol in memory will be used to find the GOT value</p>
-<p>points to the Global Offset Table</p>
-<p>the return address value of the caller obtained from *(u64 *)(caller_locals+24) since the entrypoint passes __builtin_frame_address(0)-16, this results in an offset of +8</p>
-<p>points to the real cpuid function</p>
-<p>holds the offset of the symbol relative to the GOT. used to derive the got_ptr</p>
-<p>stores the value of __builtin_frame_address(0)-16</p>
-<p>pointed to the ELF base address in memory</p>
-<p>virtual address of the first program header</p>
-<p>pointer to the ELF program headers array in memory</p>
-<p>copy of the ELF program header count from the ELF header</p>
-<p>pointer to the ELF dynamic segment</p>
-<p>number of entries in the ELF dynamic segment</p>
-<p>pointer to the ELF string table</p>
-<p>pointer to the ELF symbol table</p>
-<p>pointer to the ELF PLT relocations table</p>
-<p>number of entries in the PLT relocation table</p>
-<p>whether the loaded ELF contains PT_GNU_RELRO or not which specifies the location and size of a segment which may be made read-only after relocations have been processed.</p>
-<p>location of the GNU relro segment</p>
-<p>size of the GNU relro segment</p>
-<p>pointer to the EFL symbol versioning (from DT_VERDEF)</p>
-<p>number of entries in the symbol versioning table</p>
-<p>page-aligned virtual address of the first executable ELF segment</p>
-<p>page-aligned virtual size of the first executable ELF segment</p>
-<p>number of GNU hash buckets (from DT_GNU_HASH)</p>
-<p>last valid bloom value</p>
-<p>pointer to the structure containing resolved OpenSSL and system functions</p>
-<p>the shifter will use this address as the minimum search address any instruction below this address will be rejected</p>
-<p>the shifter will use this address as the maximum search address any instruction beyond this address will be rejected</p>
-<p>holds the secret data used for the chacha key generation</p>
-<p>holds the shift operation states written by <a class="el" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a></p>
-<p>cumulative number of reg2reg instructions successfully validated by the data shifter</p>
-<p>points to libc_info</p>
-<p>points to libcrypto_info</p>
-<p>points to the beginning of this struct</p>
-<p>parsed ELF files</p>
-<p>ELF context for libc.so</p>
-<p>ELF context for libcrypto.so</p>
-<p>functions imported from libc</p>
-<p>ELF import resolver (fake LZMA allocator)</p>
-
-</div>
-</div>
 <a id="a229ee0bd4111363061bc4230bc1f6423"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a229ee0bd4111363061bc4230bc1f6423">&#9670;&nbsp;</a></span>backdoor_setup()</h2>
 
@@ -692,7 +624,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">BOOL backdoor_setup </td>
           <td>(</td>
-          <td class="paramtype">backdoor_setup_params_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a> *&#160;</td>
           <td class="paramname"><em>params</em></td><td>)</td>
           <td></td>
         </tr>
@@ -719,7 +651,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">BOOL elf_contains_vaddr </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -751,7 +683,7 @@ Variables</h2></td></tr>
 <p>checks if given ELF file contains the range [vaddr, vaddr+size) in a segment with the specified memory protection flags </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>elf context </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>elf context </td></tr>
     <tr><td class="paramname">vaddr</td><td>starting memory address </td></tr>
     <tr><td class="paramname">size</td><td>memory size </td></tr>
     <tr><td class="paramname">p_flags</td><td>the expected segment protection flags (PF_*) </td></tr>
@@ -771,7 +703,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">u64 elf_get_code_segment </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -791,7 +723,7 @@ Variables</h2></td></tr>
 <p>Obtains the address and size of the first executable page in the given ELF file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>the parsed ELF context, which will be updated with the address and size of the code segment </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context, which will be updated with the address and size of the code segment </td></tr>
     <tr><td class="paramname">pSize</td><td>variable that will be populated with the page-aligned segment size </td></tr>
   </table>
   </dd>
@@ -809,7 +741,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void* elf_get_got_symbol </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -829,7 +761,7 @@ Variables</h2></td></tr>
 <p>Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context </td></tr>
     <tr><td class="paramname">encoded_string_id</td><td>symbol to look for (encoded) </td></tr>
   </table>
   </dd>
@@ -847,7 +779,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void* elf_get_plt_symbol </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -867,7 +799,7 @@ Variables</h2></td></tr>
 <p>Gets the PLT symbol with name <code>encoded_string_id</code> from the parsed ELF file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context </td></tr>
     <tr><td class="paramname">encoded_string_id</td><td>symbol to look for (encoded) </td></tr>
   </table>
   </dd>
@@ -885,7 +817,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void* elf_get_reloc_symbol </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -923,7 +855,7 @@ Variables</h2></td></tr>
 <p>Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context </td></tr>
     <tr><td class="paramname">relocs</td><td>array of relocations to search in </td></tr>
     <tr><td class="paramname">num_relocs</td><td>number of items in the array pointed by <code>relocs</code> </td></tr>
     <tr><td class="paramname">reloc_type</td><td>type of relocation to consider (R_X86_64_*) </td></tr>
@@ -950,7 +882,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>&#160;</td>
         </tr>
         <tr>
@@ -961,11 +893,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Parses the given in-memory ELF file into elf_info. </p>
+<p>Parses the given in-memory ELF file into <a class="el" href="structelf__info.html">elf_info</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ehdr</td><td>pointer to the beginning of the ELF header </td></tr>
-    <tr><td class="paramname">elf_info</td><td>pointer to the structure that will hold the parsed information </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>pointer to the structure that will hold the parsed information </td></tr>
   </table>
   </dd>
 </dl>
@@ -982,7 +914,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">Elf64_Sym* elf_symbol_get </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -1008,7 +940,7 @@ Variables</h2></td></tr>
 <p>Looks up an ELF symbol from a parsed ELF. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context </td></tr>
     <tr><td class="paramname">encoded_string_id</td><td>string ID of the symbol name </td></tr>
     <tr><td class="paramname">sym_version</td><td>optional string representing the symbol version (e.g. "GLIBC_2.2.5") </td></tr>
   </table>
@@ -1027,7 +959,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void* elf_symbol_get_addr </td>
           <td>(</td>
-          <td class="paramtype">elf_info_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
         </tr>
         <tr>
@@ -1047,7 +979,7 @@ Variables</h2></td></tr>
 <p>Looks up an ELF symbol from a parsed ELF, and returns its memory address. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">elf_info</td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context </td></tr>
     <tr><td class="paramname">encoded_string_id</td><td>string ID of the symbol name </td></tr>
   </table>
   </dd>
@@ -1083,7 +1015,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">dasm_ctx_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>dctx</em>&#160;</td>
         </tr>
         <tr>
@@ -1247,7 +1179,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">dasm_ctx_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>dctx</em>, </td>
         </tr>
         <tr>
@@ -1299,7 +1231,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">dasm_ctx_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>dctx</em>, </td>
         </tr>
         <tr>
@@ -1403,7 +1335,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">dasm_ctx_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>dctx</em>, </td>
         </tr>
         <tr>
@@ -1455,7 +1387,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">dasm_ctx_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>dctx</em>&#160;</td>
         </tr>
         <tr>
@@ -1648,7 +1580,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">int x86_dasm </td>
           <td>(</td>
-          <td class="paramtype">dasm_ctx_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>ctx</em>, </td>
         </tr>
         <tr>

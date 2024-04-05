@@ -1,10 +1,10 @@
 var indexSectionsWithContent =
 {
-  0: "_befgisx",
-  1: "s",
+  0: "bcdefgilprsvx",
+  1: "bdegils",
   2: "x",
-  3: "_befgsx",
-  4: "bi",
+  3: "befgpsx",
+  4: "bcdefgilprsv",
   5: "x"
 };
 
