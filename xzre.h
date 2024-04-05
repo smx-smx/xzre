@@ -511,12 +511,9 @@ assert_offset(elf_lib_info_t, elf_info, 8);
 /**
  * @brief this structure is used to hold most of the backdoor information.
  * it's used as a local variable in function @ref backdoor_setup
- * 
- * @return typedef struct 
  */
-typedef struct __attribute__((packed)) backdoor_data {
+typedef struct __attribute__((packed)) {
 	PADDING(0x30);
-	// elf_lib_info_t
 	PADDING(sizeof(elf_lib_info_t));
 
 	/**
