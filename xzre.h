@@ -128,6 +128,7 @@ typedef struct __attribute__((packed)) {
 	elf_entry_ctx_t *entry_ctx;
 } backdoor_setup_params_t;
 
+assert_offset(backdoor_setup_params_t, entry_ctx, 0x80);
 static_assert(sizeof(backdoor_setup_params_t) == 0x88);
 
 typedef struct __attribute__((packed)) {
