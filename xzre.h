@@ -452,7 +452,7 @@ assert_offset(imported_funcs_t, BN_free, 0x110);
 assert_offset(imported_funcs_t, system, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 
-typedef struct __attribute__((packed)) global_context {
+typedef struct __attribute__((packed)) {
 	PADDING(8);
 	/**
 	 * @brief 
@@ -490,6 +490,7 @@ typedef struct __attribute__((packed)) global_context {
 	 * successfully validated by the data shifter
 	 */
 	u32 reg2reg_instructions_count;
+	PADDING(4);
 } global_context_t;
 
 assert_offset(global_context_t, imported_funcs, 8);
@@ -498,7 +499,7 @@ assert_offset(global_context_t, code_range_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
 assert_offset(global_context_t, shift_operations, 0x141);
 assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
-
+static_assert(sizeof(global_context_t) == 0x168);
 
 typedef struct __attribute__((packed)) {
 	elf_info_t *lib_elf_info;
@@ -834,7 +835,7 @@ extern BOOL secret_data_append_if_flags(
  * the @p code will be verified to check if the shift operation should be allowed or not.
  * the algorithm will:
  * - locate the beginning of the function, by scanning for the `endbr64` instruction
- *    and making sure that the code lies between a pre-defined code range (TODO: figure out where the range is set)
+ *    and making sure that the code lies between a pre-defined code range (set in @ref backdoor_setup from @ref elf_get_code_segment)
  * - search for @p reg2reg_instruction_count number of "reg2reg" instructions (explained below)
  * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
  * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop and FALSE will be returned.
