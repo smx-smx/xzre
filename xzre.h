@@ -804,6 +804,23 @@ extern void *elf_get_plt_symbol(elf_info_t *elf_info, u32 encoded_string_id);
 extern void *elf_get_got_symbol(elf_info_t *elf_info, u32 encoded_string_id);
 
 /**
+ * @brief Locates a string in the ELF .rodata section
+ * 
+ * @param elf_info the ELF context to use for the search
+ * @param stringId_inOut mandatory pointer to an encoded string ID.
+ * - if the referenced string ID is 0, the first matching string (in the string table) will stop the search,
+ * and the matching string ID will be written to the pointer.
+ * - if the referenced string ID is not 0, the search will look for that specific string ID,
+ * and the value will not be updated.
+ * @param rodata_start_ptr location in the rodata section to start the search from
+ * @return char* pointer to the string, or NULL if it couldn't be found
+ */
+extern char *elf_find_string(
+	elf_info_t *elf_info,
+	u32 *stringId_inOut,
+	void *rodata_start_ptr);
+
+/**
  * @brief gets the fake LZMA allocator, used for imports resolution
  * the "opaque" field of the structure holds a pointer to @see elf_info_t
  * 

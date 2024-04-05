@@ -54,6 +54,9 @@ SECTIONS {
         "elf_get_reloc_symbol" = ".";
         *(.text.lz_encoda);
 
+        "elf_find_string" = ".";
+        *(.text.lzip_decoda);
+
         "secret_data_append_if_flags" = ".";
         *(.text.lzma_check_inia);
 
