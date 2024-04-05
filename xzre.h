@@ -124,10 +124,20 @@ assert_offset(elf_entry_ctx_t, got_offset, 0x20);
 assert_offset(elf_entry_ctx_t, caller_locals, 0x28);
 
 typedef struct __attribute__((packed)) {
-	PADDING(0x80);
+	PADDING(0x10);
+	struct global_context *globals;
+} backdoor_shared_globals_t;
+
+assert_offset(backdoor_shared_globals_t, globals, 0x10);
+
+typedef struct __attribute__((packed)) {
+	PADDING(0x8);
+	backdoor_shared_globals_t *shared;
+	PADDING(0x70);
 	elf_entry_ctx_t *entry_ctx;
 } backdoor_setup_params_t;
 
+assert_offset(backdoor_setup_params_t, shared, 0x8);
 assert_offset(backdoor_setup_params_t, entry_ctx, 0x80);
 static_assert(sizeof(backdoor_setup_params_t) == 0x88);
 
@@ -176,7 +186,7 @@ assert_offset(dasm_ctx_t, operand, 0x38);
 assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
 
-typedef struct __attribute__((packed)) {
+typedef struct __attribute__((packed)) elf_info {
 	/**
 	 * @brief pointed to the ELF base address in memory
 	 */
@@ -303,6 +313,13 @@ assert_offset(elf_info_t, gnu_hash_bloom_shift, 0xe0);
 assert_offset(elf_info_t, gnu_hash_bloom, 0xe8);
 assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
+
+typedef struct __attribute__((packed)) libc_imports {
+	u32 resolved_imports_count;
+	PADDING(0x44);
+	ssize_t (*read)(int fd, void *buf, size_t count);
+	int *(*__errno_location)(void);
+} libc_imports_t;
 
 typedef struct __attribute__((packed)) {
 	u32 resolved_imports_count;
@@ -435,7 +452,7 @@ assert_offset(imported_funcs_t, BN_free, 0x110);
 assert_offset(imported_funcs_t, system, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 
-typedef struct __attribute__((packed)) {
+typedef struct __attribute__((packed)) global_context {
 	PADDING(8);
 	/**
 	 * @brief 
@@ -481,6 +498,75 @@ assert_offset(global_context_t, code_range_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
 assert_offset(global_context_t, shift_operations, 0x141);
 assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
+
+
+typedef struct __attribute__((packed)) {
+	elf_info_t *lib_elf_info;
+	elf_info_t *elf_info;
+} elf_lib_info_t;
+
+assert_offset(elf_lib_info_t, lib_elf_info, 0);
+assert_offset(elf_lib_info_t, elf_info, 8);
+
+/**
+ * @brief this structure is used to hold most of the backdoor information.
+ * it's used as a local variable in function @ref backdoor_setup
+ * 
+ * @return typedef struct 
+ */
+typedef struct __attribute__((packed)) backdoor_data {
+	PADDING(0x30);
+	// elf_lib_info_t
+	PADDING(sizeof(elf_lib_info_t));
+
+	/**
+	 * @brief points to @ref libc_info
+	 */
+	elf_info_t *libc;
+	PADDING(sizeof(elf_info_t *));
+	/**
+	 * @brief points to @ref libcrypto_info
+	 */
+	elf_info_t *libcrypto;
+
+	/**
+	 * @brief points to the beginning of this struct
+	 */
+	struct backdoor_data *backdoor_data;
+	PADDING(sizeof(elf_lib_info_t *));
+
+	/** parsed ELF files */
+	PADDING(sizeof(elf_info_t));
+	PADDING(sizeof(elf_info_t));
+	/**
+	 * @brief ELF context for libc.so
+	 */
+	elf_info_t libc_info;
+	PADDING(sizeof(elf_info_t));
+	/**
+	 * @brief ELF context for libcrypto.so
+	 */
+	elf_info_t libcrypto_info;
+
+	/**
+	 * @brief functions imported from libc
+	 */
+	libc_imports_t libc_imports;
+
+	PADDING(0x390);
+	/**
+	 * @brief ELF import resolver (fake LZMA allocator)
+	 */
+	lzma_allocator *import_resolver;
+} backdoor_data_t;
+
+assert_offset(backdoor_data_t, libc, 0x40);
+assert_offset(backdoor_data_t, libcrypto, 0x50);
+assert_offset(backdoor_data_t, libc_info, 0x268);
+assert_offset(backdoor_data_t, libcrypto_info, 0x468);
+assert_offset(backdoor_data_t, libc_imports, 0x568);
+assert_offset(backdoor_data_t, import_resolver, 0x950);
+static_assert(sizeof(backdoor_data_t) == 0x958);
 
 /**
  * @brief represents a shift register, which will shift 
