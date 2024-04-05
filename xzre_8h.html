@@ -177,8 +177,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab898071398b359603a35c202e9c65f3b"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ab898071398b359603a35c202e9c65f3b">__attribute__</a> ((packed))</td></tr>
-<tr class="separator:ab898071398b359603a35c202e9c65f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ebad6aef2db9942e46865bbe1134bd"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af1ebad6aef2db9942e46865bbe1134bd">__attribute__</a> ((packed)) backdoor_data</td></tr>
+<tr class="memdesc:af1ebad6aef2db9942e46865bbe1134bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a>  <a href="xzre_8h.html#af1ebad6aef2db9942e46865bbe1134bd">More...</a><br /></td></tr>
+<tr class="separator:af1ebad6aef2db9942e46865bbe1134bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memItemLeft" align="right" valign="top"><a id="a07340e0f8ca9df744bc24ed6a6d2414c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, symbol_ptr, 0)</td></tr>
 <tr class="separator:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,6 +198,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ade42a29d7f52bd39f36766d5af17978e"><td class="memItemLeft" align="right" valign="top"><a id="ade42a29d7f52bd39f36766d5af17978e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, caller_locals, 0x28)</td></tr>
 <tr class="separator:ade42a29d7f52bd39f36766d5af17978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c3fff16b704f8d529ce25798073af3"><td class="memItemLeft" align="right" valign="top"><a id="a94c3fff16b704f8d529ce25798073af3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_shared_globals_t, globals, 0x10)</td></tr>
+<tr class="separator:a94c3fff16b704f8d529ce25798073af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b25e68f96fef005e33fd1f93f1cce3d"><td class="memItemLeft" align="right" valign="top"><a id="a0b25e68f96fef005e33fd1f93f1cce3d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_setup_params_t, shared, 0x8)</td></tr>
+<tr class="separator:a0b25e68f96fef005e33fd1f93f1cce3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5a94e874d57beee98370fe9e1cefd58"><td class="memItemLeft" align="right" valign="top"><a id="af5a94e874d57beee98370fe9e1cefd58"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_setup_params_t, entry_ctx, 0x80)</td></tr>
 <tr class="separator:af5a94e874d57beee98370fe9e1cefd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -488,6 +495,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a5a07630769c5ccfca03eafcb006f3f62"><td class="memItemLeft" align="right" valign="top"><a id="a5a07630769c5ccfca03eafcb006f3f62"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (global_context_t, reg2reg_instructions_count, 0x160)</td></tr>
 <tr class="separator:a5a07630769c5ccfca03eafcb006f3f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4096ca2e75a2f3606e02ad675ef48ca3"><td class="memItemLeft" align="right" valign="top"><a id="a4096ca2e75a2f3606e02ad675ef48ca3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_lib_info_t, lib_elf_info, 0)</td></tr>
+<tr class="separator:a4096ca2e75a2f3606e02ad675ef48ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d38e26d433240674b1ece8db943367"><td class="memItemLeft" align="right" valign="top"><a id="a71d38e26d433240674b1ece8db943367"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_lib_info_t, elf_info, 8)</td></tr>
+<tr class="separator:a71d38e26d433240674b1ece8db943367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f7e82fdf74e1baea02f1f75809a2a6"><td class="memItemLeft" align="right" valign="top"><a id="a85f7e82fdf74e1baea02f1f75809a2a6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libc, 0x40)</td></tr>
+<tr class="separator:a85f7e82fdf74e1baea02f1f75809a2a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9793875a5fcf985456491fc0024ef8e8"><td class="memItemLeft" align="right" valign="top"><a id="a9793875a5fcf985456491fc0024ef8e8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libcrypto, 0x50)</td></tr>
+<tr class="separator:a9793875a5fcf985456491fc0024ef8e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a4053fbbd30f6e722605f9b0a686ec4"><td class="memItemLeft" align="right" valign="top"><a id="a2a4053fbbd30f6e722605f9b0a686ec4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libc_info, 0x268)</td></tr>
+<tr class="separator:a2a4053fbbd30f6e722605f9b0a686ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fe5fa8a2a464ceeef178a3bfee0febb"><td class="memItemLeft" align="right" valign="top"><a id="a3fe5fa8a2a464ceeef178a3bfee0febb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libcrypto_info, 0x468)</td></tr>
+<tr class="separator:a3fe5fa8a2a464ceeef178a3bfee0febb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acea945d4b1eb08cb3d5826e9bf5418ab"><td class="memItemLeft" align="right" valign="top"><a id="acea945d4b1eb08cb3d5826e9bf5418ab"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, libc_imports, 0x568)</td></tr>
+<tr class="separator:acea945d4b1eb08cb3d5826e9bf5418ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80339b10786531e6061e8087045c92d9"><td class="memItemLeft" align="right" valign="top"><a id="a80339b10786531e6061e8087045c92d9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (backdoor_data_t, import_resolver, 0x950)</td></tr>
+<tr class="separator:a80339b10786531e6061e8087045c92d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a> (dasm_ctx_t *ctx, u8 *code_start, u8 *code_end)</td></tr>
 <tr class="memdesc:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">More...</a><br /></td></tr>
 <tr class="separator:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -557,6 +588,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a11edc39e63592598459a35646423aae2"><td class="memItemLeft" align="right" valign="top"><a id="a11edc39e63592598459a35646423aae2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>elf_entry_ctx_t</b></td></tr>
 <tr class="separator:a11edc39e63592598459a35646423aae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece108e6c595a83b632f4601820f78f4"><td class="memItemLeft" align="right" valign="top"><a id="aece108e6c595a83b632f4601820f78f4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_shared_globals_t</b></td></tr>
+<tr class="separator:aece108e6c595a83b632f4601820f78f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7f33c33fb959da8e8184a6a6612d881"><td class="memItemLeft" align="right" valign="top"><a id="aa7f33c33fb959da8e8184a6a6612d881"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_setup_params_t</b></td></tr>
 <tr class="separator:aa7f33c33fb959da8e8184a6a6612d881"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -566,6 +600,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a1c8b2449b24222bfafa6bdea31f4bb31"><td class="memItemLeft" align="right" valign="top"><a id="a1c8b2449b24222bfafa6bdea31f4bb31"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>elf_info_t</b></td></tr>
 <tr class="separator:a1c8b2449b24222bfafa6bdea31f4bb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76b323e5fc65850dbf3a14e531c5daa4"><td class="memItemLeft" align="right" valign="top"><a id="a76b323e5fc65850dbf3a14e531c5daa4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports_t</b></td></tr>
+<tr class="separator:a76b323e5fc65850dbf3a14e531c5daa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf6745d87532e89e5edc539f53fc35a5"><td class="memItemLeft" align="right" valign="top"><a id="aaf6745d87532e89e5edc539f53fc35a5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>system_imports_t</b></td></tr>
 <tr class="separator:aaf6745d87532e89e5edc539f53fc35a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -575,13 +612,19 @@ Variables</h2></td></tr>
 <tr class="memitem:a68492e6c725b2e440b3cda27fcb121ce"><td class="memItemLeft" align="right" valign="top"><a id="a68492e6c725b2e440b3cda27fcb121ce"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>global_context_t</b></td></tr>
 <tr class="separator:a68492e6c725b2e440b3cda27fcb121ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a934c25dd67c5443a5652a497feb0e7bc"><td class="memItemLeft" align="right" valign="top"><a id="a934c25dd67c5443a5652a497feb0e7bc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>elf_lib_info_t</b></td></tr>
+<tr class="separator:a934c25dd67c5443a5652a497feb0e7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50e722e3f2064bb5d4aeefd741ce0f33"><td class="memItemLeft" align="right" valign="top"><a id="a50e722e3f2064bb5d4aeefd741ce0f33"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_data_t</b></td></tr>
+<tr class="separator:a50e722e3f2064bb5d4aeefd741ce0f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>XZ backdoor structures and functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefano Moioli (<a href="#" onclick="location.href='mai'+'lto:'+'smx'+'de'+'v4@'+'gm'+'ail'+'.c'+'om'; return false;">smxde<span style="display: none;">.nosp@m.</span>v4@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab898071398b359603a35c202e9c65f3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab898071398b359603a35c202e9c65f3b">&#9670;&nbsp;</a></span>__attribute__()</h2>
+<a id="af1ebad6aef2db9942e46865bbe1134bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1ebad6aef2db9942e46865bbe1134bd">&#9670;&nbsp;</a></span>__attribute__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -595,6 +638,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>typedef struct </dd></dl>
 <p>points to a symbol in memory will be used to find the GOT value</p>
 <p>points to the Global Offset Table</p>
 <p>the return address value of the caller obtained from *(u64 *)(caller_locals+24) since the entrypoint passes __builtin_frame_address(0)-16, this results in an offset of +8</p>
@@ -626,6 +672,14 @@ Variables</h2></td></tr>
 <p>holds the secret data used for the chacha key generation</p>
 <p>holds the shift operation states written by <a class="el" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a></p>
 <p>cumulative number of reg2reg instructions successfully validated by the data shifter</p>
+<p>points to libc_info</p>
+<p>points to libcrypto_info</p>
+<p>points to the beginning of this struct</p>
+<p>parsed ELF files</p>
+<p>ELF context for libc.so</p>
+<p>ELF context for libcrypto.so</p>
+<p>functions imported from libc</p>
+<p>ELF import resolver (fake LZMA allocator)</p>
 
 </div>
 </div>
