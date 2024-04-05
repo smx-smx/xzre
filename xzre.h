@@ -85,6 +85,52 @@ typedef enum {
 #define PADDING(size) u8 EXPAND(_unknown, __LINE__)[size]
 
 typedef struct __attribute__((packed)) {
+	/**
+	 * @brief points to a symbol in memory
+	 * will be used to find the GOT value
+	 */
+	void *symbol_ptr;
+	/**
+	 * @brief points to the Global Offset Table
+	 */
+	void *got_ptr;
+	/**
+	 * @brief the return address value of the caller
+	 * obtained from *(u64 *)(caller_locals+24)
+	 * since the entrypoint passes __builtin_frame_address(0)-16,
+	 * this results in an offset of +8
+	 */
+	void *return_address;
+	/**
+	 * @brief points to the real cpuid function
+	 */
+	void *cpuid_fn;
+	/**
+	 * @brief holds the offset of the symbol relative to the GOT.
+	 * used to derive the @ref got_ptr
+	 */
+	u64 got_offset;
+	/**
+	 * @brief stores the value of __builtin_frame_address(0)-16
+	 */
+	u64 *caller_locals;
+} elf_entry_ctx_t;
+
+assert_offset(elf_entry_ctx_t, symbol_ptr, 0);
+assert_offset(elf_entry_ctx_t, got_ptr, 8);
+assert_offset(elf_entry_ctx_t, return_address, 0x10);
+assert_offset(elf_entry_ctx_t, cpuid_fn, 0x18);
+assert_offset(elf_entry_ctx_t, got_offset, 0x20);
+assert_offset(elf_entry_ctx_t, caller_locals, 0x28);
+
+typedef struct __attribute__((packed)) {
+	PADDING(0x80);
+	elf_entry_ctx_t *entry_ctx;
+} backdoor_setup_params_t;
+
+static_assert(sizeof(backdoor_setup_params_t) == 0x88);
+
+typedef struct __attribute__((packed)) {
 	u8* first_instruction;
 	u64 instruction_size;
 	u8 flags;
@@ -737,6 +783,14 @@ extern BOOL secret_data_append_singleton(
 	u8 *call_site, u8 *code,
 	secret_data_shift_cursor shift_cursor,
 	unsigned reg2reg_instruction_count, unsigned operation_index);
+
+/**
+ * @brief the backdoor main method
+ * 
+ * @param params parameters
+ * @return BOOL unused
+ */
+extern BOOL backdoor_setup(backdoor_setup_params_t *params);
 
 #include "util.h"
 #endif

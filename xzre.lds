@@ -62,5 +62,8 @@ SECTIONS {
 
         "secret_data_append_singleton" = ".";
         *(.text.rc_read_inis);
+
+        "backdoor_setup" = ".";
+        *(.text.microlzma_encoder_inia);
     }
 } INSERT AFTER .text;
