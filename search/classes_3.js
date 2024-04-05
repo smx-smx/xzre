@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['global_5fcontext_83',['global_context',['../structglobal__context.html',1,'']]]
+  ['global_5fcontext_5ft_84',['global_context_t',['../structglobal__context__t.html',1,'']]]
 ];
