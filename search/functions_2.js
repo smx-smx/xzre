@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['find_5fcall_5finstruction_38',['find_call_instruction',['../xzre_8h.html#a41fada894916f4c67d59090ff57aead1',1,'xzre.h']]],
-  ['find_5ffunction_5fprologue_39',['find_function_prologue',['../xzre_8h.html#a81a6f3d01ea6057c942052321b92c533',1,'xzre.h']]],
-  ['find_5ffunction_5fprologue_5fex_40',['find_function_prologue_ex',['../xzre_8h.html#a5b09699385091684d71bf8a278e0372d',1,'xzre.h']]],
-  ['find_5finstruction_5fwith_5fmem_5foperand_41',['find_instruction_with_mem_operand',['../xzre_8h.html#a64b647bb6cc1dbef0ebc134fb43019c2',1,'xzre.h']]],
-  ['find_5finstruction_5fwith_5fmem_5foperand_5fex_42',['find_instruction_with_mem_operand_ex',['../xzre_8h.html#a09a9a10f2e0f4ebc554b695cd1dd89fe',1,'xzre.h']]],
-  ['find_5flea_5finstruction_43',['find_lea_instruction',['../xzre_8h.html#aea85a14166f11bb956c7862c2a66571e',1,'xzre.h']]],
-  ['find_5flea_5finstruction_5fwith_5fmem_5foperand_44',['find_lea_instruction_with_mem_operand',['../xzre_8h.html#af7ef6e95ce13c8ac2ebfac2a4d30d0ad',1,'xzre.h']]],
-  ['find_5freg2reg_5finstruction_45',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]]
+  ['elf_5fcontains_5fvaddr_32',['elf_contains_vaddr',['../xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db',1,'xzre.h']]],
+  ['elf_5fget_5fcode_5fsegment_33',['elf_get_code_segment',['../xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a',1,'xzre.h']]],
+  ['elf_5fget_5fgot_5fsymbol_34',['elf_get_got_symbol',['../xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b',1,'xzre.h']]],
+  ['elf_5fget_5fplt_5fsymbol_35',['elf_get_plt_symbol',['../xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6',1,'xzre.h']]],
+  ['elf_5fget_5freloc_5fsymbol_36',['elf_get_reloc_symbol',['../xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1',1,'xzre.h']]],
+  ['elf_5fparse_37',['elf_parse',['../xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7',1,'xzre.h']]],
+  ['elf_5fsymbol_5fget_38',['elf_symbol_get',['../xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154',1,'xzre.h']]],
+  ['elf_5fsymbol_5fget_5faddr_39',['elf_symbol_get_addr',['../xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f',1,'xzre.h']]]
 ];

@@ -3,7 +3,7 @@ var indexSectionsWithContent =
   0: "_befgisx",
   1: "s",
   2: "x",
-  3: "_efgsx",
+  3: "_befgsx",
   4: "bi",
   5: "x"
 };

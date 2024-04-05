@@ -179,6 +179,24 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ab898071398b359603a35c202e9c65f3b"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ab898071398b359603a35c202e9c65f3b">__attribute__</a> ((packed))</td></tr>
 <tr class="separator:ab898071398b359603a35c202e9c65f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memItemLeft" align="right" valign="top"><a id="a07340e0f8ca9df744bc24ed6a6d2414c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, symbol_ptr, 0)</td></tr>
+<tr class="separator:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e543602ec7511d624f8f3f7b83a1ee8"><td class="memItemLeft" align="right" valign="top"><a id="a4e543602ec7511d624f8f3f7b83a1ee8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, got_ptr, 8)</td></tr>
+<tr class="separator:a4e543602ec7511d624f8f3f7b83a1ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a238dfcc13519ae09f6ae9097691f41b9"><td class="memItemLeft" align="right" valign="top"><a id="a238dfcc13519ae09f6ae9097691f41b9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, return_address, 0x10)</td></tr>
+<tr class="separator:a238dfcc13519ae09f6ae9097691f41b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66d3cb2e332731ec072e1462a85884df"><td class="memItemLeft" align="right" valign="top"><a id="a66d3cb2e332731ec072e1462a85884df"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, cpuid_fn, 0x18)</td></tr>
+<tr class="separator:a66d3cb2e332731ec072e1462a85884df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b5b3403c2bfcb1ad17f541f7c58761"><td class="memItemLeft" align="right" valign="top"><a id="a12b5b3403c2bfcb1ad17f541f7c58761"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, got_offset, 0x20)</td></tr>
+<tr class="separator:a12b5b3403c2bfcb1ad17f541f7c58761"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade42a29d7f52bd39f36766d5af17978e"><td class="memItemLeft" align="right" valign="top"><a id="ade42a29d7f52bd39f36766d5af17978e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (elf_entry_ctx_t, caller_locals, 0x28)</td></tr>
+<tr class="separator:ade42a29d7f52bd39f36766d5af17978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92053ded261b5ab5e5625e7b48f1d13d"><td class="memItemLeft" align="right" valign="top"><a id="a92053ded261b5ab5e5625e7b48f1d13d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (dasm_ctx_t, first_instruction, 0)</td></tr>
 <tr class="separator:a92053ded261b5ab5e5625e7b48f1d13d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -476,15 +494,15 @@ Functions</h2></td></tr>
 <tr class="memitem:aea85a14166f11bb956c7862c2a66571e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">find_lea_instruction</a> (u8 *code_start, u8 *code_end, u64 displacement)</td></tr>
 <tr class="memdesc:aea85a14166f11bb956c7862c2a66571e"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a lea instruction  <a href="xzre_8h.html#aea85a14166f11bb956c7862c2a66571e">More...</a><br /></td></tr>
 <tr class="separator:aea85a14166f11bb956c7862c2a66571e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64b647bb6cc1dbef0ebc134fb43019c2"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a64b647bb6cc1dbef0ebc134fb43019c2">find_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, u8 *mem_address)</td></tr>
-<tr class="memdesc:a64b647bb6cc1dbef0ebc134fb43019c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA or MOV instruction with an immediate memory operand  <a href="xzre_8h.html#a64b647bb6cc1dbef0ebc134fb43019c2">More...</a><br /></td></tr>
-<tr class="separator:a64b647bb6cc1dbef0ebc134fb43019c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7ef6e95ce13c8ac2ebfac2a4d30d0ad"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af7ef6e95ce13c8ac2ebfac2a4d30d0ad">find_lea_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, u8 *mem_address)</td></tr>
-<tr class="memdesc:af7ef6e95ce13c8ac2ebfac2a4d30d0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA instruction with an immediate memory operand  <a href="xzre_8h.html#af7ef6e95ce13c8ac2ebfac2a4d30d0ad">More...</a><br /></td></tr>
-<tr class="separator:af7ef6e95ce13c8ac2ebfac2a4d30d0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09a9a10f2e0f4ebc554b695cd1dd89fe"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a09a9a10f2e0f4ebc554b695cd1dd89fe">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, int opcode, u8 *mem_address)</td></tr>
-<tr class="memdesc:a09a9a10f2e0f4ebc554b695cd1dd89fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction with an immediate memory operand  <a href="xzre_8h.html#a09a9a10f2e0f4ebc554b695cd1dd89fe">More...</a><br /></td></tr>
-<tr class="separator:a09a9a10f2e0f4ebc554b695cd1dd89fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c226501adb1a2d3213484f651ff23b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60c226501adb1a2d3213484f651ff23b">find_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, void *mem_address)</td></tr>
+<tr class="memdesc:a60c226501adb1a2d3213484f651ff23b"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA or MOV instruction with an immediate memory operand  <a href="xzre_8h.html#a60c226501adb1a2d3213484f651ff23b">More...</a><br /></td></tr>
+<tr class="separator:a60c226501adb1a2d3213484f651ff23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e76946a37fb256974942a542373e421"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6e76946a37fb256974942a542373e421">find_lea_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, void *mem_address)</td></tr>
+<tr class="memdesc:a6e76946a37fb256974942a542373e421"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA instruction with an immediate memory operand  <a href="xzre_8h.html#a6e76946a37fb256974942a542373e421">More...</a><br /></td></tr>
+<tr class="separator:a6e76946a37fb256974942a542373e421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx, int opcode, void *mem_address)</td></tr>
+<tr class="memdesc:a1c8a36d89bf4e57077a56611e9aeb470"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction with an immediate memory operand  <a href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">More...</a><br /></td></tr>
+<tr class="separator:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a> (u8 *code_start, u8 *code_end, dasm_ctx_t *dctx)</td></tr>
 <tr class="memdesc:aed0391d07e4413f5a13e1ec2940c94ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a reg2reg instruction  <a href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">More...</a><br /></td></tr>
 <tr class="separator:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -527,9 +545,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a36a945c9790681a50af0a1a0cd72a269"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a> (u8 *call_site, u8 *code, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned reg2reg_instruction_count, unsigned operation_index)</td></tr>
 <tr class="memdesc:a36a945c9790681a50af0a1a0cd72a269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts data in the secret data store, after validation of <code>code</code>. this function is intended to be invoked only once for each <code>operation_index</code> value. <code>operation_index</code> will be used as an index into a global array of flags, so that multiple calls with the same value will be a NO-OP.  <a href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">More...</a><br /></td></tr>
 <tr class="separator:a36a945c9790681a50af0a1a0cd72a269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229ee0bd4111363061bc4230bc1f6423"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> (backdoor_setup_params_t *params)</td></tr>
+<tr class="memdesc:a229ee0bd4111363061bc4230bc1f6423"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor main method  <a href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">More...</a><br /></td></tr>
+<tr class="separator:a229ee0bd4111363061bc4230bc1f6423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a11edc39e63592598459a35646423aae2"><td class="memItemLeft" align="right" valign="top"><a id="a11edc39e63592598459a35646423aae2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>elf_entry_ctx_t</b></td></tr>
+<tr class="separator:a11edc39e63592598459a35646423aae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f33c33fb959da8e8184a6a6612d881"><td class="memItemLeft" align="right" valign="top"><a id="aa7f33c33fb959da8e8184a6a6612d881"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_setup_params_t</b></td></tr>
+<tr class="separator:aa7f33c33fb959da8e8184a6a6612d881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76a424a545b635af08f8ccfb3f45a2ad"><td class="memItemLeft" align="right" valign="top"><a id="a76a424a545b635af08f8ccfb3f45a2ad"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>dasm_ctx_t</b></td></tr>
 <tr class="separator:a76a424a545b635af08f8ccfb3f45a2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -565,6 +592,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>points to a symbol in memory will be used to find the GOT value</p>
+<p>points to the Global Offset Table</p>
+<p>the return address value of the caller obtained from *(u64 *)(caller_locals+24) since the entrypoint passes __builtin_frame_address(0)-16, this results in an offset of +8</p>
+<p>points to the real cpuid function</p>
+<p>holds the offset of the symbol relative to the GOT. used to derive the got_ptr</p>
+<p>stores the value of __builtin_frame_address(0)-16</p>
 <p>pointed to the ELF base address in memory</p>
 <p>virtual address of the first program header</p>
 <p>pointer to the ELF program headers array in memory</p>
@@ -590,6 +623,33 @@ Variables</h2></td></tr>
 <p>holds the secret data used for the chacha key generation</p>
 <p>holds the shift operation states written by <a class="el" href="xzre_8h.html#a36a945c9790681a50af0a1a0cd72a269">secret_data_append_singleton</a></p>
 <p>cumulative number of reg2reg instructions successfully validated by the data shifter</p>
+
+</div>
+</div>
+<a id="a229ee0bd4111363061bc4230bc1f6423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a229ee0bd4111363061bc4230bc1f6423">&#9670;&nbsp;</a></span>backdoor_setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL backdoor_setup </td>
+          <td>(</td>
+          <td class="paramtype">backdoor_setup_params_t *&#160;</td>
+          <td class="paramname"><em>params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the backdoor main method </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">params</td><td>parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL unused </dd></dl>
 
 </div>
 </div>
@@ -1109,8 +1169,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a64b647bb6cc1dbef0ebc134fb43019c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64b647bb6cc1dbef0ebc134fb43019c2">&#9670;&nbsp;</a></span>find_instruction_with_mem_operand()</h2>
+<a id="a60c226501adb1a2d3213484f651ff23b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c226501adb1a2d3213484f651ff23b">&#9670;&nbsp;</a></span>find_instruction_with_mem_operand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1136,7 +1196,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>mem_address</em>&#160;</td>
         </tr>
         <tr>
@@ -1161,8 +1221,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a09a9a10f2e0f4ebc554b695cd1dd89fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09a9a10f2e0f4ebc554b695cd1dd89fe">&#9670;&nbsp;</a></span>find_instruction_with_mem_operand_ex()</h2>
+<a id="a1c8a36d89bf4e57077a56611e9aeb470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c8a36d89bf4e57077a56611e9aeb470">&#9670;&nbsp;</a></span>find_instruction_with_mem_operand_ex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1194,7 +1254,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>mem_address</em>&#160;</td>
         </tr>
         <tr>
@@ -1265,8 +1325,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="af7ef6e95ce13c8ac2ebfac2a4d30d0ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7ef6e95ce13c8ac2ebfac2a4d30d0ad">&#9670;&nbsp;</a></span>find_lea_instruction_with_mem_operand()</h2>
+<a id="a6e76946a37fb256974942a542373e421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e76946a37fb256974942a542373e421">&#9670;&nbsp;</a></span>find_lea_instruction_with_mem_operand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1292,7 +1352,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>mem_address</em>&#160;</td>
         </tr>
         <tr>
