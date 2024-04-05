@@ -596,6 +596,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">elf_get_got_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b">More...</a><br /></td></tr>
 <tr class="separator:a3a822ab2e33cbfe16f1d3c5fb3c3300b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0adc703b5d67d3b105dc16a6a3ed9719"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0adc703b5d67d3b105dc16a6a3ed9719">elf_find_string</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 *stringId_inOut, void *rodata_start_ptr)</td></tr>
+<tr class="memdesc:a0adc703b5d67d3b105dc16a6a3ed9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locates a string in the ELF .rodata section.  <a href="xzre_8h.html#a0adc703b5d67d3b105dc16a6a3ed9719">More...</a><br /></td></tr>
+<tr class="separator:a0adc703b5d67d3b105dc16a6a3ed9719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc618a02e31b94194ce03b0c4a2b3597"><td class="memItemLeft" align="right" valign="top">lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a> ()</td></tr>
 <tr class="memdesc:abc618a02e31b94194ce03b0c4a2b3597"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to  <a href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">More...</a><br /></td></tr>
 <tr class="separator:abc618a02e31b94194ce03b0c4a2b3597"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -692,6 +695,55 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a0adc703b5d67d3b105dc16a6a3ed9719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0adc703b5d67d3b105dc16a6a3ed9719">&#9670;&nbsp;</a></span>elf_find_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* elf_find_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32 *&#160;</td>
+          <td class="paramname"><em>stringId_inOut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>rodata_start_ptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Locates a string in the ELF .rodata section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the ELF context to use for the search </td></tr>
+    <tr><td class="paramname">stringId_inOut</td><td>mandatory pointer to an encoded string ID.<ul>
+<li>if the referenced string ID is 0, the first matching string (in the string table) will stop the search, and the matching string ID will be written to the pointer.</li>
+<li>if the referenced string ID is not 0, the search will look for that specific string ID, and the value will not be updated. </li>
+</ul>
+</td></tr>
+    <tr><td class="paramname">rodata_start_ptr</td><td>location in the rodata section to start the search from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>char* pointer to the string, or NULL if it couldn't be found </dd></dl>
 
 </div>
 </div>
