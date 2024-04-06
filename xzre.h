@@ -388,7 +388,9 @@ typedef struct __attribute__((packed)) {
 	int (*EVP_DigestVerifyInit)(
 		EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,
 		const EVP_MD *type, ENGINE *e, EVP_PKEY *pkey);
-	PADDING(0x8);
+	int (*EVP_DigestVerify)(
+		EVP_MD_CTX *ctx, const unsigned char *sig,
+		size_t siglen, const unsigned char *tbs, size_t tbslen);
 	void (*EVP_MD_CTX_free)(EVP_MD_CTX *ctx);
 	void (*EVP_PKEY_free)(EVP_PKEY *key);
 	EVP_CIPHER_CTX *(*EVP_CIPHER_CTX_new)(void);
@@ -434,6 +436,7 @@ assert_offset(imported_funcs_t, BN_num_bits, 0x68);
 assert_offset(imported_funcs_t, EVP_PKEY_new_raw_public_key, 0x70);
 assert_offset(imported_funcs_t, EVP_MD_CTX_new, 0x78);
 assert_offset(imported_funcs_t, EVP_DigestVerifyInit, 0x80);
+assert_offset(imported_funcs_t, EVP_DigestVerify, 0x88);
 assert_offset(imported_funcs_t, EVP_MD_CTX_free, 0x90);
 assert_offset(imported_funcs_t, EVP_PKEY_free, 0x98);
 assert_offset(imported_funcs_t, EVP_CIPHER_CTX_new, 0xA0);
