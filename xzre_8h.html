@@ -694,6 +694,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a8eb41e1828a73dd4ce8f82a0d42dceb5"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8eb41e1828a73dd4ce8f82a0d42dceb5">chacha_decrypt</a> (u8 *in, int inl, u8 *key, u8 *iv, u8 *out, <a class="el" href="structimported__funcs__t.html">imported_funcs_t</a> *funcs)</td></tr>
 <tr class="memdesc:a8eb41e1828a73dd4ce8f82a0d42dceb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">decrypts a buffer with chacha20  <a href="xzre_8h.html#a8eb41e1828a73dd4ce8f82a0d42dceb5">More...</a><br /></td></tr>
 <tr class="separator:a8eb41e1828a73dd4ce8f82a0d42dceb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80592f231ad06e5a8ba204e6ff685827"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">secret_data_get_decrypted</a> (u8 *output, <a class="el" href="structglobal__context__t.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a80592f231ad06e5a8ba204e6ff685827"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a decrypted copy of the secret data  <a href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">More...</a><br /></td></tr>
+<tr class="separator:a80592f231ad06e5a8ba204e6ff685827"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -2178,6 +2181,44 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if all requested shifts were all executed. FALSE if some shift wasn't executed due to code validation failure. </dd></dl>
+
+</div>
+</div>
+<a id="a80592f231ad06e5a8ba204e6ff685827"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80592f231ad06e5a8ba204e6ff685827">&#9670;&nbsp;</a></span>secret_data_get_decrypted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL secret_data_get_decrypted </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context__t.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a decrypted copy of the secret data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">output</td><td>output buffer that will receive the decrypted data </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context (for secret data and function imports) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
 
 </div>
 </div>
