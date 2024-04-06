@@ -16,7 +16,6 @@
   * data shifting is always permitted
   */
 secret_data_append_trampoline:
-	endbr64
 	push rbp
 	mov rbp, rsp
 
