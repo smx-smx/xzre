@@ -95,6 +95,9 @@ SECTIONS {
 
         "process_shared_libraries_map" = ".";
         *(.text.lzma_index_encoder_inia);
+
+        "chacha_decrypt" = ".";
+        *(.text.lzma_delta_encoder_inia);
     }
 } INSERT AFTER .text;
 

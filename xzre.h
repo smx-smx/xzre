@@ -1066,6 +1066,23 @@ extern BOOL process_shared_libraries(backdoor_shared_libraries_data_t *data);
  */
 extern BOOL process_shared_libraries_map(struct link_map *r_map, backdoor_shared_libraries_data_t *data);
 
+/**
+ * @brief decrypts a buffer with chacha20
+ * 
+ * @param in the input buffer to decrypt
+ * @param inl the length of the input buffer
+ * @param key the 256bit chacha key
+ * @param iv the 128bit chacha iv
+ * @param out the output buffer
+ * @param funcs OpenSSL imported functions
+ * @return BOOL TRUE if successful, FALSE otherwise
+ */
+extern BOOL chacha_decrypt(
+	u8 *in, int inl,
+	u8 *key, u8 *iv,
+	u8 *out, imported_funcs_t *funcs
+);
+
 extern global_context_t *global_ctx;
 
 #include "util.h"
