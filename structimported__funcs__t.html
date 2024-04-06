@@ -77,12 +77,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a8b71c275d2cbf16f6bd4574663a01306"><td class="memItemLeft" align="right" valign="top"><a id="a8b71c275d2cbf16f6bd4574663a01306"></a>
-int(*&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_public_decrypt</b> )(int flen, unsigned char *from, unsigned char *to, RSA *rsa, int padding)</td></tr>
-<tr class="separator:a8b71c275d2cbf16f6bd4574663a01306"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a778a5befab17ae6c1dfed2cbad510999"><td class="memItemLeft" align="right" valign="top"><a id="a778a5befab17ae6c1dfed2cbad510999"></a>
-int(*&#160;</td><td class="memItemRight" valign="bottom"><b>EVP_PKEY_set1_RSA_null</b> )(EVP_PKEY *pkey, struct rsa_st *key)</td></tr>
-<tr class="separator:a778a5befab17ae6c1dfed2cbad510999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eaa1290845316c73ca70a6fd940a7e1"><td class="memItemLeft" align="right" valign="top"><a id="a9eaa1290845316c73ca70a6fd940a7e1"></a>
+pfn_RSA_public_decrypt_t&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_public_decrypt</b></td></tr>
+<tr class="separator:a9eaa1290845316c73ca70a6fd940a7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fd73018f6a3fb6a16cd36b26a9ae844"><td class="memItemLeft" align="right" valign="top"><a id="a9fd73018f6a3fb6a16cd36b26a9ae844"></a>
+pfn_EVP_PKEY_set1_RSA_t&#160;</td><td class="memItemRight" valign="bottom"><b>EVP_PKEY_set1_RSA</b></td></tr>
+<tr class="separator:a9fd73018f6a3fb6a16cd36b26a9ae844"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c6fe1bb416483623a95259734d1051c"><td class="memItemLeft" align="right" valign="top"><a id="a1c6fe1bb416483623a95259734d1051c"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_get0_key_null</b> )(const RSA *r, const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)</td></tr>
 <tr class="separator:a1c6fe1bb416483623a95259734d1051c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,9 +113,9 @@ const EC_GROUP *(*&#160;</td><td class="memItemRight" valign="bottom"><b>EC_KEY_
 <tr class="memitem:a714f7d66743551b76915ee27c10c09ef"><td class="memItemLeft" align="right" valign="top"><a id="a714f7d66743551b76915ee27c10c09ef"></a>
 EVP_MD *(*&#160;</td><td class="memItemRight" valign="bottom"><b>EVP_sha256</b> )(void)</td></tr>
 <tr class="separator:a714f7d66743551b76915ee27c10c09ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bbd207fd9344e5afbeb2faa71d2a0b3"><td class="memItemLeft" align="right" valign="top"><a id="a6bbd207fd9344e5afbeb2faa71d2a0b3"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_get0_key</b> )(const RSA *r, const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)</td></tr>
-<tr class="separator:a6bbd207fd9344e5afbeb2faa71d2a0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a083f816c5251df3c651179cd0b207555"><td class="memItemLeft" align="right" valign="top"><a id="a083f816c5251df3c651179cd0b207555"></a>
+pfn_RSA_get0_key_t&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_get0_key</b></td></tr>
+<tr class="separator:a083f816c5251df3c651179cd0b207555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6889005eb7d4c5ac4131568270849ce"><td class="memItemLeft" align="right" valign="top"><a id="af6889005eb7d4c5ac4131568270849ce"></a>
 int(*&#160;</td><td class="memItemRight" valign="bottom"><b>BN_num_bits</b> )(const BIGNUM *a)</td></tr>
 <tr class="separator:af6889005eb7d4c5ac4131568270849ce"><td class="memSeparator" colspan="2">&#160;</td></tr>

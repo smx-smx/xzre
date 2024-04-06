@@ -114,6 +114,10 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a>  <a href="structbackdoor__data__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__libraries__t.html">backdoor_libraries_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits represent the bit index, while the rest represents the byte index this is convenient, since a simple increment will increment the buffer position correctly  <a href="unionsecret__data__shift__cursor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +175,15 @@ typedef struct <a class="el" href="structelf__info.html">elf_info</a>&#160;</td>
 <tr class="memitem:aa318f8aef631765be09c477436487c54"><td class="memItemLeft" align="right" valign="top"><a id="aa318f8aef631765be09c477436487c54"></a>
 typedef struct <a class="el" href="structlibc__imports.html">libc_imports</a>&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports_t</b></td></tr>
 <tr class="separator:aa318f8aef631765be09c477436487c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adecb5c6743212f467a1dcb1137b9a068"><td class="memItemLeft" align="right" valign="top"><a id="adecb5c6743212f467a1dcb1137b9a068"></a>
+typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>pfn_RSA_public_decrypt_t</b>) (int flen, unsigned char *from, unsigned char *to, RSA *rsa, int padding)</td></tr>
+<tr class="separator:adecb5c6743212f467a1dcb1137b9a068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9942af087add10a0724704291e65c8f0"><td class="memItemLeft" align="right" valign="top"><a id="a9942af087add10a0724704291e65c8f0"></a>
+typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>pfn_EVP_PKEY_set1_RSA_t</b>) (EVP_PKEY *pkey, struct rsa_st *key)</td></tr>
+<tr class="separator:a9942af087add10a0724704291e65c8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e48c0241cc79ff63678f8ea3245e89b"><td class="memItemLeft" align="right" valign="top"><a id="a5e48c0241cc79ff63678f8ea3245e89b"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>pfn_RSA_get0_key_t</b>) (const RSA *r, const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)</td></tr>
+<tr class="separator:a5e48c0241cc79ff63678f8ea3245e89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -402,9 +415,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac4c84e3eaafa66db192ff467575c07ef"><td class="memItemLeft" align="right" valign="top"><a id="ac4c84e3eaafa66db192ff467575c07ef"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_public_decrypt, 0)</td></tr>
 <tr class="separator:ac4c84e3eaafa66db192ff467575c07ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3beabfccb127a01cf309d42324b6aaf8"><td class="memItemLeft" align="right" valign="top"><a id="a3beabfccb127a01cf309d42324b6aaf8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_null, 8)</td></tr>
-<tr class="separator:a3beabfccb127a01cf309d42324b6aaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06fbb87ece293673ae049e3d17a927fc"><td class="memItemLeft" align="right" valign="top"><a id="a06fbb87ece293673ae049e3d17a927fc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA, 8)</td></tr>
+<tr class="separator:a06fbb87ece293673ae049e3d17a927fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a686404ffefa47e862382092121bfc0b8"><td class="memItemLeft" align="right" valign="top"><a id="a686404ffefa47e862382092121bfc0b8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_get0_key_null, 0x10)</td></tr>
 <tr class="separator:a686404ffefa47e862382092121bfc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -549,6 +562,39 @@ Functions</h2></td></tr>
 <tr class="memitem:a80339b10786531e6061e8087045c92d9"><td class="memItemLeft" align="right" valign="top"><a id="a80339b10786531e6061e8087045c92d9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a>, import_resolver, 0x950)</td></tr>
 <tr class="separator:a80339b10786531e6061e8087045c92d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff7295e288395d194ed79f49de8e5fa0"><td class="memItemLeft" align="right" valign="top"><a id="aff7295e288395d194ed79f49de8e5fa0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__libraries__t.html">backdoor_libraries_t</a>, dynamic_linker, 0x8)</td></tr>
+<tr class="separator:aff7295e288395d194ed79f49de8e5fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dce5c84b6d79fb081dde6cac31345d6"><td class="memItemLeft" align="right" valign="top"><a id="a9dce5c84b6d79fb081dde6cac31345d6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__libraries__t.html">backdoor_libraries_t</a>, liblzma, 0x10)</td></tr>
+<tr class="separator:a9dce5c84b6d79fb081dde6cac31345d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0972ebf09e9dea25ddb4a792113158"><td class="memItemLeft" align="right" valign="top"><a id="a3b0972ebf09e9dea25ddb4a792113158"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__libraries__t.html">backdoor_libraries_t</a>, libcrypto, 0x18)</td></tr>
+<tr class="separator:a3b0972ebf09e9dea25ddb4a792113158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b029d9ccc44766450375905dd1248d8"><td class="memItemLeft" align="right" valign="top"><a id="a5b029d9ccc44766450375905dd1248d8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__libraries__t.html">backdoor_libraries_t</a>, libsystemd, 0x20)</td></tr>
+<tr class="separator:a5b029d9ccc44766450375905dd1248d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3fe4e40a58a18ca73acc16176b04e4"><td class="memItemLeft" align="right" valign="top"><a id="acf3fe4e40a58a18ca73acc16176b04e4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__libraries__t.html">backdoor_libraries_t</a>, libc, 0x28)</td></tr>
+<tr class="separator:acf3fe4e40a58a18ca73acc16176b04e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30d1da7d92ca468daa0f49ab846778c2"><td class="memItemLeft" align="right" valign="top"><a id="a30d1da7d92ca468daa0f49ab846778c2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, libs, 0x0)</td></tr>
+<tr class="separator:a30d1da7d92ca468daa0f49ab846778c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a048b732eb279374f9617dd66202521f4"><td class="memItemLeft" align="right" valign="top"><a id="a048b732eb279374f9617dd66202521f4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, elf, 0x8)</td></tr>
+<tr class="separator:a048b732eb279374f9617dd66202521f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d6bb837cbfeecfa2815803c70bd290"><td class="memItemLeft" align="right" valign="top"><a id="a34d6bb837cbfeecfa2815803c70bd290"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, RSA_public_decrypt, 0x10)</td></tr>
+<tr class="separator:a34d6bb837cbfeecfa2815803c70bd290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8242c405857d0bcbaba2584ecfc36858"><td class="memItemLeft" align="right" valign="top"><a id="a8242c405857d0bcbaba2584ecfc36858"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, EVP_PKEY_set1_RSA, 0x18)</td></tr>
+<tr class="separator:a8242c405857d0bcbaba2584ecfc36858"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3837d5df8a084f4d375e090453b5f561"><td class="memItemLeft" align="right" valign="top"><a id="a3837d5df8a084f4d375e090453b5f561"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, RSA_get0_key, 0x20)</td></tr>
+<tr class="separator:a3837d5df8a084f4d375e090453b5f561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memItemLeft" align="right" valign="top"><a id="a1451f92c8f0cf7451ffdb8dfcd799742"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, <a class="el" href="structlibc__imports.html">libc_imports</a>, 0x30)</td></tr>
+<tr class="separator:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
 <tr class="memdesc:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">More...</a><br /></td></tr>
 <tr class="separator:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -639,6 +685,12 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a0d70747b6216270de07c783fc499938e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">resolve_libc_imports</a> (struct link_map *libc, <a class="el" href="structelf__info.html">elf_info_t</a> *libc_info, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *imports)</td></tr>
 <tr class="memdesc:a0d70747b6216270de07c783fc499938e"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the libc ELF from the supplied link map, and resolves its imports  <a href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">More...</a><br /></td></tr>
 <tr class="separator:a0d70747b6216270de07c783fc499938e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb8bb283baa56567d7b88b5fcfe7db7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1cb8bb283baa56567d7b88b5fcfe7db7">process_shared_libraries</a> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a> *data)</td></tr>
+<tr class="memdesc:a1cb8bb283baa56567d7b88b5fcfe7db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">scans loaded libraries to identify interesting libraries  <a href="xzre_8h.html#a1cb8bb283baa56567d7b88b5fcfe7db7">More...</a><br /></td></tr>
+<tr class="separator:a1cb8bb283baa56567d7b88b5fcfe7db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fcba1b3d069ccf76ee3cef4a3b9a682"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1fcba1b3d069ccf76ee3cef4a3b9a682">process_shared_libraries_map</a> (struct link_map *r_map, <a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a> *data)</td></tr>
+<tr class="memdesc:a1fcba1b3d069ccf76ee3cef4a3b9a682"><td class="mdescLeft">&#160;</td><td class="mdescRight">scans loaded libraries to identify interesting libraries and populate related data  <a href="xzre_8h.html#a1fcba1b3d069ccf76ee3cef4a3b9a682">More...</a><br /></td></tr>
+<tr class="separator:a1fcba1b3d069ccf76ee3cef4a3b9a682"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -1705,6 +1757,71 @@ Variables</h2></td></tr>
 <p>gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to </p>
 <dl class="section see"><dt>See also</dt><dd>elf_info_t</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>lzma_allocator* </dd></dl>
+
+</div>
+</div>
+<a id="a1cb8bb283baa56567d7b88b5fcfe7db7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cb8bb283baa56567d7b88b5fcfe7db7">&#9670;&nbsp;</a></span>process_shared_libraries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL process_shared_libraries </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scans loaded libraries to identify interesting libraries </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>input data for the function (will be duplicated, internally) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a1fcba1b3d069ccf76ee3cef4a3b9a682"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fcba1b3d069ccf76ee3cef4a3b9a682">&#9670;&nbsp;</a></span>process_shared_libraries_map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL process_shared_libraries_map </td>
+          <td>(</td>
+          <td class="paramtype">struct link_map *&#160;</td>
+          <td class="paramname"><em>r_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a> *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scans loaded libraries to identify interesting libraries and populate related data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r_map</td><td>the linked list of loaded libraries obtained from <code>r_debug</code> </td></tr>
+    <tr><td class="paramname">data</td><td>pointer to data that will be populated by the function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
 
 </div>
 </div>
