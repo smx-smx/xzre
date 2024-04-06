@@ -267,7 +267,13 @@ typedef struct __attribute__((packed)) elf_info {
 	 * page-aligned virtual size of the first executable ELF segment
 	 */
 	u64 code_segment_size;
-	PADDING(0x28);
+
+	u64 rodata_segment_start;
+	u64 rodata_segment_size;
+	u64 data_segment_start;
+	u64 data_segment_size;
+	u64 is_data_segment_aligned;
+
 	u8 flags;
 	PADDING(7);
 	/**

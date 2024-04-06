@@ -45,6 +45,12 @@ SECTIONS {
         "elf_get_code_segment" = ".";
         *(.text.lzma_check_updata);
 
+        "elf_get_rodata_segment" = ".";
+        *(.text.index_tree_appena);
+
+        "elf_get_data_segment" = ".";
+        *(.text.microlzma_decoda);
+
         "elf_get_plt_symbol" = ".";
         *(.text.delta_coder_ena);
 
