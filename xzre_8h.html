@@ -594,9 +594,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a20700a81cc5921ecba31766edd9c3f4f"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">elf_symbol_get_addr</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:a20700a81cc5921ecba31766edd9c3f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up an ELF symbol from a parsed ELF, and returns its memory address.  <a href="xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f">More...</a><br /></td></tr>
 <tr class="separator:a20700a81cc5921ecba31766edd9c3f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 *pSize)</td></tr>
-<tr class="memdesc:af3f0d23e5fece210bdf4945c65e3a10a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the first executable page in the given ELF file.  <a href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">More...</a><br /></td></tr>
-<tr class="separator:af3f0d23e5fece210bdf4945c65e3a10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18845fc4614f60083817db417dc32a13"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a18845fc4614f60083817db417dc32a13">elf_get_code_segment</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 *pSize)</td></tr>
+<tr class="memdesc:a18845fc4614f60083817db417dc32a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the first executable segment in the given ELF file.  <a href="xzre_8h.html#a18845fc4614f60083817db417dc32a13">More...</a><br /></td></tr>
+<tr class="separator:a18845fc4614f60083817db417dc32a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e085fd878446cf655c657491b9d522"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a55e085fd878446cf655c657491b9d522">elf_get_rodata_segment</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 *pSize)</td></tr>
+<tr class="memdesc:a55e085fd878446cf655c657491b9d522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the last readonly segment in the given ELF file this corresponds to the segment that typically contains .rodata.  <a href="xzre_8h.html#a55e085fd878446cf655c657491b9d522">More...</a><br /></td></tr>
+<tr class="separator:a55e085fd878446cf655c657491b9d522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52148c8b1da2a37036e7975ea299117b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52148c8b1da2a37036e7975ea299117b">elf_get_data_segment</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 *pSize, BOOL get_alignment)</td></tr>
+<tr class="memdesc:a52148c8b1da2a37036e7975ea299117b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the last read-write segment in the given ELF file this is typically the segment that contains the following sections:  <a href="xzre_8h.html#a52148c8b1da2a37036e7975ea299117b">More...</a><br /></td></tr>
+<tr class="separator:a52148c8b1da2a37036e7975ea299117b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">elf_get_reloc_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, Elf64_Rela *relocs, unsigned num_relocs, unsigned reloc_type, u32 encoded_string_id)</td></tr>
 <tr class="memdesc:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>.  <a href="xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1">More...</a><br /></td></tr>
 <tr class="separator:acbf91a56fdd3e3f20df2182d8aa19cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -824,14 +830,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="af3f0d23e5fece210bdf4945c65e3a10a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3f0d23e5fece210bdf4945c65e3a10a">&#9670;&nbsp;</a></span>elf_get_code_segment()</h2>
+<a id="a18845fc4614f60083817db417dc32a13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18845fc4614f60083817db417dc32a13">&#9670;&nbsp;</a></span>elf_get_code_segment()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">u64 elf_get_code_segment </td>
+          <td class="memname">void* elf_get_code_segment </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
           <td class="paramname"><em>elf_info</em>, </td>
@@ -850,7 +856,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Obtains the address and size of the first executable page in the given ELF file. </p>
+<p>Obtains the address and size of the first executable segment in the given ELF file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context, which will be updated with the address and size of the code segment </td></tr>
@@ -858,7 +864,56 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the page-aligned virtual address of the executable code segment </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the page-aligned starting address of the segment </dd></dl>
+
+</div>
+</div>
+<a id="a52148c8b1da2a37036e7975ea299117b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52148c8b1da2a37036e7975ea299117b">&#9670;&nbsp;</a></span>elf_get_data_segment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* elf_get_data_segment </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>pSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>get_alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtains the address and size of the last read-write segment in the given ELF file this is typically the segment that contains the following sections: </p>
+<ul>
+<li>.init_array .fini_array .data.rel.ro .dynamic .got</li>
+</ul>
+<p>the parameter <code>get_alignment</code> controls if <code>pSize</code> should be populated with the segment size (when FALSE), or with the segment alignment (when TRUE)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context, which will be updated with the address and size of the data segment </td></tr>
+    <tr><td class="paramname">pSize</td><td>variable that will be populated with either the page-aligned segment size, or the alignment size </td></tr>
+    <tr><td class="paramname">get_alignment</td><td>controls if alignment size should be returned instead of segment size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the page-aligned starting address of the segment </dd></dl>
 
 </div>
 </div>
@@ -994,6 +1049,44 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void* the address of the symbol, or NULL if not found </dd></dl>
+
+</div>
+</div>
+<a id="a55e085fd878446cf655c657491b9d522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e085fd878446cf655c657491b9d522">&#9670;&nbsp;</a></span>elf_get_rodata_segment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* elf_get_rodata_segment </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>pSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtains the address and size of the last readonly segment in the given ELF file this corresponds to the segment that typically contains .rodata. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context, which will be updated with the address and size of the rodata segment </td></tr>
+    <tr><td class="paramname">pSize</td><td>variable that will be populated with the page-aligned segment size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the page-aligned starting address of the segment </dd></dl>
 
 </div>
 </div>
@@ -1876,7 +1969,7 @@ Variables</h2></td></tr>
 
 <p>Shifts data in the secret data store, after validation of <code>code</code>. this function is intended to be invoked only once for each <code>operation_index</code> value. <code>operation_index</code> will be used as an index into a global array of flags, so that multiple calls with the same value will be a NO-OP. </p>
 <p>the <code>code</code> will be verified to check if the shift operation should be allowed or not. the algorithm will:</p><ul>
-<li>locate the beginning of the function, by scanning for the <code>endbr64</code> instruction and making sure that the code lies between a pre-defined code range (set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> from <a class="el" href="xzre_8h.html#af3f0d23e5fece210bdf4945c65e3a10a">elf_get_code_segment</a>)</li>
+<li>locate the beginning of the function, by scanning for the <code>endbr64</code> instruction and making sure that the code lies between a pre-defined code range (set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> from <a class="el" href="xzre_8h.html#a18845fc4614f60083817db417dc32a13">elf_get_code_segment</a>)</li>
 <li>search for <code>shift_count</code> number of "reg2reg" instructions (explained below)</li>
 <li>for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index the code only considers reg2reg instruction. other instructions are skipped. the function will return TRUE if the number of shifts executed == number of wanted shifts (that is, if there are as many compatible reg2reg instructions as the number of requested shifts) NOTE: MOV instructions are counted, but don't cause any shift (they are skipped).</li>
 </ul>
