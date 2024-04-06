@@ -9,6 +9,36 @@
 extern void dasm_sample(void);
 extern void dasm_sample_end();
 extern void dasm_sample_dummy_location();
+extern BOOL secret_data_append_trampoline(secret_data_shift_cursor shift_cursor, unsigned shift_count);
+
+extern char __executable_start;
+extern char __etext;
+
+static global_context_t my_global_ctx = { 0 };
+
+void xzre_secret_data_init(){
+	global_ctx = &my_global_ctx;
+	memset(global_ctx, 0x00, sizeof(*global_ctx));
+	global_ctx->code_range_start = (u64)&__executable_start;
+	global_ctx->code_range_end = (u64)&__etext;
+}
+
+void xzre_secret_data_test(){
+	// disable x86_dasm shift slot
+	my_global_ctx.shift_operations[2] = 1;
+
+	secret_data_shift_cursor cursor = {
+		.byte_index = 16,
+		.bit_index = 0
+	};
+
+	if(secret_data_append_trampoline(cursor, 1)){
+		puts("secret data push OK!");
+		hexdump(my_global_ctx.secret_data, sizeof(my_global_ctx.secret_data));
+	} else {
+		puts("secret data push FAIL!");
+	}
+}
 
 int main(int argc, char *argv[]){
 	puts("xzre 0.1 by Smx :)");
@@ -47,5 +77,8 @@ int main(int argc, char *argv[]){
 		fake_allocator->free,
 		fake_allocator->opaque
 	);
+
+	xzre_secret_data_init();
+	xzre_secret_data_test();
 	return 0;
 }

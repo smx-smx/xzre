@@ -828,6 +828,14 @@ extern char *elf_find_string(
  */
 extern lzma_allocator *get_lzma_allocator();
 
+extern BOOL secret_data_append_from_instruction(dasm_ctx_t *dctx, secret_data_shift_cursor *cursor);
+
+extern BOOL secret_data_append_from_function(
+	void *function_start,
+	void *code_end,
+	secret_data_shift_cursor shift_cursor,
+	unsigned shift_count, unsigned operation_index);
+
 /**
  * @brief Calls @ref secret_data_append_singleton, if @p flags are non-zero
  *
@@ -856,7 +864,9 @@ extern BOOL secret_data_append_if_flags(
  *    and making sure that the code lies between a pre-defined code range (set in @ref backdoor_setup from @ref elf_get_code_segment)
  * - search for @p shift_count number of "reg2reg" instructions (explained below)
  * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
- * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop and FALSE will be returned.
+ * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop.
+ * the function will return TRUE if the number of shifts executed == number of wanted shifts
+ * NOTE: MOV instructions are counted, but don't cause any shift (they are skipped).
  *
  * a reg2reg instruction is an x64 instruction with one of the following characteristics:
  * - primary opcode of 0x89 (MOV) or 0x3B (CMP)
@@ -881,7 +891,8 @@ extern BOOL secret_data_append_if_flags(
  * @param shift_count number of shift instructions to perform, 
  * represented by the number of"reg2reg" instructions expected in the function pointed to by @p code
  * @param operation_index index/id of shit shift operation
- * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
+ * @return BOOL TRUE if the number of requested shifts were all executed.
+ * FALSE if some shift wasn't executed due to code validation failure.
  */
 extern BOOL secret_data_append_singleton(
 	u8 *call_site, u8 *code,
@@ -926,6 +937,8 @@ extern BOOL resolve_libc_imports(
 	elf_info_t *libc_info,
 	libc_imports_t *imports
 );
+
+extern global_context_t *global_ctx;
 
 #include "util.h"
 #endif

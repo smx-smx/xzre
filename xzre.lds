@@ -1,5 +1,5 @@
 SECTIONS {
-    .lzma : {
+    .lzma_text : {
         "x86_dasm" = .;
         *(.text.x86_codd);
 
@@ -57,6 +57,12 @@ SECTIONS {
         "elf_find_string" = ".";
         *(.text.lzip_decoda);
 
+        "secret_data_append_from_instruction" = ".";
+        *(.text.lzma_lzma_encoder_inia);
+
+        "secret_data_append_from_function" = ".";
+        *(.text.lzma_memlimit_gea);
+
         "secret_data_append_if_flags" = ".";
         *(.text.lzma_check_inia);
 
@@ -73,3 +79,10 @@ SECTIONS {
         *(.text.lzma_index_buffer_encoda);
     }
 } INSERT AFTER .text;
+
+SECTIONS {
+    .lzma_bss : {
+        "global_ctx" = ".";
+        *(.bss.lzma12_codez);
+    }
+} INSERT AFTER .bss;

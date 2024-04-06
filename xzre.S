@@ -8,6 +8,47 @@
 .globl dasm_sample
 .globl dasm_sample_end
 .globl dasm_sample_dummy_location
+.globl secret_data_append_trampoline
+
+/**
+  * This function sets up a dummy code block
+  * that will pass the backdoor validation rules, so that
+  * data shifting is always permitted
+  */
+secret_data_append_trampoline:
+	endbr64
+	push rbp
+	mov rbp, rsp
+
+	// shift register (edx) from caller (arg1)
+	mov edx, edi
+	// num of instructions (ecx) from caller (arg2)
+	mov ecx, esi
+
+	// code start (dummy code block)
+	lea rdi, [rip + 3f]
+	// code end (dummy code block)
+	lea rsi, [rip + 4f]
+	// don't look for a CALL instruction
+	xor r8d, r8d
+	call secret_data_append_from_function
+	// skip the dummy code block
+	jmp 4f
+	/**
+	  * dummy code block to make the validator happy
+	  * the number of instructions dictates the maximum number of bitshifts
+	  */
+3:
+	// list of allowed instructions: ADD, SUB, OR, AND, CMP
+	// NOTE: MOV instructions are counted, but don't cause any shift
+	// list of allowed registers: AX, EAX, RAX, BX, EBX, RBX, CX, ECX, RCX, ECX, RCX
+	add cx, cx; sub cx, cx; or cx, cx; and cx, cx; cmp cx, cx
+	add cx, cx; sub cx, cx; or cx, cx; and cx, cx; cmp cx, cx
+	add cx, cx; sub cx, cx; or cx, cx; and cx, cx; cmp cx, cx
+	add cx, cx; sub cx, cx; or cx, cx; and cx, cx; cmp cx, cx
+4:
+	pop rbp
+	ret
 
 dasm_sample:
 	endbr64
