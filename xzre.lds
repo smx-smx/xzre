@@ -60,7 +60,7 @@ SECTIONS {
         "secret_data_append_from_instruction" = ".";
         *(.text.lzma_lzma_encoder_inia);
 
-        "secret_data_append_from_function" = ".";
+        "secret_data_append_from_code" = ".";
         *(.text.lzma_memlimit_gea);
 
         "secret_data_append_if_flags" = ".";

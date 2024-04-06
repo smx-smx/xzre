@@ -30,7 +30,7 @@ secret_data_append_trampoline:
 	lea rsi, [rip + 4f]
 	// don't look for a CALL instruction
 	xor r8d, r8d
-	call secret_data_append_from_function
+	call secret_data_append_from_code
 	// skip the dummy code block
 	jmp 4f
 	/**

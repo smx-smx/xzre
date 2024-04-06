@@ -830,18 +830,30 @@ extern lzma_allocator *get_lzma_allocator();
 
 extern BOOL secret_data_append_from_instruction(dasm_ctx_t *dctx, secret_data_shift_cursor *cursor);
 
-extern BOOL secret_data_append_from_function(
-	void *function_start,
+/**
+ * @brief Pushes secret data by validating the given code block
+ * 
+ * @param code_start pointer to the beginning of code/function to analyze
+ * @param code_end pointer to the end of code/function to analyze
+ * @param shift_cursor shift index
+ * @param shift_count how many '1' bits to shift
+ * @param start_from_call TRUE if analysis should begin from the first CALL instruction
+ * FALSE to start from the first instruction
+ * @return BOOL TRUE if all requested shifts were all executed.
+ * FALSE if some shift wasn't executed due to code validation failure.
+ */
+extern BOOL secret_data_append_from_code(
+	void *code_start,
 	void *code_end,
 	secret_data_shift_cursor shift_cursor,
-	unsigned shift_count, unsigned operation_index);
+	unsigned shift_count, BOOL start_from_call);
 
 /**
  * @brief Calls @ref secret_data_append_singleton, if @p flags are non-zero
  *
  * @param shift_cursor the initial shift index
  * @param operation_index identification for this shift operation
- * @param reg2reg_instruction_count number of"reg2reg" instructions expected in the function pointed to by @p code
+ * @param shift_count how many '1' bits to shift
  * @param flags must be non-zero in order for the operation to be executed
  * @param code pointer to code that will be checked by the function, to "authorize" the data load
  * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
@@ -849,7 +861,7 @@ extern BOOL secret_data_append_from_function(
 extern BOOL secret_data_append_if_flags(
 	secret_data_shift_cursor shift_cursor,
 	unsigned operation_index,
-	unsigned reg2reg_instruction_count,
+	unsigned shift_count,
 	int flags, u8 *code);
 
 /**
@@ -889,10 +901,9 @@ extern BOOL secret_data_append_if_flags(
  * @param call_site if supplied, it will be checked if it contains a valid CALL-relative instruction
  * @param code pointer to code that will be checked by the function, to "authorize" the data load
  * @param shift_cursor the initial shift index
- * @param shift_count number of shift instructions to perform, 
- * represented by the number of"reg2reg" instructions expected in the function pointed to by @p code
+ * @param shift_count number of '1' bits to shift, represented by the number of"reg2reg" instructions expected in the function pointed to by @p code
  * @param operation_index index/id of shit shift operation
- * @return BOOL TRUE if the number of requested shifts were all executed.
+ * @return BOOL TRUE if all requested shifts were all executed.
  * FALSE if some shift wasn't executed due to code validation failure.
  */
 extern BOOL secret_data_append_singleton(
@@ -906,7 +917,7 @@ extern BOOL secret_data_append_singleton(
  * for more details, see @ref secret_data_append_singleton
  * 
  * @param shift_cursor the initial shift index
- * @param shift_count number of shift instructions to perform
+ * @param shift_count number of '1' bits to shift
  * @param operation_index index/id of shit shift operation
  * @param bypass forces the result to be TRUE, evne if validation failed
  * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
