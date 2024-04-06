@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['find_5fcall_5finstruction_116',['find_call_instruction',['../xzre_8h.html#a41fada894916f4c67d59090ff57aead1',1,'xzre.h']]],
-  ['find_5ffunction_5fprologue_117',['find_function_prologue',['../xzre_8h.html#a81a6f3d01ea6057c942052321b92c533',1,'xzre.h']]],
-  ['find_5ffunction_5fprologue_5fex_118',['find_function_prologue_ex',['../xzre_8h.html#a5b09699385091684d71bf8a278e0372d',1,'xzre.h']]],
-  ['find_5finstruction_5fwith_5fmem_5foperand_119',['find_instruction_with_mem_operand',['../xzre_8h.html#a60c226501adb1a2d3213484f651ff23b',1,'xzre.h']]],
-  ['find_5finstruction_5fwith_5fmem_5foperand_5fex_120',['find_instruction_with_mem_operand_ex',['../xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470',1,'xzre.h']]],
-  ['find_5flea_5finstruction_121',['find_lea_instruction',['../xzre_8h.html#aea85a14166f11bb956c7862c2a66571e',1,'xzre.h']]],
-  ['find_5flea_5finstruction_5fwith_5fmem_5foperand_122',['find_lea_instruction_with_mem_operand',['../xzre_8h.html#a6e76946a37fb256974942a542373e421',1,'xzre.h']]],
-  ['find_5freg2reg_5finstruction_123',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
-  ['find_5fstring_5freference_124',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]]
+  ['elf_5fcontains_5fvaddr_106',['elf_contains_vaddr',['../xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db',1,'xzre.h']]],
+  ['elf_5ffind_5fstring_107',['elf_find_string',['../xzre_8h.html#a0adc703b5d67d3b105dc16a6a3ed9719',1,'xzre.h']]],
+  ['elf_5ffind_5fstring_5freference_108',['elf_find_string_reference',['../xzre_8h.html#ad5619755b9a7c900a9fe0a61f0172afd',1,'xzre.h']]],
+  ['elf_5fget_5fcode_5fsegment_109',['elf_get_code_segment',['../xzre_8h.html#a18845fc4614f60083817db417dc32a13',1,'xzre.h']]],
+  ['elf_5fget_5fdata_5fsegment_110',['elf_get_data_segment',['../xzre_8h.html#a52148c8b1da2a37036e7975ea299117b',1,'xzre.h']]],
+  ['elf_5fget_5fgot_5fsymbol_111',['elf_get_got_symbol',['../xzre_8h.html#a3a822ab2e33cbfe16f1d3c5fb3c3300b',1,'xzre.h']]],
+  ['elf_5fget_5fplt_5fsymbol_112',['elf_get_plt_symbol',['../xzre_8h.html#a78a68fd2158f572304562e6e7c5d0bf6',1,'xzre.h']]],
+  ['elf_5fget_5freloc_5fsymbol_113',['elf_get_reloc_symbol',['../xzre_8h.html#acbf91a56fdd3e3f20df2182d8aa19cb1',1,'xzre.h']]],
+  ['elf_5fget_5frodata_5fsegment_114',['elf_get_rodata_segment',['../xzre_8h.html#a55e085fd878446cf655c657491b9d522',1,'xzre.h']]],
+  ['elf_5fparse_115',['elf_parse',['../xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7',1,'xzre.h']]],
+  ['elf_5fsymbol_5fget_116',['elf_symbol_get',['../xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154',1,'xzre.h']]],
+  ['elf_5fsymbol_5fget_5faddr_117',['elf_symbol_get_addr',['../xzre_8h.html#a20700a81cc5921ecba31766edd9c3f4f',1,'xzre.h']]]
 ];

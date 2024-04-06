@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['x86_5fdasm_134',['x86_dasm',['../xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f',1,'xzre.h']]]
+  ['secret_5fdata_5fappend_5ffrom_5fcall_5fsite_132',['secret_data_append_from_call_site',['../xzre_8h.html#aa74b87d0023e8efc4e820768518a884d',1,'xzre.h']]],
+  ['secret_5fdata_5fappend_5ffrom_5fcode_133',['secret_data_append_from_code',['../xzre_8h.html#ac72a5ce7a47cbed0cadf76bd0d578b65',1,'xzre.h']]],
+  ['secret_5fdata_5fappend_5fif_5fflags_134',['secret_data_append_if_flags',['../xzre_8h.html#aaa0db3f61956e32ad25cfaa21122661e',1,'xzre.h']]],
+  ['secret_5fdata_5fappend_5fsingleton_135',['secret_data_append_singleton',['../xzre_8h.html#aa571c1c4c376e99b6e4306cf6d9d5f18',1,'xzre.h']]]
 ];

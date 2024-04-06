@@ -424,12 +424,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab32e42958ca639e3cd3531f33de364d6"><td class="memItemLeft" align="right" valign="top"><a id="ab32e42958ca639e3cd3531f33de364d6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_public_decrypt_hook_ptr, 0x18)</td></tr>
 <tr class="separator:ab32e42958ca639e3cd3531f33de364d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d16ae52dff2aab526ba5bffdf0b4a3d"><td class="memItemLeft" align="right" valign="top"><a id="a5d16ae52dff2aab526ba5bffdf0b4a3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20)</td></tr>
-<tr class="separator:a5d16ae52dff2aab526ba5bffdf0b4a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4c9f2e4f61e09a793cbda8478f9e982"><td class="memItemLeft" align="right" valign="top"><a id="ab4c9f2e4f61e09a793cbda8478f9e982"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_get0_key_hook_ptr_null, 0x28)</td></tr>
-<tr class="separator:ab4c9f2e4f61e09a793cbda8478f9e982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2e8419e269c6bb46e2a56b4a8edd095"><td class="memItemLeft" align="right" valign="top"><a id="ad2e8419e269c6bb46e2a56b4a8edd095"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_hook_ptr, 0x20)</td></tr>
+<tr class="separator:ad2e8419e269c6bb46e2a56b4a8edd095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace0690caf6175f8d4904a46555b26a84"><td class="memItemLeft" align="right" valign="top"><a id="ace0690caf6175f8d4904a46555b26a84"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_get0_key_hook_ptr, 0x28)</td></tr>
+<tr class="separator:ace0690caf6175f8d4904a46555b26a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memItemLeft" align="right" valign="top"><a id="a4204d0c32a5ccc55ab1a298d689bd4fb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, DSA_get0_pqg, 0x30)</td></tr>
 <tr class="separator:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -691,6 +691,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a1fcba1b3d069ccf76ee3cef4a3b9a682"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1fcba1b3d069ccf76ee3cef4a3b9a682">process_shared_libraries_map</a> (struct link_map *r_map, <a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a> *data)</td></tr>
 <tr class="memdesc:a1fcba1b3d069ccf76ee3cef4a3b9a682"><td class="mdescLeft">&#160;</td><td class="mdescRight">scans loaded libraries to identify interesting libraries and populate related data  <a href="xzre_8h.html#a1fcba1b3d069ccf76ee3cef4a3b9a682">More...</a><br /></td></tr>
 <tr class="separator:a1fcba1b3d069ccf76ee3cef4a3b9a682"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb41e1828a73dd4ce8f82a0d42dceb5"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8eb41e1828a73dd4ce8f82a0d42dceb5">chacha_decrypt</a> (u8 *in, int inl, u8 *key, u8 *iv, u8 *out, <a class="el" href="structimported__funcs__t.html">imported_funcs_t</a> *funcs)</td></tr>
+<tr class="memdesc:a8eb41e1828a73dd4ce8f82a0d42dceb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">decrypts a buffer with chacha20  <a href="xzre_8h.html#a8eb41e1828a73dd4ce8f82a0d42dceb5">More...</a><br /></td></tr>
+<tr class="separator:a8eb41e1828a73dd4ce8f82a0d42dceb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -726,6 +729,72 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL unused </dd></dl>
+
+</div>
+</div>
+<a id="a8eb41e1828a73dd4ce8f82a0d42dceb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eb41e1828a73dd4ce8f82a0d42dceb5">&#9670;&nbsp;</a></span>chacha_decrypt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL chacha_decrypt </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>inl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>iv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs__t.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>decrypts a buffer with chacha20 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>the input buffer to decrypt </td></tr>
+    <tr><td class="paramname">inl</td><td>the length of the input buffer </td></tr>
+    <tr><td class="paramname">key</td><td>the 256bit chacha key </td></tr>
+    <tr><td class="paramname">iv</td><td>the 128bit chacha iv </td></tr>
+    <tr><td class="paramname">out</td><td>the output buffer </td></tr>
+    <tr><td class="paramname">funcs</td><td>OpenSSL imported functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
 
 </div>
 </div>
