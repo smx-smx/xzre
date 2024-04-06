@@ -45,7 +45,7 @@ typedef enum {
 	DF_ASIZE = 8,
 	// has rex
 	DF_REX = 0x20
-} DasmFlags;
+} InstructionFlags;
 
 typedef enum {
 	// ELF has JMPREL relocs
