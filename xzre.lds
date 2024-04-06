@@ -98,6 +98,9 @@ SECTIONS {
 
         "chacha_decrypt" = ".";
         *(.text.lzma_delta_encoder_inia);
+
+        "secret_data_get_decrypted" = ".";
+        *(.text.parse_lzma10);
     }
 } INSERT AFTER .text;
 

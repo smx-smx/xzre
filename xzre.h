@@ -1083,6 +1083,15 @@ extern BOOL chacha_decrypt(
 	u8 *out, imported_funcs_t *funcs
 );
 
+/**
+ * @brief obtains a decrypted copy of the secret data
+ * 
+ * @param output output buffer that will receive the decrypted data
+ * @param ctx the global context (for secret data and function imports)
+ * @return BOOL TRUE if successful, FALSE otherwise
+ */
+extern BOOL secret_data_get_decrypted(u8 *output, global_context_t *ctx);
+
 extern global_context_t *global_ctx;
 
 #include "util.h"
