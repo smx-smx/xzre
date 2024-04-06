@@ -666,6 +666,36 @@ extern BOOL find_instruction_with_mem_operand_ex(
 );
 
 /**
+ * @brief finds an instruction that references the given string
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param str the target of the string reference (i.e. the target of the LEA instruction)
+ * @return u8* the address of the first instruction that references the given string, or NULL if not found
+ */
+extern u8 *find_string_reference(
+	u8 *code_start,
+	u8 *code_end,
+	const char *str
+);
+
+/**
+ * @brief finds an instruction that references the given string
+ * 
+ * @param elf_info the parsed ELF context
+ * @param encoded_string_id the string to search for, in encoded form
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @return u8* the address of the first instruction that references the given string, or NULL if not found
+ */
+extern u8 *elf_find_string_reference(
+	elf_info_t *elf_info,
+	u32 encoded_string_id,
+	u8 *code_start,
+	u8 *code_end
+);
+
+/**
  * @brief finds a reg2reg instruction
  *
  * a reg2reg instruction is an x64 instruction with one of the following characteristics:

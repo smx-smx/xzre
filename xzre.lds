@@ -57,6 +57,9 @@ SECTIONS {
         "elf_find_string" = ".";
         *(.text.lzip_decoda);
 
+        "elf_find_string_reference" = ".";
+        *(.text.lzma_auto_decoda);
+
         "secret_data_append_from_instruction" = ".";
         *(.text.lzma_lzma_encoder_inia);
 
@@ -68,6 +71,9 @@ SECTIONS {
 
         "find_reg2reg_instruction" = ".";
         *(.text.lzma_block_total_siza);
+
+        "find_string_reference" = ".";
+        *(.text.stream_encoda);
 
         "secret_data_append_singleton" = ".";
         *(.text.rc_read_inis);
