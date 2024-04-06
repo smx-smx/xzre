@@ -79,6 +79,12 @@ typedef enum {
 	FIND_NOP
 } FuncFindType;
 
+typedef enum {
+	X_ELF_MAIN = 0,
+	X_ELF_LIBCRYPTO = 1,
+	X_ELF_LIBC = 2
+} ElfId;
+
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 
 #define CONCAT(x, y) x ## y
@@ -514,26 +520,42 @@ assert_offset(global_context_t, shift_operations, 0x141);
 assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
 static_assert(sizeof(global_context_t) == 0x168);
 
+/**
+ * @brief array of ELF handles
+ * @see ElfId maps the indices
+ */
 typedef struct __attribute__((packed)) {
-	elf_info_t *lib_elf_info;
-	elf_info_t *elf_info;
-} elf_lib_info_t;
+	elf_info_t *main;
+	elf_info_t *libcrypto;
+	elf_info_t *libc;
+} elf_handles_t;
 
-assert_offset(elf_lib_info_t, lib_elf_info, 0);
-assert_offset(elf_lib_info_t, elf_info, 8);
+assert_offset(elf_handles_t, main, 0x0);
+assert_offset(elf_handles_t, libcrypto, 0x8);
+assert_offset(elf_handles_t, libc, 0x10);
+
+struct backdoor_data;
+
+/**
+ * @brief data passed to functions that access the backdoor data
+ */
+typedef struct __attribute__((packed)) {
+	struct backdoor_data *data;
+	elf_handles_t *elf_handles;
+} backdoor_data_handle_t;
+
+assert_offset(backdoor_data_handle_t, data, 0x0);
+assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
+
 
 /**
  * @brief this structure is used to hold most of the backdoor information.
  * it's used as a local variable in function @ref backdoor_setup
  */
-typedef struct __attribute__((packed)) {
+typedef struct __attribute__((packed)) backdoor_data {
 	PADDING(0x30);
-	PADDING(sizeof(elf_lib_info_t));
+	elf_handles_t elf_handles;
 
-	/**
-	 * @brief points to @ref libc_info
-	 */
-	elf_info_t *libc;
 	PADDING(sizeof(elf_info_t *));
 	/**
 	 * @brief points to @ref libcrypto_info
@@ -544,7 +566,7 @@ typedef struct __attribute__((packed)) {
 	 * @brief points to the beginning of this struct
 	 */
 	struct backdoor_data *backdoor_data;
-	PADDING(sizeof(elf_lib_info_t *));
+	PADDING(sizeof(elf_handles_t *));
 
 	/** parsed ELF files */
 	PADDING(sizeof(elf_info_t));
@@ -571,7 +593,7 @@ typedef struct __attribute__((packed)) {
 	lzma_allocator *import_resolver;
 } backdoor_data_t;
 
-assert_offset(backdoor_data_t, libc, 0x40);
+assert_offset(backdoor_data_t, elf_handles, 0x30);
 assert_offset(backdoor_data_t, libcrypto, 0x50);
 assert_offset(backdoor_data_t, libc_info, 0x268);
 assert_offset(backdoor_data_t, libcrypto_info, 0x468);
@@ -596,7 +618,7 @@ assert_offset(backdoor_libraries_t, libc, 0x28);
 
 typedef struct __attribute__((packed)) {
 	backdoor_libraries_t *libs;
-	elf_lib_info_t *elf;
+	elf_handles_t *elf_handles;
 	pfn_RSA_public_decrypt_t RSA_public_decrypt;
 	pfn_EVP_PKEY_set1_RSA_t EVP_PKEY_set1_RSA;
 	pfn_RSA_get0_key_t RSA_get0_key;
@@ -605,7 +627,7 @@ typedef struct __attribute__((packed)) {
 } backdoor_shared_libraries_data_t;
 
 assert_offset(backdoor_shared_libraries_data_t, libs, 0x0);
-assert_offset(backdoor_shared_libraries_data_t, elf, 0x8);
+assert_offset(backdoor_shared_libraries_data_t, elf_handles, 0x8);
 assert_offset(backdoor_shared_libraries_data_t, RSA_public_decrypt, 0x10);
 assert_offset(backdoor_shared_libraries_data_t, EVP_PKEY_set1_RSA, 0x18);
 assert_offset(backdoor_shared_libraries_data_t, RSA_get0_key, 0x20);
