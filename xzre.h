@@ -375,8 +375,8 @@ typedef struct __attribute__((packed)) {
 		const RSA *r, const BIGNUM **n,
 		const BIGNUM **e, const BIGNUM **d);
 	void *RSA_public_decrypt_hook_ptr;
-	void *EVP_PKEY_set1_RSA_hook_ptr_null;
-	void *RSA_get0_key_hook_ptr_null;
+	void *EVP_PKEY_set1_RSA_hook_ptr;
+	void *RSA_get0_key_hook_ptr;
 	void (*DSA_get0_pqg)(
 		const DSA *d, const BIGNUM **p,
 		const BIGNUM **q, const BIGNUM **g);
@@ -432,8 +432,8 @@ assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
 assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA, 8);
 assert_offset(imported_funcs_t, RSA_get0_key_null, 0x10);
 assert_offset(imported_funcs_t, RSA_public_decrypt_hook_ptr, 0x18);
-assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20);
-assert_offset(imported_funcs_t, RSA_get0_key_hook_ptr_null, 0x28);
+assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr, 0x20);
+assert_offset(imported_funcs_t, RSA_get0_key_hook_ptr, 0x28);
 assert_offset(imported_funcs_t, DSA_get0_pqg, 0x30);
 assert_offset(imported_funcs_t, DSA_get0_pub_key, 0x38);
 assert_offset(imported_funcs_t, EC_POINT_point2oct, 0x40);
