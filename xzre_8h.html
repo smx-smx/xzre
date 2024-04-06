@@ -606,12 +606,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a130ba7ecb28e28acacb98c965d80dba3"><td class="memItemLeft" align="right" valign="top"><a id="a130ba7ecb28e28acacb98c965d80dba3"></a>
 BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_from_instruction</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> *cursor)</td></tr>
 <tr class="separator:a130ba7ecb28e28acacb98c965d80dba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd18479d4cfc83d3d3cbd69a3315ab38"><td class="memItemLeft" align="right" valign="top"><a id="afd18479d4cfc83d3d3cbd69a3315ab38"></a>
-BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_from_function</b> (void *function_start, void *code_end, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
-<tr class="separator:afd18479d4cfc83d3d3cbd69a3315ab38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad21c1f0b4b9127ea1234d46dbadc3e8b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">secret_data_append_if_flags</a> (<a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned operation_index, unsigned reg2reg_instruction_count, int flags, u8 *code)</td></tr>
-<tr class="memdesc:ad21c1f0b4b9127ea1234d46dbadc3e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="xzre_8h.html#aa571c1c4c376e99b6e4306cf6d9d5f18">secret_data_append_singleton</a>, if <code>flags</code> are non-zero.  <a href="xzre_8h.html#ad21c1f0b4b9127ea1234d46dbadc3e8b">More...</a><br /></td></tr>
-<tr class="separator:ad21c1f0b4b9127ea1234d46dbadc3e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72a5ce7a47cbed0cadf76bd0d578b65"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac72a5ce7a47cbed0cadf76bd0d578b65">secret_data_append_from_code</a> (void *code_start, void *code_end, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned shift_count, BOOL start_from_call)</td></tr>
+<tr class="memdesc:ac72a5ce7a47cbed0cadf76bd0d578b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes secret data by validating the given code block.  <a href="xzre_8h.html#ac72a5ce7a47cbed0cadf76bd0d578b65">More...</a><br /></td></tr>
+<tr class="separator:ac72a5ce7a47cbed0cadf76bd0d578b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0db3f61956e32ad25cfaa21122661e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aaa0db3f61956e32ad25cfaa21122661e">secret_data_append_if_flags</a> (<a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned operation_index, unsigned shift_count, int flags, u8 *code)</td></tr>
+<tr class="memdesc:aaa0db3f61956e32ad25cfaa21122661e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="xzre_8h.html#aa571c1c4c376e99b6e4306cf6d9d5f18">secret_data_append_singleton</a>, if <code>flags</code> are non-zero.  <a href="xzre_8h.html#aaa0db3f61956e32ad25cfaa21122661e">More...</a><br /></td></tr>
+<tr class="separator:aaa0db3f61956e32ad25cfaa21122661e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa571c1c4c376e99b6e4306cf6d9d5f18"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa571c1c4c376e99b6e4306cf6d9d5f18">secret_data_append_singleton</a> (u8 *call_site, u8 *code, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
 <tr class="memdesc:aa571c1c4c376e99b6e4306cf6d9d5f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts data in the secret data store, after validation of <code>code</code>. this function is intended to be invoked only once for each <code>operation_index</code> value. <code>operation_index</code> will be used as an index into a global array of flags, so that multiple calls with the same value will be a NO-OP.  <a href="xzre_8h.html#aa571c1c4c376e99b6e4306cf6d9d5f18">More...</a><br /></td></tr>
 <tr class="separator:aa571c1c4c376e99b6e4306cf6d9d5f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1596,7 +1596,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">shift_cursor</td><td>the initial shift index </td></tr>
-    <tr><td class="paramname">shift_count</td><td>number of shift instructions to perform </td></tr>
+    <tr><td class="paramname">shift_count</td><td>number of '1' bits to shift </td></tr>
     <tr><td class="paramname">operation_index</td><td>index/id of shit shift operation </td></tr>
     <tr><td class="paramname">bypass</td><td>forces the result to be TRUE, evne if validation failed </td></tr>
   </table>
@@ -1606,8 +1606,67 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad21c1f0b4b9127ea1234d46dbadc3e8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad21c1f0b4b9127ea1234d46dbadc3e8b">&#9670;&nbsp;</a></span>secret_data_append_if_flags()</h2>
+<a id="ac72a5ce7a47cbed0cadf76bd0d578b65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac72a5ce7a47cbed0cadf76bd0d578b65">&#9670;&nbsp;</a></span>secret_data_append_from_code()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL secret_data_append_from_code </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a>&#160;</td>
+          <td class="paramname"><em>shift_cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>shift_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>start_from_call</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pushes secret data by validating the given code block. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>pointer to the beginning of code/function to analyze </td></tr>
+    <tr><td class="paramname">code_end</td><td>pointer to the end of code/function to analyze </td></tr>
+    <tr><td class="paramname">shift_cursor</td><td>shift index </td></tr>
+    <tr><td class="paramname">shift_count</td><td>how many '1' bits to shift </td></tr>
+    <tr><td class="paramname">start_from_call</td><td>TRUE if analysis should begin from the first CALL instruction FALSE to start from the first instruction </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if all requested shifts were all executed. FALSE if some shift wasn't executed due to code validation failure. </dd></dl>
+
+</div>
+</div>
+<a id="aaa0db3f61956e32ad25cfaa21122661e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa0db3f61956e32ad25cfaa21122661e">&#9670;&nbsp;</a></span>secret_data_append_if_flags()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1628,7 +1687,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned&#160;</td>
-          <td class="paramname"><em>reg2reg_instruction_count</em>, </td>
+          <td class="paramname"><em>shift_count</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1655,7 +1714,7 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">shift_cursor</td><td>the initial shift index </td></tr>
     <tr><td class="paramname">operation_index</td><td>identification for this shift operation </td></tr>
-    <tr><td class="paramname">reg2reg_instruction_count</td><td>number of"reg2reg" instructions expected in the function pointed to by <code>code</code> </td></tr>
+    <tr><td class="paramname">shift_count</td><td>how many '1' bits to shift </td></tr>
     <tr><td class="paramname">flags</td><td>must be non-zero in order for the operation to be executed </td></tr>
     <tr><td class="paramname">code</td><td>pointer to code that will be checked by the function, to "authorize" the data load </td></tr>
   </table>
@@ -1728,12 +1787,12 @@ Variables</h2></td></tr>
     <tr><td class="paramname">call_site</td><td>if supplied, it will be checked if it contains a valid CALL-relative instruction </td></tr>
     <tr><td class="paramname">code</td><td>pointer to code that will be checked by the function, to "authorize" the data load </td></tr>
     <tr><td class="paramname">shift_cursor</td><td>the initial shift index </td></tr>
-    <tr><td class="paramname">shift_count</td><td>number of shift instructions to perform, represented by the number of"reg2reg" instructions expected in the function pointed to by <code>code</code> </td></tr>
+    <tr><td class="paramname">shift_count</td><td>number of '1' bits to shift, represented by the number of"reg2reg" instructions expected in the function pointed to by <code>code</code> </td></tr>
     <tr><td class="paramname">operation_index</td><td>index/id of shit shift operation </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the number of requested shifts were all executed. FALSE if some shift wasn't executed due to code validation failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if all requested shifts were all executed. FALSE if some shift wasn't executed due to code validation failure. </dd></dl>
 
 </div>
 </div>
