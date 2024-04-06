@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
 			ctx.flags);
 		printf("      --> ");
 		for(int i=0; i<ctx.instruction_size; i++){
-			printf("%02hhx ", ctx.first_instruction[i]);
+			printf("%02hhx ", ctx.instruction[i]);
 		}
 		printf("\n");
 	};

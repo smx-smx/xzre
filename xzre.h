@@ -143,7 +143,7 @@ assert_offset(backdoor_setup_params_t, entry_ctx, 0x80);
 static_assert(sizeof(backdoor_setup_params_t) == 0x88);
 
 typedef struct __attribute__((packed)) {
-	u8* first_instruction;
+	u8* instruction;
 	u64 instruction_size;
 	u8 flags;
 	u8 flags2;
@@ -170,7 +170,7 @@ typedef struct __attribute__((packed)) {
 	PADDING(47);
 } dasm_ctx_t;
 
-assert_offset(dasm_ctx_t, first_instruction, 0);
+assert_offset(dasm_ctx_t, instruction, 0);
 assert_offset(dasm_ctx_t, instruction_size, 8);
 assert_offset(dasm_ctx_t, flags, 0x10);
 assert_offset(dasm_ctx_t, flags2, 0x11);
@@ -621,8 +621,8 @@ extern BOOL find_lea_instruction(u8 *code_start, u8 *code_end, u64 displacement)
  * @param code_start address to start searching from
  * @param code_end address to stop searching at
  * @param dctx disassembler context to hold the state
- * @param mem_address the expected address of the memory access
- * @return BOOL TRUE if found, FALSE otherwise
+ * @param mem_address the address of the memory fetch (where the instruction will fetch from)
+ * @return BOOL TRUE if an instruction was found, FALSE otherwise
  */
 extern BOOL find_instruction_with_mem_operand(
 	u8 *code_start,
