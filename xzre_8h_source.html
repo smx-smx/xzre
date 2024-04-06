@@ -182,7 +182,7 @@ $(function() {
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;static_assert(<span class="keyword">sizeof</span>(<a class="code" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a>) == 0x88);</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
 <div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="structdasm__ctx__t.html">  145</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)) {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    u8* first_instruction;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    u8* instruction;</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    u64 instruction_size;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    u8 flags;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    u8 flags2;</div>
@@ -209,7 +209,7 @@ $(function() {
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    PADDING(47);</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;} <a class="code" href="structdasm__ctx__t.html">dasm_ctx_t</a>;</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;assert_offset(<a class="code" href="structdasm__ctx__t.html">dasm_ctx_t</a>, first_instruction, 0);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;assert_offset(<a class="code" href="structdasm__ctx__t.html">dasm_ctx_t</a>, instruction, 0);</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;assert_offset(<a class="code" href="structdasm__ctx__t.html">dasm_ctx_t</a>, instruction_size, 8);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;assert_offset(<a class="code" href="structdasm__ctx__t.html">dasm_ctx_t</a>, flags, 0x10);</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;assert_offset(<a class="code" href="structdasm__ctx__t.html">dasm_ctx_t</a>, flags2, 0x11);</div>
