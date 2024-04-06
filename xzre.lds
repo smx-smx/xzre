@@ -27,7 +27,7 @@ SECTIONS {
         "get_lzma_allocator" = ".";
         *(.text.stream_decoder_memconfia);
 
-        "check_call_site" = ".";
+        "secret_data_append_from_call_site" = ".";
         *(.text.lzma_index_iter_rewina);
 
         "elf_contains_vaddr" = ".";

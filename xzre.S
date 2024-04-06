@@ -18,7 +18,7 @@ dasm_sample:
 	mov edi, 0x85
 	push rsi
 	mov esi, 0x12
-	call check_call_site
+	call secret_data_append_from_call_site
 	test eax, eax
 	jz 2f
 

@@ -854,7 +854,7 @@ extern BOOL secret_data_append_if_flags(
  * the algorithm will:
  * - locate the beginning of the function, by scanning for the `endbr64` instruction
  *    and making sure that the code lies between a pre-defined code range (set in @ref backdoor_setup from @ref elf_get_code_segment)
- * - search for @p reg2reg_instruction_count number of "reg2reg" instructions (explained below)
+ * - search for @p shift_count number of "reg2reg" instructions (explained below)
  * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
  * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop and FALSE will be returned.
  *
@@ -878,14 +878,32 @@ extern BOOL secret_data_append_if_flags(
  * @param call_site if supplied, it will be checked if it contains a valid CALL-relative instruction
  * @param code pointer to code that will be checked by the function, to "authorize" the data load
  * @param shift_cursor the initial shift index
- * @param reg2reg_instruction_count number of"reg2reg" instructions expected in the function pointed to by @p code
+ * @param shift_count number of shift instructions to perform, 
+ * represented by the number of"reg2reg" instructions expected in the function pointed to by @p code
  * @param operation_index index/id of shit shift operation
  * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
  */
 extern BOOL secret_data_append_singleton(
 	u8 *call_site, u8 *code,
 	secret_data_shift_cursor shift_cursor,
-	unsigned reg2reg_instruction_count, unsigned operation_index);
+	unsigned shift_count, unsigned operation_index);
+
+/**
+ * @brief Shifts data in the secret data store, after validation of the call site,
+ * i.e. the caller of this function
+ * for more details, see @ref secret_data_append_singleton
+ * 
+ * @param shift_cursor the initial shift index
+ * @param shift_count number of shift instructions to perform
+ * @param operation_index index/id of shit shift operation
+ * @param bypass forces the result to be TRUE, evne if validation failed
+ * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
+ */
+extern BOOL secret_data_append_from_call_site(
+	secret_data_shift_cursor shift_cursor,
+	unsigned shift_count, unsigned operation_index,
+	BOOL bypass
+);
 
 /**
  * @brief the backdoor main method
