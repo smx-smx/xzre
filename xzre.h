@@ -864,8 +864,9 @@ extern BOOL secret_data_append_if_flags(
  *    and making sure that the code lies between a pre-defined code range (set in @ref backdoor_setup from @ref elf_get_code_segment)
  * - search for @p shift_count number of "reg2reg" instructions (explained below)
  * - for each instruction, shift a '1' in the data register, and increment the shift cursor to the next bit index
- * if, at any given point, a non reg2reg instruction is encountered, the whole loop will stop.
+ * the code only considers reg2reg instruction. other instructions are skipped.
  * the function will return TRUE if the number of shifts executed == number of wanted shifts
+ * (that is, if there are as many compatible reg2reg instructions as the number of requested shifts)
  * NOTE: MOV instructions are counted, but don't cause any shift (they are skipped).
  *
  * a reg2reg instruction is an x64 instruction with one of the following characteristics:
