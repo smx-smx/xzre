@@ -564,6 +564,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, int opcode, void *mem_address)</td></tr>
 <tr class="memdesc:a1c8a36d89bf4e57077a56611e9aeb470"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction with an immediate memory operand  <a href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">More...</a><br /></td></tr>
 <tr class="separator:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78aba1d370c6519777e637f1ed7b7c14"><td class="memItemLeft" align="right" valign="top">u8 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14">find_string_reference</a> (u8 *code_start, u8 *code_end, const char *str)</td></tr>
+<tr class="memdesc:a78aba1d370c6519777e637f1ed7b7c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction that references the given string  <a href="xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14">More...</a><br /></td></tr>
+<tr class="separator:a78aba1d370c6519777e637f1ed7b7c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5619755b9a7c900a9fe0a61f0172afd"><td class="memItemLeft" align="right" valign="top">u8 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad5619755b9a7c900a9fe0a61f0172afd">elf_find_string_reference</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id, u8 *code_start, u8 *code_end)</td></tr>
+<tr class="memdesc:ad5619755b9a7c900a9fe0a61f0172afd"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction that references the given string  <a href="xzre_8h.html#ad5619755b9a7c900a9fe0a61f0172afd">More...</a><br /></td></tr>
+<tr class="separator:ad5619755b9a7c900a9fe0a61f0172afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">find_reg2reg_instruction</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx)</td></tr>
 <tr class="memdesc:aed0391d07e4413f5a13e1ec2940c94ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a reg2reg instruction  <a href="xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea">More...</a><br /></td></tr>
 <tr class="separator:aed0391d07e4413f5a13e1ec2940c94ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -760,6 +766,58 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>char* pointer to the string, or NULL if it couldn't be found </dd></dl>
+
+</div>
+</div>
+<a id="ad5619755b9a7c900a9fe0a61f0172afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5619755b9a7c900a9fe0a61f0172afd">&#9670;&nbsp;</a></span>elf_find_string_reference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u8* elf_find_string_reference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>encoded_string_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds an instruction that references the given string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the parsed ELF context </td></tr>
+    <tr><td class="paramname">encoded_string_id</td><td>the string to search for, in encoded form </td></tr>
+    <tr><td class="paramname">code_start</td><td>address to start searching from </td></tr>
+    <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>u8* the address of the first instruction that references the given string, or NULL if not found </dd></dl>
 
 </div>
 </div>
@@ -1485,6 +1543,51 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a78aba1d370c6519777e637f1ed7b7c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78aba1d370c6519777e637f1ed7b7c14">&#9670;&nbsp;</a></span>find_string_reference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u8* find_string_reference </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds an instruction that references the given string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>address to start searching from </td></tr>
+    <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
+    <tr><td class="paramname">str</td><td>the target of the string reference (i.e. the target of the LEA instruction) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>u8* the address of the first instruction that references the given string, or NULL if not found </dd></dl>
 
 </div>
 </div>
