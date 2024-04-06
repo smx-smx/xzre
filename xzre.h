@@ -272,7 +272,7 @@ typedef struct __attribute__((packed)) elf_info {
 	u64 rodata_segment_size;
 	u64 data_segment_start;
 	u64 data_segment_size;
-	u64 is_data_segment_aligned;
+	u64 data_segment_alignment;
 
 	u8 flags;
 	PADDING(7);
@@ -798,13 +798,38 @@ extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, co
 extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
 
 /**
- * @brief Obtains the address and size of the first executable page in the given ELF file
+ * @brief Obtains the address and size of the first executable segment in the given ELF file
  * 
  * @param elf_info the parsed ELF context, which will be updated with the address and size of the code segment
  * @param pSize variable that will be populated with the page-aligned segment size
- * @return the page-aligned virtual address of the executable code segment
+ * @return void* the page-aligned starting address of the segment
  */
-extern u64 elf_get_code_segment(elf_info_t *elf_info, u64 *pSize);
+extern void *elf_get_code_segment(elf_info_t *elf_info, u64 *pSize);
+
+/**
+ * @brief Obtains the address and size of the last readonly segment in the given ELF file
+ * this corresponds to the segment that typically contains .rodata
+ * 
+ * @param elf_info the parsed ELF context, which will be updated with the address and size of the rodata segment
+ * @param pSize variable that will be populated with the page-aligned segment size
+ * @return void* the page-aligned starting address of the segment
+ */
+extern void *elf_get_rodata_segment(elf_info_t *elf_info, u64 *pSize);
+
+/**
+ * @brief Obtains the address and size of the last read-write segment in the given ELF file
+ * this is typically the segment that contains the following sections:
+ * - .init_array .fini_array .data.rel.ro .dynamic .got
+ * 
+ * the parameter @p get_alignment controls if @p pSize should be populated with the segment size (when FALSE),
+ * or with the segment alignment (when TRUE)
+ *
+ * @param elf_info the parsed ELF context, which will be updated with the address and size of the data segment
+ * @param pSize variable that will be populated with either the page-aligned segment size, or the alignment size
+ * @param get_alignment controls if alignment size should be returned instead of segment size
+ * @return void* the page-aligned starting address of the segment
+ */
+extern void *elf_get_data_segment(elf_info_t *elf_info, u64 *pSize, BOOL get_alignment);
 
 /**
  * @brief Searches the ELF relocations for a symbol having name @p encoded_string id
