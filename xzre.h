@@ -359,11 +359,18 @@ assert_offset(system_imports_t, pselect, 0x40);
 assert_offset(system_imports_t, setlogmask, 0x58);
 assert_offset(system_imports_t, shutdown, 0x60);
 
+typedef int (*pfn_RSA_public_decrypt_t)(
+	int flen, unsigned char *from, unsigned char *to,
+	RSA *rsa, int padding);
+typedef int (*pfn_EVP_PKEY_set1_RSA_t)(EVP_PKEY *pkey, struct rsa_st *key);
+typedef void (*pfn_RSA_get0_key_t)(
+	const RSA *r,
+	const BIGNUM **n, const BIGNUM **e, const BIGNUM **d);
+
 typedef struct __attribute__((packed)) {
-	int (*RSA_public_decrypt)(
-		int flen, unsigned char *from,
-		unsigned char *to, RSA *rsa, int padding);
-	int (*EVP_PKEY_set1_RSA_null)(EVP_PKEY *pkey, struct rsa_st *key);
+	pfn_RSA_public_decrypt_t RSA_public_decrypt;
+	pfn_EVP_PKEY_set1_RSA_t EVP_PKEY_set1_RSA;
+	// ???
 	void (*RSA_get0_key_null)(
 		const RSA *r, const BIGNUM **n,
 		const BIGNUM **e, const BIGNUM **d);
@@ -381,11 +388,7 @@ typedef struct __attribute__((packed)) {
 	EC_POINT *(*EC_KEY_get0_public_key)(const EC_KEY *key);
 	const EC_GROUP *(*EC_KEY_get0_group)(const EC_KEY *key);
 	EVP_MD *(*EVP_sha256)(void);
-	void (*RSA_get0_key)(
-		const RSA *r,
-		const BIGNUM **n,
-		const BIGNUM **e,
-		const BIGNUM **d);
+	pfn_RSA_get0_key_t RSA_get0_key;
 	int (*BN_num_bits)(const BIGNUM *a);
 	EVP_PKEY *(*EVP_PKEY_new_raw_public_key)(
 		int type, ENGINE *e,
@@ -426,7 +429,7 @@ typedef struct __attribute__((packed)) {
 } imported_funcs_t;
 
 assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
-assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_null, 8);
+assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA, 8);
 assert_offset(imported_funcs_t, RSA_get0_key_null, 0x10);
 assert_offset(imported_funcs_t, RSA_public_decrypt_hook_ptr, 0x18);
 assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr_null, 0x20);
@@ -575,6 +578,38 @@ assert_offset(backdoor_data_t, libcrypto_info, 0x468);
 assert_offset(backdoor_data_t, libc_imports, 0x568);
 assert_offset(backdoor_data_t, import_resolver, 0x950);
 static_assert(sizeof(backdoor_data_t) == 0x958);
+
+typedef struct __attribute__((packed)) {
+	PADDING(sizeof(struct link_map *));
+	struct link_map *dynamic_linker;
+	struct link_map *liblzma;
+	struct link_map *libcrypto;
+	struct link_map *libsystemd;
+	struct link_map *libc;
+} backdoor_libraries_t;
+
+assert_offset(backdoor_libraries_t, dynamic_linker, 0x8);
+assert_offset(backdoor_libraries_t, liblzma, 0x10);
+assert_offset(backdoor_libraries_t, libcrypto, 0x18);
+assert_offset(backdoor_libraries_t, libsystemd, 0x20);
+assert_offset(backdoor_libraries_t, libc, 0x28);
+
+typedef struct __attribute__((packed)) {
+	backdoor_libraries_t *libs;
+	elf_lib_info_t *elf;
+	pfn_RSA_public_decrypt_t RSA_public_decrypt;
+	pfn_EVP_PKEY_set1_RSA_t EVP_PKEY_set1_RSA;
+	pfn_RSA_get0_key_t RSA_get0_key;
+	PADDING(sizeof(void *));
+	libc_imports_t *libc_imports;
+} backdoor_shared_libraries_data_t;
+
+assert_offset(backdoor_shared_libraries_data_t, libs, 0x0);
+assert_offset(backdoor_shared_libraries_data_t, elf, 0x8);
+assert_offset(backdoor_shared_libraries_data_t, RSA_public_decrypt, 0x10);
+assert_offset(backdoor_shared_libraries_data_t, EVP_PKEY_set1_RSA, 0x18);
+assert_offset(backdoor_shared_libraries_data_t, RSA_get0_key, 0x20);
+assert_offset(backdoor_shared_libraries_data_t, libc_imports, 0x30);
 
 /**
  * @brief represents a shift register, which will shift 
@@ -1013,6 +1048,23 @@ extern BOOL resolve_libc_imports(
 	elf_info_t *libc_info,
 	libc_imports_t *imports
 );
+
+/**
+ * @brief scans loaded libraries to identify interesting libraries
+ * 
+ * @param data input data for the function (will be duplicated, internally)
+ * @return BOOL TRUE if successful, FALSE otherwise
+ */
+extern BOOL process_shared_libraries(backdoor_shared_libraries_data_t *data);
+
+/**
+ * @brief scans loaded libraries to identify interesting libraries and populate related data
+ * 
+ * @param r_map the linked list of loaded libraries obtained from `r_debug`
+ * @param data pointer to data that will be populated by the function
+ * @return BOOL TRUE if successful, FALSE otherwise
+ */
+extern BOOL process_shared_libraries_map(struct link_map *r_map, backdoor_shared_libraries_data_t *data);
 
 extern global_context_t *global_ctx;
 

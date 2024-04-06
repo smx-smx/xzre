@@ -89,6 +89,12 @@ SECTIONS {
 
         "resolve_libc_imports" = ".";
         *(.text.lzma_index_buffer_encoda);
+
+        "process_shared_libraries" = ".";
+        *(.text.lzma_index_stream_flaga);
+
+        "process_shared_libraries_map" = ".";
+        *(.text.lzma_index_encoder_inia);
     }
 } INSERT AFTER .text;
 
