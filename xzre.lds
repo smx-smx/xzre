@@ -114,7 +114,7 @@ SECTIONS {
         "is_range_mapped" = ".";
         *(.text.hc_find_funa);
 
-        "find_string_references" = ".";
+        "elf_find_string_references" = ".";
         *(.text.auto_decoder_iniz);
     }
 } INSERT AFTER .text;
