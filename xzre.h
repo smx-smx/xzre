@@ -97,6 +97,126 @@ typedef enum {
 	X_ELF_LIBCRYPTO = 3
 } ElfId;
 
+typedef enum {
+	STR_STR_from = 0x810,
+	STR_STR_ssh2 = 0x678,
+	STR_STR_48s_48s_d_pid_ld_ = 0xd8,
+	STR_STR_s = 0x708,
+	STR_STR_usr_sbin_sshd = 0x108,
+	STR_STR_Accepted_password_for = 0x870,
+	STR_STR_Accepted_publickey_for = 0x1a0,
+	STR_STR_BN_bin2bn = 0xc40,
+	STR_STR_BN_bn2bin = 0x6d0,
+	STR_STR_BN_dup = 0x958,
+	STR_STR_BN_free = 0x418,
+	STR_STR_BN_num_bits = 0x4e0,
+	STR_STR_Connection_closed_by = 0x790,
+	STR_STR_Could_not_chdir_to_home_directory_s_s = 0x18,
+	STR_STR_Could_not_get_agent_socket = 0xb0,
+	STR_STR_DISPLAY = 0x960,
+	STR_STR_DSA_get0_pqg = 0x9d0,
+	STR_STR_DSA_get0_pub_key = 0x468,
+	STR_STR_EC_KEY_get0_group = 0x7e8,
+	STR_STR_EC_KEY_get0_public_key = 0x268,
+	STR_STR_EC_POINT_point2oct = 0x6e0,
+	STR_STR_EVP_CIPHER_CTX_free = 0xb28,
+	STR_STR_EVP_CIPHER_CTX_new = 0x838,
+	STR_STR_EVP_DecryptFinal_ex = 0x2a8,
+	STR_STR_EVP_DecryptInit_ex = 0xc08,
+	STR_STR_EVP_DecryptUpdate = 0x3f0,
+	STR_STR_EVP_Digest = 0xf8,
+	STR_STR_EVP_DigestVerify = 0x408,
+	STR_STR_EVP_DigestVerifyInit = 0x118,
+	STR_STR_EVP_MD_CTX_free = 0xd10,
+	STR_STR_EVP_MD_CTX_new = 0xaf8,
+	STR_STR_EVP_PKEY_free = 0x6f8,
+	STR_STR_EVP_PKEY_new_raw_public_key = 0x758,
+	STR_STR_EVP_PKEY_set1_RSA = 0x510,
+	STR_STR_EVP_chacha20 = 0xc28,
+	STR_STR_EVP_sha256 = 0xc60,
+	STR_STR_EVP_sm = 0x188,
+	STR_STR_GLIBC_2_2_5 = 0x8c0,
+	STR_STR_GLRO_dl_naudit_naudit = 0x6a8,
+	STR_STR_KRB5CCNAME = 0x1e0,
+	STR_STR_LD_AUDIT = 0xcf0,
+	STR_STR_LD_BIND_NOT = 0xbc0,
+	STR_STR_LD_DEBUG = 0xa90,
+	STR_STR_LD_PROFILE = 0xb98,
+	STR_STR_LD_USE_LOAD_BIAS = 0x3e0,
+	STR_STR_LINES = 0xa88,
+	STR_STR_RSA_free = 0xac0,
+	STR_STR_RSA_get0_key = 0x798,
+	STR_STR_RSA_new = 0x918,
+	STR_STR_RSA_public_decrypt = 0x1d0,
+	STR_STR_RSA_set0_key = 0x540,
+	STR_STR_RSA_sign = 0x8f8,
+	STR_STR_SSH_2_0 = 0x990,
+	STR_STR_TERM = 0x4a8,
+	STR_STR_Unrecognized_internal_syslog_level_code_d = 0xe0,
+	STR_STR_WAYLAND_DISPLAY = 0x158,
+	STR_STR_errno_location = 0x878,
+	STR_STR_libc_stack_end = 0x2b0,
+	STR_STR_libc_start_main = 0x228,
+	STR_STR_dl_audit_preinit = 0xa60,
+	STR_STR_dl_audit_symbind_alt = 0x9c8,
+	STR_STR_exit = 0x8a8,
+	STR_STR_r_debug = 0x5b0,
+	STR_STR_rtld_global = 0x5b8,
+	STR_STR_rtld_global_ro = 0xa98,
+	STR_STR_auth_root_allowed = 0xb8,
+	STR_STR_authenticating = 0x1d8,
+	STR_STR_demote_sensitive_data = 0x28,
+	STR_STR_getuid = 0x348,
+	STR_STR_ld_linux_x86_64_so = 0xa48,
+	STR_STR_libc_so = 0x7d0,
+	STR_STR_libcrypto_so = 0x7c0,
+	STR_STR_liblzma_so = 0x590,
+	STR_STR_libsystemd_so = 0x938,
+	STR_STR_list_hostkey_types = 0x20,
+	STR_STR_malloc_usable_size = 0x440,
+	STR_STR_mm_answer_authpassword = 0xc0,
+	STR_STR_mm_answer_keyallowed = 0xc8,
+	STR_STR_mm_answer_keyverify = 0xd0,
+	STR_STR_mm_answer_pam_start = 0x948,
+	STR_STR_mm_choose_dh = 0x78,
+	STR_STR_mm_do_pam_account = 0x40,
+	STR_STR_mm_getpwnamallow = 0x50,
+	STR_STR_mm_log_handler = 0xa8,
+	STR_STR_mm_pty_allocate = 0x38,
+	STR_STR_mm_request_send = 0xa0,
+	STR_STR_mm_session_pty_cleanup2 = 0x48,
+	STR_STR_mm_sshpam_free_ctx = 0x70,
+	STR_STR_mm_sshpam_init_ctx = 0x58,
+	STR_STR_mm_sshpam_query = 0x60,
+	STR_STR_mm_sshpam_respond = 0x68,
+	STR_STR_mm_terminate = 0x30,
+	STR_STR_parse_PAM = 0xc58,
+	STR_STR_password = 0x400,
+	STR_STR_preauth = 0x4f0,
+	STR_STR_pselect = 0x690,
+	STR_STR_publickey = 0x7b8,
+	STR_STR_read = 0x308,
+	STR_STR_rsa_sha2_256 = 0x710,
+	STR_STR_setlogmask = 0x428,
+	STR_STR_setresgid = 0x5f0,
+	STR_STR_setresuid = 0xab8,
+	STR_STR_shutdown = 0x760,
+	STR_STR_ssh_2_0 = 0xd08,
+	STR_STR_ssh_rsa_cert_v01_openssh_com = 0x2c8,
+	STR_STR_sshpam_auth_passwd = 0x88,
+	STR_STR_sshpam_query = 0x90,
+	STR_STR_sshpam_respond = 0x80,
+	STR_STR_start_pam = 0x98,
+	STR_STR_system = 0x9f8,
+	STR_STR_unknown = 0x198,
+	STR_STR_user = 0xb10,
+	STR_STR_write = 0x380,
+	STR_STR_xcalloc_zero_size = 0x10,
+	STR_STR_yolAbejyiejuvnupEvjtgvsh5okmkAvj = 0xb00,
+	STR_STR_ELF = 0x300,
+} EncodedStringId;
+
+
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 
 #define CONCAT(x, y) x ## y
@@ -670,7 +790,7 @@ typedef union {
 } secret_data_shift_cursor;
 
 typedef struct __attribute__((packed)) {
-	u32 string_id;
+	EncodedStringId string_id;
 	PADDING(4);
 	void *code_start;
 	void *code_end;
@@ -883,7 +1003,7 @@ extern u8 *find_string_reference(
  */
 extern u8 *elf_find_string_reference(
 	elf_info_t *elf_info,
-	u32 encoded_string_id,
+	EncodedStringId encoded_string_id,
 	u8 *code_start,
 	u8 *code_end
 );
@@ -989,7 +1109,7 @@ extern void elf_find_string_references(elf_info_t *elf_info, string_references_t
  * @param sym_version optional string representing the symbol version (e.g. "GLIBC_2.2.5")
  * @return Elf64_Sym* pointer to the ELF symbol, or NULL if not found
  */
-extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, const char *sym_version);
+extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, EncodedStringId encoded_string_id, const char *sym_version);
 
 /**
  * @brief Looks up an ELF symbol from a parsed ELF, and returns its memory address
@@ -998,7 +1118,7 @@ extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, u32 encoded_string_id, co
  * @param encoded_string_id string ID of the symbol name
  * @return void* the address of the symbol
  */
-extern void *elf_symbol_get_addr(elf_info_t *elf_info, u32 encoded_string_id);
+extern void *elf_symbol_get_addr(elf_info_t *elf_info, EncodedStringId encoded_string_id);
 
 /**
  * @brief Obtains the address and size of the first executable segment in the given ELF file
@@ -1050,7 +1170,7 @@ extern void *elf_get_reloc_symbol(
 	Elf64_Rela *relocs,
 	unsigned num_relocs,
 	unsigned reloc_type,
-	u32 encoded_string_id);
+	EncodedStringId encoded_string_id);
 
 /**
  * @brief Gets the PLT symbol with name @p encoded_string_id from the parsed ELF file
@@ -1059,7 +1179,7 @@ extern void *elf_get_reloc_symbol(
  * @param encoded_string_id symbol to look for (encoded)
  * @return void* the address of the symbol, or NULL if not found
  */
-extern void *elf_get_plt_symbol(elf_info_t *elf_info, u32 encoded_string_id);
+extern void *elf_get_plt_symbol(elf_info_t *elf_info, EncodedStringId encoded_string_id);
 
 /**
  * @brief Gets the GOT symbol with name @p encoded_string_id from the parsed ELF file
@@ -1068,7 +1188,7 @@ extern void *elf_get_plt_symbol(elf_info_t *elf_info, u32 encoded_string_id);
  * @param encoded_string_id symbol to look for (encoded)
  * @return void* the address of the symbol, or NULL if not found
  */
-extern void *elf_get_got_symbol(elf_info_t *elf_info, u32 encoded_string_id);
+extern void *elf_get_got_symbol(elf_info_t *elf_info, EncodedStringId encoded_string_id);
 
 /**
  * @brief Locates a string in the ELF .rodata section
