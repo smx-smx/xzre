@@ -112,6 +112,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles__t.html">elf_handles_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">array of ELF handles  <a href="structelf__handles__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmain__elf__t.html">main_elf_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data__handle__t.html">backdoor_data_handle_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">data passed to functions that access the backdoor data  <a href="structbackdoor__data__handle__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,8 +228,9 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="separator:af4d7fb9dcfda9656ed2c6aeaec3357be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ed7f6d009d35ae3bdb830a7bb1e0289"><td class="memItemLeft" align="right" valign="top"><a id="a3ed7f6d009d35ae3bdb830a7bb1e0289"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ElfId</b> { <b>X_ELF_MAIN</b> = 0
-, <b>X_ELF_LIBCRYPTO</b> = 1
+, <b>X_ELF_TMP</b> = 1
 , <b>X_ELF_LIBC</b> = 2
+, <b>X_ELF_LIBCRYPTO</b> = 3
  }</td></tr>
 <tr class="separator:a3ed7f6d009d35ae3bdb830a7bb1e0289"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -554,12 +557,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a30e2e711133deaa2b255596805d91662"><td class="memItemLeft" align="right" valign="top"><a id="a30e2e711133deaa2b255596805d91662"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__handles__t.html">elf_handles_t</a>, main, 0x0)</td></tr>
 <tr class="separator:a30e2e711133deaa2b255596805d91662"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63579a9f9a80f62564c41ebdcca04b20"><td class="memItemLeft" align="right" valign="top"><a id="a63579a9f9a80f62564c41ebdcca04b20"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__handles__t.html">elf_handles_t</a>, libcrypto, 0x8)</td></tr>
-<tr class="separator:a63579a9f9a80f62564c41ebdcca04b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8bb70352cf385e9810f5ff5b9c0481d"><td class="memItemLeft" align="right" valign="top"><a id="ad8bb70352cf385e9810f5ff5b9c0481d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__handles__t.html">elf_handles_t</a>, tmp, 0x8)</td></tr>
+<tr class="separator:ad8bb70352cf385e9810f5ff5b9c0481d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a467cc299537ef2bec41b423f4b000e66"><td class="memItemLeft" align="right" valign="top"><a id="a467cc299537ef2bec41b423f4b000e66"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__handles__t.html">elf_handles_t</a>, libc, 0x10)</td></tr>
 <tr class="separator:a467cc299537ef2bec41b423f4b000e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c245bb24813365f0b3718be012aa59b"><td class="memItemLeft" align="right" valign="top"><a id="a2c245bb24813365f0b3718be012aa59b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__handles__t.html">elf_handles_t</a>, libcrypto, 0x18)</td></tr>
+<tr class="separator:a2c245bb24813365f0b3718be012aa59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ea39255e696332df00acc923138bee"><td class="memItemLeft" align="right" valign="top"><a id="a60ea39255e696332df00acc923138bee"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structmain__elf__t.html">main_elf_t</a>, handles, 0x0)</td></tr>
+<tr class="separator:a60ea39255e696332df00acc923138bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4765d0eff67808d1e72ff1ee2cffa2a0"><td class="memItemLeft" align="right" valign="top"><a id="a4765d0eff67808d1e72ff1ee2cffa2a0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structmain__elf__t.html">main_elf_t</a>, ehdr, 0x8)</td></tr>
+<tr class="separator:a4765d0eff67808d1e72ff1ee2cffa2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b389c91d58960da1dfd8b0b8780848"><td class="memItemLeft" align="right" valign="top"><a id="a70b389c91d58960da1dfd8b0b8780848"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structmain__elf__t.html">main_elf_t</a>, __libc_stack_end, 0x10)</td></tr>
+<tr class="separator:a70b389c91d58960da1dfd8b0b8780848"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad240914d1020a2c6cc4af519cf312dd9"><td class="memItemLeft" align="right" valign="top"><a id="ad240914d1020a2c6cc4af519cf312dd9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__data__handle__t.html">backdoor_data_handle_t</a>, data, 0x0)</td></tr>
 <tr class="separator:ad240914d1020a2c6cc4af519cf312dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -656,6 +671,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a049328971f4e99ce954d5e0346fee6d7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a> (Elf64_Ehdr *ehdr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>)</td></tr>
 <tr class="memdesc:a049328971f4e99ce954d5e0346fee6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given in-memory ELF file into <a class="el" href="structelf__info.html">elf_info</a>.  <a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">More...</a><br /></td></tr>
 <tr class="separator:a049328971f4e99ce954d5e0346fee6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642ed90d3ade30228b3286310de5e5c1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">main_elf_parse</a> (<a class="el" href="structmain__elf__t.html">main_elf_t</a> *main_elf)</td></tr>
+<tr class="memdesc:a642ed90d3ade30228b3286310de5e5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the main executable from the provided structure. as part of the process, argv0 will be retrieved and checked to see if it's the expected one (/usr/sbin/sshd)  <a href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">More...</a><br /></td></tr>
+<tr class="separator:a642ed90d3ade30228b3286310de5e5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memItemLeft" align="right" valign="top">Elf64_Sym *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id, const char *sym_version)</td></tr>
 <tr class="memdesc:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up an ELF symbol from a parsed ELF.  <a href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">More...</a><br /></td></tr>
 <tr class="separator:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1851,6 +1869,33 @@ Variables</h2></td></tr>
 <p>gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to </p>
 <dl class="section see"><dt>See also</dt><dd>elf_info_t</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>lzma_allocator* </dd></dl>
+
+</div>
+</div>
+<a id="a642ed90d3ade30228b3286310de5e5c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a642ed90d3ade30228b3286310de5e5c1">&#9670;&nbsp;</a></span>main_elf_parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL main_elf_parse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmain__elf__t.html">main_elf_t</a> *&#160;</td>
+          <td class="paramname"><em>main_elf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>parses the main executable from the provided structure. as part of the process, argv0 will be retrieved and checked to see if it's the expected one (/usr/sbin/sshd) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">main_elf</td><td>the main executable to parse </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
 
 </div>
 </div>
