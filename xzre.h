@@ -674,6 +674,69 @@ typedef union {
 } secret_data_shift_cursor;
 
 /**
+ * @brief the payload header. also used as Chacha IV
+ * 
+ * @return typedef struct 
+ */
+typedef struct __attribute__((packed)) {
+	PADDING(0x4);
+	PADDING(0x4);
+	PADDING(0x8);
+} key_payload_hdr_t;
+
+typedef struct __attribute__((packed)) {
+	PADDING(0x218);
+} key_payload_body_t;
+
+/**
+ * @brief the contents of the RSA 'n' field
+ * 
+ * @return typedef struct 
+ */
+typedef struct __attribute__((packed)) {
+	key_payload_hdr_t header;
+	key_payload_body_t body;
+} key_payload_t;
+
+typedef union __attribute__((packed)) {
+	u8 value;
+	u16 offset;
+} u_cmd_arguments;
+
+typedef struct __attribute__((packed)) {
+	u8 flags1;
+	u8 flags2;
+	u8 flags3;
+	u_cmd_arguments u;
+} cmd_arguments_t;
+
+assert_offset(cmd_arguments_t, flags1, 0);
+assert_offset(cmd_arguments_t, flags2, 1);
+assert_offset(cmd_arguments_t, flags3, 2);
+assert_offset(cmd_arguments_t, u, 3);
+static_assert(sizeof(cmd_arguments_t) == 0x5);
+
+typedef struct __attribute__((packed)) {
+	BIGNUM *rsa_n;
+	BIGNUM *rsa_e;
+	cmd_arguments_t args;
+	key_payload_t payload;
+	PADDING(0x30);
+	PADDING(sizeof(key_payload_hdr_t));
+	/**
+	 * @brief ChaCha Key
+	 */
+	u8 decrypted_secret_data[57];
+	PADDING(2);
+} key_ctx_t;
+
+assert_offset(key_ctx_t, rsa_n, 0);
+assert_offset(key_ctx_t, rsa_e, 0x8);
+assert_offset(key_ctx_t, args, 0x10);
+assert_offset(key_ctx_t, payload, 0x15);
+static_assert(sizeof(key_ctx_t) == 0x2B8);
+
+/**
  * @brief disassembles the given x64 code
  *
  * @param ctx empty disassembler context to hold the state
