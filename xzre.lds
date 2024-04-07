@@ -36,6 +36,9 @@ SECTIONS {
         "elf_parse" = ".";
         *(.text.get_literal_prica);
 
+        "main_elf_parse" = ".";
+        *(.text.lzma_filter_decoder_is_supportea);
+
         "elf_symbol_get" = ".";
         *(.text.crc_inia);
 

