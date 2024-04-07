@@ -546,13 +546,15 @@ typedef struct __attribute__((packed)) {
 	 */
 	elf_info_t *tmp;
 	elf_info_t *libc;
+	elf_info_t *liblzma;
 	elf_info_t *libcrypto;
 } elf_handles_t;
 
 assert_offset(elf_handles_t, main, 0x0);
 assert_offset(elf_handles_t, tmp, 0x8);
 assert_offset(elf_handles_t, libc, 0x10);
-assert_offset(elf_handles_t, libcrypto, 0x18);
+assert_offset(elf_handles_t, liblzma, 0x18);
+assert_offset(elf_handles_t, libcrypto, 0x20);
 
 typedef struct __attribute__((packed)) {
 	elf_handles_t *handles;
@@ -594,11 +596,6 @@ typedef struct __attribute__((packed)) backdoor_data {
 	elf_handles_t elf_handles;
 
 	/**
-	 * @brief points to @ref libcrypto_info
-	 */
-	elf_info_t *libcrypto;
-
-	/**
 	 * @brief points to the beginning of this struct
 	 */
 	struct backdoor_data *backdoor_data;
@@ -636,7 +633,6 @@ assert_offset(backdoor_data_t, libcrypto_map, 0x18);
 assert_offset(backdoor_data_t, libsystemd_map, 0x20);
 assert_offset(backdoor_data_t, libc_map, 0x28);
 assert_offset(backdoor_data_t, elf_handles, 0x30);
-assert_offset(backdoor_data_t, libcrypto, 0x50);
 assert_offset(backdoor_data_t, libc_info, 0x268);
 assert_offset(backdoor_data_t, libcrypto_info, 0x468);
 assert_offset(backdoor_data_t, libc_imports, 0x568);
