@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dasm_5fctx_5ft_96',['dasm_ctx_t',['../structdasm__ctx__t.html',1,'']]]
+  ['cmd_5farguments_5ft_103',['cmd_arguments_t',['../structcmd__arguments__t.html',1,'']]]
 ];

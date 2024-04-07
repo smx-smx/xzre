@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['libc_5fimports_102',['libc_imports',['../structlibc__imports.html',1,'']]]
+  ['imported_5ffuncs_5ft_109',['imported_funcs_t',['../structimported__funcs__t.html',1,'']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['main_5felf_5fparse_62',['main_elf_parse',['../xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1',1,'xzre.h']]],
-  ['main_5felf_5ft_63',['main_elf_t',['../structmain__elf__t.html',1,'']]]
+  ['libc_5fimports_65',['libc_imports',['../structlibc__imports.html',1,'libc_imports'],['../structbackdoor__data.html#a116ff042f4a1a315724cc6f65a56e359',1,'backdoor_data::libc_imports()']]],
+  ['libc_5finfo_66',['libc_info',['../structbackdoor__data.html#a8926fe3d847696a0a1b58ec7e9c6d14e',1,'backdoor_data']]],
+  ['libcrypto_5finfo_67',['libcrypto_info',['../structbackdoor__data.html#a932329dfc876e64f123c922e55b30142',1,'backdoor_data']]]
 ];
