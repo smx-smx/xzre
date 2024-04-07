@@ -81,8 +81,9 @@ typedef enum {
 
 typedef enum {
 	X_ELF_MAIN = 0,
-	X_ELF_LIBCRYPTO = 1,
-	X_ELF_LIBC = 2
+	X_ELF_TMP = 1,
+	X_ELF_LIBC = 2,
+	X_ELF_LIBCRYPTO = 3
 } ElfId;
 
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
@@ -526,13 +527,18 @@ static_assert(sizeof(global_context_t) == 0x168);
  */
 typedef struct __attribute__((packed)) {
 	elf_info_t *main;
-	elf_info_t *libcrypto;
+	/**
+	 * @brief used for multiple ELFs
+	 */
+	elf_info_t *tmp;
 	elf_info_t *libc;
+	elf_info_t *libcrypto;
 } elf_handles_t;
 
 assert_offset(elf_handles_t, main, 0x0);
-assert_offset(elf_handles_t, libcrypto, 0x8);
+assert_offset(elf_handles_t, tmp, 0x8);
 assert_offset(elf_handles_t, libc, 0x10);
+assert_offset(elf_handles_t, libcrypto, 0x18);
 
 typedef struct __attribute__((packed)) {
 	elf_handles_t *handles;
@@ -567,7 +573,6 @@ typedef struct __attribute__((packed)) backdoor_data {
 	PADDING(0x30);
 	elf_handles_t elf_handles;
 
-	PADDING(sizeof(elf_info_t *));
 	/**
 	 * @brief points to @ref libcrypto_info
 	 */
