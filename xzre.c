@@ -2,7 +2,10 @@
  * Copyright (C) 2024 Stefano Moioli <smxdev4@gmail.com>
  **/
 #include "xzre.h"
+#include <elf.h>
+#include <link.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -11,10 +14,20 @@ extern void dasm_sample_end();
 extern void dasm_sample_dummy_location();
 extern BOOL secret_data_append_trampoline(secret_data_shift_cursor shift_cursor, unsigned shift_count);
 
+static global_context_t my_global_ctx = { 0 };
+
+/**
+ * @brief disables all validation by marking all shift operations as executed
+ */
+void xzre_secret_data_bypass(){
+	for(int i=0; i<ARRAY_SIZE(my_global_ctx.shift_operations); i++){
+		my_global_ctx.shift_operations[i] = 1;
+	}
+}
+
+#ifndef XZRE_SHARED
 extern char __executable_start;
 extern char __etext;
-
-static global_context_t my_global_ctx = { 0 };
 
 void xzre_secret_data_init(){
 	global_ctx = &my_global_ctx;
@@ -39,6 +52,53 @@ void xzre_secret_data_test(){
 		puts("secret data push FAIL!");
 	}
 }
+#else
+void xzre_secret_data_init(){}
+void xzre_secret_data_test(){}
+#endif
+
+
+/**
+ * @brief quick and dirty hack to get the ldso ELF location
+ * 
+ * @return void* 
+ */
+static void *get_ldso_elf(){
+	char cmdBuf[128];
+	char getLdElf[] = "grep -E 'r--p 00000000.*/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2' /proc/%zu/maps | cut -d '-' -f1";
+	snprintf(cmdBuf, sizeof(cmdBuf), getLdElf, getpid());
+	FILE *hProc = popen(cmdBuf, "r");
+	memset(cmdBuf, 0x00, sizeof(cmdBuf));
+	char *s = fgets(cmdBuf, sizeof(cmdBuf), hProc);
+	pclose(hProc);
+	if(!s) return NULL;
+	u64 addr = strtoull(s, NULL, 16);
+	return (void *)addr;
+}
+
+extern void *got_ref;
+
+void main_shared(){
+	// prevent fork bomb in system command
+	unsetenv("LD_PRELOAD");
+	xzre_secret_data_bypass();
+	
+	void *ldso_elf = get_ldso_elf();
+	if(!ldso_elf){
+		puts("Failed to get LDSO elf");
+		exit(1);
+	}
+
+	elf_handles_t handles = {0};
+	elf_info_t einfo;
+	if(!elf_parse(ldso_elf, &einfo)){
+		puts("elf_parse failed");
+		return;
+	}
+
+	puts("main_shared(): OK");
+}
+
 
 int main(int argc, char *argv[]){
 	puts("xzre 0.1 by Smx :)");
@@ -82,3 +142,36 @@ int main(int argc, char *argv[]){
 	xzre_secret_data_test();
 	return 0;
 }
+
+#ifdef XZRE_SHARED
+#include <syscall.h>
+void __attribute__((constructor)) init(){
+	main_shared();
+}
+
+static inline __attribute__((always_inline)) ssize_t inline_write(int fd, const void *buf, size_t size){
+	ssize_t ret;
+	asm volatile (
+		"syscall"
+		: "=a" (ret)
+		//                 EDI      RSI       RDX
+		: "0"(__NR_write), "D"(fd), "S"(buf), "d"(size)
+		: "rcx", "r11", "memory"
+	);
+	return ret;
+}
+
+#ifdef REPLACE_RESOLVER
+void *resolver(){
+	#if 0
+	char buf[] = "hijacked resolver!\n";
+	inline_write(STDOUT_FILENO, buf, sizeof(buf));
+	#endif
+	return NULL;
+}
+
+uint32_t  __attribute__((ifunc("resolver"))) lzma_crc32(const uint8_t *buf, size_t size, uint32_t crc);
+uint64_t  __attribute__((ifunc("resolver"))) lzma_crc64(const uint8_t *buf, size_t size, uint64_t crc);
+#endif
+
+#endif

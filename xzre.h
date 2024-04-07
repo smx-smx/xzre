@@ -29,6 +29,17 @@ typedef uintptr_t uptr;
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
 #define PTRDIFF(a, b) (UPTR(a) - UPTR(b))
 
+/*
+ * Force a compilation error if condition is true, but also produce a
+ * result (of value 0 and type int), so the expression can be used
+ * e.g. in a structure initializer (or where-ever else comma expressions
+ * aren't permitted).
+ */
+#define BUILD_BUG_ON_ZERO(e) ((int)(sizeof(struct { int:(-!!(e)); })))
+#define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+#define __must_be_array(a) BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
+
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
 
@@ -130,24 +141,6 @@ assert_offset(elf_entry_ctx_t, return_address, 0x10);
 assert_offset(elf_entry_ctx_t, cpuid_fn, 0x18);
 assert_offset(elf_entry_ctx_t, got_offset, 0x20);
 assert_offset(elf_entry_ctx_t, caller_locals, 0x28);
-
-typedef struct __attribute__((packed)) {
-	PADDING(0x10);
-	struct global_context *globals;
-} backdoor_shared_globals_t;
-
-assert_offset(backdoor_shared_globals_t, globals, 0x10);
-
-typedef struct __attribute__((packed)) {
-	PADDING(0x8);
-	backdoor_shared_globals_t *shared;
-	PADDING(0x70);
-	elf_entry_ctx_t *entry_ctx;
-} backdoor_setup_params_t;
-
-assert_offset(backdoor_setup_params_t, shared, 0x8);
-assert_offset(backdoor_setup_params_t, entry_ctx, 0x80);
-static_assert(sizeof(backdoor_setup_params_t) == 0x88);
 
 typedef struct __attribute__((packed)) {
 	u8* instruction;
@@ -523,6 +516,24 @@ assert_offset(global_context_t, secret_data, 0x108);
 assert_offset(global_context_t, shift_operations, 0x141);
 assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
 static_assert(sizeof(global_context_t) == 0x168);
+
+typedef struct __attribute__((packed)) {
+	PADDING(0x10);
+	global_context_t *globals;
+} backdoor_shared_globals_t;
+
+assert_offset(backdoor_shared_globals_t, globals, 0x10);
+
+typedef struct __attribute__((packed)) {
+	PADDING(0x8);
+	backdoor_shared_globals_t *shared;
+	PADDING(0x70);
+	elf_entry_ctx_t *entry_ctx;
+} backdoor_setup_params_t;
+
+assert_offset(backdoor_setup_params_t, shared, 0x8);
+assert_offset(backdoor_setup_params_t, entry_ctx, 0x80);
+static_assert(sizeof(backdoor_setup_params_t) == 0x88);
 
 /**
  * @brief array of ELF handles
@@ -1082,6 +1093,9 @@ extern BOOL secret_data_append_from_call_site(
  * @return BOOL unused
  */
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
+
+extern void backdoor_init(elf_entry_ctx_t *ctx, u64 *caller_frame);
+extern BOOL backdoor_init_stage2(elf_entry_ctx_t *ctx);
 
 /**
  * @brief parses the libc ELF from the supplied link map, and resolves its imports

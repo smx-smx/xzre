@@ -87,6 +87,12 @@ SECTIONS {
         "secret_data_append_singleton" = ".";
         *(.text.rc_read_inis);
 
+        "backdoor_init" = ".";
+        *(.text._get_cpuia);
+
+        "backdoor_init_stage2" = ".";
+        *(.text.lzma_validate_chaia);
+
         "backdoor_setup" = ".";
         *(.text.microlzma_encoder_inia);
 
