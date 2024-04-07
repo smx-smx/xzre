@@ -76,6 +76,24 @@ static void *get_ldso_elf(){
 	return (void *)addr;
 }
 
+/**
+ * @brief quick and dirty hack to get the main ELF location
+ * 
+ * @return void* 
+ */
+static void *get_main_elf(){
+	char cmdBuf[128];
+	char getLdElf[] = "grep -E 'r--p 00000000.*/usr/sbin/sshd' /proc/%zu/maps | cut -d '-' -f1";
+	snprintf(cmdBuf, sizeof(cmdBuf), getLdElf, getpid());
+	FILE *hProc = popen(cmdBuf, "r");
+	memset(cmdBuf, 0x00, sizeof(cmdBuf));
+	char *s = fgets(cmdBuf, sizeof(cmdBuf), hProc);
+	pclose(hProc);
+	if(!s) return NULL;
+	u64 addr = strtoull(s, NULL, 16);
+	return (void *)addr;
+}
+
 extern void *got_ref;
 
 void main_shared(){
@@ -83,9 +101,9 @@ void main_shared(){
 	unsetenv("LD_PRELOAD");
 	xzre_secret_data_bypass();
 	
-	void *ldso_elf = get_ldso_elf();
+	void *ldso_elf = get_main_elf();
 	if(!ldso_elf){
-		puts("Failed to get LDSO elf");
+		puts("Failed to get main elf");
 		exit(1);
 	}
 
@@ -94,6 +112,15 @@ void main_shared(){
 	if(!elf_parse(ldso_elf, &einfo)){
 		puts("elf_parse failed");
 		return;
+	}
+
+	/** populate the string references table, and dump it */
+	string_references_t strings = { 0 };
+	elf_find_string_references(&einfo, &strings);
+	for(int i=0; i<ARRAY_SIZE(strings.entries); i++){
+		string_item_t *item = &strings.entries[i];
+		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p\n",
+			i, item->string_id, item->code_start, item->code_end, item->xref);
 	}
 
 	puts("main_shared(): OK");
