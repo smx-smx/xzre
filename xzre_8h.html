@@ -123,6 +123,10 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits represent the bit index, while the rest represents the byte index this is convenient, since a simple increment will increment the buffer position correctly  <a href="unionsecret__data__shift__cursor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstring__item__t.html">string_item_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstring__references__t.html">string_references_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkey__payload__hdr__t.html">key_payload_hdr_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">the payload header. also used as Chacha IV  <a href="structkey__payload__hdr__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -671,6 +675,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memItemLeft" align="right" valign="top"><a id="a1451f92c8f0cf7451ffdb8dfcd799742"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, libc_imports, 0x30)</td></tr>
 <tr class="separator:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af352f2a1a6fe02696c84847b8b22b232"><td class="memItemLeft" align="right" valign="top"><a id="af352f2a1a6fe02696c84847b8b22b232"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structstring__item__t.html">string_item_t</a>, string_id, 0)</td></tr>
+<tr class="separator:af352f2a1a6fe02696c84847b8b22b232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea02de90fae3bb6b3bbd6acbcd141b31"><td class="memItemLeft" align="right" valign="top"><a id="aea02de90fae3bb6b3bbd6acbcd141b31"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structstring__item__t.html">string_item_t</a>, code_start, 0x8)</td></tr>
+<tr class="separator:aea02de90fae3bb6b3bbd6acbcd141b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e0b614ced149de6af31da02389c7b5"><td class="memItemLeft" align="right" valign="top"><a id="aa7e0b614ced149de6af31da02389c7b5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structstring__item__t.html">string_item_t</a>, code_end, 0x10)</td></tr>
+<tr class="separator:aa7e0b614ced149de6af31da02389c7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9a770c4990f74a15bc966a3e438bff5"><td class="memItemLeft" align="right" valign="top"><a id="aa9a770c4990f74a15bc966a3e438bff5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structstring__item__t.html">string_item_t</a>, xref, 0x18)</td></tr>
+<tr class="separator:aa9a770c4990f74a15bc966a3e438bff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d90f49c0e37f93062bf2a5761699ae"><td class="memItemLeft" align="right" valign="top"><a id="ae9d90f49c0e37f93062bf2a5761699ae"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structstring__references__t.html">string_references_t</a>, entries, 0)</td></tr>
+<tr class="separator:ae9d90f49c0e37f93062bf2a5761699ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa970c4ef889a63da65319360b6b6a320"><td class="memItemLeft" align="right" valign="top"><a id="aa970c4ef889a63da65319360b6b6a320"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structcmd__arguments__t.html">cmd_arguments_t</a>, flags1, 0)</td></tr>
 <tr class="separator:aa970c4ef889a63da65319360b6b6a320"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -737,6 +756,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a642ed90d3ade30228b3286310de5e5c1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">main_elf_parse</a> (<a class="el" href="structmain__elf__t.html">main_elf_t</a> *main_elf)</td></tr>
 <tr class="memdesc:a642ed90d3ade30228b3286310de5e5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the main executable from the provided structure. as part of the process, argv0 will be retrieved and checked to see if it's the expected one (/usr/sbin/sshd)  <a href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">More...</a><br /></td></tr>
 <tr class="separator:a642ed90d3ade30228b3286310de5e5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6925f05854b05bb9441f71c3f1deb55c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">elf_find_string_references</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, <a class="el" href="structstring__references__t.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a6925f05854b05bb9441f71c3f1deb55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the ELF rodata section, looking for strings and the instructions that reference them  <a href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">More...</a><br /></td></tr>
+<tr class="separator:a6925f05854b05bb9441f71c3f1deb55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memItemLeft" align="right" valign="top">Elf64_Sym *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">elf_symbol_get</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 encoded_string_id, const char *sym_version)</td></tr>
 <tr class="memdesc:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up an ELF symbol from a parsed ELF.  <a href="xzre_8h.html#ac0a43ada7f303cb88b9c4b48a17b5154">More...</a><br /></td></tr>
 <tr class="separator:ac0a43ada7f303cb88b9c4b48a17b5154"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1104,6 +1126,44 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>u8* the address of the first instruction that references the given string, or NULL if not found </dd></dl>
+
+</div>
+</div>
+<a id="a6925f05854b05bb9441f71c3f1deb55c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6925f05854b05bb9441f71c3f1deb55c">&#9670;&nbsp;</a></span>elf_find_string_references()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void elf_find_string_references </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references__t.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>parses the ELF rodata section, looking for strings and the instructions that reference them </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>the executable to find strings in </td></tr>
+    <tr><td class="paramname">refs</td><td>structure that will be populated with the results </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
 
 </div>
 </div>
