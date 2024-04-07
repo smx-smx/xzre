@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 extern void dasm_sample(void);
 extern void dasm_sample_end();
@@ -96,6 +97,8 @@ static void *get_main_elf(){
 
 extern void *got_ref;
 
+//#define DUMP_STR_CODE_BLOCKS
+
 void main_shared(){
 	// prevent fork bomb in system command
 	unsetenv("LD_PRELOAD");
@@ -114,13 +117,32 @@ void main_shared(){
 		return;
 	}
 
+#ifdef DUMP_STR_CODE_BLOCKS
+	mkdir("/tmp/dumps", (mode_t)0755);
+#endif
+
 	/** populate the string references table, and dump it */
 	string_references_t strings = { 0 };
 	elf_find_string_references(&einfo, &strings);
 	for(int i=0; i<ARRAY_SIZE(strings.entries); i++){
 		string_item_t *item = &strings.entries[i];
-		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p\n",
-			i, item->string_id, item->code_start, item->code_end, item->xref);
+		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx)\n",
+			i, item->string_id, item->code_start, item->code_end, item->xref,
+				(item->code_start && item->code_end) ? PTRDIFF(item->code_end, item->code_start) : 0,
+				(item->code_start && item->xref) ? PTRDIFF(item->xref, item->code_start) : 0);
+
+		if(!item->code_start || !item->code_end){
+			continue;
+		}
+
+	#ifdef DUMP_STR_CODE_BLOCKS
+		/** dump the code block that was identified by the malware */
+		char dumpName[64];
+		snprintf(dumpName, sizeof(dumpName), "/tmp/dumps/str_%x.bin", item->string_id);
+		FILE *dump = fopen(dumpName, "wb");
+		fwrite(item->code_start, sizeof(u8), PTRDIFF(item->code_end, item->code_start), dump);
+		fclose(dump);
+	#endif
 	}
 
 	puts("main_shared(): OK");
