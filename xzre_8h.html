@@ -979,6 +979,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init_stage2<
 <tr class="memitem:a2cbf38048a3510f1632b4060b2a0a63f"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f">is_range_mapped</a> (u8 *addr, u8 length, <a class="el" href="structglobal__context__t.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a2cbf38048a3510f1632b4060b2a0a63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">verify if a memory range is mapped  <a href="xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f">More...</a><br /></td></tr>
 <tr class="separator:a2cbf38048a3510f1632b4060b2a0a63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6189320317764e3344934873b58b30b1"><td class="memItemLeft" align="right" valign="top">EncodedStringId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6189320317764e3344934873b58b30b1">get_string_id</a> (const char *string_begin, const char *string_end)</td></tr>
+<tr class="memdesc:a6189320317764e3344934873b58b30b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the.  <a href="xzre_8h.html#a6189320317764e3344934873b58b30b1">More...</a><br /></td></tr>
+<tr class="separator:a6189320317764e3344934873b58b30b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -2190,6 +2193,50 @@ Variables</h2></td></tr>
 <p>gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to </p>
 <dl class="section see"><dt>See also</dt><dd>elf_info_t</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>lzma_allocator* </dd></dl>
+
+</div>
+</div>
+<a id="a6189320317764e3344934873b58b30b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6189320317764e3344934873b58b30b1">&#9670;&nbsp;</a></span>get_string_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EncodedStringId get_string_id </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string_begin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the. </p>
+<dl class="section see"><dt>See also</dt><dd>EncodedStringId for the given string the string will be consumed until one of the following condition is reached (whichever happens first):<ul>
+<li>44 chars have been consumed (maximum string length)</li>
+<li><code>string_end</code> is supplied and has been reached</li>
+<li>the string table has been exhausted</li>
+</ul>
+</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string_begin</td><td>the string to get the ID for (max 44 chars) </td></tr>
+    <tr><td class="paramname">string_end</td><td>optional string end pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EncodedStringId the string ID matching the input string, or 0 if not found </dd></dl>
 
 </div>
 </div>
