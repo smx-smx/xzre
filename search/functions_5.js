@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_5felf_5fparse_150',['main_elf_parse',['../xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1',1,'xzre.h']]]
+  ['is_5frange_5fmapped_150',['is_range_mapped',['../xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f',1,'xzre.h']]]
 ];

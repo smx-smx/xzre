@@ -97,9 +97,7 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__info.html">elf_info</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlibc__imports.html">libc_imports</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsystem__imports__t.html">system_imports_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlibc__imports__t.html">libc_imports_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structimported__funcs__t.html">imported_funcs_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,9 +200,6 @@ typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL</b></td><
 <tr class="memitem:a958fbc6aa42d63f2a2fd296bf0e586e4"><td class="memItemLeft" align="right" valign="top"><a id="a958fbc6aa42d63f2a2fd296bf0e586e4"></a>
 typedef struct <a class="el" href="structelf__info.html">elf_info</a>&#160;</td><td class="memItemRight" valign="bottom"><b>elf_info_t</b></td></tr>
 <tr class="separator:a958fbc6aa42d63f2a2fd296bf0e586e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa318f8aef631765be09c477436487c54"><td class="memItemLeft" align="right" valign="top"><a id="aa318f8aef631765be09c477436487c54"></a>
-typedef struct <a class="el" href="structlibc__imports.html">libc_imports</a>&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports_t</b></td></tr>
-<tr class="separator:aa318f8aef631765be09c477436487c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adecb5c6743212f467a1dcb1137b9a068"><td class="memItemLeft" align="right" valign="top"><a id="adecb5c6743212f467a1dcb1137b9a068"></a>
 typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>pfn_RSA_public_decrypt_t</b>) (int flen, unsigned char *from, unsigned char *to, RSA *rsa, int padding)</td></tr>
 <tr class="separator:adecb5c6743212f467a1dcb1137b9a068"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -418,39 +413,45 @@ Functions</h2></td></tr>
 <tr class="memitem:aad70f3e20103f9ba5f86dd4797fee165"><td class="memItemLeft" align="right" valign="top"><a id="aad70f3e20103f9ba5f86dd4797fee165"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__info.html">elf_info_t</a>, gnu_hash_chain, 0xf8)</td></tr>
 <tr class="separator:aad70f3e20103f9ba5f86dd4797fee165"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc32326378a17f44f0532b01d8094041"><td class="memItemLeft" align="right" valign="top"><a id="abc32326378a17f44f0532b01d8094041"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, resolved_imports_count, 0)</td></tr>
-<tr class="separator:abc32326378a17f44f0532b01d8094041"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8dec4e6f90337d3c8bd77de8354f4a0"><td class="memItemLeft" align="right" valign="top"><a id="ac8dec4e6f90337d3c8bd77de8354f4a0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, malloc_usable_size, 8)</td></tr>
-<tr class="separator:ac8dec4e6f90337d3c8bd77de8354f4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3b08e5289d2b2c696dc0eaa36f2da91"><td class="memItemLeft" align="right" valign="top"><a id="ab3b08e5289d2b2c696dc0eaa36f2da91"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, getuid, 0x10)</td></tr>
-<tr class="separator:ab3b08e5289d2b2c696dc0eaa36f2da91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11a48fe14bd49bba7fa1651a51656dea"><td class="memItemLeft" align="right" valign="top"><a id="a11a48fe14bd49bba7fa1651a51656dea"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, exit, 0x18)</td></tr>
-<tr class="separator:a11a48fe14bd49bba7fa1651a51656dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe4f7d2c329aa8a3f5e4edcce36105d7"><td class="memItemLeft" align="right" valign="top"><a id="abe4f7d2c329aa8a3f5e4edcce36105d7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, setresgid, 0x20)</td></tr>
-<tr class="separator:abe4f7d2c329aa8a3f5e4edcce36105d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c4accafeb1cf9e9ef39f80129350180"><td class="memItemLeft" align="right" valign="top"><a id="a7c4accafeb1cf9e9ef39f80129350180"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, setresuid, 0x28)</td></tr>
-<tr class="separator:a7c4accafeb1cf9e9ef39f80129350180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40a0f65d00594dd819c52d96be2516fd"><td class="memItemLeft" align="right" valign="top"><a id="a40a0f65d00594dd819c52d96be2516fd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, system, 0x30)</td></tr>
-<tr class="separator:a40a0f65d00594dd819c52d96be2516fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab22a2c42c56c322999ac10a7f6bb48f"><td class="memItemLeft" align="right" valign="top"><a id="aab22a2c42c56c322999ac10a7f6bb48f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, write, 0x38)</td></tr>
-<tr class="separator:aab22a2c42c56c322999ac10a7f6bb48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b3c7b9913acccce6854b7863750d372"><td class="memItemLeft" align="right" valign="top"><a id="a9b3c7b9913acccce6854b7863750d372"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, pselect, 0x40)</td></tr>
-<tr class="separator:a9b3c7b9913acccce6854b7863750d372"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a272c4eaec094d5131d24f6c09e9585f5"><td class="memItemLeft" align="right" valign="top"><a id="a272c4eaec094d5131d24f6c09e9585f5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, setlogmask, 0x58)</td></tr>
-<tr class="separator:a272c4eaec094d5131d24f6c09e9585f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ea3f1a9ef5322ce2920f560f502be2f"><td class="memItemLeft" align="right" valign="top"><a id="a5ea3f1a9ef5322ce2920f560f502be2f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsystem__imports__t.html">system_imports_t</a>, shutdown, 0x60)</td></tr>
-<tr class="separator:a5ea3f1a9ef5322ce2920f560f502be2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00860c16277f603a88e90ee7bdb4dcbb"><td class="memItemLeft" align="right" valign="top"><a id="a00860c16277f603a88e90ee7bdb4dcbb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, resolved_imports_count, 0)</td></tr>
+<tr class="separator:a00860c16277f603a88e90ee7bdb4dcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34bd5c6bf55d8e7275d0c0985b2e5573"><td class="memItemLeft" align="right" valign="top"><a id="a34bd5c6bf55d8e7275d0c0985b2e5573"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, malloc_usable_size, 8)</td></tr>
+<tr class="separator:a34bd5c6bf55d8e7275d0c0985b2e5573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d6db47afe1c90489009655cab2fe50"><td class="memItemLeft" align="right" valign="top"><a id="a71d6db47afe1c90489009655cab2fe50"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, getuid, 0x10)</td></tr>
+<tr class="separator:a71d6db47afe1c90489009655cab2fe50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadb7b4f780e25591e202345fe5ce778c"><td class="memItemLeft" align="right" valign="top"><a id="aadb7b4f780e25591e202345fe5ce778c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, exit, 0x18)</td></tr>
+<tr class="separator:aadb7b4f780e25591e202345fe5ce778c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14b1d92dcf9e13f15019a5794d50f95"><td class="memItemLeft" align="right" valign="top"><a id="af14b1d92dcf9e13f15019a5794d50f95"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, setresgid, 0x20)</td></tr>
+<tr class="separator:af14b1d92dcf9e13f15019a5794d50f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a690308f78d17f696eadab775d1748e9c"><td class="memItemLeft" align="right" valign="top"><a id="a690308f78d17f696eadab775d1748e9c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, setresuid, 0x28)</td></tr>
+<tr class="separator:a690308f78d17f696eadab775d1748e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08578979bc50e6fc12121a85a1b55ba4"><td class="memItemLeft" align="right" valign="top"><a id="a08578979bc50e6fc12121a85a1b55ba4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, system, 0x30)</td></tr>
+<tr class="separator:a08578979bc50e6fc12121a85a1b55ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32ec892ff21e9a696d1c844617d148e"><td class="memItemLeft" align="right" valign="top"><a id="aa32ec892ff21e9a696d1c844617d148e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, write, 0x38)</td></tr>
+<tr class="separator:aa32ec892ff21e9a696d1c844617d148e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94c39588627205dda1307dfd7eb91943"><td class="memItemLeft" align="right" valign="top"><a id="a94c39588627205dda1307dfd7eb91943"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, pselect, 0x40)</td></tr>
+<tr class="separator:a94c39588627205dda1307dfd7eb91943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a375d718f3973cd7c34e9f8d85230640a"><td class="memItemLeft" align="right" valign="top"><a id="a375d718f3973cd7c34e9f8d85230640a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, read, 0x48)</td></tr>
+<tr class="separator:a375d718f3973cd7c34e9f8d85230640a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b20107be7daf5be86fa76b96e891b5"><td class="memItemLeft" align="right" valign="top"><a id="ab9b20107be7daf5be86fa76b96e891b5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, __errno_location, 0x50)</td></tr>
+<tr class="separator:ab9b20107be7daf5be86fa76b96e891b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab72ad74e5b5db370d8f763c5d27a54c9"><td class="memItemLeft" align="right" valign="top"><a id="ab72ad74e5b5db370d8f763c5d27a54c9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, setlogmask, 0x58)</td></tr>
+<tr class="separator:ab72ad74e5b5db370d8f763c5d27a54c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5851616bcf3585a4d63255e27d4b9080"><td class="memItemLeft" align="right" valign="top"><a id="a5851616bcf3585a4d63255e27d4b9080"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>, shutdown, 0x60)</td></tr>
+<tr class="separator:a5851616bcf3585a4d63255e27d4b9080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c84e3eaafa66db192ff467575c07ef"><td class="memItemLeft" align="right" valign="top"><a id="ac4c84e3eaafa66db192ff467575c07ef"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, RSA_public_decrypt, 0)</td></tr>
 <tr class="separator:ac4c84e3eaafa66db192ff467575c07ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -556,9 +557,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae9f62e7e684eb1f90580b1f9c7e39d9e"><td class="memItemLeft" align="right" valign="top"><a id="ae9f62e7e684eb1f90580b1f9c7e39d9e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, BN_free, 0x110)</td></tr>
 <tr class="separator:ae9f62e7e684eb1f90580b1f9c7e39d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1facd828751d33e7f43fbc03a197e3b"><td class="memItemLeft" align="right" valign="top"><a id="ad1facd828751d33e7f43fbc03a197e3b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, system, 0x118)</td></tr>
-<tr class="separator:ad1facd828751d33e7f43fbc03a197e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a0e5e1a42b92c15477e0774d1662508"><td class="memItemLeft" align="right" valign="top"><a id="a9a0e5e1a42b92c15477e0774d1662508"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, libc, 0x118)</td></tr>
+<tr class="separator:a9a0e5e1a42b92c15477e0774d1662508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41f247c8e977b275256102c5a2af23c7"><td class="memItemLeft" align="right" valign="top"><a id="a41f247c8e977b275256102c5a2af23c7"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>, resolved_imports_count, 0x120)</td></tr>
 <tr class="separator:a41f247c8e977b275256102c5a2af23c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -647,7 +648,7 @@ Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, libcrypto_info, 0x468)</td></tr>
 <tr class="separator:a3fe5fa8a2a464ceeef178a3bfee0febb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acea945d4b1eb08cb3d5826e9bf5418ab"><td class="memItemLeft" align="right" valign="top"><a id="acea945d4b1eb08cb3d5826e9bf5418ab"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, <a class="el" href="structlibc__imports.html">libc_imports</a>, 0x568)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, libc_imports, 0x568)</td></tr>
 <tr class="separator:acea945d4b1eb08cb3d5826e9bf5418ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80339b10786531e6061e8087045c92d9"><td class="memItemLeft" align="right" valign="top"><a id="a80339b10786531e6061e8087045c92d9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, import_resolver, 0x950)</td></tr>
@@ -668,7 +669,7 @@ Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, RSA_get0_key, 0x20)</td></tr>
 <tr class="separator:a3837d5df8a084f4d375e090453b5f561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memItemLeft" align="right" valign="top"><a id="a1451f92c8f0cf7451ffdb8dfcd799742"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, <a class="el" href="structlibc__imports.html">libc_imports</a>, 0x30)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a>, libc_imports, 0x30)</td></tr>
 <tr class="separator:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa970c4ef889a63da65319360b6b6a320"><td class="memItemLeft" align="right" valign="top"><a id="aa970c4ef889a63da65319360b6b6a320"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structcmd__arguments__t.html">cmd_arguments_t</a>, flags1, 0)</td></tr>
@@ -790,7 +791,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init</b> (<a
 <tr class="memitem:a00ce1a85628bd873f784fe12c875630f"><td class="memItemLeft" align="right" valign="top"><a id="a00ce1a85628bd873f784fe12c875630f"></a>
 BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init_stage2</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx)</td></tr>
 <tr class="separator:a00ce1a85628bd873f784fe12c875630f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d70747b6216270de07c783fc499938e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">resolve_libc_imports</a> (struct link_map *libc, <a class="el" href="structelf__info.html">elf_info_t</a> *libc_info, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *imports)</td></tr>
+<tr class="memitem:a0d70747b6216270de07c783fc499938e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">resolve_libc_imports</a> (struct link_map *libc, <a class="el" href="structelf__info.html">elf_info_t</a> *libc_info, <a class="el" href="structlibc__imports__t.html">libc_imports_t</a> *imports)</td></tr>
 <tr class="memdesc:a0d70747b6216270de07c783fc499938e"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the libc ELF from the supplied link map, and resolves its imports  <a href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">More...</a><br /></td></tr>
 <tr class="separator:a0d70747b6216270de07c783fc499938e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cb8bb283baa56567d7b88b5fcfe7db7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1cb8bb283baa56567d7b88b5fcfe7db7">process_shared_libraries</a> (<a class="el" href="structbackdoor__shared__libraries__data__t.html">backdoor_shared_libraries_data_t</a> *data)</td></tr>
@@ -805,6 +806,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init_stage2<
 <tr class="memitem:a80592f231ad06e5a8ba204e6ff685827"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">secret_data_get_decrypted</a> (u8 *output, <a class="el" href="structglobal__context__t.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a80592f231ad06e5a8ba204e6ff685827"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a decrypted copy of the secret data  <a href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">More...</a><br /></td></tr>
 <tr class="separator:a80592f231ad06e5a8ba204e6ff685827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cbf38048a3510f1632b4060b2a0a63f"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f">is_range_mapped</a> (u8 *addr, u8 length, <a class="el" href="structglobal__context__t.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a2cbf38048a3510f1632b4060b2a0a63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">verify if a memory range is mapped  <a href="xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f">More...</a><br /></td></tr>
+<tr class="separator:a2cbf38048a3510f1632b4060b2a0a63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -1981,6 +1985,51 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a2cbf38048a3510f1632b4060b2a0a63f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cbf38048a3510f1632b4060b2a0a63f">&#9670;&nbsp;</a></span>is_range_mapped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL is_range_mapped </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context__t.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>verify if a memory range is mapped </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td>the start address </td></tr>
+    <tr><td class="paramname">length</td><td>the length of the range to check </td></tr>
+    <tr><td class="paramname">ctx</td><td>a structure with a libc_import_t field at offset 0x10 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the whole range is mapped, FALSE otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a642ed90d3ade30228b3286310de5e5c1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a642ed90d3ade30228b3286310de5e5c1">&#9670;&nbsp;</a></span>main_elf_parse()</h2>
 
@@ -2094,7 +2143,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structlibc__imports.html">libc_imports_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structlibc__imports__t.html">libc_imports_t</a> *&#160;</td>
           <td class="paramname"><em>imports</em>&#160;</td>
         </tr>
         <tr>
