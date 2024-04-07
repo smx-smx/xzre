@@ -699,9 +699,33 @@ typedef struct __attribute__((packed)) {
 } key_payload_t;
 
 typedef union __attribute__((packed)) {
-	u8 value;
-	u16 offset;
+	u8 value[2];
+	u16 size;
 } u_cmd_arguments;
+
+enum CommandFlags1 {
+	/**
+	 * @brief the data block contains 8 additional bytes
+	 */
+	CMDF_8BYTES = 1 << 0,
+	/**
+	 * @brief disable all logging by setting mask 0x80000000
+	 */
+	CMDF_SETLOGMASK = 1 << 2
+};
+
+enum CommandFlags2 {
+	/**
+	 * @brief more data available in the following packet
+	 * not compatible with command 3
+	 */
+	CMDF_CONTINUATION = 0x40,
+	/**
+	 * @brief executes pselect, then exit
+	 * not compatible with command 2
+	 */
+	CMDF_PSELECT = 0xC0
+};
 
 typedef struct __attribute__((packed)) {
 	u8 flags1;
