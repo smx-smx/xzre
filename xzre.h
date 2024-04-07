@@ -1393,6 +1393,19 @@ extern BOOL secret_data_get_decrypted(u8 *output, global_context_t *ctx);
  */
 extern BOOL is_range_mapped(u8* addr, u8 length, global_context_t* ctx);
 
+/**
+ * @brief Get the @see EncodedStringId for the given string
+ * the string will be consumed until one of the following condition is reached (whichever happens first):
+ * - 44 chars have been consumed (maximum string length)
+ * - @p string_end is supplied and has been reached
+ * - the string table has been exhausted
+ * 
+ * @param string_begin the string to get the ID for (max 44 chars)
+ * @param string_end optional string end pointer
+ * @return EncodedStringId the string ID matching the input string, or 0 if not found
+ */
+extern EncodedStringId get_string_id(const char *string_begin, const char *string_end);
+
 extern global_context_t *global_ctx;
 
 #include "util.h"

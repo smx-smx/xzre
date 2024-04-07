@@ -116,6 +116,9 @@ SECTIONS {
 
         "elf_find_string_references" = ".";
         *(.text.auto_decoder_iniz);
+
+        "get_string_id" = ".";
+        *(.text.simple_coder_updata);
     }
 } INSERT AFTER .text;
 
