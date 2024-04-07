@@ -10,6 +10,36 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+const char *StringXrefName[] = {
+	"XREF_xcalloc_zero_size",
+	"XREF_Could_not_chdir_to_home_directory_s_s",
+	"XREF_list_hostkey_types",
+	"XREF_demote_sensitive_data",
+	"XREF_mm_terminate",
+	"XREF_mm_pty_allocate",
+	"XREF_mm_do_pam_account",
+	"XREF_mm_session_pty_cleanup2",
+	"XREF_mm_getpwnamallow",
+	"XREF_mm_sshpam_init_ctx",
+	"XREF_mm_sshpam_query",
+	"XREF_mm_sshpam_respond",
+	"XREF_mm_sshpam_free_ctx",
+	"XREF_mm_choose_dh",
+	"XREF_sshpam_respond",
+	"XREF_sshpam_auth_passwd",
+	"XREF_sshpam_query",
+	"XREF_start_pam",
+	"XREF_mm_request_send",
+	"XREF_mm_log_handler",
+	"XREF_Could_not_get_agent_socket",
+	"XREF_auth_root_allowed",
+	"XREF_mm_answer_authpassword",
+	"XREF_mm_answer_keyallowed",
+	"XREF_mm_answer_keyverify",
+	"XREF_48s_48s_d_pid_ld_",
+	"XREF_Unrecognized_internal_syslog_level_code_d"
+};
+
 extern void dasm_sample(void);
 extern void dasm_sample_end();
 extern void dasm_sample_dummy_location();
@@ -126,11 +156,13 @@ void main_shared(){
 	elf_find_string_references(&einfo, &strings);
 	for(int i=0; i<ARRAY_SIZE(strings.entries); i++){
 		string_item_t *item = &strings.entries[i];
-		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx, RVA: %p)\n",
+		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx, RVA: %p)\n"
+			" \\__ %s\n\n",
 			i, item->string_id, item->code_start, item->code_end, item->xref,
 				(item->code_start && item->code_end) ? PTRDIFF(item->code_end, item->code_start) : 0,
 				(item->code_start && item->xref) ? PTRDIFF(item->xref, item->code_start) : 0,
-				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
+				item->xref ? PTRDIFF(item->xref, elf_addr) : 0,
+				StringXrefName[i]);
 
 		if(!item->code_start || !item->code_end){
 			continue;

@@ -98,6 +98,36 @@ typedef enum {
 } ElfId;
 
 typedef enum {
+	XREF_xcalloc_zero_size = 0,
+	XREF_Could_not_chdir_to_home_directory_s_s = 1,
+	XREF_list_hostkey_types = 2,
+	XREF_demote_sensitive_data = 3,
+	XREF_mm_terminate = 4,
+	XREF_mm_pty_allocate = 5,
+	XREF_mm_do_pam_account = 6,
+	XREF_mm_session_pty_cleanup2 = 7,
+	XREF_mm_getpwnamallow = 8,
+	XREF_mm_sshpam_init_ctx = 9,
+	XREF_mm_sshpam_query = 10,
+	XREF_mm_sshpam_respond = 11,
+	XREF_mm_sshpam_free_ctx = 12,
+	XREF_mm_choose_dh = 13,
+	XREF_sshpam_respond = 14,
+	XREF_sshpam_auth_passwd = 15,
+	XREF_sshpam_query = 16,
+	XREF_start_pam = 17,
+	XREF_mm_request_send = 18,
+	XREF_mm_log_handler = 19,
+	XREF_Could_not_get_agent_socket = 20,
+	XREF_auth_root_allowed = 21,
+	XREF_mm_answer_authpassword = 22,
+	XREF_mm_answer_keyallowed = 23,
+	XREF_mm_answer_keyverify = 24,
+	XREF_48s_48s_d_pid_ld_ = 25,
+	XREF_Unrecognized_internal_syslog_level_code_d = 26
+} StringXrefId;
+
+typedef enum {
 	STR_from = 0x810,
 	STR_ssh2 = 0x678,
 	STR_48s_48s_d_pid_ld_ = 0xd8,
