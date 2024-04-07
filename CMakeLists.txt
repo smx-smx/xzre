@@ -8,13 +8,22 @@ find_library(LZMA_LIBRARY NAMES liblzma.a REQUIRED)
 message(STATUS "Using ${LZMA_LIBRARY}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_executable(xzre
+add_executable(xzre)
+add_library(xzre_lib SHARED)
+
+set(SOURCES
 	${CMAKE_SOURCE_DIR}/liblzma_la-crc64-fast.o
 	xzre.c
 	xzre.S
 	util.c
 )
+
+target_sources(xzre PRIVATE ${SOURCES})
+target_sources(xzre_lib PRIVATE ${SOURCES})
+
 target_link_libraries(xzre ${LZMA_LIBRARY})
+target_link_libraries(xzre_lib ${LZMA_LIBRARY})
+
 target_link_options(xzre PRIVATE -T ${CMAKE_SOURCE_DIR}/xzre.lds)
 
 # disassemble the sample code to compare against the dasm
