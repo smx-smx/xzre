@@ -570,7 +570,13 @@ assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
  * it's used as a local variable in function @ref backdoor_setup
  */
 typedef struct __attribute__((packed)) backdoor_data {
-	PADDING(0x30);
+	struct link_map *main_map;
+	struct link_map *dynamic_linker_map;
+	struct link_map *liblzma_map;
+	struct link_map *libcrypto_map;
+	struct link_map *libsystemd_map;
+	struct link_map *libc_map;
+
 	elf_handles_t elf_handles;
 
 	/**
@@ -609,6 +615,12 @@ typedef struct __attribute__((packed)) backdoor_data {
 	lzma_allocator *import_resolver;
 } backdoor_data_t;
 
+assert_offset(backdoor_data_t, main_map, 0);
+assert_offset(backdoor_data_t, dynamic_linker_map, 0x8);
+assert_offset(backdoor_data_t, liblzma_map, 0x10);
+assert_offset(backdoor_data_t, libcrypto_map, 0x18);
+assert_offset(backdoor_data_t, libsystemd_map, 0x20);
+assert_offset(backdoor_data_t, libc_map, 0x28);
 assert_offset(backdoor_data_t, elf_handles, 0x30);
 assert_offset(backdoor_data_t, libcrypto, 0x50);
 assert_offset(backdoor_data_t, libc_info, 0x268);
@@ -618,22 +630,7 @@ assert_offset(backdoor_data_t, import_resolver, 0x950);
 static_assert(sizeof(backdoor_data_t) == 0x958);
 
 typedef struct __attribute__((packed)) {
-	PADDING(sizeof(struct link_map *));
-	struct link_map *dynamic_linker;
-	struct link_map *liblzma;
-	struct link_map *libcrypto;
-	struct link_map *libsystemd;
-	struct link_map *libc;
-} backdoor_libraries_t;
-
-assert_offset(backdoor_libraries_t, dynamic_linker, 0x8);
-assert_offset(backdoor_libraries_t, liblzma, 0x10);
-assert_offset(backdoor_libraries_t, libcrypto, 0x18);
-assert_offset(backdoor_libraries_t, libsystemd, 0x20);
-assert_offset(backdoor_libraries_t, libc, 0x28);
-
-typedef struct __attribute__((packed)) {
-	backdoor_libraries_t *libs;
+	backdoor_data_t *data;
 	elf_handles_t *elf_handles;
 	pfn_RSA_public_decrypt_t RSA_public_decrypt;
 	pfn_EVP_PKEY_set1_RSA_t EVP_PKEY_set1_RSA;
@@ -642,7 +639,7 @@ typedef struct __attribute__((packed)) {
 	libc_imports_t *libc_imports;
 } backdoor_shared_libraries_data_t;
 
-assert_offset(backdoor_shared_libraries_data_t, libs, 0x0);
+assert_offset(backdoor_shared_libraries_data_t, data, 0x0);
 assert_offset(backdoor_shared_libraries_data_t, elf_handles, 0x8);
 assert_offset(backdoor_shared_libraries_data_t, RSA_public_decrypt, 0x10);
 assert_offset(backdoor_shared_libraries_data_t, EVP_PKEY_set1_RSA, 0x18);
