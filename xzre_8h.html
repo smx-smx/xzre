@@ -257,6 +257,14 @@ Enumerations</h2></td></tr>
 , <b>X_ELF_LIBCRYPTO</b> = 3
  }</td></tr>
 <tr class="separator:a3ed7f6d009d35ae3bdb830a7bb1e0289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 1 &lt;&lt; 0
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 1 &lt;&lt; 2
+ }</td></tr>
+<tr class="separator:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348">CommandFlags2</a> { <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71">CMDF_CONTINUATION</a> = 0x40
+, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940">CMDF_PSELECT</a> = 0xC0
+ }</td></tr>
+<tr class="separator:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -807,7 +815,48 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>XZ backdoor structures and functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefano Moioli (<a href="#" onclick="location.href='mai'+'lto:'+'smx'+'de'+'v4@'+'gm'+'ail'+'.c'+'om'; return false;">smxde<span style="display: none;">.nosp@m.</span>v4@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a5f8f63d8ae502ab76547c7b077cb067c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f8f63d8ae502ab76547c7b077cb067c">&#9670;&nbsp;</a></span>CommandFlags1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a"></a>CMDF_8BYTES&#160;</td><td class="fielddoc"><p>the data block contains 8 additional bytes </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e"></a>CMDF_SETLOGMASK&#160;</td><td class="fielddoc"><p>disable all logging by setting mask 0x80000000 </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a408b28a8a0686c2ba0ede1e1b4208348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408b28a8a0686c2ba0ede1e1b4208348">&#9670;&nbsp;</a></span>CommandFlags2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348">CommandFlags2</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71"></a>CMDF_CONTINUATION&#160;</td><td class="fielddoc"><p>more data available in the following packet not compatible with command 3 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940"></a>CMDF_PSELECT&#160;</td><td class="fielddoc"><p>executes pselect, then exit not compatible with command 2 </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a229ee0bd4111363061bc4230bc1f6423"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a229ee0bd4111363061bc4230bc1f6423">&#9670;&nbsp;</a></span>backdoor_setup()</h2>
 
