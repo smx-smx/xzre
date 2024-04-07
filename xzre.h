@@ -423,7 +423,9 @@ typedef struct __attribute__((packed)) {
 	BIGNUM *(*BN_dup)(const BIGNUM *from);
 	BIGNUM (*BN_bin2bn)(const unsigned char *s, int len, BIGNUM *ret);
 	int (*RSA_set0_key)(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d);
-	PADDING(8);
+	int (*EVP_Digest)(
+		const void *data, size_t count, unsigned char *md,
+		unsigned int *size, const EVP_MD *type, ENGINE *impl);
 	int (*RSA_sign)(
 		int type,
 		const unsigned char *m, unsigned int m_len,
@@ -465,6 +467,7 @@ assert_offset(imported_funcs_t, RSA_new, 0xD0);
 assert_offset(imported_funcs_t, BN_dup, 0xD8);
 assert_offset(imported_funcs_t, BN_bin2bn, 0xE0);
 assert_offset(imported_funcs_t, RSA_set0_key, 0xE8);
+assert_offset(imported_funcs_t, EVP_Digest, 0xF0);
 assert_offset(imported_funcs_t, RSA_sign, 0xF8);
 assert_offset(imported_funcs_t, BN_bn2bin, 0x100);
 assert_offset(imported_funcs_t, RSA_free, 0x108);
