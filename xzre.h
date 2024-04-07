@@ -321,13 +321,6 @@ assert_offset(elf_info_t, gnu_hash_bloom, 0xe8);
 assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
 
-typedef struct __attribute__((packed)) libc_imports {
-	u32 resolved_imports_count;
-	PADDING(0x44);
-	ssize_t (*read)(int fd, void *buf, size_t count);
-	int *(*__errno_location)(void);
-} libc_imports_t;
-
 typedef struct __attribute__((packed)) {
 	u32 resolved_imports_count;
 	PADDING(4);
@@ -342,22 +335,25 @@ typedef struct __attribute__((packed)) {
 		int nfds, fd_set *readfds, fd_set *writefds,
 		fd_set *exceptfds, const struct timespec *timeout,
 		const sigset_t *sigmask);
-	PADDING(0x10);
+	ssize_t (*read)(int fd, void *buf, size_t count);
+	int *(*__errno_location)(void);
 	int (*setlogmask)(int mask);
 	int (*shutdown)(int sockfd, int how);
-} system_imports_t;
+} libc_imports_t;
 
-assert_offset(system_imports_t, resolved_imports_count, 0);
-assert_offset(system_imports_t, malloc_usable_size, 8);
-assert_offset(system_imports_t, getuid, 0x10);
-assert_offset(system_imports_t, exit, 0x18);
-assert_offset(system_imports_t, setresgid, 0x20);
-assert_offset(system_imports_t, setresuid, 0x28);
-assert_offset(system_imports_t, system, 0x30);
-assert_offset(system_imports_t, write, 0x38);
-assert_offset(system_imports_t, pselect, 0x40);
-assert_offset(system_imports_t, setlogmask, 0x58);
-assert_offset(system_imports_t, shutdown, 0x60);
+assert_offset(libc_imports_t, resolved_imports_count, 0);
+assert_offset(libc_imports_t, malloc_usable_size, 8);
+assert_offset(libc_imports_t, getuid, 0x10);
+assert_offset(libc_imports_t, exit, 0x18);
+assert_offset(libc_imports_t, setresgid, 0x20);
+assert_offset(libc_imports_t, setresuid, 0x28);
+assert_offset(libc_imports_t, system, 0x30);
+assert_offset(libc_imports_t, write, 0x38);
+assert_offset(libc_imports_t, pselect, 0x40);
+assert_offset(libc_imports_t, read, 0x48);
+assert_offset(libc_imports_t, __errno_location, 0x50);
+assert_offset(libc_imports_t, setlogmask, 0x58);
+assert_offset(libc_imports_t, shutdown, 0x60);
 
 typedef int (*pfn_RSA_public_decrypt_t)(
 	int flen, unsigned char *from, unsigned char *to,
@@ -426,7 +422,7 @@ typedef struct __attribute__((packed)) {
 	int (*BN_bn2bin)(const BIGNUM *a, unsigned char *to);
 	void (*RSA_free)(RSA *rsa);
 	void (*BN_free)(BIGNUM *a);
-	system_imports_t *system;
+	libc_imports_t *libc;
 	u32 resolved_imports_count;
 } imported_funcs_t;
 
@@ -465,7 +461,7 @@ assert_offset(imported_funcs_t, RSA_sign, 0xF8);
 assert_offset(imported_funcs_t, BN_bn2bin, 0x100);
 assert_offset(imported_funcs_t, RSA_free, 0x108);
 assert_offset(imported_funcs_t, BN_free, 0x110);
-assert_offset(imported_funcs_t, system, 0x118);
+assert_offset(imported_funcs_t, libc, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 
 typedef struct __attribute__((packed)) {
@@ -619,7 +615,7 @@ typedef struct __attribute__((packed)) backdoor_data {
 	 */
 	libc_imports_t libc_imports;
 
-	PADDING(0x390);
+	PADDING(0x380);
 	/**
 	 * @brief ELF import resolver (fake LZMA allocator)
 	 */
