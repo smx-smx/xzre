@@ -104,15 +104,15 @@ void main_shared(){
 	unsetenv("LD_PRELOAD");
 	xzre_secret_data_bypass();
 	
-	void *ldso_elf = get_main_elf();
-	if(!ldso_elf){
+	void *elf_addr = get_main_elf();
+	if(!elf_addr){
 		puts("Failed to get main elf");
 		exit(1);
 	}
 
 	elf_handles_t handles = {0};
 	elf_info_t einfo;
-	if(!elf_parse(ldso_elf, &einfo)){
+	if(!elf_parse(elf_addr, &einfo)){
 		puts("elf_parse failed");
 		return;
 	}
@@ -126,10 +126,11 @@ void main_shared(){
 	elf_find_string_references(&einfo, &strings);
 	for(int i=0; i<ARRAY_SIZE(strings.entries); i++){
 		string_item_t *item = &strings.entries[i];
-		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx)\n",
+		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx, RVA: %p)\n",
 			i, item->string_id, item->code_start, item->code_end, item->xref,
 				(item->code_start && item->code_end) ? PTRDIFF(item->code_end, item->code_start) : 0,
-				(item->code_start && item->xref) ? PTRDIFF(item->xref, item->code_start) : 0);
+				(item->code_start && item->xref) ? PTRDIFF(item->xref, item->code_start) : 0,
+				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
 
 		if(!item->code_start || !item->code_end){
 			continue;
