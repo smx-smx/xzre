@@ -669,6 +669,27 @@ typedef union {
 	};
 } secret_data_shift_cursor;
 
+typedef struct __attribute__((packed)) {
+	u32 string_id;
+	PADDING(4);
+	void *code_start;
+	void *code_end;
+	u8 *xref;
+} string_item_t;
+
+assert_offset(string_item_t, string_id, 0);
+assert_offset(string_item_t, code_start, 0x8);
+assert_offset(string_item_t, code_end, 0x10);
+assert_offset(string_item_t, xref, 0x18);
+static_assert(sizeof(string_item_t) == 0x20);
+
+typedef struct __attribute__((packed)) {
+	string_item_t entries[27];
+	PADDING(0x8);
+} string_references_t;
+
+assert_offset(string_references_t, entries, 0);
+
 /**
  * @brief the payload header. also used as Chacha IV
  * 
@@ -950,6 +971,15 @@ extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
  * @return BOOL TRUE if successful, FALSE otherwise
  */
 extern BOOL main_elf_parse(main_elf_t *main_elf);
+
+/**
+ * @brief parses the ELF rodata section, looking for strings and the instructions that reference them
+ * 
+ * @param elf_info the executable to find strings in
+ * @param refs structure that will be populated with the results
+ * @return BOOL 
+ */
+extern void elf_find_string_references(elf_info_t *elf_info, string_references_t *refs);
 
 /**
  * @brief Looks up an ELF symbol from a parsed ELF
