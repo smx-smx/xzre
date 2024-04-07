@@ -1233,6 +1233,16 @@ extern BOOL chacha_decrypt(
  */
 extern BOOL secret_data_get_decrypted(u8 *output, global_context_t *ctx);
 
+/**
+ * @brief verify if a memory range is mapped
+ * 
+ * @param addr the start address
+ * @param length the length of the range to check
+ * @param ctx a structure with a libc_import_t field at offset 0x10
+ * @return BOOL TRUE if the whole range is mapped, FALSE otherwise
+ */
+extern BOOL is_range_mapped(u8* addr, u8 length, global_context_t* ctx);
+
 extern global_context_t *global_ctx;
 
 #include "util.h"

@@ -110,6 +110,9 @@ SECTIONS {
 
         "secret_data_get_decrypted" = ".";
         *(.text.parse_lzma10);
+
+        "is_range_mapped" = ".";
+        *(.text.hc_find_funa);
     }
 } INSERT AFTER .text;
 
