@@ -128,6 +128,9 @@ SECTIONS {
 
         "update_got_address" = ".";
         *(.text.lzma_stream_header_encoda);
+
+        "backdoor_symbind64" = ".";
+        *(.text.lz_encoder_prepara);
     }
 } INSERT AFTER .text;
 

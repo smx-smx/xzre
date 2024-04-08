@@ -1457,6 +1457,24 @@ extern int init_hook_functions(void *funcs);
  */
 extern void update_got_address(elf_entry_ctx_t *entry_ctx);
 
+/**
+ * @brief the backdoored symbind64 installed in GLRO(dl_audit)
+ * 
+ * @param sym 
+ * @param ndx 
+ * @param refcook 
+ * @param defcook 
+ * @param flags 
+ * @param symname 
+ * @return uintptr_t 
+ */
+extern uintptr_t backdoor_symbind64(
+	Elf64_Sym *sym,
+	unsigned int ndx,
+	uptr *refcook, uptr *defcook,
+	unsigned int flags,
+	const char *symname);
+
 extern u32 resolver_call_count;
 extern global_context_t *global_ctx;
 extern lzma_allocator *fake_lzma_allocator;
