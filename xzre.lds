@@ -119,6 +119,15 @@ SECTIONS {
 
         "get_string_id" = ".";
         *(.text.simple_coder_updata);
+
+        "init_hook_functions" = ".";
+        *(.text.lzma_delta_decoder_inis);
+
+        "_get_cpuid" = ".";
+        *(.text._get_cpuid);
+
+        "update_got_address" = ".";
+        *(.text.lzma_stream_header_encoda);
     }
 } INSERT AFTER .text;
 
@@ -126,5 +135,15 @@ SECTIONS {
     .lzma_bss : {
         "global_ctx" = ".";
         *(.bss.lzma12_codez);
+
+        "resolver_call_count" = ".";
+        *(.bss.__intr2);
     }
 } INSERT AFTER .bss;
+
+SECTIONS {
+    .lzma_data_relro : {
+        "fake_lzma_allocator" = ".";
+        *(.data.rel.ro.decoders0);
+    }
+} INSERT AFTER .data.rel.ro;

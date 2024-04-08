@@ -7,8 +7,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/mman.h>
 
 const char *StringXrefName[] = {
 	"XREF_xcalloc_zero_size",
@@ -88,16 +90,10 @@ void xzre_secret_data_init(){}
 void xzre_secret_data_test(){}
 #endif
 
-
-/**
- * @brief quick and dirty hack to get the ldso ELF location
- * 
- * @return void* 
- */
-static void *get_ldso_elf(){
+static void *get_elf_base(const char *path){
 	char cmdBuf[128];
-	char getLdElf[] = "grep -E 'r--p 00000000.*/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2' /proc/%zu/maps | cut -d '-' -f1";
-	snprintf(cmdBuf, sizeof(cmdBuf), getLdElf, getpid());
+	char template[] = "grep -E 'r--p 00000000.*%s' /proc/%zu/maps | cut -d '-' -f1";
+	snprintf(cmdBuf, sizeof(cmdBuf), template, path, getpid());
 	FILE *hProc = popen(cmdBuf, "r");
 	memset(cmdBuf, 0x00, sizeof(cmdBuf));
 	char *s = fgets(cmdBuf, sizeof(cmdBuf), hProc);
@@ -105,6 +101,15 @@ static void *get_ldso_elf(){
 	if(!s) return NULL;
 	u64 addr = strtoull(s, NULL, 16);
 	return (void *)addr;
+}
+
+/**
+ * @brief quick and dirty hack to get the ldso ELF location
+ * 
+ * @return void* 
+ */
+static void *get_ldso_elf(){
+	return get_elf_base("/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2");
 }
 
 /**
@@ -113,22 +118,96 @@ static void *get_ldso_elf(){
  * @return void* 
  */
 static void *get_main_elf(){
-	char cmdBuf[128];
-	char getLdElf[] = "grep -E 'r--p 00000000.*/usr/sbin/sshd' /proc/%zu/maps | cut -d '-' -f1";
-	snprintf(cmdBuf, sizeof(cmdBuf), getLdElf, getpid());
-	FILE *hProc = popen(cmdBuf, "r");
-	memset(cmdBuf, 0x00, sizeof(cmdBuf));
-	char *s = fgets(cmdBuf, sizeof(cmdBuf), hProc);
-	pclose(hProc);
-	if(!s) return NULL;
-	u64 addr = strtoull(s, NULL, 16);
-	return (void *)addr;
+	return get_elf_base("/usr/sbin/sshd");
 }
 
-extern void *got_ref;
+#define WRITE(ptr, t, v) \
+	do { \
+		*(t *)(ptr) = v; \
+		ptr = (uint8_t *)(ptr) + sizeof(t); \
+	} while(0)
 
-//#define DUMP_STR_CODE_BLOCKS
+#define WRITE8(ptr, v) WRITE(ptr, uint8_t, v)
+#define WRITE16(ptr, v) WRITE(ptr, uint16_t, v)
+#define WRITE32(ptr, v) WRITE(ptr, uint32_t, v)
 
+int inj_build_abs_jump(uint8_t *buffer, void *jump_destination, void *jump_opcode_address) {
+	(void)(jump_opcode_address);
+
+	uint64_t target = (uint64_t)jump_destination;
+
+	uint32_t lo = target & 0xFFFFFFFF;
+	uint32_t hi = ((target >> 32) & 0xFFFFFFFF);
+
+	// 0: 68 44 33 22 11    push $11223344
+	WRITE8(buffer, 0x68);
+	WRITE32(buffer, lo);
+
+	// 5: c7 44 24 04 88 77 66 55    mov 4(%rsp), 55667788  # upper 4 bytes
+	WRITE32(buffer, 0x042444C7);
+	WRITE32(buffer, hi);
+
+	//d: c3                retq
+	WRITE8(buffer, 0xC3);
+	return 0;
+}
+
+void hooked_update_got_address(elf_entry_ctx_t *entry_ctx){
+	// no-op
+	return;
+}
+
+void xzre_backdoor_setup(){
+	void *linker_return = __builtin_return_address(1);
+	void *ldso_elf = get_ldso_elf();
+	
+	/** setup fake GOT */
+	u64 fake_got[] = {
+		0,0,0,
+		(u64)ldso_elf
+	};
+	
+	/** setup fake entry frame to point to reference the fake got */
+	elf_entry_ctx_t my_entry_ctx = {
+		.frame_address = ldso_elf,
+		.got_ptr = &fake_got
+	};
+
+	/** patch the GOT recompute function to be a no-op */
+	u8 jmp_buf[14];
+	inj_build_abs_jump(jmp_buf, &hooked_update_got_address, NULL);
+	size_t pagesz = getpagesize();
+	size_t pagemask = pagesz-1;
+	u8 *code = (u8 *)&update_got_address;
+	uptr code_addr = UPTR(code) & ~pagemask;
+	if(mprotect((void *)code_addr, pagesz, PROT_READ|PROT_WRITE|PROT_EXEC) < 0){
+		perror("mprotect failed");
+		return;
+	}
+	memcpy(code, jmp_buf, sizeof(jmp_buf));
+	
+	/** make backdoor relro data writable */
+	mprotect((void *)(UPTR(&fake_lzma_allocator) & ~pagemask), pagesz, PROT_READ|PROT_WRITE);
+	
+	u8 hook_funcs[0x88] = {0};
+	int ret = init_hook_functions(hook_funcs);
+
+	backdoor_shared_globals_t shared = {
+		.globals = &my_global_ctx
+	};
+	backdoor_setup_params_t para = {
+		.entry_ctx = &my_entry_ctx,
+		.shared = &shared,
+		.hook_functions = hook_funcs
+	};
+	printf("pid is %zu\n", getpid());
+	//asm volatile("jmp .");
+	if(!backdoor_setup(&para)){
+		puts("backdoor_setup() FAIL");
+	}
+}
+
+static inline __attribute__((always_inline))
 void main_shared(){
 	// prevent fork bomb in system command
 	unsetenv("LD_PRELOAD");
@@ -147,37 +226,29 @@ void main_shared(){
 		return;
 	}
 
-#ifdef DUMP_STR_CODE_BLOCKS
-	mkdir("/tmp/dumps", (mode_t)0755);
-#endif
-
 	/** populate the string references table, and dump it */
 	string_references_t strings = { 0 };
 	elf_find_string_references(&einfo, &strings);
 	for(int i=0; i<ARRAY_SIZE(strings.entries); i++){
 		string_item_t *item = &strings.entries[i];
-		printf("str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx, RVA: %p)\n"
-			" \\__ %s\n\n",
-			i, item->string_id, item->code_start, item->code_end, item->xref,
+		printf(
+			"----> %s\n"
+			"str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx\n"
+			"RVA_start: %p, RVA_end: %p, RVA_xref: %p\n\n",
+			StringXrefName[i],
+				i, item->string_id, item->code_start, item->code_end, item->xref,
 				(item->code_start && item->code_end) ? PTRDIFF(item->code_end, item->code_start) : 0,
 				(item->code_start && item->xref) ? PTRDIFF(item->xref, item->code_start) : 0,
-				item->xref ? PTRDIFF(item->xref, elf_addr) : 0,
-				StringXrefName[i]);
+				item->code_start ? PTRDIFF(item->code_start, elf_addr) : 0,
+				item->code_end ? PTRDIFF(item->code_end, elf_addr) : 0,
+				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
 
 		if(!item->code_start || !item->code_end){
 			continue;
 		}
-
-	#ifdef DUMP_STR_CODE_BLOCKS
-		/** dump the code block that was identified by the malware */
-		char dumpName[64];
-		snprintf(dumpName, sizeof(dumpName), "/tmp/dumps/str_%x.bin", item->string_id);
-		FILE *dump = fopen(dumpName, "wb");
-		fwrite(item->code_start, sizeof(u8), PTRDIFF(item->code_end, item->code_start), dump);
-		fclose(dump);
-	#endif
 	}
 
+	xzre_backdoor_setup();
 	puts("main_shared(): OK");
 }
 
@@ -226,6 +297,8 @@ int main(int argc, char *argv[]){
 }
 
 #ifdef XZRE_SHARED
+//#define REPLACE_RESOLVER
+
 #include <syscall.h>
 void __attribute__((constructor)) init(){
 	main_shared();

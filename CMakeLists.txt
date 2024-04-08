@@ -21,7 +21,6 @@ set(SOURCES
 target_sources(xzre PRIVATE ${SOURCES})
 target_sources(xzre_lib PRIVATE ${SOURCES})
 target_compile_definitions(xzre_lib PRIVATE XZRE_SHARED)
-target_compile_options(xzre_lib PRIVATE -fdata-sections)
 
 target_link_libraries(xzre ${LZMA_LIBRARY})
 target_link_libraries(xzre_lib ${LZMA_LIBRARY})

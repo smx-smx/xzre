@@ -282,7 +282,7 @@ typedef struct __attribute__((packed)) {
 	/**
 	 * @brief stores the value of __builtin_frame_address(0)-16
 	 */
-	u64 *caller_locals;
+	u64 *frame_address;
 } elf_entry_ctx_t;
 
 assert_offset(elf_entry_ctx_t, symbol_ptr, 0);
@@ -290,7 +290,7 @@ assert_offset(elf_entry_ctx_t, got_ptr, 8);
 assert_offset(elf_entry_ctx_t, return_address, 0x10);
 assert_offset(elf_entry_ctx_t, cpuid_fn, 0x18);
 assert_offset(elf_entry_ctx_t, got_offset, 0x20);
-assert_offset(elf_entry_ctx_t, caller_locals, 0x28);
+assert_offset(elf_entry_ctx_t, frame_address, 0x28);
 
 typedef struct __attribute__((packed)) {
 	u8* instruction;
@@ -648,10 +648,9 @@ typedef struct __attribute__((packed)) {
 	u8 shift_operations[31];
 	/**
 	 * @brief 
-	 * cumulative number of reg2reg instructions 
-	 * successfully validated by the data shifter
+	 * number of bits copied
 	 */
-	u32 reg2reg_instructions_count;
+	u32 num_shifted_bits;
 	PADDING(4);
 } global_context_t;
 
@@ -660,7 +659,7 @@ assert_offset(global_context_t, code_range_start, 0x80);
 assert_offset(global_context_t, code_range_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
 assert_offset(global_context_t, shift_operations, 0x141);
-assert_offset(global_context_t, reg2reg_instructions_count, 0x160);
+assert_offset(global_context_t, num_shifted_bits, 0x160);
 static_assert(sizeof(global_context_t) == 0x168);
 
 typedef struct __attribute__((packed)) {
@@ -673,7 +672,8 @@ assert_offset(backdoor_shared_globals_t, globals, 0x10);
 typedef struct __attribute__((packed)) {
 	PADDING(0x8);
 	backdoor_shared_globals_t *shared;
-	PADDING(0x70);
+	void *hook_functions;
+	PADDING(0x68);
 	elf_entry_ctx_t *entry_ctx;
 } backdoor_setup_params_t;
 
@@ -1085,8 +1085,8 @@ extern BOOL find_function_prologue(u8 *code_start, u8 *code_end, u8 **output, Fu
  */
 extern BOOL find_function_prologue_ex(
 	u8 *code_start,
-	u8 *func_start_0,
-	u8 *func_start_1,
+	u8 **func_start_0,
+	u8 **func_start_1,
 	u8 *search_base,
 	u8 *code_end,
 	FuncFindType find_mode);
@@ -1436,7 +1436,32 @@ extern BOOL is_range_mapped(u8* addr, u8 length, global_context_t* ctx);
  */
 extern EncodedStringId get_string_id(const char *string_begin, const char *string_end);
 
+/**
+ * @brief the backdoor entrypoint function, called by the IFUNC resolver
+ * 
+ * @param cpuid_request 
+ * @return BOOL 
+ */
+extern BOOL _get_cpuid(int cpuid_request, void*, void*, void*, void*, void*);
+
+/**
+ * @brief Initializes the structure with hooks-related data
+ * 
+ * @param funcs 
+ * @return int 
+ */
+extern int init_hook_functions(void *funcs);
+
+/**
+ * @brief recomputes the GOT address
+ * 
+ * @param entry_ctx 
+ */
+extern void update_got_address(elf_entry_ctx_t *entry_ctx);
+
+extern u32 resolver_call_count;
 extern global_context_t *global_ctx;
+extern lzma_allocator *fake_lzma_allocator;
 
 #include "util.h"
 #endif
