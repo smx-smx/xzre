@@ -21,7 +21,7 @@ SECTIONS {
         "find_function_prologue" = ".";
         *(.text.lzma_raw_coder_memusaga);
 
-        "find_function_prologue_ex" = ".";
+        "find_function" = ".";
         *(.text.lzma2_encoder_inia);
 
         "get_lzma_allocator" = ".";
