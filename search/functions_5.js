@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['is_5frange_5fmapped_158',['is_range_mapped',['../xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f',1,'xzre.h']]]
+  ['get_5flzma_5fallocator_162',['get_lzma_allocator',['../xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597',1,'xzre.h']]],
+  ['get_5fstring_5fid_163',['get_string_id',['../xzre_8h.html#a6189320317764e3344934873b58b30b1',1,'xzre.h']]]
 ];

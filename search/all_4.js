@@ -1,13 +1,21 @@
 var searchData=
 [
-  ['find_5fcall_5finstruction_45',['find_call_instruction',['../xzre_8h.html#a41fada894916f4c67d59090ff57aead1',1,'xzre.h']]],
-  ['find_5ffunction_5fprologue_46',['find_function_prologue',['../xzre_8h.html#a81a6f3d01ea6057c942052321b92c533',1,'xzre.h']]],
-  ['find_5ffunction_5fprologue_5fex_47',['find_function_prologue_ex',['../xzre_8h.html#a5b09699385091684d71bf8a278e0372d',1,'xzre.h']]],
-  ['find_5finstruction_5fwith_5fmem_5foperand_48',['find_instruction_with_mem_operand',['../xzre_8h.html#a60c226501adb1a2d3213484f651ff23b',1,'xzre.h']]],
-  ['find_5finstruction_5fwith_5fmem_5foperand_5fex_49',['find_instruction_with_mem_operand_ex',['../xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470',1,'xzre.h']]],
-  ['find_5flea_5finstruction_50',['find_lea_instruction',['../xzre_8h.html#aea85a14166f11bb956c7862c2a66571e',1,'xzre.h']]],
-  ['find_5flea_5finstruction_5fwith_5fmem_5foperand_51',['find_lea_instruction_with_mem_operand',['../xzre_8h.html#a6e76946a37fb256974942a542373e421',1,'xzre.h']]],
-  ['find_5freg2reg_5finstruction_52',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
-  ['find_5fstring_5freference_53',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]],
-  ['first_5fvaddr_54',['first_vaddr',['../structelf__info.html#a04ca46ae688dfda82b39e720268a4316',1,'elf_info']]]
+  ['e_5fphnum_28',['e_phnum',['../structelf__info.html#a58ce2573274e2ad8e97b839ed3e17e3e',1,'elf_info']]],
+  ['elf_5fcontains_5fvaddr_29',['elf_contains_vaddr',['../xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db',1,'xzre.h']]],
+  ['elf_5fentry_5fctx_5ft_30',['elf_entry_ctx_t',['../structelf__entry__ctx__t.html',1,'']]],
+  ['elf_5ffind_5fstring_31',['elf_find_string',['../xzre_8h.html#a0adc703b5d67d3b105dc16a6a3ed9719',1,'xzre.h']]],
+  ['elf_5ffind_5fstring_5freference_32',['elf_find_string_reference',['../xzre_8h.html#a6ac7b2035eee3a9ffcceee0f9290c2e1',1,'xzre.h']]],
+  ['elf_5ffind_5fstring_5freferences_33',['elf_find_string_references',['../xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c',1,'xzre.h']]],
+  ['elf_5fget_5fcode_5fsegment_34',['elf_get_code_segment',['../xzre_8h.html#a18845fc4614f60083817db417dc32a13',1,'xzre.h']]],
+  ['elf_5fget_5fdata_5fsegment_35',['elf_get_data_segment',['../xzre_8h.html#a52148c8b1da2a37036e7975ea299117b',1,'xzre.h']]],
+  ['elf_5fget_5fgot_5fsymbol_36',['elf_get_got_symbol',['../xzre_8h.html#acb54dcbcba1c88075c523678a0d0dbda',1,'xzre.h']]],
+  ['elf_5fget_5fplt_5fsymbol_37',['elf_get_plt_symbol',['../xzre_8h.html#acbe9201dea64d4ae8112803f8af95985',1,'xzre.h']]],
+  ['elf_5fget_5freloc_5fsymbol_38',['elf_get_reloc_symbol',['../xzre_8h.html#ae691cee2f2e9ea1a5861e3676fac58c0',1,'xzre.h']]],
+  ['elf_5fget_5frodata_5fsegment_39',['elf_get_rodata_segment',['../xzre_8h.html#a55e085fd878446cf655c657491b9d522',1,'xzre.h']]],
+  ['elf_5fhandles_5ft_40',['elf_handles_t',['../structelf__handles__t.html',1,'']]],
+  ['elf_5finfo_41',['elf_info',['../structelf__info.html',1,'']]],
+  ['elf_5fparse_42',['elf_parse',['../xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7',1,'xzre.h']]],
+  ['elf_5fsymbol_5fget_43',['elf_symbol_get',['../xzre_8h.html#a7b9ee536b92d69798378b397abcec13c',1,'xzre.h']]],
+  ['elf_5fsymbol_5fget_5faddr_44',['elf_symbol_get_addr',['../xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109',1,'xzre.h']]],
+  ['elfbase_45',['elfbase',['../structelf__info.html#a583c4dd181c2f8b831e56c0d12acd660',1,'elf_info']]]
 ];

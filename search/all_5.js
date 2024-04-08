@@ -1,13 +1,14 @@
 var searchData=
 [
-  ['get_5flzma_5fallocator_55',['get_lzma_allocator',['../xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597',1,'xzre.h']]],
-  ['get_5fstring_5fid_56',['get_string_id',['../xzre_8h.html#a6189320317764e3344934873b58b30b1',1,'xzre.h']]],
-  ['global_5fcontext_5ft_57',['global_context_t',['../structglobal__context__t.html',1,'']]],
-  ['gnu_5fhash_5flast_5fbloom_58',['gnu_hash_last_bloom',['../structelf__info.html#a3a1a5acb2d22a9bc1ae2df30fa121a33',1,'elf_info']]],
-  ['gnu_5fhash_5fnbuckets_59',['gnu_hash_nbuckets',['../structelf__info.html#a575df843cb133e2a75e6b8027eb75659',1,'elf_info']]],
-  ['gnurelro_5ffound_60',['gnurelro_found',['../structelf__info.html#a66d75bbde3aa44519fd136a848e051da',1,'elf_info']]],
-  ['gnurelro_5fmemsize_61',['gnurelro_memsize',['../structelf__info.html#a1783b21f972415e71d5cb7d8531de5e5',1,'elf_info']]],
-  ['gnurelro_5fvaddr_62',['gnurelro_vaddr',['../structelf__info.html#a8500b4de03a9b9d44989375921b27f70',1,'elf_info']]],
-  ['got_5foffset_63',['got_offset',['../structelf__entry__ctx__t.html#a87ee4931628f8caffef417b6c7a9e897',1,'elf_entry_ctx_t']]],
-  ['got_5fptr_64',['got_ptr',['../structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac',1,'elf_entry_ctx_t']]]
+  ['find_5fcall_5finstruction_46',['find_call_instruction',['../xzre_8h.html#a41fada894916f4c67d59090ff57aead1',1,'xzre.h']]],
+  ['find_5ffunction_47',['find_function',['../xzre_8h.html#adb94193174339f9eae22428308d46c33',1,'xzre.h']]],
+  ['find_5ffunction_5fprologue_48',['find_function_prologue',['../xzre_8h.html#a81a6f3d01ea6057c942052321b92c533',1,'xzre.h']]],
+  ['find_5finstruction_5fwith_5fmem_5foperand_49',['find_instruction_with_mem_operand',['../xzre_8h.html#a60c226501adb1a2d3213484f651ff23b',1,'xzre.h']]],
+  ['find_5finstruction_5fwith_5fmem_5foperand_5fex_50',['find_instruction_with_mem_operand_ex',['../xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470',1,'xzre.h']]],
+  ['find_5flea_5finstruction_51',['find_lea_instruction',['../xzre_8h.html#aea85a14166f11bb956c7862c2a66571e',1,'xzre.h']]],
+  ['find_5flea_5finstruction_5fwith_5fmem_5foperand_52',['find_lea_instruction_with_mem_operand',['../xzre_8h.html#a6e76946a37fb256974942a542373e421',1,'xzre.h']]],
+  ['find_5freg2reg_5finstruction_53',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
+  ['find_5fstring_5freference_54',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]],
+  ['first_5fvaddr_55',['first_vaddr',['../structelf__info.html#a04ca46ae688dfda82b39e720268a4316',1,'elf_info']]],
+  ['frame_5faddress_56',['frame_address',['../structelf__entry__ctx__t.html#a84fe5a16977e1fd33ecb0de07c8e7a0c',1,'elf_entry_ctx_t']]]
 ];

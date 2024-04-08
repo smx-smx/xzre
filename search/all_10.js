@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['x86_5fdasm_106',['x86_dasm',['../xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f',1,'xzre.h']]],
-  ['xzre_107',['xzre',['../md_README.html',1,'']]],
-  ['xzre_2eh_108',['xzre.h',['../xzre_8h.html',1,'']]]
+  ['u_5fcmd_5farguments_106',['u_cmd_arguments',['../unionu__cmd__arguments.html',1,'']]],
+  ['update_5fgot_5faddress_107',['update_got_address',['../xzre_8h.html#a8cc394dd9e788d2b5166eedb8b155d1e',1,'xzre.h']]]
 ];

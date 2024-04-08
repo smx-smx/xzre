@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['libc_5fimports_74',['libc_imports',['../structbackdoor__data.html#a116ff042f4a1a315724cc6f65a56e359',1,'backdoor_data']]],
-  ['libc_5fimports_5ft_75',['libc_imports_t',['../structlibc__imports__t.html',1,'']]],
-  ['libc_5finfo_76',['libc_info',['../structbackdoor__data.html#a8926fe3d847696a0a1b58ec7e9c6d14e',1,'backdoor_data']]],
-  ['libcrypto_5finfo_77',['libcrypto_info',['../structbackdoor__data.html#a932329dfc876e64f123c922e55b30142',1,'backdoor_data']]]
+  ['key_5fctx_5ft_73',['key_ctx_t',['../structkey__ctx__t.html',1,'']]],
+  ['key_5fpayload_5fbody_5ft_74',['key_payload_body_t',['../structkey__payload__body__t.html',1,'']]],
+  ['key_5fpayload_5fhdr_5ft_75',['key_payload_hdr_t',['../structkey__payload__hdr__t.html',1,'']]],
+  ['key_5fpayload_5ft_76',['key_payload_t',['../structkey__payload__t.html',1,'']]]
 ];
