@@ -131,6 +131,15 @@ SECTIONS {
 
         "backdoor_symbind64" = ".";
         *(.text.lz_encoder_prepara);
+
+        "hook_RSA_get0_key" = ".";
+        *(.text.lzma_index_inia);
+
+        "hook_EVP_PKEY_set1_RSA" = ".";
+        *(.text.lzma_index_memusaga);
+
+        "hook_RSA_public_decrypt" = ".";
+        *(.text.lzma_index_prealloa);
     }
 } INSERT AFTER .text;
 
