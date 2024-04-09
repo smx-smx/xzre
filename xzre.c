@@ -236,16 +236,12 @@ void main_shared(){
 			"str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx\n"
 			"RVA_start: %p, RVA_end: %p, RVA_xref: %p\n\n",
 			StringXrefName[i],
-				i, item->string_id, item->code_start, item->code_end, item->xref,
-				(item->code_start && item->code_end) ? PTRDIFF(item->code_end, item->code_start) : 0,
-				(item->code_start && item->xref) ? PTRDIFF(item->xref, item->code_start) : 0,
-				item->code_start ? PTRDIFF(item->code_start, elf_addr) : 0,
-				item->code_end ? PTRDIFF(item->code_end, elf_addr) : 0,
+				i, item->string_id, item->func_start, item->func_end, item->xref,
+				(item->func_start && item->func_end) ? PTRDIFF(item->func_end, item->func_start) : 0,
+				(item->func_start && item->xref) ? PTRDIFF(item->xref, item->func_start) : 0,
+				item->func_start ? PTRDIFF(item->func_start, elf_addr) : 0,
+				item->func_end ? PTRDIFF(item->func_end, elf_addr) : 0,
 				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
-
-		if(!item->code_start || !item->code_end){
-			continue;
-		}
 	}
 
 	xzre_backdoor_setup();

@@ -887,16 +887,28 @@ typedef union {
 } secret_data_shift_cursor;
 
 typedef struct __attribute__((packed)) {
+	/**
+	 * @brief the string that was referenced, in encoded form
+	 */
 	EncodedStringId string_id;
 	PADDING(4);
-	void *code_start;
-	void *code_end;
-	u8 *xref;
+	/**
+	 * @brief the starting address of the function that referenced the string
+	 */
+	void *func_start;
+	/**
+	 * @brief the ending address of the function that referenced the string
+	 */
+	void *func_end;
+	/**
+	 * @brief location of the instruction that referenced the string
+	 */
+	void *xref;
 } string_item_t;
 
 assert_offset(string_item_t, string_id, 0);
-assert_offset(string_item_t, code_start, 0x8);
-assert_offset(string_item_t, code_end, 0x10);
+assert_offset(string_item_t, func_start, 0x8);
+assert_offset(string_item_t, func_end, 0x10);
 assert_offset(string_item_t, xref, 0x18);
 static_assert(sizeof(string_item_t) == 0x20);
 
