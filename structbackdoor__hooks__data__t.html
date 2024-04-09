@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>xzre: backdoor_setup_params_t Struct Reference</title>
+<title>xzre: backdoor_hooks_data_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,30 +65,33 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">backdoor_setup_params_t Struct Reference</div>  </div>
+<div class="title">backdoor_hooks_data_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a52bc732ec4c931e5aac8b8cb24466e38"><td class="memItemLeft" align="right" valign="top"><a id="a52bc732ec4c931e5aac8b8cb24466e38"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:a52bc732ec4c931e5aac8b8cb24466e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b3c5297ea98eb5f8e72973a73bcbc9"><td class="memItemLeft" align="right" valign="top"><a id="a26b3c5297ea98eb5f8e72973a73bcbc9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x68)</td></tr>
-<tr class="separator:a26b3c5297ea98eb5f8e72973a73bcbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a757fc8469ccebee928b5652e458c3351"><td class="memItemLeft" align="right" valign="top"><a id="a757fc8469ccebee928b5652e458c3351"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0xE0)</td></tr>
+<tr class="separator:a757fc8469ccebee928b5652e458c3351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d981cce6df71e984bd29441b12fe1ef"><td class="memItemLeft" align="right" valign="top"><a id="a1d981cce6df71e984bd29441b12fe1ef"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x70)</td></tr>
+<tr class="separator:a1d981cce6df71e984bd29441b12fe1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a6336958b104179c0975dc260f8216720"><td class="memItemLeft" align="right" valign="top"><a id="a6336958b104179c0975dc260f8216720"></a>
-<a class="el" href="structbackdoor__shared__globals__t.html">backdoor_shared_globals_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>shared</b></td></tr>
-<tr class="separator:a6336958b104179c0975dc260f8216720"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad665089a3f2a3005492f4ee5870a6408"><td class="memItemLeft" align="right" valign="top"><a id="ad665089a3f2a3005492f4ee5870a6408"></a>
-<a class="el" href="structbackdoor__hooks__ctx__t.html">backdoor_hooks_ctx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>hook_params</b></td></tr>
-<tr class="separator:ad665089a3f2a3005492f4ee5870a6408"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83a5d76b0906d856fb54217d219ce094"><td class="memItemLeft" align="right" valign="top"><a id="a83a5d76b0906d856fb54217d219ce094"></a>
-<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>entry_ctx</b></td></tr>
-<tr class="separator:a83a5d76b0906d856fb54217d219ce094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d7bf6e4e6bed5a9073c28331459d52"><td class="memItemLeft" align="right" valign="top"><a id="a39d7bf6e4e6bed5a9073c28331459d52"></a>
+<a class="el" href="structldso__ctx__t.html">ldso_ctx_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ldso_ctx</b></td></tr>
+<tr class="separator:a39d7bf6e4e6bed5a9073c28331459d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2511171a48300271949d738dcb327c1b"><td class="memItemLeft" align="right" valign="top"><a id="a2511171a48300271949d738dcb327c1b"></a>
+<a class="el" href="structglobal__context__t.html">global_context_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>global_ctx</b></td></tr>
+<tr class="separator:a2511171a48300271949d738dcb327c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe0e974300f30881e416e5b1614b536"><td class="memItemLeft" align="right" valign="top"><a id="adbe0e974300f30881e416e5b1614b536"></a>
+<a class="el" href="structimported__funcs__t.html">imported_funcs_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>imported_funcs</b></td></tr>
+<tr class="separator:adbe0e974300f30881e416e5b1614b536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a940484ab0aa9b8da032c79a650008870"><td class="memItemLeft" align="right" valign="top"><a id="a940484ab0aa9b8da032c79a650008870"></a>
+<a class="el" href="structlibc__imports__t.html">libc_imports_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports</b></td></tr>
+<tr class="separator:a940484ab0aa9b8da032c79a650008870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="xzre_8h_source.html">xzre.h</a></li>
