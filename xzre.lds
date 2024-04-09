@@ -150,6 +150,9 @@ SECTIONS {
 
         "resolver_call_count" = ".";
         *(.bss.__intr2);
+
+        "hooks_data_addr" = ".";
+        *(.bss.filter_optionz);
     }
 } INSERT AFTER .bss;
 
