@@ -10,5 +10,7 @@ var searchData=
   ['find_5freg2reg_5finstruction_55',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
   ['find_5fstring_5freference_56',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]],
   ['first_5fvaddr_57',['first_vaddr',['../structelf__info.html#a04ca46ae688dfda82b39e720268a4316',1,'elf_info']]],
-  ['frame_5faddress_58',['frame_address',['../structelf__entry__ctx__t.html#a84fe5a16977e1fd33ecb0de07c8e7a0c',1,'elf_entry_ctx_t']]]
+  ['frame_5faddress_58',['frame_address',['../structelf__entry__ctx__t.html#a84fe5a16977e1fd33ecb0de07c8e7a0c',1,'elf_entry_ctx_t']]],
+  ['func_5fend_59',['func_end',['../structstring__item__t.html#aa81eccee799d93a0cac1f43a59d4af4b',1,'string_item_t']]],
+  ['func_5fstart_60',['func_start',['../structstring__item__t.html#a854d271188f3d664ef48707288f98b02',1,'string_item_t']]]
 ];
