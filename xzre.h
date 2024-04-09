@@ -559,7 +559,7 @@ typedef struct __attribute__((packed)) {
 		int *outl, const unsigned char *in, int inl);
 	int (*EVP_DecryptFinal_ex)(EVP_CIPHER_CTX *ctx, unsigned char *outm, int *outl);
 	void (*EVP_CIPHER_CTX_free)(EVP_CIPHER_CTX *ctx);
-	EVP_CIPHER *(*EVP_chacha20)(void);
+	const EVP_CIPHER *(*EVP_chacha20)(void);
 	RSA *(*RSA_new)(void);
 	BIGNUM *(*BN_dup)(const BIGNUM *from);
 	BIGNUM (*BN_bin2bn)(const unsigned char *s, int len, BIGNUM *ret);
