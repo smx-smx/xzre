@@ -51,6 +51,8 @@ typedef struct {
 #include <link.h>
 #endif
 
+typedef Elf64_Xword Elf64_Relr;
+
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
 #define PTRDIFF(a, b) (UPTR(a) - UPTR(b))
