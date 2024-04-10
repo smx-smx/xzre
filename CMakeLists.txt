@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD 23)
 set(CMAKE_BUILD_TYPE Debug)
 
 find_library(LZMA_LIBRARY NAMES liblzma.a REQUIRED)
+find_program(SED_COMMAND NAMES sed REQUIRED)
 message(STATUS "Using ${LZMA_LIBRARY}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -27,6 +28,17 @@ add_custom_command(
 	VERBATIM
 )
 add_custom_target(gen_lds DEPENDS ${CMAKE_BINARY_DIR}/xzre.lds)
+
+add_custom_command(
+	OUTPUT ${CMAKE_BINARY_DIR}/xzre.csv
+	COMMAND ${CMAKE_C_COMPILER}
+		-DGEN_CSV -x c -E -P
+		${CMAKE_SOURCE_DIR}/xzre.lds.in | sed "/^\\s*$/d;s/^\\s*//" > ${CMAKE_BINARY_DIR}/xzre.csv
+	DEPENDS ${CMAKE_SOURCE_DIR}/xzre.lds.in
+	VERBATIM
+)
+add_custom_target(gen_csv ALL DEPENDS ${CMAKE_BINARY_DIR}/xzre.csv)
+
 
 target_sources(xzre PRIVATE ${SOURCES})
 target_sources(lzma PRIVATE ${SOURCES})

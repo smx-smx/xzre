@@ -1,14 +1,21 @@
-#define QUOTED(a)   #a
-#define QUOTE(a)    QUOTED(a)
+#define QUOTED(a) #a
+#define QUOTE(a) QUOTED(a)
 
+#ifdef GEN_CSV
+#define DEFSYM(name, section) QUOTE(name),QUOTE(section)
+#define SECTIONS_BEGIN()
+#define SECTIONS_END(name)
+// CSV header
+name,section
+#else
 #define DEFSYM(name, section) \
 	section : { \
 		QUOTE(name) = QUOTE(.); \
 		*(section); \
 	}
-
 #define SECTIONS_BEGIN() SECTIONS {
 #define SECTIONS_END(name) } INSERT AFTER name;
+#endif
 
 SECTIONS_BEGIN()
 	DEFSYM(x86_dasm, .text.x86_codd)
