@@ -24,6 +24,7 @@ SECTIONS_BEGIN()
 	DEFSYM(elf_contains_vaddr, .text.parse_bcz)
 	DEFSYM(elf_parse, .text.get_literal_prica)
 	DEFSYM(main_elf_parse, .text.lzma_filter_decoder_is_supportea)
+	DEFSYM(check_argument, .text.lzma_encoder_inia)
 	DEFSYM(elf_symbol_get, .text.crc_inia)
 	DEFSYM(elf_symbol_get_addr, .text.crc64_generia)
 	DEFSYM(elf_get_code_segment, .text.lzma_check_updata)
@@ -59,6 +60,7 @@ SECTIONS_BEGIN()
 	DEFSYM(call_backdoor_init_stage2, .text._get_cpuia)
 	DEFSYM(_cpuid, .text._cpuid)
 	DEFSYM(update_got_address, .text.lzma_stream_header_encoda)
+	DEFSYM(get_random_symbol_2_got_offset, .text.lzma_stream_flags_compara)
 	DEFSYM(backdoor_symbind64, .text.lz_encoder_prepara)
 	DEFSYM(hook_RSA_get0_key, .text.lzma_index_inia)
 	DEFSYM(hook_EVP_PKEY_set1_RSA, .text.lzma_index_memusaga)
@@ -76,9 +78,21 @@ SECTIONS_BEGIN()
 SECTIONS_END(.data.rel.ro)
 
 /*
-TODO map this to backdoor_cpuid_reloc_consts_t:
+TODO map this to cpuid_reloc_consts:
 0000000000000000 l     O .rodata.lzma12_mf_mao.0	0000000000000000 .hidden .Llzma_block_buffer_decode.0
 
 TODO map this to random_symbol;
 0000000000000000 l     O .rodata.lzma_lzma_encode	0000000000000008 .hidden .Lrc_read_destroy
+
+TODO map this to tls_get_addr_reloc_consts:
+0000000000000000 l     O .rodata.rc_encode	0000000000000000 .hidden .Llzma_block_uncomp_encode.0
+
+TODO map this to random_symbol_2;
+0000000000000000 l     O .rodata.lzma2_decode	0000000000000008 .hidden .Lx86_coder_destroy
+
+0000000000000000 l     O .data.rel.ro.lookup_filter.part.0	0000000000000008 .hidden .Llookup_filter.part.0
+0000000000000000 R_X86_64_64       .Ldecoder.1-0x0000000000000180
+
+0000000000000000 l     O .data.rel.ro.filter_optmap.0	0000000000000008 .hidden .Lfilter_optmap.0
+0000000000000000 R_X86_64_64       .Lencoder.1-0x00000000000002a0
 */

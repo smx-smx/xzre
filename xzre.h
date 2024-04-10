@@ -1052,29 +1052,48 @@ static_assert(sizeof(key_ctx_t) == 0x2B8);
 
 typedef struct __attribute__((packed)) {
 	/**
-	 * @brief offset from the symbol .Lrc_read_destroy to the GOT
+	 * @brief offset from the symbol random_symbol to the GOT
 	 * 
-	 * the field maps to a relation entry of type R_X86_64_GOTOFF64 and value .Lrc_read_destroy
+	 * the field maps to a relation entry of type R_X86_64_GOTOFF64 and value random_symbol
 	 */
-	ptrdiff_t rc_read_destroy_got_offset;
+	ptrdiff_t random_symbol_got_offset;
 	/**
 	 * @brief index in the GOT for _cpuid()
 	 * 
-	 * the field maps to a relation entry of type R_X86_64_GOT64 and value _cpuid
+	 * the field maps to a relocation entry of type R_X86_64_GOT64 and value _cpuid
 	 */
 	u64 cpuid_got_index;
 	/**
 	 * @brief offset from the symbol backdoor_init_stage2() to the GOT
 	 * 
-	 * the field maps to a relation entry of type R_X86_64_GOTOFF64 and value backdoor_init_stage2
+	 * the field maps to a relocation entry of type R_X86_64_GOTOFF64 and value backdoor_init_stage2
 	 */
 	ptrdiff_t backdoor_init_stage2_got_offset;
 } backdoor_cpuid_reloc_consts_t;
 
-assert_offset(backdoor_cpuid_reloc_consts_t, rc_read_destroy_got_offset, 0);
+assert_offset(backdoor_cpuid_reloc_consts_t, random_symbol_got_offset, 0);
 assert_offset(backdoor_cpuid_reloc_consts_t, cpuid_got_index, 0x8);
 assert_offset(backdoor_cpuid_reloc_consts_t, backdoor_init_stage2_got_offset, 0x10);
 static_assert(sizeof(backdoor_cpuid_reloc_consts_t) == 0x18);
+
+typedef struct __attribute__((packed)) {
+	/**
+	 * @brief offset from the symbol __tls_get_addr() to the PLT
+	 * 
+	 * the field maps to a relocation entry of type R_X86_64_PLTOFF64 and value __tls_get_addr
+	 */
+	ptrdiff_t tls_get_addr_plt_offset;
+	/**
+	 * @brief offset from the symbol random_symbol_2 to the GOT
+	 * 
+	 * the field maps to a relocation entry of type R_X86_64_GOTOFF64 and value random_symbol_2
+	 */
+	ptrdiff_t random_symbol_2_got_offset;
+} backdoor_tls_get_addr_reloc_consts_t;
+
+assert_offset(backdoor_tls_get_addr_reloc_consts_t, tls_get_addr_plt_offset, 0);
+assert_offset(backdoor_tls_get_addr_reloc_consts_t, random_symbol_2_got_offset, 0x8);
+static_assert(sizeof(backdoor_tls_get_addr_reloc_consts_t) == 0x10);
 
 /**
  * @brief disassembles the given x64 code
@@ -1260,14 +1279,32 @@ extern BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_
 extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
 
 /**
- * @brief parses the main executable from the provided structure.
- * as part of the process, argv0 will be retrieved and checked 
- * to see if it's the expected one (/usr/sbin/sshd)
+ * @brief parses the main executable from the provided structure
+ * as part of the process the arguments and environment is checked
  * 
+ * argv[0] is checked that it is "/usr/sbin/sshd"
+ * the remaining args are checked that they all start with '-'
+ * the args are checked that they do not contain the '-d' or '-D' flags (which set sshd into debug or non-daemon mode)
+ * the args are are also checked that there is not any '\\t' or '=' characters in the args
+ * the environment variable strings are checked that they do not start with any string from the encoded string table
+ * in particular these environment strings:
+ * - "DISPLAY="
+ * - "LD_AUDIT="
+ * - "LD_BIND_NOT="
+ * - "LD_DEBUG="
+ * - "LD_PROFILE="
+ * - "LD_USE_LOAD_BIAS="
+ * - "LINES="
+ * - "TERM="
+ * - "WAYLAND_DISPLAY="
+ * - "yolAbejyiejuvnup=Evjtgvsh5okmkAvj"
+ *   
  * @param main_elf the main executable to parse
- * @return BOOL TRUE if successful, FALSE otherwise
+ * @return BOOL TRUE if successful (and all checks passed), FALSE otherwise
  */
 extern BOOL main_elf_parse(main_elf_t *main_elf);
+
+extern char* check_argument(char arg_first_char, char* arg_name);
 
 /**
  * @brief parses the ELF rodata section, looking for strings and the instructions that reference them
@@ -1571,7 +1608,7 @@ extern u64 get_cpuid_got_index(elf_entry_ctx_t *ctx);
  * @param ctx holds values needed to setup the _cpuid(), passed to backdoor_init_stage2()
  * @param caller_frame stores the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
  * @param cpuid_got_addr address of the cpuid() GOT entry
- * @param reloc_consts pointer to backdoor_cpuid_reloc_consts
+ * @param reloc_consts pointer to cpuid_reloc_consts
  * @return BOOL the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
  */
 extern BOOL backdoor_init_stage2(elf_entry_ctx_t *ctx, u64 *caller_frame, void **cpuid_got_addr, backdoor_cpuid_reloc_consts_t* reloc_consts);
@@ -1721,11 +1758,35 @@ extern void _cpuid(unsigned int level, unsigned int *a, unsigned int *b,  unsign
 extern int init_hook_functions(backdoor_hooks_ctx_t *funcs);
 
 /**
- * @brief recomputes the GOT address
+ * @brief finds the __tls_get_addr() GOT entry
+ * 
+ * this function first computes the location of the __tls_get_addr() PLT trampoline function by using
+ * the PLT offset constant from tls_get_addr_reloc_consts
+ * 
+ * then it decodes the PLT jmp instruction to get the address of the __tls_get_addr() GOT entry
+ * 
+ * the __tls_get_addr() GOT entry is used in backdoor_setup() to find the ELF header at the start of the memory mapped ld.so
+ * 
+ * calls get_random_symbol_2_got_offset() to update elf_entry_ctx_t::got_ptr and elf_entry_ctx_t::got_offset
+ * sets elf_entry_ctx_t::got_offset = 0
+ * sets elf_entry_ctx_t::cpuid_fn = 0
+ * stores the address of the __tls_get_addr() GOT entry in  elf_entry_ctx_t::got_ptr
  * 
  * @param entry_ctx 
+ * @return void * the address of the __tls_get_addr() GOT entry
  */
-extern void update_got_address(elf_entry_ctx_t *entry_ctx);
+extern void *update_got_address(elf_entry_ctx_t *entry_ctx);
+
+/**
+ * @brief get the random_symbol_2 GOT offset
+ * 
+ * sets elf_entry_ctx_t::got_ptr = 0x2600
+ * stores the index in elf_entry_ctx_t::got_offset
+ * 
+ * @param ctx
+ * @return ptrdiff_t random_symbol_2 GOT offset
+ */
+extern ptrdiff_t get_random_symbol_2_got_offset(elf_entry_ctx_t *ctx);
 
 /**
  * @brief the backdoored symbind64 installed in GLRO(dl_audit)
@@ -1758,10 +1819,17 @@ extern backdoor_hooks_data_t **hooks_data_addr;
 /**
  * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
  * 
- * the symbol is used by init_elf_entry_ctx() and get_got_offset()
+ * the symbol is used by init_elf_entry_ctx()
  * 
  */
 extern const u64 random_symbol;
+/**
+ * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
+ * 
+ * the symbol is used by update_got_address()
+ * 
+ */
+extern const u64 random_symbol_2;
 /**
  * @brief special section that contains _cpuid() related GOT offsets
  * 
@@ -1770,7 +1838,16 @@ extern const u64 random_symbol;
  * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
  * 
  */
-extern backdoor_cpuid_reloc_consts_t backdoor_cpuid_reloc_consts;
+extern backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;
+/**
+ * @brief special section that contains __tls_get_addr() related GOT offsets
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * used by update_got_address() and get_random_symbol_2_got_offset()
+ * 
+ */
+extern backdoor_tls_get_addr_reloc_consts_t tls_get_addr_reloc_consts;
 
 #include "util.h"
 #endif
