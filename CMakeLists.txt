@@ -20,6 +20,14 @@ set(SOURCES
 	util.c
 )
 
+add_custom_command(
+	OUTPUT ${CMAKE_BINARY_DIR}/xzre.lds
+	COMMAND ${CMAKE_C_COMPILER} -x c -E -P ${CMAKE_SOURCE_DIR}/xzre.lds.in > ${CMAKE_BINARY_DIR}/xzre.lds
+	DEPENDS ${CMAKE_SOURCE_DIR}/xzre.lds.in
+	VERBATIM
+)
+add_custom_target(gen_lds DEPENDS ${CMAKE_BINARY_DIR}/xzre.lds)
+
 target_sources(xzre PRIVATE ${SOURCES})
 target_sources(lzma PRIVATE ${SOURCES})
 target_compile_definitions(lzma PRIVATE XZRE_SHARED)
@@ -32,8 +40,10 @@ target_link_options(lzma PRIVATE
 	"LINKER:--no-undefined"
 	"LINKER:--version-script=${CMAKE_SOURCE_DIR}/xzre.ver")
 
-target_link_options(xzre PRIVATE -T ${CMAKE_SOURCE_DIR}/xzre.lds)
-target_link_options(lzma PRIVATE -T ${CMAKE_SOURCE_DIR}/xzre.lds)
+target_link_options(xzre PRIVATE -T ${CMAKE_BINARY_DIR}/xzre.lds)
+target_link_options(lzma PRIVATE -T ${CMAKE_BINARY_DIR}/xzre.lds)
+add_dependencies(xzre gen_lds)
+add_dependencies(lzma gen_lds)
 
 # disassemble the sample code to compare against the dasm
 add_custom_target(xzre_dasm ALL 
@@ -43,3 +53,13 @@ add_custom_target(xzre_dasm ALL
 		--disassemble=dasm_sample $<TARGET_FILE:xzre>
 		> ${CMAKE_BINARY_DIR}/dasm.txt
 )
+
+add_custom_command(
+	OUTPUT ${CMAKE_BINARY_DIR}/xzre.h
+	COMMAND ${CMAKE_C_COMPILER} -DXZRE_SLIM 
+		-P -E ${CMAKE_SOURCE_DIR}/xzre.h
+		-D "static_assert(x)=" > ${CMAKE_BINARY_DIR}/xzre.h
+	DEPENDS ${CMAKE_SOURCE_DIR}/xzre.h
+	VERBATIM
+)
+add_custom_target(gen_xzre_header ALL DEPENDS ${CMAKE_BINARY_DIR}/xzre.h)

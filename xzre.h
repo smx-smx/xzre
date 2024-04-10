@@ -7,16 +7,41 @@
 #ifndef __XZRE_H
 #define __XZRE_H
 
+#ifndef XZRE_SLIM
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
+#endif
 
+#ifndef XZRE_SLIM
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uintptr_t uptr;
+#else
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef unsigned long long int u64;
+typedef unsigned long int size_t;
+typedef signed long int ssize_t;
+typedef size_t uid_t;
+typedef size_t gid_t;
+typedef uint64_t uptr;
+typedef uptr
+	Elf64_Ehdr, Elf64_Phdr, Elf64_Dyn, Elf64_Sym, Elf64_Rela, Elf64_Relr, 
+	Elf64_Verdef, Elf64_Versym, sigset_t, fd_set, EVP_PKEY, RSA, DSA, 
+	BIGNUM, EC_POINT, EC_KEY, EC_GROUP, EVP_MD, point_conversion_form_t,
+	EVP_CIPHER, EVP_CIPHER_CTX, ENGINE, EVP_MD_CTX, EVP_PKEY_CTX, BN_CTX;
+typedef struct {
+	void *(*alloc)(void *opaque, size_t nmemb, size_t size);
+	void (*free)(void *opaque, void *ptr);
+	void *opaque;
+} lzma_allocator;
+#endif
 
+#ifndef XZRE_SLIM
 #include <lzma.h>
 #include <openssl/dsa.h>
 #include <openssl/ec.h>
@@ -24,6 +49,7 @@ typedef uintptr_t uptr;
 #include <openssl/rsa.h>
 #include <elf.h>
 #include <link.h>
+#endif
 
 #define UPTR(x) ((uptr)(x))
 #define PTRADD(a, b) (UPTR(a) + UPTR(b))
@@ -246,8 +272,11 @@ typedef enum {
 	STR_ELF = 0x300,
 } EncodedStringId;
 
-
+#ifndef XZRE_SLIM
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
+#else
+#define assert_offset(t, f, o) 
+#endif
 
 #define CONCAT(x, y) x ## y
 #define EXPAND(x, y) CONCAT(x, y)
@@ -679,9 +708,9 @@ typedef struct __attribute__((packed)) {
 	PADDING(sizeof(u64));
 	void *dl_audit_symbind_alt;
 	u64 dl_audit_symbind_alt__size;
-	typeof(&RSA_public_decrypt) hook_RSA_public_decrypt;
-	typeof(&EVP_PKEY_set1_RSA) hook_EVP_PKEY_set1_RSA;
-	typeof(&RSA_get0_key) hook_RSA_get0_key;
+	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
+	pfn_RSA_public_decrypt_t hook_EVP_PKEY_set1_RSA;
+	pfn_RSA_get0_key_t hook_RSA_get0_key;
 	imported_funcs_t *imports;
 	u64 hooks_installed;
 } ldso_ctx_t;
@@ -717,8 +746,8 @@ typedef struct __attribute__((packed)) {
 		Elf64_Sym *sym, unsigned int ndx,
 		uptr *refcook, uptr *defcook,
 		unsigned int flags, const char *symname);
-	typeof(&RSA_public_decrypt) hook_RSA_public_decrypt;
-	typeof(&RSA_get0_key) hook_RSA_get0_key;
+	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
+	pfn_RSA_get0_key_t hook_RSA_get0_key;
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
