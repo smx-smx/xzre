@@ -1052,11 +1052,11 @@ static_assert(sizeof(key_ctx_t) == 0x2B8);
 
 typedef struct __attribute__((packed)) {
 	/**
-	 * @brief offset from the symbol random_symbol to the GOT
+	 * @brief offset from the symbol cpuid_random_symbol to the GOT
 	 * 
-	 * the field maps to a relation entry of type R_X86_64_GOTOFF64 and value random_symbol
+	 * the field maps to a relocation entry of type R_X86_64_GOTOFF64 and value cpuid_random_symbol
 	 */
-	ptrdiff_t random_symbol_got_offset;
+	ptrdiff_t cpuid_random_symbol_got_offset;
 	/**
 	 * @brief index in the GOT for _cpuid()
 	 * 
@@ -1071,7 +1071,7 @@ typedef struct __attribute__((packed)) {
 	ptrdiff_t backdoor_init_stage2_got_offset;
 } backdoor_cpuid_reloc_consts_t;
 
-assert_offset(backdoor_cpuid_reloc_consts_t, random_symbol_got_offset, 0);
+assert_offset(backdoor_cpuid_reloc_consts_t, cpuid_random_symbol_got_offset, 0);
 assert_offset(backdoor_cpuid_reloc_consts_t, cpuid_got_index, 0x8);
 assert_offset(backdoor_cpuid_reloc_consts_t, backdoor_init_stage2_got_offset, 0x10);
 static_assert(sizeof(backdoor_cpuid_reloc_consts_t) == 0x18);
@@ -1084,16 +1084,42 @@ typedef struct __attribute__((packed)) {
 	 */
 	ptrdiff_t tls_get_addr_plt_offset;
 	/**
-	 * @brief offset from the symbol random_symbol_2 to the GOT
+	 * @brief offset from the symbol tls_get_addr_random_symbol to the GOT
 	 * 
-	 * the field maps to a relocation entry of type R_X86_64_GOTOFF64 and value random_symbol_2
+	 * the field maps to a relocation entry of type R_X86_64_GOTOFF64 and value tls_get_addr_random_symbol
 	 */
-	ptrdiff_t random_symbol_2_got_offset;
+	ptrdiff_t tls_get_addr_random_symbol_got_offset;
 } backdoor_tls_get_addr_reloc_consts_t;
 
 assert_offset(backdoor_tls_get_addr_reloc_consts_t, tls_get_addr_plt_offset, 0);
-assert_offset(backdoor_tls_get_addr_reloc_consts_t, random_symbol_2_got_offset, 0x8);
+assert_offset(backdoor_tls_get_addr_reloc_consts_t, tls_get_addr_random_symbol_got_offset, 0x8);
 static_assert(sizeof(backdoor_tls_get_addr_reloc_consts_t) == 0x10);
+
+typedef struct __attribute__((packed)) {
+	/**
+	 * @brief the address of init_hook_functions()
+	 * 
+	 * the field maps to a relocation entry of type R_X86_64_64 and value init_hook_functions
+	 */
+	int (*init_hook_functions)(backdoor_hooks_ctx_t *funcs);
+	/**
+	 * @brief the address of elf_symbol_get_addr()
+	 * 
+	 * the field maps to a relocation entry of type R_X86_64_64 and value elf_symbol_get_addr
+	 */
+	void (*elf_symbol_get_addr)(elf_info_t *elf_info, EncodedStringId encoded_string_id);
+	/**
+	 * @brief the address of elf_parse()
+	 * 
+	 * the field maps to a relocation entry of type R_X86_64_64 and value elf_parse
+	 */
+	BOOL (*elf_parse)(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
+} elf_functions_t;
+
+assert_offset(elf_functions_t, init_hook_functions, 0);
+assert_offset(elf_functions_t, elf_symbol_get_addr, 0x8);
+assert_offset(elf_functions_t, elf_parse, 0x10);
+static_assert(sizeof(elf_functions_t) == 0x18);
 
 /**
  * @brief disassembles the given x64 code
@@ -1304,7 +1330,7 @@ extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
  */
 extern BOOL main_elf_parse(main_elf_t *main_elf);
 
-extern char* check_argument(char arg_first_char, char* arg_name);
+extern char *check_argument(char arg_first_char, char* arg_name);
 
 /**
  * @brief parses the ELF rodata section, looking for strings and the instructions that reference them
@@ -1418,7 +1444,7 @@ extern void *elf_get_got_symbol(elf_info_t *elf_info, EncodedStringId encoded_st
  */
 extern char *elf_find_string(
 	elf_info_t *elf_info,
-	u32 *stringId_inOut,
+	EncodedStringId *stringId_inOut,
 	void *rodata_start_ptr);
 
 /**
@@ -1428,6 +1454,48 @@ extern char *elf_find_string(
  * @return lzma_allocator* 
  */
 extern lzma_allocator *get_lzma_allocator();
+
+/**
+ * @brief gets the address of the fake LZMA allocator
+ * 
+ * uses fake_lzma_allocator_offset to get the address 0x180 bytes before fake_lzma_allocator
+ * and then adds 0x160 to get the final address of fake_lzma_allocator
+ * 
+ * called in get_lzma_allocator()
+ * 
+ * @return lzma_allocator* 
+ */
+extern void *get_lzma_allocator_address();
+
+/**
+ * @brief a fake free function called by lzma_free() that then calls elf_symbol_get_addr()
+ * 
+ * @param opaque the parsed ELF context (elf_info_t*)
+ * @param nmemb not used
+ * @param size string ID of the symbol name (EncodedStringId)
+ * @return void* the address of the symbol
+ */
+extern void *fake_lzma_alloc(void *opaque, size_t nmemb, size_t size);
+
+/**
+ * @brief a fake free function called by lzma_free()
+ * 
+ * this function is a red herring as it is does nothing except make it look like lzma_alloc() is the real deal
+ * 
+ * @param opaque not used
+ * @param ptr not used
+ */
+extern void fake_lzma_free(void *opaque, void *ptr);
+
+/**
+ * @brief gets the address of the elf_functions
+ * 
+ * uses elf_functions_offset to get the address 0x2a0 bytes before elf_functions
+ * and then adds 0x268 to get the final address of elf_functions
+ *  * 
+ * @return elf_functions_t* 
+ */
+extern elf_functions_t *get_elf_functions_address();
 
 extern BOOL secret_data_append_from_instruction(dasm_ctx_t *dctx, secret_data_shift_cursor *cursor);
 
@@ -1563,14 +1631,14 @@ extern unsigned int backdoor_init(unsigned int ext, u64 *caller_frame);
  * 
  * @param ctx holds values needed to setup the _cpuid(), passed to backdoor_init_stage2()
  * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
- * @return void * the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
+ * @return void* the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
  */
 extern void *call_backdoor_init_stage2(elf_entry_ctx_t *ctx, u64 *caller_frame);
 
 /**
  * @brief initialises the elf_entry_ctx_t
  * 
- * stores the address of the symbol random_symbol in elf_entry_ctx_t::symbol_ptr
+ * stores the address of the symbol cpuid_random_symbol in elf_entry_ctx_t::symbol_ptr
  * stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so
  * calls get_got_offset() to update elf_entry_ctx_t::got_offset 
  * calls get_cpuid_got_index() to update elf_entry_ctx_t::cpuid_fn
@@ -1583,12 +1651,12 @@ extern ptrdiff_t init_elf_entry_ctx(elf_entry_ctx_t *ctx);
 /**
  * @brief get the offset to the GOT
  * 
- * the offset is relative to the address of the symbol random_symbol
+ * the offset is relative to the address of the symbol cpuid_random_symbol
  * 
  * stores the offset in elf_entry_ctx_t::got_offset
  * 
  * @param ctx
- * @return ptrdiff_t offset to GOT from the symbol random_symbol
+ * @return ptrdiff_t offset to GOT from the symbol cpuid_random_symbol
  */
 extern ptrdiff_t get_got_offset(elf_entry_ctx_t *ctx);
 
@@ -1767,26 +1835,26 @@ extern int init_hook_functions(backdoor_hooks_ctx_t *funcs);
  * 
  * the __tls_get_addr() GOT entry is used in backdoor_setup() to find the ELF header at the start of the memory mapped ld.so
  * 
- * calls get_random_symbol_2_got_offset() to update elf_entry_ctx_t::got_ptr and elf_entry_ctx_t::got_offset
+ * calls get_tls_get_addr_random_symbol_got_offset() to update elf_entry_ctx_t::got_ptr and elf_entry_ctx_t::got_offset
  * sets elf_entry_ctx_t::got_offset = 0
  * sets elf_entry_ctx_t::cpuid_fn = 0
  * stores the address of the __tls_get_addr() GOT entry in  elf_entry_ctx_t::got_ptr
  * 
  * @param entry_ctx 
- * @return void * the address of the __tls_get_addr() GOT entry
+ * @return void* the address of the __tls_get_addr() GOT entry
  */
 extern void *update_got_address(elf_entry_ctx_t *entry_ctx);
 
 /**
- * @brief get the random_symbol_2 GOT offset
+ * @brief get the tls_get_addr_random_symbol GOT offset
  * 
  * sets elf_entry_ctx_t::got_ptr = 0x2600
  * stores the index in elf_entry_ctx_t::got_offset
  * 
  * @param ctx
- * @return ptrdiff_t random_symbol_2 GOT offset
+ * @return ptrdiff_t tls_get_addr_random_symbol GOT offset
  */
-extern ptrdiff_t get_random_symbol_2_got_offset(elf_entry_ctx_t *ctx);
+extern ptrdiff_t get_tls_get_addr_random_symbol_got_offset(elf_entry_ctx_t *ctx);
 
 /**
  * @brief the backdoored symbind64 installed in GLRO(dl_audit)
@@ -1814,6 +1882,21 @@ extern uintptr_t backdoor_symbind64(
  */
 extern u32 resolver_call_count;
 extern global_context_t *global_ctx;
+/**
+ * @brief the fake lzma_allocator which makes lzma_alloc() call fake_lzma_alloc()
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * lzma_allocator::alloc is the address of fake_lzma_alloc()
+ * the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_alloc
+ * 
+ * lzma_allocator::free is the address of fake_lzma_free()
+ * the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_free
+ * 
+ * lzma_allocator::opaque is the address of x86_dasm()
+ * the field maps to a relocation entry of type R_X86_64_64 and value x86_dasm
+ * 
+ */
 extern lzma_allocator *fake_lzma_allocator;
 extern backdoor_hooks_data_t **hooks_data_addr;
 /**
@@ -1822,14 +1905,14 @@ extern backdoor_hooks_data_t **hooks_data_addr;
  * the symbol is used by init_elf_entry_ctx()
  * 
  */
-extern const u64 random_symbol;
+extern const u64 cpuid_random_symbol;
 /**
  * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
  * 
  * the symbol is used by update_got_address()
  * 
  */
-extern const u64 random_symbol_2;
+extern const u64 tls_get_addr_random_symbol;
 /**
  * @brief special section that contains _cpuid() related GOT offsets
  * 
@@ -1838,16 +1921,49 @@ extern const u64 random_symbol_2;
  * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
  * 
  */
-extern backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;
+extern const backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;
 /**
  * @brief special section that contains __tls_get_addr() related GOT offsets
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
  * 
- * used by update_got_address() and get_random_symbol_2_got_offset()
+ * used by update_got_address() and get_tls_get_addr_random_symbol_got_offset()
  * 
  */
-extern backdoor_tls_get_addr_reloc_consts_t tls_get_addr_reloc_consts;
+extern const backdoor_tls_get_addr_reloc_consts_t tls_get_addr_reloc_consts;
+/**
+ * @brief special section that contains the offset to lzma_allocator_struct
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * the variable maps to a relocation entry of type R_X86_64_GOTOFF64 and value cpuid_random_symbol-0x180
+ * 
+ * used by get_lzma_allocator_address()
+ * 
+ */
+extern const ptrdiff_t fake_lzma_allocator_offset;
+/**
+ * @brief special section that contains the offset to elf_functions
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * the variable maps to a relocation entry of type R_X86_64_64 and value elf_functions-0x2a0
+ * 
+ */
+extern const ptrdiff_t elf_functions_offset;
+/**
+ * @brief special section that contains addresses to various functions
+ * 
+ * appears to be another obfuscation attempt
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * used by update_got_address() and get_tls_get_addr_random_symbol_got_offset()
+ * 
+ * used by
+ * 
+ */
+extern const elf_functions_t elf_functions;
 
 #include "util.h"
 #endif
