@@ -92,7 +92,7 @@ void xzre_secret_data_test(){}
 
 static void *get_elf_base(const char *path){
 	char cmdBuf[128];
-	char template[] = "grep -E 'r--p 00000000.*%s' /proc/%zu/maps | cut -d '-' -f1";
+	char template[] = "grep -E 'r--p 00000000.*%s' /proc/%d/maps | cut -d '-' -f1";
 	snprintf(cmdBuf, sizeof(cmdBuf), template, path, getpid());
 	FILE *hProc = popen(cmdBuf, "r");
 	memset(cmdBuf, 0x00, sizeof(cmdBuf));
@@ -200,7 +200,7 @@ void xzre_backdoor_setup(){
 		.shared = &shared,
 		.hook_params = &hook_params
 	};
-	printf("pid is %zu\n", getpid());
+	printf("pid is %d\n", getpid());
 	//asm volatile("jmp .");
 	if(!backdoor_setup(&para)){
 		puts("backdoor_setup() FAIL");
@@ -233,8 +233,8 @@ void main_shared(){
 		string_item_t *item = &strings.entries[i];
 		printf(
 			"----> %s\n"
-			"str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04lx, xref_offset: 0x%04lx\n"
-			"RVA_start: %p, RVA_end: %p, RVA_xref: %p\n\n",
+			"str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04zx, xref_offset: 0x%04zx\n"
+			"RVA_start: 0x%tx, RVA_end: 0x%tx, RVA_xref: 0x%tx\n\n",
 			StringXrefName[i],
 				i, item->string_id, item->func_start, item->func_end, item->xref,
 				(item->func_start && item->func_end) ? PTRDIFF(item->func_end, item->func_start) : 0,
@@ -258,8 +258,9 @@ int main(int argc, char *argv[]){
 		if(!res) break;
 		//hexdump(&ctx, sizeof(ctx));
 		printf(
-			"[%2d]: opcode: 0x%08x (orig:0x%08X)  (l: %2llu) -- "
-			"modrm: 0x%02x (%d, %d, %d), operand: %lx, mem_disp: %lx, rex.br: %d, f: %02hhx\n", i,
+			"[%2d]: opcode: 0x%08"PRIx32" (orig:0x%08"PRIX32")  (l: %2"PRIu64") -- "
+			"modrm: 0x%02"PRIx8" (%"PRId8", %"PRId8", %"PRId8"), operand: %"PRIx64", mem_disp: %"PRIx64", rex.br: %d, f: %02"PRIx8"\n",
+			i,
 			XZDASM_OPC(ctx.opcode), ctx.opcode,
 			ctx.instruction_size,
 			ctx.modrm, ctx.modrm_mod, ctx.modrm_reg, ctx.modrm_rm,
@@ -270,7 +271,7 @@ int main(int argc, char *argv[]){
 			ctx.flags);
 		printf("      --> ");
 		for(int i=0; i<ctx.instruction_size; i++){
-			printf("%02hhx ", ctx.instruction[i]);
+			printf("%02"PRIx8" ", ctx.instruction[i]);
 		}
 		printf("\n");
 	};
