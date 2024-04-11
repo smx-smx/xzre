@@ -1468,7 +1468,7 @@ extern lzma_allocator *get_lzma_allocator();
 extern void *get_lzma_allocator_address();
 
 /**
- * @brief a fake free function called by lzma_free() that then calls elf_symbol_get_addr()
+ * @brief a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()
  * 
  * @param opaque the parsed ELF context (elf_info_t*)
  * @param nmemb not used
