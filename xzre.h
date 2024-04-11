@@ -1268,6 +1268,24 @@ extern BOOL find_instruction_with_mem_operand_ex(
 );
 
 /**
+ * @brief Checks if the code between @p code_start and @p code_end is an endbr64 instruction.
+ *
+ *
+ * the checks is encoded as following (note: An endbr64 instruction is encoded as <code>F3 0F 1E FA</code>)
+ * @code
+ * // as 32bit quantities, so 0x10000f223 -> f223
+ * (0xFA1E0FF3 + (0xE230 | 0x5E20000)) == 0xF223
+ * @endcode
+ * and 0xE230 is always passed as an argument to prevent compiler optimizations and for further obfuscation.
+ *
+ * @param code_start pointer to the first byte of the instruction to test
+ * @param code_end pointer to the last byte of the instruction to test
+ * @param low_mask_part the constant 0xE230
+ * @return BOOL TRUE if the instruction is an endbr64, FALSE otherwise
+ */
+extern BOOL is_endbr64_instruction(u8 *code_start, u8 *code_end, u32 low_mask_part);
+
+/**
  * @brief finds an instruction that references the given string
  * 
  * @param code_start address to start searching from

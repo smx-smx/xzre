@@ -75,6 +75,7 @@ SECTIONS_BEGIN()
 	DEFSYM(hook_RSA_get0_key, .text.lzma_index_inia)
 	DEFSYM(hook_EVP_PKEY_set1_RSA, .text.lzma_index_memusaga)
 	DEFSYM(hook_RSA_public_decrypt, .text.lzma_index_prealloa)
+	DEFSYM(is_endbr64_instruction, .text.lzma_block_buffer_encoda)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()
