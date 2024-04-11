@@ -1250,6 +1250,47 @@ extern BOOL find_lea_instruction_with_mem_operand(
 );
 
 /**
+ * @brief like @ref find_mov_instruction, but also considers LEA instructions
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param is_64bit_operand TRUE if MOV should have a 64bit operand, FALSE otherwise
+ * @param load_flag TRUE if searching for load, FALSE for a store
+ * @param dctx disassembler context to hold the state 
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL find_mov_lea_instruction(
+	u8 *code_start,
+	u8 *code_end,
+	BOOL is_64bit_operand,
+	BOOL load_flag,
+	dasm_ctx_t *dctx
+);
+
+/**
+ * @brief finds a MOV instruction.
+ *
+ * @p load_flag specifies if the desired MOV should be a load:
+ * @code mov reg, [mem] @endcode
+ * or a store
+ * @code mov [mem], reg @endcode
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param is_64bit_operand TRUE if MOV should have a 64bit operand, FALSE otherwise
+ * @param load_flag TRUE if searching for load, FALSE for a store
+ * @param dctx disassembler context to hold the state 
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL find_mov_instruction(
+	u8 *code_start,
+	u8 *code_end,
+	BOOL is_64bit_operand,
+	BOOL load_flag,
+	dasm_ctx_t *dctx
+);
+
+/**
  * @brief finds an instruction with an immediate memory operand
  * 
  * @param code_start address to start searching from
