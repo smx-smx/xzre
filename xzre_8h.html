@@ -1042,6 +1042,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, int opcode, void *mem_address)</td></tr>
 <tr class="memdesc:a1c8a36d89bf4e57077a56611e9aeb470"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction with an immediate memory operand  <a href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">More...</a><br /></td></tr>
 <tr class="separator:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a544d2cf67930e0fcd9f9ff37239a4c70"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a544d2cf67930e0fcd9f9ff37239a4c70">is_endbr64_instruction</a> (u8 *code_start, u8 *code_end, u32 low_mask_part)</td></tr>
+<tr class="memdesc:a544d2cf67930e0fcd9f9ff37239a4c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the code between <code>code_start</code> and <code>code_end</code> is an endbr64 instruction.  <a href="xzre_8h.html#a544d2cf67930e0fcd9f9ff37239a4c70">More...</a><br /></td></tr>
+<tr class="separator:a544d2cf67930e0fcd9f9ff37239a4c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78aba1d370c6519777e637f1ed7b7c14"><td class="memItemLeft" align="right" valign="top">u8 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14">find_string_reference</a> (u8 *code_start, u8 *code_end, const char *str)</td></tr>
 <tr class="memdesc:a78aba1d370c6519777e637f1ed7b7c14"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction that references the given string  <a href="xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14">More...</a><br /></td></tr>
 <tr class="separator:a78aba1d370c6519777e637f1ed7b7c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3082,6 +3085,54 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a544d2cf67930e0fcd9f9ff37239a4c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a544d2cf67930e0fcd9f9ff37239a4c70">&#9670;&nbsp;</a></span>is_endbr64_instruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL is_endbr64_instruction </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>low_mask_part</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the code between <code>code_start</code> and <code>code_end</code> is an endbr64 instruction. </p>
+<p>the checks is encoded as following (note: An endbr64 instruction is encoded as <code>F3 0F 1E FA</code>) </p><div class="fragment"><div class="line"><span class="comment">// as 32bit quantities, so 0x10000f223 -&gt; f223</span></div>
+<div class="line">(0xFA1E0FF3 + (0xE230 | 0x5E20000)) == 0xF223</div>
+</div><!-- fragment --><p> and 0xE230 is always passed as an argument to prevent compiler optimizations and for further obfuscation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>pointer to the first byte of the instruction to test </td></tr>
+    <tr><td class="paramname">code_end</td><td>pointer to the last byte of the instruction to test </td></tr>
+    <tr><td class="paramname">low_mask_part</td><td>the constant 0xE230 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the instruction is an endbr64, FALSE otherwise </dd></dl>
 
 </div>
 </div>
