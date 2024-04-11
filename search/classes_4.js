@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['global_5fcontext_5ft_164',['global_context_t',['../structglobal__context__t.html',1,'']]]
+  ['fake_5flzma_5fallocator_5ft_176',['fake_lzma_allocator_t',['../structfake__lzma__allocator__t.html',1,'']]]
 ];

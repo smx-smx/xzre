@@ -1,8 +1,19 @@
 var searchData=
 [
-  ['tls_5fget_5faddr_5fplt_5foffset_136',['tls_get_addr_plt_offset',['../structbackdoor__tls__get__addr__reloc__consts__t.html#ae6b0ebd58f69b464d80d0d5ff85c52c3',1,'backdoor_tls_get_addr_reloc_consts_t']]],
-  ['tls_5fget_5faddr_5frandom_5fsymbol_137',['tls_get_addr_random_symbol',['../xzre_8h.html#a3101b150fe0226a632314e2fa473aba1',1,'xzre.h']]],
-  ['tls_5fget_5faddr_5frandom_5fsymbol_5fgot_5foffset_138',['tls_get_addr_random_symbol_got_offset',['../structbackdoor__tls__get__addr__reloc__consts__t.html#a58e0310d11edc551e3fecb8db222a8f0',1,'backdoor_tls_get_addr_reloc_consts_t']]],
-  ['tls_5fget_5faddr_5freloc_5fconsts_139',['tls_get_addr_reloc_consts',['../xzre_8h.html#aadd306e1b2b33d0306f1995e0a83dae7',1,'xzre.h']]],
-  ['tmp_140',['tmp',['../structelf__handles__t.html#a4d85b775b9f51421509de18ccf76162c',1,'elf_handles_t']]]
+  ['secret_5fdata_131',['secret_data',['../structglobal__context__t.html#af50c8817b94be0a20994b869ba247f3f',1,'global_context_t']]],
+  ['secret_5fdata_5fappend_5ffrom_5fcall_5fsite_132',['secret_data_append_from_call_site',['../xzre_8h.html#aa74b87d0023e8efc4e820768518a884d',1,'xzre.h']]],
+  ['secret_5fdata_5fappend_5ffrom_5fcode_133',['secret_data_append_from_code',['../xzre_8h.html#ac72a5ce7a47cbed0cadf76bd0d578b65',1,'xzre.h']]],
+  ['secret_5fdata_5fappend_5fif_5fflags_134',['secret_data_append_if_flags',['../xzre_8h.html#aaa0db3f61956e32ad25cfaa21122661e',1,'xzre.h']]],
+  ['secret_5fdata_5fappend_5fsingleton_135',['secret_data_append_singleton',['../xzre_8h.html#aa571c1c4c376e99b6e4306cf6d9d5f18',1,'xzre.h']]],
+  ['secret_5fdata_5fget_5fdecrypted_136',['secret_data_get_decrypted',['../xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827',1,'xzre.h']]],
+  ['secret_5fdata_5fshift_5fcursor_137',['secret_data_shift_cursor',['../unionsecret__data__shift__cursor.html',1,'']]],
+  ['shift_5foperations_138',['shift_operations',['../structglobal__context__t.html#af4c72c74b271291a917bde12aa5ab910',1,'global_context_t']]],
+  ['string_5faction_5fdata_139',['string_action_data',['../xzre_8h.html#a53450f0faa9d81b24f8cee5731b51a58',1,'xzre.h']]],
+  ['string_5fid_140',['string_id',['../structstring__item__t.html#ac4392615854eee8a435fb554bd2a39c1',1,'string_item_t']]],
+  ['string_5fitem_5ft_141',['string_item_t',['../structstring__item__t.html',1,'']]],
+  ['string_5fmask_5fdata_142',['string_mask_data',['../xzre_8h.html#a8c67ac851c8ec7f40c406b286233f98e',1,'xzre.h']]],
+  ['string_5freferences_5ft_143',['string_references_t',['../structstring__references__t.html',1,'']]],
+  ['strtab_144',['strtab',['../structelf__info__t.html#a966cc68a87bce3b41fbe225b7990d09c',1,'elf_info_t']]],
+  ['symbol_5fptr_145',['symbol_ptr',['../structelf__entry__ctx__t.html#ad01fe86502a221ee8a55703ca7875f58',1,'elf_entry_ctx_t']]],
+  ['symtab_146',['symtab',['../structelf__info__t.html#a5fe729551661143e8b853d42752de2e2',1,'elf_info_t']]]
 ];

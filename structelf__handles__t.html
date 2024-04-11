@@ -76,26 +76,44 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:aa0ce85b94c37441460d643d932ec4a68"><td class="memItemLeft" align="right" valign="top"><a id="aa0ce85b94c37441460d643d932ec4a68"></a>
-<a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>main</b></td></tr>
+<a class="el" href="structelf__info__t.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles__t.html#aa0ce85b94c37441460d643d932ec4a68">main</a></td></tr>
+<tr class="memdesc:aa0ce85b94c37441460d643d932ec4a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is for sshd itself <br /></td></tr>
 <tr class="separator:aa0ce85b94c37441460d643d932ec4a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d85b775b9f51421509de18ccf76162c"><td class="memItemLeft" align="right" valign="top"><a id="a4d85b775b9f51421509de18ccf76162c"></a>
-<a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles__t.html#a4d85b775b9f51421509de18ccf76162c">tmp</a></td></tr>
-<tr class="memdesc:a4d85b775b9f51421509de18ccf76162c"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for multiple ELFs <br /></td></tr>
+<tr class="memitem:a4d85b775b9f51421509de18ccf76162c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__info__t.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles__t.html#a4d85b775b9f51421509de18ccf76162c">tmp</a></td></tr>
+<tr class="memdesc:a4d85b775b9f51421509de18ccf76162c"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for multiple ELFs  <a href="structelf__handles__t.html#a4d85b775b9f51421509de18ccf76162c">More...</a><br /></td></tr>
 <tr class="separator:a4d85b775b9f51421509de18ccf76162c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63b1126cdb09ac7bbf4f41f92440834c"><td class="memItemLeft" align="right" valign="top"><a id="a63b1126cdb09ac7bbf4f41f92440834c"></a>
-<a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libc</b></td></tr>
+<a class="el" href="structelf__info__t.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libc</b></td></tr>
 <tr class="separator:a63b1126cdb09ac7bbf4f41f92440834c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06311bb067f5e0bb9278af215f44aee3"><td class="memItemLeft" align="right" valign="top"><a id="a06311bb067f5e0bb9278af215f44aee3"></a>
-<a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>liblzma</b></td></tr>
+<a class="el" href="structelf__info__t.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>liblzma</b></td></tr>
 <tr class="separator:a06311bb067f5e0bb9278af215f44aee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d8a1a0c48d028a386da3dbf1b3320e4"><td class="memItemLeft" align="right" valign="top"><a id="a3d8a1a0c48d028a386da3dbf1b3320e4"></a>
-<a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libcrypto</b></td></tr>
+<a class="el" href="structelf__info__t.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libcrypto</b></td></tr>
 <tr class="separator:a3d8a1a0c48d028a386da3dbf1b3320e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>array of ELF handles </p>
 <dl class="section see"><dt>See also</dt><dd>ElfId maps the indices </dd></dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a4d85b775b9f51421509de18ccf76162c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d85b775b9f51421509de18ccf76162c">&#9670;&nbsp;</a></span>tmp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structelf__info__t.html">elf_info_t</a>* elf_handles_t::tmp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>used for multiple ELFs </p>
+<p>in early <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> this is for libc </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="xzre_8h_source.html">xzre.h</a></li>
 </ul>
 </div><!-- contents -->

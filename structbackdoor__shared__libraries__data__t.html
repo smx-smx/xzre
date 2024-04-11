@@ -62,36 +62,35 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
 <div class="title">backdoor_shared_libraries_data_t Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a41ff032c7926ec2f11a86d8c7c2d37a7"><td class="memItemLeft" align="right" valign="top"><a id="a41ff032c7926ec2f11a86d8c7c2d37a7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
-<tr class="separator:a41ff032c7926ec2f11a86d8c7c2d37a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:aa98026e1bfb8a09fbc046f5c215b8410"><td class="memItemLeft" align="right" valign="top"><a id="aa98026e1bfb8a09fbc046f5c215b8410"></a>
-<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
+<a class="el" href="structbackdoor__data__t.html">backdoor_data_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
 <tr class="separator:aa98026e1bfb8a09fbc046f5c215b8410"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d7a24fa38eb0db54e3ec187b3423523"><td class="memItemLeft" align="right" valign="top"><a id="a2d7a24fa38eb0db54e3ec187b3423523"></a>
 <a class="el" href="structelf__handles__t.html">elf_handles_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>elf_handles</b></td></tr>
 <tr class="separator:a2d7a24fa38eb0db54e3ec187b3423523"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb11de4e57d9b6f0df20e5532b58a7e1"><td class="memItemLeft" align="right" valign="top"><a id="aeb11de4e57d9b6f0df20e5532b58a7e1"></a>
-pfn_RSA_public_decrypt_t&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_public_decrypt</b></td></tr>
-<tr class="separator:aeb11de4e57d9b6f0df20e5532b58a7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16839596957f3b0c463a55d43a1378d3"><td class="memItemLeft" align="right" valign="top"><a id="a16839596957f3b0c463a55d43a1378d3"></a>
-pfn_EVP_PKEY_set1_RSA_t&#160;</td><td class="memItemRight" valign="bottom"><b>EVP_PKEY_set1_RSA</b></td></tr>
-<tr class="separator:a16839596957f3b0c463a55d43a1378d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45e1211f1f53be6569a497abf716155f"><td class="memItemLeft" align="right" valign="top"><a id="a45e1211f1f53be6569a497abf716155f"></a>
-pfn_RSA_get0_key_t&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_get0_key</b></td></tr>
-<tr class="separator:a45e1211f1f53be6569a497abf716155f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ca6b421c7409f43ede5d717827b98cf"><td class="memItemLeft" align="right" valign="top"><a id="a3ca6b421c7409f43ede5d717827b98cf"></a>
+pfn_RSA_public_decrypt_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__libraries__data__t.html#a3ca6b421c7409f43ede5d717827b98cf">RSA_public_decrypt_plt</a></td></tr>
+<tr class="memdesc:a3ca6b421c7409f43ede5d717827b98cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">address of the PLT for RSA_public_decrypt() in sshd <br /></td></tr>
+<tr class="separator:a3ca6b421c7409f43ede5d717827b98cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b116f325793d5eda217cdea38e5147"><td class="memItemLeft" align="right" valign="top"><a id="a17b116f325793d5eda217cdea38e5147"></a>
+pfn_EVP_PKEY_set1_RSA_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__libraries__data__t.html#a17b116f325793d5eda217cdea38e5147">EVP_PKEY_set1_RSA_plt</a></td></tr>
+<tr class="memdesc:a17b116f325793d5eda217cdea38e5147"><td class="mdescLeft">&#160;</td><td class="mdescRight">address of the PLT for <a class="el" href="structbackdoor__shared__libraries__data__t.html#a17b116f325793d5eda217cdea38e5147" title="address of the PLT for EVP_PKEY_set1_RSA_plt() in sshd">EVP_PKEY_set1_RSA_plt()</a> in sshd <br /></td></tr>
+<tr class="separator:a17b116f325793d5eda217cdea38e5147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af49eb3757e0fce388c67a458e3b8f18a"><td class="memItemLeft" align="right" valign="top"><a id="af49eb3757e0fce388c67a458e3b8f18a"></a>
+pfn_RSA_get0_key_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__libraries__data__t.html#af49eb3757e0fce388c67a458e3b8f18a">RSA_get0_key_plt</a></td></tr>
+<tr class="memdesc:af49eb3757e0fce388c67a458e3b8f18a"><td class="mdescLeft">&#160;</td><td class="mdescRight">address of the PLT for <a class="el" href="structbackdoor__shared__libraries__data__t.html#af49eb3757e0fce388c67a458e3b8f18a" title="address of the PLT for RSA_get0_key_plt() in sshd">RSA_get0_key_plt()</a> in sshd <br /></td></tr>
+<tr class="separator:af49eb3757e0fce388c67a458e3b8f18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d4aea884caf3f397772a5e68e75842"><td class="memItemLeft" align="right" valign="top"><a id="ac8d4aea884caf3f397772a5e68e75842"></a>
+<a class="el" href="structbackdoor__hooks__data__t.html">backdoor_hooks_data_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>hooks_data_addr</b></td></tr>
+<tr class="separator:ac8d4aea884caf3f397772a5e68e75842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb81d436aca07f674d586114426542d6"><td class="memItemLeft" align="right" valign="top"><a id="abb81d436aca07f674d586114426542d6"></a>
 <a class="el" href="structlibc__imports__t.html">libc_imports_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports</b></td></tr>
 <tr class="separator:abb81d436aca07f674d586114426542d6"><td class="memSeparator" colspan="2">&#160;</td></tr>

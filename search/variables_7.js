@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['libc_5fimports_271',['libc_imports',['../structbackdoor__data.html#a116ff042f4a1a315724cc6f65a56e359',1,'backdoor_data']]],
-  ['libc_5finfo_272',['libc_info',['../structbackdoor__data.html#a8926fe3d847696a0a1b58ec7e9c6d14e',1,'backdoor_data']]],
-  ['libcrypto_5finfo_273',['libcrypto_info',['../structbackdoor__data.html#a932329dfc876e64f123c922e55b30142',1,'backdoor_data']]]
+  ['import_5fresolver_283',['import_resolver',['../structbackdoor__data__t.html#a242188e1a0f31908ae0d0be6a4eef749',1,'backdoor_data_t']]],
+  ['imported_5ffuncs_284',['imported_funcs',['../structglobal__context__t.html#a78bd96cdf31949d697acd247d05639c1',1,'global_context_t']]],
+  ['index_285',['index',['../unionsecret__data__shift__cursor.html#a9b139f7265c8349205b28aa6f8d894e0',1,'secret_data_shift_cursor']]],
+  ['init_5fhook_5ffunctions_286',['init_hook_functions',['../structelf__functions__t.html#a3e6a577e9a706ec9929ba72e003b5516',1,'elf_functions_t']]]
 ];

@@ -1,9 +1,9 @@
 var searchData=
 [
   ['backdoor_5fcpuid_5freloc_5fconsts_5ft_2',['backdoor_cpuid_reloc_consts_t',['../structbackdoor__cpuid__reloc__consts__t.html',1,'']]],
-  ['backdoor_5fdata_3',['backdoor_data',['../structbackdoor__data.html',1,'backdoor_data'],['../structbackdoor__data.html#ae10a74cd4fcfa0f65b5bae2ada983e61',1,'backdoor_data::backdoor_data()']]],
+  ['backdoor_5fdata_3',['backdoor_data',['../structbackdoor__data__t.html#a85f04164ae3b5ad5d4c92c0026951e98',1,'backdoor_data_t']]],
   ['backdoor_5fdata_5fhandle_5ft_4',['backdoor_data_handle_t',['../structbackdoor__data__handle__t.html',1,'']]],
-  ['backdoor_5fdata_5ft_5',['backdoor_data_t',['../xzre_8h.html#a78a513f8570845832aaf68c928a5126a',1,'xzre.h']]],
+  ['backdoor_5fdata_5ft_5',['backdoor_data_t',['../structbackdoor__data__t.html',1,'']]],
   ['backdoor_5fhooks_5fctx_5ft_6',['backdoor_hooks_ctx_t',['../structbackdoor__hooks__ctx__t.html',1,'']]],
   ['backdoor_5fhooks_5fdata_5ft_7',['backdoor_hooks_data_t',['../structbackdoor__hooks__data__t.html',1,'']]],
   ['backdoor_5finit_8',['backdoor_init',['../xzre_8h.html#a3659cb57f57dd0237ecb194e13d35b19',1,'xzre.h']]],
