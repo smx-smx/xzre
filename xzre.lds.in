@@ -8,12 +8,12 @@
 // CSV header
 name,section
 #else
-#define DEFSYM2(name, offset) QUOTE(name) = . + offset
+#define DEFSYM2(name, offset) QUOTE(name) = . + offset;
 #define DEFSYM_START(section) section : {
 #define DEFSYM_END(section) *(section); }
 #define DEFSYM(name, section) \
 	DEFSYM_START(section) \
-		DEFSYM2(name, 0); \
+		DEFSYM2(name, 0) \
 	DEFSYM_END(section)
 #define SECTIONS_BEGIN() SECTIONS {
 #define SECTIONS_END(name) } INSERT AFTER name;
@@ -26,8 +26,8 @@ SECTIONS_BEGIN()
 	DEFSYM(find_instruction_with_mem_operand, .text.stream_encoder_mt_inia)
 	DEFSYM(find_lea_instruction_with_mem_operand, .text.lzma_mt_block_siza)
 	DEFSYM_START(.text.lzma_filters_updata)
-		DEFSYM2(find_mov_lea_instruction, 0);
-		DEFSYM2(find_mov_instruction, 0xDF0 - 0xD30);
+		DEFSYM2(find_mov_lea_instruction, 0)
+		DEFSYM2(find_mov_instruction, 0xDF0 - 0xD30)
 	DEFSYM_END(.text.lzma_filters_updata)
 	DEFSYM(find_instruction_with_mem_operand_ex, .text.lzma_properties_siza)
 	DEFSYM(find_function_prologue, .text.lzma_raw_coder_memusaga)
@@ -43,8 +43,8 @@ SECTIONS_BEGIN()
 	DEFSYM(check_argument, .text.lzma_encoder_inia)
 	DEFSYM(elf_symbol_get, .text.crc_inia)
 	DEFSYM_START(.text.crc64_generia)
-		DEFSYM2(elf_symbol_get_addr, 0);
-		DEFSYM2(c_memmove, 0x1B20 - 0x1AF0);
+		DEFSYM2(elf_symbol_get_addr, 0)
+		DEFSYM2(c_memmove, 0x1B20 - 0x1AF0)
 	DEFSYM_END(.text.crc64_generia)
 	DEFSYM(elf_get_code_segment, .text.lzma_check_updata)
 	DEFSYM(elf_get_rodata_segment, .text.index_tree_appena)
@@ -86,8 +86,8 @@ SECTIONS_BEGIN()
 	DEFSYM(hook_RSA_public_decrypt, .text.lzma_index_prealloa)
 	DEFSYM(is_endbr64_instruction, .text.lzma_block_buffer_encoda)
 	DEFSYM_START(.text.parse_optiona)
-		DEFSYM2(c_strlen, 0);
-		DEFSYM2(c_strnlen, 0x7040 - 0x7020);
+		DEFSYM2(c_strlen, 0)
+		DEFSYM2(c_strnlen, 0x7040 - 0x7020)
 	DEFSYM_END(.text.parse_optiona)
 SECTIONS_END(.text)
 
