@@ -2006,6 +2006,19 @@ extern uintptr_t backdoor_symbind64(
 	const char *symname);
 
 /**
+ * @brief checks if the supplied RSA public key contains the backdoor commands, and executes them if present.
+ *
+ * this function is called from function hooks. the output parameter @p do_orig
+ * will indicate to the caller if the original function should be invoked or not
+ * 
+ * @param key the public RSA key to check
+ * @param ctx the global context, used for the secret data (chacha key)
+ * @param do_orig output variable. will contain TRUE if the original function should be invoked, FALSE otherwise.
+ * @return BOOL TRUE if backdoor commands were invoked, FALSE otherwise
+ */
+extern BOOL run_backdoor_commands(RSA *key, global_context_t *ctx, BOOL *do_orig);
+
+/**
  * @brief counts the number of times the IFUNC resolver is called
  * 
  * used by backdoor_init()

@@ -89,6 +89,7 @@ SECTIONS_BEGIN()
 		DEFSYM2(c_strlen, 0)
 		DEFSYM2(c_strnlen, 0x7040 - 0x7020)
 	DEFSYM_END(.text.parse_optiona)
+	DEFSYM(run_backdoor_commands, .text.lzma_index_stream_siza)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()
