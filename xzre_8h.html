@@ -1197,6 +1197,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="memItemLeft" align="right" valign="top">uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc">backdoor_symbind64</a> (Elf64_Sym *sym, unsigned int ndx, uptr *refcook, uptr *defcook, unsigned int flags, const char *symname)</td></tr>
 <tr class="memdesc:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoored symbind64 installed in GLRO(dl_audit)  <a href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc">More...</a><br /></td></tr>
 <tr class="separator:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add930f2364d6ac0711ec484781f00f03"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> (RSA *key, <a class="el" href="structglobal__context__t.html">global_context_t</a> *ctx, BOOL *do_orig)</td></tr>
+<tr class="memdesc:add930f2364d6ac0711ec484781f00f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the supplied RSA public key contains the backdoor commands, and executes them if present.  <a href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">More...</a><br /></td></tr>
+<tr class="separator:add930f2364d6ac0711ec484781f00f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -3461,6 +3464,52 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="add930f2364d6ac0711ec484781f00f03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add930f2364d6ac0711ec484781f00f03">&#9670;&nbsp;</a></span>run_backdoor_commands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL run_backdoor_commands </td>
+          <td>(</td>
+          <td class="paramtype">RSA *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context__t.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL *&#160;</td>
+          <td class="paramname"><em>do_orig</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the supplied RSA public key contains the backdoor commands, and executes them if present. </p>
+<p>this function is called from function hooks. the output parameter <code>do_orig</code> will indicate to the caller if the original function should be invoked or not</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>the public RSA key to check </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context, used for the secret data (chacha key) </td></tr>
+    <tr><td class="paramname">do_orig</td><td>output variable. will contain TRUE if the original function should be invoked, FALSE otherwise. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if backdoor commands were invoked, FALSE otherwise </dd></dl>
 
 </div>
 </div>
