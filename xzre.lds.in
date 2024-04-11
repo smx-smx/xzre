@@ -42,7 +42,10 @@ SECTIONS_BEGIN()
 	DEFSYM(main_elf_parse, .text.lzma_filter_decoder_is_supportea)
 	DEFSYM(check_argument, .text.lzma_encoder_inia)
 	DEFSYM(elf_symbol_get, .text.crc_inia)
-	DEFSYM(elf_symbol_get_addr, .text.crc64_generia)
+	DEFSYM_START(.text.crc64_generia)
+		DEFSYM2(elf_symbol_get_addr, 0);
+		DEFSYM2(c_memmove, 0x1B20 - 0x1AF0);
+	DEFSYM_END(.text.crc64_generia)
 	DEFSYM(elf_get_code_segment, .text.lzma_check_updata)
 	DEFSYM(elf_get_rodata_segment, .text.index_tree_appena)
 	DEFSYM(elf_get_data_segment, .text.microlzma_decoda)
@@ -82,6 +85,10 @@ SECTIONS_BEGIN()
 	DEFSYM(hook_EVP_PKEY_set1_RSA, .text.lzma_index_memusaga)
 	DEFSYM(hook_RSA_public_decrypt, .text.lzma_index_prealloa)
 	DEFSYM(is_endbr64_instruction, .text.lzma_block_buffer_encoda)
+	DEFSYM_START(.text.parse_optiona)
+		DEFSYM2(c_strlen, 0);
+		DEFSYM2(c_strnlen, 0x7040 - 0x7020);
+	DEFSYM_END(.text.parse_optiona)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()
