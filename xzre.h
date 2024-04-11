@@ -1931,7 +1931,7 @@ extern EncodedStringId get_string_id(const char *string_begin, const char *strin
  * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
  * @return BOOL TRUE if cpuid leaf supported, FALSE otherwise
  */
-extern unsigned int _get_cpuid(unsigned int leaf, unsigned int *eax, unsigned int *ebx,  unsigned int *ecx, unsigned int *edx, u64 *caller_frame);
+extern unsigned int _get_cpuid_modified(unsigned int leaf, unsigned int *eax, unsigned int *ebx,  unsigned int *ecx, unsigned int *edx, u64 *caller_frame);
 
 /**
  * @brief actually calls cpuid instruction
@@ -1944,7 +1944,7 @@ extern unsigned int _get_cpuid(unsigned int leaf, unsigned int *eax, unsigned in
  * @param c ECX register output for cpuid instruction
  * @param d EDX register output for cpuid instruction
  */
-extern void _cpuid(unsigned int level, unsigned int *a, unsigned int *b,  unsigned int *c, unsigned int *d);
+extern void _cpuid_gcc(unsigned int level, unsigned int *a, unsigned int *b,  unsigned int *c, unsigned int *d);
 
 /**
  * @brief Initializes the structure with hooks-related data
