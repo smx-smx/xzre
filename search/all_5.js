@@ -12,10 +12,12 @@ var searchData=
   ['find_5finstruction_5fwith_5fmem_5foperand_5fex_73',['find_instruction_with_mem_operand_ex',['../xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470',1,'xzre.h']]],
   ['find_5flea_5finstruction_74',['find_lea_instruction',['../xzre_8h.html#aea85a14166f11bb956c7862c2a66571e',1,'xzre.h']]],
   ['find_5flea_5finstruction_5fwith_5fmem_5foperand_75',['find_lea_instruction_with_mem_operand',['../xzre_8h.html#a6e76946a37fb256974942a542373e421',1,'xzre.h']]],
-  ['find_5freg2reg_5finstruction_76',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
-  ['find_5fstring_5freference_77',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]],
-  ['first_5fvaddr_78',['first_vaddr',['../structelf__info__t.html#a6ea7f00d7e0d5bb2a4b6d09ee967d272',1,'elf_info_t']]],
-  ['frame_5faddress_79',['frame_address',['../structelf__entry__ctx__t.html#a84fe5a16977e1fd33ecb0de07c8e7a0c',1,'elf_entry_ctx_t']]],
-  ['func_5fend_80',['func_end',['../structstring__item__t.html#aa81eccee799d93a0cac1f43a59d4af4b',1,'string_item_t']]],
-  ['func_5fstart_81',['func_start',['../structstring__item__t.html#a854d271188f3d664ef48707288f98b02',1,'string_item_t']]]
+  ['find_5fmov_5finstruction_76',['find_mov_instruction',['../xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0',1,'xzre.h']]],
+  ['find_5fmov_5flea_5finstruction_77',['find_mov_lea_instruction',['../xzre_8h.html#ae9718452d28f67f46d046c02c0125148',1,'xzre.h']]],
+  ['find_5freg2reg_5finstruction_78',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
+  ['find_5fstring_5freference_79',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]],
+  ['first_5fvaddr_80',['first_vaddr',['../structelf__info__t.html#a6ea7f00d7e0d5bb2a4b6d09ee967d272',1,'elf_info_t']]],
+  ['frame_5faddress_81',['frame_address',['../structelf__entry__ctx__t.html#a84fe5a16977e1fd33ecb0de07c8e7a0c',1,'elf_entry_ctx_t']]],
+  ['func_5fend_82',['func_end',['../structstring__item__t.html#aa81eccee799d93a0cac1f43a59d4af4b',1,'string_item_t']]],
+  ['func_5fstart_83',['func_start',['../structstring__item__t.html#a854d271188f3d664ef48707288f98b02',1,'string_item_t']]]
 ];

@@ -1039,6 +1039,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a6e76946a37fb256974942a542373e421"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6e76946a37fb256974942a542373e421">find_lea_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, void *mem_address)</td></tr>
 <tr class="memdesc:a6e76946a37fb256974942a542373e421"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA instruction with an immediate memory operand  <a href="xzre_8h.html#a6e76946a37fb256974942a542373e421">More...</a><br /></td></tr>
 <tr class="separator:a6e76946a37fb256974942a542373e421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9718452d28f67f46d046c02c0125148"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae9718452d28f67f46d046c02c0125148">find_mov_lea_instruction</a> (u8 *code_start, u8 *code_end, BOOL is_64bit_operand, BOOL load_flag, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx)</td></tr>
+<tr class="memdesc:ae9718452d28f67f46d046c02c0125148"><td class="mdescLeft">&#160;</td><td class="mdescRight">like <a class="el" href="xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0">find_mov_instruction</a>, but also considers LEA instructions  <a href="xzre_8h.html#ae9718452d28f67f46d046c02c0125148">More...</a><br /></td></tr>
+<tr class="separator:ae9718452d28f67f46d046c02c0125148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab8cd040932beaf3ec377a753bfece0"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0">find_mov_instruction</a> (u8 *code_start, u8 *code_end, BOOL is_64bit_operand, BOOL load_flag, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx)</td></tr>
+<tr class="memdesc:a3ab8cd040932beaf3ec377a753bfece0"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a MOV instruction.  <a href="xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0">More...</a><br /></td></tr>
+<tr class="separator:a3ab8cd040932beaf3ec377a753bfece0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">find_instruction_with_mem_operand_ex</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *dctx, int opcode, void *mem_address)</td></tr>
 <tr class="memdesc:a1c8a36d89bf4e57077a56611e9aeb470"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an instruction with an immediate memory operand  <a href="xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470">More...</a><br /></td></tr>
 <tr class="separator:a1c8a36d89bf4e57077a56611e9aeb470"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2732,6 +2738,126 @@ Variables</h2></td></tr>
     <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
     <tr><td class="paramname">dctx</td><td>disassembler context to hold the state </td></tr>
     <tr><td class="paramname">mem_address</td><td>the expected address of the memory access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a3ab8cd040932beaf3ec377a753bfece0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab8cd040932beaf3ec377a753bfece0">&#9670;&nbsp;</a></span>find_mov_instruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL find_mov_instruction </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>is_64bit_operand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>load_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>dctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds a MOV instruction. </p>
+<p><code>load_flag</code> specifies if the desired MOV should be a load: </p><div class="fragment"><div class="line">mov reg, [mem] </div>
+</div><!-- fragment --><p> or a store </p><div class="fragment"><div class="line">mov [mem], reg </div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>address to start searching from </td></tr>
+    <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
+    <tr><td class="paramname">is_64bit_operand</td><td>TRUE if MOV should have a 64bit operand, FALSE otherwise </td></tr>
+    <tr><td class="paramname">load_flag</td><td>TRUE if searching for load, FALSE for a store </td></tr>
+    <tr><td class="paramname">dctx</td><td>disassembler context to hold the state </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ae9718452d28f67f46d046c02c0125148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9718452d28f67f46d046c02c0125148">&#9670;&nbsp;</a></span>find_mov_lea_instruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL find_mov_lea_instruction </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>is_64bit_operand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>load_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx__t.html">dasm_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>dctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>like <a class="el" href="xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0">find_mov_instruction</a>, but also considers LEA instructions </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>address to start searching from </td></tr>
+    <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
+    <tr><td class="paramname">is_64bit_operand</td><td>TRUE if MOV should have a 64bit operand, FALSE otherwise </td></tr>
+    <tr><td class="paramname">load_flag</td><td>TRUE if searching for load, FALSE for a store </td></tr>
+    <tr><td class="paramname">dctx</td><td>disassembler context to hold the state </td></tr>
   </table>
   </dd>
 </dl>
