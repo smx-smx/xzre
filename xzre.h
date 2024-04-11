@@ -368,7 +368,7 @@ assert_offset(dasm_ctx_t, operand, 0x38);
 assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 128);
 
-typedef struct __attribute__((packed)) elf_info {
+typedef struct __attribute__((packed)) {
 	/**
 	 * @brief pointed to the ELF base address in memory
 	 */
@@ -494,6 +494,11 @@ assert_offset(elf_info_t, relr_relocs, 0x88);
 assert_offset(elf_info_t, relr_relocs_num, 0x90);
 assert_offset(elf_info_t, code_segment_start, 0x98);
 assert_offset(elf_info_t, code_segment_size, 0xA0);
+assert_offset(elf_info_t, rodata_segment_start, 0xA8);
+assert_offset(elf_info_t, rodata_segment_size, 0xB0);
+assert_offset(elf_info_t, data_segment_start, 0xB8);
+assert_offset(elf_info_t, data_segment_size, 0xC0);
+assert_offset(elf_info_t, data_segment_alignment, 0xC8);
 assert_offset(elf_info_t, flags, 0xD0);
 assert_offset(elf_info_t, gnu_hash_nbuckets, 0xd8);
 assert_offset(elf_info_t, gnu_hash_last_bloom, 0xdc);
@@ -501,6 +506,7 @@ assert_offset(elf_info_t, gnu_hash_bloom_shift, 0xe0);
 assert_offset(elf_info_t, gnu_hash_bloom, 0xe8);
 assert_offset(elf_info_t, gnu_hash_buckets, 0xf0);
 assert_offset(elf_info_t, gnu_hash_chain, 0xf8);
+static_assert(sizeof(elf_info_t) == 0x100);
 
 typedef struct __attribute__((packed)) {
 	u32 resolved_imports_count;
@@ -520,7 +526,7 @@ typedef struct __attribute__((packed)) {
 	int *(*__errno_location)(void);
 	int (*setlogmask)(int mask);
 	int (*shutdown)(int sockfd, int how);
-	void **libc_stack_end;
+	void *__libc_stack_end;
 } libc_imports_t;
 
 assert_offset(libc_imports_t, resolved_imports_count, 0);
@@ -646,6 +652,7 @@ assert_offset(imported_funcs_t, RSA_free, 0x108);
 assert_offset(imported_funcs_t, BN_free, 0x110);
 assert_offset(imported_funcs_t, libc, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
+static_assert(sizeof(imported_funcs_t) == 0x128);
 
 typedef struct __attribute__((packed)) {
 	PADDING(8);
@@ -654,17 +661,22 @@ typedef struct __attribute__((packed)) {
 	 * pointer to the structure containing resolved OpenSSL and system functions
 	 */
 	imported_funcs_t *imported_funcs;
-	PADDING(0x70);
+	libc_imports_t* libc_imports;
+	PADDING(0x68);
 	/**
 	 * @brief 
 	 * the shifter will use this address as the minimum search address
 	 * any instruction below this address will be rejected
+	 * 
+	 * set in backdoor_setup() to the liblzma code segment start
 	 */
 	u64 code_range_start;
 	/**
 	 * @brief 
 	 * the shifter will use this address as the maximum search address
 	 * any instruction beyond this address will be rejected
+	 * 
+	 * set in backdoor_setup() to the liblzma code segment end
 	 */
 	u64 code_range_end;
 	PADDING(0x78);
@@ -687,7 +699,8 @@ typedef struct __attribute__((packed)) {
 	PADDING(4);
 } global_context_t;
 
-assert_offset(global_context_t, imported_funcs, 8);
+assert_offset(global_context_t, imported_funcs, 0x8);
+assert_offset(global_context_t, libc_imports, 0x10);
 assert_offset(global_context_t, code_range_start, 0x80);
 assert_offset(global_context_t, code_range_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
@@ -714,7 +727,7 @@ typedef struct __attribute__((packed)) {
 	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
 	pfn_RSA_public_decrypt_t hook_EVP_PKEY_set1_RSA;
 	pfn_RSA_get0_key_t hook_RSA_get0_key;
-	imported_funcs_t *imports;
+	imported_funcs_t *imported_funcs;
 	u64 hooks_installed;
 } ldso_ctx_t;
 
@@ -723,6 +736,8 @@ assert_offset(ldso_ctx_t, dl_audit_symbind_alt__size, 0x108);
 assert_offset(ldso_ctx_t, hook_RSA_public_decrypt, 0x110);
 assert_offset(ldso_ctx_t, hook_EVP_PKEY_set1_RSA, 0x118);
 assert_offset(ldso_ctx_t, hook_RSA_get0_key, 0x120);
+assert_offset(ldso_ctx_t, imported_funcs, 0x128);
+assert_offset(ldso_ctx_t, hooks_installed, 0x130);
 static_assert(sizeof(ldso_ctx_t) == 0x138);
 
 
@@ -789,6 +804,7 @@ typedef struct __attribute__((packed)) {
 } backdoor_setup_params_t;
 
 assert_offset(backdoor_setup_params_t, shared, 0x8);
+assert_offset(backdoor_setup_params_t, hook_params, 0x10);
 assert_offset(backdoor_setup_params_t, entry_ctx, 0x80);
 static_assert(sizeof(backdoor_setup_params_t) == 0x88);
 
@@ -797,9 +813,15 @@ static_assert(sizeof(backdoor_setup_params_t) == 0x88);
  * @see ElfId maps the indices
  */
 typedef struct __attribute__((packed)) {
+	/**
+	 * @brief this is for sshd itself
+	 * 
+	 */
 	elf_info_t *main;
 	/**
 	 * @brief used for multiple ELFs
+	 * 
+	 * in early backdoor_setup() this is for libc
 	 */
 	elf_info_t *tmp;
 	elf_info_t *libc;
@@ -815,35 +837,28 @@ assert_offset(elf_handles_t, libcrypto, 0x20);
 
 typedef struct __attribute__((packed)) {
 	elf_handles_t *handles;
-	Elf64_Ehdr *ehdr;
-	void *__libc_stack_end;
+	Elf64_Ehdr *libc_ehdr;
+	void **__libc_stack_end;
 } main_elf_t;
 
 assert_offset(main_elf_t, handles, 0x0);
-assert_offset(main_elf_t, ehdr, 0x8);
+assert_offset(main_elf_t, libc_ehdr, 0x8);
 assert_offset(main_elf_t, __libc_stack_end, 0x10);
-
-
-struct backdoor_data;
-
-/**
- * @brief data passed to functions that access the backdoor data
- */
-typedef struct __attribute__((packed)) {
-	struct backdoor_data *data;
-	elf_handles_t *elf_handles;
-} backdoor_data_handle_t;
-
-assert_offset(backdoor_data_handle_t, data, 0x0);
-assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
-
 
 /**
  * @brief this structure is used to hold most of the backdoor information.
  * it's used as a local variable in function @ref backdoor_setup
  */
-typedef struct __attribute__((packed)) backdoor_data {
+typedef struct __attribute__((packed)) {
+	/**
+	 * @brief this is for sshd itself
+	 * 
+	 */
 	struct link_map *main_map;
+	/**
+	 * @brief this is for ld.so
+	 * 
+	 */
 	struct link_map *dynamic_linker_map;
 	struct link_map *liblzma_map;
 	struct link_map *libcrypto_map;
@@ -856,16 +871,25 @@ typedef struct __attribute__((packed)) backdoor_data {
 	 * @brief points to the beginning of this struct
 	 */
 	struct backdoor_data *backdoor_data;
-	PADDING(sizeof(elf_handles_t *));
+	elf_handles_t * elf_handles_ptr;
 
 	/** parsed ELF files */
-	PADDING(sizeof(elf_info_t));
-	PADDING(sizeof(elf_info_t));
+	/**
+	 * @brief this is for sshd itself
+	 * 
+	 */
+	elf_info_t main_info;
+	/**
+	 * @brief used for multiple ELFs
+	 * 
+	 * in early backdoor_setup() this is for libc
+	 */
+	elf_info_t tmp_info;
 	/**
 	 * @brief ELF context for libc.so
 	 */
 	elf_info_t libc_info;
-	PADDING(sizeof(elf_info_t));
+	elf_info_t liblzma_info;
 	/**
 	 * @brief ELF context for libcrypto.so
 	 */
@@ -890,27 +914,54 @@ assert_offset(backdoor_data_t, libcrypto_map, 0x18);
 assert_offset(backdoor_data_t, libsystemd_map, 0x20);
 assert_offset(backdoor_data_t, libc_map, 0x28);
 assert_offset(backdoor_data_t, elf_handles, 0x30);
+assert_offset(backdoor_data_t, main_info, 0x68);
+assert_offset(backdoor_data_t, tmp_info, 0x168);
 assert_offset(backdoor_data_t, libc_info, 0x268);
+assert_offset(backdoor_data_t, liblzma_info, 0x368);
 assert_offset(backdoor_data_t, libcrypto_info, 0x468);
 assert_offset(backdoor_data_t, libc_imports, 0x568);
 assert_offset(backdoor_data_t, import_resolver, 0x950);
 static_assert(sizeof(backdoor_data_t) == 0x958);
 
+/**
+ * @brief data passed to functions that access the backdoor data
+ */
 typedef struct __attribute__((packed)) {
 	backdoor_data_t *data;
 	elf_handles_t *elf_handles;
-	pfn_RSA_public_decrypt_t RSA_public_decrypt;
-	pfn_EVP_PKEY_set1_RSA_t EVP_PKEY_set1_RSA;
-	pfn_RSA_get0_key_t RSA_get0_key;
-	PADDING(sizeof(void *));
+} backdoor_data_handle_t;
+
+assert_offset(backdoor_data_handle_t, data, 0x0);
+assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
+
+typedef struct __attribute__((packed)) {
+	backdoor_data_t *data;
+	elf_handles_t *elf_handles;
+	/**
+	 * @brief address of the PLT for RSA_public_decrypt() in sshd
+	 * 
+	 */
+	pfn_RSA_public_decrypt_t* RSA_public_decrypt_plt;
+	/**
+	 * @brief address of the PLT for EVP_PKEY_set1_RSA_plt() in sshd
+	 * 
+	 */
+	pfn_EVP_PKEY_set1_RSA_t* EVP_PKEY_set1_RSA_plt;
+	/**
+	 * @brief address of the PLT for RSA_get0_key_plt() in sshd
+	 * 
+	 */
+	pfn_RSA_get0_key_t* RSA_get0_key_plt;
+	backdoor_hooks_data_t **hooks_data_addr;
 	libc_imports_t *libc_imports;
 } backdoor_shared_libraries_data_t;
 
 assert_offset(backdoor_shared_libraries_data_t, data, 0x0);
 assert_offset(backdoor_shared_libraries_data_t, elf_handles, 0x8);
-assert_offset(backdoor_shared_libraries_data_t, RSA_public_decrypt, 0x10);
-assert_offset(backdoor_shared_libraries_data_t, EVP_PKEY_set1_RSA, 0x18);
-assert_offset(backdoor_shared_libraries_data_t, RSA_get0_key, 0x20);
+assert_offset(backdoor_shared_libraries_data_t, RSA_public_decrypt_plt, 0x10);
+assert_offset(backdoor_shared_libraries_data_t, EVP_PKEY_set1_RSA_plt, 0x18);
+assert_offset(backdoor_shared_libraries_data_t, RSA_get0_key_plt, 0x20);
+assert_offset(backdoor_shared_libraries_data_t, hooks_data_addr, 0x28);
 assert_offset(backdoor_shared_libraries_data_t, libc_imports, 0x30);
 
 /**
@@ -1096,18 +1147,22 @@ assert_offset(backdoor_tls_get_addr_reloc_consts_t, tls_get_addr_random_symbol_g
 static_assert(sizeof(backdoor_tls_get_addr_reloc_consts_t) == 0x10);
 
 typedef struct __attribute__((packed)) {
+	PADDING(sizeof(u64));
 	/**
 	 * @brief the address of init_hook_functions()
 	 * 
 	 * the field maps to a relocation entry of type R_X86_64_64 and value init_hook_functions
 	 */
 	int (*init_hook_functions)(backdoor_hooks_ctx_t *funcs);
+	PADDING(sizeof(u64));
+	PADDING(sizeof(u64));
 	/**
 	 * @brief the address of elf_symbol_get_addr()
 	 * 
 	 * the field maps to a relocation entry of type R_X86_64_64 and value elf_symbol_get_addr
 	 */
 	void (*elf_symbol_get_addr)(elf_info_t *elf_info, EncodedStringId encoded_string_id);
+	PADDING(sizeof(u64));
 	/**
 	 * @brief the address of elf_parse()
 	 * 
@@ -1116,10 +1171,20 @@ typedef struct __attribute__((packed)) {
 	BOOL (*elf_parse)(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
 } elf_functions_t;
 
-assert_offset(elf_functions_t, init_hook_functions, 0);
-assert_offset(elf_functions_t, elf_symbol_get_addr, 0x8);
-assert_offset(elf_functions_t, elf_parse, 0x10);
-static_assert(sizeof(elf_functions_t) == 0x18);
+assert_offset(elf_functions_t, init_hook_functions, 0x8);
+assert_offset(elf_functions_t, elf_symbol_get_addr, 0x20);
+assert_offset(elf_functions_t, elf_parse, 0x30);
+static_assert(sizeof(elf_functions_t) == 0x38);
+
+typedef struct __attribute__((packed)) {
+	PADDING(sizeof(u64));
+	lzma_allocator allocator;
+} fake_lzma_allocator_t;
+
+assert_offset(fake_lzma_allocator_t, allocator.alloc, 0x8);
+assert_offset(fake_lzma_allocator_t, allocator.free, 0x10);
+assert_offset(fake_lzma_allocator_t, allocator.opaque, 0x18);
+static_assert(sizeof(fake_lzma_allocator_t) == 0x20);
 
 /**
  * @brief disassembles the given x64 code
@@ -1305,15 +1370,21 @@ extern BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_
 extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
 
 /**
- * @brief parses the main executable from the provided structure
- * as part of the process the arguments and environment is checked
+ * @brief Parses the main executable from the provided structure.
+ * As part of the process the arguments and environment is checked.
  * 
- * argv[0] is checked that it is "/usr/sbin/sshd"
- * the remaining args are checked that they all start with '-'
- * the args are checked that they do not contain the '-d' or '-D' flags (which set sshd into debug or non-daemon mode)
- * the args are are also checked that there is not any '\\t' or '=' characters in the args
- * the environment variable strings are checked that they do not start with any string from the encoded string table
- * in particular these environment strings:
+ * The main_elf_t::libc_ehdr is set in backdoor_setup() by an interesting trick where the address of __tls_get_addr()
+ * is found via GOT in update_got_address(). Then a backwards search for the ELF header magic bytes from this address is
+ * performed to find the libc.so ELF header.
+ * 
+ * The following checks are performed:
+ * - that argv[0] is "/usr/sbin/sshd"
+ * - the remaining args all start with '-'
+ * - the args do not contain the '-d' or '-D' flags (which set sshd into debug or non-daemon mode)
+ * - that there is not any '\\t' or '=' characters in the args
+ * - the environment variable strings do not start with any string from the encoded string table
+ * 
+ * In particular these environment strings:
  * - "DISPLAY="
  * - "LD_AUDIT="
  * - "LD_BIND_NOT="
@@ -1325,8 +1396,8 @@ extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
  * - "WAYLAND_DISPLAY="
  * - "yolAbejyiejuvnup=Evjtgvsh5okmkAvj"
  *   
- * @param main_elf the main executable to parse
- * @return BOOL TRUE if successful (and all checks passed), FALSE otherwise
+ * @param main_elf The main executable to parse.
+ * @return BOOL TRUE if successful and all checks passed, or FALSE otherwise.
  */
 extern BOOL main_elf_parse(main_elf_t *main_elf);
 
@@ -1386,6 +1457,9 @@ extern void *elf_get_rodata_segment(elf_info_t *elf_info, u64 *pSize);
  * 
  * the parameter @p get_alignment controls if @p pSize should be populated with the segment size (when FALSE),
  * or with the segment alignment (when TRUE)
+ * 
+ * Used to store data in the free space after the segment created due to alignment:
+ * - for liblzma at (return value + 0x10) is the backdoor_hooks_data_t struct pointed to by hooks_data_addr
  *
  * @param elf_info the parsed ELF context, which will be updated with the address and size of the data segment
  * @param pSize variable that will be populated with either the page-aligned segment size, or the alignment size
@@ -1463,9 +1537,9 @@ extern lzma_allocator *get_lzma_allocator();
  * 
  * called in get_lzma_allocator()
  * 
- * @return lzma_allocator* 
+ * @return fake_lzma_allocator_t*
  */
-extern void *get_lzma_allocator_address();
+extern fake_lzma_allocator_t *get_lzma_allocator_address();
 
 /**
  * @brief a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()
@@ -1606,34 +1680,24 @@ extern BOOL secret_data_append_from_call_site(
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
 
 /**
- * @brief calls call_backdoor_init_stage2() while in the crc64() IFUNC resolver function
+ * @brief calls backdoor_init_stage2() while in the crc64() IFUNC resolver function
  * 
  * the function counts the number of times it was called in resolver_call_count
  * 
  * the first time it is called is in the crc32() resolver just returns the maximum supported cpuid level
  * 
- * the second time it is called is in the crc64() resolver and then this function calls call_backdoor_init_stage2()
+ * the second time it is called is in the crc64() resolver and then this function calls backdoor_init_stage2()
+ * 
+ * stores elf_entry_ctx_t::symbol_ptr - elf_entry_ctx_t::got_offset in elf_entry_ctx_t::got_ptr which is the GOT address 
  * 
  * this is a modified version of __get_cpuid_max() from gcc
  * 
+ * backdoor_init_stage2() is called by replacing the _cpuid() GOT entry to point to backdoor_init_stage2()
  * @param ext EAX register input. Is either 0 or 0x80000000, but this value is actually not used.
  * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
  * @return unsigned int the EAX register output. Normally the maximum supported cpuid level.
  */
 extern unsigned int backdoor_init(unsigned int ext, u64 *caller_frame);
-
-/**
- * @brief calls backdoor_init_stage2()
- * 
- * backdoor_init_stage2() is called by replacing the _cpuid() GOT entry to point to backdoor_init_stage2()
- * 
- * stores elf_entry_ctx_t::symbol_ptr - elf_entry_ctx_t::got_offset in elf_entry_ctx_t::got_ptr which is the GOT address 
- * 
- * @param ctx holds values needed to setup the _cpuid(), passed to backdoor_init_stage2()
- * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
- * @return void* the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
- */
-extern void *call_backdoor_init_stage2(elf_entry_ctx_t *ctx, u64 *caller_frame);
 
 /**
  * @brief initialises the elf_entry_ctx_t
@@ -1747,6 +1811,14 @@ extern BOOL secret_data_get_decrypted(u8 *output, global_context_t *ctx);
  * @return BOOL TRUE if the whole range is mapped, FALSE otherwise
  */
 extern BOOL is_range_mapped(u8* addr, u8 length, global_context_t* ctx);
+
+/**
+ * @brief returns the number of 1 bits in x
+ * 
+ * @param x 
+ * @return u32 number of 1 bits
+ */
+extern u32 count_bits(u64 x);
 
 /**
  * @brief Get the @see EncodedStringId for the given string
@@ -1881,9 +1953,37 @@ extern uintptr_t backdoor_symbind64(
  * 
  */
 extern u32 resolver_call_count;
+static_assert(sizeof(resolver_call_count) == 0x4);
+
 extern global_context_t *global_ctx;
+static_assert(sizeof(global_ctx) == 0x8);
+
 /**
- * @brief the fake lzma_allocator which makes lzma_alloc() call fake_lzma_alloc()
+ * @brief location of backdoor_hooks_data_t
+ * 
+ * set in process_shared_libraries_map() to a location in the spare bytes after the last liblzma data segment
+ * 
+ */
+extern backdoor_hooks_data_t *hooks_data_addr;
+static_assert(sizeof(hooks_data_addr) == 0x8);
+
+/**
+ * @brief special .data.rel.ro section that contains the offset to fake_lzma_allocator_struct
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * the variable maps to a relocation entry of type R_X86_64_GOTOFF64 and value cpuid_random_symbol-0x180
+ * 
+ * used by get_lzma_allocator_address()
+ * 
+ */
+extern const ptrdiff_t fake_lzma_allocator_offset;
+static_assert(sizeof(fake_lzma_allocator_offset) == 0x8);
+
+/**
+ * @brief special .data.rel.ro section that contains a fake lzma_allocator
+ * 
+ * the fake lzma_allocator makes lzma_alloc() call fake_lzma_alloc()
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
  * 
@@ -1897,53 +1997,11 @@ extern global_context_t *global_ctx;
  * the field maps to a relocation entry of type R_X86_64_64 and value x86_dasm
  * 
  */
-extern lzma_allocator *fake_lzma_allocator;
-extern backdoor_hooks_data_t **hooks_data_addr;
+extern fake_lzma_allocator_t fake_lzma_allocator;
+static_assert(sizeof(fake_lzma_allocator) == 0x20);
+
 /**
- * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
- * 
- * the symbol is used by init_elf_entry_ctx()
- * 
- */
-extern const u64 cpuid_random_symbol;
-/**
- * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
- * 
- * the symbol is used by update_got_address()
- * 
- */
-extern const u64 tls_get_addr_random_symbol;
-/**
- * @brief special section that contains _cpuid() related GOT offsets
- * 
- * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
- * 
- * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
- * 
- */
-extern const backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;
-/**
- * @brief special section that contains __tls_get_addr() related GOT offsets
- * 
- * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
- * 
- * used by update_got_address() and get_tls_get_addr_random_symbol_got_offset()
- * 
- */
-extern const backdoor_tls_get_addr_reloc_consts_t tls_get_addr_reloc_consts;
-/**
- * @brief special section that contains the offset to lzma_allocator_struct
- * 
- * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
- * 
- * the variable maps to a relocation entry of type R_X86_64_GOTOFF64 and value cpuid_random_symbol-0x180
- * 
- * used by get_lzma_allocator_address()
- * 
- */
-extern const ptrdiff_t fake_lzma_allocator_offset;
-/**
- * @brief special section that contains the offset to elf_functions
+ * @brief special .data.rel.ro section that contains the offset to elf_functions
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
  * 
@@ -1951,8 +2009,10 @@ extern const ptrdiff_t fake_lzma_allocator_offset;
  * 
  */
 extern const ptrdiff_t elf_functions_offset;
+static_assert(sizeof(elf_functions_offset) == 0x8);
+
 /**
- * @brief special section that contains addresses to various functions
+ * @brief special .data.rel.ro section that contains addresses to various functions
  * 
  * appears to be another obfuscation attempt
  * 
@@ -1964,6 +2024,73 @@ extern const ptrdiff_t elf_functions_offset;
  * 
  */
 extern const elf_functions_t elf_functions;
+static_assert(sizeof(elf_functions) == 0x38);
+
+/**
+ * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
+ * 
+ * inside a .rodata section
+ * 
+ * the symbol is used by init_elf_entry_ctx()
+ * 
+ */
+extern const u64 cpuid_random_symbol;
+static_assert(sizeof(cpuid_random_symbol) == 0x8);
+
+/**
+ * @brief a bogus global variable that is used by the backdoor to generate an extra symbol
+ * 
+ * inside a .rodata section
+ * 
+ * the symbol is used by update_got_address()
+ * 
+ */
+extern const u64 tls_get_addr_random_symbol;
+static_assert(sizeof(tls_get_addr_random_symbol) == 0x8);
+
+/**
+ * @brief special .rodata section that contains _cpuid() related GOT offsets
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
+ * 
+ */
+extern const backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;
+static_assert(sizeof(cpuid_reloc_consts) == 0x18);
+
+/**
+ * @brief special .rodata section that contains __tls_get_addr() related GOT offsets
+ * 
+ * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
+ * 
+ * used by update_got_address() and get_tls_get_addr_random_symbol_got_offset()
+ * 
+ */
+extern const backdoor_tls_get_addr_reloc_consts_t tls_get_addr_reloc_consts;
+static_assert(sizeof(tls_get_addr_reloc_consts) == 0x10);
+
+/**
+ * @brief contains mask data for the encoded string radix tree
+ * 
+ * inside a .rodata section
+ * 
+ * used by get_string_id()
+ * 
+ */
+extern const u64 string_mask_data[238];
+static_assert(sizeof(string_mask_data) == 0x770);
+
+/**
+ * @brief contains action data for the encoded string radix tree
+ * 
+ * inside a .rodata section
+ * 
+ * used by get_string_id()
+ * 
+ */
+extern const u32 string_action_data[1304];
+static_assert(sizeof(string_action_data) == 0x1460);
 
 #include "util.h"
 #endif
