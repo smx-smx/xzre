@@ -45,9 +45,10 @@ const char *StringXrefName[] = {
 extern void dasm_sample(void);
 extern void dasm_sample_end();
 extern void dasm_sample_dummy_location();
-extern BOOL secret_data_append_trampoline(secret_data_shift_cursor shift_cursor, unsigned shift_count);
+extern BOOL secret_data_append_trampoline(secret_data_shift_cursor_t shift_cursor, unsigned shift_count);
 
 static global_context_t my_global_ctx = { 0 };
+static global_context_t* my_global_ctx_ptr = &my_global_ctx;
 
 /**
  * @brief disables all validation by marking all shift operations as executed
@@ -73,7 +74,7 @@ void xzre_secret_data_test(){
 	// disable x86_dasm shift slot
 	my_global_ctx.shift_operations[2] = 1;
 
-	secret_data_shift_cursor cursor = {
+	secret_data_shift_cursor_t cursor = {
 		.byte_index = 16,
 		.bit_index = 0
 	};
@@ -193,7 +194,7 @@ void xzre_backdoor_setup(){
 	int ret = init_hook_functions(&hook_params);
 
 	backdoor_shared_globals_t shared = {
-		.globals = &my_global_ctx
+		.globals = &my_global_ctx_ptr
 	};
 	backdoor_setup_params_t para = {
 		.entry_ctx = &my_entry_ctx,
