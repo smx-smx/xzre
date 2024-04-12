@@ -1179,12 +1179,12 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a6189320317764e3344934873b58b30b1"><td class="memItemLeft" align="right" valign="top">EncodedStringId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6189320317764e3344934873b58b30b1">get_string_id</a> (const char *string_begin, const char *string_end)</td></tr>
 <tr class="memdesc:a6189320317764e3344934873b58b30b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the.  <a href="xzre_8h.html#a6189320317764e3344934873b58b30b1">More...</a><br /></td></tr>
 <tr class="separator:a6189320317764e3344934873b58b30b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a> (unsigned int leaf, unsigned int *eax, unsigned int *ebx, unsigned int *ecx, unsigned int *edx, u64 *caller_frame)</td></tr>
-<tr class="memdesc:a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()  <a href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">More...</a><br /></td></tr>
-<tr class="separator:a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5d1b3446090d6186a41841fb282df1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1">_cpuid</a> (unsigned int level, unsigned int *a, unsigned int *b, unsigned int *c, unsigned int *d)</td></tr>
-<tr class="memdesc:aed5d1b3446090d6186a41841fb282df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">actually calls cpuid instruction  <a href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1">More...</a><br /></td></tr>
-<tr class="separator:aed5d1b3446090d6186a41841fb282df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a954b1d109f7b7576c4d904a1ef5de2c9"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a954b1d109f7b7576c4d904a1ef5de2c9">_get_cpuid_modified</a> (unsigned int leaf, unsigned int *eax, unsigned int *ebx, unsigned int *ecx, unsigned int *edx, u64 *caller_frame)</td></tr>
+<tr class="memdesc:a954b1d109f7b7576c4d904a1ef5de2c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()  <a href="xzre_8h.html#a954b1d109f7b7576c4d904a1ef5de2c9">More...</a><br /></td></tr>
+<tr class="separator:a954b1d109f7b7576c4d904a1ef5de2c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93ca9203c23a4ab6b11ad972e77d6d80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a93ca9203c23a4ab6b11ad972e77d6d80">_cpuid_gcc</a> (unsigned int level, unsigned int *a, unsigned int *b, unsigned int *c, unsigned int *d)</td></tr>
+<tr class="memdesc:a93ca9203c23a4ab6b11ad972e77d6d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">actually calls cpuid instruction  <a href="xzre_8h.html#a93ca9203c23a4ab6b11ad972e77d6d80">More...</a><br /></td></tr>
+<tr class="separator:a93ca9203c23a4ab6b11ad972e77d6d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbcfd61778019372e0cabdf79b98824d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">init_hook_functions</a> (<a class="el" href="structbackdoor__hooks__ctx__t.html">backdoor_hooks_ctx_t</a> *funcs)</td></tr>
 <tr class="memdesc:abbcfd61778019372e0cabdf79b98824d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the structure with hooks-related data.  <a href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">More...</a><br /></td></tr>
 <tr class="separator:abbcfd61778019372e0cabdf79b98824d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1231,7 +1231,7 @@ Variables</h2></td></tr>
 <tr class="memdesc:a3101b150fe0226a632314e2fa473aba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">a bogus global variable that is used by the backdoor to generate an extra symbol  <a href="xzre_8h.html#a3101b150fe0226a632314e2fa473aba1">More...</a><br /></td></tr>
 <tr class="separator:a3101b150fe0226a632314e2fa473aba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ee0871d6d6f7544176777c8f00244b7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structbackdoor__cpuid__reloc__consts__t.html">backdoor_cpuid_reloc_consts_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7">cpuid_reloc_consts</a></td></tr>
-<tr class="memdesc:a6ee0871d6d6f7544176777c8f00244b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">special .rodata section that contains <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a> related GOT offsets  <a href="xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7">More...</a><br /></td></tr>
+<tr class="memdesc:a6ee0871d6d6f7544176777c8f00244b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">special .rodata section that contains _cpuid() related GOT offsets  <a href="xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7">More...</a><br /></td></tr>
 <tr class="separator:a6ee0871d6d6f7544176777c8f00244b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadd306e1b2b33d0306f1995e0a83dae7"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structbackdoor__tls__get__addr__reloc__consts__t.html">backdoor_tls_get_addr_reloc_consts_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aadd306e1b2b33d0306f1995e0a83dae7">tls_get_addr_reloc_consts</a></td></tr>
 <tr class="memdesc:aadd306e1b2b33d0306f1995e0a83dae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">special .rodata section that contains __tls_get_addr() related GOT offsets  <a href="xzre_8h.html#aadd306e1b2b33d0306f1995e0a83dae7">More...</a><br /></td></tr>
@@ -1288,14 +1288,14 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aed5d1b3446090d6186a41841fb282df1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed5d1b3446090d6186a41841fb282df1">&#9670;&nbsp;</a></span>_cpuid()</h2>
+<a id="a93ca9203c23a4ab6b11ad972e77d6d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93ca9203c23a4ab6b11ad972e77d6d80">&#9670;&nbsp;</a></span>_cpuid_gcc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void _cpuid </td>
+          <td class="memname">void _cpuid_gcc </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -1347,14 +1347,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a3c1f9d6a6a722f65a4fc7530ec2ffe2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">&#9670;&nbsp;</a></span>_get_cpuid()</h2>
+<a id="a954b1d109f7b7576c4d904a1ef5de2c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a954b1d109f7b7576c4d904a1ef5de2c9">&#9670;&nbsp;</a></span>_get_cpuid_modified()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int _get_cpuid </td>
+          <td class="memname">unsigned int _get_cpuid_modified </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>leaf</em>, </td>
@@ -1401,12 +1401,12 @@ Variables</h2></td></tr>
 <p>calls <a class="el" href="xzre_8h.html#a3659cb57f57dd0237ecb194e13d35b19" title="calls backdoor_init_stage2() while in the crc64() IFUNC resolver function">backdoor_init()</a></p>
 <p>this is a copy of __get_cpuid() from gcc</p>
 <p>for context this is the extra code the backdoor build inserts into both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c </p><div class="fragment"><div class="line"><span class="preprocessor">#if defined(CRC32_GENERIC) &amp;&amp; defined(CRC64_GENERIC) &amp;&amp; defined(CRC_X86_CLMUL) &amp;&amp; defined(CRC_USE_IFUNC) &amp;&amp; defined(PIC) &amp;&amp; (defined(BUILDING_CRC64_CLMUL) || defined(BUILDING_CRC32_CLMUL))</span></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a>(<span class="keywordtype">int</span>, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*);</div>
+<div class="line"><span class="keywordtype">int</span> _get_cpuid(<span class="keywordtype">int</span>, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*);</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> _is_arch_extension_supported(<span class="keywordtype">void</span>) {</div>
 <div class="line">  <span class="keywordtype">int</span> success = 1;</div>
 <div class="line">  uint32_t r[4];</div>
-<div class="line">  success = <a class="code" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a>(1, &amp;r[0], &amp;r[1], &amp;r[2], &amp;r[3], ((<span class="keywordtype">char</span>*) __builtin_frame_address(0))-16);</div>
+<div class="line">  success = _get_cpuid(1, &amp;r[0], &amp;r[1], &amp;r[2], &amp;r[3], ((<span class="keywordtype">char</span>*) __builtin_frame_address(0))-16);</div>
 <div class="line">  <span class="keyword">const</span> uint32_t ecx_mask = (1 &lt;&lt; 1) | (1 &lt;&lt; 9) | (1 &lt;&lt; 19);</div>
 <div class="line">  <span class="keywordflow">return</span> success &amp;&amp; (r[2] &amp; ecx_mask) == ecx_mask;</div>
 <div class="line">}</div>
@@ -1414,8 +1414,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="preprocessor">#else</span></div>
 <div class="line"><span class="preprocessor">#define _is_arch_extension_supported() is_arch_extension_supported</span></div>
 <div class="line"><span class="preprocessor">#endif </span></div>
-<div class="ttc" id="axzre_8h_html_a3c1f9d6a6a722f65a4fc7530ec2ffe2e"><div class="ttname"><a href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e">_get_cpuid</a></div><div class="ttdeci">unsigned int _get_cpuid(unsigned int leaf, unsigned int *eax, unsigned int *ebx, unsigned int *ecx, unsigned int *edx, u64 *caller_frame)</div><div class="ttdoc">the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()</div></div>
-</div><!-- fragment --><p>the <a class="el" href="xzre_8h.html#a3c1f9d6a6a722f65a4fc7530ec2ffe2e" title="the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64()">_get_cpuid()</a> function is defined in the file liblzma_la-crc64-fast.o which is linked into liblzma to bring in the backdoor's code</p>
+</div><!-- fragment --><p>the _get_cpuid() function is defined in the file liblzma_la-crc64-fast.o which is linked into liblzma to bring in the backdoor's code</p>
 <p>the _is_arch_extension_supported is a modified version of is_arch_extension_supported() from xz/src/liblzma/check/crc_x86_clmul.h</p>
 <p>additionally both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c are modified to replace the call to is_arch_extension_supported() with _is_arch_extension_supported()</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -1465,7 +1464,7 @@ Variables</h2></td></tr>
 <p>the second time it is called is in the crc64() resolver and then this function calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a></p>
 <p>stores <a class="el" href="structelf__entry__ctx__t.html#ad01fe86502a221ee8a55703ca7875f58" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> - <a class="el" href="structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> in <a class="el" href="structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> which is the GOT address</p>
 <p>this is a modified version of __get_cpuid_max() from gcc</p>
-<p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> is called by replacing the <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a> GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> is called by replacing the _cpuid() GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ext</td><td>EAX register input. Is either 0 or 0x80000000, but this value is actually not used. </td></tr>
     <tr><td class="paramname">caller_frame</td><td>the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
@@ -1515,7 +1514,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ctx</td><td>holds values needed to setup the <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a>, passed to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </td></tr>
+    <tr><td class="paramname">ctx</td><td>holds values needed to setup the _cpuid(), passed to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </td></tr>
     <tr><td class="paramname">caller_frame</td><td>stores the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
     <tr><td class="paramname">cpuid_got_addr</td><td>address of the cpuid() GOT entry </td></tr>
     <tr><td class="paramname">reloc_consts</td><td>pointer to cpuid_reloc_consts </td></tr>
@@ -3916,7 +3915,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>special .rodata section that contains <a class="el" href="xzre_8h.html#aed5d1b3446090d6186a41841fb282df1" title="actually calls cpuid instruction">_cpuid()</a> related GOT offsets </p>
+<p>special .rodata section that contains _cpuid() related GOT offsets </p>
 <p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
 <p>used by call_backdoor_init_stage2(), <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> and <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> </p>
 
