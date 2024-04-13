@@ -1695,6 +1695,21 @@ extern BOOL secret_data_append_if_flags(
 	int flags, u8 *code);
 
 /**
+ * @brief calls @ref secret_data_append_singleton
+ * with either the given code address or the return address, if @p addr is <= 1
+ * 
+ * @param addr the code address to use for the verification. NULL to use the return address
+ * @param shift_cursor the initial shift index
+ * @param shift_count how many '1' bits to shift
+ * @param operation_index identification for this shift operation
+ * @return BOOL 
+ */
+extern BOOL secret_data_append_from_address(
+	void *addr,
+	secret_data_shift_cursor shift_cursor,
+	unsigned shift_count, unsigned operation_index);
+
+/**
  * @brief Shifts data in the secret data store, after validation of @p code.
  * this function is intended to be invoked only once for each @p operation_index value.
  * @p operation_index will be used as an index into a global array of flags,
