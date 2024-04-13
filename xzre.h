@@ -855,6 +855,17 @@ assert_offset(main_elf_t, __libc_stack_end, 0x10);
 typedef struct backdoor_data backdoor_data_t;
 
 /**
+ * @brief data passed to functions that access the backdoor data
+ */
+typedef struct __attribute__((packed)) backdoor_data_handle {
+	backdoor_data_t *data;
+	elf_handles_t *elf_handles;
+} backdoor_data_handle_t;
+
+assert_offset(backdoor_data_handle_t, data, 0x0);
+assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
+
+/**
  * @brief this structure is used to hold most of the backdoor information.
  * it's used as a local variable in function @ref backdoor_setup
  */
@@ -927,17 +938,6 @@ assert_offset(backdoor_data_t, libcrypto_info, 0x468);
 assert_offset(backdoor_data_t, libc_imports, 0x568);
 assert_offset(backdoor_data_t, import_resolver, 0x950);
 static_assert(sizeof(backdoor_data_t) == 0x958);
-
-/**
- * @brief data passed to functions that access the backdoor data
- */
-typedef struct __attribute__((packed)) backdoor_data_handle {
-	backdoor_data_t *data;
-	elf_handles_t *elf_handles;
-} backdoor_data_handle_t;
-
-assert_offset(backdoor_data_handle_t, data, 0x0);
-assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
 
 typedef struct __attribute__((packed)) backdoor_shared_libraries_data {
 	backdoor_data_t *data;
@@ -1706,7 +1706,7 @@ extern BOOL secret_data_append_if_flags(
  */
 extern BOOL secret_data_append_from_address(
 	void *addr,
-	secret_data_shift_cursor shift_cursor,
+	secret_data_shift_cursor_t shift_cursor,
 	unsigned shift_count, unsigned operation_index);
 
 /**
