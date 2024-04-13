@@ -662,7 +662,15 @@ typedef struct __attribute__((packed)) global_context {
 	 */
 	imported_funcs_t *imported_funcs;
 	libc_imports_t* libc_imports;
-	PADDING(0x68);
+	/**
+	 * @brief 
+	 * This flag gets set to TRUE by @ref run_backdoor_commands if any of the validity checks fail,
+	 * making future invocations return immediately.
+	 *
+	 * It's likely both a safety check and an anti tampering mechanism.
+	 */
+	BOOL disable_backdoor;
+	PADDING(0x64);
 	/**
 	 * @brief 
 	 * the shifter will use this address as the minimum search address
@@ -701,6 +709,7 @@ typedef struct __attribute__((packed)) global_context {
 
 assert_offset(global_context_t, imported_funcs, 0x8);
 assert_offset(global_context_t, libc_imports, 0x10);
+assert_offset(global_context_t, disable_backdoor, 0x18);
 assert_offset(global_context_t, code_range_start, 0x80);
 assert_offset(global_context_t, code_range_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
