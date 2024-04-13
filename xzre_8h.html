@@ -119,11 +119,11 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmain__elf.html">main_elf</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data.html">backdoor_data</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a>  <a href="structbackdoor__data.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data__handle.html">backdoor_data_handle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">data passed to functions that access the backdoor data  <a href="structbackdoor__data__handle.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data.html">backdoor_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a>  <a href="structbackdoor__data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__libraries__data.html">backdoor_shared_libraries_data</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -986,6 +986,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a70b389c91d58960da1dfd8b0b8780848"><td class="memItemLeft" align="right" valign="top"><a id="a70b389c91d58960da1dfd8b0b8780848"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structmain__elf.html">main_elf_t</a>, __libc_stack_end, 0x10)</td></tr>
 <tr class="separator:a70b389c91d58960da1dfd8b0b8780848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad240914d1020a2c6cc4af519cf312dd9"><td class="memItemLeft" align="right" valign="top"><a id="ad240914d1020a2c6cc4af519cf312dd9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a>, data, 0x0)</td></tr>
+<tr class="separator:ad240914d1020a2c6cc4af519cf312dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2934e1fc87c15302b153d4cc15f1f9c4"><td class="memItemLeft" align="right" valign="top"><a id="a2934e1fc87c15302b153d4cc15f1f9c4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a>, <a class="el" href="structelf__handles.html">elf_handles</a>, 0x8)</td></tr>
+<tr class="separator:a2934e1fc87c15302b153d4cc15f1f9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5e80dc08a6eb1a376410812c0feae22"><td class="memItemLeft" align="right" valign="top"><a id="ac5e80dc08a6eb1a376410812c0feae22"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, main_map, 0)</td></tr>
 <tr class="separator:ac5e80dc08a6eb1a376410812c0feae22"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1028,12 +1034,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a80339b10786531e6061e8087045c92d9"><td class="memItemLeft" align="right" valign="top"><a id="a80339b10786531e6061e8087045c92d9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, import_resolver, 0x950)</td></tr>
 <tr class="separator:a80339b10786531e6061e8087045c92d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad240914d1020a2c6cc4af519cf312dd9"><td class="memItemLeft" align="right" valign="top"><a id="ad240914d1020a2c6cc4af519cf312dd9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a>, data, 0x0)</td></tr>
-<tr class="separator:ad240914d1020a2c6cc4af519cf312dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2934e1fc87c15302b153d4cc15f1f9c4"><td class="memItemLeft" align="right" valign="top"><a id="a2934e1fc87c15302b153d4cc15f1f9c4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a>, <a class="el" href="structelf__handles.html">elf_handles</a>, 0x8)</td></tr>
-<tr class="separator:a2934e1fc87c15302b153d4cc15f1f9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac82e17a1f10bad69aa9680e89dae0fc1"><td class="memItemLeft" align="right" valign="top"><a id="ac82e17a1f10bad69aa9680e89dae0fc1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data.html">backdoor_shared_libraries_data_t</a>, data, 0x0)</td></tr>
 <tr class="separator:ac82e17a1f10bad69aa9680e89dae0fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1259,9 +1259,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a9549ca2df0051496f162616f98bac754"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a9549ca2df0051496f162616f98bac754">secret_data_append_if_flags</a> (<a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned operation_index, unsigned shift_count, int flags, u8 *code)</td></tr>
 <tr class="memdesc:a9549ca2df0051496f162616f98bac754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a>, if <code>flags</code> are non-zero.  <a href="xzre_8h.html#a9549ca2df0051496f162616f98bac754">More...</a><br /></td></tr>
 <tr class="separator:a9549ca2df0051496f162616f98bac754"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ff8e49f1d8447d2d203907f226f5e25"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0ff8e49f1d8447d2d203907f226f5e25">secret_data_append_from_address</a> (void *addr, secret_data_shift_cursor shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
-<tr class="memdesc:a0ff8e49f1d8447d2d203907f226f5e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> with either the given code address or the return address, if <code>addr</code> is &lt;= 1  <a href="xzre_8h.html#a0ff8e49f1d8447d2d203907f226f5e25">More...</a><br /></td></tr>
-<tr class="separator:a0ff8e49f1d8447d2d203907f226f5e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7239c834d2598747c9158949280783b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa7239c834d2598747c9158949280783b">secret_data_append_from_address</a> (void *addr, <a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
+<tr class="memdesc:aa7239c834d2598747c9158949280783b"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> with either the given code address or the return address, if <code>addr</code> is &lt;= 1  <a href="xzre_8h.html#aa7239c834d2598747c9158949280783b">More...</a><br /></td></tr>
+<tr class="separator:aa7239c834d2598747c9158949280783b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48636f910a9c7df2f2adfa4abf7a73e9"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> (u8 *call_site, u8 *code, <a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
 <tr class="memdesc:a48636f910a9c7df2f2adfa4abf7a73e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts data in the secret data store, after validation of <code>code</code>. this function is intended to be invoked only once for each <code>operation_index</code> value. <code>operation_index</code> will be used as an index into a global array of flags, so that multiple calls with the same value will be a NO-OP.  <a href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">More...</a><br /></td></tr>
 <tr class="separator:a48636f910a9c7df2f2adfa4abf7a73e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3974,8 +3974,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a0ff8e49f1d8447d2d203907f226f5e25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ff8e49f1d8447d2d203907f226f5e25">&#9670;&nbsp;</a></span>secret_data_append_from_address()</h2>
+<a id="aa7239c834d2598747c9158949280783b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7239c834d2598747c9158949280783b">&#9670;&nbsp;</a></span>secret_data_append_from_address()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3989,7 +3989,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">secret_data_shift_cursor&#160;</td>
+          <td class="paramtype"><a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a>&#160;</td>
           <td class="paramname"><em>shift_cursor</em>, </td>
         </tr>
         <tr>
