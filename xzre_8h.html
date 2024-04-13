@@ -1259,6 +1259,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a9549ca2df0051496f162616f98bac754"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a9549ca2df0051496f162616f98bac754">secret_data_append_if_flags</a> (<a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned operation_index, unsigned shift_count, int flags, u8 *code)</td></tr>
 <tr class="memdesc:a9549ca2df0051496f162616f98bac754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a>, if <code>flags</code> are non-zero.  <a href="xzre_8h.html#a9549ca2df0051496f162616f98bac754">More...</a><br /></td></tr>
 <tr class="separator:a9549ca2df0051496f162616f98bac754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff8e49f1d8447d2d203907f226f5e25"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0ff8e49f1d8447d2d203907f226f5e25">secret_data_append_from_address</a> (void *addr, secret_data_shift_cursor shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
+<tr class="memdesc:a0ff8e49f1d8447d2d203907f226f5e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> with either the given code address or the return address, if <code>addr</code> is &lt;= 1  <a href="xzre_8h.html#a0ff8e49f1d8447d2d203907f226f5e25">More...</a><br /></td></tr>
+<tr class="separator:a0ff8e49f1d8447d2d203907f226f5e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48636f910a9c7df2f2adfa4abf7a73e9"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> (u8 *call_site, u8 *code, <a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
 <tr class="memdesc:a48636f910a9c7df2f2adfa4abf7a73e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts data in the secret data store, after validation of <code>code</code>. this function is intended to be invoked only once for each <code>operation_index</code> value. <code>operation_index</code> will be used as an index into a global array of flags, so that multiple calls with the same value will be a NO-OP.  <a href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">More...</a><br /></td></tr>
 <tr class="separator:a48636f910a9c7df2f2adfa4abf7a73e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3968,6 +3971,58 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if backdoor commands were invoked, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a0ff8e49f1d8447d2d203907f226f5e25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff8e49f1d8447d2d203907f226f5e25">&#9670;&nbsp;</a></span>secret_data_append_from_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL secret_data_append_from_address </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">secret_data_shift_cursor&#160;</td>
+          <td class="paramname"><em>shift_cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>shift_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>operation_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> with either the given code address or the return address, if <code>addr</code> is &lt;= 1 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td>the code address to use for the verification. NULL to use the return address </td></tr>
+    <tr><td class="paramname">shift_cursor</td><td>the initial shift index </td></tr>
+    <tr><td class="paramname">shift_count</td><td>how many '1' bits to shift </td></tr>
+    <tr><td class="paramname">operation_index</td><td>identification for this shift operation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
 
 </div>
 </div>
