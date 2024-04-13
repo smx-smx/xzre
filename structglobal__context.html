@@ -93,6 +93,9 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a2f75270d895fb7a930c5286c6f929e28"><td class="memItemLeft" align="right" valign="top"><a id="a2f75270d895fb7a930c5286c6f929e28"></a>
 <a class="el" href="structlibc__imports.html">libc_imports_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libc_imports</b></td></tr>
 <tr class="separator:a2f75270d895fb7a930c5286c6f929e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd62af07344d65195f10f6d6a3c98af"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af">disable_backdoor</a></td></tr>
+<tr class="memdesc:a4cd62af07344d65195f10f6d6a3c98af"><td class="mdescLeft">&#160;</td><td class="mdescRight">This flag gets set to TRUE by <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> if any of the validity checks fail, making future invocations return immediately.  <a href="structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af">More...</a><br /></td></tr>
+<tr class="separator:a4cd62af07344d65195f10f6d6a3c98af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a717a926b3e4ac408c768b121fcf7d614"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a717a926b3e4ac408c768b121fcf7d614">code_range_start</a></td></tr>
 <tr class="memdesc:a717a926b3e4ac408c768b121fcf7d614"><td class="mdescLeft">&#160;</td><td class="mdescRight">the shifter will use this address as the minimum search address any instruction below this address will be rejected  <a href="structglobal__context.html#a717a926b3e4ac408c768b121fcf7d614">More...</a><br /></td></tr>
 <tr class="separator:a717a926b3e4ac408c768b121fcf7d614"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +147,23 @@ u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struc
 
 <p>the shifter will use this address as the minimum search address any instruction below this address will be rejected </p>
 <p>set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to the liblzma code segment start </p>
+
+</div>
+</div>
+<a id="a4cd62af07344d65195f10f6d6a3c98af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd62af07344d65195f10f6d6a3c98af">&#9670;&nbsp;</a></span>disable_backdoor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL global_context::disable_backdoor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This flag gets set to TRUE by <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> if any of the validity checks fail, making future invocations return immediately. </p>
+<p>It's likely both a safety check and an anti tampering mechanism. </p>
 
 </div>
 </div>
