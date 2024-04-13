@@ -1782,7 +1782,7 @@ extern BOOL secret_data_append_from_call_site(
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
 
 /**
- * @brief calls backdoor_init_stage2() while in the crc64() IFUNC resolver function
+ * @brief calls @ref backdoor_init while in the crc64() IFUNC resolver function
  * 
  * the function counts the number of times it was called in resolver_call_count
  * 
@@ -1795,11 +1795,22 @@ extern BOOL backdoor_setup(backdoor_setup_params_t *params);
  * this is a modified version of __get_cpuid_max() from gcc
  * 
  * backdoor_init_stage2() is called by replacing the _cpuid() GOT entry to point to backdoor_init_stage2()
- * @param ext EAX register input. Is either 0 or 0x80000000, but this value is actually not used.
+ * @param cpuid_request EAX register input. Is either 0 or 0x80000000, but this value is actually not used.
  * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
  * @return unsigned int the EAX register output. Normally the maximum supported cpuid level.
  */
-extern unsigned int backdoor_init(unsigned int ext, u64 *caller_frame);
+extern unsigned int backdoor_entry(unsigned int cpuid_request, u64 *caller_frame);
+
+/**
+ * @brief calls @ref backdoor_init_stage2 by disguising it as a call to cpuid.
+ *
+ * this is achieved by modifying the cpuid GOT entry.
+ * 
+ * @param state the entry context, filled by @ref backdoor_entry
+ * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
+ * @return unsigned int the EAX register output. Normally the maximum supported cpuid level.
+ */
+extern unsigned int backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
 
 /**
  * @brief initialises the elf_entry_ctx_t
