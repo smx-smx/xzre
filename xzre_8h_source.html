@@ -637,7 +637,7 @@ $(function() {
 <div class="line"><a name="l00663"></a><span class="lineno"><a class="line" href="structglobal__context.html#a5dccd92d1dd861220b290896bd7ba487">  663</a></span>&#160;    <a class="code" href="structimported__funcs.html">imported_funcs_t</a> *<a class="code" href="structglobal__context.html#a5dccd92d1dd861220b290896bd7ba487">imported_funcs</a>;</div>
 <div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    <a class="code" href="structlibc__imports.html">libc_imports_t</a>* <a class="code" href="structlibc__imports.html">libc_imports</a>;</div>
 <div class="line"><a name="l00672"></a><span class="lineno"><a class="line" href="structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af">  672</a></span>&#160;    BOOL <a class="code" href="structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af">disable_backdoor</a>;</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    PADDING(0x68);</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    PADDING(0x64);</div>
 <div class="line"><a name="l00681"></a><span class="lineno"><a class="line" href="structglobal__context.html#a717a926b3e4ac408c768b121fcf7d614">  681</a></span>&#160;    u64 <a class="code" href="structglobal__context.html#a717a926b3e4ac408c768b121fcf7d614">code_range_start</a>;</div>
 <div class="line"><a name="l00689"></a><span class="lineno"><a class="line" href="structglobal__context.html#a7b19808b1df8a3d875126261db187217">  689</a></span>&#160;    u64 <a class="code" href="structglobal__context.html#a7b19808b1df8a3d875126261db187217">code_range_end</a>;</div>
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    PADDING(0x78);</div>
@@ -649,15 +649,15 @@ $(function() {
 <div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160; </div>
 <div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, <a class="code" href="structimported__funcs.html">imported_funcs</a>, 0x8);</div>
 <div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, <a class="code" href="structlibc__imports.html">libc_imports</a>, 0x10);</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, disable_backdoor, 0x18)</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, disable_backdoor, 0x18);</div>
 <div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, code_range_start, 0x80);</div>
 <div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, code_range_end, 0x88);</div>
 <div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, secret_data, 0x108);</div>
 <div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, shift_operations, 0x141);</div>
 <div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;assert_offset(<a class="code" href="structglobal__context.html">global_context_t</a>, num_shifted_bits, 0x160);</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;static_assert(sizeof(<a class="code" href="structglobal__context.html">global_context_t</a>) == 0x168);</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;static_assert(<span class="keyword">sizeof</span>(<a class="code" href="structglobal__context.html">global_context_t</a>) == 0x168);</div>
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160; </div>
-<div class="line"><a name="l00720"></a><span class="lineno"><a class="line" href="structbackdoor__shared__globals.html">  720</a></span>&#160;typedef struct __attribute__((packed)) <a class="code" href="structbackdoor__shared__globals.html">backdoor_shared_globals</a> {</div>
+<div class="line"><a name="l00720"></a><span class="lineno"><a class="line" href="structbackdoor__shared__globals.html">  720</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)) <a class="code" href="structbackdoor__shared__globals.html">backdoor_shared_globals</a> {</div>
 <div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    PADDING(0x10);</div>
 <div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    <a class="code" href="structglobal__context.html">global_context_t</a> **globals;</div>
 <div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;} <a class="code" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a>;</div>
