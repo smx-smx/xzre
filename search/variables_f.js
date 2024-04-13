@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['verdef_323',['verdef',['../structelf__info__t.html#a5b17799896473346beebc72c4766d19a',1,'elf_info_t']]],
-  ['verdef_5fnum_324',['verdef_num',['../structelf__info__t.html#a652924f9ce8c60158f50724dc2bc18f7',1,'elf_info_t']]]
+  ['verdef_334',['verdef',['../structelf__info.html#a356ae81a037a0f79bac22d7064642ef3',1,'elf_info']]],
+  ['verdef_5fnum_335',['verdef_num',['../structelf__info.html#a74c23ee5c941369c805fc6a58b01e362',1,'elf_info']]]
 ];

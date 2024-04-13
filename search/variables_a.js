@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['num_5fshifted_5fbits_301',['num_shifted_bits',['../structglobal__context__t.html#abd29ac9cddcde5baca3901d2bcc6c92f',1,'global_context_t']]]
+  ['num_5fshifted_5fbits_312',['num_shifted_bits',['../structglobal__context.html#a6895ac8df8ead90c8f140a8c6606828f',1,'global_context']]]
 ];

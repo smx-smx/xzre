@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fake_5flzma_5fallocator_5ft_180',['fake_lzma_allocator_t',['../structfake__lzma__allocator__t.html',1,'']]]
+  ['fake_5flzma_5fallocator_186',['fake_lzma_allocator',['../structfake__lzma__allocator.html',1,'']]]
 ];

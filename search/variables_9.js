@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main_298',['main',['../structelf__handles__t.html#aa0ce85b94c37441460d643d932ec4a68',1,'elf_handles_t']]],
-  ['main_5finfo_299',['main_info',['../structbackdoor__data__t.html#aac20b032bff93b0d4b4f2d4d6aafb8ab',1,'backdoor_data_t']]],
-  ['main_5fmap_300',['main_map',['../structbackdoor__data__t.html#abf6c4d626e769b5b7f2ff14545688379',1,'backdoor_data_t']]]
+  ['main_309',['main',['../structelf__handles.html#ad693d428a831ddaadae6d8de369ebf80',1,'elf_handles']]],
+  ['main_5finfo_310',['main_info',['../structbackdoor__data.html#ad66782fe22d1981edf9f791ac0d4a0d7',1,'backdoor_data']]],
+  ['main_5fmap_311',['main_map',['../structbackdoor__data.html#a6d36460b86405888db4138fb6cb02a21',1,'backdoor_data']]]
 ];

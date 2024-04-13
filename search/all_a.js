@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['ldso_5fctx_5ft_112',['ldso_ctx_t',['../structldso__ctx__t.html',1,'']]],
-  ['libc_5fimports_113',['libc_imports',['../structbackdoor__data__t.html#a2db55bdd55d551c9b193357a5d533f3a',1,'backdoor_data_t']]],
-  ['libc_5fimports_5ft_114',['libc_imports_t',['../structlibc__imports__t.html',1,'']]],
-  ['libc_5finfo_115',['libc_info',['../structbackdoor__data__t.html#a99e48fdb9e85f5f5cd7d37786d78eab0',1,'backdoor_data_t']]],
-  ['libcrypto_5finfo_116',['libcrypto_info',['../structbackdoor__data__t.html#a1729f7578790ffabfb83b9597696fe4e',1,'backdoor_data_t']]]
+  ['ldso_5fctx_119',['ldso_ctx',['../structldso__ctx.html',1,'']]],
+  ['libc_5fimports_120',['libc_imports',['../structlibc__imports.html',1,'libc_imports'],['../structbackdoor__data.html#a116ff042f4a1a315724cc6f65a56e359',1,'backdoor_data::libc_imports()']]],
+  ['libc_5finfo_121',['libc_info',['../structbackdoor__data.html#a8926fe3d847696a0a1b58ec7e9c6d14e',1,'backdoor_data']]],
+  ['libcrypto_5finfo_122',['libcrypto_info',['../structbackdoor__data.html#a932329dfc876e64f123c922e55b30142',1,'backdoor_data']]]
 ];

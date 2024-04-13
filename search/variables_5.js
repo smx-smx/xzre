@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['gnu_5fhash_5flast_5fbloom_283',['gnu_hash_last_bloom',['../structelf__info__t.html#ac4d39036e9e07224ea09729dc37707b1',1,'elf_info_t']]],
-  ['gnu_5fhash_5fnbuckets_284',['gnu_hash_nbuckets',['../structelf__info__t.html#a4490dbc4646cc57c1d3978fc36b67aa2',1,'elf_info_t']]],
-  ['gnurelro_5ffound_285',['gnurelro_found',['../structelf__info__t.html#a9f789d5392e2556caf933d69493df820',1,'elf_info_t']]],
-  ['gnurelro_5fmemsize_286',['gnurelro_memsize',['../structelf__info__t.html#a4dd36abf609750416ef1549e98e8ccb2',1,'elf_info_t']]],
-  ['gnurelro_5fvaddr_287',['gnurelro_vaddr',['../structelf__info__t.html#a9ae2050d1e5ea2b661c7c974bd4fdda6',1,'elf_info_t']]],
-  ['got_5foffset_288',['got_offset',['../structelf__entry__ctx__t.html#af75bd9706dff28ecdc39c1c14765e873',1,'elf_entry_ctx_t']]],
-  ['got_5fptr_289',['got_ptr',['../structelf__entry__ctx__t.html#a981d9d100fcb877d5c77a16059bd47ac',1,'elf_entry_ctx_t']]]
+  ['gnu_5fhash_5flast_5fbloom_294',['gnu_hash_last_bloom',['../structelf__info.html#a3a1a5acb2d22a9bc1ae2df30fa121a33',1,'elf_info']]],
+  ['gnu_5fhash_5fnbuckets_295',['gnu_hash_nbuckets',['../structelf__info.html#a575df843cb133e2a75e6b8027eb75659',1,'elf_info']]],
+  ['gnurelro_5ffound_296',['gnurelro_found',['../structelf__info.html#a66d75bbde3aa44519fd136a848e051da',1,'elf_info']]],
+  ['gnurelro_5fmemsize_297',['gnurelro_memsize',['../structelf__info.html#a1783b21f972415e71d5cb7d8531de5e5',1,'elf_info']]],
+  ['gnurelro_5fvaddr_298',['gnurelro_vaddr',['../structelf__info.html#a8500b4de03a9b9d44989375921b27f70',1,'elf_info']]],
+  ['got_5foffset_299',['got_offset',['../structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7',1,'elf_entry_ctx']]],
+  ['got_5fptr_300',['got_ptr',['../structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0',1,'elf_entry_ctx']]]
 ];
