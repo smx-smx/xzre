@@ -1360,6 +1360,18 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a52ef44e674339d73bef9c9e28c97ecb7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52ef44e674339d73bef9c9e28c97ecb7">sshd_get_host_keys_address_via_krb5ccname</a> (u8 *data_start, u8 *data_end, u8 *code_start, u8 *code_end, void **host_keys_out, <a class="el" href="structelf__info.html">elf_info_t</a> *elf)</td></tr>
 <tr class="memdesc:a52ef44e674339d73bef9c9e28c97ecb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the address of <code>sensitive_data.host_keys</code> in sshd by using getenv( STR_KRB5CCNAME )  <a href="xzre_8h.html#a52ef44e674339d73bef9c9e28c97ecb7">More...</a><br /></td></tr>
 <tr class="separator:a52ef44e674339d73bef9c9e28c97ecb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5126a648eae68682ec767c19bba0f9eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5126a648eae68682ec767c19bba0f9eb">sshd_get_host_keys_score_in_demote_sensitive_data</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a5126a648eae68682ec767c19bba0f9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>demote_sensitive_data</code> accesses <code>host_keys</code> or not  <a href="xzre_8h.html#a5126a648eae68682ec767c19bba0f9eb">More...</a><br /></td></tr>
+<tr class="separator:a5126a648eae68682ec767c19bba0f9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b20bf7b31873edf824778f9ecc471b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a72b20bf7b31873edf824778f9ecc471b">sshd_get_host_keys_score_in_main</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a72b20bf7b31873edf824778f9ecc471b"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>main</code> accesses <code>host_keys</code> or not  <a href="xzre_8h.html#a72b20bf7b31873edf824778f9ecc471b">More...</a><br /></td></tr>
+<tr class="separator:a72b20bf7b31873edf824778f9ecc471b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f33df6c2fc052bc282697241421337b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a4f33df6c2fc052bc282697241421337b">sshd_get_host_keys_score_in_do_child</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a4f33df6c2fc052bc282697241421337b"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>do_child</code> accesses <code>host_keys</code> or not  <a href="xzre_8h.html#a4f33df6c2fc052bc282697241421337b">More...</a><br /></td></tr>
+<tr class="separator:a4f33df6c2fc052bc282697241421337b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9f89faac5a24707275635026fa910b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">sshd_get_host_keys_score</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:ac9f89faac5a24707275635026fa910b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if accesses <code>host_keys</code> or not  <a href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">More...</a><br /></td></tr>
+<tr class="separator:ac9f89faac5a24707275635026fa910b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -4491,6 +4503,186 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the address was found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ac9f89faac5a24707275635026fa910b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f89faac5a24707275635026fa910b4">&#9670;&nbsp;</a></span>sshd_get_host_keys_score()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sshd_get_host_keys_score </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>host_keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a numeric score which indicates if accesses <code>host_keys</code> or not </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
+    <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a5126a648eae68682ec767c19bba0f9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5126a648eae68682ec767c19bba0f9eb">&#9670;&nbsp;</a></span>sshd_get_host_keys_score_in_demote_sensitive_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sshd_get_host_keys_score_in_demote_sensitive_data </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>host_keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a numeric score which indicates if <code>demote_sensitive_data</code> accesses <code>host_keys</code> or not </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
+    <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int a score of 3 if accessed, 0 otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a4f33df6c2fc052bc282697241421337b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f33df6c2fc052bc282697241421337b">&#9670;&nbsp;</a></span>sshd_get_host_keys_score_in_do_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sshd_get_host_keys_score_in_do_child </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>host_keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a numeric score which indicates if <code>do_child</code> accesses <code>host_keys</code> or not </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
+    <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a72b20bf7b31873edf824778f9ecc471b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72b20bf7b31873edf824778f9ecc471b">&#9670;&nbsp;</a></span>sshd_get_host_keys_score_in_main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sshd_get_host_keys_score_in_main </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>host_keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a numeric score which indicates if <code>main</code> accesses <code>host_keys</code> or not </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
+    <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
