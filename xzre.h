@@ -874,6 +874,40 @@ typedef struct __attribute__((packed)) backdoor_data_handle {
 assert_offset(backdoor_data_handle_t, data, 0x0);
 assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
 
+
+typedef struct __attribute__((packed)) string_item {
+	/**
+	 * @brief the string that was referenced, in encoded form
+	 */
+	EncodedStringId string_id;
+	PADDING(4);
+	/**
+	 * @brief the starting address of the function that referenced the string
+	 */
+	void *func_start;
+	/**
+	 * @brief the ending address of the function that referenced the string
+	 */
+	void *func_end;
+	/**
+	 * @brief location of the instruction that referenced the string
+	 */
+	void *xref;
+} string_item_t;
+
+assert_offset(string_item_t, string_id, 0);
+assert_offset(string_item_t, func_start, 0x8);
+assert_offset(string_item_t, func_end, 0x10);
+assert_offset(string_item_t, xref, 0x18);
+static_assert(sizeof(string_item_t) == 0x20);
+
+typedef struct __attribute__((packed)) string_references {
+	string_item_t entries[27];
+	PADDING(0x8);
+} string_references_t;
+
+assert_offset(string_references_t, entries, 0);
+
 /**
  * @brief this structure is used to hold most of the backdoor information.
  * it's used as a local variable in function @ref backdoor_setup
@@ -924,8 +958,12 @@ typedef struct __attribute__((packed)) backdoor_data {
 	 * @brief functions imported from libc
 	 */
 	libc_imports_t libc_imports;
-
-	PADDING(0x378);
+	/**
+	 * @brief information about resolved string references
+	 * and the containing functions boundaries 
+	 */
+	string_references_t string_refs;
+	PADDING(16);
 	/**
 	 * @brief ELF import resolver (fake LZMA allocator)
 	 */
@@ -945,6 +983,7 @@ assert_offset(backdoor_data_t, libc_info, 0x268);
 assert_offset(backdoor_data_t, liblzma_info, 0x368);
 assert_offset(backdoor_data_t, libcrypto_info, 0x468);
 assert_offset(backdoor_data_t, libc_imports, 0x568);
+assert_offset(backdoor_data_t, string_refs, 0x5D8);
 assert_offset(backdoor_data_t, import_resolver, 0x950);
 static_assert(sizeof(backdoor_data_t) == 0x958);
 
@@ -994,39 +1033,6 @@ typedef union {
 		u32 byte_index : 29;
 	};
 } secret_data_shift_cursor_t;
-
-typedef struct __attribute__((packed)) string_item {
-	/**
-	 * @brief the string that was referenced, in encoded form
-	 */
-	EncodedStringId string_id;
-	PADDING(4);
-	/**
-	 * @brief the starting address of the function that referenced the string
-	 */
-	void *func_start;
-	/**
-	 * @brief the ending address of the function that referenced the string
-	 */
-	void *func_end;
-	/**
-	 * @brief location of the instruction that referenced the string
-	 */
-	void *xref;
-} string_item_t;
-
-assert_offset(string_item_t, string_id, 0);
-assert_offset(string_item_t, func_start, 0x8);
-assert_offset(string_item_t, func_end, 0x10);
-assert_offset(string_item_t, xref, 0x18);
-static_assert(sizeof(string_item_t) == 0x20);
-
-typedef struct __attribute__((packed)) string_references {
-	string_item_t entries[27];
-	PADDING(0x8);
-} string_references_t;
-
-assert_offset(string_references_t, entries, 0);
 
 /**
  * @brief the payload header. also used as Chacha IV
