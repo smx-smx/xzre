@@ -100,6 +100,7 @@ SECTIONS_BEGIN()
 	DEFSYM(find_dl_naudit, .text.lzma_filter_flags_decoda)
 	DEFSYM(find_link_map_l_audit_any_plt, .text.lzma_index_hash_inia)
 	DEFSYM(find_link_map_l_audit_any_plt_bitmask, .text.lzma_index_iter_locata)
+	DEFSYM(sshd_get_host_keys_address, .text.lzma_bufcpa)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()

@@ -250,6 +250,18 @@ void main_shared(){
 				item->func_end ? PTRDIFF(item->func_end, elf_addr) : 0,
 				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
 	}
+
+
+	u64 code_size = 0, data_size = 0;
+	void *data_start = elf_get_data_segment(&einfo, &data_size, 0);
+	void *data_end = (void *)PTRADD(data_start, data_size);
+	void *code_start = elf_get_code_segment(&einfo, &code_size);
+	void *code_end = (void *)PTRADD(code_start, code_size);
+	void *ssh_host_keys = NULL;
+	if(sshd_get_host_keys_address(data_start, data_end, code_start, code_end, &strings, &ssh_host_keys)){
+		printf("sensitive_data.host_keys: %p\n", ssh_host_keys);
+	}
+
 	//xzre_backdoor_setup();
 	puts("main_shared(): OK");
 }
