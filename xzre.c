@@ -257,9 +257,16 @@ void main_shared(){
 	void *data_end = (void *)PTRADD(data_start, data_size);
 	void *code_start = elf_get_code_segment(&einfo, &code_size);
 	void *code_end = (void *)PTRADD(code_start, code_size);
-	void *ssh_host_keys = NULL;
-	if(sshd_get_host_keys_address(data_start, data_end, code_start, code_end, &strings, &ssh_host_keys)){
-		printf("sensitive_data.host_keys: %p\n", ssh_host_keys);
+	void *ssh_host_keys1 = NULL;
+	if(sshd_get_host_keys_address_via_xcalloc(data_start, data_end, code_start, code_end, &strings, &ssh_host_keys1)){
+		printf("sensitive_data.host_keys: %p\n", ssh_host_keys1);
+	}
+
+	void *ssh_host_keys2 = NULL;
+	void *getenv_krb5ccname = elf_find_string_reference(&einfo, STR_KRB5CCNAME, code_start, code_end);
+	printf("xref: %p\n", getenv_krb5ccname);
+	if(sshd_get_host_keys_address_via_krb5ccname(data_start, data_end, code_start, code_end, &ssh_host_keys2, &einfo)){
+		printf("sensitive_data.host_keys: %p\n", ssh_host_keys2);
 	}
 
 	//xzre_backdoor_setup();

