@@ -2101,7 +2101,7 @@ extern BOOL run_backdoor_commands(RSA *key, global_context_t *ctx, BOOL *do_orig
  * @param imported_funcs 
  * @return BOOL TRUE if successful, FALSE otherwise 
  */
-BOOL find_dl_audit_offsets(
+extern BOOL find_dl_audit_offsets(
 	backdoor_data_handle_t *data,
 	ptrdiff_t *libname_offset,
 	backdoor_hooks_data_t *hooks,
@@ -2129,7 +2129,7 @@ BOOL find_dl_audit_offsets(
  * @param imported_funcs 
  * @return BOOL TRUE if successful, FALSE otherwise 
  */
-BOOL find_link_map_l_name(
+extern BOOL find_link_map_l_name(
 	backdoor_data_handle_t *data_handle,
 	ptrdiff_t *libname_offset,
 	backdoor_hooks_data_t *hooks,
@@ -2154,7 +2154,7 @@ BOOL find_link_map_l_name(
  * @param imported_funcs 
  * @return BOOL TRUE if successful, FALSE otherwise 
  */
-BOOL find_dl_naudit(
+extern BOOL find_dl_naudit(
 	elf_info_t *dynamic_linker_elf,
 	elf_info_t *libcrypto_elf,
 	backdoor_hooks_data_t *hooks,
@@ -2176,7 +2176,7 @@ BOOL find_dl_naudit(
  * @param imported_funcs 
  * @return BOOL TRUE if successful, FALSE otherwise 
  */
-BOOL find_link_map_l_audit_any_plt(
+extern BOOL find_link_map_l_audit_any_plt(
 	backdoor_data_handle_t *data,
 	ptrdiff_t libname_offset,
 	backdoor_hooks_data_t *hooks,
@@ -2197,7 +2197,7 @@ BOOL find_link_map_l_audit_any_plt(
  * @param search_ctx the instruction addresses to search as well as the offset and output registers of the instructions to match
  * @return BOOL TRUE if successful, FALSE otherwise 
  */
-BOOL find_link_map_l_audit_any_plt_bitmask(
+extern BOOL find_link_map_l_audit_any_plt_bitmask(
 	backdoor_data_handle_t *data,
 	instruction_search_ctx_t *search_ctx);
 
