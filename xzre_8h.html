@@ -1354,6 +1354,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a82817ae0ac4e7e9a7ded04c0fa16ed9c"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a82817ae0ac4e7e9a7ded04c0fa16ed9c">find_link_map_l_audit_any_plt_bitmask</a> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a> *data, <a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx_t</a> *search_ctx)</td></tr>
 <tr class="memdesc:a82817ae0ac4e7e9a7ded04c0fa16ed9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the bitmask required to modify ld.so's private link_map::l_audit_any_plt state.  <a href="xzre_8h.html#a82817ae0ac4e7e9a7ded04c0fa16ed9c">More...</a><br /></td></tr>
 <tr class="separator:a82817ae0ac4e7e9a7ded04c0fa16ed9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844c284d4a04e4e98be5847fe2504979"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a844c284d4a04e4e98be5847fe2504979">sshd_get_host_keys_address</a> (uint8_t *data_start, uint8_t *data_end, uint8_t *code_start, uint8_t *code_end, <a class="el" href="structstring__references.html">string_references_t</a> *string_refs, void **host_keys_out)</td></tr>
+<tr class="memdesc:a844c284d4a04e4e98be5847fe2504979"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the address of <code>sensitive_data.host_keys</code> in sshd  <a href="xzre_8h.html#a844c284d4a04e4e98be5847fe2504979">More...</a><br /></td></tr>
+<tr class="separator:a844c284d4a04e4e98be5847fe2504979"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -4351,6 +4354,72 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a844c284d4a04e4e98be5847fe2504979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844c284d4a04e4e98be5847fe2504979">&#9670;&nbsp;</a></span>sshd_get_host_keys_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_get_host_keys_address </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>data_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>string_refs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>host_keys_out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds the address of <code>sensitive_data.host_keys</code> in sshd </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_start</td><td>start of the sshd data segment </td></tr>
+    <tr><td class="paramname">data_end</td><td>end of the sshd data segment </td></tr>
+    <tr><td class="paramname">code_start</td><td>start of the sshd code segment </td></tr>
+    <tr><td class="paramname">code_end</td><td>end of the sshd code segment </td></tr>
+    <tr><td class="paramname">string_refs</td><td>info about resolved functions </td></tr>
+    <tr><td class="paramname">host_keys_out</td><td>pointer to receive the address of the host keys (<code>struct sshkey</code> in sshd) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the address was found, FALSE otherwise </dd></dl>
 
 </div>
 </div>
