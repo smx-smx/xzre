@@ -14,7 +14,8 @@ var searchData=
   ['string_5fitem_154',['string_item',['../structstring__item.html',1,'']]],
   ['string_5fmask_5fdata_155',['string_mask_data',['../xzre_8h.html#a8c67ac851c8ec7f40c406b286233f98e',1,'xzre.h']]],
   ['string_5freferences_156',['string_references',['../structstring__references.html',1,'']]],
-  ['strtab_157',['strtab',['../structelf__info.html#a4234e0dcece021d3bb5d64723180da9a',1,'elf_info']]],
-  ['symbol_5fptr_158',['symbol_ptr',['../structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb',1,'elf_entry_ctx']]],
-  ['symtab_159',['symtab',['../structelf__info.html#aa34e0002d511de06b931d7c7b7579dc0',1,'elf_info']]]
+  ['string_5frefs_157',['string_refs',['../structbackdoor__data.html#a374102b786779a01463a82162ac97614',1,'backdoor_data']]],
+  ['strtab_158',['strtab',['../structelf__info.html#a4234e0dcece021d3bb5d64723180da9a',1,'elf_info']]],
+  ['symbol_5fptr_159',['symbol_ptr',['../structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb',1,'elf_entry_ctx']]],
+  ['symtab_160',['symtab',['../structelf__info.html#aa34e0002d511de06b931d7c7b7579dc0',1,'elf_info']]]
 ];
