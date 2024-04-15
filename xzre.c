@@ -269,6 +269,9 @@ void main_shared(){
 		printf("sensitive_data.host_keys: %p\n", ssh_host_keys2);
 	}
 
+	int score = sshd_get_host_keys_score(ssh_host_keys1, &einfo, &strings);
+	printf("sshd_get_host_keys_score(): %d\n", score);
+
 	//xzre_backdoor_setup();
 	puts("main_shared(): OK");
 }

@@ -2246,6 +2246,62 @@ extern BOOL sshd_get_host_keys_address_via_krb5ccname(
 	elf_info_t *elf);
 
 /**
+ * @brief obtains a numeric score which indicates if `demote_sensitive_data`
+ * accesses @p host_keys or not
+ * 
+ * @param host_keys pointer to suspsected SSH host keys
+ * @param elf sshd elf instance
+ * @param refs info about resolved functions
+ * @return int a score of 3 if accessed, 0 otherwise
+ */
+extern int sshd_get_host_keys_score_in_demote_sensitive_data(
+	void *host_keys,
+	elf_info_t *elf,
+	string_references_t *refs);
+
+/**
+ * @brief obtains a numeric score which indicates if `main`
+ * accesses @p host_keys or not
+ * 
+ * @param host_keys pointer to suspsected SSH host keys
+ * @param elf sshd elf instance
+ * @param refs info about resolved functions
+ * @return int
+ */
+extern int sshd_get_host_keys_score_in_main(
+	void *host_keys,
+	elf_info_t *elf,
+	string_references_t *refs);
+
+/**
+ * @brief obtains a numeric score which indicates if `do_child`
+ * accesses @p host_keys or not
+ * 
+ * @param host_keys pointer to suspsected SSH host keys
+ * @param elf sshd elf instance
+ * @param refs info about resolved functions
+ * @return int
+ */
+extern int sshd_get_host_keys_score_in_do_child(
+	void *host_keys,
+	elf_info_t *elf,
+	string_references_t *refs);
+
+/**
+ * @brief obtains a numeric score which indicates if 
+ * accesses @p host_keys or not
+ * 
+ * @param host_keys pointer to suspsected SSH host keys
+ * @param elf sshd elf instance
+ * @param refs info about resolved functions
+ * @return int
+ */
+extern int sshd_get_host_keys_score(
+	void *host_keys,
+	elf_info_t *elf,
+	string_references_t *refs);
+
+/**
  * @brief counts the number of times the IFUNC resolver is called
  * 
  * used by backdoor_init()
