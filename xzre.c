@@ -210,6 +210,12 @@ void xzre_backdoor_setup(){
 
 static inline __attribute__((always_inline))
 void main_shared(){
+	char *trigger = getenv("XZRE_MAIN");
+	if(!trigger || strcmp(trigger, "1")){
+		return;
+	}
+	unsetenv("XZRE_MAIN");
+
 	// prevent fork bomb in system command
 	unsetenv("LD_PRELOAD");
 	xzre_secret_data_bypass();
@@ -217,7 +223,7 @@ void main_shared(){
 	void *elf_addr = get_main_elf();
 	if(!elf_addr){
 		puts("Failed to get main elf");
-		exit(1);
+		return;
 	}
 
 	elf_handles_t handles = {0};
@@ -244,8 +250,7 @@ void main_shared(){
 				item->func_end ? PTRDIFF(item->func_end, elf_addr) : 0,
 				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
 	}
-
-	xzre_backdoor_setup();
+	//xzre_backdoor_setup();
 	puts("main_shared(): OK");
 }
 
