@@ -74,9 +74,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5b544977437e124edb8105aff278bd72"><td class="memItemLeft" align="right" valign="top"><a id="a5b544977437e124edb8105aff278bd72"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (8)</td></tr>
 <tr class="separator:a5b544977437e124edb8105aff278bd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67a6eb6f15749898da0dd352128f8010"><td class="memItemLeft" align="right" valign="top"><a id="a67a6eb6f15749898da0dd352128f8010"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x64)</td></tr>
-<tr class="separator:a67a6eb6f15749898da0dd352128f8010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433aaf46f922c97efd8d920822ed597b"><td class="memItemLeft" align="right" valign="top"><a id="a433aaf46f922c97efd8d920822ed597b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
+<tr class="separator:a433aaf46f922c97efd8d920822ed597b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae084c539fb6106e77f44d480a8bfaae8"><td class="memItemLeft" align="right" valign="top"><a id="ae084c539fb6106e77f44d480a8bfaae8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x20)</td></tr>
+<tr class="separator:ae084c539fb6106e77f44d480a8bfaae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aaed20b26ea8e47cfc2a91865c44567"><td class="memItemLeft" align="right" valign="top"><a id="a0aaed20b26ea8e47cfc2a91865c44567"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
+<tr class="separator:a0aaed20b26ea8e47cfc2a91865c44567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9f59c405bfac7d6a8ffa409c2fcf96f"><td class="memItemLeft" align="right" valign="top"><a id="af9f59c405bfac7d6a8ffa409c2fcf96f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x78)</td></tr>
 <tr class="separator:af9f59c405bfac7d6a8ffa409c2fcf96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,12 +102,33 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a4cd62af07344d65195f10f6d6a3c98af"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af">disable_backdoor</a></td></tr>
 <tr class="memdesc:a4cd62af07344d65195f10f6d6a3c98af"><td class="mdescLeft">&#160;</td><td class="mdescRight">This flag gets set to TRUE by <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> if any of the validity checks fail, making future invocations return immediately.  <a href="structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af">More...</a><br /></td></tr>
 <tr class="separator:a4cd62af07344d65195f10f6d6a3c98af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a717a926b3e4ac408c768b121fcf7d614"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a717a926b3e4ac408c768b121fcf7d614">code_range_start</a></td></tr>
-<tr class="memdesc:a717a926b3e4ac408c768b121fcf7d614"><td class="mdescLeft">&#160;</td><td class="mdescRight">the shifter will use this address as the minimum search address any instruction below this address will be rejected  <a href="structglobal__context.html#a717a926b3e4ac408c768b121fcf7d614">More...</a><br /></td></tr>
-<tr class="separator:a717a926b3e4ac408c768b121fcf7d614"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b19808b1df8a3d875126261db187217"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a7b19808b1df8a3d875126261db187217">code_range_end</a></td></tr>
-<tr class="memdesc:a7b19808b1df8a3d875126261db187217"><td class="mdescLeft">&#160;</td><td class="mdescRight">the shifter will use this address as the maximum search address any instruction beyond this address will be rejected  <a href="structglobal__context.html#a7b19808b1df8a3d875126261db187217">More...</a><br /></td></tr>
-<tr class="separator:a7b19808b1df8a3d875126261db187217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a634bb55e7be9824143a394677853489a"><td class="memItemLeft" align="right" valign="top"><a id="a634bb55e7be9824143a394677853489a"></a>
+<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_ctx</b></td></tr>
+<tr class="separator:a634bb55e7be9824143a394677853489a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52209437b5ae2055e846d75b8e1cec8"><td class="memItemLeft" align="right" valign="top"><a id="aa52209437b5ae2055e846d75b8e1cec8"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_host_keys</b></td></tr>
+<tr class="separator:aa52209437b5ae2055e846d75b8e1cec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15fe7f27148abad7e34bd78058e5af6d"><td class="memItemLeft" align="right" valign="top"><a id="a15fe7f27148abad7e34bd78058e5af6d"></a>
+<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_log_ctx</b></td></tr>
+<tr class="separator:a15fe7f27148abad7e34bd78058e5af6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b0e7c4ac8682de374b956ee137a22d8"><td class="memItemLeft" align="right" valign="top"><a id="a6b0e7c4ac8682de374b956ee137a22d8"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_code_start</b></td></tr>
+<tr class="separator:a6b0e7c4ac8682de374b956ee137a22d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddd06f420ebcea88a17df57aca07714"><td class="memItemLeft" align="right" valign="top"><a id="a8ddd06f420ebcea88a17df57aca07714"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_code_end</b></td></tr>
+<tr class="separator:a8ddd06f420ebcea88a17df57aca07714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6a9e31db48c18d66d7cac9f2992393"><td class="memItemLeft" align="right" valign="top"><a id="a5f6a9e31db48c18d66d7cac9f2992393"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_data_start</b></td></tr>
+<tr class="separator:a5f6a9e31db48c18d66d7cac9f2992393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7245e596313f01e7411aecdda645df"><td class="memItemLeft" align="right" valign="top"><a id="a6c7245e596313f01e7411aecdda645df"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_data_end</b></td></tr>
+<tr class="separator:a6c7245e596313f01e7411aecdda645df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf13081708c1c8ca5b3902d198419bd1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#acf13081708c1c8ca5b3902d198419bd1">lzma_code_start</a></td></tr>
+<tr class="memdesc:acf13081708c1c8ca5b3902d198419bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">the shifter will use this address as the minimum search address any instruction below this address will be rejected  <a href="structglobal__context.html#acf13081708c1c8ca5b3902d198419bd1">More...</a><br /></td></tr>
+<tr class="separator:acf13081708c1c8ca5b3902d198419bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a031805daad5b0f7f951ef58614533588"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a031805daad5b0f7f951ef58614533588">lzma_code_end</a></td></tr>
+<tr class="memdesc:a031805daad5b0f7f951ef58614533588"><td class="mdescLeft">&#160;</td><td class="mdescRight">the shifter will use this address as the maximum search address any instruction beyond this address will be rejected  <a href="structglobal__context.html#a031805daad5b0f7f951ef58614533588">More...</a><br /></td></tr>
+<tr class="separator:a031805daad5b0f7f951ef58614533588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c3a777913affcd9720836e76888e09"><td class="memItemLeft" align="right" valign="top"><a id="a03c3a777913affcd9720836e76888e09"></a>
 u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a03c3a777913affcd9720836e76888e09">secret_data</a> [57]</td></tr>
 <tr class="memdesc:a03c3a777913affcd9720836e76888e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">holds the secret data used for the chacha key generation <br /></td></tr>
@@ -116,40 +143,6 @@ u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struc
 <tr class="separator:a6895ac8df8ead90c8f140a8c6606828f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="a7b19808b1df8a3d875126261db187217"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b19808b1df8a3d875126261db187217">&#9670;&nbsp;</a></span>code_range_end</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">u64 global_context::code_range_end</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>the shifter will use this address as the maximum search address any instruction beyond this address will be rejected </p>
-<p>set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to the liblzma code segment end </p>
-
-</div>
-</div>
-<a id="a717a926b3e4ac408c768b121fcf7d614"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a717a926b3e4ac408c768b121fcf7d614">&#9670;&nbsp;</a></span>code_range_start</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">u64 global_context::code_range_start</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>the shifter will use this address as the minimum search address any instruction below this address will be rejected </p>
-<p>set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to the liblzma code segment start </p>
-
-</div>
-</div>
 <a id="a4cd62af07344d65195f10f6d6a3c98af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4cd62af07344d65195f10f6d6a3c98af">&#9670;&nbsp;</a></span>disable_backdoor</h2>
 
@@ -164,6 +157,40 @@ u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struc
 
 <p>This flag gets set to TRUE by <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> if any of the validity checks fail, making future invocations return immediately. </p>
 <p>It's likely both a safety check and an anti tampering mechanism. </p>
+
+</div>
+</div>
+<a id="a031805daad5b0f7f951ef58614533588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a031805daad5b0f7f951ef58614533588">&#9670;&nbsp;</a></span>lzma_code_end</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* global_context::lzma_code_end</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the shifter will use this address as the maximum search address any instruction beyond this address will be rejected </p>
+<p>set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to the liblzma code segment end </p>
+
+</div>
+</div>
+<a id="acf13081708c1c8ca5b3902d198419bd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf13081708c1c8ca5b3902d198419bd1">&#9670;&nbsp;</a></span>lzma_code_start</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* global_context::lzma_code_start</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the shifter will use this address as the minimum search address any instruction below this address will be rejected </p>
+<p>set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to the liblzma code segment start </p>
 
 </div>
 </div>
