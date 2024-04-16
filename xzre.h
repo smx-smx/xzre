@@ -16,22 +16,17 @@
 #include <sys/select.h>
 #endif
 
-#ifndef XZRE_SLIM
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uintptr_t uptr;
-#else
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef unsigned long long int u64;
+
+#ifdef XZRE_SLIM
 typedef unsigned long int size_t;
 typedef signed long int ssize_t;
 typedef size_t uid_t;
 typedef size_t gid_t;
-typedef uint64_t uptr;
 typedef uptr
 	Elf64_Ehdr, Elf64_Phdr, Elf64_Dyn, Elf64_Sym, Elf64_Rela, Elf64_Relr, 
 	Elf64_Verdef, Elf64_Versym, sigset_t, fd_set, EVP_PKEY, RSA, DSA, 
