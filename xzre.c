@@ -251,6 +251,8 @@ void main_shared(){
 				item->xref ? PTRDIFF(item->xref, elf_addr) : 0);
 	}
 
+	printf("BASE ADDR: %p\n", einfo.elfbase);
+
 
 	u64 code_size = 0, data_size = 0;
 	void *data_start = elf_get_data_segment(&einfo, &data_size, 0);
@@ -271,6 +273,20 @@ void main_shared(){
 
 	int score = sshd_get_host_keys_score(ssh_host_keys1, &einfo, &strings);
 	printf("sshd_get_host_keys_score(): %d\n", score);
+
+	void *keyVerify_start = NULL;
+	void *keyVerify_end = NULL;
+	void *keyVerify_fptr_addr = NULL;
+	BOOL checkPrologue = TRUE;
+	if(elf_find_function_pointer(XREF_mm_answer_keyverify,
+		&keyVerify_start, &keyVerify_end, &keyVerify_fptr_addr,
+		&einfo, &strings, &checkPrologue
+	)){
+		printf("keyVerify: start=%p, end=%p, fptr_addr=%p\n",
+			keyVerify_start,
+			keyVerify_end,
+			keyVerify_fptr_addr);
+	}
 
 	//xzre_backdoor_setup();
 	puts("main_shared(): OK");

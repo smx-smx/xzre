@@ -73,6 +73,9 @@ typedef Elf64_Xword Elf64_Relr;
 
 typedef int BOOL;
 
+#define TRUE 1
+#define FALSE 0
+
 typedef enum {
 	// has lock prefix
 	DF_LOCK = 1,
@@ -670,7 +673,9 @@ typedef struct __attribute__((packed)) global_context {
 	 * It's likely both a safety check and an anti tampering mechanism.
 	 */
 	BOOL disable_backdoor;
-	PADDING(0x64);
+	PADDING(12);
+	void *sshd_host_keys;
+	PADDING(0x50);
 	/**
 	 * @brief 
 	 * the shifter will use this address as the minimum search address
@@ -710,6 +715,7 @@ typedef struct __attribute__((packed)) global_context {
 assert_offset(global_context_t, imported_funcs, 0x8);
 assert_offset(global_context_t, libc_imports, 0x10);
 assert_offset(global_context_t, disable_backdoor, 0x18);
+assert_offset(global_context_t, sshd_host_keys, 0x28);
 assert_offset(global_context_t, code_range_start, 0x80);
 assert_offset(global_context_t, code_range_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
@@ -1605,6 +1611,26 @@ extern void *elf_get_plt_symbol(elf_info_t *elf_info, EncodedStringId encoded_st
  * @return void* the address of the symbol, or NULL if not found
  */
 extern void *elf_get_got_symbol(elf_info_t *elf_info, EncodedStringId encoded_string_id);
+
+/**
+ * @brief this function searches for a function pointer, pointing to a function
+ * designated by the given @p xref_id
+ * 
+ * @param xref_id the index to use to retrieve the function from @p xrefs
+ * @param pOutCodeStart output variable that will receive the function start address
+ * @param pOutCodeEnd output variable that will receive the function end address
+ * @param pOutFptrAddr output variable that will receive the address of the function pointer
+ * @param elf_info sshd elf context
+ * @param xrefs array of resolved functions, filled by @ref elf_find_string_references
+ * @param pCheckPrologue if the BOOL pointed to by this variable is TRUE, an endbr64 will be expected at the beginning
+ * @return BOOL TRUE if the function pointer was found, FALSE otherwise
+ */
+extern BOOL elf_find_function_pointer(
+	StringXrefId xref_id,
+	void **pOutCodeStart, void **pOutCodeEnd,
+	void **pOutFptrAddr, elf_info_t *elf_info,
+	string_references_t *xrefs,
+	BOOL *pCheckPrologue);
 
 /**
  * @brief Locates a string in the ELF .rodata section
