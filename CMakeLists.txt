@@ -33,7 +33,7 @@ add_custom_command(
 	OUTPUT ${CMAKE_BINARY_DIR}/xzre.csv
 	COMMAND ${CMAKE_C_COMPILER}
 		-DGEN_CSV -x c -E -P
-		${CMAKE_SOURCE_DIR}/xzre.lds.in | sed "/^\\s*$/d;s/^\\s*//" > ${CMAKE_BINARY_DIR}/xzre.csv
+		${CMAKE_SOURCE_DIR}/xzre.lds.in | ${SED_COMMAND} "/^\\s*$/d;s/^\\s*//" > ${CMAKE_BINARY_DIR}/xzre.csv
 	DEPENDS ${CMAKE_SOURCE_DIR}/xzre.lds.in
 	VERBATIM
 )
@@ -70,7 +70,8 @@ add_custom_command(
 	OUTPUT ${CMAKE_BINARY_DIR}/xzre.h
 	COMMAND ${CMAKE_C_COMPILER} -DXZRE_SLIM 
 		-P -E ${CMAKE_SOURCE_DIR}/xzre.h
-		-D "static_assert(x)=" > ${CMAKE_BINARY_DIR}/xzre.h
+		-D "static_assert(x)="
+		| ${SED_COMMAND} "/^;*$/d" > ${CMAKE_BINARY_DIR}/xzre.h
 	DEPENDS ${CMAKE_SOURCE_DIR}/xzre.h
 	VERBATIM
 )
