@@ -558,9 +558,12 @@ Enumerations</h2></td></tr>
 <tr class="separator:afde1d1c69b6bedd0626eee956c7111de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 1 &lt;&lt; 0
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 1 &lt;&lt; 2
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891">CMDF_DISABLE_PAM</a> = 0x40
  }</td></tr>
 <tr class="separator:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348">CommandFlags2</a> { <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71">CMDF_CONTINUATION</a> = 0x40
+<tr class="memitem:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348">CommandFlags2</a> { <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ad62079a782b410d925454cf4c67cad43">CMDF_IMPERSONATE</a> = 0x1
+, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a503e908611a2b460cac82b916acf3d68">CMDF_CHANGE_MONITOR_REQ</a> = 0x2
+, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71">CMDF_CONTINUATION</a> = 0x40
 , <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940">CMDF_PSELECT</a> = 0xC0
  }</td></tr>
 <tr class="separator:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1596,6 +1599,8 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e"></a>CMDF_SETLOGMASK&#160;</td><td class="fielddoc"><p>disable all logging by setting mask 0x80000000 </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891"></a>CMDF_DISABLE_PAM&#160;</td><td class="fielddoc"><p>if set, disables PAM authentication </p>
+</td></tr>
 </table>
 
 </div>
@@ -1612,7 +1617,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71"></a>CMDF_CONTINUATION&#160;</td><td class="fielddoc"><p>more data available in the following packet not compatible with command 3 </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ad62079a782b410d925454cf4c67cad43"></a>CMDF_IMPERSONATE&#160;</td><td class="fielddoc"><p>if set, impersonate a user (info from payload) if not set, impersonate root </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a503e908611a2b460cac82b916acf3d68"></a>CMDF_CHANGE_MONITOR_REQ&#160;</td><td class="fielddoc"><p>if set, changes the <code>monitor_reqtype</code> field from <code>MONITOR_REQ_AUTHPASSWORD</code> to what's contained in the payload </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71"></a>CMDF_CONTINUATION&#160;</td><td class="fielddoc"><p>more data available in the following packet not compatible with command 3 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940"></a>CMDF_PSELECT&#160;</td><td class="fielddoc"><p>executes pselect, then exit not compatible with command 2 </p>
 </td></tr>
