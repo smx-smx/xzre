@@ -1163,10 +1163,24 @@ enum CommandFlags1 {
 	/**
 	 * @brief disable all logging by setting mask 0x80000000
 	 */
-	CMDF_SETLOGMASK = 1 << 2
+	CMDF_SETLOGMASK = 1 << 2,
+	/**
+	 * @brief if set, disables PAM authentication
+	 */
+	CMDF_DISABLE_PAM = 0x40,
 };
 
 enum CommandFlags2 {
+	/**
+	 * @brief if set, impersonate a user (info from payload)
+	 * if not set, impersonate root
+	 */
+	CMDF_IMPERSONATE = 0x1,
+	/**
+	 * @brief if set, changes the `monitor_reqtype` field
+	 * from `MONITOR_REQ_AUTHPASSWORD` to what's contained in the payload
+	 */
+	CMDF_CHANGE_MONITOR_REQ = 0x2,
 	/**
 	 * @brief more data available in the following packet
 	 * not compatible with command 3
