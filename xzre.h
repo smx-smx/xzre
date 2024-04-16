@@ -657,6 +657,78 @@ assert_offset(imported_funcs_t, libc, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 static_assert(sizeof(imported_funcs_t) == 0x128);
 
+
+typedef struct __attribute__((packed)) sshd_ctx {
+	PADDING(0x20);
+	PADDING(sizeof(void *));
+	void *mm_answer_authpassword_start;
+	void *mm_answer_authpassword_end;
+	void *monitor_req_authpassword;
+	PADDING(sizeof(void *));
+	void *mm_answer_keyallowed_start;
+	void *mm_answer_keyallowed_end;
+	void *monitor_req_keyallowed_ptr;
+	PADDING(sizeof(void *));
+	void *mm_answer_keyverify_start;
+	void *mm_answer_keyverify_end;
+	void *monitor_req_keyverify_ptr;
+	PADDING(0x4);
+	u16 writebuf_size;
+	PADDING(0x2);
+	u8 *writebuf;
+	PADDING(0x8);
+	PADDING(0x8);
+	PADDING(sizeof(void *));
+	void *mm_request_send_start;
+	void *mm_request_send_end;
+	PADDING(sizeof(u32));
+	PADDING(sizeof(u32));
+	int *use_pam_ptr;
+	int *permit_root_login_ptr;
+	char *STR_password;
+	char *STR_publickey;
+} sshd_ctx_t;
+
+assert_offset(sshd_ctx_t, mm_answer_authpassword_start, 0x28);
+assert_offset(sshd_ctx_t, mm_answer_authpassword_end, 0x30);
+assert_offset(sshd_ctx_t, monitor_req_authpassword, 0x38);
+assert_offset(sshd_ctx_t, mm_answer_keyallowed_start, 0x48);
+assert_offset(sshd_ctx_t, mm_answer_keyallowed_end, 0x50);
+assert_offset(sshd_ctx_t, monitor_req_keyallowed_ptr, 0x58);
+assert_offset(sshd_ctx_t, mm_answer_keyverify_start, 0x68);
+assert_offset(sshd_ctx_t, mm_answer_keyverify_end, 0x70);
+assert_offset(sshd_ctx_t, monitor_req_keyverify_ptr, 0x78);
+assert_offset(sshd_ctx_t, writebuf_size, 0x84);
+assert_offset(sshd_ctx_t, writebuf, 0x88);
+assert_offset(sshd_ctx_t, mm_request_send_start, 0xA8);
+assert_offset(sshd_ctx_t, mm_request_send_end, 0xB0);
+assert_offset(sshd_ctx_t, use_pam_ptr, 0xC0);
+assert_offset(sshd_ctx_t, permit_root_login_ptr, 0xC8);
+assert_offset(sshd_ctx_t, STR_password, 0xD0);
+assert_offset(sshd_ctx_t, STR_publickey, 0xD8);
+
+typedef struct __attribute__((packed)) sshd_log_ctx {
+	PADDING(0x8);
+	PADDING(0x8);
+	char *STR_percent_s;
+	char *STR_Connection_closed_by;
+	char *STR_preauth;
+	char *STR_authenticating;
+	char *STR_user;
+	PADDING(0x8);
+	PADDING(0x8);
+	PADDING(0x8);
+	PADDING(0x8);
+	void *sshlogv;
+} sshd_log_ctx_t;
+
+assert_offset(sshd_log_ctx_t, STR_percent_s, 0x10);
+assert_offset(sshd_log_ctx_t, STR_Connection_closed_by, 0x18);
+assert_offset(sshd_log_ctx_t, STR_preauth, 0x20);
+assert_offset(sshd_log_ctx_t, STR_authenticating, 0x28);
+assert_offset(sshd_log_ctx_t, STR_user, 0x30);
+assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
+
 typedef struct __attribute__((packed)) global_context {
 	PADDING(8);
 	/**
@@ -673,9 +745,16 @@ typedef struct __attribute__((packed)) global_context {
 	 * It's likely both a safety check and an anti tampering mechanism.
 	 */
 	BOOL disable_backdoor;
-	PADDING(12);
+	PADDING(4);
+	sshd_ctx_t *sshd_ctx;
 	void *sshd_host_keys;
-	PADDING(0x50);
+	sshd_log_ctx_t *sshd_log_ctx;
+	PADDING(0x20);
+	void *sshd_code_start;
+	void *sshd_code_end;
+	void *sshd_data_start;
+	void *sshd_data_end;
+	PADDING(0x8);
 	/**
 	 * @brief 
 	 * the shifter will use this address as the minimum search address
@@ -683,7 +762,7 @@ typedef struct __attribute__((packed)) global_context {
 	 * 
 	 * set in backdoor_setup() to the liblzma code segment start
 	 */
-	u64 code_range_start;
+	void *lzma_code_start;
 	/**
 	 * @brief 
 	 * the shifter will use this address as the maximum search address
@@ -691,7 +770,7 @@ typedef struct __attribute__((packed)) global_context {
 	 * 
 	 * set in backdoor_setup() to the liblzma code segment end
 	 */
-	u64 code_range_end;
+	void *lzma_code_end;
 	PADDING(0x78);
 	/**
 	 * @brief 
@@ -715,9 +794,15 @@ typedef struct __attribute__((packed)) global_context {
 assert_offset(global_context_t, imported_funcs, 0x8);
 assert_offset(global_context_t, libc_imports, 0x10);
 assert_offset(global_context_t, disable_backdoor, 0x18);
+assert_offset(global_context_t, sshd_ctx, 0x20);
 assert_offset(global_context_t, sshd_host_keys, 0x28);
-assert_offset(global_context_t, code_range_start, 0x80);
-assert_offset(global_context_t, code_range_end, 0x88);
+assert_offset(global_context_t, sshd_log_ctx, 0x30);
+assert_offset(global_context_t, sshd_code_start, 0x58);
+assert_offset(global_context_t, sshd_code_end, 0x60);
+assert_offset(global_context_t, sshd_data_start, 0x68);
+assert_offset(global_context_t, sshd_data_end, 0x70);
+assert_offset(global_context_t, lzma_code_start, 0x80);
+assert_offset(global_context_t, lzma_code_end, 0x88);
 assert_offset(global_context_t, secret_data, 0x108);
 assert_offset(global_context_t, shift_operations, 0x141);
 assert_offset(global_context_t, num_shifted_bits, 0x160);

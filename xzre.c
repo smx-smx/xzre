@@ -66,8 +66,8 @@ extern char __etext;
 void xzre_secret_data_init(){
 	global_ctx = &my_global_ctx;
 	memset(global_ctx, 0x00, sizeof(*global_ctx));
-	global_ctx->code_range_start = (u64)&__executable_start;
-	global_ctx->code_range_end = (u64)&__etext;
+	global_ctx->lzma_code_start = &__executable_start;
+	global_ctx->lzma_code_end = &__etext;
 }
 
 void xzre_secret_data_test(){
