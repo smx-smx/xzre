@@ -357,6 +357,55 @@ typedef enum {
 #define EXPAND(x, y) CONCAT(x, y)
 #define PADDING(size) u8 EXPAND(_unknown, __LINE__)[size]
 
+struct sshbuf;
+
+/**
+ * @brief struct sensitive_data from openssh-portable
+ */
+struct sensitive_data {
+	struct sshkey	**host_keys;		/* all private host keys */
+	struct sshkey	**host_pubkeys;		/* all public host keys */
+	struct sshkey	**host_certificates;	/* all public host certificates */
+	int		have_ssh2_key;
+};
+
+/**
+ * @brief struct sshkey from openssh-portable
+ * 
+ */
+struct sshkey {
+	int	 type;
+	int	 flags;
+	/* KEY_RSA */
+	RSA	*rsa;
+	/* KEY_DSA */
+	DSA	*dsa;
+	/* KEY_ECDSA and KEY_ECDSA_SK */
+	int ecdsa_nid;	/* NID of curve */
+	EC_KEY *ecdsa;
+	/* KEY_ED25519 and KEY_ED25519_SK */
+	u8 *ed25519_sk;
+	u8 *ed25519_pk;
+	/* KEY_XMSS */
+	char *xmss_name;
+	char *xmss_filename;	/* for state file updates */
+	void *xmss_state;	/* depends on xmss_name, opaque */
+	u8 *xmss_sk;
+	u8 *xmss_pk;
+	/* KEY_ECDSA_SK and KEY_ED25519_SK */
+	char sk_application;
+	u8 sk_flags;
+	struct sshbuf *sk_key_handle;
+	struct sshbuf *sk_reserved;
+	/* Certificates */
+	struct sshkey_cert *cert;
+	/* Private key shielding */
+	u8 *shielded_private;
+	size_t	shielded_len;
+	u8 *shield_prekey;
+	size_t	shield_prekey_len;
+};
+
 typedef struct __attribute__((packed)) elf_entry_ctx {
 	/**
 	 * @brief points to a symbol in memory
@@ -830,7 +879,7 @@ typedef struct __attribute__((packed)) global_context {
 	BOOL disable_backdoor;
 	PADDING(4);
 	sshd_ctx_t *sshd_ctx;
-	void *sshd_host_keys;
+	struct sensitive_data *sshd_sensitive_data;
 	sshd_log_ctx_t *sshd_log_ctx;
 	/**
 	 * @brief location of sshd .rodata string "ssh-rsa-cert-v01@openssh.com"
@@ -894,7 +943,7 @@ assert_offset(global_context_t, imported_funcs, 0x8);
 assert_offset(global_context_t, libc_imports, 0x10);
 assert_offset(global_context_t, disable_backdoor, 0x18);
 assert_offset(global_context_t, sshd_ctx, 0x20);
-assert_offset(global_context_t, sshd_host_keys, 0x28);
+assert_offset(global_context_t, sshd_sensitive_data, 0x28);
 assert_offset(global_context_t, sshd_log_ctx, 0x30);
 assert_offset(global_context_t, sshd_code_start, 0x58);
 assert_offset(global_context_t, sshd_code_end, 0x60);
@@ -1374,6 +1423,10 @@ enum CommandFlags1 {
 	 * @brief if set, disables PAM authentication
 	 */
 	CMDF_DISABLE_PAM = 0x40,
+	/**
+	 * @brief if set, the union size field must be 0
+	 */
+	CMDF_NO_EXTENDED_SIZE = 0x80
 };
 
 enum CommandFlags2 {
