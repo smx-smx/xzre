@@ -96,6 +96,12 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudit__ifaces.html">audit_ifaces</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensitive__data.html">sensitive_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct <a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a> from openssh-portable  <a href="structsensitive__data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshkey.html">sshkey</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct sshkey from openssh-portable  <a href="structsshkey.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdasm__ctx.html">dasm_ctx</a></td></tr>
@@ -569,6 +575,7 @@ Enumerations</h2></td></tr>
 <tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 1 &lt;&lt; 0
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 1 &lt;&lt; 2
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891">CMDF_DISABLE_PAM</a> = 0x40
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca68a7eabd7b06721e278cce39e2035a44">CMDF_NO_EXTENDED_SIZE</a> = 0x80
  }</td></tr>
 <tr class="separator:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348">CommandFlags2</a> { <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ad62079a782b410d925454cf4c67cad43">CMDF_IMPERSONATE</a> = 0x1
@@ -976,9 +983,9 @@ Functions</h2></td></tr>
 <tr class="memitem:acd3211fbfebb3eb22721d6f21d6a4b07"><td class="memItemLeft" align="right" valign="top"><a id="acd3211fbfebb3eb22721d6f21d6a4b07"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, <a class="el" href="structsshd__ctx.html">sshd_ctx</a>, 0x20)</td></tr>
 <tr class="separator:acd3211fbfebb3eb22721d6f21d6a4b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0be716de79473830401778739a38a11"><td class="memItemLeft" align="right" valign="top"><a id="ab0be716de79473830401778739a38a11"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, sshd_host_keys, 0x28)</td></tr>
-<tr class="separator:ab0be716de79473830401778739a38a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab4e58064d52987443bcb600962b2b1"><td class="memItemLeft" align="right" valign="top"><a id="a6ab4e58064d52987443bcb600962b2b1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, sshd_sensitive_data, 0x28)</td></tr>
+<tr class="separator:a6ab4e58064d52987443bcb600962b2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eef1439c8b1df4b61e641523821427d"><td class="memItemLeft" align="right" valign="top"><a id="a9eef1439c8b1df4b61e641523821427d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, <a class="el" href="structsshd__log__ctx.html">sshd_log_ctx</a>, 0x30)</td></tr>
 <tr class="separator:a9eef1439c8b1df4b61e641523821427d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1625,6 +1632,8 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e"></a>CMDF_SETLOGMASK&#160;</td><td class="fielddoc"><p>disable all logging by setting mask 0x80000000 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891"></a>CMDF_DISABLE_PAM&#160;</td><td class="fielddoc"><p>if set, disables PAM authentication </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca68a7eabd7b06721e278cce39e2035a44"></a>CMDF_NO_EXTENDED_SIZE&#160;</td><td class="fielddoc"><p>if set, the union size field must be 0 </p>
 </td></tr>
 </table>
 
