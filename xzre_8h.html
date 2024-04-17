@@ -1352,6 +1352,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aeba34776520881226359e3a0524fbe7b"><td class="memItemLeft" align="right" valign="top"><a id="aeba34776520881226359e3a0524fbe7b"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>check_argument</b> (char arg_first_char, char *arg_name)</td></tr>
 <tr class="separator:aeba34776520881226359e3a0524fbe7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e">process_is_sshd</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *elf, u8 *stack_end)</td></tr>
+<tr class="memdesc:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the current process is sshd by inspecting <code>argv</code> and <code>envp</code> by inspecting the top of the process stack ( represented by <code>stack_end</code> )  <a href="xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e">More...</a><br /></td></tr>
+<tr class="separator:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6925f05854b05bb9441f71c3f1deb55c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">elf_find_string_references</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
 <tr class="memdesc:a6925f05854b05bb9441f71c3f1deb55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the ELF rodata section, looking for strings and the instructions that reference them  <a href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">More...</a><br /></td></tr>
 <tr class="separator:a6925f05854b05bb9441f71c3f1deb55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1516,6 +1519,18 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:ac9f89faac5a24707275635026fa910b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">sshd_get_host_keys_score</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
 <tr class="memdesc:ac9f89faac5a24707275635026fa910b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if accesses <code>host_keys</code> or not  <a href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">More...</a><br /></td></tr>
 <tr class="separator:ac9f89faac5a24707275635026fa910b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a966b189602e0af0053053e8405d39fa2"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a966b189602e0af0053053e8405d39fa2">bignum_serialize</a> (u8 *buffer, u64 bufferSize, u64 *pOutSize, const BIGNUM *bn, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
+<tr class="memdesc:a966b189602e0af0053053e8405d39fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the BIGNUM <code>bn</code> to the buffer <code>buffer</code>.  <a href="xzre_8h.html#a966b189602e0af0053053e8405d39fa2">More...</a><br /></td></tr>
+<tr class="separator:a966b189602e0af0053053e8405d39fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642b0366b943daba60d004a6a46fb7c7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7">rsa_key_hash</a> (const RSA *rsa, u8 *mdBuf, u64 mdBufSize, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
+<tr class="memdesc:a642b0366b943daba60d004a6a46fb7c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a SHA256 hash of the supplied RSA key  <a href="xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7">More...</a><br /></td></tr>
+<tr class="separator:a642b0366b943daba60d004a6a46fb7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15067dbf30f28d1f0fb5901d272081ec"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a15067dbf30f28d1f0fb5901d272081ec">dsa_key_hash</a> (const DSA *dsa, u8 *mdBuf, u64 mdBufSize, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
+<tr class="memdesc:a15067dbf30f28d1f0fb5901d272081ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a SHA256 hash of the supplied RSA key  <a href="xzre_8h.html#a15067dbf30f28d1f0fb5901d272081ec">More...</a><br /></td></tr>
+<tr class="separator:a15067dbf30f28d1f0fb5901d272081ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3417b7999e13c79b9411e092923278"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3a3417b7999e13c79b9411e092923278">sha256</a> (const void *data, size_t count, u8 *mdBuf, u64 mdBufSize, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
+<tr class="memdesc:a3a3417b7999e13c79b9411e092923278"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the SHA256 hash of the supplied data  <a href="xzre_8h.html#a3a3417b7999e13c79b9411e092923278">More...</a><br /></td></tr>
+<tr class="separator:a3a3417b7999e13c79b9411e092923278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -2062,6 +2077,65 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a966b189602e0af0053053e8405d39fa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a966b189602e0af0053053e8405d39fa2">&#9670;&nbsp;</a></span>bignum_serialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL bignum_serialize </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>bufferSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>pOutSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const BIGNUM *&#160;</td>
+          <td class="paramname"><em>bn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Serializes the BIGNUM <code>bn</code> to the buffer <code>buffer</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>the destination buffer to write the bignum to </td></tr>
+    <tr><td class="paramname">bufferSize</td><td>size of the destination buffer </td></tr>
+    <tr><td class="paramname">pOutSize</td><td>pointer to a variable that will receive the number of bytes written to the buffer </td></tr>
+    <tr><td class="paramname">bn</td><td>the BIGNUM to serialize </td></tr>
+    <tr><td class="paramname">funcs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successfully serialized, FALSE otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a8eb41e1828a73dd4ce8f82a0d42dceb5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8eb41e1828a73dd4ce8f82a0d42dceb5">&#9670;&nbsp;</a></span>chacha_decrypt()</h2>
 
@@ -2152,6 +2226,58 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>u32 number of 1 bits </dd></dl>
+
+</div>
+</div>
+<a id="a15067dbf30f28d1f0fb5901d272081ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15067dbf30f28d1f0fb5901d272081ec">&#9670;&nbsp;</a></span>dsa_key_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL dsa_key_hash </td>
+          <td>(</td>
+          <td class="paramtype">const DSA *&#160;</td>
+          <td class="paramname"><em>dsa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>mdBuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>mdBufSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a SHA256 hash of the supplied RSA key </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dsa</td><td>the DSA key to hash </td></tr>
+    <tr><td class="paramname">mdBuf</td><td>buffer to write the resulting digest to </td></tr>
+    <tr><td class="paramname">mdBufSize</td><td>size of the buffer indicated by <code>mdBuf</code> </td></tr>
+    <tr><td class="paramname">funcs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the hash was successfully generated, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -4109,6 +4235,44 @@ Variables</h2></td></tr>
 
 <p>Parses the main executable from the provided structure. As part of the process the arguments and environment is checked. </p>
 <p>The main_elf_t::dynamic_linker_ehdr is set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method that installs the backdoor_symbind64() callback">backdoor_setup()</a> by an interesting trick where the address of __tls_get_addr() is found via GOT in <a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c" title="finds the __tls_get_addr() GOT entry">update_got_address()</a>. Then a backwards search for the ELF header magic bytes from this address is performed to find the ld.so ELF header.</p>
+<p>The function will succeed if the checks outlined in <a class="el" href="xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e">process_is_sshd</a> (invoked by this function) are successful.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structmain__elf.html">main_elf</a></td><td>The main executable to parse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful and all checks passed, or FALSE otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a04a9f7dfab9ccac6d8407c906b7b2e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04a9f7dfab9ccac6d8407c906b7b2e2e">&#9670;&nbsp;</a></span>process_is_sshd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL process_is_sshd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>stack_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the current process is sshd by inspecting <code>argv</code> and <code>envp</code> by inspecting the top of the process stack ( represented by <code>stack_end</code> ) </p>
 <p>The following checks are performed:</p><ul>
 <li>that argv[0] is "/usr/sbin/sshd"</li>
 <li>the remaining args all start with '-'</li>
@@ -4130,11 +4294,12 @@ Variables</h2></td></tr>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="structmain__elf.html">main_elf</a></td><td>The main executable to parse. </td></tr>
+    <tr><td class="paramname">elf</td><td>the main ELF context </td></tr>
+    <tr><td class="paramname">stack_end</td><td>pointer to the top of the process stack, also known as <code>__libc_stack_end</code> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful and all checks passed, or FALSE otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the process is <code>sshd</code>, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -4245,6 +4410,58 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a642b0366b943daba60d004a6a46fb7c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a642b0366b943daba60d004a6a46fb7c7">&#9670;&nbsp;</a></span>rsa_key_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL rsa_key_hash </td>
+          <td>(</td>
+          <td class="paramtype">const RSA *&#160;</td>
+          <td class="paramname"><em>rsa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>mdBuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>mdBufSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>obtains a SHA256 hash of the supplied RSA key </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rsa</td><td>the RSA key to hash </td></tr>
+    <tr><td class="paramname">mdBuf</td><td>buffer to write the resulting digest to </td></tr>
+    <tr><td class="paramname">mdBufSize</td><td>size of the buffer indicated by <code>mdBuf</code> </td></tr>
+    <tr><td class="paramname">funcs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the hash was successfully generated, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -4623,6 +4840,65 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a3a3417b7999e13c79b9411e092923278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3417b7999e13c79b9411e092923278">&#9670;&nbsp;</a></span>sha256()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sha256 </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>mdBuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>mdBufSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>computes the SHA256 hash of the supplied data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>buffer containing the data to hash </td></tr>
+    <tr><td class="paramname">count</td><td>number of bytes to hash from <code>data</code> </td></tr>
+    <tr><td class="paramname">mdBuf</td><td>buffer to write the resulting digest to </td></tr>
+    <tr><td class="paramname">mdBufSize</td><td>size of the buffer indicated by <code>mdBuf</code> </td></tr>
+    <tr><td class="paramname">funcs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
 
 </div>
 </div>

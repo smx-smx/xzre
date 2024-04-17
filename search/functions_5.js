@@ -1,10 +1,21 @@
 var searchData=
 [
-  ['get_5fcpuid_5fgot_5findex_298',['get_cpuid_got_index',['../xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99',1,'xzre.h']]],
-  ['get_5felf_5ffunctions_5faddress_299',['get_elf_functions_address',['../xzre_8h.html#aa3c963b13e204d9d99ab57a5647e9b45',1,'xzre.h']]],
-  ['get_5fgot_5foffset_300',['get_got_offset',['../xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4',1,'xzre.h']]],
-  ['get_5flzma_5fallocator_301',['get_lzma_allocator',['../xzre_8h.html#abc618a02e31b94194ce03b0c4a2b3597',1,'xzre.h']]],
-  ['get_5flzma_5fallocator_5faddress_302',['get_lzma_allocator_address',['../xzre_8h.html#a45b23f67e591074c22a0691a6b5aced5',1,'xzre.h']]],
-  ['get_5fstring_5fid_303',['get_string_id',['../xzre_8h.html#a6189320317764e3344934873b58b30b1',1,'xzre.h']]],
-  ['get_5ftls_5fget_5faddr_5frandom_5fsymbol_5fgot_5foffset_304',['get_tls_get_addr_random_symbol_got_offset',['../xzre_8h.html#ae20580c7a069afb3b578f060582867df',1,'xzre.h']]]
+  ['fake_5flzma_5falloc_287',['fake_lzma_alloc',['../xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584',1,'xzre.h']]],
+  ['fake_5flzma_5ffree_288',['fake_lzma_free',['../xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17',1,'xzre.h']]],
+  ['find_5fcall_5finstruction_289',['find_call_instruction',['../xzre_8h.html#a41fada894916f4c67d59090ff57aead1',1,'xzre.h']]],
+  ['find_5fdl_5faudit_5foffsets_290',['find_dl_audit_offsets',['../xzre_8h.html#a8847a8cb7f015796a8fbd59cb7a18248',1,'xzre.h']]],
+  ['find_5fdl_5fnaudit_291',['find_dl_naudit',['../xzre_8h.html#a18543737f1eaf3cb1288d0c57c1f0a65',1,'xzre.h']]],
+  ['find_5ffunction_292',['find_function',['../xzre_8h.html#adb94193174339f9eae22428308d46c33',1,'xzre.h']]],
+  ['find_5ffunction_5fprologue_293',['find_function_prologue',['../xzre_8h.html#a81a6f3d01ea6057c942052321b92c533',1,'xzre.h']]],
+  ['find_5finstruction_5fwith_5fmem_5foperand_294',['find_instruction_with_mem_operand',['../xzre_8h.html#a60c226501adb1a2d3213484f651ff23b',1,'xzre.h']]],
+  ['find_5finstruction_5fwith_5fmem_5foperand_5fex_295',['find_instruction_with_mem_operand_ex',['../xzre_8h.html#a1c8a36d89bf4e57077a56611e9aeb470',1,'xzre.h']]],
+  ['find_5flea_5finstruction_296',['find_lea_instruction',['../xzre_8h.html#aea85a14166f11bb956c7862c2a66571e',1,'xzre.h']]],
+  ['find_5flea_5finstruction_5fwith_5fmem_5foperand_297',['find_lea_instruction_with_mem_operand',['../xzre_8h.html#a6e76946a37fb256974942a542373e421',1,'xzre.h']]],
+  ['find_5flink_5fmap_5fl_5faudit_5fany_5fplt_298',['find_link_map_l_audit_any_plt',['../xzre_8h.html#a2d980185c135b2dd9bc69c099ba60c25',1,'xzre.h']]],
+  ['find_5flink_5fmap_5fl_5faudit_5fany_5fplt_5fbitmask_299',['find_link_map_l_audit_any_plt_bitmask',['../xzre_8h.html#a82817ae0ac4e7e9a7ded04c0fa16ed9c',1,'xzre.h']]],
+  ['find_5flink_5fmap_5fl_5fname_300',['find_link_map_l_name',['../xzre_8h.html#a17824cde912b4de5dd68530dcbf9d42c',1,'xzre.h']]],
+  ['find_5fmov_5finstruction_301',['find_mov_instruction',['../xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0',1,'xzre.h']]],
+  ['find_5fmov_5flea_5finstruction_302',['find_mov_lea_instruction',['../xzre_8h.html#ae9718452d28f67f46d046c02c0125148',1,'xzre.h']]],
+  ['find_5freg2reg_5finstruction_303',['find_reg2reg_instruction',['../xzre_8h.html#aed0391d07e4413f5a13e1ec2940c94ea',1,'xzre.h']]],
+  ['find_5fstring_5freference_304',['find_string_reference',['../xzre_8h.html#a78aba1d370c6519777e637f1ed7b7c14',1,'xzre.h']]]
 ];
