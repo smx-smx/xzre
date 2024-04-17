@@ -1862,7 +1862,21 @@ extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
  * The main_elf_t::dynamic_linker_ehdr is set in backdoor_setup() by an interesting trick where the address of __tls_get_addr()
  * is found via GOT in update_got_address(). Then a backwards search for the ELF header magic bytes from this address is
  * performed to find the ld.so ELF header.
- * 
+ *
+ * The function will succeed if the checks outlined in @ref process_is_sshd (invoked by this function) are successful.
+ *
+ * @param main_elf The main executable to parse.
+ * @return BOOL TRUE if successful and all checks passed, or FALSE otherwise.
+ */
+extern BOOL main_elf_parse(main_elf_t *main_elf);
+
+extern char *check_argument(char arg_first_char, char* arg_name);
+
+/**
+ * @brief checks if the current process is sshd by inspecting `argv` and `envp`.
+ *
+ * this is done by reading the top of the process stack ( represented by @p stack_end )
+ *
  * The following checks are performed:
  * - that argv[0] is "/usr/sbin/sshd"
  * - the remaining args all start with '-'
@@ -1880,14 +1894,13 @@ extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
  * - "LINES="
  * - "TERM="
  * - "WAYLAND_DISPLAY="
- * - "yolAbejyiejuvnup=Evjtgvsh5okmkAvj"
- *   
- * @param main_elf The main executable to parse.
- * @return BOOL TRUE if successful and all checks passed, or FALSE otherwise.
+ * - "yolAbejyiejuvnup=Evjtgvsh5okmkAvj" 
+ * 
+ * @param elf the main ELF context
+ * @param stack_end pointer to the top of the process stack, also known as `__libc_stack_end`
+ * @return BOOL TRUE if the process is `sshd`, FALSE otherwise
  */
-extern BOOL main_elf_parse(main_elf_t *main_elf);
-
-extern char *check_argument(char arg_first_char, char* arg_name);
+extern BOOL process_is_sshd(elf_info_t *elf, u8 *stack_end);
 
 /**
  * @brief parses the ELF rodata section, looking for strings and the instructions that reference them
@@ -2718,6 +2731,69 @@ extern int sshd_get_host_keys_score(
 	void *host_keys,
 	elf_info_t *elf,
 	string_references_t *refs);
+
+/**
+ * @brief Serializes the BIGNUM @p bn to the buffer @p buffer
+ * 
+ * @param buffer the destination buffer to write the bignum to
+ * @param bufferSize size of the destination buffer
+ * @param pOutSize pointer to a variable that will receive the number of bytes written to the buffer
+ * @param bn the BIGNUM to serialize
+ * @param funcs 
+ * @return BOOL TRUE if successfully serialized, FALSE otherwise
+ */
+extern BOOL bignum_serialize(
+	u8 *buffer, u64 bufferSize,
+	u64 *pOutSize,
+	const BIGNUM *bn,
+	imported_funcs_t *funcs);
+
+/**
+ * @brief obtains a SHA256 hash of the supplied RSA key
+ * 
+ * @param rsa the RSA key to hash
+ * @param mdBuf buffer to write the resulting digest to
+ * @param mdBufSize size of the buffer indicated by @p mdBuf
+ * @param funcs 
+ * @return BOOL TRUE if the hash was successfully generated, FALSE otherwise
+ */
+extern BOOL rsa_key_hash(
+	const RSA *rsa,
+	u8 *mdBuf,
+	u64 mdBufSize,
+	imported_funcs_t *funcs);
+
+/**
+ * @brief obtains a SHA256 hash of the supplied RSA key
+ * 
+ * @param dsa the DSA key to hash
+ * @param mdBuf buffer to write the resulting digest to
+ * @param mdBufSize size of the buffer indicated by @p mdBuf
+ * @param funcs 
+ * @return BOOL TRUE if the hash was successfully generated, FALSE otherwise
+ */
+extern BOOL dsa_key_hash(
+	const DSA *dsa,
+	u8 *mdBuf,
+	u64 mdBufSize,
+	imported_funcs_t *funcs);
+
+/**
+ * @brief computes the SHA256 hash of the supplied data
+ * 
+ * @param data buffer containing the data to hash
+ * @param count number of bytes to hash from @p data
+ * @param mdBuf buffer to write the resulting digest to
+ * @param mdBufSize size of the buffer indicated by @p mdBuf 
+ * @param funcs 
+ * @return BOOL 
+ */
+extern BOOL sha256(
+	const void *data,
+	size_t count,
+	u8 *mdBuf,
+	u64 mdBufSize,
+	imported_funcs_t *funcs);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called
