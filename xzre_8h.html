@@ -1353,7 +1353,7 @@ Functions</h2></td></tr>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>check_argument</b> (char arg_first_char, char *arg_name)</td></tr>
 <tr class="separator:aeba34776520881226359e3a0524fbe7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e">process_is_sshd</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *elf, u8 *stack_end)</td></tr>
-<tr class="memdesc:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the current process is sshd by inspecting <code>argv</code> and <code>envp</code> by inspecting the top of the process stack ( represented by <code>stack_end</code> )  <a href="xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e">More...</a><br /></td></tr>
+<tr class="memdesc:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the current process is sshd by inspecting <code>argv</code> and <code>envp</code>.  <a href="xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e">More...</a><br /></td></tr>
 <tr class="separator:a04a9f7dfab9ccac6d8407c906b7b2e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6925f05854b05bb9441f71c3f1deb55c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">elf_find_string_references</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
 <tr class="memdesc:a6925f05854b05bb9441f71c3f1deb55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the ELF rodata section, looking for strings and the instructions that reference them  <a href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">More...</a><br /></td></tr>
@@ -4272,7 +4272,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>checks if the current process is sshd by inspecting <code>argv</code> and <code>envp</code> by inspecting the top of the process stack ( represented by <code>stack_end</code> ) </p>
+<p>checks if the current process is sshd by inspecting <code>argv</code> and <code>envp</code>. </p>
+<p>this is done by reading the top of the process stack ( represented by <code>stack_end</code> )</p>
 <p>The following checks are performed:</p><ul>
 <li>that argv[0] is "/usr/sbin/sshd"</li>
 <li>the remaining args all start with '-'</li>
