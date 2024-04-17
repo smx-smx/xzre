@@ -8,7 +8,9 @@
 #define __XZRE_H
 
 #ifndef XZRE_SLIM
+#define _GNU_SOURCE
 #include <assert.h>
+#include <link.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <sys/select.h>
@@ -68,6 +70,75 @@ typedef Elf64_Xword Elf64_Relr;
 #define __must_be_array(a) BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
 
+// copied from https://sourceware.org/git/?p=glibc.git;a=blob;f=include/link.h;h=bef2820b40cd553c77990dcda4f4ccf0203a9110;hb=f94f6d8a3572840d3ba42ab9ace3ea522c99c0c2#l360
+struct auditstate
+{
+ 		uintptr_t cookie;
+ 		unsigned int bindflags;
+};
+
+typedef struct link_map *lookup_t;
+
+struct La_i86_regs;
+struct La_i86_retval;
+struct La_x86_64_regs;
+struct La_x86_64_retval;
+struct La_x32_regs;
+struct La_x32_retval;
+
+// copied from https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/generic/ldsodefs.h;h=2ebe7901c03ade2da466d8a2bf1e1214ef8f54d1;hb=f94f6d8a3572840d3ba42ab9ace3ea522c99c0c2#l256
+// and https://sourceware.org/git/?p=glibc.git;a=blob;f=sysdeps/x86/ldsodefs.h;h=50dc81c02249bc8e034842066428452f6c00aec3;hb=57581acd9559217e859fdac693145ce6399f4d70
+struct audit_ifaces
+{
+	void (*activity) (uintptr_t *, unsigned int);
+	char *(*objsearch) (const char *, uintptr_t *, unsigned int);
+	unsigned int (*objopen) (struct link_map *, Lmid_t, uintptr_t *);
+	void (*preinit) (uintptr_t *);
+	union
+	{
+		uintptr_t (*symbind32) (Elf32_Sym *, unsigned int, uintptr_t *,
+			uintptr_t *, unsigned int *, const char *);
+		uintptr_t (*symbind64) (Elf64_Sym *, unsigned int, uintptr_t *,
+			uintptr_t *, unsigned int *, const char *);
+	};
+	union
+	{
+		Elf32_Addr (*i86_gnu_pltenter) (Elf32_Sym *, unsigned int, uintptr_t *,
+			uintptr_t *, struct La_i86_regs *,
+			unsigned int *, const char *name,
+			long int *framesizep);
+		Elf64_Addr (*x86_64_gnu_pltenter) (Elf64_Sym *, unsigned int,
+			uintptr_t *,
+			uintptr_t *, struct La_x86_64_regs *,
+			unsigned int *, const char *name,
+			long int *framesizep);
+		Elf32_Addr (*x32_gnu_pltenter) (Elf32_Sym *, unsigned int, uintptr_t *,
+			uintptr_t *, struct La_x32_regs *,
+			unsigned int *, const char *name,
+			long int *framesizep);
+	};
+	union
+	{
+ 		unsigned int (*i86_gnu_pltexit) (Elf32_Sym *, unsigned int, uintptr_t *,
+			uintptr_t *, const struct La_i86_regs *,
+			struct La_i86_retval *, const char *);
+		unsigned int (*x86_64_gnu_pltexit) (Elf64_Sym *, unsigned int,
+			uintptr_t *,
+			uintptr_t *,
+			const struct La_x86_64_regs *,
+			struct La_x86_64_retval *,
+			const char *);
+		unsigned int (*x32_gnu_pltexit) (Elf32_Sym *, unsigned int, uintptr_t *,
+			uintptr_t *,
+			const struct La_x32_regs *,
+			struct La_x86_64_retval *,
+			const char *);
+	};
+	unsigned int (*objclose) (uintptr_t *);
+
+	struct audit_ifaces *next;
+};
+
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
 
@@ -122,8 +193,12 @@ typedef enum {
 } FuncFindType;
 
 typedef enum {
+	/**
+	 * @brief this is for sshd itself
+	 * 
+	 */
 	X_ELF_MAIN = 0,
-	X_ELF_TMP = 1,
+	X_ELF_DYNAMIC_LINKER = 1,
 	X_ELF_LIBC = 2,
 	X_ELF_LIBCRYPTO = 3
 } ElfId;
@@ -562,9 +637,21 @@ typedef struct __attribute__((packed)) imported_funcs {
 	void (*RSA_get0_key_null)(
 		const RSA *r, const BIGNUM **n,
 		const BIGNUM **e, const BIGNUM **d);
-	void *RSA_public_decrypt_hook_ptr;
-	void *EVP_PKEY_set1_RSA_hook_ptr;
-	void *RSA_get0_key_hook_ptr;
+	/**
+	 * @brief address of the PLT for RSA_public_decrypt() in sshd
+	 * 
+	 */
+	void *RSA_public_decrypt_plt;
+	/**
+	 * @brief address of the PLT for EVP_PKEY_set1_RSA() in sshd
+	 * 
+	 */
+	void *EVP_PKEY_set1_RSA_plt;
+	/**
+	 * @brief address of the PLT for RSA_get0_key() in sshd
+	 * 
+	 */
+	void *RSA_get0_key_plt;
 	void (*DSA_get0_pqg)(
 		const DSA *d, const BIGNUM **p,
 		const BIGNUM **q, const BIGNUM **g);
@@ -621,9 +708,9 @@ typedef struct __attribute__((packed)) imported_funcs {
 assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
 assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA, 8);
 assert_offset(imported_funcs_t, RSA_get0_key_null, 0x10);
-assert_offset(imported_funcs_t, RSA_public_decrypt_hook_ptr, 0x18);
-assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_hook_ptr, 0x20);
-assert_offset(imported_funcs_t, RSA_get0_key_hook_ptr, 0x28);
+assert_offset(imported_funcs_t, RSA_public_decrypt_plt, 0x18);
+assert_offset(imported_funcs_t, EVP_PKEY_set1_RSA_plt, 0x20);
+assert_offset(imported_funcs_t, RSA_get0_key_plt, 0x28);
 assert_offset(imported_funcs_t, DSA_get0_pqg, 0x30);
 assert_offset(imported_funcs_t, DSA_get0_pub_key, 0x38);
 assert_offset(imported_funcs_t, EC_POINT_point2oct, 0x40);
@@ -656,7 +743,6 @@ assert_offset(imported_funcs_t, BN_free, 0x110);
 assert_offset(imported_funcs_t, libc, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 static_assert(sizeof(imported_funcs_t) == 0x128);
-
 
 typedef struct __attribute__((packed)) sshd_ctx {
 	PADDING(0x20);
@@ -732,10 +818,12 @@ assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
 typedef struct __attribute__((packed)) global_context {
 	PADDING(8);
 	/**
-	 * @brief 
-	 * pointer to the structure containing resolved OpenSSL and system functions
+	 * @brief pointer to the structure containing resolved OpenSSL functions
 	 */
 	imported_funcs_t *imported_funcs;
+	/**
+	 * @brief pointer to the structure containing resolved libc functions
+	 */
 	libc_imports_t* libc_imports;
 	/**
 	 * @brief 
@@ -749,43 +837,59 @@ typedef struct __attribute__((packed)) global_context {
 	sshd_ctx_t *sshd_ctx;
 	void *sshd_host_keys;
 	sshd_log_ctx_t *sshd_log_ctx;
-	PADDING(0x20);
+	/**
+	 * @brief location of sshd .rodata string "ssh-rsa-cert-v01@openssh.com"
+	 */
+	char *ssh_rsa_cert_v01_openssh_com_str;
+	/**
+	 * @brief location of sshd .rodata string "rsa-sha2-256"
+	 */
+	char *rsa_sha2_256_str;
+	PADDING(0x10);
+	/**
+	 * @brief sshd code segment start
+	 */
 	void *sshd_code_start;
+	/**
+	 * @brief sshd code segment end
+	 */
 	void *sshd_code_end;
+	/**
+	 * @brief sshd data segment end
+	 */
 	void *sshd_data_start;
+	/**
+	 * @brief sshd data segment start
+	 */
 	void *sshd_data_end;
 	PADDING(0x8);
 	/**
-	 * @brief 
+	 * @brief liblzma code segment start
+	 * 
 	 * the shifter will use this address as the minimum search address
 	 * any instruction below this address will be rejected
-	 * 
-	 * set in backdoor_setup() to the liblzma code segment start
 	 */
 	void *lzma_code_start;
 	/**
-	 * @brief 
+	 * @brief liblzma code segment end
+	 * 
 	 * the shifter will use this address as the maximum search address
 	 * any instruction beyond this address will be rejected
-	 * 
-	 * set in backdoor_setup() to the liblzma code segment end
 	 */
 	void *lzma_code_end;
 	PADDING(0x78);
 	/**
-	 * @brief 
-	 * holds the secret data used for the chacha key generation
+	 * @brief the secret data used for the chacha key generation
 	 */
 	u8 secret_data[57];
 	/**
-	 * @brief
-	 * holds the shift operation states
+	 * @brief the shift operation states
+	 * 
 	 * written by @ref secret_data_append_singleton
 	 */
 	u8 shift_operations[31];
 	/**
-	 * @brief 
-	 * number of bits copied
+	 * @brief number of bits copied
 	 */
 	u32 num_shifted_bits;
 	PADDING(4);
@@ -809,7 +913,12 @@ assert_offset(global_context_t, num_shifted_bits, 0x160);
 static_assert(sizeof(global_context_t) == 0x168);
 
 typedef struct __attribute__((packed)) backdoor_shared_globals {
-	PADDING(0x10);
+	PADDING(sizeof(void*));
+	/**
+	 * this value is copied to ldso_ctx_t::hook_EVP_PKEY_set1_RSA in backdoor_setup
+	 * 
+	 */
+	PADDING(sizeof(void*));
 	global_context_t **globals;
 } backdoor_shared_globals_t;
 
@@ -817,27 +926,133 @@ assert_offset(backdoor_shared_globals_t, globals, 0x10);
 static_assert(sizeof(backdoor_shared_globals_t) == 0x18);
 
 typedef struct __attribute__((packed)) ldso_ctx {
-	PADDING(0x60);
+	PADDING(0x40);
+	/**
+	 * @brief the location of libcrypto's auditstate::bindflags field
+	 * 
+	 * _dl_audit_symbind_alt() will check this field to see backdoor_symbind() should be called for this ELF
+	 * 
+	 * this field is set to LA_FLG_BINDTO to activate backdoor_symbind()
+	 * 
+	 * before _dl_naudit is set to 1 this is actually the location of libname_list::next
+	 * 
+	 */
+	void *libcrypto_auditstate_bindflags_ptr;
+	/**
+	 * @brief backup of the old value of libcrypto's libname_list::next field
+	 * 
+	 */
+	void *libcrypto_auditstate_bindflags_old_value;
+	/**
+	 * @brief the location of sshd's auditstate::bindflags field
+	 * 
+	 * _dl_audit_symbind_alt() will check this field to see backdoor_symbind() should be called for this ELF
+	 * 
+	 * this field is set to LA_FLG_BINDFROM to activate backdoor_symbind()
+	 * 
+	 * before _dl_naudit is set to 1 this is actually the location of libname_list::next
+	 * 
+	 */
+	void *sshd_auditstate_bindflags_ptr;
+	/**
+	 * @brief backup of the old value of sshd's libname_list::next field
+	 * 
+	 */
+	void *sshd_auditstate_bindflags_old_value;
+	/**
+	 * @brief location of sshd's link_map::l_audit_any_plt flag
+	 * 
+	 * this flag controls whether ld.so's _dl_audit_symbind_alt() will even check the struct auditstate for sshd
+	 * 
+	 * this flag is set to 1 to activate backdoor_symbind()
+	 * 
+	 */
 	void* sshd_link_map_l_audit_any_plt_addr;
+	/**
+	 * @brief bitmask that sets the link_map::l_audit_any_plt flag
+	 * 
+	 * used with ldso_ctx_t::sshd_link_map_l_audit_any_plt_addr to set the correct bit
+	 * 
+	 */
 	u8 link_map_l_audit_any_plt_bitmask;
 	PADDING(0x7);
-	ptrdiff_t _dl_audit_offset;
-	ptrdiff_t _dl_naudit_offset;
-	PADDING(0x78);
-	void *libcrypto_l_name;
-	void *_dl_audit_symbind_alt;
+	/**
+	 * @brief location of ld.so's _rtld_global_ro::_dl_audit_ptr field
+	 * 
+	 * ld.so's _dl_audit_symbind_alt() uses the struct at this location to call the backdor_symbind() callback function
+	 * 
+	 * this field is set to hooked_audit_ifaces to activate backdoor_symbind()
+	 * 
+	 */
+	struct audit_ifaces **_dl_audit_ptr;
+	/**
+	 * @brief location of ld.so's _rtld_global_ro::_dl_naudit_ptr field
+	 * 
+	 * this field controls whether ld.so's _dl_audit_symbind_alt() will expect any struct audit_ifaces
+	 * 
+	 * this field is set to 1 to activate backdoor_symbind()
+	 * 
+	 */
+	unsigned int *_dl_naudit_ptr;
+	/**
+	 * @brief the struct audit_ifaces that points to backdoor_symbind()
+	 * 
+	 * the audit_ifaces::symbind64 field is set to backdoor_symbind()
+	 * 
+	 * _dl_audit_symbind_alt() will use this struct to check for a audit_ifaces::symbind64 callback function
+	 * 
+	 */
+	struct audit_ifaces hooked_audit_ifaces;
+	PADDING(0x30);
+	/**
+	 * @brief location of libcrypto's link_map::l_name field
+	 * 
+	 * used by backdoor_setup() to store a pointer to the backdoor_hooks_data_t struct
+	 * 
+	 */
+	char **libcrypto_l_name;
+	/**
+	 * @brief address of ld.so's _dl_audit_symbind_alt() function
+	 * 
+	 * this function is called when ld.so is binding all the dynamic linking symbols between ELFs
+	 * 
+	 */
+	void (*_dl_audit_symbind_alt)(struct link_map *l, const ElfW(Sym) *ref, void **value, lookup_t result);
+	/**
+	 * @brief code size of ld.so's _dl_audit_symbind_alt() function
+	 * 
+	 */
 	size_t _dl_audit_symbind_alt__size;
+	/**
+	 * @brief pointer to the function that will replace RSA_public_decrypt()
+	 * 
+	 */
 	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
+	/**
+	 * this field is set to a value from backdoor_shared_globals_t
+	 * which is different to the other hook_ fields that are coped from backdoor_hooks_ctx_t
+	 * 
+	 */
 	pfn_RSA_public_decrypt_t hook_EVP_PKEY_set1_RSA;
+	/**
+	 * @brief pointer to the function that will replace RSA_get0_key()
+	 * 
+	 */
 	pfn_RSA_get0_key_t hook_RSA_get0_key;
 	imported_funcs_t *imported_funcs;
 	u64 hooks_installed;
 } ldso_ctx_t;
 
+assert_offset(ldso_ctx_t, libcrypto_auditstate_bindflags_ptr, 0x40);
+assert_offset(ldso_ctx_t, libcrypto_auditstate_bindflags_old_value, 0x48);
+assert_offset(ldso_ctx_t, sshd_auditstate_bindflags_ptr, 0x50);
+assert_offset(ldso_ctx_t, sshd_auditstate_bindflags_old_value, 0x58);
 assert_offset(ldso_ctx_t, sshd_link_map_l_audit_any_plt_addr, 0x60);
 assert_offset(ldso_ctx_t, link_map_l_audit_any_plt_bitmask, 0x68);
-assert_offset(ldso_ctx_t, _dl_audit_offset, 0x70);
-assert_offset(ldso_ctx_t, _dl_naudit_offset, 0x78);
+assert_offset(ldso_ctx_t, _dl_audit_ptr, 0x70);
+assert_offset(ldso_ctx_t, _dl_naudit_ptr, 0x78);
+assert_offset(ldso_ctx_t, hooked_audit_ifaces, 0x80);
+static_assert(sizeof(struct audit_ifaces) == 0x48);
 assert_offset(ldso_ctx_t, libcrypto_l_name, 0xF8);
 assert_offset(ldso_ctx_t, _dl_audit_symbind_alt, 0x100);
 assert_offset(ldso_ctx_t, _dl_audit_symbind_alt__size, 0x108);
@@ -875,20 +1090,17 @@ typedef struct __attribute__((packed)) backdoor_hooks_ctx {
 	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
 	pfn_RSA_get0_key_t hook_RSA_get0_key;
 	/**
-	 * @brief 
-	 * set to addess of symbol .Llzma12_mode_map_part_1
+	 * @brief set to addess of symbol .Llzma12_mode_map_part_1
 	 */
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
 	/**
-	 * @brief 
-	 * set to addess of symbol .Lfile_info_decode_0
+	 * @brief set to addess of symbol .Lfile_info_decode_0
 	 */
 	PADDING(sizeof(void *));
 	/**
-	 * @brief 
-	 * set to addess of symbol .Lbt_skip_func_part_0
+	 * @brief set to addess of symbol .Lbt_skip_func_part_0
 	 */
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
@@ -921,23 +1133,23 @@ static_assert(sizeof(backdoor_setup_params_t) == 0x88);
  */
 typedef struct __attribute__((packed)) elf_handles {
 	/**
-	 * @brief this is for sshd itself
+	 * @brief this is for sshd
 	 * 
 	 */
 	elf_info_t *main;
 	/**
-	 * @brief used for multiple ELFs
+	 * @brief ELF context for ld.so
 	 * 
 	 * in early backdoor_setup() this is for the dynamic linker ld.so
 	 */
-	elf_info_t *tmp;
+	elf_info_t *dynamic_linker;
 	elf_info_t *libc;
 	elf_info_t *liblzma;
 	elf_info_t *libcrypto;
 } elf_handles_t;
 
 assert_offset(elf_handles_t, main, 0x0);
-assert_offset(elf_handles_t, tmp, 0x8);
+assert_offset(elf_handles_t, dynamic_linker, 0x8);
 assert_offset(elf_handles_t, libc, 0x10);
 assert_offset(elf_handles_t, liblzma, 0x18);
 assert_offset(elf_handles_t, libcrypto, 0x20);
@@ -964,7 +1176,6 @@ typedef struct __attribute__((packed)) backdoor_data_handle {
 
 assert_offset(backdoor_data_handle_t, data, 0x0);
 assert_offset(backdoor_data_handle_t, elf_handles, 0x8);
-
 
 typedef struct __attribute__((packed)) string_item {
 	/**
@@ -1030,11 +1241,11 @@ typedef struct __attribute__((packed)) backdoor_data {
 	 */
 	elf_info_t main_info;
 	/**
-	 * @brief used for multiple ELFs
+	 * @brief ELF context for ld.so
 	 * 
 	 * in early backdoor_setup() this is for the dynamic linker ld.so
 	 */
-	elf_info_t tmp_info;
+	elf_info_t dynamic_linker_info;
 	/**
 	 * @brief ELF context for libc.so
 	 */
@@ -1069,7 +1280,7 @@ assert_offset(backdoor_data_t, libsystemd_map, 0x20);
 assert_offset(backdoor_data_t, libc_map, 0x28);
 assert_offset(backdoor_data_t, elf_handles, 0x30);
 assert_offset(backdoor_data_t, main_info, 0x68);
-assert_offset(backdoor_data_t, tmp_info, 0x168);
+assert_offset(backdoor_data_t, dynamic_linker_info, 0x168);
 assert_offset(backdoor_data_t, libc_info, 0x268);
 assert_offset(backdoor_data_t, liblzma_info, 0x368);
 assert_offset(backdoor_data_t, libcrypto_info, 0x468);
@@ -1085,17 +1296,17 @@ typedef struct __attribute__((packed)) backdoor_shared_libraries_data {
 	 * @brief address of the PLT for RSA_public_decrypt() in sshd
 	 * 
 	 */
-	pfn_RSA_public_decrypt_t* RSA_public_decrypt_plt;
+	void* RSA_public_decrypt_plt;
 	/**
 	 * @brief address of the PLT for EVP_PKEY_set1_RSA_plt() in sshd
 	 * 
 	 */
-	pfn_EVP_PKEY_set1_RSA_t* EVP_PKEY_set1_RSA_plt;
+	void* EVP_PKEY_set1_RSA_plt;
 	/**
 	 * @brief address of the PLT for RSA_get0_key_plt() in sshd
 	 * 
 	 */
-	pfn_RSA_get0_key_t* RSA_get0_key_plt;
+	void* RSA_get0_key_plt;
 	backdoor_hooks_data_t **hooks_data_addr;
 	libc_imports_t *libc_imports;
 } backdoor_shared_libraries_data_t;
@@ -1286,7 +1497,7 @@ typedef struct __attribute__((packed)) elf_functions {
 	 * 
 	 * the field maps to a relocation entry of type R_X86_64_64 and value elf_symbol_get_addr
 	 */
-	void (*elf_symbol_get_addr)(elf_info_t *elf_info, EncodedStringId encoded_string_id);
+	void *(*elf_symbol_get_addr)(elf_info_t *elf_info, EncodedStringId encoded_string_id);
 	PADDING(sizeof(u64));
 	/**
 	 * @brief the address of elf_parse()
@@ -1313,11 +1524,31 @@ static_assert(sizeof(fake_lzma_allocator_t) == 0x20);
 
 typedef struct __attribute__((packed)) instruction_search_ctx
 {
+	/**
+	 * @brief start of the code address range to search
+	 * 
+	 */
 	u8 *start_addr;
+	/**
+	 * @brief start of the code address range to search
+	 * 
+	 */
 	u8 *end_addr;
+	/**
+	 * @brief offset to match in the instruction displacement
+	 * 
+	 */
 	u8 *offset_to_match;
+	/**
+	 * @brief register to match as the instruction output
+	 * 
+	 */
 	u32 *output_register_to_match;
 	u8 *output_register; // TODO unknown
+	/**
+	 * @brief TRUE if the instruction sequence was found, FALSE otherwise
+	 * 
+	 */
 	BOOL result;
 	PADDING(0x4);
 	backdoor_hooks_data_t *hooks;
@@ -1340,9 +1571,9 @@ static_assert(sizeof(instruction_search_ctx_t) == 0x40);
  * @param ctx empty disassembler context to hold the state
  * @param code_start pointer to the start of buffer (first disassemblable location)
  * @param code_end pointer to the end of the buffer
- * @return int TRUE if disassembly was successful, FALSE otherwise
+ * @return BOOL TRUE if disassembly was successful, FALSE otherwise
  */
-extern int x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);
+extern BOOL x86_dasm(dasm_ctx_t *ctx, u8 *code_start, u8 *code_end);
 
 /**
  * @brief finds a call instruction
@@ -1689,8 +1920,8 @@ extern void *elf_get_data_segment(elf_info_t *elf_info, u64 *pSize, BOOL get_ali
 extern void *elf_get_reloc_symbol(
 	elf_info_t *elf_info,
 	Elf64_Rela *relocs,
-	unsigned num_relocs,
-	unsigned reloc_type,
+	u32 num_relocs,
+	u64 reloc_type,
 	EncodedStringId encoded_string_id);
 
 /**
@@ -1914,10 +2145,23 @@ extern BOOL secret_data_append_from_call_site(
 );
 
 /**
- * @brief the backdoor main method
+ * @brief the backdoor main method that installs the backdoor_symbind64() callback
  * 
- * @param params parameters
- * @return BOOL unused
+ * If the backdoor initialization steps are successful the final step modifies some ld.so private structures
+ * to simulate a LD_AUDIT library and install the backdoor_symbind64() as a symbind callback.
+ * 
+ * To pass the various conditions in ld.so's _dl_audit_symbind_alt the following fields are modified:
+ * - the sshd and libcrypto struct link_map::l_audit_any_plt flag is set to 1
+ * - the sshd struct auditstate::bindflags is set to LA_FLG_BINDFROM
+ * - the libcrypto struct auditstate::bindflags is set to LA_FLG_BINDTO
+ * - _rtld_global_ro::_dl_audit is set to point to ldso_ctx_t::hooked_audit_iface
+ * - the struct audit_ifaces::symbind64 is set to backdoor_symbind64()
+ * - _rtld_global_ro::_dl_naudit is set to 1
+ * 
+ * After the modifications backdoor_symbind64() will be called for all symbol bindings from sshd to libcrypto.
+ * 
+ * @param params parameters from backdoor_init_stage()
+ * @return BOOL unused, always return FALSE
  */
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
 
@@ -1930,11 +2174,10 @@ extern BOOL backdoor_setup(backdoor_setup_params_t *params);
  * 
  * the second time it is called is in the crc64() resolver and then this function calls backdoor_init_stage2()
  * 
- * stores elf_entry_ctx_t::symbol_ptr - elf_entry_ctx_t::got_offset in elf_entry_ctx_t::got_ptr which is the GOT address 
- * 
  * this is a modified version of __get_cpuid_max() from gcc
  * 
  * backdoor_init_stage2() is called by replacing the _cpuid() GOT entry to point to backdoor_init_stage2()
+ * 
  * @param cpuid_request EAX register input. Is either 0 or 0x80000000, but this value is actually not used.
  * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
  * @return unsigned int the EAX register output. Normally the maximum supported cpuid level.
@@ -1944,13 +2187,15 @@ extern unsigned int backdoor_entry(unsigned int cpuid_request, u64 *caller_frame
 /**
  * @brief calls @ref backdoor_init_stage2 by disguising it as a call to cpuid.
  *
- * this is achieved by modifying the cpuid GOT entry.
+ * @ref backdoor_init_stage2 is called by replacing the _cpuid() GOT entry to point to @ref backdoor_init_stage2
+ * 
+ * stores elf_entry_ctx_t::symbol_ptr - elf_entry_ctx_t::got_offset in elf_entry_ctx_t::got_ptr which is the GOT address .
  * 
  * @param state the entry context, filled by @ref backdoor_entry
  * @param caller_frame the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver
- * @return unsigned int the EAX register output. Normally the maximum supported cpuid level.
+ * @return void* the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of backdoor_init_stage2()
  */
-extern unsigned int backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
+extern void * backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
 
 /**
  * @brief initialises the elf_entry_ctx_t
