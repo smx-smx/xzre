@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['resolver_5fcall_5fcount_344',['resolver_call_count',['../xzre_8h.html#ab9c7b9765c15a48fbed3d1a8daf1b27f',1,'xzre.h']]],
-  ['return_5faddress_345',['return_address',['../structelf__entry__ctx.html#a8f0bdc109d8669cbe7024312b5db7fbd',1,'elf_entry_ctx']]],
-  ['rsa_5fget0_5fkey_5fplt_346',['RSA_get0_key_plt',['../structbackdoor__shared__libraries__data.html#ad0398d2c15a4f059ce93f3f246f74498',1,'backdoor_shared_libraries_data']]],
-  ['rsa_5fpublic_5fdecrypt_5fplt_347',['RSA_public_decrypt_plt',['../structbackdoor__shared__libraries__data.html#a9f903c41d3021859de4c51f121b583bc',1,'backdoor_shared_libraries_data']]]
+  ['offset_5fto_5fmatch_388',['offset_to_match',['../structinstruction__search__ctx.html#a68e8f8c7f105fcfe3bc77abbfcdb493e',1,'instruction_search_ctx']]],
+  ['output_5fregister_5fto_5fmatch_389',['output_register_to_match',['../structinstruction__search__ctx.html#ae0ec8bee47bf045c3ce653c33b9ce2f1',1,'instruction_search_ctx']]]
 ];

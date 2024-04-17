@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['import_5fresolver_328',['import_resolver',['../structbackdoor__data.html#ad6eb45526286b7304fb01af7c50ff5b2',1,'backdoor_data']]],
-  ['imported_5ffuncs_329',['imported_funcs',['../structglobal__context.html#a5dccd92d1dd861220b290896bd7ba487',1,'global_context']]],
-  ['index_330',['index',['../unionsecret__data__shift__cursor__t.html#a159dd83929f3c1d7b994d4961d8f7850',1,'secret_data_shift_cursor_t']]],
-  ['init_5fhook_5ffunctions_331',['init_hook_functions',['../structelf__functions.html#a4034b3706679dac6eacec8f90530d652',1,'elf_functions']]]
+  ['hook_5fevp_5fpkey_5fset1_5frsa_366',['hook_EVP_PKEY_set1_RSA',['../structldso__ctx.html#a47b2d4f88dcb9bbb7d9d4161294eef76',1,'ldso_ctx']]],
+  ['hook_5frsa_5fget0_5fkey_367',['hook_RSA_get0_key',['../structldso__ctx.html#a6ebdde768535a27a9a269f5f5b5f9cb2',1,'ldso_ctx']]],
+  ['hook_5frsa_5fpublic_5fdecrypt_368',['hook_RSA_public_decrypt',['../structldso__ctx.html#ae2d0c91c19ed327dc332e5a42778e9a3',1,'ldso_ctx']]],
+  ['hooked_5faudit_5fifaces_369',['hooked_audit_ifaces',['../structldso__ctx.html#a91f73403c7858ed838d4d16148296485',1,'ldso_ctx']]],
+  ['hooks_5fdata_5faddr_370',['hooks_data_addr',['../xzre_8h.html#a32c97a88bc607d3f2459f0d7d420099d',1,'xzre.h']]]
 ];

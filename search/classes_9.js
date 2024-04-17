@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main_5felf_212',['main_elf',['../structmain__elf.html',1,'']]]
+  ['ldso_5fctx_242',['ldso_ctx',['../structldso__ctx.html',1,'']]],
+  ['libc_5fimports_243',['libc_imports',['../structlibc__imports.html',1,'']]]
 ];

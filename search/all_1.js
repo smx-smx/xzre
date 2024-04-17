@@ -1,22 +1,5 @@
 var searchData=
 [
-  ['backdoor_5fcpuid_5freloc_5fconsts_2',['backdoor_cpuid_reloc_consts',['../structbackdoor__cpuid__reloc__consts.html',1,'']]],
-  ['backdoor_5fdata_3',['backdoor_data',['../structbackdoor__data.html',1,'']]],
-  ['backdoor_5fdata_5fhandle_4',['backdoor_data_handle',['../structbackdoor__data__handle.html',1,'']]],
-  ['backdoor_5fdata_5fhandle_5ft_5',['backdoor_data_handle_t',['../xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405',1,'xzre.h']]],
-  ['backdoor_5fdata_5ft_6',['backdoor_data_t',['../xzre_8h.html#a78a513f8570845832aaf68c928a5126a',1,'xzre.h']]],
-  ['backdoor_5fentry_7',['backdoor_entry',['../xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc',1,'xzre.h']]],
-  ['backdoor_5fhooks_5fctx_8',['backdoor_hooks_ctx',['../structbackdoor__hooks__ctx.html',1,'']]],
-  ['backdoor_5fhooks_5fdata_9',['backdoor_hooks_data',['../structbackdoor__hooks__data.html',1,'']]],
-  ['backdoor_5finit_10',['backdoor_init',['../xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6',1,'xzre.h']]],
-  ['backdoor_5finit_5fstage2_11',['backdoor_init_stage2',['../xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6',1,'xzre.h']]],
-  ['backdoor_5finit_5fstage2_5fgot_5foffset_12',['backdoor_init_stage2_got_offset',['../structbackdoor__cpuid__reloc__consts.html#a1e485c91ec545face6eb5870af71c3de',1,'backdoor_cpuid_reloc_consts']]],
-  ['backdoor_5fsetup_13',['backdoor_setup',['../xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423',1,'xzre.h']]],
-  ['backdoor_5fsetup_5fparams_14',['backdoor_setup_params',['../structbackdoor__setup__params.html',1,'']]],
-  ['backdoor_5fshared_5fglobals_15',['backdoor_shared_globals',['../structbackdoor__shared__globals.html',1,'']]],
-  ['backdoor_5fshared_5flibraries_5fdata_16',['backdoor_shared_libraries_data',['../structbackdoor__shared__libraries__data.html',1,'']]],
-  ['backdoor_5fsymbind64_17',['backdoor_symbind64',['../xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc',1,'xzre.h']]],
-  ['backdoor_5ftls_5fget_5faddr_5freloc_5fconsts_18',['backdoor_tls_get_addr_reloc_consts',['../structbackdoor__tls__get__addr__reloc__consts.html',1,'']]],
-  ['bit_5findex_19',['bit_index',['../unionsecret__data__shift__cursor__t.html#afa0821d36c89dc0e8ac3d126049e1604',1,'secret_data_shift_cursor_t']]],
-  ['byte_5findex_20',['byte_index',['../unionsecret__data__shift__cursor__t.html#a1aaf16a99b291ced145bbbaaef9cba1e',1,'secret_data_shift_cursor_t']]]
+  ['audit_5fifaces_6',['audit_ifaces',['../structaudit__ifaces.html',1,'']]],
+  ['auditstate_7',['auditstate',['../structauditstate.html',1,'']]]
 ];

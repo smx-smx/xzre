@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['num_5fshifted_5fbits_340',['num_shifted_bits',['../structglobal__context.html#a6895ac8df8ead90c8f140a8c6606828f',1,'global_context']]]
+  ['main_384',['main',['../structelf__handles.html#ad693d428a831ddaadae6d8de369ebf80',1,'elf_handles']]],
+  ['main_5finfo_385',['main_info',['../structbackdoor__data.html#ad66782fe22d1981edf9f791ac0d4a0d7',1,'backdoor_data']]],
+  ['main_5fmap_386',['main_map',['../structbackdoor__data.html#a6d36460b86405888db4138fb6cb02a21',1,'backdoor_data']]]
 ];

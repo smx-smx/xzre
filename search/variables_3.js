@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['e_5fphnum_307',['e_phnum',['../structelf__info.html#a58ce2573274e2ad8e97b839ed3e17e3e',1,'elf_info']]],
-  ['elf_5ffunctions_308',['elf_functions',['../xzre_8h.html#a43a1216740525fdfa050474fc9b91a57',1,'xzre.h']]],
-  ['elf_5ffunctions_5foffset_309',['elf_functions_offset',['../xzre_8h.html#a4623e8d4254091bcbffbead1ee7ed2ff',1,'xzre.h']]],
-  ['elf_5fparse_310',['elf_parse',['../structelf__functions.html#aa14d9c82c4eb98b3da13538201353533',1,'elf_functions']]],
-  ['elf_5fsymbol_5fget_5faddr_311',['elf_symbol_get_addr',['../structelf__functions.html#a65e8c71928f31bcf57d57caa0e35d837',1,'elf_functions']]],
-  ['elfbase_312',['elfbase',['../structelf__info.html#a583c4dd181c2f8b831e56c0d12acd660',1,'elf_info']]],
-  ['evp_5fpkey_5fset1_5frsa_5fplt_313',['EVP_PKEY_set1_RSA_plt',['../structbackdoor__shared__libraries__data.html#ab977ba59c8aa4be47d56f2c3e6501eab',1,'backdoor_shared_libraries_data']]]
+  ['decrypted_5fsecret_5fdata_338',['decrypted_secret_data',['../structkey__ctx.html#a513b4c31ec1dbf7865acd503325ff11b',1,'key_ctx']]],
+  ['disable_5fbackdoor_339',['disable_backdoor',['../structglobal__context.html#a4cd62af07344d65195f10f6d6a3c98af',1,'global_context']]],
+  ['dyn_340',['dyn',['../structelf__info.html#a3c3f1487932a753b2908a26ebb52e0c0',1,'elf_info']]],
+  ['dyn_5fnum_5fentries_341',['dyn_num_entries',['../structelf__info.html#aad068cf90f065cfa166ee1bfaf56432e',1,'elf_info']]],
+  ['dynamic_5flinker_342',['dynamic_linker',['../structelf__handles.html#aad9c46086d39b765eb2455b6445f2986',1,'elf_handles']]],
+  ['dynamic_5flinker_5finfo_343',['dynamic_linker_info',['../structbackdoor__data.html#ad416055b3c186bdc2c86b01a27251f48',1,'backdoor_data']]],
+  ['dynamic_5flinker_5fmap_344',['dynamic_linker_map',['../structbackdoor__data.html#af0c12a5d305514c457e8ccd17a9634d1',1,'backdoor_data']]]
 ];

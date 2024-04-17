@@ -63,6 +63,22 @@ $(function() {
 <div class="contents">
 <div class="textblock">Here is a list of all documented struct and union fields with links to the struct/union documentation for each field:</div>
 
+<h3><a id="index__5F"></a>- _ -</h3><ul>
+<li>_dl_audit_ptr
+: <a class="el" href="structldso__ctx.html#acef3e145d925ae4a507d61e4c2256809">ldso_ctx</a>
+</li>
+<li>_dl_audit_symbind_alt
+: <a class="el" href="structldso__ctx.html#ab398b3a2a4a7049a007c2ce246be3e11">ldso_ctx</a>
+</li>
+<li>_dl_audit_symbind_alt__size
+: <a class="el" href="structldso__ctx.html#aa517322ded43614b595e507c1425eabb">ldso_ctx</a>
+</li>
+<li>_dl_naudit_ptr
+: <a class="el" href="structldso__ctx.html#a67f22bd8ad4f38fd85f4be1558df5adc">ldso_ctx</a>
+</li>
+</ul>
+
+
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>backdoor_init_stage2_got_offset
 : <a class="el" href="structbackdoor__cpuid__reloc__consts.html#a1e485c91ec545face6eb5870af71c3de">backdoor_cpuid_reloc_consts</a>
@@ -108,6 +124,12 @@ $(function() {
 <li>dyn_num_entries
 : <a class="el" href="structelf__info.html#aad068cf90f065cfa166ee1bfaf56432e">elf_info</a>
 </li>
+<li>dynamic_linker
+: <a class="el" href="structelf__handles.html#aad9c46086d39b765eb2455b6445f2986">elf_handles</a>
+</li>
+<li>dynamic_linker_info
+: <a class="el" href="structbackdoor__data.html#ad416055b3c186bdc2c86b01a27251f48">backdoor_data</a>
+</li>
 <li>dynamic_linker_map
 : <a class="el" href="structbackdoor__data.html#af0c12a5d305514c457e8ccd17a9634d1">backdoor_data</a>
 </li>
@@ -122,13 +144,17 @@ $(function() {
 : <a class="el" href="structelf__functions.html#aa14d9c82c4eb98b3da13538201353533">elf_functions</a>
 </li>
 <li>elf_symbol_get_addr
-: <a class="el" href="structelf__functions.html#a65e8c71928f31bcf57d57caa0e35d837">elf_functions</a>
+: <a class="el" href="structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b">elf_functions</a>
 </li>
 <li>elfbase
 : <a class="el" href="structelf__info.html#a583c4dd181c2f8b831e56c0d12acd660">elf_info</a>
 </li>
+<li>end_addr
+: <a class="el" href="structinstruction__search__ctx.html#a84ab74900d4eddc764c11910a7d1bae5">instruction_search_ctx</a>
+</li>
 <li>EVP_PKEY_set1_RSA_plt
-: <a class="el" href="structbackdoor__shared__libraries__data.html#ab977ba59c8aa4be47d56f2c3e6501eab">backdoor_shared_libraries_data</a>
+: <a class="el" href="structbackdoor__shared__libraries__data.html#a875496a16e72c0cb3d8da33781762e0f">backdoor_shared_libraries_data</a>
+, <a class="el" href="structimported__funcs.html#af95a28ca3f6c25bd3ecdd064a23309c5">imported_funcs</a>
 </li>
 </ul>
 
@@ -174,6 +200,22 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>hook_EVP_PKEY_set1_RSA
+: <a class="el" href="structldso__ctx.html#a47b2d4f88dcb9bbb7d9d4161294eef76">ldso_ctx</a>
+</li>
+<li>hook_RSA_get0_key
+: <a class="el" href="structldso__ctx.html#a6ebdde768535a27a9a269f5f5b5f9cb2">ldso_ctx</a>
+</li>
+<li>hook_RSA_public_decrypt
+: <a class="el" href="structldso__ctx.html#ae2d0c91c19ed327dc332e5a42778e9a3">ldso_ctx</a>
+</li>
+<li>hooked_audit_ifaces
+: <a class="el" href="structldso__ctx.html#a91f73403c7858ed838d4d16148296485">ldso_ctx</a>
+</li>
+</ul>
+
+
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>import_resolver
 : <a class="el" href="structbackdoor__data.html#ad6eb45526286b7304fb01af7c50ff5b2">backdoor_data</a>
@@ -193,12 +235,25 @@ $(function() {
 <h3><a id="index_l"></a>- l -</h3><ul>
 <li>libc_imports
 : <a class="el" href="structbackdoor__data.html#a116ff042f4a1a315724cc6f65a56e359">backdoor_data</a>
+, <a class="el" href="structglobal__context.html#a2f75270d895fb7a930c5286c6f929e28">global_context</a>
 </li>
 <li>libc_info
 : <a class="el" href="structbackdoor__data.html#a8926fe3d847696a0a1b58ec7e9c6d14e">backdoor_data</a>
 </li>
+<li>libcrypto_auditstate_bindflags_old_value
+: <a class="el" href="structldso__ctx.html#a1ed972f5c9306a268f94ccf5b84b911c">ldso_ctx</a>
+</li>
+<li>libcrypto_auditstate_bindflags_ptr
+: <a class="el" href="structldso__ctx.html#a4af16654f389b0bf2bd96308afd1d469">ldso_ctx</a>
+</li>
 <li>libcrypto_info
 : <a class="el" href="structbackdoor__data.html#a932329dfc876e64f123c922e55b30142">backdoor_data</a>
+</li>
+<li>libcrypto_l_name
+: <a class="el" href="structldso__ctx.html#a8f68b96010a76e72135e68cfad110542">ldso_ctx</a>
+</li>
+<li>link_map_l_audit_any_plt_bitmask
+: <a class="el" href="structldso__ctx.html#a5f52e1a88c3a17d61072f2d944f706e7">ldso_ctx</a>
 </li>
 <li>lzma_code_end
 : <a class="el" href="structglobal__context.html#a031805daad5b0f7f951ef58614533588">global_context</a>
@@ -229,9 +284,20 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_o"></a>- o -</h3><ul>
+<li>offset_to_match
+: <a class="el" href="structinstruction__search__ctx.html#a68e8f8c7f105fcfe3bc77abbfcdb493e">instruction_search_ctx</a>
+</li>
+<li>output_register_to_match
+: <a class="el" href="structinstruction__search__ctx.html#ae0ec8bee47bf045c3ce653c33b9ce2f1">instruction_search_ctx</a>
+</li>
+</ul>
+
+
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>PADDING()
 : <a class="el" href="structbackdoor__hooks__ctx.html#afafb3990a82ad3ba4cf7d86baac30722">backdoor_hooks_ctx</a>
+, <a class="el" href="structbackdoor__shared__globals.html#a820796b3a4e4d55dfa6e182d2de90d4e">backdoor_shared_globals</a>
 </li>
 <li>phdrs
 : <a class="el" href="structelf__info.html#a46b6bb90c2dccef9e76c09ea014048ae">elf_info</a>
@@ -246,14 +312,22 @@ $(function() {
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>result
+: <a class="el" href="structinstruction__search__ctx.html#a05e5f377f835a8081b52dc6d331c81fb">instruction_search_ctx</a>
+</li>
 <li>return_address
 : <a class="el" href="structelf__entry__ctx.html#a8f0bdc109d8669cbe7024312b5db7fbd">elf_entry_ctx</a>
 </li>
 <li>RSA_get0_key_plt
-: <a class="el" href="structbackdoor__shared__libraries__data.html#ad0398d2c15a4f059ce93f3f246f74498">backdoor_shared_libraries_data</a>
+: <a class="el" href="structbackdoor__shared__libraries__data.html#a89e6b89c81556fab72e027d1b7e44a8b">backdoor_shared_libraries_data</a>
+, <a class="el" href="structimported__funcs.html#a52a65738a6de9458c8952bd142331191">imported_funcs</a>
 </li>
 <li>RSA_public_decrypt_plt
-: <a class="el" href="structbackdoor__shared__libraries__data.html#a9f903c41d3021859de4c51f121b583bc">backdoor_shared_libraries_data</a>
+: <a class="el" href="structbackdoor__shared__libraries__data.html#aaee59a1ccd7efcb2615d4cec198a5bb6">backdoor_shared_libraries_data</a>
+, <a class="el" href="structimported__funcs.html#a37ed0762785dde90622e25985c9abc35">imported_funcs</a>
+</li>
+<li>rsa_sha2_256_str
+: <a class="el" href="structglobal__context.html#a5662bf8d73281bdec2ce7dbf99758371">global_context</a>
 </li>
 </ul>
 
@@ -264,6 +338,33 @@ $(function() {
 </li>
 <li>shift_operations
 : <a class="el" href="structglobal__context.html#a6f197e9f7782db222c1a54ed0f59fd58">global_context</a>
+</li>
+<li>ssh_rsa_cert_v01_openssh_com_str
+: <a class="el" href="structglobal__context.html#a638d74a6f18776126304f0b72544ae06">global_context</a>
+</li>
+<li>sshd_auditstate_bindflags_old_value
+: <a class="el" href="structldso__ctx.html#a7cc8b9818d079073b25c93e55f3776eb">ldso_ctx</a>
+</li>
+<li>sshd_auditstate_bindflags_ptr
+: <a class="el" href="structldso__ctx.html#a136f1f2760b5d9eb601fc599b84c8fd8">ldso_ctx</a>
+</li>
+<li>sshd_code_end
+: <a class="el" href="structglobal__context.html#a8ddd06f420ebcea88a17df57aca07714">global_context</a>
+</li>
+<li>sshd_code_start
+: <a class="el" href="structglobal__context.html#a6b0e7c4ac8682de374b956ee137a22d8">global_context</a>
+</li>
+<li>sshd_data_end
+: <a class="el" href="structglobal__context.html#a6c7245e596313f01e7411aecdda645df">global_context</a>
+</li>
+<li>sshd_data_start
+: <a class="el" href="structglobal__context.html#a5f6a9e31db48c18d66d7cac9f2992393">global_context</a>
+</li>
+<li>sshd_link_map_l_audit_any_plt_addr
+: <a class="el" href="structldso__ctx.html#ae3a49e232656fb95fbb2f3f08f579639">ldso_ctx</a>
+</li>
+<li>start_addr
+: <a class="el" href="structinstruction__search__ctx.html#a80df4d55c53d2716bed1a419bcbd9c7c">instruction_search_ctx</a>
 </li>
 <li>string_id
 : <a class="el" href="structstring__item.html#a7127d6c46cccb4d81759f01f495acd9f">string_item</a>
@@ -289,12 +390,6 @@ $(function() {
 </li>
 <li>tls_get_addr_random_symbol_got_offset
 : <a class="el" href="structbackdoor__tls__get__addr__reloc__consts.html#a22cf3898da642626d8fc88d1c4b5bb39">backdoor_tls_get_addr_reloc_consts</a>
-</li>
-<li>tmp
-: <a class="el" href="structelf__handles.html#afb05727822b02d3f67f98422689e5948">elf_handles</a>
-</li>
-<li>tmp_info
-: <a class="el" href="structbackdoor__data.html#ac09c793a5bd2f82c9e514c2ac23ffc5a">backdoor_data</a>
 </li>
 </ul>
 

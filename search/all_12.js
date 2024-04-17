@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['verdef_181',['verdef',['../structelf__info.html#a356ae81a037a0f79bac22d7064642ef3',1,'elf_info']]],
-  ['verdef_5fnum_182',['verdef_num',['../structelf__info.html#a74c23ee5c941369c805fc6a58b01e362',1,'elf_info']]]
+  ['tls_5fget_5faddr_5fplt_5foffset_204',['tls_get_addr_plt_offset',['../structbackdoor__tls__get__addr__reloc__consts.html#a0827b12f5648dae1daaa202813b299e6',1,'backdoor_tls_get_addr_reloc_consts']]],
+  ['tls_5fget_5faddr_5frandom_5fsymbol_205',['tls_get_addr_random_symbol',['../xzre_8h.html#a3101b150fe0226a632314e2fa473aba1',1,'xzre.h']]],
+  ['tls_5fget_5faddr_5frandom_5fsymbol_5fgot_5foffset_206',['tls_get_addr_random_symbol_got_offset',['../structbackdoor__tls__get__addr__reloc__consts.html#a22cf3898da642626d8fc88d1c4b5bb39',1,'backdoor_tls_get_addr_reloc_consts']]],
+  ['tls_5fget_5faddr_5freloc_5fconsts_207',['tls_get_addr_reloc_consts',['../xzre_8h.html#aadd306e1b2b33d0306f1995e0a83dae7',1,'xzre.h']]]
 ];

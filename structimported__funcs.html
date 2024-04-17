@@ -79,15 +79,18 @@ pfn_EVP_PKEY_set1_RSA_t&#160;</td><td class="memItemRight" valign="bottom"><b>EV
 <tr class="memitem:a0ceca9d12f092745383fa4334a2c24bd"><td class="memItemLeft" align="right" valign="top"><a id="a0ceca9d12f092745383fa4334a2c24bd"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_get0_key_null</b> )(const RSA *r, const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)</td></tr>
 <tr class="separator:a0ceca9d12f092745383fa4334a2c24bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d408a4542bc1d7d81c0ef34e26e52b"><td class="memItemLeft" align="right" valign="top"><a id="a05d408a4542bc1d7d81c0ef34e26e52b"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_public_decrypt_hook_ptr</b></td></tr>
-<tr class="separator:a05d408a4542bc1d7d81c0ef34e26e52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacc0c00c6893d073d5860c8b75e67900"><td class="memItemLeft" align="right" valign="top"><a id="aacc0c00c6893d073d5860c8b75e67900"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>EVP_PKEY_set1_RSA_hook_ptr</b></td></tr>
-<tr class="separator:aacc0c00c6893d073d5860c8b75e67900"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae02379ce44b63088c4bcccfd5fd726d"><td class="memItemLeft" align="right" valign="top"><a id="aae02379ce44b63088c4bcccfd5fd726d"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>RSA_get0_key_hook_ptr</b></td></tr>
-<tr class="separator:aae02379ce44b63088c4bcccfd5fd726d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37ed0762785dde90622e25985c9abc35"><td class="memItemLeft" align="right" valign="top"><a id="a37ed0762785dde90622e25985c9abc35"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structimported__funcs.html#a37ed0762785dde90622e25985c9abc35">RSA_public_decrypt_plt</a></td></tr>
+<tr class="memdesc:a37ed0762785dde90622e25985c9abc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">address of the PLT for RSA_public_decrypt() in sshd <br /></td></tr>
+<tr class="separator:a37ed0762785dde90622e25985c9abc35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af95a28ca3f6c25bd3ecdd064a23309c5"><td class="memItemLeft" align="right" valign="top"><a id="af95a28ca3f6c25bd3ecdd064a23309c5"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structimported__funcs.html#af95a28ca3f6c25bd3ecdd064a23309c5">EVP_PKEY_set1_RSA_plt</a></td></tr>
+<tr class="memdesc:af95a28ca3f6c25bd3ecdd064a23309c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">address of the PLT for EVP_PKEY_set1_RSA() in sshd <br /></td></tr>
+<tr class="separator:af95a28ca3f6c25bd3ecdd064a23309c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52a65738a6de9458c8952bd142331191"><td class="memItemLeft" align="right" valign="top"><a id="a52a65738a6de9458c8952bd142331191"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structimported__funcs.html#a52a65738a6de9458c8952bd142331191">RSA_get0_key_plt</a></td></tr>
+<tr class="memdesc:a52a65738a6de9458c8952bd142331191"><td class="mdescLeft">&#160;</td><td class="mdescRight">address of the PLT for RSA_get0_key() in sshd <br /></td></tr>
+<tr class="separator:a52a65738a6de9458c8952bd142331191"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab34c5c7ee0e3d6b3b0f0599d3a6a8502"><td class="memItemLeft" align="right" valign="top"><a id="ab34c5c7ee0e3d6b3b0f0599d3a6a8502"></a>
 void(*&#160;</td><td class="memItemRight" valign="bottom"><b>DSA_get0_pqg</b> )(const DSA *d, const BIGNUM **p, const BIGNUM **q, const BIGNUM **g)</td></tr>
 <tr class="separator:ab34c5c7ee0e3d6b3b0f0599d3a6a8502"><td class="memSeparator" colspan="2">&#160;</td></tr>

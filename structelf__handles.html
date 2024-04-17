@@ -77,11 +77,11 @@ $(function() {
 Data Fields</h2></td></tr>
 <tr class="memitem:ad693d428a831ddaadae6d8de369ebf80"><td class="memItemLeft" align="right" valign="top"><a id="ad693d428a831ddaadae6d8de369ebf80"></a>
 <a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles.html#ad693d428a831ddaadae6d8de369ebf80">main</a></td></tr>
-<tr class="memdesc:ad693d428a831ddaadae6d8de369ebf80"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is for sshd itself <br /></td></tr>
+<tr class="memdesc:ad693d428a831ddaadae6d8de369ebf80"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is for sshd <br /></td></tr>
 <tr class="separator:ad693d428a831ddaadae6d8de369ebf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb05727822b02d3f67f98422689e5948"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles.html#afb05727822b02d3f67f98422689e5948">tmp</a></td></tr>
-<tr class="memdesc:afb05727822b02d3f67f98422689e5948"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for multiple ELFs  <a href="structelf__handles.html#afb05727822b02d3f67f98422689e5948">More...</a><br /></td></tr>
-<tr class="separator:afb05727822b02d3f67f98422689e5948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad9c46086d39b765eb2455b6445f2986"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__handles.html#aad9c46086d39b765eb2455b6445f2986">dynamic_linker</a></td></tr>
+<tr class="memdesc:aad9c46086d39b765eb2455b6445f2986"><td class="mdescLeft">&#160;</td><td class="mdescRight">ELF context for ld.so.  <a href="structelf__handles.html#aad9c46086d39b765eb2455b6445f2986">More...</a><br /></td></tr>
+<tr class="separator:aad9c46086d39b765eb2455b6445f2986"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2898bcafe0726b7bf28375feca2c0e3f"><td class="memItemLeft" align="right" valign="top"><a id="a2898bcafe0726b7bf28375feca2c0e3f"></a>
 <a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>libc</b></td></tr>
 <tr class="separator:a2898bcafe0726b7bf28375feca2c0e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,22 +94,22 @@ Data Fields</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>array of ELF handles </p>
-<dl class="section see"><dt>See also</dt><dd>ElfId maps the indices </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289">ElfId</a> maps the indices </dd></dl>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="afb05727822b02d3f67f98422689e5948"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb05727822b02d3f67f98422689e5948">&#9670;&nbsp;</a></span>tmp</h2>
+<a id="aad9c46086d39b765eb2455b6445f2986"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad9c46086d39b765eb2455b6445f2986">&#9670;&nbsp;</a></span>dynamic_linker</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structelf__info.html">elf_info_t</a>* elf_handles::tmp</td>
+          <td class="memname"><a class="el" href="structelf__info.html">elf_info_t</a>* elf_handles::dynamic_linker</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>used for multiple ELFs </p>
-<p>in early <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> this is for the dynamic linker ld.so </p>
+<p>ELF context for ld.so. </p>
+<p>in early <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method that installs the backdoor_symbind64() callback">backdoor_setup()</a> this is for the dynamic linker ld.so </p>
 
 </div>
 </div>

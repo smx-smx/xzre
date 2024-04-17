@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['x86_5fdasm_183',['x86_dasm',['../xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f',1,'xzre.h']]],
-  ['xref_184',['xref',['../structstring__item.html#a897d41bd473c1ffd8e65448e28f05f70',1,'string_item']]],
-  ['xzre_185',['xzre',['../md_README.html',1,'']]],
-  ['xzre_2eh_186',['xzre.h',['../xzre_8h.html',1,'']]]
+  ['u_5fcmd_5farguments_5ft_208',['u_cmd_arguments_t',['../unionu__cmd__arguments__t.html',1,'']]],
+  ['update_5fgot_5faddress_209',['update_got_address',['../xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c',1,'xzre.h']]]
 ];

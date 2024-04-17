@@ -111,9 +111,9 @@ struct link_map *&#160;</td><td class="memItemRight" valign="bottom"><b>libc_map
 <tr class="memitem:ad66782fe22d1981edf9f791ac0d4a0d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__info.html">elf_info_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data.html#ad66782fe22d1981edf9f791ac0d4a0d7">main_info</a></td></tr>
 <tr class="memdesc:ad66782fe22d1981edf9f791ac0d4a0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is for sshd itself  <a href="structbackdoor__data.html#ad66782fe22d1981edf9f791ac0d4a0d7">More...</a><br /></td></tr>
 <tr class="separator:ad66782fe22d1981edf9f791ac0d4a0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac09c793a5bd2f82c9e514c2ac23ffc5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__info.html">elf_info_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data.html#ac09c793a5bd2f82c9e514c2ac23ffc5a">tmp_info</a></td></tr>
-<tr class="memdesc:ac09c793a5bd2f82c9e514c2ac23ffc5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for multiple ELFs  <a href="structbackdoor__data.html#ac09c793a5bd2f82c9e514c2ac23ffc5a">More...</a><br /></td></tr>
-<tr class="separator:ac09c793a5bd2f82c9e514c2ac23ffc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad416055b3c186bdc2c86b01a27251f48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structelf__info.html">elf_info_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data.html#ad416055b3c186bdc2c86b01a27251f48">dynamic_linker_info</a></td></tr>
+<tr class="memdesc:ad416055b3c186bdc2c86b01a27251f48"><td class="mdescLeft">&#160;</td><td class="mdescRight">ELF context for ld.so.  <a href="structbackdoor__data.html#ad416055b3c186bdc2c86b01a27251f48">More...</a><br /></td></tr>
+<tr class="separator:ad416055b3c186bdc2c86b01a27251f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8926fe3d847696a0a1b58ec7e9c6d14e"><td class="memItemLeft" align="right" valign="top"><a id="a8926fe3d847696a0a1b58ec7e9c6d14e"></a>
 <a class="el" href="structelf__info.html">elf_info_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__data.html#a8926fe3d847696a0a1b58ec7e9c6d14e">libc_info</a></td></tr>
 <tr class="memdesc:a8926fe3d847696a0a1b58ec7e9c6d14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">ELF context for libc.so. <br /></td></tr>
@@ -141,6 +141,23 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>this structure is used to hold most of the backdoor information. it's used as a local variable in function <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="ad416055b3c186bdc2c86b01a27251f48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad416055b3c186bdc2c86b01a27251f48">&#9670;&nbsp;</a></span>dynamic_linker_info</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structelf__info.html">elf_info_t</a> backdoor_data::dynamic_linker_info</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ELF context for ld.so. </p>
+<p>in early <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method that installs the backdoor_symbind64() callback">backdoor_setup()</a> this is for the dynamic linker ld.so </p>
+
+</div>
+</div>
 <a id="ad66782fe22d1981edf9f791ac0d4a0d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad66782fe22d1981edf9f791ac0d4a0d7">&#9670;&nbsp;</a></span>main_info</h2>
 
@@ -155,23 +172,6 @@ lzma_allocator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 
 <p>this is for sshd itself </p>
 <p>parsed ELF files </p>
-
-</div>
-</div>
-<a id="ac09c793a5bd2f82c9e514c2ac23ffc5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac09c793a5bd2f82c9e514c2ac23ffc5a">&#9670;&nbsp;</a></span>tmp_info</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structelf__info.html">elf_info_t</a> backdoor_data::tmp_info</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>used for multiple ELFs </p>
-<p>in early <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> this is for the dynamic linker ld.so </p>
 
 </div>
 </div>

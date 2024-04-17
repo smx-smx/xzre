@@ -89,9 +89,9 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a4034b3706679dac6eacec8f90530d652"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__functions.html#a4034b3706679dac6eacec8f90530d652">init_hook_functions</a> )(<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a> *funcs)</td></tr>
 <tr class="memdesc:a4034b3706679dac6eacec8f90530d652"><td class="mdescLeft">&#160;</td><td class="mdescRight">the address of <a class="el" href="structelf__functions.html#a4034b3706679dac6eacec8f90530d652" title="the address of init_hook_functions()">init_hook_functions()</a>  <a href="structelf__functions.html#a4034b3706679dac6eacec8f90530d652">More...</a><br /></td></tr>
 <tr class="separator:a4034b3706679dac6eacec8f90530d652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65e8c71928f31bcf57d57caa0e35d837"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__functions.html#a65e8c71928f31bcf57d57caa0e35d837">elf_symbol_get_addr</a> )(<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td></tr>
-<tr class="memdesc:a65e8c71928f31bcf57d57caa0e35d837"><td class="mdescLeft">&#160;</td><td class="mdescRight">the address of <a class="el" href="structelf__functions.html#a65e8c71928f31bcf57d57caa0e35d837" title="the address of elf_symbol_get_addr()">elf_symbol_get_addr()</a>  <a href="structelf__functions.html#a65e8c71928f31bcf57d57caa0e35d837">More...</a><br /></td></tr>
-<tr class="separator:a65e8c71928f31bcf57d57caa0e35d837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63dc1dc013c89cb5a59868f5b90f736b"><td class="memItemLeft" align="right" valign="top">void *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b">elf_symbol_get_addr</a> )(<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td></tr>
+<tr class="memdesc:a63dc1dc013c89cb5a59868f5b90f736b"><td class="mdescLeft">&#160;</td><td class="mdescRight">the address of <a class="el" href="structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b" title="the address of elf_symbol_get_addr()">elf_symbol_get_addr()</a>  <a href="structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b">More...</a><br /></td></tr>
+<tr class="separator:a63dc1dc013c89cb5a59868f5b90f736b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa14d9c82c4eb98b3da13538201353533"><td class="memItemLeft" align="right" valign="top">BOOL(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__functions.html#aa14d9c82c4eb98b3da13538201353533">elf_parse</a> )(Elf64_Ehdr *ehdr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>)</td></tr>
 <tr class="memdesc:aa14d9c82c4eb98b3da13538201353533"><td class="mdescLeft">&#160;</td><td class="mdescRight">the address of <a class="el" href="structelf__functions.html#aa14d9c82c4eb98b3da13538201353533" title="the address of elf_parse()">elf_parse()</a>  <a href="structelf__functions.html#aa14d9c82c4eb98b3da13538201353533">More...</a><br /></td></tr>
 <tr class="separator:aa14d9c82c4eb98b3da13538201353533"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,19 +114,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a65e8c71928f31bcf57d57caa0e35d837"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65e8c71928f31bcf57d57caa0e35d837">&#9670;&nbsp;</a></span>elf_symbol_get_addr</h2>
+<a id="a63dc1dc013c89cb5a59868f5b90f736b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63dc1dc013c89cb5a59868f5b90f736b">&#9670;&nbsp;</a></span>elf_symbol_get_addr</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* elf_functions::elf_symbol_get_addr) (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td>
+          <td class="memname">void*(* elf_functions::elf_symbol_get_addr) (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>the address of <a class="el" href="structelf__functions.html#a65e8c71928f31bcf57d57caa0e35d837" title="the address of elf_symbol_get_addr()">elf_symbol_get_addr()</a> </p>
+<p>the address of <a class="el" href="structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b" title="the address of elf_symbol_get_addr()">elf_symbol_get_addr()</a> </p>
 <p>the field maps to a relocation entry of type R_X86_64_64 and value elf_symbol_get_addr </p>
 
 </div>

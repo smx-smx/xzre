@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['import_5fresolver_109',['import_resolver',['../structbackdoor__data.html#ad6eb45526286b7304fb01af7c50ff5b2',1,'backdoor_data']]],
-  ['imported_5ffuncs_110',['imported_funcs',['../structimported__funcs.html',1,'imported_funcs'],['../structglobal__context.html#a5dccd92d1dd861220b290896bd7ba487',1,'global_context::imported_funcs()']]],
-  ['index_111',['index',['../unionsecret__data__shift__cursor__t.html#a159dd83929f3c1d7b994d4961d8f7850',1,'secret_data_shift_cursor_t']]],
-  ['init_5felf_5fentry_5fctx_112',['init_elf_entry_ctx',['../xzre_8h.html#abf19222b4917f772ad487a2970dd51ec',1,'xzre.h']]],
-  ['init_5fhook_5ffunctions_113',['init_hook_functions',['../structelf__functions.html#a4034b3706679dac6eacec8f90530d652',1,'elf_functions::init_hook_functions()'],['../xzre_8h.html#abbcfd61778019372e0cabdf79b98824d',1,'init_hook_functions(backdoor_hooks_ctx_t *funcs):&#160;xzre.h']]],
-  ['instruction_5fsearch_5fctx_114',['instruction_search_ctx',['../structinstruction__search__ctx.html',1,'']]],
-  ['is_5fendbr64_5finstruction_115',['is_endbr64_instruction',['../xzre_8h.html#a544d2cf67930e0fcd9f9ff37239a4c70',1,'xzre.h']]],
-  ['is_5frange_5fmapped_116',['is_range_mapped',['../xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f',1,'xzre.h']]]
+  ['hook_5fevp_5fpkey_5fset1_5frsa_118',['hook_EVP_PKEY_set1_RSA',['../structldso__ctx.html#a47b2d4f88dcb9bbb7d9d4161294eef76',1,'ldso_ctx']]],
+  ['hook_5frsa_5fget0_5fkey_119',['hook_RSA_get0_key',['../structldso__ctx.html#a6ebdde768535a27a9a269f5f5b5f9cb2',1,'ldso_ctx']]],
+  ['hook_5frsa_5fpublic_5fdecrypt_120',['hook_RSA_public_decrypt',['../structldso__ctx.html#ae2d0c91c19ed327dc332e5a42778e9a3',1,'ldso_ctx']]],
+  ['hooked_5faudit_5fifaces_121',['hooked_audit_ifaces',['../structldso__ctx.html#a91f73403c7858ed838d4d16148296485',1,'ldso_ctx']]],
+  ['hooks_5fdata_5faddr_122',['hooks_data_addr',['../xzre_8h.html#a32c97a88bc607d3f2459f0d7d420099d',1,'xzre.h']]]
 ];

@@ -76,6 +76,7 @@ $(function() {
 <p>XZ backdoor structures and functions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;link.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;sys/select.h&gt;</code><br />
@@ -85,13 +86,16 @@ $(function() {
 <code>#include &lt;openssl/evp.h&gt;</code><br />
 <code>#include &lt;openssl/rsa.h&gt;</code><br />
 <code>#include &lt;elf.h&gt;</code><br />
-<code>#include &lt;link.h&gt;</code><br />
 <code>#include &quot;util.h&quot;</code><br />
 </div>
 <p><a href="xzre_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structauditstate.html">auditstate</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudit__ifaces.html">audit_ifaces</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdasm__ctx.html">dasm_ctx</a></td></tr>
@@ -165,6 +169,9 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5"><td class="memItemLeft" align="right" valign="top"><a id="a369266c24eacffb87046522897a570d5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_GNU_SOURCE</b></td></tr>
+<tr class="separator:a369266c24eacffb87046522897a570d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab00cb4aeb1653ec4164170204142f57e"><td class="memItemLeft" align="right" valign="top"><a id="ab00cb4aeb1653ec4164170204142f57e"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UPTR</b>(x)&#160;&#160;&#160;((uptr)(x))</td></tr>
 <tr class="separator:ab00cb4aeb1653ec4164170204142f57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,6 +235,9 @@ typedef uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><b>uptr</b>
 <tr class="memitem:a74c374136cf9a969dde2585536c808ac"><td class="memItemLeft" align="right" valign="top"><a id="a74c374136cf9a969dde2585536c808ac"></a>
 typedef Elf64_Xword&#160;</td><td class="memItemRight" valign="bottom"><b>Elf64_Relr</b></td></tr>
 <tr class="separator:a74c374136cf9a969dde2585536c808ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664c87ad0ff2d94f4894df6aae5d491a"><td class="memItemLeft" align="right" valign="top"><a id="a664c87ad0ff2d94f4894df6aae5d491a"></a>
+typedef struct link_map *&#160;</td><td class="memItemRight" valign="bottom"><b>lookup_t</b></td></tr>
+<tr class="separator:a664c87ad0ff2d94f4894df6aae5d491a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a050c65e107f0c828f856a231f4b4e788"><td class="memItemLeft" align="right" valign="top"><a id="a050c65e107f0c828f856a231f4b4e788"></a>
 typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL</b></td></tr>
 <tr class="separator:a050c65e107f0c828f856a231f4b4e788"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -365,8 +375,8 @@ Enumerations</h2></td></tr>
 , <b>FIND_NOP</b>
  }</td></tr>
 <tr class="separator:af4d7fb9dcfda9656ed2c6aeaec3357be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ed7f6d009d35ae3bdb830a7bb1e0289"><td class="memItemLeft" align="right" valign="top"><a id="a3ed7f6d009d35ae3bdb830a7bb1e0289"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ElfId</b> { <b>X_ELF_MAIN</b> = 0
-, <b>X_ELF_TMP</b> = 1
+<tr class="memitem:a3ed7f6d009d35ae3bdb830a7bb1e0289"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289">ElfId</a> { <a class="el" href="xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289aba3b2cdb9ea0a8c79650d8c305d93898">X_ELF_MAIN</a> = 0
+, <b>X_ELF_DYNAMIC_LINKER</b> = 1
 , <b>X_ELF_LIBC</b> = 2
 , <b>X_ELF_LIBCRYPTO</b> = 3
  }</td></tr>
@@ -783,15 +793,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a686404ffefa47e862382092121bfc0b8"><td class="memItemLeft" align="right" valign="top"><a id="a686404ffefa47e862382092121bfc0b8"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, RSA_get0_key_null, 0x10)</td></tr>
 <tr class="separator:a686404ffefa47e862382092121bfc0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab32e42958ca639e3cd3531f33de364d6"><td class="memItemLeft" align="right" valign="top"><a id="ab32e42958ca639e3cd3531f33de364d6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, RSA_public_decrypt_hook_ptr, 0x18)</td></tr>
-<tr class="separator:ab32e42958ca639e3cd3531f33de364d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2e8419e269c6bb46e2a56b4a8edd095"><td class="memItemLeft" align="right" valign="top"><a id="ad2e8419e269c6bb46e2a56b4a8edd095"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_hook_ptr, 0x20)</td></tr>
-<tr class="separator:ad2e8419e269c6bb46e2a56b4a8edd095"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace0690caf6175f8d4904a46555b26a84"><td class="memItemLeft" align="right" valign="top"><a id="ace0690caf6175f8d4904a46555b26a84"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, RSA_get0_key_hook_ptr, 0x28)</td></tr>
-<tr class="separator:ace0690caf6175f8d4904a46555b26a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2cf0588ff092c0c868f77fe6b0c891"><td class="memItemLeft" align="right" valign="top"><a id="a5d2cf0588ff092c0c868f77fe6b0c891"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, RSA_public_decrypt_plt, 0x18)</td></tr>
+<tr class="separator:a5d2cf0588ff092c0c868f77fe6b0c891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80afe68eeb6661768178ee09af63b655"><td class="memItemLeft" align="right" valign="top"><a id="a80afe68eeb6661768178ee09af63b655"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA_plt, 0x20)</td></tr>
+<tr class="separator:a80afe68eeb6661768178ee09af63b655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3393e7d1ec13dddc8167bfc6c986aee"><td class="memItemLeft" align="right" valign="top"><a id="ab3393e7d1ec13dddc8167bfc6c986aee"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, RSA_get0_key_plt, 0x28)</td></tr>
+<tr class="separator:ab3393e7d1ec13dddc8167bfc6c986aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memItemLeft" align="right" valign="top"><a id="a4204d0c32a5ccc55ab1a298d689bd4fb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a>, DSA_get0_pqg, 0x30)</td></tr>
 <tr class="separator:a4204d0c32a5ccc55ab1a298d689bd4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1002,18 +1012,33 @@ Functions</h2></td></tr>
 <tr class="memitem:a94c3fff16b704f8d529ce25798073af3"><td class="memItemLeft" align="right" valign="top"><a id="a94c3fff16b704f8d529ce25798073af3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a>, globals, 0x10)</td></tr>
 <tr class="separator:a94c3fff16b704f8d529ce25798073af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ebb9a8122e1ca3ff60a88a706bfc7a"><td class="memItemLeft" align="right" valign="top"><a id="a60ebb9a8122e1ca3ff60a88a706bfc7a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, libcrypto_auditstate_bindflags_ptr, 0x40)</td></tr>
+<tr class="separator:a60ebb9a8122e1ca3ff60a88a706bfc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb179047ab46ffd448fd0ac65b5514ad"><td class="memItemLeft" align="right" valign="top"><a id="afb179047ab46ffd448fd0ac65b5514ad"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, libcrypto_auditstate_bindflags_old_value, 0x48)</td></tr>
+<tr class="separator:afb179047ab46ffd448fd0ac65b5514ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9ef814c9f77301fbb4bddd2286650f7"><td class="memItemLeft" align="right" valign="top"><a id="af9ef814c9f77301fbb4bddd2286650f7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, sshd_auditstate_bindflags_ptr, 0x50)</td></tr>
+<tr class="separator:af9ef814c9f77301fbb4bddd2286650f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35636e7e9dd56d5bb5d794beabcf3f76"><td class="memItemLeft" align="right" valign="top"><a id="a35636e7e9dd56d5bb5d794beabcf3f76"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, sshd_auditstate_bindflags_old_value, 0x58)</td></tr>
+<tr class="separator:a35636e7e9dd56d5bb5d794beabcf3f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e918ed678d91e80af8641b9bffb0ebd"><td class="memItemLeft" align="right" valign="top"><a id="a1e918ed678d91e80af8641b9bffb0ebd"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, sshd_link_map_l_audit_any_plt_addr, 0x60)</td></tr>
 <tr class="separator:a1e918ed678d91e80af8641b9bffb0ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62eb5a46823ef3365476a3e0532e3f65"><td class="memItemLeft" align="right" valign="top"><a id="a62eb5a46823ef3365476a3e0532e3f65"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, link_map_l_audit_any_plt_bitmask, 0x68)</td></tr>
 <tr class="separator:a62eb5a46823ef3365476a3e0532e3f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae822daf37f46b464fdd02e0af984cc4a"><td class="memItemLeft" align="right" valign="top"><a id="ae822daf37f46b464fdd02e0af984cc4a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, _dl_audit_offset, 0x70)</td></tr>
-<tr class="separator:ae822daf37f46b464fdd02e0af984cc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd9613817a2e70461b9bfbbb1cb33a55"><td class="memItemLeft" align="right" valign="top"><a id="abd9613817a2e70461b9bfbbb1cb33a55"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, _dl_naudit_offset, 0x78)</td></tr>
-<tr class="separator:abd9613817a2e70461b9bfbbb1cb33a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a219f543b7020d21b9e9eb512576cef9e"><td class="memItemLeft" align="right" valign="top"><a id="a219f543b7020d21b9e9eb512576cef9e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, _dl_audit_ptr, 0x70)</td></tr>
+<tr class="separator:a219f543b7020d21b9e9eb512576cef9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403c8e80ef6bc04f4c0ddf6746cdcc4d"><td class="memItemLeft" align="right" valign="top"><a id="a403c8e80ef6bc04f4c0ddf6746cdcc4d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, _dl_naudit_ptr, 0x78)</td></tr>
+<tr class="separator:a403c8e80ef6bc04f4c0ddf6746cdcc4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3515f1ed0cef7b21d990db6f2e7fee"><td class="memItemLeft" align="right" valign="top"><a id="a0c3515f1ed0cef7b21d990db6f2e7fee"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, hooked_audit_ifaces, 0x80)</td></tr>
+<tr class="separator:a0c3515f1ed0cef7b21d990db6f2e7fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c728d421b6aa6bdf7dec59dd95ccb76"><td class="memItemLeft" align="right" valign="top"><a id="a4c728d421b6aa6bdf7dec59dd95ccb76"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a>, libcrypto_l_name, 0xF8)</td></tr>
 <tr class="separator:a4c728d421b6aa6bdf7dec59dd95ccb76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1077,9 +1102,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a30e2e711133deaa2b255596805d91662"><td class="memItemLeft" align="right" valign="top"><a id="a30e2e711133deaa2b255596805d91662"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a65ea88969746c06d6c0d0b1586f610db">elf_handles_t</a>, main, 0x0)</td></tr>
 <tr class="separator:a30e2e711133deaa2b255596805d91662"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8bb70352cf385e9810f5ff5b9c0481d"><td class="memItemLeft" align="right" valign="top"><a id="ad8bb70352cf385e9810f5ff5b9c0481d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a65ea88969746c06d6c0d0b1586f610db">elf_handles_t</a>, tmp, 0x8)</td></tr>
-<tr class="separator:ad8bb70352cf385e9810f5ff5b9c0481d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31f2241e00fa4e3d0ed40c12df7da2af"><td class="memItemLeft" align="right" valign="top"><a id="a31f2241e00fa4e3d0ed40c12df7da2af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a65ea88969746c06d6c0d0b1586f610db">elf_handles_t</a>, dynamic_linker, 0x8)</td></tr>
+<tr class="separator:a31f2241e00fa4e3d0ed40c12df7da2af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a467cc299537ef2bec41b423f4b000e66"><td class="memItemLeft" align="right" valign="top"><a id="a467cc299537ef2bec41b423f4b000e66"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a65ea88969746c06d6c0d0b1586f610db">elf_handles_t</a>, libc, 0x10)</td></tr>
 <tr class="separator:a467cc299537ef2bec41b423f4b000e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1143,9 +1168,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a260462b3ca60420fad0b46e3dc5c00a6"><td class="memItemLeft" align="right" valign="top"><a id="a260462b3ca60420fad0b46e3dc5c00a6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, main_info, 0x68)</td></tr>
 <tr class="separator:a260462b3ca60420fad0b46e3dc5c00a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ec489765b21f8bdc8c92e590c0f7422"><td class="memItemLeft" align="right" valign="top"><a id="a2ec489765b21f8bdc8c92e590c0f7422"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, tmp_info, 0x168)</td></tr>
-<tr class="separator:a2ec489765b21f8bdc8c92e590c0f7422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fbcadb5c1ecbdad462e3b6f243fb919"><td class="memItemLeft" align="right" valign="top"><a id="a9fbcadb5c1ecbdad462e3b6f243fb919"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, dynamic_linker_info, 0x168)</td></tr>
+<tr class="separator:a9fbcadb5c1ecbdad462e3b6f243fb919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a4053fbbd30f6e722605f9b0a686ec4"><td class="memItemLeft" align="right" valign="top"><a id="a2a4053fbbd30f6e722605f9b0a686ec4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#a78a513f8570845832aaf68c928a5126a">backdoor_data_t</a>, libc_info, 0x268)</td></tr>
 <tr class="separator:a2a4053fbbd30f6e722605f9b0a686ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1266,9 +1291,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a4bcac3889c4d2fff6294722e35ec4c09"><td class="memItemLeft" align="right" valign="top"><a id="a4bcac3889c4d2fff6294722e35ec4c09"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx_t</a>, <a class="el" href="structimported__funcs.html">imported_funcs</a>, 0x38)</td></tr>
 <tr class="separator:a4bcac3889c4d2fff6294722e35ec4c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">x86_dasm</a> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
-<tr class="memdesc:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f">More...</a><br /></td></tr>
-<tr class="separator:a52d510f0bbb31de19d8d20bf1acaeb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad15241561f71f06020fb6f2649e6a3"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3">x86_dasm</a> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
+<tr class="memdesc:a6ad15241561f71f06020fb6f2649e6a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3">More...</a><br /></td></tr>
+<tr class="separator:a6ad15241561f71f06020fb6f2649e6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41fada894916f4c67d59090ff57aead1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">find_call_instruction</a> (u8 *code_start, u8 *code_end, u8 *call_target, <a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *dctx)</td></tr>
 <tr class="memdesc:a41fada894916f4c67d59090ff57aead1"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a call instruction  <a href="xzre_8h.html#a41fada894916f4c67d59090ff57aead1">More...</a><br /></td></tr>
 <tr class="separator:a41fada894916f4c67d59090ff57aead1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1338,9 +1363,9 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>check_argument</b> 
 <tr class="memitem:a52148c8b1da2a37036e7975ea299117b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52148c8b1da2a37036e7975ea299117b">elf_get_data_segment</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 *pSize, BOOL get_alignment)</td></tr>
 <tr class="memdesc:a52148c8b1da2a37036e7975ea299117b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the address and size of the last read-write segment in the given ELF file this is typically the segment that contains the following sections:  <a href="xzre_8h.html#a52148c8b1da2a37036e7975ea299117b">More...</a><br /></td></tr>
 <tr class="separator:a52148c8b1da2a37036e7975ea299117b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae691cee2f2e9ea1a5861e3676fac58c0"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae691cee2f2e9ea1a5861e3676fac58c0">elf_get_reloc_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, Elf64_Rela *relocs, unsigned num_relocs, unsigned reloc_type, EncodedStringId encoded_string_id)</td></tr>
-<tr class="memdesc:ae691cee2f2e9ea1a5861e3676fac58c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>.  <a href="xzre_8h.html#ae691cee2f2e9ea1a5861e3676fac58c0">More...</a><br /></td></tr>
-<tr class="separator:ae691cee2f2e9ea1a5861e3676fac58c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a244da0ace01c1812168a0f7bb48bfd3b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a244da0ace01c1812168a0f7bb48bfd3b">elf_get_reloc_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, Elf64_Rela *relocs, u32 num_relocs, u64 reloc_type, EncodedStringId encoded_string_id)</td></tr>
+<tr class="memdesc:a244da0ace01c1812168a0f7bb48bfd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches the ELF relocations for a symbol having name <code>encoded_string</code> id and relocation of type <code>reloc_type</code>.  <a href="xzre_8h.html#a244da0ace01c1812168a0f7bb48bfd3b">More...</a><br /></td></tr>
+<tr class="separator:a244da0ace01c1812168a0f7bb48bfd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbe9201dea64d4ae8112803f8af95985"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acbe9201dea64d4ae8112803f8af95985">elf_get_plt_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td></tr>
 <tr class="memdesc:acbe9201dea64d4ae8112803f8af95985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the PLT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#acbe9201dea64d4ae8112803f8af95985">More...</a><br /></td></tr>
 <tr class="separator:acbe9201dea64d4ae8112803f8af95985"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1387,14 +1412,14 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memdesc:ace528f88c27d645eafff5052f6c36bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts data in the secret data store, after validation of the call site, i.e. the caller of this function for more details, see <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a>.  <a href="xzre_8h.html#ace528f88c27d645eafff5052f6c36bd0">More...</a><br /></td></tr>
 <tr class="separator:ace528f88c27d645eafff5052f6c36bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a229ee0bd4111363061bc4230bc1f6423"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> (<a class="el" href="structbackdoor__setup__params.html">backdoor_setup_params_t</a> *params)</td></tr>
-<tr class="memdesc:a229ee0bd4111363061bc4230bc1f6423"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor main method  <a href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">More...</a><br /></td></tr>
+<tr class="memdesc:a229ee0bd4111363061bc4230bc1f6423"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor main method that installs the <a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc" title="the backdoored symbind64 installed in GLRO(dl_audit)">backdoor_symbind64()</a> callback  <a href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">More...</a><br /></td></tr>
 <tr class="separator:a229ee0bd4111363061bc4230bc1f6423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a851b6ae19abb6961d0c6c21f382e0abc"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">backdoor_entry</a> (unsigned int cpuid_request, u64 *caller_frame)</td></tr>
-<tr class="memdesc:a851b6ae19abb6961d0c6c21f382e0abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6">backdoor_init</a> while in the crc64() IFUNC resolver function  <a href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">More...</a><br /></td></tr>
+<tr class="memdesc:a851b6ae19abb6961d0c6c21f382e0abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">backdoor_init</a> while in the crc64() IFUNC resolver function  <a href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">More...</a><br /></td></tr>
 <tr class="separator:a851b6ae19abb6961d0c6c21f382e0abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a247a9d52e67096a060b99f0eb6dd4ca6"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6">backdoor_init</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *state, u64 *caller_frame)</td></tr>
-<tr class="memdesc:a247a9d52e67096a060b99f0eb6dd4ca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> by disguising it as a call to cpuid.  <a href="xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6">More...</a><br /></td></tr>
-<tr class="separator:a247a9d52e67096a060b99f0eb6dd4ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4662813f09936a772b6682e8bdd0be62"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">backdoor_init</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *state, u64 *caller_frame)</td></tr>
+<tr class="memdesc:a4662813f09936a772b6682e8bdd0be62"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> by disguising it as a call to cpuid.  <a href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">More...</a><br /></td></tr>
+<tr class="separator:a4662813f09936a772b6682e8bdd0be62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf19222b4917f772ad487a2970dd51ec"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec">init_elf_entry_ctx</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
 <tr class="memdesc:abf19222b4917f772ad487a2970dd51ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialises the elf_entry_ctx_t  <a href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec">More...</a><br /></td></tr>
 <tr class="separator:abf19222b4917f772ad487a2970dd51ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1458,7 +1483,7 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memdesc:a17824cde912b4de5dd68530dcbf9d42c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find struct link_map offsets required to modify ld.so's private struct auditstate state.  <a href="xzre_8h.html#a17824cde912b4de5dd68530dcbf9d42c">More...</a><br /></td></tr>
 <tr class="separator:a17824cde912b4de5dd68530dcbf9d42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18543737f1eaf3cb1288d0c57c1f0a65"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a18543737f1eaf3cb1288d0c57c1f0a65">find_dl_naudit</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *dynamic_linker_elf, <a class="el" href="structelf__info.html">elf_info_t</a> *libcrypto_elf, <a class="el" href="structbackdoor__hooks__data.html">backdoor_hooks_data_t</a> *hooks, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *<a class="el" href="structimported__funcs.html">imported_funcs</a>)</td></tr>
-<tr class="memdesc:a18543737f1eaf3cb1288d0c57c1f0a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find __rtld_global_ro offsets required to modify ld.so's private struct audit_ifaces state.  <a href="xzre_8h.html#a18543737f1eaf3cb1288d0c57c1f0a65">More...</a><br /></td></tr>
+<tr class="memdesc:a18543737f1eaf3cb1288d0c57c1f0a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find __rtld_global_ro offsets required to modify ld.so's private struct <a class="el" href="structaudit__ifaces.html">audit_ifaces</a> state.  <a href="xzre_8h.html#a18543737f1eaf3cb1288d0c57c1f0a65">More...</a><br /></td></tr>
 <tr class="separator:a18543737f1eaf3cb1288d0c57c1f0a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d980185c135b2dd9bc69c099ba60c25"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2d980185c135b2dd9bc69c099ba60c25">find_link_map_l_audit_any_plt</a> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a> *data, ptrdiff_t libname_offset, <a class="el" href="structbackdoor__hooks__data.html">backdoor_hooks_data_t</a> *hooks, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *<a class="el" href="structimported__funcs.html">imported_funcs</a>)</td></tr>
 <tr class="memdesc:a2d980185c135b2dd9bc69c099ba60c25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find struct link_map offset required to modify ld.so's private link_map::l_audit_any_plt state.  <a href="xzre_8h.html#a2d980185c135b2dd9bc69c099ba60c25">More...</a><br /></td></tr>
@@ -1544,7 +1569,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>array of ELF handles </p>
-<dl class="section see"><dt>See also</dt><dd>ElfId maps the indices </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289">ElfId</a> maps the indices </dd></dl>
 
 </div>
 </div>
@@ -1624,6 +1649,24 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71"></a>CMDF_CONTINUATION&#160;</td><td class="fielddoc"><p>more data available in the following packet not compatible with command 3 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940"></a>CMDF_PSELECT&#160;</td><td class="fielddoc"><p>executes pselect, then exit not compatible with command 2 </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a3ed7f6d009d35ae3bdb830a7bb1e0289"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ed7f6d009d35ae3bdb830a7bb1e0289">&#9670;&nbsp;</a></span>ElfId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289">ElfId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3ed7f6d009d35ae3bdb830a7bb1e0289aba3b2cdb9ea0a8c79650d8c305d93898"></a>X_ELF_MAIN&#160;</td><td class="fielddoc"><p>this is for sshd itself </p>
 </td></tr>
 </table>
 
@@ -1740,7 +1783,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>the backdoor entrypoint function, called by the IFUNC resolver for liblzma crc32() and crc64() </p>
-<p>calls <a class="el" href="xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6" title="calls backdoor_init_stage2 by disguising it as a call to cpuid.">backdoor_init()</a></p>
+<p>calls <a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62" title="calls backdoor_init_stage2 by disguising it as a call to cpuid.">backdoor_init()</a></p>
 <p>this is a copy of __get_cpuid() from gcc</p>
 <p>for context this is the extra code the backdoor build inserts into both xz/src/liblzma/check/crc32_fast.c and xz/src/liblzma/check/crc64_fast.c </p><div class="fragment"><div class="line"><span class="preprocessor">#if defined(CRC32_GENERIC) &amp;&amp; defined(CRC64_GENERIC) &amp;&amp; defined(CRC_X86_CLMUL) &amp;&amp; defined(CRC_USE_IFUNC) &amp;&amp; defined(PIC) &amp;&amp; (defined(BUILDING_CRC64_CLMUL) || defined(BUILDING_CRC32_CLMUL))</span></div>
 <div class="line"><span class="keywordtype">int</span> _get_cpuid(<span class="keywordtype">int</span>, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*, <span class="keywordtype">void</span>*);</div>
@@ -1800,13 +1843,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>calls <a class="el" href="xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6">backdoor_init</a> while in the crc64() IFUNC resolver function </p>
+<p>calls <a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">backdoor_init</a> while in the crc64() IFUNC resolver function </p>
 <p>the function counts the number of times it was called in resolver_call_count</p>
 <p>the first time it is called is in the crc32() resolver just returns the maximum supported cpuid level</p>
 <p>the second time it is called is in the crc64() resolver and then this function calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a></p>
-<p>stores <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> - <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> in <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> which is the GOT address</p>
 <p>this is a modified version of __get_cpuid_max() from gcc</p>
-<p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> is called by replacing the _cpuid() GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> is called by replacing the _cpuid() GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cpuid_request</td><td>EAX register input. Is either 0 or 0x80000000, but this value is actually not used. </td></tr>
     <tr><td class="paramname">caller_frame</td><td>the value of __builtin_frame_address(0)-16 from within context of the INFUN resolver </td></tr>
@@ -1817,14 +1860,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a247a9d52e67096a060b99f0eb6dd4ca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a247a9d52e67096a060b99f0eb6dd4ca6">&#9670;&nbsp;</a></span>backdoor_init()</h2>
+<a id="a4662813f09936a772b6682e8bdd0be62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4662813f09936a772b6682e8bdd0be62">&#9670;&nbsp;</a></span>backdoor_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int backdoor_init </td>
+          <td class="memname">void* backdoor_init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>state</em>, </td>
@@ -1844,7 +1887,8 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> by disguising it as a call to cpuid. </p>
-<p>this is achieved by modifying the cpuid GOT entry.</p>
+<p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> is called by replacing the _cpuid() GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a></p>
+<p>stores <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> - <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> in <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> which is the GOT address .</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>the entry context, filled by <a class="el" href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">backdoor_entry</a> </td></tr>
@@ -1852,7 +1896,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>unsigned int the EAX register output. Normally the maximum supported cpuid level. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the value <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
 
 </div>
 </div>
@@ -1922,14 +1966,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>the backdoor main method </p>
+<p>the backdoor main method that installs the <a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc" title="the backdoored symbind64 installed in GLRO(dl_audit)">backdoor_symbind64()</a> callback </p>
+<p>If the backdoor initialization steps are successful the final step modifies some ld.so private structures to simulate a LD_AUDIT library and install the <a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc" title="the backdoored symbind64 installed in GLRO(dl_audit)">backdoor_symbind64()</a> as a symbind callback.</p>
+<p>To pass the various conditions in ld.so's _dl_audit_symbind_alt the following fields are modified:</p><ul>
+<li>the sshd and libcrypto struct link_map::l_audit_any_plt flag is set to 1</li>
+<li>the sshd struct auditstate::bindflags is set to LA_FLG_BINDFROM</li>
+<li>the libcrypto struct auditstate::bindflags is set to LA_FLG_BINDTO</li>
+<li>_rtld_global_ro::_dl_audit is set to point to ldso_ctx_t::hooked_audit_iface</li>
+<li>the struct audit_ifaces::symbind64 is set to <a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc" title="the backdoored symbind64 installed in GLRO(dl_audit)">backdoor_symbind64()</a></li>
+<li>_rtld_global_ro::_dl_naudit is set to 1</li>
+</ul>
+<p>After the modifications <a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc" title="the backdoored symbind64 installed in GLRO(dl_audit)">backdoor_symbind64()</a> will be called for all symbol bindings from sshd to libcrypto.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">params</td><td>parameters </td></tr>
+    <tr><td class="paramname">params</td><td>parameters from backdoor_init_stage() </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL unused </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL unused, always return FALSE </dd></dl>
 
 </div>
 </div>
@@ -2522,8 +2576,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae691cee2f2e9ea1a5861e3676fac58c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae691cee2f2e9ea1a5861e3676fac58c0">&#9670;&nbsp;</a></span>elf_get_reloc_symbol()</h2>
+<a id="a244da0ace01c1812168a0f7bb48bfd3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a244da0ace01c1812168a0f7bb48bfd3b">&#9670;&nbsp;</a></span>elf_get_reloc_symbol()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2543,13 +2597,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramtype">u32&#160;</td>
           <td class="paramname"><em>num_relocs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramtype">u64&#160;</td>
           <td class="paramname"><em>reloc_type</em>, </td>
         </tr>
         <tr>
@@ -2967,7 +3021,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Find __rtld_global_ro offsets required to modify ld.so's private struct audit_ifaces state. </p>
+<p>Find __rtld_global_ro offsets required to modify ld.so's private struct <a class="el" href="structaudit__ifaces.html">audit_ifaces</a> state. </p>
 <p>First, this function disassembles ld.so to search for the assert(GLRO(dl_naudit) &lt;= naudit) from _dl_main(). This assert has a LEA instruction with an offset to ld.so's __rtld_global_ro::_dl_naudit.</p>
 <p>This function disassembles ld.so's _dl_audit_symbind_alt() to verify it contains a LEA instruction with an offset that matches __rtld_global_ro::_dl_naudit.</p>
 <p>This function then sets ldso_ctx::dl_naudit_offset and ldso_ctx::dl_naudit_offset to the offset from the start of __rtld_global_ro to __rtld_global_ro::_dl_naudit and __rtld_global_ro::_dl_audit respectively.</p>
@@ -3394,7 +3448,7 @@ Variables</h2></td></tr>
 
 <p>Find the bitmask required to modify ld.so's private link_map::l_audit_any_plt state. </p>
 <p>First, this function disassembles ld.so's _dl_audit_symbind_alt() to search for a sequence of MOVZ, OR, and TEST instructions that fetch the link_map::l_audit_any_plt.</p>
-<p>This function then sets ldso_ctx::sshd_link_map_l_audit_any_plt_addr to the offset to the address of sshd's link_map::l_audit_any_plt flag;</p>
+<p>This function then sets <a class="el" href="structldso__ctx.html#ae3a49e232656fb95fbb2f3f08f579639" title="location of sshd&#39;s link_map::l_audit_any_plt flag">ldso_ctx::sshd_link_map_l_audit_any_plt_addr</a> to the offset to the address of sshd's link_map::l_audit_any_plt flag;</p>
 <p>This function also sets ldso_ctx::l_audit_any_plt_bitmask to the bitmask that sets the link_map::l_audit_any_plt flag.</p>
 <p>This function also resolves a number of libc and libcrypto function addresses.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -3450,7 +3504,7 @@ Variables</h2></td></tr>
 <p>This function inspects ld.so's private struct link_map for liblzma.</p>
 <p>First, this function finds the end of the link_map by searching for the private link_map::l_relro_addr and link_map::l_relro_size with values that match liblzma's <a class="el" href="structelf__info.html#a8500b4de03a9b9d44989375921b27f70" title="location of the GNU relro segment">elf_info_t::gnurelro_vaddr</a> and <a class="el" href="structelf__info.html#a1783b21f972415e71d5cb7d8531de5e5" title="size of the GNU relro segment">elf_info_t::gnurelro_memsize</a> respectively.</p>
 <p>This function then calculates libname_offset by searching for linkmap::l_name which points to a string stored just after the link_map by ld.so's _dl_new_object().</p>
-<p>This function then sets ldso_ctx::libcrypto_l_name to the location of link_map::l_name for the libcrypto link_map.</p>
+<p>This function then sets <a class="el" href="structldso__ctx.html#a8f68b96010a76e72135e68cfad110542" title="location of libcrypto&#39;s link_map::l_name field">ldso_ctx::libcrypto_l_name</a> to the location of link_map::l_name for the libcrypto link_map.</p>
 <p>This function disassembles ld.so's _dl_audit_preinit() and _dl_audit_symbind_alt() to verify both contain a LEA instruction with an offset that matches libname_offset.</p>
 <p>This function also resolves a number of libc and libcrypto function addresses.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -4045,7 +4099,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Parses the main executable from the provided structure. As part of the process the arguments and environment is checked. </p>
-<p>The main_elf_t::dynamic_linker_ehdr is set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> by an interesting trick where the address of __tls_get_addr() is found via GOT in <a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c" title="finds the __tls_get_addr() GOT entry">update_got_address()</a>. Then a backwards search for the ELF header magic bytes from this address is performed to find the ld.so ELF header.</p>
+<p>The main_elf_t::dynamic_linker_ehdr is set in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method that installs the backdoor_symbind64() callback">backdoor_setup()</a> by an interesting trick where the address of __tls_get_addr() is found via GOT in <a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c" title="finds the __tls_get_addr() GOT entry">update_got_address()</a>. Then a backwards search for the ELF header magic bytes from this address is performed to find the ld.so ELF header.</p>
 <p>The following checks are performed:</p><ul>
 <li>that argv[0] is "/usr/sbin/sshd"</li>
 <li>the remaining args all start with '-'</li>
@@ -4896,7 +4950,7 @@ Variables</h2></td></tr>
 <p>finds the __tls_get_addr() GOT entry </p>
 <p>this function first computes the location of the __tls_get_addr() PLT trampoline function by using the PLT offset constant from tls_get_addr_reloc_consts</p>
 <p>then it decodes the PLT jmp instruction to get the address of the __tls_get_addr() GOT entry</p>
-<p>the __tls_get_addr() GOT entry is used in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method">backdoor_setup()</a> to find the ELF header at the start of the memory mapped ld.so</p>
+<p>the __tls_get_addr() GOT entry is used in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method that installs the backdoor_symbind64() callback">backdoor_setup()</a> to find the ELF header at the start of the memory mapped ld.so</p>
 <p>calls <a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df" title="get the tls_get_addr_random_symbol GOT offset">get_tls_get_addr_random_symbol_got_offset()</a> to update <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> and <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> sets <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> = 0 sets <a class="el" href="structelf__entry__ctx.html#ac57b21a9eadcd40b34305f45684cc2e9" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a> = 0 stores the address of the __tls_get_addr() GOT entry in <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -4908,14 +4962,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a52d510f0bbb31de19d8d20bf1acaeb5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52d510f0bbb31de19d8d20bf1acaeb5f">&#9670;&nbsp;</a></span>x86_dasm()</h2>
+<a id="a6ad15241561f71f06020fb6f2649e6a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad15241561f71f06020fb6f2649e6a3">&#9670;&nbsp;</a></span>x86_dasm()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int x86_dasm </td>
+          <td class="memname">BOOL x86_dasm </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>ctx</em>, </td>
@@ -4949,7 +5003,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int TRUE if disassembly was successful, FALSE otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if disassembly was successful, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -5085,7 +5139,7 @@ Variables</h2></td></tr>
 <p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
 <p>lzma_allocator::alloc is the address of <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a> the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_alloc</p>
 <p>lzma_allocator::free is the address of <a class="el" href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17" title="a fake free function called by lzma_free()">fake_lzma_free()</a> the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_free</p>
-<p>lzma_allocator::opaque is the address of <a class="el" href="xzre_8h.html#a52d510f0bbb31de19d8d20bf1acaeb5f" title="disassembles the given x64 code">x86_dasm()</a> the field maps to a relocation entry of type R_X86_64_64 and value x86_dasm </p>
+<p>lzma_allocator::opaque is the address of <a class="el" href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3" title="disassembles the given x64 code">x86_dasm()</a> the field maps to a relocation entry of type R_X86_64_64 and value x86_dasm </p>
 
 </div>
 </div>
@@ -5162,7 +5216,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>counts the number of times the IFUNC resolver is called </p>
-<p>used by <a class="el" href="xzre_8h.html#a247a9d52e67096a060b99f0eb6dd4ca6" title="calls backdoor_init_stage2 by disguising it as a call to cpuid.">backdoor_init()</a> </p>
+<p>used by <a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62" title="calls backdoor_init_stage2 by disguising it as a call to cpuid.">backdoor_init()</a> </p>
 
 </div>
 </div>

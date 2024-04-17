@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['phdrs_341',['phdrs',['../structelf__info.html#a46b6bb90c2dccef9e76c09ea014048ae',1,'elf_info']]],
-  ['plt_5frelocs_342',['plt_relocs',['../structelf__info.html#a5d272c3d46d0b9254b9ba62ad38ef2b5',1,'elf_info']]],
-  ['plt_5frelocs_5fnum_343',['plt_relocs_num',['../structelf__info.html#ad4c0ec1374213c0f36d73ddcb3bbfd08',1,'elf_info']]]
+  ['num_5fshifted_5fbits_387',['num_shifted_bits',['../structglobal__context.html#a6895ac8df8ead90c8f140a8c6606828f',1,'global_context']]]
 ];
