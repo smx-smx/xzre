@@ -144,16 +144,35 @@ typedef int BOOL;
 
 typedef enum {
 	// has lock prefix
-	DF_LOCK = 1,
-	// has es-segment override
-	DF_ESEG = 2,
+	DF_LOCK_REP = 1,
+	// has segment (ds/es) override
+	DF_SEG = 2,
 	// has operand size override
 	DF_OSIZE = 4,
 	// has address size override
 	DF_ASIZE = 8,
+	// vex instruction
+	DF_VEX = 0x10,
 	// has rex
-	DF_REX = 0x20
+	DF_REX = 0x20,
+	// has modrm
+	DF_MODRM = 0x40,
+	// has sib
+	DF_SIB = 0x80
 } InstructionFlags;
+
+typedef enum {
+	// memory with displacement
+	DF_MEM_DISP = 0x1,
+	// 8-bit displacement
+	DF_MEM_DISP8 = 0x2,
+	// memory seg+offs (0xa0-0xa3)
+	DF_MEM_SEG_OFFS = 0x4,
+	// has immediate
+	DF_IMM = 0x8,
+	// 64-bit immediate (movabs)
+	DF_IMM64 = 0x10
+} InstructionFlags2;
 
 typedef enum {
 	// ELF has JMPREL relocs
@@ -448,27 +467,51 @@ assert_offset(elf_entry_ctx_t, frame_address, 0x28);
 typedef struct __attribute__((packed)) dasm_ctx {
 	u8* instruction;
 	u64 instruction_size;
-	u8 flags;
-	u8 flags2;
-	PADDING(2);
-	u8 lock_byte;
-	u8 _unk1;
-	u8 last_prefix;
-	PADDING(4);
-	u8 rex_byte;
-	u8 modrm;
-	u8 modrm_mod;
-	u8 modrm_reg;
-	u8 modrm_rm;
-	PADDING(4);
-	u8 byte_24;
+	union {
+		struct __attribute__((packed)) {
+			u8 flags;
+			u8 flags2;
+			PADDING(2);
+			u8 lock_rep_byte;
+			u8 seg_byte;
+			u8 osize_byte;
+			u8 asize_byte;
+			u8 vex_byte;
+			u8 vex_byte2;
+			u8 vex_byte3;
+			u8 rex_byte;
+			union {
+				struct __attribute__((packed)) {
+					u8 modrm;
+					u8 modrm_mod;
+					u8 modrm_reg;
+					u8 modrm_rm;
+				};
+				u32 modrm_word;
+			};
+		};
+		u16 flags_u16;
+        };
+	PADDING(1);
+	struct __attribute__((packed)) {
+		union {
+			struct __attribute__((packed)) {
+				u8 sib;
+				u8 sib_scale;
+				u8 sib_index;
+				u8 sib_base;
+			};
+			u32 sib_word;
+		};
+	};
 	PADDING(3);
 	u32 opcode;
 	PADDING(4);
 	u64 mem_disp;
 	// e.g. in CALL
 	u64 operand;
-	PADDING(16);
+	u64 operand_zeroextended;
+	u64 operand_size;
 	u8 insn_offset;
 	PADDING(7);
 } dasm_ctx_t;
@@ -477,16 +520,27 @@ assert_offset(dasm_ctx_t, instruction, 0);
 assert_offset(dasm_ctx_t, instruction_size, 8);
 assert_offset(dasm_ctx_t, flags, 0x10);
 assert_offset(dasm_ctx_t, flags2, 0x11);
-assert_offset(dasm_ctx_t, lock_byte, 0x14);
-assert_offset(dasm_ctx_t, last_prefix, 0x16);
+assert_offset(dasm_ctx_t, lock_rep_byte, 0x14);
+assert_offset(dasm_ctx_t, seg_byte, 0x15);
+assert_offset(dasm_ctx_t, osize_byte, 0x16);
+assert_offset(dasm_ctx_t, asize_byte, 0x17);
+assert_offset(dasm_ctx_t, vex_byte, 0x18);
+assert_offset(dasm_ctx_t, vex_byte2, 0x19);
+assert_offset(dasm_ctx_t, vex_byte3, 0x1A);
 assert_offset(dasm_ctx_t, rex_byte, 0x1B);
 assert_offset(dasm_ctx_t, modrm, 0x1C);
 assert_offset(dasm_ctx_t, modrm_mod, 0x1D);
 assert_offset(dasm_ctx_t, modrm_reg, 0x1E);
 assert_offset(dasm_ctx_t, modrm_rm, 0x1F);
+assert_offset(dasm_ctx_t, sib, 0x21);
+assert_offset(dasm_ctx_t, sib_scale, 0x22);
+assert_offset(dasm_ctx_t, sib_index, 0x23);
+assert_offset(dasm_ctx_t, sib_base, 0x24);
 assert_offset(dasm_ctx_t, opcode, 0x28);
 assert_offset(dasm_ctx_t, mem_disp, 0x30);
 assert_offset(dasm_ctx_t, operand, 0x38);
+assert_offset(dasm_ctx_t, operand_zeroextended, 0x40);
+assert_offset(dasm_ctx_t, operand_size, 0x48);
 assert_offset(dasm_ctx_t, insn_offset, 0x50);
 static_assert(sizeof(dasm_ctx_t) == 0x58);
 
