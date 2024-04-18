@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x86_5fdasm_338',['x86_dasm',['../xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3',1,'xzre.h']]]
+  ['verify_5fsignature_339',['verify_signature',['../xzre_8h.html#a0b0ce96673cd8ebf4541cff2b20dfe86',1,'xzre.h']]]
 ];

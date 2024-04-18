@@ -352,15 +352,28 @@ typedef struct <a class="el" href="structinstruction__search__ctx.html">instruct
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a7a28d9f889f70e46106eb6e946183605"><td class="memItemLeft" align="right" valign="top"><a id="a7a28d9f889f70e46106eb6e946183605"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InstructionFlags</b> { <br />
-&#160;&#160;<b>DF_LOCK</b> = 1
-, <b>DF_ESEG</b> = 2
+&#160;&#160;<b>DF_LOCK_REP</b> = 1
+, <b>DF_SEG</b> = 2
 , <b>DF_OSIZE</b> = 4
 , <b>DF_ASIZE</b> = 8
 , <br />
-&#160;&#160;<b>DF_REX</b> = 0x20
+&#160;&#160;<b>DF_VEX</b> = 0x10
+, <b>DF_REX</b> = 0x20
+, <b>DF_MODRM</b> = 0x40
+, <b>DF_SIB</b> = 0x80
 <br />
  }</td></tr>
 <tr class="separator:a7a28d9f889f70e46106eb6e946183605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a601dc05cbcee627f9a0439b294b3e11f"><td class="memItemLeft" align="right" valign="top"><a id="a601dc05cbcee627f9a0439b294b3e11f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InstructionFlags2</b> { <br />
+&#160;&#160;<b>DF_MEM_DISP</b> = 0x1
+, <b>DF_MEM_DISP8</b> = 0x2
+, <b>DF_MEM_SEG_OFFS</b> = 0x4
+, <b>DF_IMM</b> = 0x8
+, <br />
+&#160;&#160;<b>DF_IMM64</b> = 0x10
+<br />
+ }</td></tr>
+<tr class="separator:a601dc05cbcee627f9a0439b294b3e11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8720669b781fc318e97d4ec37ae4997c"><td class="memItemLeft" align="right" valign="top"><a id="a8720669b781fc318e97d4ec37ae4997c"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ElfFlags</b> { <br />
 &#160;&#160;<b>X_ELF_PLTREL</b> = 0x1
 , <b>X_ELF_RELA</b> = 0x2
@@ -617,12 +630,27 @@ Functions</h2></td></tr>
 <tr class="memitem:a8376690511def56513ab02a0fb86b164"><td class="memItemLeft" align="right" valign="top"><a id="a8376690511def56513ab02a0fb86b164"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, flags2, 0x11)</td></tr>
 <tr class="separator:a8376690511def56513ab02a0fb86b164"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a712dd0741cd0f1f19762f77f7ee7a6fc"><td class="memItemLeft" align="right" valign="top"><a id="a712dd0741cd0f1f19762f77f7ee7a6fc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, lock_byte, 0x14)</td></tr>
-<tr class="separator:a712dd0741cd0f1f19762f77f7ee7a6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa8191a6eeda3f4475fc1e5726a555cd"><td class="memItemLeft" align="right" valign="top"><a id="aaa8191a6eeda3f4475fc1e5726a555cd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, last_prefix, 0x16)</td></tr>
-<tr class="separator:aaa8191a6eeda3f4475fc1e5726a555cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ca87eda04ad7144fcaf13d6067bd28"><td class="memItemLeft" align="right" valign="top"><a id="a66ca87eda04ad7144fcaf13d6067bd28"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, lock_rep_byte, 0x14)</td></tr>
+<tr class="separator:a66ca87eda04ad7144fcaf13d6067bd28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7d85682620d9dba765d7d59d30189b3"><td class="memItemLeft" align="right" valign="top"><a id="ad7d85682620d9dba765d7d59d30189b3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, seg_byte, 0x15)</td></tr>
+<tr class="separator:ad7d85682620d9dba765d7d59d30189b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a724f0c0e2d15e151ac23748aba1e2038"><td class="memItemLeft" align="right" valign="top"><a id="a724f0c0e2d15e151ac23748aba1e2038"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, osize_byte, 0x16)</td></tr>
+<tr class="separator:a724f0c0e2d15e151ac23748aba1e2038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad414448b1c4074007ac89d200d9dc7"><td class="memItemLeft" align="right" valign="top"><a id="a6ad414448b1c4074007ac89d200d9dc7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, asize_byte, 0x17)</td></tr>
+<tr class="separator:a6ad414448b1c4074007ac89d200d9dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04116b65b09a6c53dd9352b6d5fbf0bf"><td class="memItemLeft" align="right" valign="top"><a id="a04116b65b09a6c53dd9352b6d5fbf0bf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, vex_byte, 0x18)</td></tr>
+<tr class="separator:a04116b65b09a6c53dd9352b6d5fbf0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6bce69c596f9af26184b6b02b5b76b"><td class="memItemLeft" align="right" valign="top"><a id="a8c6bce69c596f9af26184b6b02b5b76b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, vex_byte2, 0x19)</td></tr>
+<tr class="separator:a8c6bce69c596f9af26184b6b02b5b76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88758e34bd8e70469ee70187f0424caf"><td class="memItemLeft" align="right" valign="top"><a id="a88758e34bd8e70469ee70187f0424caf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, vex_byte3, 0x1A)</td></tr>
+<tr class="separator:a88758e34bd8e70469ee70187f0424caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e9aff34162fef534b67b1607f2c0393"><td class="memItemLeft" align="right" valign="top"><a id="a1e9aff34162fef534b67b1607f2c0393"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, rex_byte, 0x1B)</td></tr>
 <tr class="separator:a1e9aff34162fef534b67b1607f2c0393"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -638,6 +666,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a2834cafae7e8ef36218929187afe78e5"><td class="memItemLeft" align="right" valign="top"><a id="a2834cafae7e8ef36218929187afe78e5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, modrm_rm, 0x1F)</td></tr>
 <tr class="separator:a2834cafae7e8ef36218929187afe78e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1c3c1902b98bb609a84e4ee16b13ee7"><td class="memItemLeft" align="right" valign="top"><a id="af1c3c1902b98bb609a84e4ee16b13ee7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, sib, 0x21)</td></tr>
+<tr class="separator:af1c3c1902b98bb609a84e4ee16b13ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e89e72b5ae1955d75b97adcbb9f1fc1"><td class="memItemLeft" align="right" valign="top"><a id="a8e89e72b5ae1955d75b97adcbb9f1fc1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, sib_scale, 0x22)</td></tr>
+<tr class="separator:a8e89e72b5ae1955d75b97adcbb9f1fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f2e8c9cda11659c8931cf00d603d3a"><td class="memItemLeft" align="right" valign="top"><a id="ae1f2e8c9cda11659c8931cf00d603d3a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, sib_index, 0x23)</td></tr>
+<tr class="separator:ae1f2e8c9cda11659c8931cf00d603d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0fe5f5f93ed1b51d3d3da4e70809d61"><td class="memItemLeft" align="right" valign="top"><a id="af0fe5f5f93ed1b51d3d3da4e70809d61"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, sib_base, 0x24)</td></tr>
+<tr class="separator:af0fe5f5f93ed1b51d3d3da4e70809d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92f57bfeaa7959d5aabe4d3de379448a"><td class="memItemLeft" align="right" valign="top"><a id="a92f57bfeaa7959d5aabe4d3de379448a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, opcode, 0x28)</td></tr>
 <tr class="separator:a92f57bfeaa7959d5aabe4d3de379448a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -647,6 +687,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a63e08f3940f8ef224f578ed0107e3651"><td class="memItemLeft" align="right" valign="top"><a id="a63e08f3940f8ef224f578ed0107e3651"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, operand, 0x38)</td></tr>
 <tr class="separator:a63e08f3940f8ef224f578ed0107e3651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e50f205f98d5f025f5eb9ba07d039b"><td class="memItemLeft" align="right" valign="top"><a id="aa2e50f205f98d5f025f5eb9ba07d039b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, operand_zeroextended, 0x40)</td></tr>
+<tr class="separator:aa2e50f205f98d5f025f5eb9ba07d039b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cd2ff2b6482f5374b4fe62381763967"><td class="memItemLeft" align="right" valign="top"><a id="a1cd2ff2b6482f5374b4fe62381763967"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, operand_size, 0x48)</td></tr>
+<tr class="separator:a1cd2ff2b6482f5374b4fe62381763967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb3f2de7b7e5754295e89cbf02531246"><td class="memItemLeft" align="right" valign="top"><a id="abb3f2de7b7e5754295e89cbf02531246"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a>, insn_offset, 0x50)</td></tr>
 <tr class="separator:abb3f2de7b7e5754295e89cbf02531246"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1531,6 +1577,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a3a3417b7999e13c79b9411e092923278"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3a3417b7999e13c79b9411e092923278">sha256</a> (const void *data, size_t count, u8 *mdBuf, u64 mdBufSize, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
 <tr class="memdesc:a3a3417b7999e13c79b9411e092923278"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the SHA256 hash of the supplied data  <a href="xzre_8h.html#a3a3417b7999e13c79b9411e092923278">More...</a><br /></td></tr>
 <tr class="separator:a3a3417b7999e13c79b9411e092923278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0ce96673cd8ebf4541cff2b20dfe86"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0b0ce96673cd8ebf4541cff2b20dfe86">verify_signature</a> (struct <a class="el" href="structsshkey.html">sshkey</a> *<a class="el" href="structsshkey.html">sshkey</a>, u8 *signed_data, u64 sshkey_digest_offset, u64 signed_data_size, u8 *signature, u8 *ed448_raw_key, <a class="el" href="structglobal__context.html">global_context_t</a> *global_ctx)</td></tr>
+<tr class="memdesc:a0b0ce96673cd8ebf4541cff2b20dfe86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if <code>signed_data</code> is signed with <code>ed448_raw_key</code>.  <a href="xzre_8h.html#a0b0ce96673cd8ebf4541cff2b20dfe86">More...</a><br /></td></tr>
+<tr class="separator:a0b0ce96673cd8ebf4541cff2b20dfe86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -5245,6 +5294,84 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void* the address of the __tls_get_addr() GOT entry </dd></dl>
+
+</div>
+</div>
+<a id="a0b0ce96673cd8ebf4541cff2b20dfe86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b0ce96673cd8ebf4541cff2b20dfe86">&#9670;&nbsp;</a></span>verify_signature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL verify_signature </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structsshkey.html">sshkey</a> *&#160;</td>
+          <td class="paramname"><em>sshkey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>signed_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>sshkey_digest_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>signed_data_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>signature</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>ed448_raw_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>global_ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if <code>signed_data</code> is signed with <code>ed448_raw_key</code>. </p>
+<p>in order to do this, the code will</p><ul>
+<li>compute a sha256 hash of the SSH host key in <code>sshkey</code> (after serialization) and write it to <code>signed_data</code> at offset <code>sshkey_digest_offset</code> </li>
+<li>load the ED448 key from <code>ed448_raw_key</code> </li>
+<li>use it to verify <code>signed_data</code> (including the hashed SSH host key)</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sshkey</td><td>the SSH host key </td></tr>
+    <tr><td class="paramname">signed_data</td><td>data to verify, including an empty space to hold the hashed SSH key </td></tr>
+    <tr><td class="paramname">sshkey_digest_offset</td><td>offset to write the hashed SSH key to, in <code>signed_data</code> </td></tr>
+    <tr><td class="paramname">signed_data_size</td><td>length of the <code>signed_data</code> buffer, including the space for the SSH key hash digest </td></tr>
+    <tr><td class="paramname">signature</td><td>signature of the signed data to check </td></tr>
+    <tr><td class="paramname">ed448_raw_key</td><td>the ED448 public key obtained from <a class="el" href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">secret_data_get_decrypted</a> </td></tr>
+    <tr><td class="paramname">global_ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the signature verification is successful, FALSE otherwise </dd></dl>
 
 </div>
 </div>
