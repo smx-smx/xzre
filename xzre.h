@@ -23,12 +23,12 @@ typedef uint64_t u64;
 typedef uintptr_t uptr;
 
 #ifdef XZRE_SLIM
-typedef unsigned long int size_t;
-typedef signed long int ssize_t;
 typedef size_t uid_t;
 typedef size_t gid_t;
+typedef uint32_t Elf32_Addr;
+typedef uint64_t Elf64_Addr;
 typedef uptr
-	Elf64_Ehdr, Elf64_Phdr, Elf64_Dyn, Elf64_Sym, Elf64_Rela, Elf64_Relr, 
+	Elf32_Sym, Elf64_Ehdr, Elf64_Phdr, Elf64_Dyn, Elf64_Sym, Elf64_Rela, Elf64_Relr, 
 	Elf64_Verdef, Elf64_Versym, sigset_t, fd_set, EVP_PKEY, RSA, DSA, 
 	BIGNUM, EC_POINT, EC_KEY, EC_GROUP, EVP_MD, point_conversion_form_t,
 	EVP_CIPHER, EVP_CIPHER_CTX, ENGINE, EVP_MD_CTX, EVP_PKEY_CTX, BN_CTX;
@@ -37,6 +37,9 @@ typedef struct {
 	void (*free)(void *opaque, void *ptr);
 	void *opaque;
 } lzma_allocator;
+
+typedef long int Lmid_t;
+#define ElfW(Sym) Elf64_Sym
 #endif
 
 #ifndef XZRE_SLIM
@@ -843,7 +846,10 @@ assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 static_assert(sizeof(imported_funcs_t) == 0x128);
 
 typedef struct __attribute__((packed)) sshd_ctx {
-	PADDING(0x20);
+	BOOL have_mm_answer_keyallowed;
+	BOOL have_mm_answer_authpassword;
+	BOOL have_mm_answer_keyverify;
+	PADDING(0x14);
 	PADDING(sizeof(void *));
 	void *mm_answer_authpassword_start;
 	void *mm_answer_authpassword_end;
@@ -2848,6 +2854,33 @@ extern BOOL sha256(
 	u8 *mdBuf,
 	u64 mdBufSize,
 	imported_funcs_t *funcs);
+
+/**
+ * @brief Checks if @p signed_data is signed with @p ed448_raw_key.
+ *
+ * in order to do this, the code will
+ * - compute a sha256 hash of the SSH host key in @p sshkey (after serialization) and write it to @p signed_data at offset @p sshkey_digest_offset
+ * - load the ED448 key from @p ed448_raw_key
+ * - use it to verify @p signed_data (including the hashed SSH host key)
+ * 
+ * @param sshkey the SSH host key
+ * @param signed_data data to verify, including an empty space to hold the hashed SSH key
+ * @param sshkey_digest_offset offset to write the hashed SSH key to, in @p signed_data
+ * @param signed_data_size length of the @p signed_data buffer, including the space for the SSH key hash digest
+ * @param signature signature of the signed data to check
+ * @param ed448_raw_key the ED448 public key obtained from @ref secret_data_get_decrypted
+ * @param global_ctx 
+ * @return BOOL TRUE if the signature verification is successful, FALSE otherwise
+ */
+extern BOOL verify_signature(
+	struct sshkey *sshkey,
+	u8 *signed_data,
+	u64 sshkey_digest_offset,
+	u64 signed_data_size,
+	u8 *signature,
+	u8 *ed448_raw_key,
+	global_context_t *global_ctx
+);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called

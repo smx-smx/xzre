@@ -114,6 +114,7 @@ SECTIONS_BEGIN()
 		DEFSYM2(dsa_key_hash, 0x3B70 - 0x3A10)
 	DEFSYM_END(.text.lzma_file_info_decodea)
 	DEFSYM(sha256, .text.lzma_easy_encodea)
+	DEFSYM(verify_signature, .text.lzma_index_dua)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()
