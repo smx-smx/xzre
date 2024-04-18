@@ -585,8 +585,8 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:afde1d1c69b6bedd0626eee956c7111de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 1 &lt;&lt; 0
-, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 1 &lt;&lt; 2
+<tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 0x1
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 0x4
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891">CMDF_DISABLE_PAM</a> = 0x40
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca68a7eabd7b06721e278cce39e2035a44">CMDF_NO_EXTENDED_SIZE</a> = 0x80
  }</td></tr>
@@ -1580,6 +1580,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a0b0ce96673cd8ebf4541cff2b20dfe86"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0b0ce96673cd8ebf4541cff2b20dfe86">verify_signature</a> (struct <a class="el" href="structsshkey.html">sshkey</a> *<a class="el" href="structsshkey.html">sshkey</a>, u8 *signed_data, u64 sshkey_digest_offset, u64 signed_data_size, u8 *signature, u8 *ed448_raw_key, <a class="el" href="structglobal__context.html">global_context_t</a> *global_ctx)</td></tr>
 <tr class="memdesc:a0b0ce96673cd8ebf4541cff2b20dfe86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if <code>signed_data</code> is signed with <code>ed448_raw_key</code>.  <a href="xzre_8h.html#a0b0ce96673cd8ebf4541cff2b20dfe86">More...</a><br /></td></tr>
 <tr class="separator:a0b0ce96673cd8ebf4541cff2b20dfe86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a938289ac36ce7b17b60a4f5c0c28d2d4"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a938289ac36ce7b17b60a4f5c0c28d2d4">sshd_patch_variables</a> (BOOL skip_root_patch, BOOL disable_pam, BOOL replace_monitor_reqtype, int monitor_reqtype, <a class="el" href="structglobal__context.html">global_context_t</a> *global_ctx)</td></tr>
+<tr class="memdesc:a938289ac36ce7b17b60a4f5c0c28d2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Patches the sshd configuration.  <a href="xzre_8h.html#a938289ac36ce7b17b60a4f5c0c28d2d4">More...</a><br /></td></tr>
+<tr class="separator:a938289ac36ce7b17b60a4f5c0c28d2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -5263,6 +5266,65 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a938289ac36ce7b17b60a4f5c0c28d2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a938289ac36ce7b17b60a4f5c0c28d2d4">&#9670;&nbsp;</a></span>sshd_patch_variables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_patch_variables </td>
+          <td>(</td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>skip_root_patch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>disable_pam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL&#160;</td>
+          <td class="paramname"><em>replace_monitor_reqtype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>monitor_reqtype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>global_ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Patches the sshd configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">skip_root_patch</td><td>TRUE to keep current configuration, FALSE to enable root login </td></tr>
+    <tr><td class="paramname">disable_pam</td><td>TRUE to disable PAM, FALSE to keep current configuration </td></tr>
+    <tr><td class="paramname">replace_monitor_reqtype</td><td>TRUE to replace the <code>type</code> field in <code>struct mon_table</code> for <code>MONITOR_REQ_AUTHPASSWORD</code>. FALSE to increment it by 1 (from <code>MONITOR_REQ_AUTHPASSWORD</code> to <code>MONITOR_ANS_AUTHPASSWORD</code>) </td></tr>
+    <tr><td class="paramname">monitor_reqtype</td><td>the new value to apply, if <code>replace_monitor_reqtype</code> is TRUE </td></tr>
+    <tr><td class="paramname">global_ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE if modifications couldn't be applied </dd></dl>
 
 </div>
 </div>
