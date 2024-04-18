@@ -1,0 +1,17 @@
+{
+    "name": "smx-smx/xzre",
+    "autoload": {
+        "psr-4": {
+            "Smx\\Xzre\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stefano Moioli",
+            "email": "smxdev4@gmail.com"
+        }
+    ],
+    "require": {
+        "phpseclib/phpseclib": "~3.0"
+    }
+}
