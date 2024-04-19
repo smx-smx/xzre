@@ -277,10 +277,11 @@ void main_shared(){
 	void *keyVerify_start = NULL;
 	void *keyVerify_end = NULL;
 	void *keyVerify_fptr_addr = NULL;
-	BOOL checkPrologue = TRUE;
+	global_context_t ctx;
+	ctx.uses_endbr64 = TRUE;
 	if(elf_find_function_pointer(XREF_mm_answer_keyverify,
 		&keyVerify_start, &keyVerify_end, &keyVerify_fptr_addr,
-		&einfo, &strings, &checkPrologue
+		&einfo, &strings, &ctx
 	)){
 		printf("keyVerify: start=%p, end=%p, fptr_addr=%p\n",
 			keyVerify_start,

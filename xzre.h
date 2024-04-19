@@ -929,7 +929,8 @@ assert_offset(sshd_log_ctx_t, STR_user, 0x30);
 assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
 
 typedef struct __attribute__((packed)) global_context {
-	PADDING(8);
+	BOOL uses_endbr64;
+	PADDING(4);
 	/**
 	 * @brief pointer to the structure containing resolved OpenSSL functions
 	 */
@@ -1008,6 +1009,7 @@ typedef struct __attribute__((packed)) global_context {
 	PADDING(4);
 } global_context_t;
 
+assert_offset(global_context_t, uses_endbr64, 0x0);
 assert_offset(global_context_t, imported_funcs, 0x8);
 assert_offset(global_context_t, libc_imports, 0x10);
 assert_offset(global_context_t, disable_backdoor, 0x18);
@@ -2082,7 +2084,7 @@ extern void *elf_get_got_symbol(elf_info_t *elf_info, EncodedStringId encoded_st
  * @param pOutFptrAddr output variable that will receive the address of the function pointer
  * @param elf_info sshd elf context
  * @param xrefs array of resolved functions, filled by @ref elf_find_string_references
- * @param pCheckPrologue if the BOOL pointed to by this variable is TRUE, an endbr64 will be expected at the beginning
+ * @param ctx the global context. used to retrieve the 'uses_endbr64' field
  * @return BOOL TRUE if the function pointer was found, FALSE otherwise
  */
 extern BOOL elf_find_function_pointer(
@@ -2090,7 +2092,7 @@ extern BOOL elf_find_function_pointer(
 	void **pOutCodeStart, void **pOutCodeEnd,
 	void **pOutFptrAddr, elf_info_t *elf_info,
 	string_references_t *xrefs,
-	BOOL *pCheckPrologue);
+	global_context_t *ctx);
 
 /**
  * @brief Locates a string in the ELF .rodata section
@@ -2438,7 +2440,7 @@ extern BOOL secret_data_get_decrypted(u8 *output, global_context_t *ctx);
  * @param ctx a structure with a libc_import_t field at offset 0x10
  * @return BOOL TRUE if the whole range is mapped, FALSE otherwise
  */
-extern BOOL is_range_mapped(u8* addr, u8 length, global_context_t* ctx);
+extern BOOL is_range_mapped(u8* addr, u64 length, global_context_t* ctx);
 
 /**
  * @brief returns the number of 1 bits in x
