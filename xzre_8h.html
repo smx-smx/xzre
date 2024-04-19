@@ -1029,6 +1029,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a91b036c4250b1ac65cdcc5bea0c1838f"><td class="memItemLeft" align="right" valign="top"><a id="a91b036c4250b1ac65cdcc5bea0c1838f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, sshlogv, 0x58)</td></tr>
 <tr class="separator:a91b036c4250b1ac65cdcc5bea0c1838f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70548ad6431944460b7b9ee232d8a705"><td class="memItemLeft" align="right" valign="top"><a id="a70548ad6431944460b7b9ee232d8a705"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, uses_endbr64, 0x0)</td></tr>
+<tr class="separator:a70548ad6431944460b7b9ee232d8a705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80a0978414f64efd7647e8f4cf4edbcc"><td class="memItemLeft" align="right" valign="top"><a id="a80a0978414f64efd7647e8f4cf4edbcc"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, <a class="el" href="structimported__funcs.html">imported_funcs</a>, 0x8)</td></tr>
 <tr class="separator:a80a0978414f64efd7647e8f4cf4edbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1440,9 +1443,9 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>check_argument</b> 
 <tr class="memitem:acb54dcbcba1c88075c523678a0d0dbda"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#acb54dcbcba1c88075c523678a0d0dbda">elf_get_got_symbol</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId encoded_string_id)</td></tr>
 <tr class="memdesc:acb54dcbcba1c88075c523678a0d0dbda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the GOT symbol with name <code>encoded_string_id</code> from the parsed ELF file.  <a href="xzre_8h.html#acb54dcbcba1c88075c523678a0d0dbda">More...</a><br /></td></tr>
 <tr class="separator:acb54dcbcba1c88075c523678a0d0dbda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa71724f34c91861ce2211d9622e41972"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa71724f34c91861ce2211d9622e41972">elf_find_function_pointer</a> (StringXrefId xref_id, void **pOutCodeStart, void **pOutCodeEnd, void **pOutFptrAddr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, <a class="el" href="structstring__references.html">string_references_t</a> *xrefs, BOOL *pCheckPrologue)</td></tr>
-<tr class="memdesc:aa71724f34c91861ce2211d9622e41972"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function searches for a function pointer, pointing to a function designated by the given <code>xref_id</code>  <a href="xzre_8h.html#aa71724f34c91861ce2211d9622e41972">More...</a><br /></td></tr>
-<tr class="separator:aa71724f34c91861ce2211d9622e41972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02157f429658403951e2f41eb0e01117"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a02157f429658403951e2f41eb0e01117">elf_find_function_pointer</a> (StringXrefId xref_id, void **pOutCodeStart, void **pOutCodeEnd, void **pOutFptrAddr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, <a class="el" href="structstring__references.html">string_references_t</a> *xrefs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a02157f429658403951e2f41eb0e01117"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function searches for a function pointer, pointing to a function designated by the given <code>xref_id</code>  <a href="xzre_8h.html#a02157f429658403951e2f41eb0e01117">More...</a><br /></td></tr>
+<tr class="separator:a02157f429658403951e2f41eb0e01117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad86c0039d3a08468f5cf7187662ebab9"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad86c0039d3a08468f5cf7187662ebab9">elf_find_string</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, EncodedStringId *stringId_inOut, void *rodata_start_ptr)</td></tr>
 <tr class="memdesc:ad86c0039d3a08468f5cf7187662ebab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locates a string in the ELF .rodata section.  <a href="xzre_8h.html#ad86c0039d3a08468f5cf7187662ebab9">More...</a><br /></td></tr>
 <tr class="separator:ad86c0039d3a08468f5cf7187662ebab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1514,9 +1517,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a80592f231ad06e5a8ba204e6ff685827"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">secret_data_get_decrypted</a> (u8 *output, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a80592f231ad06e5a8ba204e6ff685827"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a decrypted copy of the secret data  <a href="xzre_8h.html#a80592f231ad06e5a8ba204e6ff685827">More...</a><br /></td></tr>
 <tr class="separator:a80592f231ad06e5a8ba204e6ff685827"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cbf38048a3510f1632b4060b2a0a63f"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f">is_range_mapped</a> (u8 *addr, u8 length, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
-<tr class="memdesc:a2cbf38048a3510f1632b4060b2a0a63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">verify if a memory range is mapped  <a href="xzre_8h.html#a2cbf38048a3510f1632b4060b2a0a63f">More...</a><br /></td></tr>
-<tr class="separator:a2cbf38048a3510f1632b4060b2a0a63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d94ba8c95f0333dc53ef8432156b0ca"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5d94ba8c95f0333dc53ef8432156b0ca">is_range_mapped</a> (u8 *addr, u64 length, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a5d94ba8c95f0333dc53ef8432156b0ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">verify if a memory range is mapped  <a href="xzre_8h.html#a5d94ba8c95f0333dc53ef8432156b0ca">More...</a><br /></td></tr>
+<tr class="separator:a5d94ba8c95f0333dc53ef8432156b0ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ec1df74592643b26839ecbe320d36ae"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a9ec1df74592643b26839ecbe320d36ae">count_bits</a> (u64 x)</td></tr>
 <tr class="memdesc:a9ec1df74592643b26839ecbe320d36ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of 1 bits in x  <a href="xzre_8h.html#a9ec1df74592643b26839ecbe320d36ae">More...</a><br /></td></tr>
 <tr class="separator:a9ec1df74592643b26839ecbe320d36ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2397,8 +2400,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aa71724f34c91861ce2211d9622e41972"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa71724f34c91861ce2211d9622e41972">&#9670;&nbsp;</a></span>elf_find_function_pointer()</h2>
+<a id="a02157f429658403951e2f41eb0e01117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02157f429658403951e2f41eb0e01117">&#9670;&nbsp;</a></span>elf_find_function_pointer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2442,8 +2445,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">BOOL *&#160;</td>
-          <td class="paramname"><em>pCheckPrologue</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2462,7 +2465,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">pOutFptrAddr</td><td>output variable that will receive the address of the function pointer </td></tr>
     <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>sshd elf context </td></tr>
     <tr><td class="paramname">xrefs</td><td>array of resolved functions, filled by <a class="el" href="xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c">elf_find_string_references</a> </td></tr>
-    <tr><td class="paramname">pCheckPrologue</td><td>if the BOOL pointed to by this variable is TRUE, an endbr64 will be expected at the beginning </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context. used to retrieve the 'uses_endbr64' field </td></tr>
   </table>
   </dd>
 </dl>
@@ -4236,8 +4239,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2cbf38048a3510f1632b4060b2a0a63f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cbf38048a3510f1632b4060b2a0a63f">&#9670;&nbsp;</a></span>is_range_mapped()</h2>
+<a id="a5d94ba8c95f0333dc53ef8432156b0ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d94ba8c95f0333dc53ef8432156b0ca">&#9670;&nbsp;</a></span>is_range_mapped()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4251,7 +4254,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u8&#160;</td>
+          <td class="paramtype">u64&#160;</td>
           <td class="paramname"><em>length</em>, </td>
         </tr>
         <tr>
