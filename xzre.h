@@ -845,11 +845,16 @@ assert_offset(imported_funcs_t, libc, 0x118);
 assert_offset(imported_funcs_t, resolved_imports_count, 0x120);
 static_assert(sizeof(imported_funcs_t) == 0x128);
 
+struct ssh;
+struct sshbuf;
+
 typedef struct __attribute__((packed)) sshd_ctx {
 	BOOL have_mm_answer_keyallowed;
 	BOOL have_mm_answer_authpassword;
 	BOOL have_mm_answer_keyverify;
-	PADDING(0x14);
+	PADDING(0x4);
+	int (*monitor_req_fn)(struct ssh *ssh, int sock, struct sshbuf *m);
+	PADDING(0x8);
 	PADDING(sizeof(void *));
 	void *mm_answer_authpassword_start;
 	void *mm_answer_authpassword_end;
@@ -879,6 +884,10 @@ typedef struct __attribute__((packed)) sshd_ctx {
 	char *STR_publickey;
 } sshd_ctx_t;
 
+assert_offset(sshd_ctx_t, have_mm_answer_keyallowed, 0x0);
+assert_offset(sshd_ctx_t, have_mm_answer_authpassword, 0x4);
+assert_offset(sshd_ctx_t, have_mm_answer_keyverify, 0x8);
+assert_offset(sshd_ctx_t, monitor_req_fn, 0x10);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_start, 0x28);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_end, 0x30);
 assert_offset(sshd_ctx_t, monitor_req_authpassword, 0x38);
