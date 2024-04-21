@@ -50,13 +50,25 @@ function encode_data(int $size, int $data){
     }
 }
 
-function make_array(int $size){
+function make_array(int $size, bool $owned = true){
     $uchar = FFI::type('uint8_t');
     $arrT = FFI::arrayType($uchar, [$size]);
-    return FFI::new($arrT);
+    return FFI::new($arrT, $owned);
 }
 
 function cdata_bytes(CData $object){
     $size = FFI::sizeof($object);
     return FFI::string(FFI::addr($object), $size);
+}
+
+function ptrval(CData $ptr){
+	return FFI::cast('uintptr_t *', FFI::addr($ptr))[0];
+}
+
+function ptrdiff($a, $b){
+	return $a - $b;
+}
+
+function ptradd($a, $b){
+	return $a + $b;
 }
