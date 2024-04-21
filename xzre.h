@@ -23,8 +23,9 @@ typedef uint64_t u64;
 typedef uintptr_t uptr;
 
 #ifdef XZRE_SLIM
-typedef size_t uid_t;
-typedef size_t gid_t;
+typedef int pid_t;
+typedef int uid_t;
+typedef int gid_t;
 typedef uint32_t Elf32_Addr;
 typedef uint64_t Elf64_Addr;
 typedef uptr
@@ -1527,6 +1528,10 @@ enum CommandFlags2 {
 	 */
 	CMDF_CHANGE_MONITOR_REQ = 0x2,
 	/**
+	 * @brief 
+	 */
+	CMDF_AUTH_BYPASS = 0x4,
+	/**
 	 * @brief more data available in the following packet
 	 * not compatible with command 3
 	 */
@@ -1536,6 +1541,17 @@ enum CommandFlags2 {
 	 * not compatible with command 2
 	 */
 	CMDF_PSELECT = 0xC0
+};
+
+enum CommandFlags3 {
+	/**
+	 * @brief 5 bits used to store number of sockets (in cmd3)
+	 */
+	CMDF_SOCKET_NUM = 0x1F,
+	/**
+	 * @brief 6 bits used to store the monitor req / 2 (might be unused)
+	 */
+	CMDF_MONITOR_REQ_VAL = 0x3F
 };
 
 typedef struct __attribute__((packed)) cmd_arguments {
@@ -1698,6 +1714,35 @@ assert_offset(instruction_search_ctx_t, result, 0x28);
 assert_offset(instruction_search_ctx_t, hooks, 0x30);
 assert_offset(instruction_search_ctx_t, imported_funcs, 0x38);
 static_assert(sizeof(instruction_search_ctx_t) == 0x40);
+
+typedef struct __attribute__((packed)) auth_bypass_args {
+	u32 cmd_type;
+	PADDING(4);
+	cmd_arguments_t *args;
+	const BIGNUM *rsa_n;
+	const BIGNUM *rsa_e;
+	u8 *payload_body;
+	u16 payload_body_size;
+	PADDING(6);
+	RSA *rsa;
+} auth_bypass_args_t;
+
+assert_offset(auth_bypass_args_t, cmd_type, 0);
+assert_offset(auth_bypass_args_t, args, 0x8);
+assert_offset(auth_bypass_args_t, rsa_n, 0x10);
+assert_offset(auth_bypass_args_t, rsa_e, 0x18);
+assert_offset(auth_bypass_args_t, payload_body, 0x20);
+assert_offset(auth_bypass_args_t, payload_body_size, 0x28);
+assert_offset(auth_bypass_args_t, rsa, 0x30);
+
+/**
+ * @brief 
+ * 
+ * @param args 
+ * @param ctx 
+ * @return BOOL 
+ */
+extern BOOL sshd_auth_bypass(auth_bypass_args_t *args, global_context_t *ctx);
 
 /**
  * @brief disassembles the given x64 code
