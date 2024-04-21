@@ -380,6 +380,19 @@ typedef enum {
 #define PADDING(size) u8 EXPAND(_unknown, __LINE__)[size]
 
 struct sshbuf;
+struct kex;
+
+/**
+ * @brief struct monitor from openssh-portable
+ */
+struct monitor {
+	int			 m_recvfd;
+	int			 m_sendfd;
+	int			 m_log_recvfd;
+	int			 m_log_sendfd;
+	struct kex		**m_pkex;
+	pid_t			 m_pid;
+};
 
 /**
  * @brief struct sensitive_data from openssh-portable
@@ -959,7 +972,8 @@ typedef struct __attribute__((packed)) global_context {
 	 * @brief location of sshd .rodata string "rsa-sha2-256"
 	 */
 	char *rsa_sha2_256_str;
-	PADDING(0x10);
+	struct monitor **struct_monitor_ptr_address;
+	PADDING(0x8);
 	/**
 	 * @brief sshd code segment start
 	 */
@@ -1016,6 +1030,7 @@ assert_offset(global_context_t, disable_backdoor, 0x18);
 assert_offset(global_context_t, sshd_ctx, 0x20);
 assert_offset(global_context_t, sshd_sensitive_data, 0x28);
 assert_offset(global_context_t, sshd_log_ctx, 0x30);
+assert_offset(global_context_t, struct_monitor_ptr_address, 0x48);
 assert_offset(global_context_t, sshd_code_start, 0x58);
 assert_offset(global_context_t, sshd_code_end, 0x60);
 assert_offset(global_context_t, sshd_data_start, 0x68);
@@ -2910,6 +2925,20 @@ extern BOOL sshd_patch_variables(
 	BOOL replace_monitor_reqtype,
 	int monitor_reqtype,
 	global_context_t *global_ctx
+);
+
+/**
+ * @brief finds the pointer to `struct monitor`, and updates the global context in @p ctx with its location
+ * 
+ * @param elf sshd elf context
+ * @param refs sshd string references
+ * @param ctx global context
+ * @return BOOL TRUE if the pointer has been found, FALSE otherwise
+ */
+extern BOOL sshd_find_monitor_struct(
+	elf_info_t *elf,
+	string_references_t *refs,
+	global_context_t *ctx
 );
 
 /**
