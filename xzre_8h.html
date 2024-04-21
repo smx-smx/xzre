@@ -96,6 +96,9 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudit__ifaces.html">audit_ifaces</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonitor.html">monitor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct monitor from openssh-portable  <a href="structmonitor.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsensitive__data.html">sensitive_data</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct <a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a> from openssh-portable  <a href="structsensitive__data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1050,6 +1053,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a9eef1439c8b1df4b61e641523821427d"><td class="memItemLeft" align="right" valign="top"><a id="a9eef1439c8b1df4b61e641523821427d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, <a class="el" href="structsshd__log__ctx.html">sshd_log_ctx</a>, 0x30)</td></tr>
 <tr class="separator:a9eef1439c8b1df4b61e641523821427d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7efe9d222c85fd8ef99e976ce09557f3"><td class="memItemLeft" align="right" valign="top"><a id="a7efe9d222c85fd8ef99e976ce09557f3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, struct_monitor_ptr_address, 0x48)</td></tr>
+<tr class="separator:a7efe9d222c85fd8ef99e976ce09557f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1e135dccb4a40a8ae6757f215eb3fc6"><td class="memItemLeft" align="right" valign="top"><a id="af1e135dccb4a40a8ae6757f215eb3fc6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, sshd_code_start, 0x58)</td></tr>
 <tr class="separator:af1e135dccb4a40a8ae6757f215eb3fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1598,6 +1604,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a938289ac36ce7b17b60a4f5c0c28d2d4"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a938289ac36ce7b17b60a4f5c0c28d2d4">sshd_patch_variables</a> (BOOL skip_root_patch, BOOL disable_pam, BOOL replace_monitor_reqtype, int monitor_reqtype, <a class="el" href="structglobal__context.html">global_context_t</a> *global_ctx)</td></tr>
 <tr class="memdesc:a938289ac36ce7b17b60a4f5c0c28d2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Patches the sshd configuration.  <a href="xzre_8h.html#a938289ac36ce7b17b60a4f5c0c28d2d4">More...</a><br /></td></tr>
 <tr class="separator:a938289ac36ce7b17b60a4f5c0c28d2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32fc521229739df889407c2e9e48475"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">sshd_find_monitor_struct</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:ad32fc521229739df889407c2e9e48475"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the pointer to <code>struct monitor</code>, and updates the global context in <code>ctx</code> with its location  <a href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">More...</a><br /></td></tr>
+<tr class="separator:ad32fc521229739df889407c2e9e48475"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -4967,6 +4976,51 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
+
+</div>
+</div>
+<a id="ad32fc521229739df889407c2e9e48475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32fc521229739df889407c2e9e48475">&#9670;&nbsp;</a></span>sshd_find_monitor_struct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_find_monitor_struct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds the pointer to <code>struct monitor</code>, and updates the global context in <code>ctx</code> with its location </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elf</td><td>sshd elf context </td></tr>
+    <tr><td class="paramname">refs</td><td>sshd string references </td></tr>
+    <tr><td class="paramname">ctx</td><td>global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the pointer has been found, FALSE otherwise </dd></dl>
 
 </div>
 </div>
