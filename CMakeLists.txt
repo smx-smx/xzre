@@ -14,6 +14,35 @@ add_compile_options(-Wno-deprecated-declarations)
 add_executable(xzre)
 add_library(lzma SHARED)
 
+if(USE_PHP)
+	find_program(PHP_CONFIG_EXECUTABLE NAMES
+		php-config
+		HINTS
+			# use php-config from the sysroot (it's a shell script)
+			${CMAKE_SYSROOT}
+		PATH_SUFFIXES
+			bin
+			usr/bin
+		REQUIRED
+	)
+	message(STATUS "php-config: ${PHP_CONFIG_EXECUTABLE}")
+	execute_process(
+		COMMAND ${PHP_CONFIG_EXECUTABLE} --includes
+		OUTPUT_VARIABLE PHP_INCLUDE_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE
+	)
+	execute_process(
+		COMMAND ${PHP_CONFIG_EXECUTABLE} --libs
+		OUTPUT_VARIABLE PHP_LIBS OUTPUT_STRIP_TRAILING_WHITESPACE
+	)
+	string(REPLACE "-I" "" PHP_INCLUDE_DIRS ${PHP_INCLUDE_DIRS})
+	separate_arguments(PHP_INCLUDE_DIRS)
+
+	string(REPLACE "-l" "" PHP_LIBS ${PHP_LIBS})
+	separate_arguments(PHP_LIBS)
+
+	find_library(PHP_EMBED_LIBRARY NAMES php REQUIRED)
+endif()
+
 set(SOURCES
 	${CMAKE_SOURCE_DIR}/liblzma_la-crc64-fast.o
 	xzre.c
@@ -43,6 +72,15 @@ add_custom_target(gen_csv ALL DEPENDS ${CMAKE_BINARY_DIR}/xzre.csv)
 target_sources(xzre PRIVATE ${SOURCES})
 target_sources(lzma PRIVATE ${SOURCES})
 target_compile_definitions(lzma PRIVATE XZRE_SHARED)
+
+if(USE_PHP)
+	target_compile_definitions(xzre PRIVATE USE_PHP)
+	target_compile_definitions(lzma PRIVATE USE_PHP)
+	target_include_directories(xzre PRIVATE ${PHP_INCLUDE_DIRS})
+	target_include_directories(lzma PRIVATE ${PHP_INCLUDE_DIRS})
+	target_link_libraries(xzre ${PHP_EMBED_LIBRARY})
+	target_link_libraries(lzma ${PHP_EMBED_LIBRARY})
+endif()
 
 target_link_libraries(xzre ${LZMA_LIBRARY})
 target_link_libraries(lzma "$<LINK_LIBRARY:WHOLE_ARCHIVE,${LZMA_LIBRARY}>")

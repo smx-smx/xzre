@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2024 Stefano Moioli <smxdev4@gmail.com>
  **/
+#define _GNU_SOURCE
 #include "xzre.h"
 #include <elf.h>
 #include <link.h>
@@ -11,6 +12,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#ifdef USE_PHP
+#include <sapi/embed/php_embed.h>
+#endif
 
 const char *StringXrefName[] = {
 	"XREF_xcalloc_zero_size",
@@ -208,6 +212,25 @@ void xzre_backdoor_setup(){
 	}
 }
 
+#ifdef USE_PHP
+int run_php(int argc, char *argv[]){
+	int rc = EXIT_FAILURE;
+	PHP_EMBED_START_BLOCK(argc, argv)
+	do {
+		zend_file_handle file_handle;
+		zend_stream_init_filename(&file_handle, argv[0]);
+
+		if(php_execute_script(&file_handle) == FAILURE){
+			break;
+		}
+		rc = EXIT_SUCCESS;
+	} while(0);
+	PHP_EMBED_END_BLOCK()
+
+	return rc;
+}
+#endif
+
 static inline __attribute__((always_inline))
 void main_shared(){
 	char *trigger = getenv("XZRE_MAIN");
@@ -215,6 +238,18 @@ void main_shared(){
 		return;
 	}
 	unsetenv("XZRE_MAIN");
+
+	#ifdef USE_PHP
+	char *xzre_dir = getenv("XZRE_DIR");
+	if(xzre_dir){
+		char *php_script = NULL;
+		asprintf(&php_script, "%s/sshd.php", xzre_dir);
+		char *php_argv[] = {php_script, "-sshd"};
+		run_php(ARRAY_SIZE(php_argv), php_argv);
+		free(php_script);
+	}
+	return;
+	#endif
 
 	// prevent fork bomb in system command
 	unsetenv("LD_PRELOAD");
@@ -240,7 +275,7 @@ void main_shared(){
 		string_item_t *item = &strings.entries[i];
 		printf(
 			"----> %s\n"
-			"str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04zx, xref_offset: 0x%04zx\n"
+			"str %2d: id=0x%x, start=%p, end=%p, xref=%p (size: 0x%04zx, xref_offset: 0x%04zx)\n"
 			"RVA_start: 0x%tx, RVA_end: 0x%tx, RVA_xref: 0x%tx\n\n",
 			StringXrefName[i],
 				i, item->string_id, item->func_start, item->func_end, item->xref,
@@ -274,19 +309,28 @@ void main_shared(){
 	int score = sshd_get_host_keys_score(ssh_host_keys1, &einfo, &strings);
 	printf("sshd_get_host_keys_score(): %d\n", score);
 
-	void *keyVerify_start = NULL;
-	void *keyVerify_end = NULL;
-	void *keyVerify_fptr_addr = NULL;
-	global_context_t ctx;
-	ctx.uses_endbr64 = TRUE;
+	sshd_ctx_t sshd_ctx;
+	sshd_log_ctx_t sshd_log_ctx;
+
+	void *fn_start = NULL;
+	void *fn_end = NULL;
+	void *fn_fptr_addr = NULL;
+	global_context_t ctx = {
+		.uses_endbr64 = TRUE,
+		.sshd_ctx = &sshd_ctx,
+		.sshd_log_ctx = &sshd_log_ctx
+	};
 	if(elf_find_function_pointer(XREF_mm_answer_keyverify,
-		&keyVerify_start, &keyVerify_end, &keyVerify_fptr_addr,
+		&fn_start, &fn_end, &fn_fptr_addr,
 		&einfo, &strings, &ctx
 	)){
+		sshd_ctx.mm_answer_keyverify_start = fn_start;
+		sshd_ctx.mm_answer_keyverify_end = fn_end;
+		sshd_ctx.have_mm_answer_keyverify = TRUE;
 		printf("keyVerify: start=%p, end=%p, fptr_addr=%p\n",
-			keyVerify_start,
-			keyVerify_end,
-			keyVerify_fptr_addr);
+			fn_start,
+			fn_end,
+			fn_fptr_addr);
 	}
 
 	//xzre_backdoor_setup();
