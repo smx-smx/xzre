@@ -960,6 +960,8 @@ typedef struct __attribute__((packed)) global_context {
 	 * making future invocations return immediately.
 	 *
 	 * It's likely both a safety check and an anti tampering mechanism.
+	 *
+	 * It's also used to avoid running the payload more than once, if the hooks gets called multiple times
 	 */
 	BOOL disable_backdoor;
 	PADDING(4);
@@ -1716,7 +1718,7 @@ assert_offset(instruction_search_ctx_t, hooks, 0x30);
 assert_offset(instruction_search_ctx_t, imported_funcs, 0x38);
 static_assert(sizeof(instruction_search_ctx_t) == 0x40);
 
-typedef struct __attribute__((packed)) auth_bypass_args {
+typedef struct __attribute__((packed)) sshd_proxy_args {
 	u32 cmd_type;
 	PADDING(4);
 	cmd_arguments_t *args;
@@ -1726,24 +1728,35 @@ typedef struct __attribute__((packed)) auth_bypass_args {
 	u16 payload_body_size;
 	PADDING(6);
 	RSA *rsa;
-} auth_bypass_args_t;
+} sshd_proxy_args_t;
 
-assert_offset(auth_bypass_args_t, cmd_type, 0);
-assert_offset(auth_bypass_args_t, args, 0x8);
-assert_offset(auth_bypass_args_t, rsa_n, 0x10);
-assert_offset(auth_bypass_args_t, rsa_e, 0x18);
-assert_offset(auth_bypass_args_t, payload_body, 0x20);
-assert_offset(auth_bypass_args_t, payload_body_size, 0x28);
-assert_offset(auth_bypass_args_t, rsa, 0x30);
+assert_offset(sshd_proxy_args_t, cmd_type, 0);
+assert_offset(sshd_proxy_args_t, args, 0x8);
+assert_offset(sshd_proxy_args_t, rsa_n, 0x10);
+assert_offset(sshd_proxy_args_t, rsa_e, 0x18);
+assert_offset(sshd_proxy_args_t, payload_body, 0x20);
+assert_offset(sshd_proxy_args_t, payload_body_size, 0x28);
+assert_offset(sshd_proxy_args_t, rsa, 0x30);
 
 /**
- * @brief 
+ * @brief
+ * forges a new `MONITOR_REQ_KEYALLOWED` packet, and injects it into the server to gain root privileges
+ * through the sshd monitor.
+ *
+ * this function is called if the calling function, @ref run_backdoor_commands , is invoked without root 
+ * (which is what normally happens when sshd is sandboxed)
  * 
- * @param args 
- * @param ctx 
- * @return BOOL 
+ * the code will then construct a new packet and send a monitor request with type `MONITOR_REQ_KEYALLOWED` and the payload as key.
+ * the receiving end (`mm_answer_keyallowed`) will then run the payload, likely as soon as  `RSA_get0_key` is invoked, through the hook
+ * (TODO: confirm this)
+ *
+ * the `disable_backdoor` flag is used to avoid running the payload more than once, in case of multiple calls
+ *
+ * @param args arguments used to build the SSH packet
+ * @param ctx the global context
+ * @return BOOL TRUE if the packet was sent successfully, FALSE otherwise
  */
-extern BOOL sshd_auth_bypass(auth_bypass_args_t *args, global_context_t *ctx);
+extern BOOL sshd_proxy_elevate(sshd_proxy_args_t *args, global_context_t *ctx);
 
 /**
  * @brief disassembles the given x64 code
