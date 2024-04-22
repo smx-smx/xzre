@@ -1654,6 +1654,12 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">sshd_get_sshbuf</a> (struct sshbuf *sshbuf, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a44abb1c444c5d0428c6d67b9e8e38276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the right <code>sshbuf</code> (FIXME: which?), starting from: <code>(*(ctx-&gt;struct_monitor_ptr_address))-&gt;kex-&gt;my</code>  <a href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">More...</a><br /></td></tr>
 <tr class="separator:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce260e9315b4afa70668391058ed484"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="memdesc:a8ce260e9315b4afa70668391058ed484"><td class="mdescLeft">&#160;</td><td class="mdescRight">runs the payload received from <a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function  <a href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">More...</a><br /></td></tr>
+<tr class="separator:a8ce260e9315b4afa70668391058ed484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99eb76809c798f3bcae98526992e63ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">mm_answer_keyverify_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="memdesc:a99eb76809c798f3bcae98526992e63ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">used in conjunction with <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> to bypass the key validity check  <a href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">More...</a><br /></td></tr>
+<tr class="separator:a99eb76809c798f3bcae98526992e63ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -4389,6 +4395,96 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a8ce260e9315b4afa70668391058ed484"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ce260e9315b4afa70668391058ed484">&#9670;&nbsp;</a></span>mm_answer_keyallowed_hook()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mm_answer_keyallowed_hook </td>
+          <td>(</td>
+          <td class="paramtype">struct ssh *&#160;</td>
+          <td class="paramname"><em>ssh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>runs the payload received from <a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ssh</td><td></td></tr>
+    <tr><td class="paramname">sock</td><td></td></tr>
+    <tr><td class="paramname">m</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a99eb76809c798f3bcae98526992e63ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99eb76809c798f3bcae98526992e63ef">&#9670;&nbsp;</a></span>mm_answer_keyverify_hook()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mm_answer_keyverify_hook </td>
+          <td>(</td>
+          <td class="paramtype">struct ssh *&#160;</td>
+          <td class="paramname"><em>ssh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>used in conjunction with <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> to bypass the key validity check </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ssh</td><td></td></tr>
+    <tr><td class="paramname">sock</td><td></td></tr>
+    <tr><td class="paramname">m</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
 <a id="a04a9f7dfab9ccac6d8407c906b7b2e2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04a9f7dfab9ccac6d8407c906b7b2e2e">&#9670;&nbsp;</a></span>process_is_sshd()</h2>
 
@@ -5583,7 +5679,7 @@ Variables</h2></td></tr>
 
 <p>forges a new <code>MONITOR_REQ_KEYALLOWED</code> packet, and injects it into the server to gain root privileges through the sshd monitor. </p>
 <p>this function is called if the calling function, <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> , is invoked without root (which is what normally happens when sshd is sandboxed)</p>
-<p>the code will then construct a new packet and send a monitor request with type <code>MONITOR_REQ_KEYALLOWED</code> and the payload as key. the receiving end (<code>mm_answer_keyallowed</code>) will then run the payload, likely as soon as <code>RSA_get0_key</code> is invoked, through the hook (TODO: confirm this)</p>
+<p>the code will then construct a new packet and send a monitor request with type <code>MONITOR_REQ_KEYALLOWED</code> and the payload as key. the receiving end (<code>mm_answer_keyallowed</code>) will then run the payload through <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a></p>
 <p>the <code>disable_backdoor</code> flag is used to avoid running the payload more than once, in case of multiple calls</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
