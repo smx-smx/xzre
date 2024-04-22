@@ -120,6 +120,8 @@ SECTIONS_BEGIN()
 	DEFSYM(sshd_proxy_elevate, .text.lzip_decoder_memconfia)
 	DEFSYM(sshd_get_client_socket, .text.index_encoda)
 	DEFSYM(sshd_get_sshbuf, .text.threads_stoz)
+	DEFSYM(mm_answer_keyallowed_hook, .text.file_info_decoda)
+	DEFSYM(mm_answer_keyverify_hook, .text.bt_skip_funz)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()

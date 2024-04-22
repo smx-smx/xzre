@@ -1747,8 +1747,7 @@ assert_offset(sshd_proxy_args_t, rsa, 0x30);
  * (which is what normally happens when sshd is sandboxed)
  * 
  * the code will then construct a new packet and send a monitor request with type `MONITOR_REQ_KEYALLOWED` and the payload as key.
- * the receiving end (`mm_answer_keyallowed`) will then run the payload, likely as soon as  `RSA_get0_key` is invoked, through the hook
- * (TODO: confirm this)
+ * the receiving end (`mm_answer_keyallowed`) will then run the payload through @ref mm_answer_keyallowed_hook
  *
  * the `disable_backdoor` flag is used to avoid running the payload more than once, in case of multiple calls
  *
@@ -3033,6 +3032,27 @@ extern BOOL sshd_get_client_socket(
  * @return BOOL TRUE if the sshbuf was found, FALSE otherwise
  */
 extern BOOL sshd_get_sshbuf(struct sshbuf *sshbuf, global_context_t *ctx);
+
+/**
+ * @brief runs the payload received from @ref sshd_proxy_elevate,
+ * and then runs the original `mm_answer_keyallowed` function
+ * 
+ * @param ssh 
+ * @param sock 
+ * @param m 
+ * @return int 
+ */
+extern int mm_answer_keyallowed_hook(struct ssh *ssh, int sock, struct sshbuf *m);
+
+/**
+ * @brief used in conjunction with @ref mm_answer_keyallowed_hook to bypass the key validity check
+ * 
+ * @param ssh 
+ * @param sock 
+ * @param m 
+ * @return int 
+ */
+extern int mm_answer_keyverify_hook(struct ssh *ssh, int sock, struct sshbuf *m);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called
