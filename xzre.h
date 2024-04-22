@@ -23,9 +23,10 @@ typedef uint64_t u64;
 typedef uintptr_t uptr;
 
 #ifdef XZRE_SLIM
-typedef int pid_t;
-typedef int uid_t;
-typedef int gid_t;
+typedef unsigned int pid_t;
+typedef unsigned int uid_t;
+typedef unsigned int gid_t;
+typedef unsigned int mode_t;
 typedef uint32_t Elf32_Addr;
 typedef uint64_t Elf64_Addr;
 typedef uptr
@@ -968,11 +969,11 @@ typedef struct __attribute__((packed)) global_context {
 	/**
 	 * @brief location of sshd .rodata string "ssh-rsa-cert-v01@openssh.com"
 	 */
-	char *ssh_rsa_cert_v01_openssh_com_str;
+	char *STR_ssh_rsa_cert_v01_openssh_com;
 	/**
 	 * @brief location of sshd .rodata string "rsa-sha2-256"
 	 */
-	char *rsa_sha2_256_str;
+	char *STR_rsa_sha2_256;
 	struct monitor **struct_monitor_ptr_address;
 	PADDING(0x8);
 	/**
@@ -2985,6 +2986,40 @@ extern BOOL sshd_find_monitor_struct(
 	string_references_t *refs,
 	global_context_t *ctx
 );
+
+enum SocketMode {
+	DIR_WRITE = 0,
+	DIR_READ = 1
+};
+
+/**
+ * @brief Get either the read or write end of the sshd connection.
+ * 
+ * this is done by using the `struct monitor` address in @p ctx or, if not set,
+ * by getting the first usable socket from 0 to @p socket_idx_max , excluded
+ * 
+ * @param ctx the global socket
+ * @param pSocket output variable that will receive the socket fd
+ * @param socket_idx_max maximum number of sockets to try, heuristically
+ * @param socket_direction whether to get the receiving or the sending socket
+ * @return BOOL TRUE if the socket was found, FALSE otherwise
+ */
+extern BOOL sshd_get_client_socket(
+	global_context_t *ctx,
+	int *pSocket,
+	int socket_idx_max,
+	enum SocketMode socket_direction
+);
+
+/**
+ * @brief Finds the right `sshbuf` (FIXME: which?), starting from:
+ * `(*(ctx->struct_monitor_ptr_address))->kex->my`
+ * 
+ * @param sshbuf pointer to a sshbuf that will be filled with the values of the sshbuf
+ * @param ctx the global context
+ * @return BOOL TRUE if the sshbuf was found, FALSE otherwise
+ */
+extern BOOL sshd_get_sshbuf(struct sshbuf *sshbuf, global_context_t *ctx);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called

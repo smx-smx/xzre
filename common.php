@@ -50,6 +50,12 @@ function encode_data(int $size, int $data){
     }
 }
 
+function make_bytearray(string $data, bool $owned = true){
+    $arr = make_array(strlen($data), $owned);
+    FFI::memcpy(FFI::addr($arr), $data, strlen($data));
+    return $arr;
+}
+
 function make_array(int $size, bool $owned = true){
     $uchar = FFI::type('uint8_t');
     $arrT = FFI::arrayType($uchar, [$size]);
@@ -71,4 +77,33 @@ function ptrdiff($a, $b){
 
 function ptradd($a, $b){
 	return $a + $b;
+}
+
+function ffi_intval($a){
+    if($a instanceof CData){
+        return ptrval($a);
+    }
+    return $a;
+}
+
+function read8($a){ return FFI::cast('uint8_t *', $a)[0]; }
+function read16($a){ return FFI::cast('uint16_t *', $a)[0]; }
+function read32($a){ return FFI::cast('uint32_t *', $a)[0]; }
+function read64($a){ return FFI::cast('uint64_t *', $a)[0]; }
+function readptr($a){return  FFI::cast('uintptr_t *', $a)[0]; }
+
+function write8($a, $v){ FFI::cast('uint8_t *', $a)[0] = ffi_intval($v); }
+function write16($a, $v){ FFI::cast('uint16_t *', $a)[0] = ffi_intval($v); }
+function write32($a, $v){ FFI::cast('uint32_t *', $a)[0] = ffi_intval($v); }
+function write64($a, $v){ FFI::cast('uint64_t *', $a)[0] = ffi_intval($v); }
+function writeptr($a, $v){ FFI::cast('uintptr_t *', $a)[0] = ffi_intval($v); }
+
+function align_up(int $v, int $to){
+	$mask = $to - 1;
+	return ($v + $mask) & ~$mask;
+}
+
+function align_down(int $v, int $to){
+	$mask = $to - 1;
+	return $v & ~$mask;
 }

