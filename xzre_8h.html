@@ -175,7 +175,7 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structauth__bypass__args.html">auth_bypass_args</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__proxy__args.html">sshd_proxy_args</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -353,9 +353,9 @@ typedef struct <a class="el" href="structfake__lzma__allocator.html">fake_lzma_a
 <tr class="memitem:aab16a9d096477545284f14539e84c7bc"><td class="memItemLeft" align="right" valign="top"><a id="aab16a9d096477545284f14539e84c7bc"></a>
 typedef struct <a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>instruction_search_ctx_t</b></td></tr>
 <tr class="separator:aab16a9d096477545284f14539e84c7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a771d5a60d47a4935013524f60e8a4380"><td class="memItemLeft" align="right" valign="top"><a id="a771d5a60d47a4935013524f60e8a4380"></a>
-typedef struct <a class="el" href="structauth__bypass__args.html">auth_bypass_args</a>&#160;</td><td class="memItemRight" valign="bottom"><b>auth_bypass_args_t</b></td></tr>
-<tr class="separator:a771d5a60d47a4935013524f60e8a4380"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ade9ff1104d2c4be417ee49a64baafa"><td class="memItemLeft" align="right" valign="top"><a id="a7ade9ff1104d2c4be417ee49a64baafa"></a>
+typedef struct <a class="el" href="structsshd__proxy__args.html">sshd_proxy_args</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_proxy_args_t</b></td></tr>
+<tr class="separator:a7ade9ff1104d2c4be417ee49a64baafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -1382,29 +1382,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a4bcac3889c4d2fff6294722e35ec4c09"><td class="memItemLeft" align="right" valign="top"><a id="a4bcac3889c4d2fff6294722e35ec4c09"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx_t</a>, <a class="el" href="structimported__funcs.html">imported_funcs</a>, 0x38)</td></tr>
 <tr class="separator:a4bcac3889c4d2fff6294722e35ec4c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99dc8545ed25d29026e54c04398ae5be"><td class="memItemLeft" align="right" valign="top"><a id="a99dc8545ed25d29026e54c04398ae5be"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, cmd_type, 0)</td></tr>
-<tr class="separator:a99dc8545ed25d29026e54c04398ae5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adda0f97af8bfa9438e8b4db7bbe3219f"><td class="memItemLeft" align="right" valign="top"><a id="adda0f97af8bfa9438e8b4db7bbe3219f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, args, 0x8)</td></tr>
-<tr class="separator:adda0f97af8bfa9438e8b4db7bbe3219f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9b52c73d804f4934da6caf8be5dc530"><td class="memItemLeft" align="right" valign="top"><a id="af9b52c73d804f4934da6caf8be5dc530"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, rsa_n, 0x10)</td></tr>
-<tr class="separator:af9b52c73d804f4934da6caf8be5dc530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7703f3810b0793f91dbe13065f7a0f70"><td class="memItemLeft" align="right" valign="top"><a id="a7703f3810b0793f91dbe13065f7a0f70"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, rsa_e, 0x18)</td></tr>
-<tr class="separator:a7703f3810b0793f91dbe13065f7a0f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1daa478f5dce8786a727992c94d7e8bf"><td class="memItemLeft" align="right" valign="top"><a id="a1daa478f5dce8786a727992c94d7e8bf"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, payload_body, 0x20)</td></tr>
-<tr class="separator:a1daa478f5dce8786a727992c94d7e8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c8f349e638ec415621dba50f9e4d705"><td class="memItemLeft" align="right" valign="top"><a id="a4c8f349e638ec415621dba50f9e4d705"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, payload_body_size, 0x28)</td></tr>
-<tr class="separator:a4c8f349e638ec415621dba50f9e4d705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d8747594268bbf4d0213818b36db850"><td class="memItemLeft" align="right" valign="top"><a id="a3d8747594268bbf4d0213818b36db850"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a>, rsa, 0x30)</td></tr>
-<tr class="separator:a3d8747594268bbf4d0213818b36db850"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a921173221c8d3ebd6d1b2688428f78e7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a921173221c8d3ebd6d1b2688428f78e7">sshd_auth_bypass</a> (<a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a> *args, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
-<tr class="separator:a921173221c8d3ebd6d1b2688428f78e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c36b0bffea839861161aaccff5bd00"><td class="memItemLeft" align="right" valign="top"><a id="aa3c36b0bffea839861161aaccff5bd00"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, cmd_type, 0)</td></tr>
+<tr class="separator:aa3c36b0bffea839861161aaccff5bd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3461e3ffaa79fb19e5afed2b34c2846c"><td class="memItemLeft" align="right" valign="top"><a id="a3461e3ffaa79fb19e5afed2b34c2846c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, args, 0x8)</td></tr>
+<tr class="separator:a3461e3ffaa79fb19e5afed2b34c2846c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97963757dd5d29dd7b61828064a06896"><td class="memItemLeft" align="right" valign="top"><a id="a97963757dd5d29dd7b61828064a06896"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, rsa_n, 0x10)</td></tr>
+<tr class="separator:a97963757dd5d29dd7b61828064a06896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab79e59e1ffd612d99ae4caeede7ea023"><td class="memItemLeft" align="right" valign="top"><a id="ab79e59e1ffd612d99ae4caeede7ea023"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, rsa_e, 0x18)</td></tr>
+<tr class="separator:ab79e59e1ffd612d99ae4caeede7ea023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade89a93f6bf0c658a353af242e2d147f"><td class="memItemLeft" align="right" valign="top"><a id="ade89a93f6bf0c658a353af242e2d147f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, payload_body, 0x20)</td></tr>
+<tr class="separator:ade89a93f6bf0c658a353af242e2d147f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd87ff1ba0c0258539f56fde9a3dcf1f"><td class="memItemLeft" align="right" valign="top"><a id="abd87ff1ba0c0258539f56fde9a3dcf1f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, payload_body_size, 0x28)</td></tr>
+<tr class="separator:abd87ff1ba0c0258539f56fde9a3dcf1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4fac7de3f6aba3fdf4037bb0b7c37c"><td class="memItemLeft" align="right" valign="top"><a id="a7d4fac7de3f6aba3fdf4037bb0b7c37c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, rsa, 0x30)</td></tr>
+<tr class="separator:a7d4fac7de3f6aba3fdf4037bb0b7c37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68b586c330a6c746c65cee778a8b72e8"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a> *args, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a68b586c330a6c746c65cee778a8b72e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">forges a new <code>MONITOR_REQ_KEYALLOWED</code> packet, and injects it into the server to gain root privileges through the sshd monitor.  <a href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">More...</a><br /></td></tr>
+<tr class="separator:a68b586c330a6c746c65cee778a8b72e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad15241561f71f06020fb6f2649e6a3"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3">x86_dasm</a> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
 <tr class="memdesc:a6ad15241561f71f06020fb6f2649e6a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3">More...</a><br /></td></tr>
 <tr class="separator:a6ad15241561f71f06020fb6f2649e6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -5045,42 +5046,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a921173221c8d3ebd6d1b2688428f78e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a921173221c8d3ebd6d1b2688428f78e7">&#9670;&nbsp;</a></span>sshd_auth_bypass()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BOOL sshd_auth_bypass </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structauth__bypass__args.html">auth_bypass_args_t</a> *&#160;</td>
-          <td class="paramname"><em>args</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
-          <td class="paramname"><em>ctx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td></td></tr>
-    <tr><td class="paramname">ctx</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL </dd></dl>
-
-</div>
-</div>
 <a id="ad32fc521229739df889407c2e9e48475"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad32fc521229739df889407c2e9e48475">&#9670;&nbsp;</a></span>sshd_find_monitor_struct()</h2>
 
@@ -5587,6 +5552,47 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE if modifications couldn't be applied </dd></dl>
+
+</div>
+</div>
+<a id="a68b586c330a6c746c65cee778a8b72e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68b586c330a6c746c65cee778a8b72e8">&#9670;&nbsp;</a></span>sshd_proxy_elevate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_proxy_elevate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a> *&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>forges a new <code>MONITOR_REQ_KEYALLOWED</code> packet, and injects it into the server to gain root privileges through the sshd monitor. </p>
+<p>this function is called if the calling function, <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> , is invoked without root (which is what normally happens when sshd is sandboxed)</p>
+<p>the code will then construct a new packet and send a monitor request with type <code>MONITOR_REQ_KEYALLOWED</code> and the payload as key. the receiving end (<code>mm_answer_keyallowed</code>) will then run the payload, likely as soon as <code>RSA_get0_key</code> is invoked, through the hook (TODO: confirm this)</p>
+<p>the <code>disable_backdoor</code> flag is used to avoid running the payload more than once, in case of multiple calls</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>arguments used to build the SSH packet </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the packet was sent successfully, FALSE otherwise </dd></dl>
 
 </div>
 </div>

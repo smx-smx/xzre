@@ -174,7 +174,8 @@ u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struc
 </div><div class="memdoc">
 
 <p>This flag gets set to TRUE by <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> if any of the validity checks fail, making future invocations return immediately. </p>
-<p>It's likely both a safety check and an anti tampering mechanism. </p>
+<p>It's likely both a safety check and an anti tampering mechanism.</p>
+<p>It's also used to avoid running the payload more than once, if the hooks gets called multiple times </p>
 
 </div>
 </div>
