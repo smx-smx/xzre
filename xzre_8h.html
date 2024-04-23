@@ -294,6 +294,9 @@ typedef struct <a class="el" href="structldso__ctx.html">ldso_ctx</a>&#160;</td>
 <tr class="memitem:a6bdb9d6365136f6f9cefd4ba841ae308"><td class="memItemLeft" align="right" valign="top"><a id="a6bdb9d6365136f6f9cefd4ba841ae308"></a>
 typedef struct <a class="el" href="structbackdoor__hooks__data.html">backdoor_hooks_data</a>&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_hooks_data_t</b></td></tr>
 <tr class="separator:a6bdb9d6365136f6f9cefd4ba841ae308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a124787f6a02a94208dafa5994d89644d"><td class="memItemLeft" align="right" valign="top"><a id="a124787f6a02a94208dafa5994d89644d"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>log_handler_fn</b>) (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
+<tr class="separator:a124787f6a02a94208dafa5994d89644d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f9a74cf91da7432a6404333a7658fbf"><td class="memItemLeft" align="right" valign="top"><a id="a6f9a74cf91da7432a6404333a7658fbf"></a>
 typedef struct <a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_hooks_ctx_t</b></td></tr>
 <tr class="separator:a6f9a74cf91da7432a6404333a7658fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -593,6 +596,21 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:afde1d1c69b6bedd0626eee956c7111de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca1fd1d8935433e6ba2e3918214e07f9"><td class="memItemLeft" align="right" valign="top"><a id="aca1fd1d8935433e6ba2e3918214e07f9"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>LogLevel</b> { <br />
+&#160;&#160;<b>SYSLOG_LEVEL_QUIET</b>
+, <b>SYSLOG_LEVEL_FATAL</b>
+, <b>SYSLOG_LEVEL_ERROR</b>
+, <b>SYSLOG_LEVEL_INFO</b>
+, <br />
+&#160;&#160;<b>SYSLOG_LEVEL_VERBOSE</b>
+, <b>SYSLOG_LEVEL_DEBUG1</b>
+, <b>SYSLOG_LEVEL_DEBUG2</b>
+, <b>SYSLOG_LEVEL_DEBUG3</b>
+, <br />
+&#160;&#160;<b>SYSLOG_LEVEL_NOT_SET</b> = -1
+<br />
+ }</td></tr>
+<tr class="separator:aca1fd1d8935433e6ba2e3918214e07f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 0x1
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 0x4
 , <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891">CMDF_DISABLE_PAM</a> = 0x40
@@ -1181,6 +1199,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ada9d6e7410ac46d52cd7da32b816d40c"><td class="memItemLeft" align="right" valign="top"><a id="ada9d6e7410ac46d52cd7da32b816d40c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a>, hook_RSA_get0_key, 0x50)</td></tr>
 <tr class="separator:ada9d6e7410ac46d52cd7da32b816d40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a416d22351b85b59792c982eed4bb7ac1"><td class="memItemLeft" align="right" valign="top"><a id="a416d22351b85b59792c982eed4bb7ac1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a>, mm_log_handler, 0x58)</td></tr>
+<tr class="separator:a416d22351b85b59792c982eed4bb7ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c420adfd4796794d37f883e6d4b5a8"><td class="memItemLeft" align="right" valign="top"><a id="a82c420adfd4796794d37f883e6d4b5a8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a>, mm_answer_keyallowed, 0x70)</td></tr>
+<tr class="separator:a82c420adfd4796794d37f883e6d4b5a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af055cd69bee66618dc6463be82811aca"><td class="memItemLeft" align="right" valign="top"><a id="af055cd69bee66618dc6463be82811aca"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a>, mm_answer_keyverify, 0x78)</td></tr>
+<tr class="separator:af055cd69bee66618dc6463be82811aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b25e68f96fef005e33fd1f93f1cce3d"><td class="memItemLeft" align="right" valign="top"><a id="a0b25e68f96fef005e33fd1f93f1cce3d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__setup__params.html">backdoor_setup_params_t</a>, shared, 0x8)</td></tr>
 <tr class="separator:a0b25e68f96fef005e33fd1f93f1cce3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1660,6 +1687,8 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a99eb76809c798f3bcae98526992e63ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">mm_answer_keyverify_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
 <tr class="memdesc:a99eb76809c798f3bcae98526992e63ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">used in conjunction with <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> to bypass the key validity check  <a href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">More...</a><br /></td></tr>
 <tr class="separator:a99eb76809c798f3bcae98526992e63ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a096fbb5b183337e44012a38910ea31eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a096fbb5b183337e44012a38910ea31eb">mm_log_handler_hook</a> (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
+<tr class="separator:a096fbb5b183337e44012a38910ea31eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -4482,6 +4511,55 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a096fbb5b183337e44012a38910ea31eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a096fbb5b183337e44012a38910ea31eb">&#9670;&nbsp;</a></span>mm_log_handler_hook()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mm_log_handler_hook </td>
+          <td>(</td>
+          <td class="paramtype">LogLevel&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>forced</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td></td></tr>
+    <tr><td class="paramname">forced</td><td></td></tr>
+    <tr><td class="paramname">msg</td><td></td></tr>
+    <tr><td class="paramname">ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -75,22 +75,10 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x30)</td></tr>
 <tr class="separator:a276c1d5c817df1ecc9d7c1916649d33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afafb3990a82ad3ba4cf7d86baac30722"><td class="memItemLeft" align="right" valign="top"><a id="afafb3990a82ad3ba4cf7d86baac30722"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__hooks__ctx.html#afafb3990a82ad3ba4cf7d86baac30722">PADDING</a> (sizeof(void *))</td></tr>
-<tr class="memdesc:afafb3990a82ad3ba4cf7d86baac30722"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to addess of symbol .Llzma12_mode_map_part_1 <br /></td></tr>
-<tr class="separator:afafb3990a82ad3ba4cf7d86baac30722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afafb3990a82ad3ba4cf7d86baac30722"><td class="memItemLeft" align="right" valign="top"><a id="afafb3990a82ad3ba4cf7d86baac30722"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
 <tr class="separator:afafb3990a82ad3ba4cf7d86baac30722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afafb3990a82ad3ba4cf7d86baac30722"><td class="memItemLeft" align="right" valign="top"><a id="afafb3990a82ad3ba4cf7d86baac30722"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
-<tr class="separator:afafb3990a82ad3ba4cf7d86baac30722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afafb3990a82ad3ba4cf7d86baac30722"><td class="memItemLeft" align="right" valign="top"><a id="afafb3990a82ad3ba4cf7d86baac30722"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__hooks__ctx.html#afafb3990a82ad3ba4cf7d86baac30722">PADDING</a> (sizeof(void *))</td></tr>
-<tr class="memdesc:afafb3990a82ad3ba4cf7d86baac30722"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to addess of symbol .Lfile_info_decode_0 <br /></td></tr>
-<tr class="separator:afafb3990a82ad3ba4cf7d86baac30722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afafb3990a82ad3ba4cf7d86baac30722"><td class="memItemLeft" align="right" valign="top"><a id="afafb3990a82ad3ba4cf7d86baac30722"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__hooks__ctx.html#afafb3990a82ad3ba4cf7d86baac30722">PADDING</a> (sizeof(void *))</td></tr>
-<tr class="memdesc:afafb3990a82ad3ba4cf7d86baac30722"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to addess of symbol .Lbt_skip_func_part_0 <br /></td></tr>
 <tr class="separator:afafb3990a82ad3ba4cf7d86baac30722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afafb3990a82ad3ba4cf7d86baac30722"><td class="memItemLeft" align="right" valign="top"><a id="afafb3990a82ad3ba4cf7d86baac30722"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
@@ -113,6 +101,15 @@ pfn_RSA_public_decrypt_t&#160;</td><td class="memItemRight" valign="bottom"><b>h
 <tr class="memitem:a420f00bff410fb94f892e59af2eefde4"><td class="memItemLeft" align="right" valign="top"><a id="a420f00bff410fb94f892e59af2eefde4"></a>
 pfn_RSA_get0_key_t&#160;</td><td class="memItemRight" valign="bottom"><b>hook_RSA_get0_key</b></td></tr>
 <tr class="separator:a420f00bff410fb94f892e59af2eefde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c810076ba3f7e8d4f2997a01dc3191"><td class="memItemLeft" align="right" valign="top"><a id="aa7c810076ba3f7e8d4f2997a01dc3191"></a>
+log_handler_fn&#160;</td><td class="memItemRight" valign="bottom"><b>mm_log_handler</b></td></tr>
+<tr class="separator:aa7c810076ba3f7e8d4f2997a01dc3191"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b06ef62e5e56de6552014f3dd0a9b5c"><td class="memItemLeft" align="right" valign="top"><a id="a6b06ef62e5e56de6552014f3dd0a9b5c"></a>
+int(*&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_keyallowed</b> )(struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="separator:a6b06ef62e5e56de6552014f3dd0a9b5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a95e4b168ed6bc534dc5625880dd1df"><td class="memItemLeft" align="right" valign="top"><a id="a0a95e4b168ed6bc534dc5625880dd1df"></a>
+int(*&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_keyverify</b> )(struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="separator:a0a95e4b168ed6bc534dc5625880dd1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="xzre_8h_source.html">xzre.h</a></li>
