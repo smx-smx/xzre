@@ -2835,16 +2835,16 @@ extern BOOL find_link_map_l_audit_any_plt_bitmask(
  * @param code_start start of the sshd code segment
  * @param code_end end of the sshd code segment
  * @param string_refs info about resolved functions
- * @param host_keys_out pointer to receive the address of the host keys (`struct sshkey` in sshd)
+ * @param sensitive_data_out pointer to receive the address of sensitive_data
  * @return BOOL TRUE if the address was found, FALSE otherwise
  */
-extern BOOL sshd_get_host_keys_address_via_xcalloc(
+extern BOOL sshd_get_sensitive_data_address_via_xcalloc(
 	u8 *data_start,
 	u8 *data_end,
 	u8 *code_start,
 	u8 *code_end,
 	string_references_t *string_refs,
-	void **host_keys_out);
+	void **sensitive_data_out);
 
 /**
  * @brief finds the address of `sensitive_data.host_keys` in sshd by using
@@ -2857,70 +2857,70 @@ extern BOOL sshd_get_host_keys_address_via_xcalloc(
  * @param code_start start of the sshd code segment
  * @param code_end end of the sshd code segment
  * @param string_refs info about resolved functions
- * @param host_keys_out pointer to receive the address of the host keys (`struct sshkey` in sshd)
+ * @param sensitive_data_out pointer to receive the address of sensitive_data
  * @return BOOL TRUE if the address was found, FALSE otherwise
  */
-extern BOOL sshd_get_host_keys_address_via_krb5ccname(
+extern BOOL sshd_get_sensitive_data_address_via_krb5ccname(
 	u8 *data_start,
 	u8 *data_end,
 	u8 *code_start,
 	u8 *code_end,
-	void **host_keys_out,
+	void **sensitive_data_out,
 	elf_info_t *elf);
 
 /**
  * @brief obtains a numeric score which indicates if `demote_sensitive_data`
- * accesses @p host_keys or not
+ * accesses @p sensitive_data or not
  * 
- * @param host_keys pointer to suspsected SSH host keys
+ * @param sensitive_data pointer to suspsected SSH host keys
  * @param elf sshd elf instance
  * @param refs info about resolved functions
  * @return int a score of 3 if accessed, 0 otherwise
  */
-extern int sshd_get_host_keys_score_in_demote_sensitive_data(
-	void *host_keys,
+extern int sshd_get_sensitive_data_score_in_demote_sensitive_data(
+	void *sensitive_data,
 	elf_info_t *elf,
 	string_references_t *refs);
 
 /**
  * @brief obtains a numeric score which indicates if `main`
- * accesses @p host_keys or not
+ * accesses @p sensitive_data or not
  * 
- * @param host_keys pointer to suspsected SSH host keys
+ * @param sensitive_data pointer to suspsected SSH host keys
  * @param elf sshd elf instance
  * @param refs info about resolved functions
  * @return int
  */
-extern int sshd_get_host_keys_score_in_main(
-	void *host_keys,
+extern int sshd_get_sensitive_data_score_in_main(
+	void *sensitive_data,
 	elf_info_t *elf,
 	string_references_t *refs);
 
 /**
  * @brief obtains a numeric score which indicates if `do_child`
- * accesses @p host_keys or not
+ * accesses @p sensitive_data or not
  * 
- * @param host_keys pointer to suspsected SSH host keys
+ * @param sensitive_data pointer to suspsected SSH host keys
  * @param elf sshd elf instance
  * @param refs info about resolved functions
  * @return int
  */
-extern int sshd_get_host_keys_score_in_do_child(
-	void *host_keys,
+extern int sshd_get_sensitive_data_score_in_do_child(
+	void *sensitive_data,
 	elf_info_t *elf,
 	string_references_t *refs);
 
 /**
  * @brief obtains a numeric score which indicates if 
- * accesses @p host_keys or not
+ * accesses @p sensitive_data or not
  * 
- * @param host_keys pointer to suspsected SSH host keys
+ * @param sensitive_data pointer to suspsected SSH host keys
  * @param elf sshd elf instance
  * @param refs info about resolved functions
  * @return int
  */
-extern int sshd_get_host_keys_score(
-	void *host_keys,
+extern int sshd_get_sensitive_data_score(
+	void *sensitive_data,
 	elf_info_t *elf,
 	string_references_t *refs);
 
@@ -3115,6 +3115,78 @@ extern void mm_log_handler_hook(
 	int forced,
 	const char *msg,
 	void *ctx);
+
+/**
+ * @brief reads data from the specified file descriptor
+ * 
+ * @param fd the file descriptor to read from
+ * @param buffer the buffer to read data to
+ * @param count number of bytes to read
+ * @param funcs imported libc functions
+ * @return ssize_t number of bytes read, or -1 on error
+ */
+extern ssize_t fd_read(
+	int fd, 
+	void *buffer,
+	size_t count,
+	libc_imports_t *funcs);
+
+/**
+ * @brief reads data to the specified file descriptor
+ * 
+ * @param fd the file descriptor to write to
+ * @param buffer data to write
+ * @param count number of bytes to write
+ * @param funcs imported libc functions
+ * @return ssize_t number of bytes written, or -1 on error
+ */
+extern ssize_t fd_write(
+	int fd,
+	void *buffer,
+	size_t count,
+	libc_imports_t *funcs);
+
+/**
+ * @brief checks if the given array of pointers contains any NULL pointer
+ * 
+ * @param pointers array of pointers to check
+ * @param num_pointers number of pointers to check
+ * @return BOOL TRUE if @p pointers contains any NULL pointer, FALSE if all pointers are non-NULL
+ */
+extern BOOL contains_null_pointers(
+	void **pointers,
+	unsigned int num_pointers
+);
+
+/**
+ * @brief calls `sshlogv` from openssh, similarly to `sshlog` in openssh
+ * 
+ * @param log_ctx imported openssh log functions/data (to get the `sshlogv` function pointer)
+ * @param level log level 
+ * @param fmt log format
+ * @param ... 
+ */
+extern void sshd_log(
+	sshd_log_ctx_t *log_ctx,
+	LogLevel level, const char *fmt, ...);
+
+/**
+ * @brief locates `sensitive_data` within sshd,
+ * and resolves some additional libcrypto functions
+ * 
+ * @param sshd sshfd ELF context
+ * @param libcrypto libcrypto ELF context
+ * @param refs string references
+ * @param funcs imported functions
+ * @param ctx global context
+ * @return BOOL TRUE if sensitive_data was located successfully, FALSE otherwise
+ */
+extern BOOL sshd_find_sensitive_data(
+	elf_info_t *sshd,
+	elf_info_t *libcrypto,
+	string_references_t *refs,
+	imported_funcs_t *funcs,
+	global_context_t *ctx);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called

@@ -295,19 +295,19 @@ void main_shared(){
 	void *code_start = elf_get_code_segment(&einfo, &code_size);
 	void *code_end = (void *)PTRADD(code_start, code_size);
 	void *ssh_host_keys1 = NULL;
-	if(sshd_get_host_keys_address_via_xcalloc(data_start, data_end, code_start, code_end, &strings, &ssh_host_keys1)){
+	if(sshd_get_sensitive_data_address_via_xcalloc(data_start, data_end, code_start, code_end, &strings, &ssh_host_keys1)){
 		printf("sensitive_data.host_keys: %p\n", ssh_host_keys1);
 	}
 
 	void *ssh_host_keys2 = NULL;
 	void *getenv_krb5ccname = elf_find_string_reference(&einfo, STR_KRB5CCNAME, code_start, code_end);
 	printf("xref: %p\n", getenv_krb5ccname);
-	if(sshd_get_host_keys_address_via_krb5ccname(data_start, data_end, code_start, code_end, &ssh_host_keys2, &einfo)){
+	if(sshd_get_sensitive_data_address_via_krb5ccname(data_start, data_end, code_start, code_end, &ssh_host_keys2, &einfo)){
 		printf("sensitive_data.host_keys: %p\n", ssh_host_keys2);
 	}
 
-	int score = sshd_get_host_keys_score(ssh_host_keys1, &einfo, &strings);
-	printf("sshd_get_host_keys_score(): %d\n", score);
+	int score = sshd_get_sensitive_data_score(ssh_host_keys1, &einfo, &strings);
+	printf("sshd_get_sensitive_data_score(): %d\n", score);
 
 	sshd_ctx_t sshd_ctx;
 	sshd_log_ctx_t sshd_log_ctx;
