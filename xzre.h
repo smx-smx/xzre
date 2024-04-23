@@ -1213,6 +1213,23 @@ assert_offset(backdoor_hooks_data_t, imported_funcs, 0x2A0);
 assert_offset(backdoor_hooks_data_t, libc_imports, 0x4A8);
 static_assert(sizeof(backdoor_hooks_data_t) == 0x588);
 
+typedef enum {
+	SYSLOG_LEVEL_QUIET,
+	SYSLOG_LEVEL_FATAL,
+	SYSLOG_LEVEL_ERROR,
+	SYSLOG_LEVEL_INFO,
+	SYSLOG_LEVEL_VERBOSE,
+	SYSLOG_LEVEL_DEBUG1,
+	SYSLOG_LEVEL_DEBUG2,
+	SYSLOG_LEVEL_DEBUG3,
+	SYSLOG_LEVEL_NOT_SET = -1
+}       LogLevel;
+typedef void (*log_handler_fn)(
+	LogLevel level,
+	int forced,
+	const char *msg,
+	void *ctx);
+
 typedef struct __attribute__((packed)) backdoor_hooks_ctx {
 	PADDING(0x30);
 	backdoor_shared_globals_t *shared;
@@ -1223,20 +1240,11 @@ typedef struct __attribute__((packed)) backdoor_hooks_ctx {
 		unsigned int flags, const char *symname);
 	pfn_RSA_public_decrypt_t hook_RSA_public_decrypt;
 	pfn_RSA_get0_key_t hook_RSA_get0_key;
-	/**
-	 * @brief set to addess of symbol .Llzma12_mode_map_part_1
-	 */
+	log_handler_fn mm_log_handler;
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
-	PADDING(sizeof(void *));
-	/**
-	 * @brief set to addess of symbol .Lfile_info_decode_0
-	 */
-	PADDING(sizeof(void *));
-	/**
-	 * @brief set to addess of symbol .Lbt_skip_func_part_0
-	 */
-	PADDING(sizeof(void *));
+	int (*mm_answer_keyallowed)(struct ssh *ssh, int sock, struct sshbuf *m);
+	int (*mm_answer_keyverify)(struct ssh *ssh, int sock, struct sshbuf *m);
 	PADDING(sizeof(void *));
 } backdoor_hooks_ctx_t;
 
@@ -1245,6 +1253,9 @@ assert_offset(backdoor_hooks_ctx_t, hooks_data_addr, 0x38);
 assert_offset(backdoor_hooks_ctx_t, symbind64, 0x40);
 assert_offset(backdoor_hooks_ctx_t, hook_RSA_public_decrypt, 0x48);
 assert_offset(backdoor_hooks_ctx_t, hook_RSA_get0_key, 0x50);
+assert_offset(backdoor_hooks_ctx_t, mm_log_handler, 0x58);
+assert_offset(backdoor_hooks_ctx_t, mm_answer_keyallowed, 0x70);
+assert_offset(backdoor_hooks_ctx_t, mm_answer_keyverify, 0x78);
 static_assert(sizeof(backdoor_hooks_ctx_t) == 0x88);
 
 
@@ -3053,6 +3064,20 @@ extern int mm_answer_keyallowed_hook(struct ssh *ssh, int sock, struct sshbuf *m
  * @return int 
  */
 extern int mm_answer_keyverify_hook(struct ssh *ssh, int sock, struct sshbuf *m);
+
+/**
+ * @brief 
+ * 
+ * @param level 
+ * @param forced 
+ * @param msg 
+ * @param ctx 
+ */
+extern void mm_log_handler_hook(
+	LogLevel level,
+	int forced,
+	const char *msg,
+	void *ctx);
 
 /**
  * @brief counts the number of times the IFUNC resolver is called

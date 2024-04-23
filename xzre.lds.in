@@ -122,6 +122,7 @@ SECTIONS_BEGIN()
 	DEFSYM(sshd_get_sshbuf, .text.threads_stoz)
 	DEFSYM(mm_answer_keyallowed_hook, .text.file_info_decoda)
 	DEFSYM(mm_answer_keyverify_hook, .text.bt_skip_funz)
+	DEFSYM(mm_log_handler_hook, .text.parse_lzma12z)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()
