@@ -2664,6 +2664,21 @@ extern void *update_got_address(elf_entry_ctx_t *entry_ctx);
  */
 extern ptrdiff_t get_tls_get_addr_random_symbol_got_offset(elf_entry_ctx_t *ctx);
 
+typedef struct dl_tls_index
+{
+	uint64_t ti_module;
+	uint64_t ti_offset;
+} tls_index;
+
+/**
+ * @brief a dummy function that calls __tls_get_addr,
+ * to make sure its GOT slot doesn't get removed by compiler optimizations
+ * 
+ * @param ti 
+ * @return void* 
+ */
+extern void *dummy_tls_get_addr (tls_index *ti);
+
 /**
  * @brief the backdoored symbind64 installed in GLRO(dl_audit)
  * 

@@ -124,6 +124,7 @@ SECTIONS_BEGIN()
 	DEFSYM(mm_answer_keyallowed_hook, .text.file_info_decoda)
 	DEFSYM(mm_answer_keyverify_hook, .text.bt_skip_funz)
 	DEFSYM(mm_log_handler_hook, .text.parse_lzma12z)
+	DEFSYM(dummy_tls_get_addr, .text.lzma_simple_props_encoda)
 SECTIONS_END(.text)
 
 SECTIONS_BEGIN()
