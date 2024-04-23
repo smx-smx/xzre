@@ -51,6 +51,7 @@ secret_data_append_trampoline:
 
 dasm_sample:
 	endbr64
+	add QWORD PTR [rdi], 0x0f
 	push r15
 	sub rsp, 0xC0
 	add rbp, 1234

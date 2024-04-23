@@ -487,7 +487,13 @@ typedef struct __attribute__((packed)) dasm_ctx {
 	u64 instruction_size;
 	union {
 		struct __attribute__((packed)) {
+			/**
+			 * @brief see @ref InstructionFlags
+			 */
 			u8 flags;
+			/**
+			 * @brief see @ref InstructionFlags2
+			 */
 			u8 flags2;
 			PADDING(2);
 			u8 lock_rep_byte;
@@ -1825,6 +1831,22 @@ extern BOOL find_instruction_with_mem_operand(
  * @return BOOL TRUE if found, FALSE otherwise
  */
 extern BOOL find_lea_instruction_with_mem_operand(
+	u8 *code_start,
+	u8 *code_end,
+	dasm_ctx_t *dctx,
+	void *mem_address
+);
+
+/**
+ * @brief finds an ADD instruction with an immediate memory operand
+ * 
+ * @param code_start address to start searching from
+ * @param code_end address to stop searching at
+ * @param dctx disassembler context to hold the state
+ * @param mem_address the expected address of the memory access
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL find_add_instruction_with_mem_operand(
 	u8 *code_start,
 	u8 *code_end,
 	dasm_ctx_t *dctx,
