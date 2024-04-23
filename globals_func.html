@@ -99,6 +99,12 @@ $(function() {
 <li>chacha_decrypt()
 : <a class="el" href="xzre_8h.html#a8eb41e1828a73dd4ce8f82a0d42dceb5">xzre.h</a>
 </li>
+<li>check_backdoor_state()
+: <a class="el" href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">xzre.h</a>
+</li>
+<li>contains_null_pointers()
+: <a class="el" href="xzre_8h.html#a49d6b781406209d412b2dfadd3c7d95f">xzre.h</a>
+</li>
 <li>count_bits()
 : <a class="el" href="xzre_8h.html#a9ec1df74592643b26839ecbe320d36ae">xzre.h</a>
 </li>
@@ -106,6 +112,9 @@ $(function() {
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>decrypt_payload_message()
+: <a class="el" href="xzre_8h.html#a91ced8a70c0e916ae8289e4ad77fbd47">xzre.h</a>
+</li>
 <li>dsa_key_hash()
 : <a class="el" href="xzre_8h.html#a15067dbf30f28d1f0fb5901d272081ec">xzre.h</a>
 </li>
@@ -118,6 +127,9 @@ $(function() {
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>elf_contains_vaddr()
 : <a class="el" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">xzre.h</a>
+</li>
+<li>elf_contains_vaddr_relro()
+: <a class="el" href="xzre_8h.html#a2b6f96960f68c8cd69c6bb5bce25426b">xzre.h</a>
 </li>
 <li>elf_find_function_pointer()
 : <a class="el" href="xzre_8h.html#a02157f429658403951e2f41eb0e01117">xzre.h</a>
@@ -167,6 +179,12 @@ $(function() {
 </li>
 <li>fake_lzma_free()
 : <a class="el" href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17">xzre.h</a>
+</li>
+<li>fd_read()
+: <a class="el" href="xzre_8h.html#a443ee065f54857cd4c559963df5a7b85">xzre.h</a>
+</li>
+<li>fd_write()
+: <a class="el" href="xzre_8h.html#a1c7515ae18e8ded5ffe02d66b9f6bffb">xzre.h</a>
 </li>
 <li>find_add_instruction_with_mem_operand()
 : <a class="el" href="xzre_8h.html#a683636baae409d1b74ea2c216e2ba107">xzre.h</a>
@@ -257,6 +275,9 @@ $(function() {
 <li>is_endbr64_instruction()
 : <a class="el" href="xzre_8h.html#a544d2cf67930e0fcd9f9ff37239a4c70">xzre.h</a>
 </li>
+<li>is_payload_message()
+: <a class="el" href="xzre_8h.html#a464486af9c22216fd595612cf988dca5">xzre.h</a>
+</li>
 <li>is_range_mapped()
 : <a class="el" href="xzre_8h.html#a5d94ba8c95f0333dc53ef8432156b0ca">xzre.h</a>
 </li>
@@ -327,32 +348,47 @@ $(function() {
 <li>sha256()
 : <a class="el" href="xzre_8h.html#a3a3417b7999e13c79b9411e092923278">xzre.h</a>
 </li>
+<li>sshbuf_bignum_is_negative()
+: <a class="el" href="xzre_8h.html#ae4488f858b97dc690b41cf9a5d20ef44">xzre.h</a>
+</li>
 <li>sshd_find_monitor_struct()
 : <a class="el" href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">xzre.h</a>
 </li>
+<li>sshd_find_sensitive_data()
+: <a class="el" href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">xzre.h</a>
+</li>
 <li>sshd_get_client_socket()
-: <a class="el" href="xzre_8h.html#a14bc3643604ad36b5232b2ccebf6df7e">xzre.h</a>
+: <a class="el" href="xzre_8h.html#aaa520bbc6de39ccb7a4e5013cf66d7aa">xzre.h</a>
 </li>
-<li>sshd_get_host_keys_address_via_krb5ccname()
-: <a class="el" href="xzre_8h.html#a52ef44e674339d73bef9c9e28c97ecb7">xzre.h</a>
+<li>sshd_get_sensitive_data_address_via_krb5ccname()
+: <a class="el" href="xzre_8h.html#a75dff765c216d52b153ba98cf7cf0227">xzre.h</a>
 </li>
-<li>sshd_get_host_keys_address_via_xcalloc()
-: <a class="el" href="xzre_8h.html#a4302c868eefb917c26b5922f19889b45">xzre.h</a>
+<li>sshd_get_sensitive_data_address_via_xcalloc()
+: <a class="el" href="xzre_8h.html#ae0bd1e83c94cd866e022dd5867bee152">xzre.h</a>
 </li>
-<li>sshd_get_host_keys_score()
-: <a class="el" href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">xzre.h</a>
+<li>sshd_get_sensitive_data_score()
+: <a class="el" href="xzre_8h.html#a7d1ef087d8cb5ea0a468fc42bb503049">xzre.h</a>
 </li>
-<li>sshd_get_host_keys_score_in_demote_sensitive_data()
-: <a class="el" href="xzre_8h.html#a5126a648eae68682ec767c19bba0f9eb">xzre.h</a>
+<li>sshd_get_sensitive_data_score_in_demote_sensitive_data()
+: <a class="el" href="xzre_8h.html#a8320540fc87f4c785714c52940a85571">xzre.h</a>
 </li>
-<li>sshd_get_host_keys_score_in_do_child()
-: <a class="el" href="xzre_8h.html#a4f33df6c2fc052bc282697241421337b">xzre.h</a>
+<li>sshd_get_sensitive_data_score_in_do_child()
+: <a class="el" href="xzre_8h.html#a5f78359c3bb3564a965009ee2280ac5a">xzre.h</a>
 </li>
-<li>sshd_get_host_keys_score_in_main()
-: <a class="el" href="xzre_8h.html#a72b20bf7b31873edf824778f9ecc471b">xzre.h</a>
+<li>sshd_get_sensitive_data_score_in_main()
+: <a class="el" href="xzre_8h.html#aa83cef3858c167b051721db9fbd72667">xzre.h</a>
 </li>
 <li>sshd_get_sshbuf()
 : <a class="el" href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">xzre.h</a>
+</li>
+<li>sshd_get_usable_socket()
+: <a class="el" href="xzre_8h.html#a077a435ef7c8a7960451ff5c0cc5dc43">xzre.h</a>
+</li>
+<li>sshd_kex_sshbuf_get()
+: <a class="el" href="xzre_8h.html#a657f411379e9d088996d8722b82eeefd">xzre.h</a>
+</li>
+<li>sshd_log()
+: <a class="el" href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">xzre.h</a>
 </li>
 <li>sshd_patch_variables()
 : <a class="el" href="xzre_8h.html#a938289ac36ce7b17b60a4f5c0c28d2d4">xzre.h</a>

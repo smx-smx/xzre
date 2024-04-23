@@ -1486,6 +1486,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 vaddr, u64 size, u32 p_flags)</td></tr>
 <tr class="memdesc:a2a09d15b1c506e0f29ee9433771ad8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains the range [vaddr, vaddr+size) in a segment with the specified memory protection flags  <a href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">More...</a><br /></td></tr>
 <tr class="separator:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6f96960f68c8cd69c6bb5bce25426b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2b6f96960f68c8cd69c6bb5bce25426b">elf_contains_vaddr_relro</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 vaddr, u64 size, u32 p_flags)</td></tr>
+<tr class="memdesc:a2b6f96960f68c8cd69c6bb5bce25426b"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains the range [vaddr, vaddr+size) in the gnurelro segment  <a href="xzre_8h.html#a2b6f96960f68c8cd69c6bb5bce25426b">More...</a><br /></td></tr>
+<tr class="separator:a2b6f96960f68c8cd69c6bb5bce25426b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a049328971f4e99ce954d5e0346fee6d7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a> (Elf64_Ehdr *ehdr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>)</td></tr>
 <tr class="memdesc:a049328971f4e99ce954d5e0346fee6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given in-memory ELF file into <a class="el" href="structelf__info.html">elf_info</a>.  <a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">More...</a><br /></td></tr>
 <tr class="separator:a049328971f4e99ce954d5e0346fee6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1647,27 +1650,30 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a82817ae0ac4e7e9a7ded04c0fa16ed9c"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a82817ae0ac4e7e9a7ded04c0fa16ed9c">find_link_map_l_audit_any_plt_bitmask</a> (<a class="el" href="xzre_8h.html#a98d97fcc51fcd4fdbc88e9cd1f0d4405">backdoor_data_handle_t</a> *data, <a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx_t</a> *search_ctx)</td></tr>
 <tr class="memdesc:a82817ae0ac4e7e9a7ded04c0fa16ed9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the bitmask required to modify ld.so's private link_map::l_audit_any_plt state.  <a href="xzre_8h.html#a82817ae0ac4e7e9a7ded04c0fa16ed9c">More...</a><br /></td></tr>
 <tr class="separator:a82817ae0ac4e7e9a7ded04c0fa16ed9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4302c868eefb917c26b5922f19889b45"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a4302c868eefb917c26b5922f19889b45">sshd_get_host_keys_address_via_xcalloc</a> (u8 *data_start, u8 *data_end, u8 *code_start, u8 *code_end, <a class="el" href="structstring__references.html">string_references_t</a> *string_refs, void **host_keys_out)</td></tr>
-<tr class="memdesc:a4302c868eefb917c26b5922f19889b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the address of <code>sensitive_data.host_keys</code> in sshd by using XREF_xcalloc_zero_size in <code>xcalloc</code>  <a href="xzre_8h.html#a4302c868eefb917c26b5922f19889b45">More...</a><br /></td></tr>
-<tr class="separator:a4302c868eefb917c26b5922f19889b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ef44e674339d73bef9c9e28c97ecb7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52ef44e674339d73bef9c9e28c97ecb7">sshd_get_host_keys_address_via_krb5ccname</a> (u8 *data_start, u8 *data_end, u8 *code_start, u8 *code_end, void **host_keys_out, <a class="el" href="structelf__info.html">elf_info_t</a> *elf)</td></tr>
-<tr class="memdesc:a52ef44e674339d73bef9c9e28c97ecb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the address of <code>sensitive_data.host_keys</code> in sshd by using getenv( STR_KRB5CCNAME )  <a href="xzre_8h.html#a52ef44e674339d73bef9c9e28c97ecb7">More...</a><br /></td></tr>
-<tr class="separator:a52ef44e674339d73bef9c9e28c97ecb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5126a648eae68682ec767c19bba0f9eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5126a648eae68682ec767c19bba0f9eb">sshd_get_host_keys_score_in_demote_sensitive_data</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
-<tr class="memdesc:a5126a648eae68682ec767c19bba0f9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>demote_sensitive_data</code> accesses <code>host_keys</code> or not  <a href="xzre_8h.html#a5126a648eae68682ec767c19bba0f9eb">More...</a><br /></td></tr>
-<tr class="separator:a5126a648eae68682ec767c19bba0f9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72b20bf7b31873edf824778f9ecc471b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a72b20bf7b31873edf824778f9ecc471b">sshd_get_host_keys_score_in_main</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
-<tr class="memdesc:a72b20bf7b31873edf824778f9ecc471b"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>main</code> accesses <code>host_keys</code> or not  <a href="xzre_8h.html#a72b20bf7b31873edf824778f9ecc471b">More...</a><br /></td></tr>
-<tr class="separator:a72b20bf7b31873edf824778f9ecc471b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f33df6c2fc052bc282697241421337b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a4f33df6c2fc052bc282697241421337b">sshd_get_host_keys_score_in_do_child</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
-<tr class="memdesc:a4f33df6c2fc052bc282697241421337b"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>do_child</code> accesses <code>host_keys</code> or not  <a href="xzre_8h.html#a4f33df6c2fc052bc282697241421337b">More...</a><br /></td></tr>
-<tr class="separator:a4f33df6c2fc052bc282697241421337b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9f89faac5a24707275635026fa910b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">sshd_get_host_keys_score</a> (void *host_keys, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
-<tr class="memdesc:ac9f89faac5a24707275635026fa910b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if accesses <code>host_keys</code> or not  <a href="xzre_8h.html#ac9f89faac5a24707275635026fa910b4">More...</a><br /></td></tr>
-<tr class="separator:ac9f89faac5a24707275635026fa910b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0bd1e83c94cd866e022dd5867bee152"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae0bd1e83c94cd866e022dd5867bee152">sshd_get_sensitive_data_address_via_xcalloc</a> (u8 *data_start, u8 *data_end, u8 *code_start, u8 *code_end, <a class="el" href="structstring__references.html">string_references_t</a> *string_refs, void **sensitive_data_out)</td></tr>
+<tr class="memdesc:ae0bd1e83c94cd866e022dd5867bee152"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the address of <code>sensitive_data.host_keys</code> in sshd by using XREF_xcalloc_zero_size in <code>xcalloc</code>  <a href="xzre_8h.html#ae0bd1e83c94cd866e022dd5867bee152">More...</a><br /></td></tr>
+<tr class="separator:ae0bd1e83c94cd866e022dd5867bee152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75dff765c216d52b153ba98cf7cf0227"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a75dff765c216d52b153ba98cf7cf0227">sshd_get_sensitive_data_address_via_krb5ccname</a> (u8 *data_start, u8 *data_end, u8 *code_start, u8 *code_end, void **sensitive_data_out, <a class="el" href="structelf__info.html">elf_info_t</a> *elf)</td></tr>
+<tr class="memdesc:a75dff765c216d52b153ba98cf7cf0227"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the address of <code>sensitive_data.host_keys</code> in sshd by using getenv( STR_KRB5CCNAME )  <a href="xzre_8h.html#a75dff765c216d52b153ba98cf7cf0227">More...</a><br /></td></tr>
+<tr class="separator:a75dff765c216d52b153ba98cf7cf0227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8320540fc87f4c785714c52940a85571"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8320540fc87f4c785714c52940a85571">sshd_get_sensitive_data_score_in_demote_sensitive_data</a> (void *<a class="el" href="structsensitive__data.html">sensitive_data</a>, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a8320540fc87f4c785714c52940a85571"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>demote_sensitive_data</code> accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not  <a href="xzre_8h.html#a8320540fc87f4c785714c52940a85571">More...</a><br /></td></tr>
+<tr class="separator:a8320540fc87f4c785714c52940a85571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa83cef3858c167b051721db9fbd72667"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa83cef3858c167b051721db9fbd72667">sshd_get_sensitive_data_score_in_main</a> (void *<a class="el" href="structsensitive__data.html">sensitive_data</a>, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:aa83cef3858c167b051721db9fbd72667"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>main</code> accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not  <a href="xzre_8h.html#aa83cef3858c167b051721db9fbd72667">More...</a><br /></td></tr>
+<tr class="separator:aa83cef3858c167b051721db9fbd72667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f78359c3bb3564a965009ee2280ac5a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f78359c3bb3564a965009ee2280ac5a">sshd_get_sensitive_data_score_in_do_child</a> (void *<a class="el" href="structsensitive__data.html">sensitive_data</a>, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a5f78359c3bb3564a965009ee2280ac5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if <code>do_child</code> accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not  <a href="xzre_8h.html#a5f78359c3bb3564a965009ee2280ac5a">More...</a><br /></td></tr>
+<tr class="separator:a5f78359c3bb3564a965009ee2280ac5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d1ef087d8cb5ea0a468fc42bb503049"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a7d1ef087d8cb5ea0a468fc42bb503049">sshd_get_sensitive_data_score</a> (void *<a class="el" href="structsensitive__data.html">sensitive_data</a>, <a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs)</td></tr>
+<tr class="memdesc:a7d1ef087d8cb5ea0a468fc42bb503049"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a numeric score which indicates if accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not  <a href="xzre_8h.html#a7d1ef087d8cb5ea0a468fc42bb503049">More...</a><br /></td></tr>
+<tr class="separator:a7d1ef087d8cb5ea0a468fc42bb503049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a966b189602e0af0053053e8405d39fa2"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a966b189602e0af0053053e8405d39fa2">bignum_serialize</a> (u8 *buffer, u64 bufferSize, u64 *pOutSize, const BIGNUM *bn, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
 <tr class="memdesc:a966b189602e0af0053053e8405d39fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the BIGNUM <code>bn</code> to the buffer <code>buffer</code>.  <a href="xzre_8h.html#a966b189602e0af0053053e8405d39fa2">More...</a><br /></td></tr>
 <tr class="separator:a966b189602e0af0053053e8405d39fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4488f858b97dc690b41cf9a5d20ef44"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae4488f858b97dc690b41cf9a5d20ef44">sshbuf_bignum_is_negative</a> (struct sshbuf *buf)</td></tr>
+<tr class="memdesc:ae4488f858b97dc690b41cf9a5d20ef44"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given serialized BIGNUM is negative  <a href="xzre_8h.html#ae4488f858b97dc690b41cf9a5d20ef44">More...</a><br /></td></tr>
+<tr class="separator:ae4488f858b97dc690b41cf9a5d20ef44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642b0366b943daba60d004a6a46fb7c7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7">rsa_key_hash</a> (const RSA *rsa, u8 *mdBuf, u64 mdBufSize, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
 <tr class="memdesc:a642b0366b943daba60d004a6a46fb7c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">obtains a SHA256 hash of the supplied RSA key  <a href="xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7">More...</a><br /></td></tr>
 <tr class="separator:a642b0366b943daba60d004a6a46fb7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1686,12 +1692,27 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:ad32fc521229739df889407c2e9e48475"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">sshd_find_monitor_struct</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:ad32fc521229739df889407c2e9e48475"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the pointer to <code>struct monitor</code>, and updates the global context in <code>ctx</code> with its location  <a href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">More...</a><br /></td></tr>
 <tr class="separator:ad32fc521229739df889407c2e9e48475"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14bc3643604ad36b5232b2ccebf6df7e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a14bc3643604ad36b5232b2ccebf6df7e">sshd_get_client_socket</a> (<a class="el" href="structglobal__context.html">global_context_t</a> *ctx, int *pSocket, int socket_idx_max, enum SocketMode socket_direction)</td></tr>
-<tr class="memdesc:a14bc3643604ad36b5232b2ccebf6df7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get either the read or write end of the sshd connection.  <a href="xzre_8h.html#a14bc3643604ad36b5232b2ccebf6df7e">More...</a><br /></td></tr>
-<tr class="separator:a14bc3643604ad36b5232b2ccebf6df7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa520bbc6de39ccb7a4e5013cf66d7aa"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aaa520bbc6de39ccb7a4e5013cf66d7aa">sshd_get_client_socket</a> (<a class="el" href="structglobal__context.html">global_context_t</a> *ctx, int *pSocket, int socket_index, enum SocketMode socket_direction)</td></tr>
+<tr class="memdesc:aaa520bbc6de39ccb7a4e5013cf66d7aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get either the read or write end of the sshd connection.  <a href="xzre_8h.html#aaa520bbc6de39ccb7a4e5013cf66d7aa">More...</a><br /></td></tr>
+<tr class="separator:aaa520bbc6de39ccb7a4e5013cf66d7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a077a435ef7c8a7960451ff5c0cc5dc43"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a077a435ef7c8a7960451ff5c0cc5dc43">sshd_get_usable_socket</a> (int *pSock, int socket_index, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *imports)</td></tr>
+<tr class="memdesc:a077a435ef7c8a7960451ff5c0cc5dc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the first usable socket fd  <a href="xzre_8h.html#a077a435ef7c8a7960451ff5c0cc5dc43">More...</a><br /></td></tr>
+<tr class="separator:a077a435ef7c8a7960451ff5c0cc5dc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">sshd_get_sshbuf</a> (struct sshbuf *sshbuf, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a44abb1c444c5d0428c6d67b9e8e38276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the right <code>sshbuf</code> (FIXME: which?), starting from: <code>(*(ctx-&gt;struct_monitor_ptr_address))-&gt;kex-&gt;my</code>  <a href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">More...</a><br /></td></tr>
 <tr class="separator:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a657f411379e9d088996d8722b82eeefd"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a657f411379e9d088996d8722b82eeefd">sshd_kex_sshbuf_get</a> (void *kex, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx, void **pOutputData, size_t *pOutputSize)</td></tr>
+<tr class="memdesc:a657f411379e9d088996d8722b82eeefd"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates an sshbuf within <code>struct kex</code> (FIXME: which?)  <a href="xzre_8h.html#a657f411379e9d088996d8722b82eeefd">More...</a><br /></td></tr>
+<tr class="separator:a657f411379e9d088996d8722b82eeefd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a464486af9c22216fd595612cf988dca5"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a464486af9c22216fd595612cf988dca5">is_payload_message</a> (void *sshbuf_data, size_t sshbuf_size, size_t *pOutPayloadSize, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a464486af9c22216fd595612cf988dca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given sshbuf buffer contains a backdoor payload message  <a href="xzre_8h.html#a464486af9c22216fd595612cf988dca5">More...</a><br /></td></tr>
+<tr class="separator:a464486af9c22216fd595612cf988dca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a91ced8a70c0e916ae8289e4ad77fbd47">decrypt_payload_message</a> (void *payload, size_t payload_size, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="mdescLeft">&#160;</td><td class="mdescRight">decrypts the given backdoor payload  <a href="xzre_8h.html#a91ced8a70c0e916ae8289e4ad77fbd47">More...</a><br /></td></tr>
+<tr class="separator:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8412cd4edc81e13f4041a11dd7a59f33"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">check_backdoor_state</a> (<a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a8412cd4edc81e13f4041a11dd7a59f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the backdoor state is the expected one (FIXME: which?)  <a href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">More...</a><br /></td></tr>
+<tr class="separator:a8412cd4edc81e13f4041a11dd7a59f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ce260e9315b4afa70668391058ed484"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
 <tr class="memdesc:a8ce260e9315b4afa70668391058ed484"><td class="mdescLeft">&#160;</td><td class="mdescRight">runs the payload received from <a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function  <a href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">More...</a><br /></td></tr>
 <tr class="separator:a8ce260e9315b4afa70668391058ed484"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1700,6 +1721,21 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="separator:a99eb76809c798f3bcae98526992e63ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a096fbb5b183337e44012a38910ea31eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a096fbb5b183337e44012a38910ea31eb">mm_log_handler_hook</a> (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
 <tr class="separator:a096fbb5b183337e44012a38910ea31eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a443ee065f54857cd4c559963df5a7b85"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a443ee065f54857cd4c559963df5a7b85">fd_read</a> (int fd, void *buffer, size_t count, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *funcs)</td></tr>
+<tr class="memdesc:a443ee065f54857cd4c559963df5a7b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads data from the specified file descriptor  <a href="xzre_8h.html#a443ee065f54857cd4c559963df5a7b85">More...</a><br /></td></tr>
+<tr class="separator:a443ee065f54857cd4c559963df5a7b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7515ae18e8ded5ffe02d66b9f6bffb"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a1c7515ae18e8ded5ffe02d66b9f6bffb">fd_write</a> (int fd, void *buffer, size_t count, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *funcs)</td></tr>
+<tr class="memdesc:a1c7515ae18e8ded5ffe02d66b9f6bffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads data to the specified file descriptor  <a href="xzre_8h.html#a1c7515ae18e8ded5ffe02d66b9f6bffb">More...</a><br /></td></tr>
+<tr class="separator:a1c7515ae18e8ded5ffe02d66b9f6bffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49d6b781406209d412b2dfadd3c7d95f"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a49d6b781406209d412b2dfadd3c7d95f">contains_null_pointers</a> (void **pointers, unsigned int num_pointers)</td></tr>
+<tr class="memdesc:a49d6b781406209d412b2dfadd3c7d95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given array of pointers contains any NULL pointer  <a href="xzre_8h.html#a49d6b781406209d412b2dfadd3c7d95f">More...</a><br /></td></tr>
+<tr class="separator:a49d6b781406209d412b2dfadd3c7d95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd2f206ddcca1e6919558e0548990d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">sshd_log</a> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a> *log_ctx, LogLevel level, const char *fmt,...)</td></tr>
+<tr class="memdesc:adbd2f206ddcca1e6919558e0548990d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <code>sshlogv</code> from openssh, similarly to <code>sshlog</code> in openssh  <a href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">More...</a><br /></td></tr>
+<tr class="separator:adbd2f206ddcca1e6919558e0548990d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f865a1a2eb6a32980c4336b2290e17e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">sshd_find_sensitive_data</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *sshd, <a class="el" href="structelf__info.html">elf_info_t</a> *libcrypto, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a5f865a1a2eb6a32980c4336b2290e17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> within sshd, and resolves some additional libcrypto functions  <a href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">More...</a><br /></td></tr>
+<tr class="separator:a5f865a1a2eb6a32980c4336b2290e17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -2391,6 +2427,71 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a8412cd4edc81e13f4041a11dd7a59f33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8412cd4edc81e13f4041a11dd7a59f33">&#9670;&nbsp;</a></span>check_backdoor_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL check_backdoor_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the backdoor state is the expected one (FIXME: which?) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the backdoor state is in the expected state, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a49d6b781406209d412b2dfadd3c7d95f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49d6b781406209d412b2dfadd3c7d95f">&#9670;&nbsp;</a></span>contains_null_pointers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL contains_null_pointers </td>
+          <td>(</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>pointers</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>num_pointers</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the given array of pointers contains any NULL pointer </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pointers</td><td>array of pointers to check </td></tr>
+    <tr><td class="paramname">num_pointers</td><td>number of pointers to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if <code>pointers</code> contains any NULL pointer, FALSE if all pointers are non-NULL </dd></dl>
+
+</div>
+</div>
 <a id="a9ec1df74592643b26839ecbe320d36ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ec1df74592643b26839ecbe320d36ae">&#9670;&nbsp;</a></span>count_bits()</h2>
 
@@ -2415,6 +2516,51 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>u32 number of 1 bits </dd></dl>
+
+</div>
+</div>
+<a id="a91ced8a70c0e916ae8289e4ad77fbd47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ced8a70c0e916ae8289e4ad77fbd47">&#9670;&nbsp;</a></span>decrypt_payload_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL decrypt_payload_message </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>payload</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>payload_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>decrypts the given backdoor payload </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td>payload data </td></tr>
+    <tr><td class="paramname">payload_size</td><td>size of payload data </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successfully decrypted, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -2542,6 +2688,58 @@ Variables</h2></td></tr>
     <tr><td class="paramname">vaddr</td><td>starting memory address </td></tr>
     <tr><td class="paramname">size</td><td>memory size </td></tr>
     <tr><td class="paramname">p_flags</td><td>the expected segment protection flags (PF_*) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a2b6f96960f68c8cd69c6bb5bce25426b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b6f96960f68c8cd69c6bb5bce25426b">&#9670;&nbsp;</a></span>elf_contains_vaddr_relro()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL elf_contains_vaddr_relro </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>elf_info</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>vaddr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>p_flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if given ELF file contains the range [vaddr, vaddr+size) in the gnurelro segment </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structelf__info.html">elf_info</a></td><td>elf context </td></tr>
+    <tr><td class="paramname">vaddr</td><td>starting memory address </td></tr>
+    <tr><td class="paramname">size</td><td>memory size </td></tr>
+    <tr><td class="paramname">p_flags</td><td>the expected segment protection flags (PF_*). must be non-zero </td></tr>
   </table>
   </dd>
 </dl>
@@ -3225,6 +3423,110 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a443ee065f54857cd4c559963df5a7b85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a443ee065f54857cd4c559963df5a7b85">&#9670;&nbsp;</a></span>fd_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t fd_read </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlibc__imports.html">libc_imports_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads data from the specified file descriptor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>the file descriptor to read from </td></tr>
+    <tr><td class="paramname">buffer</td><td>the buffer to read data to </td></tr>
+    <tr><td class="paramname">count</td><td>number of bytes to read </td></tr>
+    <tr><td class="paramname">funcs</td><td>imported libc functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t number of bytes read, or -1 on error </dd></dl>
+
+</div>
+</div>
+<a id="a1c7515ae18e8ded5ffe02d66b9f6bffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c7515ae18e8ded5ffe02d66b9f6bffb">&#9670;&nbsp;</a></span>fd_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t fd_write </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlibc__imports.html">libc_imports_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reads data to the specified file descriptor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>the file descriptor to write to </td></tr>
+    <tr><td class="paramname">buffer</td><td>data to write </td></tr>
+    <tr><td class="paramname">count</td><td>number of bytes to write </td></tr>
+    <tr><td class="paramname">funcs</td><td>imported libc functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t number of bytes written, or -1 on error </dd></dl>
 
 </div>
 </div>
@@ -4440,6 +4742,58 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a464486af9c22216fd595612cf988dca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a464486af9c22216fd595612cf988dca5">&#9670;&nbsp;</a></span>is_payload_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL is_payload_message </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>sshbuf_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>sshbuf_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>pOutPayloadSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the given sshbuf buffer contains a backdoor payload message </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sshbuf_data</td><td>sshbuf data pointer </td></tr>
+    <tr><td class="paramname">sshbuf_size</td><td>size of sshbuf data </td></tr>
+    <tr><td class="paramname">pOutPayloadSize</td><td>output variable that will be populated with the size of the backdoor payload, if found </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the given sshbuf contains a backdoor payload message, FALSE otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a5d94ba8c95f0333dc53ef8432156b0ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d94ba8c95f0333dc53ef8432156b0ca">&#9670;&nbsp;</a></span>is_range_mapped()</h2>
 
@@ -5310,6 +5664,33 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ae4488f858b97dc690b41cf9a5d20ef44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4488f858b97dc690b41cf9a5d20ef44">&#9670;&nbsp;</a></span>sshbuf_bignum_is_negative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshbuf_bignum_is_negative </td>
+          <td>(</td>
+          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramname"><em>buf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the given serialized BIGNUM is negative </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buf</td><td>buffer containing a serialized BIGNUM </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the serialized BIGNUM is negative, FALSE otherwise </dd></dl>
+
+</div>
+</div>
 <a id="ad32fc521229739df889407c2e9e48475"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad32fc521229739df889407c2e9e48475">&#9670;&nbsp;</a></span>sshd_find_monitor_struct()</h2>
 
@@ -5355,8 +5736,67 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a14bc3643604ad36b5232b2ccebf6df7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14bc3643604ad36b5232b2ccebf6df7e">&#9670;&nbsp;</a></span>sshd_get_client_socket()</h2>
+<a id="a5f865a1a2eb6a32980c4336b2290e17e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f865a1a2eb6a32980c4336b2290e17e">&#9670;&nbsp;</a></span>sshd_find_sensitive_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_find_sensitive_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>sshd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>libcrypto</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>locates <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> within sshd, and resolves some additional libcrypto functions </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sshd</td><td>sshfd ELF context </td></tr>
+    <tr><td class="paramname">libcrypto</td><td>libcrypto ELF context </td></tr>
+    <tr><td class="paramname">refs</td><td>string references </td></tr>
+    <tr><td class="paramname">funcs</td><td>imported functions </td></tr>
+    <tr><td class="paramname">ctx</td><td>global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if <a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a> was located successfully, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="aaa520bbc6de39ccb7a4e5013cf66d7aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa520bbc6de39ccb7a4e5013cf66d7aa">&#9670;&nbsp;</a></span>sshd_get_client_socket()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5377,7 +5817,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>socket_idx_max</em>, </td>
+          <td class="paramname"><em>socket_index</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5394,12 +5834,12 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get either the read or write end of the sshd connection. </p>
-<p>this is done by using the <code>struct monitor</code> address in <code>ctx</code> or, if not set, by getting the first usable socket from 0 to <code>socket_idx_max</code> , excluded</p>
+<p>this is done by using the <code>struct monitor</code> address in <code>ctx</code> or, if not set, by getting the first usable socket having index <code>socket_index</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ctx</td><td>the global socket </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
     <tr><td class="paramname">pSocket</td><td>output variable that will receive the socket fd </td></tr>
-    <tr><td class="paramname">socket_idx_max</td><td>maximum number of sockets to try, heuristically </td></tr>
+    <tr><td class="paramname">socket_index</td><td>index <code>n</code> of the n-th usable socket that the function should return </td></tr>
     <tr><td class="paramname">socket_direction</td><td>whether to get the receiving or the sending socket </td></tr>
   </table>
   </dd>
@@ -5408,14 +5848,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a52ef44e674339d73bef9c9e28c97ecb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52ef44e674339d73bef9c9e28c97ecb7">&#9670;&nbsp;</a></span>sshd_get_host_keys_address_via_krb5ccname()</h2>
+<a id="a75dff765c216d52b153ba98cf7cf0227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75dff765c216d52b153ba98cf7cf0227">&#9670;&nbsp;</a></span>sshd_get_sensitive_data_address_via_krb5ccname()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">BOOL sshd_get_host_keys_address_via_krb5ccname </td>
+          <td class="memname">BOOL sshd_get_sensitive_data_address_via_krb5ccname </td>
           <td>(</td>
           <td class="paramtype">u8 *&#160;</td>
           <td class="paramname"><em>data_start</em>, </td>
@@ -5442,7 +5882,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>host_keys_out</em>, </td>
+          <td class="paramname"><em>sensitive_data_out</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5467,7 +5907,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">code_start</td><td>start of the sshd code segment </td></tr>
     <tr><td class="paramname">code_end</td><td>end of the sshd code segment </td></tr>
     <tr><td class="paramname">string_refs</td><td>info about resolved functions </td></tr>
-    <tr><td class="paramname">host_keys_out</td><td>pointer to receive the address of the host keys (<code>struct sshkey</code> in sshd) </td></tr>
+    <tr><td class="paramname">sensitive_data_out</td><td>pointer to receive the address of <a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -5475,14 +5915,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a4302c868eefb917c26b5922f19889b45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4302c868eefb917c26b5922f19889b45">&#9670;&nbsp;</a></span>sshd_get_host_keys_address_via_xcalloc()</h2>
+<a id="ae0bd1e83c94cd866e022dd5867bee152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0bd1e83c94cd866e022dd5867bee152">&#9670;&nbsp;</a></span>sshd_get_sensitive_data_address_via_xcalloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">BOOL sshd_get_host_keys_address_via_xcalloc </td>
+          <td class="memname">BOOL sshd_get_sensitive_data_address_via_xcalloc </td>
           <td>(</td>
           <td class="paramtype">u8 *&#160;</td>
           <td class="paramname"><em>data_start</em>, </td>
@@ -5515,7 +5955,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>host_keys_out</em>&#160;</td>
+          <td class="paramname"><em>sensitive_data_out</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -5534,7 +5974,7 @@ Variables</h2></td></tr>
     <tr><td class="paramname">code_start</td><td>start of the sshd code segment </td></tr>
     <tr><td class="paramname">code_end</td><td>end of the sshd code segment </td></tr>
     <tr><td class="paramname">string_refs</td><td>info about resolved functions </td></tr>
-    <tr><td class="paramname">host_keys_out</td><td>pointer to receive the address of the host keys (<code>struct sshkey</code> in sshd) </td></tr>
+    <tr><td class="paramname">sensitive_data_out</td><td>pointer to receive the address of <a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -5542,17 +5982,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac9f89faac5a24707275635026fa910b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9f89faac5a24707275635026fa910b4">&#9670;&nbsp;</a></span>sshd_get_host_keys_score()</h2>
+<a id="a7d1ef087d8cb5ea0a468fc42bb503049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d1ef087d8cb5ea0a468fc42bb503049">&#9670;&nbsp;</a></span>sshd_get_sensitive_data_score()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sshd_get_host_keys_score </td>
+          <td class="memname">int sshd_get_sensitive_data_score </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>host_keys</em>, </td>
+          <td class="paramname"><em>sensitive_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5574,10 +6014,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>obtains a numeric score which indicates if accesses <code>host_keys</code> or not </p>
+<p>obtains a numeric score which indicates if accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname"><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></td><td>pointer to suspsected SSH host keys </td></tr>
     <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
     <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
   </table>
@@ -5587,17 +6027,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5126a648eae68682ec767c19bba0f9eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5126a648eae68682ec767c19bba0f9eb">&#9670;&nbsp;</a></span>sshd_get_host_keys_score_in_demote_sensitive_data()</h2>
+<a id="a8320540fc87f4c785714c52940a85571"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8320540fc87f4c785714c52940a85571">&#9670;&nbsp;</a></span>sshd_get_sensitive_data_score_in_demote_sensitive_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sshd_get_host_keys_score_in_demote_sensitive_data </td>
+          <td class="memname">int sshd_get_sensitive_data_score_in_demote_sensitive_data </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>host_keys</em>, </td>
+          <td class="paramname"><em>sensitive_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5619,10 +6059,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>obtains a numeric score which indicates if <code>demote_sensitive_data</code> accesses <code>host_keys</code> or not </p>
+<p>obtains a numeric score which indicates if <code>demote_sensitive_data</code> accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname"><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></td><td>pointer to suspsected SSH host keys </td></tr>
     <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
     <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
   </table>
@@ -5632,17 +6072,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a4f33df6c2fc052bc282697241421337b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f33df6c2fc052bc282697241421337b">&#9670;&nbsp;</a></span>sshd_get_host_keys_score_in_do_child()</h2>
+<a id="a5f78359c3bb3564a965009ee2280ac5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f78359c3bb3564a965009ee2280ac5a">&#9670;&nbsp;</a></span>sshd_get_sensitive_data_score_in_do_child()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sshd_get_host_keys_score_in_do_child </td>
+          <td class="memname">int sshd_get_sensitive_data_score_in_do_child </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>host_keys</em>, </td>
+          <td class="paramname"><em>sensitive_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5664,10 +6104,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>obtains a numeric score which indicates if <code>do_child</code> accesses <code>host_keys</code> or not </p>
+<p>obtains a numeric score which indicates if <code>do_child</code> accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname"><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></td><td>pointer to suspsected SSH host keys </td></tr>
     <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
     <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
   </table>
@@ -5677,17 +6117,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a72b20bf7b31873edf824778f9ecc471b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72b20bf7b31873edf824778f9ecc471b">&#9670;&nbsp;</a></span>sshd_get_host_keys_score_in_main()</h2>
+<a id="aa83cef3858c167b051721db9fbd72667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa83cef3858c167b051721db9fbd72667">&#9670;&nbsp;</a></span>sshd_get_sensitive_data_score_in_main()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int sshd_get_host_keys_score_in_main </td>
+          <td class="memname">int sshd_get_sensitive_data_score_in_main </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>host_keys</em>, </td>
+          <td class="paramname"><em>sensitive_data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5709,10 +6149,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>obtains a numeric score which indicates if <code>main</code> accesses <code>host_keys</code> or not </p>
+<p>obtains a numeric score which indicates if <code>main</code> accesses <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> or not </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">host_keys</td><td>pointer to suspsected SSH host keys </td></tr>
+    <tr><td class="paramname"><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></td><td>pointer to suspsected SSH host keys </td></tr>
     <tr><td class="paramname">elf</td><td>sshd elf instance </td></tr>
     <tr><td class="paramname">refs</td><td>info about resolved functions </td></tr>
   </table>
@@ -5757,6 +6197,154 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the sshbuf was found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a077a435ef7c8a7960451ff5c0cc5dc43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a077a435ef7c8a7960451ff5c0cc5dc43">&#9670;&nbsp;</a></span>sshd_get_usable_socket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_get_usable_socket </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>pSock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>socket_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlibc__imports.html">libc_imports_t</a> *&#160;</td>
+          <td class="paramname"><em>imports</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>gets the first usable socket fd </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pSock</td><td>output variable that will receive the socket fd </td></tr>
+    <tr><td class="paramname">socket_index</td><td>index <code>n</code> of the n-th usable socket that the function should return </td></tr>
+    <tr><td class="paramname">imports</td><td>imported libc functions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the socket was found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a657f411379e9d088996d8722b82eeefd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a657f411379e9d088996d8722b82eeefd">&#9670;&nbsp;</a></span>sshd_kex_sshbuf_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_kex_sshbuf_get </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>kex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>pOutputData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>pOutputSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>locates an sshbuf within <code>struct kex</code> (FIXME: which?) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kex</td><td>pointer to <code>struct kex</code> to search in </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+    <tr><td class="paramname">pOutputData</td><td>output variable that will receive the address of the sshbuf data </td></tr>
+    <tr><td class="paramname">pOutputSize</td><td>output variable that will receive the size of the sshbuf data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the sshbuf was found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="adbd2f206ddcca1e6919558e0548990d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd2f206ddcca1e6919558e0548990d7">&#9670;&nbsp;</a></span>sshd_log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sshd_log </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>log_ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LogLevel&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calls <code>sshlogv</code> from openssh, similarly to <code>sshlog</code> in openssh </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">log_ctx</td><td>imported openssh log functions/data (to get the <code>sshlogv</code> function pointer) </td></tr>
+    <tr><td class="paramname">level</td><td>log level </td></tr>
+    <tr><td class="paramname">fmt</td><td>log format </td></tr>
+    <tr><td class="paramname">...</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
