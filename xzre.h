@@ -2024,6 +2024,18 @@ extern BOOL find_function(
 extern BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);
 
 /**
+ * @brief checks if given ELF file contains the range [vaddr, vaddr+size)
+ * in the gnurelro segment
+ * 
+ * @param elf_info elf context
+ * @param vaddr starting memory address
+ * @param size memory size
+ * @param p_flags the expected segment protection flags (PF_*). must be non-zero
+ * @return BOOL TRUE if found, FALSE otherwise
+ */
+extern BOOL elf_contains_vaddr_relro(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);
+
+/**
  * @brief Parses the given in-memory ELF file into elf_info
  * 
  * @param ehdr pointer to the beginning of the ELF header
@@ -2940,6 +2952,15 @@ extern BOOL bignum_serialize(
 	const BIGNUM *bn,
 	imported_funcs_t *funcs);
 
+
+/**
+ * @brief checks if the given serialized BIGNUM is negative
+ * 
+ * @param buf buffer containing a serialized BIGNUM
+ * @return BOOL TRUE if the serialized BIGNUM is negative, FALSE otherwise
+ */
+extern BOOL sshbuf_bignum_is_negative(struct sshbuf *buf);
+
 /**
  * @brief obtains a SHA256 hash of the supplied RSA key
  * 
@@ -3056,20 +3077,30 @@ enum SocketMode {
  * @brief Get either the read or write end of the sshd connection.
  * 
  * this is done by using the `struct monitor` address in @p ctx or, if not set,
- * by getting the first usable socket from 0 to @p socket_idx_max , excluded
+ * by getting the first usable socket having index @p socket_index
  * 
- * @param ctx the global socket
+ * @param ctx the global context
  * @param pSocket output variable that will receive the socket fd
- * @param socket_idx_max maximum number of sockets to try, heuristically
+ * @param socket_index index `n` of the n-th usable socket that the function should return
  * @param socket_direction whether to get the receiving or the sending socket
  * @return BOOL TRUE if the socket was found, FALSE otherwise
  */
 extern BOOL sshd_get_client_socket(
 	global_context_t *ctx,
 	int *pSocket,
-	int socket_idx_max,
+	int socket_index,
 	enum SocketMode socket_direction
 );
+
+/**
+ * @brief gets the first usable socket fd
+ * 
+ * @param pSock output variable that will receive the socket fd
+ * @param socket_index index `n` of the n-th usable socket that the function should return
+ * @param imports imported libc functions
+ * @return BOOL TRUE if the socket was found, FALSE otherwise
+ */
+extern BOOL sshd_get_usable_socket(int *pSock, int socket_index, libc_imports_t *imports);
 
 /**
  * @brief Finds the right `sshbuf` (FIXME: which?), starting from:
@@ -3080,6 +3111,53 @@ extern BOOL sshd_get_client_socket(
  * @return BOOL TRUE if the sshbuf was found, FALSE otherwise
  */
 extern BOOL sshd_get_sshbuf(struct sshbuf *sshbuf, global_context_t *ctx);
+
+/**
+ * @brief locates an sshbuf within `struct kex` (FIXME: which?)
+ * 
+ * @param kex pointer to `struct kex` to search in 
+ * @param ctx the global context
+ * @param pOutputData output variable that will receive the address of the sshbuf data
+ * @param pOutputSize output variable that will receive the size of the sshbuf data
+ * @return BOOL TRUE if the sshbuf was found, FALSE otherwise
+ */
+extern BOOL sshd_kex_sshbuf_get(void *kex, global_context_t *ctx, void **pOutputData, size_t *pOutputSize);
+
+/**
+ * @brief checks if the given sshbuf buffer contains a backdoor payload message
+ * 
+ * @param sshbuf_data sshbuf data pointer
+ * @param sshbuf_size size of sshbuf data
+ * @param pOutPayloadSize output variable that will be populated with the size of the backdoor payload, if found
+ * @param ctx the global context
+ * @return BOOL TRUE if the given sshbuf contains a backdoor payload message, FALSE otherwise
+ */
+extern BOOL is_payload_message(
+	void *sshbuf_data,
+	size_t sshbuf_size,
+	size_t *pOutPayloadSize,
+	global_context_t *ctx);
+
+/**
+ * @brief decrypts the given backdoor payload
+ * 
+ * @param payload payload data
+ * @param payload_size size of payload data
+ * @param ctx the global context
+ * @return BOOL TRUE if successfully decrypted, FALSE otherwise
+ */
+extern BOOL decrypt_payload_message(
+	void *payload,
+	size_t payload_size,
+	global_context_t *ctx);
+
+/**
+ * @brief checks if the backdoor state is the expected one (FIXME: which?)
+ * 
+ * @param ctx the global context
+ * @return BOOL TRUE if the backdoor state is in the expected state, FALSE otherwise
+ */
+extern BOOL check_backdoor_state(global_context_t *ctx);
 
 /**
  * @brief runs the payload received from @ref sshd_proxy_elevate,
