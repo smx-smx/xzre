@@ -1448,6 +1448,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a6e76946a37fb256974942a542373e421"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6e76946a37fb256974942a542373e421">find_lea_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *dctx, void *mem_address)</td></tr>
 <tr class="memdesc:a6e76946a37fb256974942a542373e421"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds a LEA instruction with an immediate memory operand  <a href="xzre_8h.html#a6e76946a37fb256974942a542373e421">More...</a><br /></td></tr>
 <tr class="separator:a6e76946a37fb256974942a542373e421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a683636baae409d1b74ea2c216e2ba107"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a683636baae409d1b74ea2c216e2ba107">find_add_instruction_with_mem_operand</a> (u8 *code_start, u8 *code_end, <a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *dctx, void *mem_address)</td></tr>
+<tr class="memdesc:a683636baae409d1b74ea2c216e2ba107"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds an ADD instruction with an immediate memory operand  <a href="xzre_8h.html#a683636baae409d1b74ea2c216e2ba107">More...</a><br /></td></tr>
+<tr class="separator:a683636baae409d1b74ea2c216e2ba107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9718452d28f67f46d046c02c0125148"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae9718452d28f67f46d046c02c0125148">find_mov_lea_instruction</a> (u8 *code_start, u8 *code_end, BOOL is_64bit_operand, BOOL load_flag, <a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *dctx)</td></tr>
 <tr class="memdesc:ae9718452d28f67f46d046c02c0125148"><td class="mdescLeft">&#160;</td><td class="mdescRight">like <a class="el" href="xzre_8h.html#a3ab8cd040932beaf3ec377a753bfece0">find_mov_instruction</a>, but also considers LEA instructions  <a href="xzre_8h.html#ae9718452d28f67f46d046c02c0125148">More...</a><br /></td></tr>
 <tr class="separator:ae9718452d28f67f46d046c02c0125148"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3187,6 +3190,58 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a683636baae409d1b74ea2c216e2ba107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a683636baae409d1b74ea2c216e2ba107">&#9670;&nbsp;</a></span>find_add_instruction_with_mem_operand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL find_add_instruction_with_mem_operand </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>dctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>mem_address</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds an ADD instruction with an immediate memory operand </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>address to start searching from </td></tr>
+    <tr><td class="paramname">code_end</td><td>address to stop searching at </td></tr>
+    <tr><td class="paramname">dctx</td><td>disassembler context to hold the state </td></tr>
+    <tr><td class="paramname">mem_address</td><td>the expected address of the memory access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if found, FALSE otherwise </dd></dl>
 
 </div>
 </div>
