@@ -150,7 +150,7 @@ typedef int BOOL;
 typedef enum {
 	// has lock prefix
 	DF_LOCK_REP = 1,
-	// has segment (ds/es) override
+	// has segment (es/ss) override
 	DF_SEG = 2,
 	// has operand size override
 	DF_OSIZE = 4,
