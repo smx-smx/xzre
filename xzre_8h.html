@@ -177,6 +177,8 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__proxy__args.html">sshd_proxy_args</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdl__tls__index.html">dl_tls_index</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -359,6 +361,9 @@ typedef struct <a class="el" href="structinstruction__search__ctx.html">instruct
 <tr class="memitem:a7ade9ff1104d2c4be417ee49a64baafa"><td class="memItemLeft" align="right" valign="top"><a id="a7ade9ff1104d2c4be417ee49a64baafa"></a>
 typedef struct <a class="el" href="structsshd__proxy__args.html">sshd_proxy_args</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_proxy_args_t</b></td></tr>
 <tr class="separator:a7ade9ff1104d2c4be417ee49a64baafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5388ad27423cd366d74dd8a1cec2d433"><td class="memItemLeft" align="right" valign="top"><a id="a5388ad27423cd366d74dd8a1cec2d433"></a>
+typedef struct <a class="el" href="structdl__tls__index.html">dl_tls_index</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tls_index</b></td></tr>
+<tr class="separator:a5388ad27423cd366d74dd8a1cec2d433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -1618,6 +1623,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:ae20580c7a069afb3b578f060582867df"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df">get_tls_get_addr_random_symbol_got_offset</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
 <tr class="memdesc:ae20580c7a069afb3b578f060582867df"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the tls_get_addr_random_symbol GOT offset  <a href="xzre_8h.html#ae20580c7a069afb3b578f060582867df">More...</a><br /></td></tr>
 <tr class="separator:ae20580c7a069afb3b578f060582867df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cbdcbe6fe49e7d3122630082cd84f34"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0cbdcbe6fe49e7d3122630082cd84f34">dummy_tls_get_addr</a> (<a class="el" href="structdl__tls__index.html">tls_index</a> *ti)</td></tr>
+<tr class="memdesc:a0cbdcbe6fe49e7d3122630082cd84f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">a dummy function that calls __tls_get_addr, to make sure its GOT slot doesn't get removed by compiler optimizations  <a href="xzre_8h.html#a0cbdcbe6fe49e7d3122630082cd84f34">More...</a><br /></td></tr>
+<tr class="separator:a0cbdcbe6fe49e7d3122630082cd84f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="memItemLeft" align="right" valign="top">uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc">backdoor_symbind64</a> (Elf64_Sym *sym, unsigned int ndx, uptr *refcook, uptr *defcook, unsigned int flags, const char *symname)</td></tr>
 <tr class="memdesc:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoored symbind64 installed in GLRO(dl_audit)  <a href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc">More...</a><br /></td></tr>
 <tr class="separator:a60ba9b591b9f0b10a78ea2136a0a3adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2459,6 +2467,33 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the hash was successfully generated, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a0cbdcbe6fe49e7d3122630082cd84f34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cbdcbe6fe49e7d3122630082cd84f34">&#9670;&nbsp;</a></span>dummy_tls_get_addr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* dummy_tls_get_addr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdl__tls__index.html">tls_index</a> *&#160;</td>
+          <td class="paramname"><em>ti</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a dummy function that calls __tls_get_addr, to make sure its GOT slot doesn't get removed by compiler optimizations </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ti</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void* </dd></dl>
 
 </div>
 </div>
