@@ -77,15 +77,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a433aaf46f922c97efd8d920822ed597b"><td class="memItemLeft" align="right" valign="top"><a id="a433aaf46f922c97efd8d920822ed597b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
 <tr class="separator:a433aaf46f922c97efd8d920822ed597b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aaed20b26ea8e47cfc2a91865c44567"><td class="memItemLeft" align="right" valign="top"><a id="a0aaed20b26ea8e47cfc2a91865c44567"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:a0aaed20b26ea8e47cfc2a91865c44567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aaed20b26ea8e47cfc2a91865c44567"><td class="memItemLeft" align="right" valign="top"><a id="a0aaed20b26ea8e47cfc2a91865c44567"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:a0aaed20b26ea8e47cfc2a91865c44567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9f59c405bfac7d6a8ffa409c2fcf96f"><td class="memItemLeft" align="right" valign="top"><a id="af9f59c405bfac7d6a8ffa409c2fcf96f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x78)</td></tr>
-<tr class="separator:af9f59c405bfac7d6a8ffa409c2fcf96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a433aaf46f922c97efd8d920822ed597b"><td class="memItemLeft" align="right" valign="top"><a id="a433aaf46f922c97efd8d920822ed597b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
+<tr class="separator:a433aaf46f922c97efd8d920822ed597b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a433aaf46f922c97efd8d920822ed597b"><td class="memItemLeft" align="right" valign="top"><a id="a433aaf46f922c97efd8d920822ed597b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
 <tr class="separator:a433aaf46f922c97efd8d920822ed597b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,6 +120,12 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <tr class="memitem:a767e6004e3aac160bbf9ff782389874f"><td class="memItemLeft" align="right" valign="top"><a id="a767e6004e3aac160bbf9ff782389874f"></a>
 struct <a class="el" href="structmonitor.html">monitor</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>struct_monitor_ptr_address</b></td></tr>
 <tr class="separator:a767e6004e3aac160bbf9ff782389874f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3577238b60a44427f1d28e0f446122"><td class="memItemLeft" align="right" valign="top"><a id="a9e3577238b60a44427f1d28e0f446122"></a>
+u32&#160;</td><td class="memItemRight" valign="bottom"><b>exit_flag</b></td></tr>
+<tr class="separator:a9e3577238b60a44427f1d28e0f446122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa4ede10bcf93977c944e0a6060565de"><td class="memItemLeft" align="right" valign="top"><a id="aaa4ede10bcf93977c944e0a6060565de"></a>
+<a class="el" href="structsshd__offsets.html">sshd_offsets_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_offsets</b></td></tr>
+<tr class="separator:aaa4ede10bcf93977c944e0a6060565de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b0e7c4ac8682de374b956ee137a22d8"><td class="memItemLeft" align="right" valign="top"><a id="a6b0e7c4ac8682de374b956ee137a22d8"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a6b0e7c4ac8682de374b956ee137a22d8">sshd_code_start</a></td></tr>
 <tr class="memdesc:a6b0e7c4ac8682de374b956ee137a22d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">sshd code segment start <br /></td></tr>
@@ -142,12 +142,42 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a6c7245e596313f01e7411aecdda645df">sshd_data_end</a></td></tr>
 <tr class="memdesc:a6c7245e596313f01e7411aecdda645df"><td class="mdescLeft">&#160;</td><td class="mdescRight">sshd data segment start <br /></td></tr>
 <tr class="separator:a6c7245e596313f01e7411aecdda645df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d0ac4abe82dfb78ecc1e1f8367c55e3"><td class="memItemLeft" align="right" valign="top"><a id="a5d0ac4abe82dfb78ecc1e1f8367c55e3"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_main</b></td></tr>
+<tr class="separator:a5d0ac4abe82dfb78ecc1e1f8367c55e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf13081708c1c8ca5b3902d198419bd1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#acf13081708c1c8ca5b3902d198419bd1">lzma_code_start</a></td></tr>
 <tr class="memdesc:acf13081708c1c8ca5b3902d198419bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">liblzma code segment start  <a href="structglobal__context.html#acf13081708c1c8ca5b3902d198419bd1">More...</a><br /></td></tr>
 <tr class="separator:acf13081708c1c8ca5b3902d198419bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a031805daad5b0f7f951ef58614533588"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a031805daad5b0f7f951ef58614533588">lzma_code_end</a></td></tr>
 <tr class="memdesc:a031805daad5b0f7f951ef58614533588"><td class="mdescLeft">&#160;</td><td class="mdescRight">liblzma code segment end  <a href="structglobal__context.html#a031805daad5b0f7f951ef58614533588">More...</a><br /></td></tr>
 <tr class="separator:a031805daad5b0f7f951ef58614533588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af549f18aec0c9a72364c6e38619cb6d8"><td class="memItemLeft" align="right" valign="top"><a id="af549f18aec0c9a72364c6e38619cb6d8"></a>
+u32&#160;</td><td class="memItemRight" valign="bottom"><b>uid</b></td></tr>
+<tr class="separator:af549f18aec0c9a72364c6e38619cb6d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb10a15804346eea6148efb9bb1affe"><td class="memItemLeft" align="right" valign="top"><a id="a2fb10a15804346eea6148efb9bb1affe"></a>
+u64&#160;</td><td class="memItemRight" valign="bottom"><b>sock_read_buf_size</b></td></tr>
+<tr class="separator:a2fb10a15804346eea6148efb9bb1affe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a674e482bca0c2641cd7cd45468f47bb0"><td class="memItemLeft" align="right" valign="top"><a id="a674e482bca0c2641cd7cd45468f47bb0"></a>
+u8&#160;</td><td class="memItemRight" valign="bottom"><b>sock_read_buf</b> [64]</td></tr>
+<tr class="separator:a674e482bca0c2641cd7cd45468f47bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73347a60f35c228ed19d8a7dd89408f9"><td class="memItemLeft" align="right" valign="top"><a id="a73347a60f35c228ed19d8a7dd89408f9"></a>
+u64&#160;</td><td class="memItemRight" valign="bottom"><b>payload_data_size</b></td></tr>
+<tr class="separator:a73347a60f35c228ed19d8a7dd89408f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82ed003044b253b66d0616ee37632e44"><td class="memItemLeft" align="right" valign="top"><a id="a82ed003044b253b66d0616ee37632e44"></a>
+u64&#160;</td><td class="memItemRight" valign="bottom"><b>digest_offset</b></td></tr>
+<tr class="separator:a82ed003044b253b66d0616ee37632e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa27f68c75bed750f0ddb51f8f8177e9d"><td class="memItemLeft" align="right" valign="top"><a id="aa27f68c75bed750f0ddb51f8f8177e9d"></a>
+u8 *&#160;</td><td class="memItemRight" valign="bottom"><b>payload_data</b></td></tr>
+<tr class="separator:aa27f68c75bed750f0ddb51f8f8177e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817937c16d62863cca87453091c8bf5b"><td class="memItemLeft" align="right" valign="top"><a id="a817937c16d62863cca87453091c8bf5b"></a>
+<a class="el" href="structsshd__payload__ctx.html">sshd_payload_ctx_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_payload_ctx</b></td></tr>
+<tr class="separator:a817937c16d62863cca87453091c8bf5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbcb9b7a5cf57bcc0e2a74e253a1c9f2"><td class="memItemLeft" align="right" valign="top"><a id="afbcb9b7a5cf57bcc0e2a74e253a1c9f2"></a>
+u32&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_host_pubkey_idx</b></td></tr>
+<tr class="separator:afbcb9b7a5cf57bcc0e2a74e253a1c9f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ef6dc54f1c69f4bd55232b56b8bdb7"><td class="memItemLeft" align="right" valign="top"><a id="ab7ef6dc54f1c69f4bd55232b56b8bdb7"></a>
+u32&#160;</td><td class="memItemRight" valign="bottom"><b>payload_state</b></td></tr>
+<tr class="separator:ab7ef6dc54f1c69f4bd55232b56b8bdb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c3a777913affcd9720836e76888e09"><td class="memItemLeft" align="right" valign="top"><a id="a03c3a777913affcd9720836e76888e09"></a>
 u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structglobal__context.html#a03c3a777913affcd9720836e76888e09">secret_data</a> [57]</td></tr>
 <tr class="memdesc:a03c3a777913affcd9720836e76888e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">the secret data used for the chacha key generation <br /></td></tr>
