@@ -148,9 +148,9 @@ typedef int BOOL;
 #define FALSE 0
 
 typedef enum {
-	// has lock prefix
+	// has lock or rep prefix
 	DF_LOCK_REP = 1,
-	// has segment (es/ss) override
+	// has segment override
 	DF_SEG = 2,
 	// has operand size override
 	DF_OSIZE = 4,
@@ -516,7 +516,7 @@ typedef struct __attribute__((packed)) dasm_ctx {
 		};
 		u16 flags_u16;
         };
-	PADDING(1);
+	u8 imm64_reg; // low 3 bits only
 	struct __attribute__((packed)) {
 		union {
 			struct __attribute__((packed)) {
@@ -556,6 +556,7 @@ assert_offset(dasm_ctx_t, modrm, 0x1C);
 assert_offset(dasm_ctx_t, modrm_mod, 0x1D);
 assert_offset(dasm_ctx_t, modrm_reg, 0x1E);
 assert_offset(dasm_ctx_t, modrm_rm, 0x1F);
+assert_offset(dasm_ctx_t, imm64_reg, 0x20);
 assert_offset(dasm_ctx_t, sib, 0x21);
 assert_offset(dasm_ctx_t, sib_scale, 0x22);
 assert_offset(dasm_ctx_t, sib_index, 0x23);
@@ -1064,6 +1065,8 @@ assert_offset(global_context_t, disable_backdoor, 0x18);
 assert_offset(global_context_t, sshd_ctx, 0x20);
 assert_offset(global_context_t, sshd_sensitive_data, 0x28);
 assert_offset(global_context_t, sshd_log_ctx, 0x30);
+assert_offset(global_context_t, STR_ssh_rsa_cert_v01_openssh_com, 0x38);
+assert_offset(global_context_t, STR_rsa_sha2_256, 0x40);
 assert_offset(global_context_t, struct_monitor_ptr_address, 0x48);
 assert_offset(global_context_t, exit_flag, 0x50);
 assert_offset(global_context_t, sshd_offsets, 0x54);
@@ -1345,6 +1348,7 @@ assert_offset(elf_handles_t, dynamic_linker, 0x8);
 assert_offset(elf_handles_t, libc, 0x10);
 assert_offset(elf_handles_t, liblzma, 0x18);
 assert_offset(elf_handles_t, libcrypto, 0x20);
+static_assert(sizeof(elf_handles_t) == 0x28);
 
 typedef struct __attribute__((packed)) main_elf {
 	elf_handles_t *elf_handles;
@@ -1355,6 +1359,7 @@ typedef struct __attribute__((packed)) main_elf {
 assert_offset(main_elf_t, elf_handles, 0x0);
 assert_offset(main_elf_t, dynamic_linker_ehdr, 0x8);
 assert_offset(main_elf_t, __libc_stack_end, 0x10);
+static_assert(sizeof(main_elf_t) == 0x18);
 
 typedef struct backdoor_data backdoor_data_t;
 
@@ -1401,6 +1406,7 @@ typedef struct __attribute__((packed)) string_references {
 } string_references_t;
 
 assert_offset(string_references_t, entries, 0);
+static_assert(sizeof(string_references_t) == 0x368);
 
 /**
  * @brief this structure is used to hold most of the backdoor information.
@@ -1471,6 +1477,7 @@ assert_offset(backdoor_data_t, libcrypto_map, 0x18);
 assert_offset(backdoor_data_t, libsystemd_map, 0x20);
 assert_offset(backdoor_data_t, libc_map, 0x28);
 assert_offset(backdoor_data_t, elf_handles, 0x30);
+assert_offset(backdoor_data_t, data_handle, 0x58);
 assert_offset(backdoor_data_t, main_info, 0x68);
 assert_offset(backdoor_data_t, dynamic_linker_info, 0x168);
 assert_offset(backdoor_data_t, libc_info, 0x268);
