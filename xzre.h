@@ -879,29 +879,29 @@ typedef struct __attribute__((packed)) sshd_ctx {
 	PADDING(sizeof(void *));
 	void *mm_answer_authpassword_start;
 	void *mm_answer_authpassword_end;
-	void *monitor_req_authpassword;
+	void *mm_answer_authpassword_ptr;
 	PADDING(sizeof(void *));
 	void *mm_answer_keyallowed_start;
 	void *mm_answer_keyallowed_end;
-	void *monitor_req_keyallowed_ptr;
+	void *mm_answer_keyallowed_ptr;
 	PADDING(sizeof(void *));
 	void *mm_answer_keyverify_start;
 	void *mm_answer_keyverify_end;
-	void *monitor_req_keyverify_ptr;
+	void *mm_answer_keyverify_ptr;
 	PADDING(0x4);
 	u16 writebuf_size;
 	PADDING(0x2);
 	u8 *writebuf;
 	PADDING(0x8);
 	PADDING(0x8);
-	PADDING(sizeof(void *));
+	char *STR_unknown_ptr;
 	void *mm_request_send_start;
 	void *mm_request_send_end;
-	PADDING(sizeof(u32));
-	PADDING(sizeof(u32));
+	PADDING(sizeof(u32)); // BOOL?
+	PADDING(sizeof(u32)); // BOOL?
 	int *use_pam_ptr;
 	int *permit_root_login_ptr;
-	char *STR_password;
+	char *STR_without_password;
 	char *STR_publickey;
 } sshd_ctx_t;
 
@@ -940,6 +940,7 @@ typedef struct __attribute__((packed)) sshd_log_ctx {
 	PADDING(0x8);
 	PADDING(0x8);
 	void *sshlogv;
+	void (*mm_log_handler)(int level, int forced, const char *msg, void *ctx);
 } sshd_log_ctx_t;
 
 assert_offset(sshd_log_ctx_t, STR_percent_s, 0x10);
@@ -948,6 +949,17 @@ assert_offset(sshd_log_ctx_t, STR_preauth, 0x20);
 assert_offset(sshd_log_ctx_t, STR_authenticating, 0x28);
 assert_offset(sshd_log_ctx_t, STR_user, 0x30);
 assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
+assert_offset(sshd_log_ctx_t, mm_log_handler, 0x60);
+
+typedef struct __attribute__((packed)) sshd_offsets {
+	u8 kex_qword_index;
+	u8 pkex_offset;
+	u8 sshbuf_data_qword_index;
+	u8 sshbuf_size_qword_index;
+} sshd_offsets_t;
+
+typedef struct __attribute__((packed)) sshd_payload_ctx {
+} sshd_payload_ctx_t;
 
 typedef struct __attribute__((packed)) global_context {
 	BOOL uses_endbr64;
@@ -983,7 +995,9 @@ typedef struct __attribute__((packed)) global_context {
 	 */
 	char *STR_rsa_sha2_256;
 	struct monitor **struct_monitor_ptr_address;
-	PADDING(0x8);
+	u32 exit_flag;
+	sshd_offsets_t sshd_offsets;
+
 	/**
 	 * @brief sshd code segment start
 	 */
@@ -1000,7 +1014,7 @@ typedef struct __attribute__((packed)) global_context {
 	 * @brief sshd data segment start
 	 */
 	void *sshd_data_end;
-	PADDING(0x8);
+	void *sshd_main;
 	/**
 	 * @brief liblzma code segment start
 	 * 
@@ -1015,7 +1029,17 @@ typedef struct __attribute__((packed)) global_context {
 	 * any instruction beyond this address will be rejected
 	 */
 	void *lzma_code_end;
-	PADDING(0x78);
+	u32 uid;
+	PADDING(4);
+	u64 sock_read_buf_size;
+	u8 sock_read_buf[64];
+	u64 payload_data_size;
+	u64 digest_offset;
+	// signed data (size payload_data_size)
+	u8 *payload_data;
+	sshd_payload_ctx_t *sshd_payload_ctx;
+	u32 sshd_host_pubkey_idx;
+	u32 payload_state;
 	/**
 	 * @brief the secret data used for the chacha key generation
 	 */
@@ -1041,12 +1065,23 @@ assert_offset(global_context_t, sshd_ctx, 0x20);
 assert_offset(global_context_t, sshd_sensitive_data, 0x28);
 assert_offset(global_context_t, sshd_log_ctx, 0x30);
 assert_offset(global_context_t, struct_monitor_ptr_address, 0x48);
+assert_offset(global_context_t, exit_flag, 0x50);
+assert_offset(global_context_t, sshd_offsets, 0x54);
 assert_offset(global_context_t, sshd_code_start, 0x58);
 assert_offset(global_context_t, sshd_code_end, 0x60);
 assert_offset(global_context_t, sshd_data_start, 0x68);
 assert_offset(global_context_t, sshd_data_end, 0x70);
 assert_offset(global_context_t, lzma_code_start, 0x80);
 assert_offset(global_context_t, lzma_code_end, 0x88);
+assert_offset(global_context_t, uid, 0x90);
+assert_offset(global_context_t, sock_read_buf_size, 0x98);
+assert_offset(global_context_t, sock_read_buf, 0xA0);
+assert_offset(global_context_t, payload_data_size, 0xE0);
+assert_offset(global_context_t, digest_offset, 0xE8);
+assert_offset(global_context_t, payload_data, 0xF0);
+assert_offset(global_context_t, sshd_payload_ctx, 0xF8);
+assert_offset(global_context_t, sshd_host_pubkey_idx, 0x100);
+assert_offset(global_context_t, payload_state, 0x104);
 assert_offset(global_context_t, secret_data, 0x108);
 assert_offset(global_context_t, shift_operations, 0x141);
 assert_offset(global_context_t, num_shifted_bits, 0x160);
@@ -1208,16 +1243,22 @@ typedef struct __attribute__((packed)) backdoor_hooks_data {
 	ldso_ctx_t ldso_ctx;
 	global_context_t global_ctx;
 	imported_funcs_t imported_funcs;
-	PADDING(0xE0);
+	sshd_ctx_t sshd_ctx;
 	libc_imports_t libc_imports;
-	PADDING(0x70);
+	sshd_log_ctx_t sshd_log_ctx;
+	u64 signed_data_size;
+	u8 signed_data;
 } backdoor_hooks_data_t;
 
 assert_offset(backdoor_hooks_data_t, ldso_ctx, 0);
 assert_offset(backdoor_hooks_data_t, global_ctx, 0x138);
 assert_offset(backdoor_hooks_data_t, imported_funcs, 0x2A0);
+assert_offset(backdoor_hooks_data_t, sshd_ctx, 0x3C8);
 assert_offset(backdoor_hooks_data_t, libc_imports, 0x4A8);
-static_assert(sizeof(backdoor_hooks_data_t) == 0x588);
+assert_offset(backdoor_hooks_data_t, sshd_log_ctx, 0x518);
+assert_offset(backdoor_hooks_data_t, signed_data_size, 0x580);
+assert_offset(backdoor_hooks_data_t, signed_data, 0x588);
+static_assert(sizeof(backdoor_hooks_data_t) == 0x589);
 
 typedef enum {
 	SYSLOG_LEVEL_QUIET,
@@ -1493,14 +1534,31 @@ typedef union {
  * @return typedef struct 
  */
 typedef struct __attribute__((packed)) key_payload_hdr {
-	PADDING(0x4);
-	PADDING(0x4);
-	PADDING(0x8);
+	u32 field_a;
+	u32 field_b;
+	u64 field_c;
 } key_payload_hdr_t;
 
+typedef union __attribute__((packed)) {
+	u8 value[2];
+	u16 size;
+} u_cmd_arguments_t;
+
+typedef struct __attribute__((packed)) cmd_arguments {
+	u8 flags1;
+	u8 flags2;
+	u8 flags3;
+	u_cmd_arguments_t u;
+} cmd_arguments_t;
+
 typedef struct __attribute__((packed)) key_payload_body {
-	PADDING(0x218);
+	/** ed448 signature */
+	u8 signature[0x72];
+	cmd_arguments_t args;
+	u8 data[0x1A1];
 } key_payload_body_t;
+
+assert_offset(key_payload_body_t, args, 0x72);
 
 /**
  * @brief the contents of the RSA 'n' field
@@ -1512,11 +1570,6 @@ typedef struct __attribute__((packed)) key_payload {
 	key_payload_body_t body;
 } key_payload_t;
 
-typedef union __attribute__((packed)) {
-	u8 value[2];
-	u16 size;
-} u_cmd_arguments_t;
-
 enum CommandFlags1 {
 	/**
 	 * @brief the data block contains 8 additional bytes
@@ -1526,6 +1579,10 @@ enum CommandFlags1 {
 	 * @brief disable all logging by setting mask 0x80000000
 	 */
 	CMDF_SETLOGMASK = 0x4,
+	/**
+	 * @brief custom monitor socket index override
+	 */
+	CMDF_SOCKET_INDEX = 0x20,
 	/**
 	 * @brief if set, disables PAM authentication
 	 */
@@ -1560,7 +1617,14 @@ enum CommandFlags2 {
 	 * @brief executes pselect, then exit
 	 * not compatible with command 2
 	 */
-	CMDF_PSELECT = 0xC0
+	CMDF_PSELECT = 0xC0,
+
+	/**
+	 * @brief
+	 * (0111_1000 >> 3) & 0xF
+	 * when @ref CMDF_SOCKET_INDEX is specified
+	 */
+	CMDF_SOCKFD_MASK = 0x78
 };
 
 enum CommandFlags3 {
@@ -1573,13 +1637,6 @@ enum CommandFlags3 {
 	 */
 	CMDF_MONITOR_REQ_VAL = 0x3F
 };
-
-typedef struct __attribute__((packed)) cmd_arguments {
-	u8 flags1;
-	u8 flags2;
-	u8 flags3;
-	u_cmd_arguments_t u;
-} cmd_arguments_t;
 
 assert_offset(cmd_arguments_t, flags1, 0);
 assert_offset(cmd_arguments_t, flags2, 1);
@@ -2982,14 +3039,14 @@ extern BOOL rsa_key_hash(
  * @param dsa the DSA key to hash
  * @param mdBuf buffer to write the resulting digest to
  * @param mdBufSize size of the buffer indicated by @p mdBuf
- * @param funcs 
+ * @param ctx 
  * @return BOOL TRUE if the hash was successfully generated, FALSE otherwise
  */
 extern BOOL dsa_key_hash(
 	const DSA *dsa,
 	u8 *mdBuf,
 	u64 mdBufSize,
-	imported_funcs_t *funcs);
+	global_context_t *ctx);
 
 /**
  * @brief computes the SHA256 hash of the supplied data
