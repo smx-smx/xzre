@@ -911,20 +911,20 @@ assert_offset(sshd_ctx_t, have_mm_answer_keyverify, 0x8);
 assert_offset(sshd_ctx_t, monitor_req_fn, 0x10);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_start, 0x28);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_end, 0x30);
-assert_offset(sshd_ctx_t, monitor_req_authpassword, 0x38);
+assert_offset(sshd_ctx_t, mm_answer_authpassword_ptr, 0x38);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_start, 0x48);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_end, 0x50);
-assert_offset(sshd_ctx_t, monitor_req_keyallowed_ptr, 0x58);
+assert_offset(sshd_ctx_t, mm_answer_keyallowed_ptr, 0x58);
 assert_offset(sshd_ctx_t, mm_answer_keyverify_start, 0x68);
 assert_offset(sshd_ctx_t, mm_answer_keyverify_end, 0x70);
-assert_offset(sshd_ctx_t, monitor_req_keyverify_ptr, 0x78);
+assert_offset(sshd_ctx_t, mm_answer_keyverify_ptr, 0x78);
 assert_offset(sshd_ctx_t, writebuf_size, 0x84);
 assert_offset(sshd_ctx_t, writebuf, 0x88);
 assert_offset(sshd_ctx_t, mm_request_send_start, 0xA8);
 assert_offset(sshd_ctx_t, mm_request_send_end, 0xB0);
 assert_offset(sshd_ctx_t, use_pam_ptr, 0xC0);
 assert_offset(sshd_ctx_t, permit_root_login_ptr, 0xC8);
-assert_offset(sshd_ctx_t, STR_password, 0xD0);
+assert_offset(sshd_ctx_t, STR_without_password, 0xD0);
 assert_offset(sshd_ctx_t, STR_publickey, 0xD8);
 
 typedef struct __attribute__((packed)) sshd_log_ctx {
