@@ -8,13 +8,21 @@ use FFI\CData;
 define('CHACHA20_KEY_SIZE', 32);
 define('CHACHA20_IV_SIZE', 16);
 define('SHA256_DIGEST_SIZE', 32);
-define('ED448_PUBKEY_SIZE', 57);
+define('ED448_KEY_SIZE', 57);
 
 define('OP_ENCRYPT', 0);
 define('OP_DECRYPT', 1);
 
 function path_combine(string ...$parts){
     return implode(DIRECTORY_SEPARATOR, $parts);
+}
+
+function patch_data(string $data, int $offset, string $patch){
+    return (''
+        . substr($data, 0, $offset)
+        . $patch
+        . substr($data, $offset + strlen($patch))
+    );
 }
 
 function error(string $msg){
@@ -106,4 +114,15 @@ function align_up(int $v, int $to){
 function align_down(int $v, int $to){
 	$mask = $to - 1;
 	return $v & ~$mask;
+}
+
+function run_cmd(string ...$args){
+    $hProc = proc_open($args, [], $p);
+    return proc_close($hProc);
+}
+
+function der2pem($der_data, $type='CERTIFICATE') {
+    $pem = chunk_split(base64_encode($der_data), 64, "\n");
+    $pem = "-----BEGIN ".$type."-----\n".$pem."-----END ".$type."-----\n";
+    return $pem;
 }

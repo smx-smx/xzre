@@ -84,3 +84,15 @@ dasm_sample_end:
 
 dasm_sample_dummy_location:
 	ret
+
+# replacement for secret_data_get_decrypted
+shellcode_start:
+# rdi: output
+lea rsi, [rip+shellcode_end]
+mov ecx, 57
+rep movsb
+xor eax, eax
+inc eax
+ret
+
+shellcode_end: .byte 0
