@@ -4,6 +4,7 @@ project(xzre LANGUAGES C ASM)
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_BUILD_TYPE Debug)
 
+find_library(UNWIND_LIBRARY NAMES libunwind.so REQUIRED)
 find_library(LZMA_LIBRARY NAMES liblzma.a REQUIRED)
 find_program(SED_COMMAND NAMES sed REQUIRED)
 message(STATUS "Using ${LZMA_LIBRARY}")
@@ -114,3 +115,8 @@ add_custom_command(
 	VERBATIM
 )
 add_custom_target(gen_xzre_header ALL DEPENDS ${CMAKE_BINARY_DIR}/xzre.h)
+
+
+add_library(ssh_patch SHARED ssh_patch.c ssh_patch.S)
+target_compile_options(ssh_patch PRIVATE -Wno-deprecated-declarations)
+target_link_libraries(ssh_patch crypto dl ${UNWIND_LIBRARY})
