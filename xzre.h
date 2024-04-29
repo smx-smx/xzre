@@ -186,6 +186,8 @@ typedef enum {
 	X_ELF_RELA = 0x2,
 	// ELF has RELR relocs
 	X_ELF_RELR = 0x4,
+	// ELF has DT_VERDEF
+	X_ELF_VERDEF = 0x8,
 	// ELF has DT_VERSYM
 	X_ELF_VERSYM = 0x10,
 	// ELF has DF_1_NOW
@@ -877,11 +879,13 @@ typedef struct __attribute__((packed)) sshd_ctx {
 	PADDING(0x4);
 	int (*monitor_req_fn)(struct ssh *ssh, int sock, struct sshbuf *m);
 	PADDING(0x8);
-	PADDING(sizeof(void *));
+	// Used to initialize *mm_answer_keyverify_ptr
+	void *mm_answer_keyverify;
 	void *mm_answer_authpassword_start;
 	void *mm_answer_authpassword_end;
 	void *mm_answer_authpassword_ptr;
-	PADDING(sizeof(void *));
+	u32 monitor_reqtype;
+	PADDING(4);
 	void *mm_answer_keyallowed_start;
 	void *mm_answer_keyallowed_end;
 	void *mm_answer_keyallowed_ptr;
@@ -910,9 +914,11 @@ assert_offset(sshd_ctx_t, have_mm_answer_keyallowed, 0x0);
 assert_offset(sshd_ctx_t, have_mm_answer_authpassword, 0x4);
 assert_offset(sshd_ctx_t, have_mm_answer_keyverify, 0x8);
 assert_offset(sshd_ctx_t, monitor_req_fn, 0x10);
+assert_offset(sshd_ctx_t, mm_answer_keyverify, 0x20);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_start, 0x28);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_end, 0x30);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_ptr, 0x38);
+assert_offset(sshd_ctx_t, monitor_reqtype, 0x40);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_start, 0x48);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_end, 0x50);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_ptr, 0x58);
@@ -921,6 +927,7 @@ assert_offset(sshd_ctx_t, mm_answer_keyverify_end, 0x70);
 assert_offset(sshd_ctx_t, mm_answer_keyverify_ptr, 0x78);
 assert_offset(sshd_ctx_t, writebuf_size, 0x84);
 assert_offset(sshd_ctx_t, writebuf, 0x88);
+assert_offset(sshd_ctx_t, STR_unknown_ptr, 0xA0);
 assert_offset(sshd_ctx_t, mm_request_send_start, 0xA8);
 assert_offset(sshd_ctx_t, mm_request_send_end, 0xB0);
 assert_offset(sshd_ctx_t, use_pam_ptr, 0xC0);
@@ -951,6 +958,7 @@ assert_offset(sshd_log_ctx_t, STR_authenticating, 0x28);
 assert_offset(sshd_log_ctx_t, STR_user, 0x30);
 assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
 assert_offset(sshd_log_ctx_t, mm_log_handler, 0x60);
+static_assert(sizeof(sshd_log_ctx_t) == 0x68);
 
 typedef struct __attribute__((packed)) sshd_offsets {
 	u8 kex_qword_index;
@@ -1261,7 +1269,7 @@ assert_offset(backdoor_hooks_data_t, libc_imports, 0x4A8);
 assert_offset(backdoor_hooks_data_t, sshd_log_ctx, 0x518);
 assert_offset(backdoor_hooks_data_t, signed_data_size, 0x580);
 assert_offset(backdoor_hooks_data_t, signed_data, 0x588);
-static_assert(sizeof(backdoor_hooks_data_t) == 0x589);
+static_assert(sizeof(backdoor_hooks_data_t) >= 0x589);
 
 typedef enum {
 	SYSLOG_LEVEL_QUIET,
@@ -2162,7 +2170,7 @@ extern BOOL process_is_sshd(elf_info_t *elf, u8 *stack_end);
  * @param refs structure that will be populated with the results
  * @return BOOL 
  */
-extern void elf_find_string_references(elf_info_t *elf_info, string_references_t *refs);
+extern BOOL elf_find_string_references(elf_info_t *elf_info, string_references_t *refs);
 
 /**
  * @brief Looks up an ELF symbol from a parsed ELF
@@ -2299,7 +2307,7 @@ extern char *elf_find_string(
  * 
  * @return lzma_allocator* 
  */
-extern lzma_allocator *get_lzma_allocator();
+extern lzma_allocator *get_lzma_allocator(void);
 
 /**
  * @brief gets the address of the fake LZMA allocator
@@ -2311,7 +2319,7 @@ extern lzma_allocator *get_lzma_allocator();
  * 
  * @return fake_lzma_allocator_t*
  */
-extern fake_lzma_allocator_t *get_lzma_allocator_address();
+extern fake_lzma_allocator_t *get_lzma_allocator_address(void);
 
 /**
  * @brief a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()
@@ -2341,7 +2349,7 @@ extern void fake_lzma_free(void *opaque, void *ptr);
  *  * 
  * @return elf_functions_t* 
  */
-extern elf_functions_t *get_elf_functions_address();
+extern elf_functions_t *get_elf_functions_address(void);
 
 extern BOOL secret_data_append_from_instruction(dasm_ctx_t *dctx, secret_data_shift_cursor_t *cursor);
 
@@ -3197,7 +3205,7 @@ extern BOOL sshd_kex_sshbuf_get(void *kex, global_context_t *ctx, void **pOutput
  * @return BOOL TRUE if the given sshbuf contains a backdoor payload message, FALSE otherwise
  */
 extern BOOL is_payload_message(
-	void *sshbuf_data,
+	u8 *sshbuf_data,
 	size_t sshbuf_size,
 	size_t *pOutPayloadSize,
 	global_context_t *ctx);
