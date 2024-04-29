@@ -712,7 +712,7 @@ $(function() {
 <div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    <span class="keyword">const</span> BIGNUM **n, <span class="keyword">const</span> BIGNUM **e, <span class="keyword">const</span> BIGNUM **d);</div>
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160; </div>
 <div class="line"><a name="l00756"></a><span class="lineno"><a class="line" href="structimported__funcs.html">  756</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)) <a class="code" href="structimported__funcs.html">imported_funcs</a> {</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    pfn_RSA_public_decrypt_t RSA_public_decrypt;</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    pfn_RSA_public_decrypt_t <a class="code" href="ssh__patch_8c.html#ae142ad01d213393458d1f4770b68555f">RSA_public_decrypt</a>;</div>
 <div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    pfn_EVP_PKEY_set1_RSA_t EVP_PKEY_set1_RSA;</div>
 <div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    <span class="comment">// ???</span></div>
 <div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;    void (*RSA_get0_key_null)(</div>
@@ -774,7 +774,7 @@ $(function() {
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;    u64 resolved_imports_count;</div>
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;} <a class="code" href="structimported__funcs.html">imported_funcs_t</a>;</div>
 <div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160; </div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;assert_offset(<a class="code" href="structimported__funcs.html">imported_funcs_t</a>, RSA_public_decrypt, 0);</div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;assert_offset(<a class="code" href="structimported__funcs.html">imported_funcs_t</a>, <a class="code" href="ssh__patch_8c.html#ae142ad01d213393458d1f4770b68555f">RSA_public_decrypt</a>, 0);</div>
 <div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;assert_offset(<a class="code" href="structimported__funcs.html">imported_funcs_t</a>, EVP_PKEY_set1_RSA, 8);</div>
 <div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;assert_offset(<a class="code" href="structimported__funcs.html">imported_funcs_t</a>, RSA_get0_key_null, 0x10);</div>
 <div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;assert_offset(<a class="code" href="structimported__funcs.html">imported_funcs_t</a>, RSA_public_decrypt_plt, 0x18);</div>
@@ -1862,6 +1862,7 @@ $(function() {
 <div class="line"><a name="l03478"></a><span class="lineno"> 3478</span>&#160; </div>
 <div class="line"><a name="l03479"></a><span class="lineno"> 3479</span>&#160;<span class="preprocessor">#include &quot;util.h&quot;</span></div>
 <div class="line"><a name="l03480"></a><span class="lineno"> 3480</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="assh__patch_8c_html_ae142ad01d213393458d1f4770b68555f"><div class="ttname"><a href="ssh__patch_8c.html#ae142ad01d213393458d1f4770b68555f">RSA_public_decrypt</a></div><div class="ttdeci">int RSA_public_decrypt(int flen, const unsigned char *from, unsigned char *to, RSA *rsa, int padding)</div><div class="ttdef"><b>Definition:</b> ssh_patch.c:37</div></div>
 <div class="ttc" id="astructaudit__ifaces_html"><div class="ttname"><a href="structaudit__ifaces.html">audit_ifaces</a></div><div class="ttdef"><b>Definition:</b> xzre.h:92</div></div>
 <div class="ttc" id="astructauditstate_html"><div class="ttname"><a href="structauditstate.html">auditstate</a></div><div class="ttdef"><b>Definition:</b> xzre.h:75</div></div>
 <div class="ttc" id="astructbackdoor__cpuid__reloc__consts_html"><div class="ttname"><a href="structbackdoor__cpuid__reloc__consts.html">backdoor_cpuid_reloc_consts</a></div><div class="ttdef"><b>Definition:</b> xzre.h:1674</div></div>

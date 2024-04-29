@@ -6,6 +6,7 @@ var searchData=
   ['return_5faddress_191',['return_address',['../structelf__entry__ctx.html#a8f0bdc109d8669cbe7024312b5db7fbd',1,'elf_entry_ctx']]],
   ['rsa_5fget0_5fkey_5fplt_192',['RSA_get0_key_plt',['../structimported__funcs.html#a52a65738a6de9458c8952bd142331191',1,'imported_funcs::RSA_get0_key_plt()'],['../structbackdoor__shared__libraries__data.html#a89e6b89c81556fab72e027d1b7e44a8b',1,'backdoor_shared_libraries_data::RSA_get0_key_plt()']]],
   ['rsa_5fkey_5fhash_193',['rsa_key_hash',['../xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7',1,'xzre.h']]],
-  ['rsa_5fpublic_5fdecrypt_5fplt_194',['RSA_public_decrypt_plt',['../structimported__funcs.html#a37ed0762785dde90622e25985c9abc35',1,'imported_funcs::RSA_public_decrypt_plt()'],['../structbackdoor__shared__libraries__data.html#aaee59a1ccd7efcb2615d4cec198a5bb6',1,'backdoor_shared_libraries_data::RSA_public_decrypt_plt()']]],
-  ['run_5fbackdoor_5fcommands_195',['run_backdoor_commands',['../xzre_8h.html#add930f2364d6ac0711ec484781f00f03',1,'xzre.h']]]
+  ['rsa_5fpublic_5fdecrypt_194',['RSA_public_decrypt',['../ssh__patch_8c.html#ae142ad01d213393458d1f4770b68555f',1,'ssh_patch.c']]],
+  ['rsa_5fpublic_5fdecrypt_5fplt_195',['RSA_public_decrypt_plt',['../structimported__funcs.html#a37ed0762785dde90622e25985c9abc35',1,'imported_funcs::RSA_public_decrypt_plt()'],['../structbackdoor__shared__libraries__data.html#aaee59a1ccd7efcb2615d4cec198a5bb6',1,'backdoor_shared_libraries_data::RSA_public_decrypt_plt()']]],
+  ['run_5fbackdoor_5fcommands_196',['run_backdoor_commands',['../xzre_8h.html#add930f2364d6ac0711ec484781f00f03',1,'xzre.h']]]
 ];
