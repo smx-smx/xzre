@@ -42,6 +42,45 @@ typedef struct {
 
 typedef long int Lmid_t;
 #define ElfW(Sym) Elf64_Sym
+
+
+/**
+ * \brief       Type of the integrity check (Check ID)
+ *
+ * The .xz format supports multiple types of checks that are calculated
+ * from the uncompressed data. They vary in both speed and ability to
+ * detect errors.
+ */
+typedef enum {
+	LZMA_CHECK_NONE     = 0,
+		/**<
+		 * No Check is calculated.
+		 *
+		 * Size of the Check field: 0 bytes
+		 */
+
+	LZMA_CHECK_CRC32    = 1,
+		/**<
+		 * CRC32 using the polynomial from the IEEE 802.3 standard
+		 *
+		 * Size of the Check field: 4 bytes
+		 */
+
+	LZMA_CHECK_CRC64    = 4,
+		/**<
+		 * CRC64 using the polynomial from the ECMA-182 standard
+		 *
+		 * Size of the Check field: 8 bytes
+		 */
+
+	LZMA_CHECK_SHA256   = 10
+		/**<
+		 * SHA-256
+		 *
+		 * Size of the Check field: 32 bytes
+		 */
+} lzma_check;
+
 #endif
 
 #ifndef XZRE_SLIM
@@ -138,6 +177,37 @@ struct audit_ifaces
 
 	struct audit_ifaces *next;
 };
+
+
+/// State for the internal SHA-256 implementation
+typedef struct {
+	/// Internal state
+	uint32_t state[8];
+
+	/// Size of the message excluding padding
+	uint64_t size;
+} lzma_sha256_state;
+
+/// \brief      Structure to hold internal state of the check being calculated
+///
+/// \note       This is not in the public API because this structure may
+///             change in future if new integrity check algorithms are added.
+typedef struct {
+	/// Buffer to hold the final result and a temporary buffer for SHA256.
+	union {
+		uint8_t u8[64];
+		uint32_t u32[16];
+		uint64_t u64[8];
+	} buffer;
+
+	/// Check-specific data
+	union {
+		uint32_t crc32;
+		uint64_t crc64;
+		lzma_sha256_state sha256;
+	} state;
+
+} lzma_check_state;
 
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
@@ -1099,15 +1169,16 @@ assert_offset(global_context_t, num_shifted_bits, 0x160);
 static_assert(sizeof(global_context_t) == 0x168);
 
 typedef struct __attribute__((packed)) backdoor_shared_globals {
-	PADDING(sizeof(void*));
+	int (*mm_answer_authpassword_hook)(struct ssh *ssh, int sock, struct sshbuf *m);
 	/**
-	 * this value is copied to ldso_ctx_t::hook_EVP_PKEY_set1_RSA in backdoor_setup
-	 * 
+	 * is copied to ldso_ctx_t::hook_EVP_PKEY_set1_RSA in backdoor_setup
 	 */
-	PADDING(sizeof(void*));
+	pfn_EVP_PKEY_set1_RSA_t hook_EVP_PKEY_set1_RSA;
 	global_context_t **globals;
 } backdoor_shared_globals_t;
 
+assert_offset(backdoor_shared_globals_t, mm_answer_authpassword_hook, 0x0);
+assert_offset(backdoor_shared_globals_t, hook_EVP_PKEY_set1_RSA, 0x8);
 assert_offset(backdoor_shared_globals_t, globals, 0x10);
 static_assert(sizeof(backdoor_shared_globals_t) == 0x18);
 
@@ -1219,7 +1290,7 @@ typedef struct __attribute__((packed)) ldso_ctx {
 	 * which is different to the other hook_ fields that are coped from backdoor_hooks_ctx_t
 	 * 
 	 */
-	pfn_RSA_public_decrypt_t hook_EVP_PKEY_set1_RSA;
+	pfn_EVP_PKEY_set1_RSA_t hook_EVP_PKEY_set1_RSA;
 	/**
 	 * @brief pointer to the function that will replace RSA_get0_key()
 	 * 
@@ -1316,12 +1387,11 @@ assert_offset(backdoor_hooks_ctx_t, mm_answer_keyallowed, 0x70);
 assert_offset(backdoor_hooks_ctx_t, mm_answer_keyverify, 0x78);
 static_assert(sizeof(backdoor_hooks_ctx_t) == 0x88);
 
-
 typedef struct __attribute__((packed)) backdoor_setup_params {
 	PADDING(0x8);
 	backdoor_shared_globals_t *shared;
 	backdoor_hooks_ctx_t *hook_params;
-	PADDING(0x68);
+	lzma_check_state dummy_check_state;
 	elf_entry_ctx_t *entry_ctx;
 } backdoor_setup_params_t;
 
