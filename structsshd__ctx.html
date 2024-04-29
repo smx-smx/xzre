@@ -77,12 +77,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a545b957e36325c31808ef84d8b7defa3"><td class="memItemLeft" align="right" valign="top"><a id="a545b957e36325c31808ef84d8b7defa3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
 <tr class="separator:a545b957e36325c31808ef84d8b7defa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70bd22f0ae077e90e41a121c5b48bbf4"><td class="memItemLeft" align="right" valign="top"><a id="a70bd22f0ae077e90e41a121c5b48bbf4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
-<tr class="separator:a70bd22f0ae077e90e41a121c5b48bbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70bd22f0ae077e90e41a121c5b48bbf4"><td class="memItemLeft" align="right" valign="top"><a id="a70bd22f0ae077e90e41a121c5b48bbf4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
-<tr class="separator:a70bd22f0ae077e90e41a121c5b48bbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8e0793561a4a81c14dbb457cb79b0f"><td class="memItemLeft" align="right" valign="top"><a id="a7d8e0793561a4a81c14dbb457cb79b0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
+<tr class="separator:a7d8e0793561a4a81c14dbb457cb79b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70bd22f0ae077e90e41a121c5b48bbf4"><td class="memItemLeft" align="right" valign="top"><a id="a70bd22f0ae077e90e41a121c5b48bbf4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
 <tr class="separator:a70bd22f0ae077e90e41a121c5b48bbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,6 +116,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>have_mm_answer_keyver
 <tr class="memitem:a4e627e911cf2c4481cdb8de9f1cbb608"><td class="memItemLeft" align="right" valign="top"><a id="a4e627e911cf2c4481cdb8de9f1cbb608"></a>
 int(*&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_req_fn</b> )(struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
 <tr class="separator:a4e627e911cf2c4481cdb8de9f1cbb608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28196be66a50545ec99d925097b1a5a2"><td class="memItemLeft" align="right" valign="top"><a id="a28196be66a50545ec99d925097b1a5a2"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_keyverify</b></td></tr>
+<tr class="separator:a28196be66a50545ec99d925097b1a5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae87555543e6ac2845d6fbcd7c84514d3"><td class="memItemLeft" align="right" valign="top"><a id="ae87555543e6ac2845d6fbcd7c84514d3"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_start</b></td></tr>
 <tr class="separator:ae87555543e6ac2845d6fbcd7c84514d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,6 +128,9 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassw
 <tr class="memitem:ae543ced7d581110ada50b2cb5ce9ffd5"><td class="memItemLeft" align="right" valign="top"><a id="ae543ced7d581110ada50b2cb5ce9ffd5"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_ptr</b></td></tr>
 <tr class="separator:ae543ced7d581110ada50b2cb5ce9ffd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3198eff80d003a9303c033ebd3d2f7e4"><td class="memItemLeft" align="right" valign="top"><a id="a3198eff80d003a9303c033ebd3d2f7e4"></a>
+u32&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_reqtype</b></td></tr>
+<tr class="separator:a3198eff80d003a9303c033ebd3d2f7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a059562ba10eb5ea090ec6398dcb5f98a"><td class="memItemLeft" align="right" valign="top"><a id="a059562ba10eb5ea090ec6398dcb5f98a"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_keyallowed_start</b></td></tr>
 <tr class="separator:a059562ba10eb5ea090ec6398dcb5f98a"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -7,7 +7,7 @@ var searchData=
   ['elf_5ffind_5ffunction_5fpointer_71',['elf_find_function_pointer',['../xzre_8h.html#a02157f429658403951e2f41eb0e01117',1,'xzre.h']]],
   ['elf_5ffind_5fstring_72',['elf_find_string',['../xzre_8h.html#ad86c0039d3a08468f5cf7187662ebab9',1,'xzre.h']]],
   ['elf_5ffind_5fstring_5freference_73',['elf_find_string_reference',['../xzre_8h.html#a6ac7b2035eee3a9ffcceee0f9290c2e1',1,'xzre.h']]],
-  ['elf_5ffind_5fstring_5freferences_74',['elf_find_string_references',['../xzre_8h.html#a6925f05854b05bb9441f71c3f1deb55c',1,'xzre.h']]],
+  ['elf_5ffind_5fstring_5freferences_74',['elf_find_string_references',['../xzre_8h.html#a977d8b72a5f81675c76838347747d094',1,'xzre.h']]],
   ['elf_5ffunctions_75',['elf_functions',['../structelf__functions.html',1,'elf_functions'],['../xzre_8h.html#a43a1216740525fdfa050474fc9b91a57',1,'elf_functions():&#160;xzre.h']]],
   ['elf_5ffunctions_5foffset_76',['elf_functions_offset',['../xzre_8h.html#a4623e8d4254091bcbffbead1ee7ed2ff',1,'xzre.h']]],
   ['elf_5fget_5fcode_5fsegment_77',['elf_get_code_segment',['../xzre_8h.html#a18845fc4614f60083817db417dc32a13',1,'xzre.h']]],
