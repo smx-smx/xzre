@@ -62,44 +62,36 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
 <div class="title">backdoor_shared_globals Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a820796b3a4e4d55dfa6e182d2de90d4e"><td class="memItemLeft" align="right" valign="top"><a id="a820796b3a4e4d55dfa6e182d2de90d4e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(void *))</td></tr>
-<tr class="separator:a820796b3a4e4d55dfa6e182d2de90d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a820796b3a4e4d55dfa6e182d2de90d4e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__globals.html#a820796b3a4e4d55dfa6e182d2de90d4e">PADDING</a> (sizeof(void *))</td></tr>
-<tr class="separator:a820796b3a4e4d55dfa6e182d2de90d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
+<tr class="memitem:a8d4d0d6aace6dc4e69af7219465a29d4"><td class="memItemLeft" align="right" valign="top"><a id="a8d4d0d6aace6dc4e69af7219465a29d4"></a>
+int(*&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_hook</b> )(struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="separator:a8d4d0d6aace6dc4e69af7219465a29d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3e66d0fba425140c3a66cb4730d2a5"><td class="memItemLeft" align="right" valign="top">pfn_EVP_PKEY_set1_RSA_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__shared__globals.html#a2b3e66d0fba425140c3a66cb4730d2a5">hook_EVP_PKEY_set1_RSA</a></td></tr>
+<tr class="separator:a2b3e66d0fba425140c3a66cb4730d2a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88ed75e9b34a13b56f8a32a3b1e876c"><td class="memItemLeft" align="right" valign="top"><a id="ad88ed75e9b34a13b56f8a32a3b1e876c"></a>
 <a class="el" href="structglobal__context.html">global_context_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>globals</b></td></tr>
 <tr class="separator:ad88ed75e9b34a13b56f8a32a3b1e876c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a820796b3a4e4d55dfa6e182d2de90d4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a820796b3a4e4d55dfa6e182d2de90d4e">&#9670;&nbsp;</a></span>PADDING()</h2>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="a2b3e66d0fba425140c3a66cb4730d2a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3e66d0fba425140c3a66cb4730d2a5">&#9670;&nbsp;</a></span>hook_EVP_PKEY_set1_RSA</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">backdoor_shared_globals::PADDING </td>
-          <td>(</td>
-          <td class="paramtype">sizeof(void *)&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">pfn_EVP_PKEY_set1_RSA_t backdoor_shared_globals::hook_EVP_PKEY_set1_RSA</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>this value is copied to <a class="el" href="structldso__ctx.html#a47b2d4f88dcb9bbb7d9d4161294eef76">ldso_ctx_t::hook_EVP_PKEY_set1_RSA</a> in backdoor_setup </p>
+<p>is copied to <a class="el" href="structldso__ctx.html#abe3b0f470ffff74817c67770f4a804f1">ldso_ctx_t::hook_EVP_PKEY_set1_RSA</a> in backdoor_setup </p>
 
 </div>
 </div>
