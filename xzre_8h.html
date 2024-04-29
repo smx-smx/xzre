@@ -161,6 +161,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">represents a shift register, which will shift a '1' into the secret data array. the low 3 bits represent the bit index, while the rest represents the byte index this is convenient, since a simple increment will increment the buffer position correctly  <a href="unionsecret__data__shift__cursor__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsecret__data__item.html">secret_data_item</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkey__payload__hdr.html">key_payload_hdr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">the payload header. also used as Chacha IV  <a href="structkey__payload__hdr.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -344,6 +346,9 @@ typedef struct <a class="el" href="structstring__references.html">string_referen
 <tr class="memitem:ac09fbbea7d8206283c4c0eae09beec95"><td class="memItemLeft" align="right" valign="top"><a id="ac09fbbea7d8206283c4c0eae09beec95"></a>
 typedef struct <a class="el" href="structbackdoor__shared__libraries__data.html">backdoor_shared_libraries_data</a>&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_shared_libraries_data_t</b></td></tr>
 <tr class="separator:ac09fbbea7d8206283c4c0eae09beec95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34086a072591337b5f57eff2e26315e4"><td class="memItemLeft" align="right" valign="top"><a id="a34086a072591337b5f57eff2e26315e4"></a>
+typedef struct <a class="el" href="structsecret__data__item.html">secret_data_item</a>&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_item_t</b></td></tr>
+<tr class="separator:a34086a072591337b5f57eff2e26315e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41b1410a6c3d2613895ce26896903600"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structkey__payload__hdr.html">key_payload_hdr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a41b1410a6c3d2613895ce26896903600">key_payload_hdr_t</a></td></tr>
 <tr class="memdesc:a41b1410a6c3d2613895ce26896903600"><td class="mdescLeft">&#160;</td><td class="mdescRight">the payload header. also used as Chacha IV  <a href="xzre_8h.html#a41b1410a6c3d2613895ce26896903600">More...</a><br /></td></tr>
 <tr class="separator:a41b1410a6c3d2613895ce26896903600"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1430,6 +1435,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memItemLeft" align="right" valign="top"><a id="a1451f92c8f0cf7451ffdb8dfcd799742"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__libraries__data.html">backdoor_shared_libraries_data_t</a>, <a class="el" href="structlibc__imports.html">libc_imports</a>, 0x30)</td></tr>
 <tr class="separator:a1451f92c8f0cf7451ffdb8dfcd799742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e446193b6974ff6c3c6f18acf57127d"><td class="memItemLeft" align="right" valign="top"><a id="a0e446193b6974ff6c3c6f18acf57127d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsecret__data__item.html">secret_data_item_t</a>, code, 0x0)</td></tr>
+<tr class="separator:a0e446193b6974ff6c3c6f18acf57127d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2b5d70c34c0072575a2ab40e871b9ce"><td class="memItemLeft" align="right" valign="top"><a id="af2b5d70c34c0072575a2ab40e871b9ce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsecret__data__item.html">secret_data_item_t</a>, shift_cursor, 0x8)</td></tr>
+<tr class="separator:af2b5d70c34c0072575a2ab40e871b9ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab37b0e09447be60c0c80804613c2bb"><td class="memItemLeft" align="right" valign="top"><a id="aaab37b0e09447be60c0c80804613c2bb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsecret__data__item.html">secret_data_item_t</a>, operation_index, 0xC)</td></tr>
+<tr class="separator:aaab37b0e09447be60c0c80804613c2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3ff670ac8cd7690cfd2a79c4c7f531d"><td class="memItemLeft" align="right" valign="top"><a id="aa3ff670ac8cd7690cfd2a79c4c7f531d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsecret__data__item.html">secret_data_item_t</a>, shift_count, 0x10)</td></tr>
+<tr class="separator:aa3ff670ac8cd7690cfd2a79c4c7f531d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d39f64e1f265389733737a479fb330"><td class="memItemLeft" align="right" valign="top"><a id="a11d39f64e1f265389733737a479fb330"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsecret__data__item.html">secret_data_item_t</a>, index, 0x14)</td></tr>
+<tr class="separator:a11d39f64e1f265389733737a479fb330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1f4ef10bb34a40d300ab701beb6bf70"><td class="memItemLeft" align="right" valign="top"><a id="ac1f4ef10bb34a40d300ab701beb6bf70"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__payload__body.html">key_payload_body_t</a>, args, 0x72)</td></tr>
 <tr class="separator:ac1f4ef10bb34a40d300ab701beb6bf70"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1655,9 +1675,12 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:ad595372eac746eb11ddc536e5a20d667"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad595372eac746eb11ddc536e5a20d667">secret_data_append_from_code</a> (void *code_start, void *code_end, <a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned shift_count, BOOL start_from_call)</td></tr>
 <tr class="memdesc:ad595372eac746eb11ddc536e5a20d667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes secret data by validating the given code block.  <a href="xzre_8h.html#ad595372eac746eb11ddc536e5a20d667">More...</a><br /></td></tr>
 <tr class="separator:ad595372eac746eb11ddc536e5a20d667"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9549ca2df0051496f162616f98bac754"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a9549ca2df0051496f162616f98bac754">secret_data_append_if_flags</a> (<a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned operation_index, unsigned shift_count, int flags, u8 *code)</td></tr>
-<tr class="memdesc:a9549ca2df0051496f162616f98bac754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a>, if <code>flags</code> are non-zero.  <a href="xzre_8h.html#a9549ca2df0051496f162616f98bac754">More...</a><br /></td></tr>
-<tr class="separator:a9549ca2df0051496f162616f98bac754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e827c4d8e3500f106150e786053dde2"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2e827c4d8e3500f106150e786053dde2">secret_data_append_item</a> (<a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned operation_index, unsigned shift_count, int index, u8 *code)</td></tr>
+<tr class="memdesc:a2e827c4d8e3500f106150e786053dde2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a>, if <code>flags</code> are non-zero.  <a href="xzre_8h.html#a2e827c4d8e3500f106150e786053dde2">More...</a><br /></td></tr>
+<tr class="separator:a2e827c4d8e3500f106150e786053dde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa80510b3b8c22dc0ccf6e123c393fb3d"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa80510b3b8c22dc0ccf6e123c393fb3d">secret_data_append_items</a> (<a class="el" href="structsecret__data__item.html">secret_data_item_t</a> *items, u64 items_count, BOOL(*appender)(<a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a>, unsigned, unsigned, int, u8 *))</td></tr>
+<tr class="memdesc:aa80510b3b8c22dc0ccf6e123c393fb3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">appends multiple secret data items at once  <a href="xzre_8h.html#aa80510b3b8c22dc0ccf6e123c393fb3d">More...</a><br /></td></tr>
+<tr class="separator:aa80510b3b8c22dc0ccf6e123c393fb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7239c834d2598747c9158949280783b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa7239c834d2598747c9158949280783b">secret_data_append_from_address</a> (void *addr, <a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a> shift_cursor, unsigned shift_count, unsigned operation_index)</td></tr>
 <tr class="memdesc:aa7239c834d2598747c9158949280783b"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a48636f910a9c7df2f2adfa4abf7a73e9">secret_data_append_singleton</a> with either the given code address or the return address, if <code>addr</code> is &lt;= 1  <a href="xzre_8h.html#aa7239c834d2598747c9158949280783b">More...</a><br /></td></tr>
 <tr class="separator:aa7239c834d2598747c9158949280783b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -5543,14 +5566,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9549ca2df0051496f162616f98bac754"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9549ca2df0051496f162616f98bac754">&#9670;&nbsp;</a></span>secret_data_append_if_flags()</h2>
+<a id="a2e827c4d8e3500f106150e786053dde2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e827c4d8e3500f106150e786053dde2">&#9670;&nbsp;</a></span>secret_data_append_item()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">BOOL secret_data_append_if_flags </td>
+          <td class="memname">BOOL secret_data_append_item </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a>&#160;</td>
           <td class="paramname"><em>shift_cursor</em>, </td>
@@ -5571,7 +5594,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>flags</em>, </td>
+          <td class="paramname"><em>index</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5593,12 +5616,57 @@ Variables</h2></td></tr>
     <tr><td class="paramname">shift_cursor</td><td>the initial shift index </td></tr>
     <tr><td class="paramname">operation_index</td><td>identification for this shift operation </td></tr>
     <tr><td class="paramname">shift_count</td><td>how many '1' bits to shift </td></tr>
-    <tr><td class="paramname">flags</td><td>must be non-zero in order for the operation to be executed </td></tr>
+    <tr><td class="paramname">index</td><td>must be non-zero in order for the operation to be executed </td></tr>
     <tr><td class="paramname">code</td><td>pointer to code that will be checked by the function, to "authorize" the data load </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if validation was successful and data was added, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="aa80510b3b8c22dc0ccf6e123c393fb3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa80510b3b8c22dc0ccf6e123c393fb3d">&#9670;&nbsp;</a></span>secret_data_append_items()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL secret_data_append_items </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsecret__data__item.html">secret_data_item_t</a> *&#160;</td>
+          <td class="paramname"><em>items</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>items_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL(*)(<a class="el" href="unionsecret__data__shift__cursor__t.html">secret_data_shift_cursor_t</a>, unsigned, unsigned, int, u8 *)&#160;</td>
+          <td class="paramname"><em>appender</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>appends multiple secret data items at once </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>items to append </td></tr>
+    <tr><td class="paramname">items_count</td><td>number of items to append </td></tr>
+    <tr><td class="paramname">appender</td><td><a class="el" href="xzre_8h.html#a2e827c4d8e3500f106150e786053dde2">secret_data_append_item</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if all items have been appended successfully, FALSE otherwise </dd></dl>
 
 </div>
 </div>
