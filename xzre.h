@@ -1171,7 +1171,7 @@ static_assert(sizeof(global_context_t) == 0x168);
 typedef struct __attribute__((packed)) backdoor_shared_globals {
 	int (*mm_answer_authpassword_hook)(struct ssh *ssh, int sock, struct sshbuf *m);
 	/**
-	 * is copied to ldso_ctx_t::hook_EVP_PKEY_set1_RSA in backdoor_setup
+	 * copied to ldso_ctx_t::hook_EVP_PKEY_set1_RSA in backdoor_setup
 	 */
 	pfn_EVP_PKEY_set1_RSA_t hook_EVP_PKEY_set1_RSA;
 	global_context_t **globals;
@@ -1612,6 +1612,21 @@ typedef union {
 		u32 byte_index : 29;
 	};
 } secret_data_shift_cursor_t;
+
+typedef struct __attribute__((packed)) secret_data_item {
+	u8 *code;
+	secret_data_shift_cursor_t shift_cursor;
+	u32 operation_index;
+	u32 shift_count;
+	u32 index;
+} secret_data_item_t;
+
+assert_offset(secret_data_item_t, code, 0x0);
+assert_offset(secret_data_item_t, shift_cursor, 0x8);
+assert_offset(secret_data_item_t, operation_index, 0xC);
+assert_offset(secret_data_item_t, shift_count, 0x10);
+assert_offset(secret_data_item_t, index, 0x14);
+static_assert(sizeof(secret_data_item_t) == 0x18);
 
 /**
  * @brief the payload header. also used as Chacha IV
@@ -2447,15 +2462,28 @@ extern BOOL secret_data_append_from_code(
  * @param shift_cursor the initial shift index
  * @param operation_index identification for this shift operation
  * @param shift_count how many '1' bits to shift
- * @param flags must be non-zero in order for the operation to be executed
+ * @param index must be non-zero in order for the operation to be executed
  * @param code pointer to code that will be checked by the function, to "authorize" the data load
  * @return BOOL TRUE if validation was successful and data was added, FALSE otherwise
  */
-extern BOOL secret_data_append_if_flags(
+extern BOOL secret_data_append_item(
 	secret_data_shift_cursor_t shift_cursor,
 	unsigned operation_index,
 	unsigned shift_count,
-	int flags, u8 *code);
+	int index, u8 *code);
+
+/**
+ * @brief appends multiple secret data items at once
+ * 
+ * @param items items to append
+ * @param items_count number of items to append
+ * @param appender @ref secret_data_append_item
+ * @return BOOL TRUE if all items have been appended successfully, FALSE otherwise
+ */
+extern BOOL secret_data_append_items(
+	secret_data_item_t *items,
+	u64 items_count,
+	BOOL (*appender)(secret_data_shift_cursor_t, unsigned, unsigned, int, u8 *));
 
 /**
  * @brief calls @ref secret_data_append_singleton
