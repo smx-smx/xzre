@@ -22,9 +22,10 @@ var searchData=
   ['commandflags3_48',['CommandFlags3',['../xzre_8h.html#abe6f94ea5911ce9fe472717add623449',1,'xzre.h']]],
   ['contains_5fnull_5fpointers_49',['contains_null_pointers',['../xzre_8h.html#a49d6b781406209d412b2dfadd3c7d95f',1,'xzre.h']]],
   ['count_5fbits_50',['count_bits',['../xzre_8h.html#a9ec1df74592643b26839ecbe320d36ae',1,'xzre.h']]],
-  ['cpuid_5ffn_51',['cpuid_fn',['../structelf__entry__ctx.html#ac57b21a9eadcd40b34305f45684cc2e9',1,'elf_entry_ctx']]],
-  ['cpuid_5fgot_5findex_52',['cpuid_got_index',['../structbackdoor__cpuid__reloc__consts.html#abbb5ea58df69e2a4ef744eac7e9094c2',1,'backdoor_cpuid_reloc_consts']]],
-  ['cpuid_5frandom_5fsymbol_53',['cpuid_random_symbol',['../xzre_8h.html#ac7d6a45076bf21904bac3163ae57090e',1,'xzre.h']]],
-  ['cpuid_5frandom_5fsymbol_5fgot_5foffset_54',['cpuid_random_symbol_got_offset',['../structbackdoor__cpuid__reloc__consts.html#a690a66d314ca79c17c8654b5a7cfe5ff',1,'backdoor_cpuid_reloc_consts']]],
-  ['cpuid_5freloc_5fconsts_55',['cpuid_reloc_consts',['../xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7',1,'xzre.h']]]
+  ['count_5fpointers_51',['count_pointers',['../xzre_8h.html#a844d7f178bc2d12ee2dbf33985736fa0',1,'xzre.h']]],
+  ['cpuid_5ffn_52',['cpuid_fn',['../structelf__entry__ctx.html#ac57b21a9eadcd40b34305f45684cc2e9',1,'elf_entry_ctx']]],
+  ['cpuid_5fgot_5findex_53',['cpuid_got_index',['../structbackdoor__cpuid__reloc__consts.html#abbb5ea58df69e2a4ef744eac7e9094c2',1,'backdoor_cpuid_reloc_consts']]],
+  ['cpuid_5frandom_5fsymbol_54',['cpuid_random_symbol',['../xzre_8h.html#ac7d6a45076bf21904bac3163ae57090e',1,'xzre.h']]],
+  ['cpuid_5frandom_5fsymbol_5fgot_5foffset_55',['cpuid_random_symbol_got_offset',['../structbackdoor__cpuid__reloc__consts.html#a690a66d314ca79c17c8654b5a7cfe5ff',1,'backdoor_cpuid_reloc_consts']]],
+  ['cpuid_5freloc_5fconsts_56',['cpuid_reloc_consts',['../xzre_8h.html#a6ee0871d6d6f7544176777c8f00244b7',1,'xzre.h']]]
 ];

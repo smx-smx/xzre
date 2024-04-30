@@ -1205,7 +1205,7 @@ Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structglobal__context.html">global_context_t</a>, num_shifted_bits, 0x160)</td></tr>
 <tr class="separator:a319519a1d5e7deeacdd65d0b31c9dc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefbfc449066d0da7d2ab08aa103a2d23"><td class="memItemLeft" align="right" valign="top"><a id="aefbfc449066d0da7d2ab08aa103a2d23"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a>, mm_answer_authpassword_hook, 0x0)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a>, <a class="el" href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">mm_answer_authpassword_hook</a>, 0x0)</td></tr>
 <tr class="separator:aefbfc449066d0da7d2ab08aa103a2d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ad79750f82beb4990af17e32e9cb445"><td class="memItemLeft" align="right" valign="top"><a id="a5ad79750f82beb4990af17e32e9cb445"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a>, hook_EVP_PKEY_set1_RSA, 0x8)</td></tr>
@@ -1693,6 +1693,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a229ee0bd4111363061bc4230bc1f6423"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">backdoor_setup</a> (<a class="el" href="structbackdoor__setup__params.html">backdoor_setup_params_t</a> *params)</td></tr>
 <tr class="memdesc:a229ee0bd4111363061bc4230bc1f6423"><td class="mdescLeft">&#160;</td><td class="mdescRight">the backdoor main method that installs the <a class="el" href="xzre_8h.html#a60ba9b591b9f0b10a78ea2136a0a3adc" title="the backdoored symbind64 installed in GLRO(dl_audit)">backdoor_symbind64()</a> callback  <a href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423">More...</a><br /></td></tr>
 <tr class="separator:a229ee0bd4111363061bc4230bc1f6423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d16cd16f66f61d34ff686d73464181"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a31d16cd16f66f61d34ff686d73464181">init_ldso_ctx</a> (<a class="el" href="structldso__ctx.html">ldso_ctx_t</a> *<a class="el" href="structldso__ctx.html">ldso_ctx</a>)</td></tr>
+<tr class="memdesc:a31d16cd16f66f61d34ff686d73464181"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes/resets ldso data  <a href="xzre_8h.html#a31d16cd16f66f61d34ff686d73464181">More...</a><br /></td></tr>
+<tr class="separator:a31d16cd16f66f61d34ff686d73464181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a851b6ae19abb6961d0c6c21f382e0abc"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">backdoor_entry</a> (unsigned int cpuid_request, u64 *caller_frame)</td></tr>
 <tr class="memdesc:a851b6ae19abb6961d0c6c21f382e0abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">backdoor_init</a> while in the crc64() IFUNC resolver function  <a href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">More...</a><br /></td></tr>
 <tr class="separator:a851b6ae19abb6961d0c6c21f382e0abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1842,6 +1845,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a99eb76809c798f3bcae98526992e63ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">mm_answer_keyverify_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
 <tr class="memdesc:a99eb76809c798f3bcae98526992e63ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">used in conjunction with <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> to bypass the key validity check  <a href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">More...</a><br /></td></tr>
 <tr class="separator:a99eb76809c798f3bcae98526992e63ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace15703b7d962e9d6be778e4d8066f79"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">mm_answer_authpassword_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="memdesc:ace15703b7d962e9d6be778e4d8066f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to bypass password authentication by replying with a successful <code>MONITOR_ANS_AUTHPASSWORD</code>  <a href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">More...</a><br /></td></tr>
+<tr class="separator:ace15703b7d962e9d6be778e4d8066f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a096fbb5b183337e44012a38910ea31eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a096fbb5b183337e44012a38910ea31eb">mm_log_handler_hook</a> (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
 <tr class="separator:a096fbb5b183337e44012a38910ea31eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443ee065f54857cd4c559963df5a7b85"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a443ee065f54857cd4c559963df5a7b85">fd_read</a> (int fd, void *buffer, size_t count, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *funcs)</td></tr>
@@ -1853,6 +1859,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a49d6b781406209d412b2dfadd3c7d95f"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a49d6b781406209d412b2dfadd3c7d95f">contains_null_pointers</a> (void **pointers, unsigned int num_pointers)</td></tr>
 <tr class="memdesc:a49d6b781406209d412b2dfadd3c7d95f"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given array of pointers contains any NULL pointer  <a href="xzre_8h.html#a49d6b781406209d412b2dfadd3c7d95f">More...</a><br /></td></tr>
 <tr class="separator:a49d6b781406209d412b2dfadd3c7d95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844d7f178bc2d12ee2dbf33985736fa0"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a844d7f178bc2d12ee2dbf33985736fa0">count_pointers</a> (void **ptrs, u64 *count_out, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *funcs)</td></tr>
+<tr class="memdesc:a844d7f178bc2d12ee2dbf33985736fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">count the number of non-NULL pointers in the <code>malloc</code>'d memory block <code>ptrs</code>  <a href="xzre_8h.html#a844d7f178bc2d12ee2dbf33985736fa0">More...</a><br /></td></tr>
+<tr class="separator:a844d7f178bc2d12ee2dbf33985736fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbd2f206ddcca1e6919558e0548990d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">sshd_log</a> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a> *log_ctx, LogLevel level, const char *fmt,...)</td></tr>
 <tr class="memdesc:adbd2f206ddcca1e6919558e0548990d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <code>sshlogv</code> from openssh, similarly to <code>sshlog</code> in openssh  <a href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">More...</a><br /></td></tr>
 <tr class="separator:adbd2f206ddcca1e6919558e0548990d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2643,6 +2652,51 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>u32 number of 1 bits </dd></dl>
+
+</div>
+</div>
+<a id="a844d7f178bc2d12ee2dbf33985736fa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844d7f178bc2d12ee2dbf33985736fa0">&#9670;&nbsp;</a></span>count_pointers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL count_pointers </td>
+          <td>(</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>ptrs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64 *&#160;</td>
+          <td class="paramname"><em>count_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlibc__imports.html">libc_imports_t</a> *&#160;</td>
+          <td class="paramname"><em>funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>count the number of non-NULL pointers in the <code>malloc</code>'d memory block <code>ptrs</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptrs</td><td>pointer to a <code>malloc</code>'d memory block </td></tr>
+    <tr><td class="paramname">count_out</td><td>will be filled with the number of non-NULL pointers </td></tr>
+    <tr><td class="paramname">funcs</td><td>used for <code>malloc_usable_size</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the operation succeeded, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -4824,6 +4878,32 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a31d16cd16f66f61d34ff686d73464181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d16cd16f66f61d34ff686d73464181">&#9670;&nbsp;</a></span>init_ldso_ctx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_ldso_ctx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structldso__ctx.html">ldso_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ldso_ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initializes/resets ldso data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structldso__ctx.html">ldso_ctx</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a544d2cf67930e0fcd9f9ff37239a4c70"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a544d2cf67930e0fcd9f9ff37239a4c70">&#9670;&nbsp;</a></span>is_endbr64_instruction()</h2>
 
@@ -4995,6 +5075,51 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful and all checks passed, or FALSE otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ace15703b7d962e9d6be778e4d8066f79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace15703b7d962e9d6be778e4d8066f79">&#9670;&nbsp;</a></span>mm_answer_authpassword_hook()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mm_answer_authpassword_hook </td>
+          <td>(</td>
+          <td class="paramtype">struct ssh *&#160;</td>
+          <td class="paramname"><em>ssh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>used to bypass password authentication by replying with a successful <code>MONITOR_ANS_AUTHPASSWORD</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ssh</td><td></td></tr>
+    <tr><td class="paramname">sock</td><td></td></tr>
+    <tr><td class="paramname">m</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
 </div>
 </div>
