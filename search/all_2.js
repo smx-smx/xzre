@@ -19,6 +19,6 @@ var searchData=
   ['backdoor_5ftls_5fget_5faddr_5freloc_5fconsts_24',['backdoor_tls_get_addr_reloc_consts',['../structbackdoor__tls__get__addr__reloc__consts.html',1,'']]],
   ['bignum_5fserialize_25',['bignum_serialize',['../xzre_8h.html#a966b189602e0af0053053e8405d39fa2',1,'xzre.h']]],
   ['bit_5findex_26',['bit_index',['../unionsecret__data__shift__cursor__t.html#afa0821d36c89dc0e8ac3d126049e1604',1,'secret_data_shift_cursor_t']]],
-  ['buffer_27',['buffer',['../structlzma__check__state.html#a4bef7ca708dcd4224fcc3909eb7596b5',1,'lzma_check_state']]],
+  ['buffer_27',['buffer',['../structlzma__check__state.html#a6e2d968df74b41b8f72a7f01f5c590e0',1,'lzma_check_state']]],
   ['byte_5findex_28',['byte_index',['../unionsecret__data__shift__cursor__t.html#a1aaf16a99b291ced145bbbaaef9cba1e',1,'secret_data_shift_cursor_t']]]
 ];
