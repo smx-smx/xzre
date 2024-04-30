@@ -484,7 +484,7 @@ class Invoker {
 
 
         /** load PEM into an OpenSSL RSA key structure */
-        $rsa_key = $this->nat_openssl_pkcs8_load($pkey->toString('PKCS8'));
+        $rsa_key = $this->nat_openssl_pkcs8_load($pkey);
         return $rsa_key;
     }
 
