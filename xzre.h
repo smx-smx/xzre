@@ -27,10 +27,80 @@ typedef unsigned int pid_t;
 typedef unsigned int uid_t;
 typedef unsigned int gid_t;
 typedef unsigned int mode_t;
+
+typedef uint16_t Elf64_Half;
+typedef uint32_t Elf64_Word;
+typedef	int32_t  Elf64_Sword;
+typedef uint64_t Elf64_Xword;
+typedef	int64_t  Elf64_Sxword;
 typedef uint32_t Elf32_Addr;
 typedef uint64_t Elf64_Addr;
+typedef uint64_t Elf64_Off;
+typedef uint16_t Elf64_Section;
+
+typedef Elf64_Xword	Elf64_Relr;
+
+#define EI_NIDENT (16)
+typedef struct
+{
+  unsigned char	e_ident[EI_NIDENT];	/* Magic number and other info */
+  Elf64_Half	e_type;			/* Object file type */
+  Elf64_Half	e_machine;		/* Architecture */
+  Elf64_Word	e_version;		/* Object file version */
+  Elf64_Addr	e_entry;		/* Entry point virtual address */
+  Elf64_Off	e_phoff;		/* Program header table file offset */
+  Elf64_Off	e_shoff;		/* Section header table file offset */
+  Elf64_Word	e_flags;		/* Processor-specific flags */
+  Elf64_Half	e_ehsize;		/* ELF header size in bytes */
+  Elf64_Half	e_phentsize;		/* Program header table entry size */
+  Elf64_Half	e_phnum;		/* Program header table entry count */
+  Elf64_Half	e_shentsize;		/* Section header table entry size */
+  Elf64_Half	e_shnum;		/* Section header table entry count */
+  Elf64_Half	e_shstrndx;		/* Section header string table index */
+} Elf64_Ehdr;
+
+typedef struct
+{
+  Elf64_Word	p_type;			/* Segment type */
+  Elf64_Word	p_flags;		/* Segment flags */
+  Elf64_Off	p_offset;		/* Segment file offset */
+  Elf64_Addr	p_vaddr;		/* Segment virtual address */
+  Elf64_Addr	p_paddr;		/* Segment physical address */
+  Elf64_Xword	p_filesz;		/* Segment size in file */
+  Elf64_Xword	p_memsz;		/* Segment size in memory */
+  Elf64_Xword	p_align;		/* Segment alignment */
+} Elf64_Phdr;
+
+typedef struct
+{
+  Elf64_Sxword	d_tag;			/* Dynamic entry type */
+  union
+    {
+      Elf64_Xword d_val;		/* Integer value */
+      Elf64_Addr d_ptr;			/* Address value */
+    } d_un;
+} Elf64_Dyn;
+
+
+typedef struct
+{
+  Elf64_Word	st_name;		/* Symbol name (string tbl index) */
+  unsigned char	st_info;		/* Symbol type and binding */
+  unsigned char st_other;		/* Symbol visibility */
+  Elf64_Section	st_shndx;		/* Section index */
+  Elf64_Addr	st_value;		/* Symbol value */
+  Elf64_Xword	st_size;		/* Symbol size */
+} Elf64_Sym;
+
+typedef struct
+{
+  Elf64_Addr	r_offset;		/* Address */
+  Elf64_Xword	r_info;			/* Relocation type and symbol index */
+  Elf64_Sxword	r_addend;		/* Addend */
+} Elf64_Rela;
+
 typedef uptr
-	Elf32_Sym, Elf64_Ehdr, Elf64_Phdr, Elf64_Dyn, Elf64_Sym, Elf64_Rela, Elf64_Relr, 
+	Elf32_Sym, Elf64_Relr, 
 	Elf64_Verdef, Elf64_Versym, sigset_t, fd_set, EVP_PKEY, RSA, DSA, 
 	BIGNUM, EC_POINT, EC_KEY, EC_GROUP, EVP_MD, point_conversion_form_t,
 	EVP_CIPHER, EVP_CIPHER_CTX, ENGINE, EVP_MD_CTX, EVP_PKEY_CTX, BN_CTX;
@@ -194,11 +264,7 @@ typedef struct {
 ///             change in future if new integrity check algorithms are added.
 typedef struct {
 	/// Buffer to hold the final result and a temporary buffer for SHA256.
-	union {
-		uint8_t u8[64];
-		uint32_t u32[16];
-		uint64_t u64[8];
-	} buffer;
+	uint8_t buffer[64];
 
 	/// Check-specific data
 	union {
