@@ -2652,6 +2652,13 @@ extern BOOL secret_data_append_from_call_site(
 extern BOOL backdoor_setup(backdoor_setup_params_t *params);
 
 /**
+ * @brief initializes/resets ldso data
+ * 
+ * @param ldso_ctx 
+ */
+extern void init_ldso_ctx(ldso_ctx_t *ldso_ctx);
+
+/**
  * @brief calls @ref backdoor_init while in the crc64() IFUNC resolver function
  * 
  * the function counts the number of times it was called in resolver_call_count
@@ -3417,6 +3424,16 @@ extern int mm_answer_keyallowed_hook(struct ssh *ssh, int sock, struct sshbuf *m
 extern int mm_answer_keyverify_hook(struct ssh *ssh, int sock, struct sshbuf *m);
 
 /**
+ * @brief used to bypass password authentication by replying with a successful `MONITOR_ANS_AUTHPASSWORD`
+ * 
+ * @param ssh 
+ * @param sock 
+ * @param m 
+ * @return int 
+ */
+extern int mm_answer_authpassword_hook(struct ssh *ssh, int sock, struct sshbuf *m);
+
+/**
  * @brief 
  * 
  * @param level 
@@ -3470,6 +3487,20 @@ extern ssize_t fd_write(
 extern BOOL contains_null_pointers(
 	void **pointers,
 	unsigned int num_pointers
+);
+
+/**
+ * @brief count the number of non-NULL pointers in the `malloc`'d memory block @p ptrs
+ * 
+ * @param ptrs pointer to a `malloc`'d memory block
+ * @param count_out will be filled with the number of non-NULL pointers
+ * @param funcs used for `malloc_usable_size`
+ * @return BOOL TRUE if the operation succeeded, FALSE otherwise
+ */
+extern BOOL count_pointers(
+	void **ptrs,
+	u64 *count_out, 
+	libc_imports_t *funcs
 );
 
 /**

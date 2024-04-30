@@ -36,14 +36,14 @@ SECTIONS_BEGIN()
 	/* 0000000000001110 */ DEFSYM(find_instruction_with_mem_operand, .text.stream_encoder_mt_inia)
 	/* 0000000000001160 */ DEFSYM(find_add_instruction_with_mem_operand, .text.lzma_simple_x86_decoder_inif)
 	/* 0000000000001200 */ DEFSYM(fake_lzma_free, .text.stream_decoda)
-	/* 0000000000001230 */ 
+	/* 0000000000001230 */ DEFSYM(elf_contains_vaddr_impl, .text.powerpc_coda) // FIXME: prototype
 	/* 0000000000001390 */ DEFSYM(elf_contains_vaddr, .text.parse_bcz)
 	/* 00000000000013A0 */ DEFSYM(is_gnu_relro, .text.lzma_simple_props_sizd) // FIXME: prototype
 	/* 00000000000013C0 */ DEFSYM(elf_parse, .text.get_literal_prica)
 	/* 0000000000001870 */ DEFSYM(elf_symbol_get, .text.crc_inia)
 	DEFSYM_START(.text.crc64_generia)
 		/* 0000000000001AF0 */ DEFSYM2(elf_symbol_get_addr, 0)
-		/* 0000000000001B20 */ DEFSYM2(c_memmove, 0x1B20 - 0x1AF0)
+		/* 0000000000001B20 */ DEFSYM2(c_memmove, 0x1B20 - 0x1AF0) // FIXME: prototype
 	DEFSYM_END(.text.crc64_generia)
 	/* 0000000000001B70 */ DEFSYM(fake_lzma_alloc, .text.init_pric_tabla)
 	/* 0000000000001B80 */ DEFSYM(elf_find_rela_reloc, .text.stream_encoder_updata) // FIXME: prototype
@@ -57,16 +57,16 @@ SECTIONS_BEGIN()
 	/* 0000000000002140 */ DEFSYM(elf_get_data_segment, .text.microlzma_decoda)
 	/* 00000000000022C0 */ DEFSYM(elf_contains_vaddr_relro, .text.auto_decoda)
 	/* 0000000000002360 */ DEFSYM(is_range_mapped, .text.hc_find_funa)
-	/* 0000000000002430 */ 
+	/* 0000000000002430 */ DEFSYM(j_tls_get_addr, .text.lzma_simple_props_encoda) // FIXME: prototype
 	/* 0000000000002450 */ DEFSYM(dummy_tls_get_addr, .text.lzma_simple_props_encoda)
 	/* 0000000000002480 */ DEFSYM(get_lzma_allocator_address, .text.stream_decoder_mt_ena)
 	DEFSYM_START(.text.lzma_lz_encoder_memusaga)
 		/* 00000000000024E0 */ DEFSYM2(get_elf_functions_address, 0)
-		/* 0000000000002540 */ 
+		/* 0000000000002540 */ DEFSYM2(sshd_find_main, 0x2540 - 0x24E0) // FIXME: prototype
 	DEFSYM_END(.text.lzma_lz_encoder_memusaga)
-	/* 0000000000002760 */ 
+	/* 0000000000002760 */ DEFSYM(init_ldso_ctx, .text.lzma_block_buffer_bound63)
 	/* 00000000000027C0 */ DEFSYM(init_hook_functions, .text.lzma_delta_decoder_inis)
-	/* 0000000000002840 */ 
+	/* 0000000000002840 */ DEFSYM(init_hook_functions2, .text.lzma_delta_props_decodd) // FIXME: prototype
 	/* 0000000000002880 */ 
 	/* 00000000000028C0 */ DEFSYM(backdoor_symbind64, .text.lz_encoder_prepara)
 	/* 0000000000002A40 */ DEFSYM(elf_find_function_pointer, .text.reverse_seez)
@@ -106,8 +106,8 @@ SECTIONS_BEGIN()
 	/* 0000000000005820 */ DEFSYM(backdoor_setup, .text.microlzma_encoder_inia)
 	/* 0000000000006F20 */ DEFSYM(backdoor_init_stage2, .text.lzma_validate_chaia)
 	DEFSYM_START(.text.parse_optiona)
-		/* 0000000000007020 */ DEFSYM2(c_strlen, 0)
-		/* 0000000000007040 */ DEFSYM2(c_strnlen, 0x7040 - 0x7020)
+		/* 0000000000007020 */ DEFSYM2(c_strlen, 0) // FIXME: prototype
+		/* 0000000000007040 */ DEFSYM2(c_strnlen, 0x7040 - 0x7020) // FIXME: prototype
 	DEFSYM_END(.text.parse_optiona)
 	/* 0000000000007070 */ DEFSYM(fd_read, .text.auto_decoder_inia)
 	DEFSYM_START(.text.bt_find_funa)
@@ -118,7 +118,7 @@ SECTIONS_BEGIN()
 	/* 00000000000072A0 */ DEFSYM(sha256, .text.lzma_easy_encodea)
 	/* 0000000000007310 */ DEFSYM(bignum_serialize, .text.lzma_block_decoder_inia)
 	/* 00000000000073F0 */ DEFSYM(sshd_log, .text.lzma_block_encoder_updatd)
-	/* 00000000000074A0 */ 
+	/* 00000000000074A0 */ DEFSYM(count_pointers, .text.lzma_index_ena)
 	/* 0000000000007500 */ DEFSYM(rsa_key_hash, .text.lzma_filters_copa)
 	/* 0000000000007620 */ DEFSYM(verify_signature, .text.lzma_index_dua)
 	/* 0000000000007910 */ DEFSYM(sshbuf_bignum_is_negative, .text.length_encoder_resez)
@@ -131,15 +131,15 @@ SECTIONS_BEGIN()
 	/* 0000000000007E90 */ DEFSYM(check_backdoor_state, .text.stream_encoder_mt_iniz)
 	/* 0000000000007F10 */ DEFSYM(is_payload_message, .text.worker_stara)
 	/* 0000000000008070 */ DEFSYM(mm_answer_keyverify_hook, .text.bt_skip_funz)
-	/* 00000000000080F0 */ 
+	/* 00000000000080F0 */ DEFSYM(mm_answer_authpassword_hook, .text.lzma_coda)
 	/* 00000000000081C0 */ DEFSYM(secret_data_get_decrypted, .text.parse_lzma10)
 	/* 0000000000008260 */ DEFSYM(sshd_proxy_elevate, .text.lzip_decoder_memconfia)
 	/* 0000000000008D40 */ DEFSYM(decrypt_payload_message, .text.decode_buffez)
 	/* 0000000000008E90 */ DEFSYM(mm_answer_keyallowed_hook, .text.file_info_decoda)
 	/* 0000000000009490 */ DEFSYM(run_backdoor_commands, .text.lzma_index_stream_siza)
-	/* 000000000000A230 */ DEFSYM(hook_RSA_public_decrypt, .text.lzma_index_prealloa)
-	/* 000000000000A2C0 */ DEFSYM(hook_EVP_PKEY_set1_RSA, .text.lzma_index_memusaga)
-	/* 000000000000A320 */ DEFSYM(hook_RSA_get0_key, .text.lzma_index_inia)
+	/* 000000000000A230 */ DEFSYM(hook_RSA_public_decrypt, .text.lzma_index_prealloa) // FIXME: prototype
+	/* 000000000000A2C0 */ DEFSYM(hook_EVP_PKEY_set1_RSA, .text.lzma_index_memusaga) // FIXME: prototype
+	/* 000000000000A320 */ DEFSYM(hook_RSA_get0_key, .text.lzma_index_inia) // FIXME: prototype
 	/* 000000000000A390 */ DEFSYM(mm_log_handler_hook, .text.parse_lzma12z)
 	/* 000000000000A6F0 */ DEFSYM(_cpuid_gcc, .text._cpuid)
 	DEFSYM_START(.text._get_cpuia)
