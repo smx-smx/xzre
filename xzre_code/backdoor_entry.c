@@ -15,4 +15,5 @@ unsigned int backdoor_entry(unsigned int cpuid_request, u64 *caller_frame){
 	}
 	++resolver_call_count;
 	_cpuid_gcc(cpuid_request, &a, &b, &c, &d);
+	return a;
 }

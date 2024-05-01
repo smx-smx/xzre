@@ -19,7 +19,7 @@ BOOL main_elf_parse(main_elf_t *main_elf){
 	))){
 		return FALSE;
 	}
-	elf_info_t *dynamic_linker;
+	elf_info_t *dynamic_linker = main_elf->elf_handles->dynamic_linker;
 	void **libc_stack_end_ptr = (void *)PTRADD(dynamic_linker->elfbase, libc_stack_end_sym->st_value);
 	if(!process_is_sshd(dynamic_linker, *libc_stack_end_ptr)){
 		return FALSE;

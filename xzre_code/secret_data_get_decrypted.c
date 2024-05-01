@@ -23,6 +23,6 @@ BOOL secret_data_get_decrypted(u8 *output, global_context_t *ctx){
 
 	return chacha_decrypt(
 		ctx->secret_data, sizeof(ctx->secret_data),
-		buf1.key, buf1.iv,
+		buf2.key, buf2.iv,
 		output, ctx->imported_funcs);
 }
