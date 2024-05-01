@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <sys/select.h>
+#include <time.h>
 #endif
 
 typedef uint8_t u8;
@@ -1928,13 +1929,17 @@ assert_offset(monitor_data_t, payload_body_size, 0x28);
 assert_offset(monitor_data_t, rsa, 0x30);
 
 /**
- * @brief payload union within @ref run_backdoor_commands
+ * @brief union used within @ref run_backdoor_commands
  * 
  */
-typedef union __attribute__((packed)) payload {
+typedef union __attribute__((packed)) backdoor_runtime_data {
+#ifndef XZRE_SLIM
+	struct timespec timespec;
+	fd_set fd_set;
+#endif
 	monitor_data_t monitor;
 	u8 data[608];
-} payload_t;
+} backdoor_runtime_data_t;
 
 /**
  * @brief stack frame layout for @ref run_backdoor_commands
@@ -1967,7 +1972,7 @@ typedef struct __attribute__((packed)) run_backdoor_commands_data {
 		} keys;
 	} u;
 	PADDING(7);
-	payload_t payload;
+	backdoor_runtime_data_t payload;
 	key_ctx_t kctx;
 } run_backdoor_commands_data_t;
 
