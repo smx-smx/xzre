@@ -175,7 +175,7 @@ void xzre_backdoor_setup(){
 	/** setup fake entry frame to point to reference the fake got */
 	elf_entry_ctx_t my_entry_ctx = {
 		.frame_address = ldso_elf,
-		.got_ptr = &fake_got
+		.got_ctx.got_ptr = &fake_got
 	};
 
 	/** patch the GOT recompute function to be a no-op */

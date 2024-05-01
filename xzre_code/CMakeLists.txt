@@ -1,0 +1,16 @@
+add_library(xzre_code
+	backdoor_entry.c
+	chacha_decrypt.c
+	elf_symbol_get_addr.c
+	get_lzma_allocator.c
+	is_endbr64_instruction.c
+	fake_lzma_alloc.c
+	fake_lzma_free.c
+	main_elf_parse.c
+	secret_data_append_from_address.c
+	secret_data_append_item.c
+	secret_data_append_singleton.c
+	secret_data_get_decrypted.c
+	sha256.c
+	sshd_patch_variables.c
+)

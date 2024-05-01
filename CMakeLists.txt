@@ -10,7 +10,7 @@ find_program(SED_COMMAND NAMES sed REQUIRED)
 message(STATUS "Using ${LZMA_LIBRARY}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_compile_options(-Wno-deprecated-declarations)
+add_compile_options(-Wno-deprecated-declarations -Wno-address-of-packed-member)
 
 add_executable(xzre)
 add_library(lzma SHARED)
@@ -50,6 +50,9 @@ set(SOURCES
 	xzre.S
 	util.c
 )
+
+add_subdirectory(xzre_code)
+target_include_directories(xzre_code PRIVATE ${CMAKE_SOURCE_DIR})
 
 add_custom_command(
 	OUTPUT ${CMAKE_BINARY_DIR}/xzre.lds

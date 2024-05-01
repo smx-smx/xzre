@@ -275,6 +275,11 @@ typedef struct {
 
 } lzma_check_state;
 
+#define CHACHA20_KEY_SIZE 32
+#define CHACHA20_IV_SIZE 16
+#define SHA256_DIGEST_SIZE 32
+#define ED448_KEY_SIZE 57
+
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
 
@@ -522,6 +527,13 @@ typedef enum {
 struct sshbuf;
 struct kex;
 
+/* permit_root_login */
+#define	PERMIT_NOT_SET		-1
+#define	PERMIT_NO		0
+#define	PERMIT_FORCED_ONLY	1
+#define	PERMIT_NO_PASSWD	2
+#define	PERMIT_YES		3
+
 /**
  * @brief struct monitor from openssh-portable
  */
@@ -581,12 +593,7 @@ struct sshkey {
 	size_t	shield_prekey_len;
 };
 
-typedef struct __attribute__((packed)) elf_entry_ctx {
-	/**
-	 * @brief points to a symbol in memory
-	 * will be used to find the GOT value
-	 */
-	void *symbol_ptr;
+typedef struct __attribute__((packed)) got_ctx {
 	/**
 	 * @brief points to the Global Offset Table
 	 */
@@ -607,6 +614,21 @@ typedef struct __attribute__((packed)) elf_entry_ctx {
 	 * used to derive the @ref got_ptr
 	 */
 	ptrdiff_t got_offset;
+} got_ctx_t;
+
+assert_offset(got_ctx_t, got_ptr, 0);
+assert_offset(got_ctx_t, return_address, 0x8);
+assert_offset(got_ctx_t, cpuid_fn, 0x10);
+assert_offset(got_ctx_t, got_offset, 0x18);
+static_assert(sizeof(got_ctx_t) == 0x20);
+
+typedef struct __attribute__((packed)) elf_entry_ctx {
+	/**
+	 * @brief points to a symbol in memory
+	 * will be used to find the GOT value
+	 */
+	void *symbol_ptr;
+	got_ctx_t got_ctx;
 	/**
 	 * @brief stores the value of __builtin_frame_address(0)-16
 	 */
@@ -614,10 +636,7 @@ typedef struct __attribute__((packed)) elf_entry_ctx {
 } elf_entry_ctx_t;
 
 assert_offset(elf_entry_ctx_t, symbol_ptr, 0);
-assert_offset(elf_entry_ctx_t, got_ptr, 8);
-assert_offset(elf_entry_ctx_t, return_address, 0x10);
-assert_offset(elf_entry_ctx_t, cpuid_fn, 0x18);
-assert_offset(elf_entry_ctx_t, got_offset, 0x20);
+assert_offset(elf_entry_ctx_t, got_ctx, 0x8);
 assert_offset(elf_entry_ctx_t, frame_address, 0x28);
 
 typedef struct __attribute__((packed)) dasm_ctx {
@@ -1008,19 +1027,21 @@ static_assert(sizeof(imported_funcs_t) == 0x128);
 struct ssh;
 struct sshbuf;
 
+typedef int (*sshd_monitor_func_t)(struct ssh *ssh, int sock, struct sshbuf *m);
+
 typedef struct __attribute__((packed)) sshd_ctx {
 	BOOL have_mm_answer_keyallowed;
 	BOOL have_mm_answer_authpassword;
 	BOOL have_mm_answer_keyverify;
 	PADDING(0x4);
-	int (*monitor_req_fn)(struct ssh *ssh, int sock, struct sshbuf *m);
+	sshd_monitor_func_t mm_answer_authpassword_hook;
 	PADDING(0x8);
 	// Used to initialize *mm_answer_keyverify_ptr
 	void *mm_answer_keyverify;
 	void *mm_answer_authpassword_start;
 	void *mm_answer_authpassword_end;
-	void *mm_answer_authpassword_ptr;
-	u32 monitor_reqtype;
+	sshd_monitor_func_t *mm_answer_authpassword_ptr;
+	int monitor_reqtype_authpassword;
 	PADDING(4);
 	void *mm_answer_keyallowed_start;
 	void *mm_answer_keyallowed_end;
@@ -1049,12 +1070,12 @@ typedef struct __attribute__((packed)) sshd_ctx {
 assert_offset(sshd_ctx_t, have_mm_answer_keyallowed, 0x0);
 assert_offset(sshd_ctx_t, have_mm_answer_authpassword, 0x4);
 assert_offset(sshd_ctx_t, have_mm_answer_keyverify, 0x8);
-assert_offset(sshd_ctx_t, monitor_req_fn, 0x10);
+assert_offset(sshd_ctx_t, mm_answer_authpassword_hook, 0x10);
 assert_offset(sshd_ctx_t, mm_answer_keyverify, 0x20);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_start, 0x28);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_end, 0x30);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_ptr, 0x38);
-assert_offset(sshd_ctx_t, monitor_reqtype, 0x40);
+assert_offset(sshd_ctx_t, monitor_reqtype_authpassword, 0x40);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_start, 0x48);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_end, 0x50);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_ptr, 0x58);
@@ -1188,7 +1209,7 @@ typedef struct __attribute__((packed)) global_context {
 	/**
 	 * @brief the secret data used for the chacha key generation
 	 */
-	u8 secret_data[57];
+	u8 secret_data[ED448_KEY_SIZE];
 	/**
 	 * @brief the shift operation states
 	 * 
@@ -1235,7 +1256,7 @@ assert_offset(global_context_t, num_shifted_bits, 0x160);
 static_assert(sizeof(global_context_t) == 0x168);
 
 typedef struct __attribute__((packed)) backdoor_shared_globals {
-	int (*mm_answer_authpassword_hook)(struct ssh *ssh, int sock, struct sshbuf *m);
+	sshd_monitor_func_t mm_answer_authpassword_hook;
 	/**
 	 * copied to ldso_ctx_t::hook_EVP_PKEY_set1_RSA in backdoor_setup
 	 */
@@ -1438,8 +1459,8 @@ typedef struct __attribute__((packed)) backdoor_hooks_ctx {
 	log_handler_fn mm_log_handler;
 	PADDING(sizeof(void *));
 	PADDING(sizeof(void *));
-	int (*mm_answer_keyallowed)(struct ssh *ssh, int sock, struct sshbuf *m);
-	int (*mm_answer_keyverify)(struct ssh *ssh, int sock, struct sshbuf *m);
+	sshd_monitor_func_t mm_answer_keyallowed;
+	sshd_monitor_func_t mm_answer_keyverify;
 	PADDING(sizeof(void *));
 } backdoor_hooks_ctx_t;
 
