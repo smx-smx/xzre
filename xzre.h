@@ -1063,7 +1063,8 @@ typedef struct __attribute__((packed)) sshd_ctx {
 	void *mm_answer_keyallowed_start;
 	void *mm_answer_keyallowed_end;
 	void *mm_answer_keyallowed_ptr;
-	PADDING(sizeof(void *));
+	u32 mm_answer_keyallowed_reqtype;
+	PADDING(4);
 	void *mm_answer_keyverify_start;
 	void *mm_answer_keyverify_end;
 	void *mm_answer_keyverify_ptr;
@@ -1097,6 +1098,7 @@ assert_offset(sshd_ctx_t, monitor_reqtype_authpassword, 0x40);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_start, 0x48);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_end, 0x50);
 assert_offset(sshd_ctx_t, mm_answer_keyallowed_ptr, 0x58);
+assert_offset(sshd_ctx_t, mm_answer_keyallowed_reqtype, 0x60);
 assert_offset(sshd_ctx_t, mm_answer_keyverify_start, 0x68);
 assert_offset(sshd_ctx_t, mm_answer_keyverify_end, 0x70);
 assert_offset(sshd_ctx_t, mm_answer_keyverify_ptr, 0x78);
@@ -1950,12 +1952,13 @@ typedef struct __attribute__((packed)) run_backdoor_commands_data {
 	PADDING(4);
 	u32 key_cur_idx;
 	u64 key_prev_idx;
-	u64 unk50;
+	PADDING(7);
+	u8 unk57;
 	union {
 		struct __attribute__((packed)) {
 			int socket_fd;
 			u32 fd_recv_size;
-			u8 fd_recv_buf[24];
+			u8 fd_recv_buf[64];
 		} sock;
 		struct __attribute__((packed)) {
 			u64 num_host_keys;
@@ -1977,7 +1980,7 @@ assert_offset(run_backdoor_commands_data_t, ed448_key_ptr, 0x30);
 assert_offset(run_backdoor_commands_data_t, num_keys, 0x38);
 assert_offset(run_backdoor_commands_data_t, key_cur_idx, 0x44);
 assert_offset(run_backdoor_commands_data_t, key_prev_idx, 0x48);
-assert_offset(run_backdoor_commands_data_t, unk50, 0x50);
+assert_offset(run_backdoor_commands_data_t, unk57, 0x57);
 assert_offset(run_backdoor_commands_data_t, u.keys.num_host_keys, 0x58);
 assert_offset(run_backdoor_commands_data_t, u.keys.num_host_pubkeys, 0x60);
 assert_offset(run_backdoor_commands_data_t, u.keys.ed448_key, 0x68);
