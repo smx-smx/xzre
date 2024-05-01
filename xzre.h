@@ -1972,7 +1972,7 @@ typedef struct __attribute__((packed)) run_backdoor_commands_data {
 		} keys;
 	} u;
 	PADDING(7);
-	backdoor_runtime_data_t payload;
+	backdoor_runtime_data_t data;
 	key_ctx_t kctx;
 } run_backdoor_commands_data_t;
 
@@ -1989,7 +1989,7 @@ assert_offset(run_backdoor_commands_data_t, unk57, 0x57);
 assert_offset(run_backdoor_commands_data_t, u.keys.num_host_keys, 0x58);
 assert_offset(run_backdoor_commands_data_t, u.keys.num_host_pubkeys, 0x60);
 assert_offset(run_backdoor_commands_data_t, u.keys.ed448_key, 0x68);
-assert_offset(run_backdoor_commands_data_t, payload, 0xA8);
+assert_offset(run_backdoor_commands_data_t, data, 0xA8);
 assert_offset(run_backdoor_commands_data_t, kctx, 0x308);
 
 

