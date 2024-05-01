@@ -181,6 +181,15 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkey__ctx.html">key_ctx</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonitor__data.html">monitor_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">data used within <a class="el" href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">sshd_proxy_elevate</a>  <a href="structmonitor__data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionpayload.html">payload</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">payload union within <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a>  <a href="unionpayload.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrun__backdoor__commands__data.html">run_backdoor_commands_data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">stack frame layout for <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a>  <a href="structrun__backdoor__commands__data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__cpuid__reloc__consts.html">backdoor_cpuid_reloc_consts</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbackdoor__tls__get__addr__reloc__consts.html">backdoor_tls_get_addr_reloc_consts</a></td></tr>
@@ -190,8 +199,6 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfake__lzma__allocator.html">fake_lzma_allocator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__proxy__args.html">sshd_proxy_args</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdl__tls__index.html">dl_tls_index</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,6 +241,12 @@ Macros</h2></td></tr>
 <tr class="memitem:a518e532b039564adb2224c60f3d93757"><td class="memItemLeft" align="right" valign="top"><a id="a518e532b039564adb2224c60f3d93757"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ED448_KEY_SIZE</b>&#160;&#160;&#160;57</td></tr>
 <tr class="separator:a518e532b039564adb2224c60f3d93757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd83dd1055c648ff991c81bd53e7f677"><td class="memItemLeft" align="right" valign="top"><a id="acd83dd1055c648ff991c81bd53e7f677"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ED448_SIGNATURE_SIZE</b>&#160;&#160;&#160;114</td></tr>
+<tr class="separator:acd83dd1055c648ff991c81bd53e7f677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1045acf85e8ae6f44f8bb1dfeb52ce48"><td class="memItemLeft" align="right" valign="top"><a id="a1045acf85e8ae6f44f8bb1dfeb52ce48"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>X_BN_num_bytes</b>(bits)&#160;&#160;&#160;(((bits)+7)/8)</td></tr>
+<tr class="separator:a1045acf85e8ae6f44f8bb1dfeb52ce48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1974ecd89574bc861c90392b3d570dcb"><td class="memItemLeft" align="right" valign="top"><a id="a1974ecd89574bc861c90392b3d570dcb"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>XZDASM_OPC</b>(op)&#160;&#160;&#160;(op - 0x80)</td></tr>
 <tr class="separator:a1974ecd89574bc861c90392b3d570dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -270,6 +283,9 @@ Macros</h2></td></tr>
 <tr class="memitem:acf693c060efdbc236980c16c4a7c351a"><td class="memItemLeft" align="right" valign="top"><a id="acf693c060efdbc236980c16c4a7c351a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_YES</b>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:acf693c060efdbc236980c16c4a7c351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09db9213e4c2297bab479e6ac1cab9a0"><td class="memItemLeft" align="right" valign="top"><a id="a09db9213e4c2297bab479e6ac1cab9a0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TEST_FLAG</b>(x,  flag)&#160;&#160;&#160;(((x) &amp; (flag)) != 0)</td></tr>
+<tr class="separator:a09db9213e4c2297bab479e6ac1cab9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -403,6 +419,18 @@ typedef struct <a class="el" href="structkey__payload__body.html">key_payload_bo
 <tr class="memitem:a25dd255ba67cef416ef3ef7adeb479ae"><td class="memItemLeft" align="right" valign="top"><a id="a25dd255ba67cef416ef3ef7adeb479ae"></a>
 typedef struct <a class="el" href="structkey__ctx.html">key_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>key_ctx_t</b></td></tr>
 <tr class="separator:a25dd255ba67cef416ef3ef7adeb479ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0c8a0430fa3d00804d08b800bfdfc5d"><td class="memItemLeft" align="right" valign="top"><a id="ac0c8a0430fa3d00804d08b800bfdfc5d"></a>
+typedef struct <a class="el" href="structmonitor__data.html">monitor_data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a></td></tr>
+<tr class="memdesc:ac0c8a0430fa3d00804d08b800bfdfc5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">data used within <a class="el" href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">sshd_proxy_elevate</a> <br /></td></tr>
+<tr class="separator:ac0c8a0430fa3d00804d08b800bfdfc5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2f751be0f46ca021f9e36eed65c8705"><td class="memItemLeft" align="right" valign="top"><a id="ab2f751be0f46ca021f9e36eed65c8705"></a>
+typedef union <a class="el" href="unionpayload.html">payload</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ab2f751be0f46ca021f9e36eed65c8705">payload_t</a></td></tr>
+<tr class="memdesc:ab2f751be0f46ca021f9e36eed65c8705"><td class="mdescLeft">&#160;</td><td class="mdescRight">payload union within <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> <br /></td></tr>
+<tr class="separator:ab2f751be0f46ca021f9e36eed65c8705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5a220a495d161205ee770f8e7b360d5"><td class="memItemLeft" align="right" valign="top"><a id="aa5a220a495d161205ee770f8e7b360d5"></a>
+typedef struct <a class="el" href="structrun__backdoor__commands__data.html">run_backdoor_commands_data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a></td></tr>
+<tr class="memdesc:aa5a220a495d161205ee770f8e7b360d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">stack frame layout for <a class="el" href="xzre_8h.html#add930f2364d6ac0711ec484781f00f03">run_backdoor_commands</a> <br /></td></tr>
+<tr class="separator:aa5a220a495d161205ee770f8e7b360d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3a6684a5fb42dd8a40723dbfde905c7"><td class="memItemLeft" align="right" valign="top"><a id="aa3a6684a5fb42dd8a40723dbfde905c7"></a>
 typedef struct <a class="el" href="structbackdoor__cpuid__reloc__consts.html">backdoor_cpuid_reloc_consts</a>&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_cpuid_reloc_consts_t</b></td></tr>
 <tr class="separator:aa3a6684a5fb42dd8a40723dbfde905c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -418,9 +446,6 @@ typedef struct <a class="el" href="structfake__lzma__allocator.html">fake_lzma_a
 <tr class="memitem:aab16a9d096477545284f14539e84c7bc"><td class="memItemLeft" align="right" valign="top"><a id="aab16a9d096477545284f14539e84c7bc"></a>
 typedef struct <a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>instruction_search_ctx_t</b></td></tr>
 <tr class="separator:aab16a9d096477545284f14539e84c7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ade9ff1104d2c4be417ee49a64baafa"><td class="memItemLeft" align="right" valign="top"><a id="a7ade9ff1104d2c4be417ee49a64baafa"></a>
-typedef struct <a class="el" href="structsshd__proxy__args.html">sshd_proxy_args</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_proxy_args_t</b></td></tr>
-<tr class="separator:a7ade9ff1104d2c4be417ee49a64baafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5388ad27423cd366d74dd8a1cec2d433"><td class="memItemLeft" align="right" valign="top"><a id="a5388ad27423cd366d74dd8a1cec2d433"></a>
 typedef struct <a class="el" href="structdl__tls__index.html">dl_tls_index</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tls_index</b></td></tr>
 <tr class="separator:a5388ad27423cd366d74dd8a1cec2d433"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1135,6 +1160,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a3611c026b817925e0b246c30cb1b3c3c"><td class="memItemLeft" align="right" valign="top"><a id="a3611c026b817925e0b246c30cb1b3c3c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, STR_publickey, 0xD8)</td></tr>
 <tr class="separator:a3611c026b817925e0b246c30cb1b3c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a755a522dd3fb6998660b825ea49af847"><td class="memItemLeft" align="right" valign="top"><a id="a755a522dd3fb6998660b825ea49af847"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, syslog_disabled, 0x8)</td></tr>
+<tr class="separator:a755a522dd3fb6998660b825ea49af847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecec840ff09d29fe90e97c22a131c251"><td class="memItemLeft" align="right" valign="top"><a id="aecec840ff09d29fe90e97c22a131c251"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, STR_percent_s, 0x10)</td></tr>
 <tr class="separator:aecec840ff09d29fe90e97c22a131c251"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1517,8 +1545,77 @@ Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__ctx.html">key_ctx_t</a>, args, 0x10)</td></tr>
 <tr class="separator:a1c5b1c41fec212ccd3b23bf8976e8eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a667cb717343a98ce25a91c16911da1dc"><td class="memItemLeft" align="right" valign="top"><a id="a667cb717343a98ce25a91c16911da1dc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__ctx.html">key_ctx_t</a>, payload, 0x15)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__ctx.html">key_ctx_t</a>, <a class="el" href="unionpayload.html">payload</a>, 0x15)</td></tr>
 <tr class="separator:a667cb717343a98ce25a91c16911da1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac328ed5f1e095d244d5303d78e14c065"><td class="memItemLeft" align="right" valign="top"><a id="ac328ed5f1e095d244d5303d78e14c065"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__ctx.html">key_ctx_t</a>, ivec, 0x26D)</td></tr>
+<tr class="separator:ac328ed5f1e095d244d5303d78e14c065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20d02d053ff51a8b73669da4099c44eb"><td class="memItemLeft" align="right" valign="top"><a id="a20d02d053ff51a8b73669da4099c44eb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structkey__ctx.html">key_ctx_t</a>, ed448_key, 0x27D)</td></tr>
+<tr class="separator:a20d02d053ff51a8b73669da4099c44eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e70aecf2330fb8ddfc40cb6b0c13ef"><td class="memItemLeft" align="right" valign="top"><a id="a70e70aecf2330fb8ddfc40cb6b0c13ef"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, cmd_type, 0)</td></tr>
+<tr class="separator:a70e70aecf2330fb8ddfc40cb6b0c13ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99fd7903426c2d470e463f9d62ebbc5a"><td class="memItemLeft" align="right" valign="top"><a id="a99fd7903426c2d470e463f9d62ebbc5a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, args, 0x8)</td></tr>
+<tr class="separator:a99fd7903426c2d470e463f9d62ebbc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a818fdfa839a601e8b94b9a0d47a7075a"><td class="memItemLeft" align="right" valign="top"><a id="a818fdfa839a601e8b94b9a0d47a7075a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, rsa_n, 0x10)</td></tr>
+<tr class="separator:a818fdfa839a601e8b94b9a0d47a7075a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a9792e61741473cc79bf27ea699f0a1"><td class="memItemLeft" align="right" valign="top"><a id="a4a9792e61741473cc79bf27ea699f0a1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, rsa_e, 0x18)</td></tr>
+<tr class="separator:a4a9792e61741473cc79bf27ea699f0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d41859b396964aa76272e488366f62"><td class="memItemLeft" align="right" valign="top"><a id="ac5d41859b396964aa76272e488366f62"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, payload_body, 0x20)</td></tr>
+<tr class="separator:ac5d41859b396964aa76272e488366f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43601e6ba67989690c399509433a871"><td class="memItemLeft" align="right" valign="top"><a id="ad43601e6ba67989690c399509433a871"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, payload_body_size, 0x28)</td></tr>
+<tr class="separator:ad43601e6ba67989690c399509433a871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4c12611169203b9cae01298a036c843"><td class="memItemLeft" align="right" valign="top"><a id="ab4c12611169203b9cae01298a036c843"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a>, rsa, 0x30)</td></tr>
+<tr class="separator:ab4c12611169203b9cae01298a036c843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12662497d5e98feadfdcea9261db7ec3"><td class="memItemLeft" align="right" valign="top"><a id="a12662497d5e98feadfdcea9261db7ec3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, body_size, 0)</td></tr>
+<tr class="separator:a12662497d5e98feadfdcea9261db7ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c748b0f5c21bdd202d32a88cd2a6c3"><td class="memItemLeft" align="right" valign="top"><a id="ad3c748b0f5c21bdd202d32a88cd2a6c3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, p_do_orig, 8)</td></tr>
+<tr class="separator:ad3c748b0f5c21bdd202d32a88cd2a6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c7a0a6e4463550dc557baccfe73579b"><td class="memItemLeft" align="right" valign="top"><a id="a5c7a0a6e4463550dc557baccfe73579b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, payload_size, 0x10)</td></tr>
+<tr class="separator:a5c7a0a6e4463550dc557baccfe73579b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8c40adb2fb3d63b6fc05a4854017281"><td class="memItemLeft" align="right" valign="top"><a id="ab8c40adb2fb3d63b6fc05a4854017281"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, hostkey_hash_offset, 0x18)</td></tr>
+<tr class="separator:ab8c40adb2fb3d63b6fc05a4854017281"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e0bba6079d49aa92743445a67467dc9"><td class="memItemLeft" align="right" valign="top"><a id="a2e0bba6079d49aa92743445a67467dc9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, rsa, 0x20)</td></tr>
+<tr class="separator:a2e0bba6079d49aa92743445a67467dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac23fc33e070830fe39385eaf57ca61"><td class="memItemLeft" align="right" valign="top"><a id="a9ac23fc33e070830fe39385eaf57ca61"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, ed448_key_ptr, 0x30)</td></tr>
+<tr class="separator:a9ac23fc33e070830fe39385eaf57ca61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8d1065463e35d2d711b39740ec1ab10"><td class="memItemLeft" align="right" valign="top"><a id="ad8d1065463e35d2d711b39740ec1ab10"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, num_keys, 0x38)</td></tr>
+<tr class="separator:ad8d1065463e35d2d711b39740ec1ab10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5472c59862ff3346922b38ad06d8f77"><td class="memItemLeft" align="right" valign="top"><a id="ae5472c59862ff3346922b38ad06d8f77"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, key_cur_idx, 0x44)</td></tr>
+<tr class="separator:ae5472c59862ff3346922b38ad06d8f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40bc1a763f191d3c4aa8803c419a7071"><td class="memItemLeft" align="right" valign="top"><a id="a40bc1a763f191d3c4aa8803c419a7071"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, key_prev_idx, 0x48)</td></tr>
+<tr class="separator:a40bc1a763f191d3c4aa8803c419a7071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b605c137a195d0cea50f215c67d6674"><td class="memItemLeft" align="right" valign="top"><a id="a3b605c137a195d0cea50f215c67d6674"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, num_host_keys, 0x58)</td></tr>
+<tr class="separator:a3b605c137a195d0cea50f215c67d6674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3840d43e99f696e8e2623ef00967d646"><td class="memItemLeft" align="right" valign="top"><a id="a3840d43e99f696e8e2623ef00967d646"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, num_host_pubkeys, 0x60)</td></tr>
+<tr class="separator:a3840d43e99f696e8e2623ef00967d646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af23c215fe5d72afa9df2d1e4f3a31424"><td class="memItemLeft" align="right" valign="top"><a id="af23c215fe5d72afa9df2d1e4f3a31424"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, ed448_key, 0x68)</td></tr>
+<tr class="separator:af23c215fe5d72afa9df2d1e4f3a31424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1161fd6392ffb97724c792e7a335c695"><td class="memItemLeft" align="right" valign="top"><a id="a1161fd6392ffb97724c792e7a335c695"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, <a class="el" href="unionpayload.html">payload</a>, 0xA8)</td></tr>
+<tr class="separator:a1161fd6392ffb97724c792e7a335c695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b3eb74eafa6ead7c9cb91bcb406d189"><td class="memItemLeft" align="right" valign="top"><a id="a6b3eb74eafa6ead7c9cb91bcb406d189"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, kctx, 0x308)</td></tr>
+<tr class="separator:a6b3eb74eafa6ead7c9cb91bcb406d189"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0e0e270f39e3bbb6ea6aca1ec2ef5b3"><td class="memItemLeft" align="right" valign="top"><a id="ac0e0e270f39e3bbb6ea6aca1ec2ef5b3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__cpuid__reloc__consts.html">backdoor_cpuid_reloc_consts_t</a>, cpuid_random_symbol_got_offset, 0)</td></tr>
 <tr class="separator:ac0e0e270f39e3bbb6ea6aca1ec2ef5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1576,30 +1673,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a4bcac3889c4d2fff6294722e35ec4c09"><td class="memItemLeft" align="right" valign="top"><a id="a4bcac3889c4d2fff6294722e35ec4c09"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structinstruction__search__ctx.html">instruction_search_ctx_t</a>, <a class="el" href="structimported__funcs.html">imported_funcs</a>, 0x38)</td></tr>
 <tr class="separator:a4bcac3889c4d2fff6294722e35ec4c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c36b0bffea839861161aaccff5bd00"><td class="memItemLeft" align="right" valign="top"><a id="aa3c36b0bffea839861161aaccff5bd00"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, cmd_type, 0)</td></tr>
-<tr class="separator:aa3c36b0bffea839861161aaccff5bd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3461e3ffaa79fb19e5afed2b34c2846c"><td class="memItemLeft" align="right" valign="top"><a id="a3461e3ffaa79fb19e5afed2b34c2846c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, args, 0x8)</td></tr>
-<tr class="separator:a3461e3ffaa79fb19e5afed2b34c2846c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97963757dd5d29dd7b61828064a06896"><td class="memItemLeft" align="right" valign="top"><a id="a97963757dd5d29dd7b61828064a06896"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, rsa_n, 0x10)</td></tr>
-<tr class="separator:a97963757dd5d29dd7b61828064a06896"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab79e59e1ffd612d99ae4caeede7ea023"><td class="memItemLeft" align="right" valign="top"><a id="ab79e59e1ffd612d99ae4caeede7ea023"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, rsa_e, 0x18)</td></tr>
-<tr class="separator:ab79e59e1ffd612d99ae4caeede7ea023"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade89a93f6bf0c658a353af242e2d147f"><td class="memItemLeft" align="right" valign="top"><a id="ade89a93f6bf0c658a353af242e2d147f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, payload_body, 0x20)</td></tr>
-<tr class="separator:ade89a93f6bf0c658a353af242e2d147f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd87ff1ba0c0258539f56fde9a3dcf1f"><td class="memItemLeft" align="right" valign="top"><a id="abd87ff1ba0c0258539f56fde9a3dcf1f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, payload_body_size, 0x28)</td></tr>
-<tr class="separator:abd87ff1ba0c0258539f56fde9a3dcf1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d4fac7de3f6aba3fdf4037bb0b7c37c"><td class="memItemLeft" align="right" valign="top"><a id="a7d4fac7de3f6aba3fdf4037bb0b7c37c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a>, rsa, 0x30)</td></tr>
-<tr class="separator:a7d4fac7de3f6aba3fdf4037bb0b7c37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68b586c330a6c746c65cee778a8b72e8"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a> (<a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a> *args, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
-<tr class="memdesc:a68b586c330a6c746c65cee778a8b72e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">forges a new <code>MONITOR_REQ_KEYALLOWED</code> packet, and injects it into the server to gain root privileges through the sshd monitor.  <a href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">More...</a><br /></td></tr>
-<tr class="separator:a68b586c330a6c746c65cee778a8b72e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60b93ed64ba904012e9fa9477e97a244"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">sshd_proxy_elevate</a> (<a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a> *args, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a60b93ed64ba904012e9fa9477e97a244"><td class="mdescLeft">&#160;</td><td class="mdescRight">forges a new <code>MONITOR_REQ_KEYALLOWED</code> packet, and injects it into the server to gain root privileges through the sshd monitor.  <a href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">More...</a><br /></td></tr>
+<tr class="separator:a60b93ed64ba904012e9fa9477e97a244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad15241561f71f06020fb6f2649e6a3"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3">x86_dasm</a> (<a class="el" href="structdasm__ctx.html">dasm_ctx_t</a> *ctx, u8 *code_start, u8 *code_end)</td></tr>
 <tr class="memdesc:a6ad15241561f71f06020fb6f2649e6a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">disassembles the given x64 code  <a href="xzre_8h.html#a6ad15241561f71f06020fb6f2649e6a3">More...</a><br /></td></tr>
 <tr class="separator:a6ad15241561f71f06020fb6f2649e6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1878,14 +1954,14 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a0c558b4d23018ab4e177dfd14f186be9"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0c558b4d23018ab4e177dfd14f186be9">is_payload_message</a> (u8 *sshbuf_data, size_t sshbuf_size, size_t *pOutPayloadSize, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a0c558b4d23018ab4e177dfd14f186be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given sshbuf buffer contains a backdoor payload message  <a href="xzre_8h.html#a0c558b4d23018ab4e177dfd14f186be9">More...</a><br /></td></tr>
 <tr class="separator:a0c558b4d23018ab4e177dfd14f186be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a91ced8a70c0e916ae8289e4ad77fbd47">decrypt_payload_message</a> (void *payload, size_t payload_size, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memitem:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a91ced8a70c0e916ae8289e4ad77fbd47">decrypt_payload_message</a> (void *<a class="el" href="unionpayload.html">payload</a>, size_t payload_size, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="mdescLeft">&#160;</td><td class="mdescRight">decrypts the given backdoor payload  <a href="xzre_8h.html#a91ced8a70c0e916ae8289e4ad77fbd47">More...</a><br /></td></tr>
 <tr class="separator:a91ced8a70c0e916ae8289e4ad77fbd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8412cd4edc81e13f4041a11dd7a59f33"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">check_backdoor_state</a> (<a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a8412cd4edc81e13f4041a11dd7a59f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the backdoor state is the expected one (FIXME: which?)  <a href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">More...</a><br /></td></tr>
 <tr class="separator:a8412cd4edc81e13f4041a11dd7a59f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ce260e9315b4afa70668391058ed484"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
-<tr class="memdesc:a8ce260e9315b4afa70668391058ed484"><td class="mdescLeft">&#160;</td><td class="mdescRight">runs the payload received from <a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function  <a href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">More...</a><br /></td></tr>
+<tr class="memdesc:a8ce260e9315b4afa70668391058ed484"><td class="mdescLeft">&#160;</td><td class="mdescRight">runs the payload received from <a class="el" href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function  <a href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">More...</a><br /></td></tr>
 <tr class="separator:a8ce260e9315b4afa70668391058ed484"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99eb76809c798f3bcae98526992e63ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">mm_answer_keyverify_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
 <tr class="memdesc:a99eb76809c798f3bcae98526992e63ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">used in conjunction with <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> to bypass the key validity check  <a href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">More...</a><br /></td></tr>
@@ -5253,7 +5329,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>runs the payload received from <a class="el" href="xzre_8h.html#a68b586c330a6c746c65cee778a8b72e8">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function </p>
+<p>runs the payload received from <a class="el" href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ssh</td><td></td></tr>
@@ -6805,8 +6881,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a68b586c330a6c746c65cee778a8b72e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68b586c330a6c746c65cee778a8b72e8">&#9670;&nbsp;</a></span>sshd_proxy_elevate()</h2>
+<a id="a60b93ed64ba904012e9fa9477e97a244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60b93ed64ba904012e9fa9477e97a244">&#9670;&nbsp;</a></span>sshd_proxy_elevate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -6814,7 +6890,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">BOOL sshd_proxy_elevate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structsshd__proxy__args.html">sshd_proxy_args_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d">monitor_data_t</a> *&#160;</td>
           <td class="paramname"><em>args</em>, </td>
         </tr>
         <tr>

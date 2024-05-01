@@ -71,34 +71,33 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1c8415ff49ef4794c10db68329fe12c7"><td class="memItemLeft" align="right" valign="top"><a id="a1c8415ff49ef4794c10db68329fe12c7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x30)</td></tr>
-<tr class="separator:a1c8415ff49ef4794c10db68329fe12c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d5f96debbda24fa0e3535f29fdba497"><td class="memItemLeft" align="right" valign="top"><a id="a9d5f96debbda24fa0e3535f29fdba497"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (sizeof(<a class="el" href="xzre_8h.html#a41b1410a6c3d2613895ce26896903600">key_payload_hdr_t</a>))</td></tr>
-<tr class="separator:a9d5f96debbda24fa0e3535f29fdba497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b671cffb3be6e8468580c208a459f5"><td class="memItemLeft" align="right" valign="top"><a id="a12b671cffb3be6e8468580c208a459f5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (CHACHA20_KEY_SIZE+CHACHA20_IV_SIZE)</td></tr>
+<tr class="separator:a12b671cffb3be6e8468580c208a459f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76013bf1c0b81f8711d7a1956e0fddb4"><td class="memItemLeft" align="right" valign="top"><a id="a76013bf1c0b81f8711d7a1956e0fddb4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (2)</td></tr>
 <tr class="separator:a76013bf1c0b81f8711d7a1956e0fddb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a34763014f682be707720cd4969e6b2a3"><td class="memItemLeft" align="right" valign="top"><a id="a34763014f682be707720cd4969e6b2a3"></a>
-BIGNUM *&#160;</td><td class="memItemRight" valign="bottom"><b>rsa_n</b></td></tr>
-<tr class="separator:a34763014f682be707720cd4969e6b2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe686d1601602eec50c2bc08479a4368"><td class="memItemLeft" align="right" valign="top"><a id="abe686d1601602eec50c2bc08479a4368"></a>
-BIGNUM *&#160;</td><td class="memItemRight" valign="bottom"><b>rsa_e</b></td></tr>
-<tr class="separator:abe686d1601602eec50c2bc08479a4368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830549bf04d4c195b064a0f812d5d755"><td class="memItemLeft" align="right" valign="top"><a id="a830549bf04d4c195b064a0f812d5d755"></a>
+const BIGNUM *&#160;</td><td class="memItemRight" valign="bottom"><b>rsa_n</b></td></tr>
+<tr class="separator:a830549bf04d4c195b064a0f812d5d755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5f419724c020c42dfce531f7dc74ec"><td class="memItemLeft" align="right" valign="top"><a id="acc5f419724c020c42dfce531f7dc74ec"></a>
+const BIGNUM *&#160;</td><td class="memItemRight" valign="bottom"><b>rsa_e</b></td></tr>
+<tr class="separator:acc5f419724c020c42dfce531f7dc74ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39faef86986dbf30f5d515ecc5d57f76"><td class="memItemLeft" align="right" valign="top"><a id="a39faef86986dbf30f5d515ecc5d57f76"></a>
 <a class="el" href="structcmd__arguments.html">cmd_arguments_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>args</b></td></tr>
 <tr class="separator:a39faef86986dbf30f5d515ecc5d57f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1d94065a7a0cdd1205276ffb0bed520"><td class="memItemLeft" align="right" valign="top"><a id="af1d94065a7a0cdd1205276ffb0bed520"></a>
 <a class="el" href="xzre_8h.html#aaad9381e8f52552bbb914465c45bdac2">key_payload_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>payload</b></td></tr>
 <tr class="separator:af1d94065a7a0cdd1205276ffb0bed520"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a513b4c31ec1dbf7865acd503325ff11b"><td class="memItemLeft" align="right" valign="top"><a id="a513b4c31ec1dbf7865acd503325ff11b"></a>
-u8&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkey__ctx.html#a513b4c31ec1dbf7865acd503325ff11b">decrypted_secret_data</a> [57]</td></tr>
-<tr class="memdesc:a513b4c31ec1dbf7865acd503325ff11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ChaCha Key. <br /></td></tr>
-<tr class="separator:a513b4c31ec1dbf7865acd503325ff11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d8637e32b3a14c507f0b9e9b7380817"><td class="memItemLeft" align="right" valign="top"><a id="a1d8637e32b3a14c507f0b9e9b7380817"></a>
+u8&#160;</td><td class="memItemRight" valign="bottom"><b>ivec</b> [CHACHA20_IV_SIZE]</td></tr>
+<tr class="separator:a1d8637e32b3a14c507f0b9e9b7380817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7508f7e900cee7d2092d5239aff3ee8"><td class="memItemLeft" align="right" valign="top"><a id="aa7508f7e900cee7d2092d5239aff3ee8"></a>
+u8&#160;</td><td class="memItemRight" valign="bottom"><b>ed448_key</b> [ED448_KEY_SIZE]</td></tr>
+<tr class="separator:aa7508f7e900cee7d2092d5239aff3ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="xzre_8h_source.html">xzre.h</a></li>
