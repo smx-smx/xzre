@@ -188,6 +188,20 @@ struct auditstate
 
 typedef struct link_map *lookup_t;
 
+/** reference: https://flapenguin.me/elf-dt-gnu-hash */
+typedef struct gnu_hash_table {
+	uint32_t nbuckets;
+	uint32_t symoffset;
+	uint32_t bloom_size;
+	uint32_t bloom_shift;
+	uint64_t bloom[];
+	#if 0
+	// uint64_t bloom[bloom_size]; /* uint32_t for 32-bit binaries */
+	// uint32_t buckets[nbuckets];
+	// uint32_t chain[];
+	#endif
+} gnu_hash_table_t;
+
 struct La_i86_regs;
 struct La_i86_retval;
 struct La_x86_64_regs;
@@ -2265,7 +2279,7 @@ extern BOOL find_function(
  * @param p_flags the expected segment protection flags (PF_*)
  * @return BOOL TRUE if found, FALSE otherwise
  */
-extern BOOL elf_contains_vaddr(elf_info_t *elf_info, u64 vaddr, u64 size, u32 p_flags);
+extern BOOL elf_contains_vaddr(elf_info_t *elf_info, void *vaddr, u64 size, u32 p_flags);
 
 /**
  * @brief checks if given ELF file contains the range [vaddr, vaddr+size)
@@ -2287,6 +2301,15 @@ extern BOOL elf_contains_vaddr_relro(elf_info_t *elf_info, u64 vaddr, u64 size, 
  * @return BOOL TRUE if parsing completed successfully, FALSE otherwise
  */
 extern BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info);
+
+/**
+ * @brief checks if the provided identifiers represent a `PT_GNU_RELRO`
+ * 
+ * @param p_type program header type
+ * @param addend constant `0xA0000000`
+ * @return BOOL TRUE if the supplied pt_type is `PT_GNU_RELRO`, FALSE otherwise
+ */
+extern BOOL is_gnu_relro(Elf64_Word p_type, u32 addend);
 
 /**
  * @brief Parses the main executable from the provided structure.

@@ -38,7 +38,7 @@ SECTIONS_BEGIN()
 	/* 0000000000001200 */ DEFSYM(fake_lzma_free, .text.stream_decoda)
 	/* 0000000000001230 */ DEFSYM(elf_contains_vaddr_impl, .text.powerpc_coda) // FIXME: prototype
 	/* 0000000000001390 */ DEFSYM(elf_contains_vaddr, .text.parse_bcz)
-	/* 00000000000013A0 */ DEFSYM(is_gnu_relro, .text.lzma_simple_props_sizd) // FIXME: prototype
+	/* 00000000000013A0 */ DEFSYM(is_gnu_relro, .text.lzma_simple_props_sizd)
 	/* 00000000000013C0 */ DEFSYM(elf_parse, .text.get_literal_prica)
 	/* 0000000000001870 */ DEFSYM(elf_symbol_get, .text.crc_inia)
 	DEFSYM_START(.text.crc64_generia)
