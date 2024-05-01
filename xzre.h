@@ -1942,7 +1942,7 @@ typedef union __attribute__((packed)) payload {
  */
 typedef struct __attribute__((packed)) run_backdoor_commands_data {
 	u64 body_size;
-	u32 *p_do_orig;
+	BOOL *p_do_orig;
 	u64 payload_size;
 	u64 hostkey_hash_offset;
 	RSA *rsa;

