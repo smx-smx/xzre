@@ -129,6 +129,12 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__log__ctx.html">sshd_log_ctx</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsshd__offsets__kex.html">sshd_offsets_kex</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsshd__offsets__sshbuf.html">sshd_offsets_sshbuf</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__offsets__fields.html">sshd_offsets_fields</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__offsets.html">sshd_offsets</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshd__payload__ctx.html">sshd_payload_ctx</a></td></tr>
@@ -351,6 +357,15 @@ typedef struct <a class="el" href="structsshd__ctx.html">sshd_ctx</a>&#160;</td>
 <tr class="memitem:a6f86f3a8bd5ba030a9f53f298b22ef00"><td class="memItemLeft" align="right" valign="top"><a id="a6f86f3a8bd5ba030a9f53f298b22ef00"></a>
 typedef struct <a class="el" href="structsshd__log__ctx.html">sshd_log_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_log_ctx_t</b></td></tr>
 <tr class="separator:a6f86f3a8bd5ba030a9f53f298b22ef00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4fe3cc13a3ff4b5b495d34f1772c6df"><td class="memItemLeft" align="right" valign="top"><a id="ac4fe3cc13a3ff4b5b495d34f1772c6df"></a>
+typedef union <a class="el" href="unionsshd__offsets__kex.html">sshd_offsets_kex</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_offsets_kex_t</b></td></tr>
+<tr class="separator:ac4fe3cc13a3ff4b5b495d34f1772c6df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad83d376950ce717489769415c25a5302"><td class="memItemLeft" align="right" valign="top"><a id="ad83d376950ce717489769415c25a5302"></a>
+typedef union <a class="el" href="unionsshd__offsets__sshbuf.html">sshd_offsets_sshbuf</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_offsets_sshbuf_t</b></td></tr>
+<tr class="separator:ad83d376950ce717489769415c25a5302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6e9d6a0969316000596ae0a8efb7cb"><td class="memItemLeft" align="right" valign="top"><a id="a2a6e9d6a0969316000596ae0a8efb7cb"></a>
+typedef struct <a class="el" href="structsshd__offsets__fields.html">sshd_offsets_fields</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_offsets_fields_t</b></td></tr>
+<tr class="separator:a2a6e9d6a0969316000596ae0a8efb7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7be4624c05a2d9dcfae7da34acdaa69c"><td class="memItemLeft" align="right" valign="top"><a id="a7be4624c05a2d9dcfae7da34acdaa69c"></a>
 typedef struct <a class="el" href="structsshd__offsets.html">sshd_offsets</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_offsets_t</b></td></tr>
 <tr class="separator:a7be4624c05a2d9dcfae7da34acdaa69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1610,15 +1625,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a40bc1a763f191d3c4aa8803c419a7071"><td class="memItemLeft" align="right" valign="top"><a id="a40bc1a763f191d3c4aa8803c419a7071"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, key_prev_idx, 0x48)</td></tr>
 <tr class="separator:a40bc1a763f191d3c4aa8803c419a7071"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b605c137a195d0cea50f215c67d6674"><td class="memItemLeft" align="right" valign="top"><a id="a3b605c137a195d0cea50f215c67d6674"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, num_host_keys, 0x58)</td></tr>
-<tr class="separator:a3b605c137a195d0cea50f215c67d6674"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3840d43e99f696e8e2623ef00967d646"><td class="memItemLeft" align="right" valign="top"><a id="a3840d43e99f696e8e2623ef00967d646"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, num_host_pubkeys, 0x60)</td></tr>
-<tr class="separator:a3840d43e99f696e8e2623ef00967d646"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af23c215fe5d72afa9df2d1e4f3a31424"><td class="memItemLeft" align="right" valign="top"><a id="af23c215fe5d72afa9df2d1e4f3a31424"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, ed448_key, 0x68)</td></tr>
-<tr class="separator:af23c215fe5d72afa9df2d1e4f3a31424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780487919be3b7819f0e811ecd652544"><td class="memItemLeft" align="right" valign="top"><a id="a780487919be3b7819f0e811ecd652544"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, unk50, 0x50)</td></tr>
+<tr class="separator:a780487919be3b7819f0e811ecd652544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78458295a33474a6481e16e18dd6e5a3"><td class="memItemLeft" align="right" valign="top"><a id="a78458295a33474a6481e16e18dd6e5a3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, u.keys.num_host_keys, 0x58)</td></tr>
+<tr class="separator:a78458295a33474a6481e16e18dd6e5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005edc7e447669e08b882dfe5264e214"><td class="memItemLeft" align="right" valign="top"><a id="a005edc7e447669e08b882dfe5264e214"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, u.keys.num_host_pubkeys, 0x60)</td></tr>
+<tr class="separator:a005edc7e447669e08b882dfe5264e214"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e1812cdd16ab5316abdbf1971a3d85d"><td class="memItemLeft" align="right" valign="top"><a id="a3e1812cdd16ab5316abdbf1971a3d85d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, u.keys.ed448_key, 0x68)</td></tr>
+<tr class="separator:a3e1812cdd16ab5316abdbf1971a3d85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1161fd6392ffb97724c792e7a335c695"><td class="memItemLeft" align="right" valign="top"><a id="a1161fd6392ffb97724c792e7a335c695"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="xzre_8h.html#aa5a220a495d161205ee770f8e7b360d5">run_backdoor_commands_data_t</a>, <a class="el" href="unionpayload.html">payload</a>, 0xA8)</td></tr>
 <tr class="separator:a1161fd6392ffb97724c792e7a335c695"><td class="memSeparator" colspan="2">&#160;</td></tr>
