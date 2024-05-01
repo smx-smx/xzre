@@ -160,8 +160,8 @@ class Invoker {
         $this->nat_sshd_ctx->have_mm_answer_keyallowed = 1;
         $this->nat_sshd_ctx->have_mm_answer_authpassword = 1;
         $this->nat_sshd_ctx->have_mm_answer_keyverify = 1;
-        $this->nat_sshd_ctx->monitor_req_fn = function($ssh, $sock, $buf){
-            print("-- monitor_req_fn invoked\n");
+        $this->nat_sshd_ctx->mm_answer_authpassword_hook = function($ssh, $sock, $buf){
+            print("-- mm_answer_authpassword_hook invoked\n");
             return 0;
         };
 
