@@ -1951,7 +1951,7 @@ typedef struct __attribute__((packed)) run_backdoor_commands_data {
 	u64 payload_size;
 	u64 hostkey_hash_offset;
 	RSA *rsa;
-	PADDING(8);
+	u8 *payload_data_ptr;
 	u8 *ed448_key_ptr;
 	u64 num_keys;
 	PADDING(4);
