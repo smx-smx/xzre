@@ -8,6 +8,7 @@ add_library(xzre_code
 	fake_lzma_alloc.c
 	fake_lzma_free.c
 	main_elf_parse.c
+	run_backdoor_commands.c
 	secret_data_append_from_address.c
 	secret_data_append_item.c
 	secret_data_append_singleton.c

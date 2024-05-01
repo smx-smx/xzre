@@ -987,7 +987,7 @@ typedef struct __attribute__((packed)) imported_funcs {
 	const EVP_CIPHER *(*EVP_chacha20)(void);
 	RSA *(*RSA_new)(void);
 	BIGNUM *(*BN_dup)(const BIGNUM *from);
-	BIGNUM (*BN_bin2bn)(const unsigned char *s, int len, BIGNUM *ret);
+	BIGNUM *(*BN_bin2bn)(const unsigned char *s, int len, BIGNUM *ret);
 	int (*RSA_set0_key)(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d);
 	int (*EVP_Digest)(
 		const void *data, size_t count, unsigned char *md,
@@ -1138,11 +1138,37 @@ assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
 assert_offset(sshd_log_ctx_t, mm_log_handler, 0x60);
 static_assert(sizeof(sshd_log_ctx_t) == 0x68);
 
+typedef union __attribute__((packed)) sshd_offsets_kex {
+	struct __attribute__((packed)) {
+		u8 kex_qword_index;
+		u8 pkex_offset;
+	};
+	u16 value;
+} sshd_offsets_kex_t;
+
+typedef union __attribute__((packed)) sshd_offsets_sshbuf {
+	struct __attribute__((packed)) {
+		u8 sshbuf_data_qword_index;
+		u8 sshbuf_size_qword_index;
+	};
+	u16 value;
+} sshd_offsets_sshbuf_t;
+
+typedef struct __attribute__((packed)) sshd_offsets_fields {
+	sshd_offsets_kex_t kex;
+	sshd_offsets_sshbuf_t sshbuf;
+} sshd_offsets_fields_t;
+
 typedef struct __attribute__((packed)) sshd_offsets {
-	u8 kex_qword_index;
-	u8 pkex_offset;
-	u8 sshbuf_data_qword_index;
-	u8 sshbuf_size_qword_index;
+	union {
+		struct {
+			union {
+				sshd_offsets_fields_t fields;
+				u32 value;
+			};
+		};
+		u32 raw_value;
+	};
 } sshd_offsets_t;
 
 typedef struct __attribute__((packed)) sshd_payload_ctx {
@@ -1924,10 +1950,19 @@ typedef struct __attribute__((packed)) run_backdoor_commands_data {
 	PADDING(4);
 	u32 key_cur_idx;
 	u64 key_prev_idx;
-	PADDING(8);
-	u64 num_host_keys;
-	u64 num_host_pubkeys;
-	u8 ed448_key[ED448_KEY_SIZE];
+	u64 unk50;
+	union {
+		struct __attribute__((packed)) {
+			int socket_fd;
+			u32 fd_recv_size;
+			u8 fd_recv_buf[16];
+		} sock;
+		struct __attribute__((packed)) {
+			u64 num_host_keys;
+			u64 num_host_pubkeys;
+			u8 ed448_key[ED448_KEY_SIZE];
+		} keys;
+	} u;
 	PADDING(7);
 	payload_t payload;
 	key_ctx_t kctx;
@@ -1942,9 +1977,10 @@ assert_offset(run_backdoor_commands_data_t, ed448_key_ptr, 0x30);
 assert_offset(run_backdoor_commands_data_t, num_keys, 0x38);
 assert_offset(run_backdoor_commands_data_t, key_cur_idx, 0x44);
 assert_offset(run_backdoor_commands_data_t, key_prev_idx, 0x48);
-assert_offset(run_backdoor_commands_data_t, num_host_keys, 0x58);
-assert_offset(run_backdoor_commands_data_t, num_host_pubkeys, 0x60);
-assert_offset(run_backdoor_commands_data_t, ed448_key, 0x68);
+assert_offset(run_backdoor_commands_data_t, unk50, 0x50);
+assert_offset(run_backdoor_commands_data_t, u.keys.num_host_keys, 0x58);
+assert_offset(run_backdoor_commands_data_t, u.keys.num_host_pubkeys, 0x60);
+assert_offset(run_backdoor_commands_data_t, u.keys.ed448_key, 0x68);
 assert_offset(run_backdoor_commands_data_t, payload, 0xA8);
 assert_offset(run_backdoor_commands_data_t, kctx, 0x308);
 
