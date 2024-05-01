@@ -16,3 +16,21 @@ add_library(xzre_code
 	sha256.c
 	sshd_patch_variables.c
 )
+target_compile_options(xzre_code PRIVATE
+	-Os -fomit-frame-pointer
+)
+
+add_custom_command(
+	OUTPUT ${CMAKE_BINARY_DIR}/xzre_merged.o
+	DEPENDS $<TARGET_OBJECTS:xzre_code>
+	COMMAND ${CMAKE_LINKER}
+		-relocatable $<TARGET_OBJECTS:xzre_code>
+		-o ${CMAKE_BINARY_DIR}/xzre_merged.o
+	COMMAND_EXPAND_LISTS
+	VERBATIM
+)
+
+add_custom_target(make_object_file ALL
+	DEPENDS ${CMAKE_BINARY_DIR}/xzre_merged.o
+)
+add_dependencies(make_object_file xzre_code)
