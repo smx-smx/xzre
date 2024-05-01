@@ -94,6 +94,8 @@ $(function() {
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structauditstate.html">auditstate</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgnu__hash__table.html">gnu_hash_table</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudit__ifaces.html">audit_ifaces</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlzma__sha256__state.html">lzma_sha256_state</a></td></tr>
@@ -292,6 +294,8 @@ typedef Elf64_Xword&#160;</td><td class="memItemRight" valign="bottom"><b>Elf64_
 <tr class="memitem:a664c87ad0ff2d94f4894df6aae5d491a"><td class="memItemLeft" align="right" valign="top"><a id="a664c87ad0ff2d94f4894df6aae5d491a"></a>
 typedef struct link_map *&#160;</td><td class="memItemRight" valign="bottom"><b>lookup_t</b></td></tr>
 <tr class="separator:a664c87ad0ff2d94f4894df6aae5d491a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14e14daa7c876bbbe0dc552f840494f8"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structgnu__hash__table.html">gnu_hash_table</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a14e14daa7c876bbbe0dc552f840494f8">gnu_hash_table_t</a></td></tr>
+<tr class="separator:a14e14daa7c876bbbe0dc552f840494f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a050c65e107f0c828f856a231f4b4e788"><td class="memItemLeft" align="right" valign="top"><a id="a050c65e107f0c828f856a231f4b4e788"></a>
 typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL</b></td></tr>
 <tr class="separator:a050c65e107f0c828f856a231f4b4e788"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1641,15 +1645,18 @@ Functions</h2></td></tr>
 <tr class="memitem:adb94193174339f9eae22428308d46c33"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#adb94193174339f9eae22428308d46c33">find_function</a> (u8 *code_start, void **func_start, void **func_end, u8 *search_base, u8 *code_end, FuncFindType find_mode)</td></tr>
 <tr class="memdesc:adb94193174339f9eae22428308d46c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates the function boundaries.  <a href="xzre_8h.html#adb94193174339f9eae22428308d46c33">More...</a><br /></td></tr>
 <tr class="separator:adb94193174339f9eae22428308d46c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">elf_contains_vaddr</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 vaddr, u64 size, u32 p_flags)</td></tr>
-<tr class="memdesc:a2a09d15b1c506e0f29ee9433771ad8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains the range [vaddr, vaddr+size) in a segment with the specified memory protection flags  <a href="xzre_8h.html#a2a09d15b1c506e0f29ee9433771ad8db">More...</a><br /></td></tr>
-<tr class="separator:a2a09d15b1c506e0f29ee9433771ad8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bf5f1627236a90a54515265280e8354"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2bf5f1627236a90a54515265280e8354">elf_contains_vaddr</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, void *vaddr, u64 size, u32 p_flags)</td></tr>
+<tr class="memdesc:a2bf5f1627236a90a54515265280e8354"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains the range [vaddr, vaddr+size) in a segment with the specified memory protection flags  <a href="xzre_8h.html#a2bf5f1627236a90a54515265280e8354">More...</a><br /></td></tr>
+<tr class="separator:a2bf5f1627236a90a54515265280e8354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b6f96960f68c8cd69c6bb5bce25426b"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2b6f96960f68c8cd69c6bb5bce25426b">elf_contains_vaddr_relro</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>, u64 vaddr, u64 size, u32 p_flags)</td></tr>
 <tr class="memdesc:a2b6f96960f68c8cd69c6bb5bce25426b"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if given ELF file contains the range [vaddr, vaddr+size) in the gnurelro segment  <a href="xzre_8h.html#a2b6f96960f68c8cd69c6bb5bce25426b">More...</a><br /></td></tr>
 <tr class="separator:a2b6f96960f68c8cd69c6bb5bce25426b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a049328971f4e99ce954d5e0346fee6d7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">elf_parse</a> (Elf64_Ehdr *ehdr, <a class="el" href="structelf__info.html">elf_info_t</a> *<a class="el" href="structelf__info.html">elf_info</a>)</td></tr>
 <tr class="memdesc:a049328971f4e99ce954d5e0346fee6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given in-memory ELF file into <a class="el" href="structelf__info.html">elf_info</a>.  <a href="xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7">More...</a><br /></td></tr>
 <tr class="separator:a049328971f4e99ce954d5e0346fee6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae4bd899725c9e0825517734783f0433"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aae4bd899725c9e0825517734783f0433">is_gnu_relro</a> (Elf64_Word p_type, u32 addend)</td></tr>
+<tr class="memdesc:aae4bd899725c9e0825517734783f0433"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the provided identifiers represent a <code>PT_GNU_RELRO</code>  <a href="xzre_8h.html#aae4bd899725c9e0825517734783f0433">More...</a><br /></td></tr>
+<tr class="separator:aae4bd899725c9e0825517734783f0433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642ed90d3ade30228b3286310de5e5c1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">main_elf_parse</a> (<a class="el" href="structmain__elf.html">main_elf_t</a> *<a class="el" href="structmain__elf.html">main_elf</a>)</td></tr>
 <tr class="memdesc:a642ed90d3ade30228b3286310de5e5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the main executable from the provided structure. As part of the process the arguments and environment is checked.  <a href="xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1">More...</a><br /></td></tr>
 <tr class="separator:a642ed90d3ade30228b3286310de5e5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1967,6 +1974,21 @@ Variables</h2></td></tr>
 
 <p>array of ELF handles </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289">ElfId</a> maps the indices </dd></dl>
+
+</div>
+</div>
+<a id="a14e14daa7c876bbbe0dc552f840494f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14e14daa7c876bbbe0dc552f840494f8">&#9670;&nbsp;</a></span>gnu_hash_table_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structgnu__hash__table.html">gnu_hash_table</a> <a class="el" href="xzre_8h.html#a14e14daa7c876bbbe0dc552f840494f8">gnu_hash_table_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>reference: <a href="https://flapenguin.me/elf-dt-gnu-hash">https://flapenguin.me/elf-dt-gnu-hash</a> </p>
 
 </div>
 </div>
@@ -2862,8 +2884,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2a09d15b1c506e0f29ee9433771ad8db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a09d15b1c506e0f29ee9433771ad8db">&#9670;&nbsp;</a></span>elf_contains_vaddr()</h2>
+<a id="a2bf5f1627236a90a54515265280e8354"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bf5f1627236a90a54515265280e8354">&#9670;&nbsp;</a></span>elf_contains_vaddr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2877,7 +2899,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">u64&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>vaddr</em>, </td>
         </tr>
         <tr>
@@ -4987,6 +5009,44 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the instruction is an endbr64, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="aae4bd899725c9e0825517734783f0433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae4bd899725c9e0825517734783f0433">&#9670;&nbsp;</a></span>is_gnu_relro()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL is_gnu_relro </td>
+          <td>(</td>
+          <td class="paramtype">Elf64_Word&#160;</td>
+          <td class="paramname"><em>p_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u32&#160;</td>
+          <td class="paramname"><em>addend</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the provided identifiers represent a <code>PT_GNU_RELRO</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_type</td><td>program header type </td></tr>
+    <tr><td class="paramname">addend</td><td>constant <code>0xA0000000</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the supplied pt_type is <code>PT_GNU_RELRO</code>, FALSE otherwise </dd></dl>
 
 </div>
 </div>

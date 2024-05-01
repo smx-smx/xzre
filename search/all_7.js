@@ -10,10 +10,12 @@ var searchData=
   ['global_5fcontext_133',['global_context',['../structglobal__context.html',1,'']]],
   ['gnu_5fhash_5flast_5fbloom_134',['gnu_hash_last_bloom',['../structelf__info.html#a3a1a5acb2d22a9bc1ae2df30fa121a33',1,'elf_info']]],
   ['gnu_5fhash_5fnbuckets_135',['gnu_hash_nbuckets',['../structelf__info.html#a575df843cb133e2a75e6b8027eb75659',1,'elf_info']]],
-  ['gnurelro_5ffound_136',['gnurelro_found',['../structelf__info.html#a66d75bbde3aa44519fd136a848e051da',1,'elf_info']]],
-  ['gnurelro_5fmemsize_137',['gnurelro_memsize',['../structelf__info.html#a1783b21f972415e71d5cb7d8531de5e5',1,'elf_info']]],
-  ['gnurelro_5fvaddr_138',['gnurelro_vaddr',['../structelf__info.html#a8500b4de03a9b9d44989375921b27f70',1,'elf_info']]],
-  ['got_5fctx_139',['got_ctx',['../structgot__ctx.html',1,'']]],
-  ['got_5foffset_140',['got_offset',['../structgot__ctx.html#afc55b6f8c228b93eb08d1bdc061f4750',1,'got_ctx']]],
-  ['got_5fptr_141',['got_ptr',['../structgot__ctx.html#aac8a1b7398f74099e686177ae0a11a9b',1,'got_ctx']]]
+  ['gnu_5fhash_5ftable_136',['gnu_hash_table',['../structgnu__hash__table.html',1,'']]],
+  ['gnu_5fhash_5ftable_5ft_137',['gnu_hash_table_t',['../xzre_8h.html#a14e14daa7c876bbbe0dc552f840494f8',1,'xzre.h']]],
+  ['gnurelro_5ffound_138',['gnurelro_found',['../structelf__info.html#a66d75bbde3aa44519fd136a848e051da',1,'elf_info']]],
+  ['gnurelro_5fmemsize_139',['gnurelro_memsize',['../structelf__info.html#a1783b21f972415e71d5cb7d8531de5e5',1,'elf_info']]],
+  ['gnurelro_5fvaddr_140',['gnurelro_vaddr',['../structelf__info.html#a8500b4de03a9b9d44989375921b27f70',1,'elf_info']]],
+  ['got_5fctx_141',['got_ctx',['../structgot__ctx.html',1,'']]],
+  ['got_5foffset_142',['got_offset',['../structgot__ctx.html#afc55b6f8c228b93eb08d1bdc061f4750',1,'got_ctx']]],
+  ['got_5fptr_143',['got_ptr',['../structgot__ctx.html#aac8a1b7398f74099e686177ae0a11a9b',1,'got_ctx']]]
 ];
