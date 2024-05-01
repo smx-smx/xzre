@@ -1548,7 +1548,7 @@ $(function() {
 <div class="line"><a name="l01951"></a><span class="lineno"> 1951</span>&#160;    u64 payload_size;</div>
 <div class="line"><a name="l01952"></a><span class="lineno"> 1952</span>&#160;    u64 hostkey_hash_offset;</div>
 <div class="line"><a name="l01953"></a><span class="lineno"> 1953</span>&#160;    RSA *rsa;</div>
-<div class="line"><a name="l01954"></a><span class="lineno"> 1954</span>&#160;    PADDING(8);</div>
+<div class="line"><a name="l01954"></a><span class="lineno"> 1954</span>&#160;    u8 *payload_data_ptr;</div>
 <div class="line"><a name="l01955"></a><span class="lineno"> 1955</span>&#160;    u8 *ed448_key_ptr;</div>
 <div class="line"><a name="l01956"></a><span class="lineno"> 1956</span>&#160;    u64 num_keys;</div>
 <div class="line"><a name="l01957"></a><span class="lineno"> 1957</span>&#160;    PADDING(4);</div>
