@@ -6,6 +6,14 @@
 #include <elf.h>
 #include <openssl/bn.h>
 
+#ifndef DT_RELRSZ
+#define DT_RELRSZ 35 /* Total size of RELR relative relocations */
+#endif
+
+#ifndef DT_RELR
+#define DT_RELR	36 /* Address of RELR relative relocations */
+#endif
+
 BOOL elf_parse(Elf64_Ehdr *ehdr, elf_info_t *elf_info){
 	if(!ehdr || !elf_info){
 		return FALSE;
