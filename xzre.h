@@ -293,6 +293,9 @@ typedef struct {
 #define CHACHA20_IV_SIZE 16
 #define SHA256_DIGEST_SIZE 32
 #define ED448_KEY_SIZE 57
+#define ED448_SIGNATURE_SIZE 114
+
+#define X_BN_num_bytes(bits) (((bits)+7)/8)
 
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
@@ -1107,8 +1110,10 @@ assert_offset(sshd_ctx_t, STR_without_password, 0xD0);
 assert_offset(sshd_ctx_t, STR_publickey, 0xD8);
 
 typedef struct __attribute__((packed)) sshd_log_ctx {
-	PADDING(0x8);
-	PADDING(0x8);
+	PADDING(4);
+	BOOL unkbool_log_handler;
+	BOOL syslog_disabled;
+	PADDING(4);
 	char *STR_percent_s;
 	char *STR_Connection_closed_by;
 	char *STR_preauth;
@@ -1122,6 +1127,7 @@ typedef struct __attribute__((packed)) sshd_log_ctx {
 	void (*mm_log_handler)(int level, int forced, const char *msg, void *ctx);
 } sshd_log_ctx_t;
 
+assert_offset(sshd_log_ctx_t, syslog_disabled, 0x8);
 assert_offset(sshd_log_ctx_t, STR_percent_s, 0x10);
 assert_offset(sshd_log_ctx_t, STR_Connection_closed_by, 0x18);
 assert_offset(sshd_log_ctx_t, STR_preauth, 0x20);
@@ -1754,7 +1760,7 @@ typedef struct __attribute__((packed)) cmd_arguments {
 
 typedef struct __attribute__((packed)) key_payload_body {
 	/** ed448 signature */
-	u8 signature[0x72];
+	u8 signature[ED448_SIGNATURE_SIZE];
 	cmd_arguments_t args;
 	u8 data[0x1A1];
 } key_payload_body_t;
@@ -1770,6 +1776,9 @@ typedef struct __attribute__((packed)) key_payload {
 	key_payload_hdr_t header;
 	key_payload_body_t body;
 } key_payload_t;
+static_assert(sizeof(key_payload_t) == 0x228);
+
+#define TEST_FLAG(x, flag) (((x) & (flag)) != 0)
 
 enum CommandFlags1 {
 	/**
@@ -1846,16 +1855,13 @@ assert_offset(cmd_arguments_t, u, 3);
 static_assert(sizeof(cmd_arguments_t) == 0x5);
 
 typedef struct __attribute__((packed)) key_ctx {
-	BIGNUM *rsa_n;
-	BIGNUM *rsa_e;
+	const BIGNUM *rsa_n;
+	const BIGNUM *rsa_e;
 	cmd_arguments_t args;
 	key_payload_t payload;
-	PADDING(0x30);
-	PADDING(sizeof(key_payload_hdr_t));
-	/**
-	 * @brief ChaCha Key
-	 */
-	u8 decrypted_secret_data[57];
+	PADDING(CHACHA20_KEY_SIZE + CHACHA20_IV_SIZE);
+	u8 ivec[CHACHA20_IV_SIZE];
+	u8 ed448_key[ED448_KEY_SIZE];
 	PADDING(2);
 } key_ctx_t;
 
@@ -1863,7 +1869,82 @@ assert_offset(key_ctx_t, rsa_n, 0);
 assert_offset(key_ctx_t, rsa_e, 0x8);
 assert_offset(key_ctx_t, args, 0x10);
 assert_offset(key_ctx_t, payload, 0x15);
-static_assert(sizeof(key_ctx_t) == 0x2B8);
+assert_offset(key_ctx_t, ivec, 0x26D);
+assert_offset(key_ctx_t, ed448_key, 0x27D);
+
+/**
+ * @brief data used within @ref sshd_proxy_elevate
+ * 
+ */
+typedef struct __attribute__((packed)) monitor_data {
+	u32 cmd_type;
+	PADDING(4);
+	cmd_arguments_t *args;
+	const BIGNUM *rsa_n;
+	const BIGNUM *rsa_e;
+	u8 *payload_body;
+	u16 payload_body_size;
+	PADDING(6);
+	RSA *rsa;
+} monitor_data_t;
+
+assert_offset(monitor_data_t, cmd_type, 0);
+assert_offset(monitor_data_t, args, 0x8);
+assert_offset(monitor_data_t, rsa_n, 0x10);
+assert_offset(monitor_data_t, rsa_e, 0x18);
+assert_offset(monitor_data_t, payload_body, 0x20);
+assert_offset(monitor_data_t, payload_body_size, 0x28);
+assert_offset(monitor_data_t, rsa, 0x30);
+
+/**
+ * @brief payload union within @ref run_backdoor_commands
+ * 
+ */
+typedef union __attribute__((packed)) payload {
+	monitor_data_t monitor;
+	u8 data[608];
+} payload_t;
+
+/**
+ * @brief stack frame layout for @ref run_backdoor_commands
+ * 
+ */
+typedef struct __attribute__((packed)) run_backdoor_commands_data {
+	u64 body_size;
+	u32 *p_do_orig;
+	u64 payload_size;
+	u64 hostkey_hash_offset;
+	RSA *rsa;
+	PADDING(8);
+	u8 *ed448_key_ptr;
+	u64 num_keys;
+	PADDING(4);
+	u32 key_cur_idx;
+	u64 key_prev_idx;
+	PADDING(8);
+	u64 num_host_keys;
+	u64 num_host_pubkeys;
+	u8 ed448_key[ED448_KEY_SIZE];
+	PADDING(7);
+	payload_t payload;
+	key_ctx_t kctx;
+} run_backdoor_commands_data_t;
+
+assert_offset(run_backdoor_commands_data_t, body_size, 0);
+assert_offset(run_backdoor_commands_data_t, p_do_orig, 8);
+assert_offset(run_backdoor_commands_data_t, payload_size, 0x10);
+assert_offset(run_backdoor_commands_data_t, hostkey_hash_offset, 0x18);
+assert_offset(run_backdoor_commands_data_t, rsa, 0x20);
+assert_offset(run_backdoor_commands_data_t, ed448_key_ptr, 0x30);
+assert_offset(run_backdoor_commands_data_t, num_keys, 0x38);
+assert_offset(run_backdoor_commands_data_t, key_cur_idx, 0x44);
+assert_offset(run_backdoor_commands_data_t, key_prev_idx, 0x48);
+assert_offset(run_backdoor_commands_data_t, num_host_keys, 0x58);
+assert_offset(run_backdoor_commands_data_t, num_host_pubkeys, 0x60);
+assert_offset(run_backdoor_commands_data_t, ed448_key, 0x68);
+assert_offset(run_backdoor_commands_data_t, payload, 0xA8);
+assert_offset(run_backdoor_commands_data_t, kctx, 0x308);
+
 
 typedef struct __attribute__((packed)) backdoor_cpuid_reloc_consts {
 	/**
@@ -1993,25 +2074,6 @@ assert_offset(instruction_search_ctx_t, hooks, 0x30);
 assert_offset(instruction_search_ctx_t, imported_funcs, 0x38);
 static_assert(sizeof(instruction_search_ctx_t) == 0x40);
 
-typedef struct __attribute__((packed)) sshd_proxy_args {
-	u32 cmd_type;
-	PADDING(4);
-	cmd_arguments_t *args;
-	const BIGNUM *rsa_n;
-	const BIGNUM *rsa_e;
-	u8 *payload_body;
-	u16 payload_body_size;
-	PADDING(6);
-	RSA *rsa;
-} sshd_proxy_args_t;
-
-assert_offset(sshd_proxy_args_t, cmd_type, 0);
-assert_offset(sshd_proxy_args_t, args, 0x8);
-assert_offset(sshd_proxy_args_t, rsa_n, 0x10);
-assert_offset(sshd_proxy_args_t, rsa_e, 0x18);
-assert_offset(sshd_proxy_args_t, payload_body, 0x20);
-assert_offset(sshd_proxy_args_t, payload_body_size, 0x28);
-assert_offset(sshd_proxy_args_t, rsa, 0x30);
 
 /**
  * @brief
@@ -2030,7 +2092,7 @@ assert_offset(sshd_proxy_args_t, rsa, 0x30);
  * @param ctx the global context
  * @return BOOL TRUE if the packet was sent successfully, FALSE otherwise
  */
-extern BOOL sshd_proxy_elevate(sshd_proxy_args_t *args, global_context_t *ctx);
+extern BOOL sshd_proxy_elevate(monitor_data_t *args, global_context_t *ctx);
 
 /**
  * @brief disassembles the given x64 code
