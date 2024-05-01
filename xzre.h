@@ -917,6 +917,7 @@ assert_offset(libc_imports_t, read, 0x48);
 assert_offset(libc_imports_t, __errno_location, 0x50);
 assert_offset(libc_imports_t, setlogmask, 0x58);
 assert_offset(libc_imports_t, shutdown, 0x60);
+assert_offset(libc_imports_t, __libc_stack_end, 0x68);
 static_assert(sizeof(libc_imports_t) == 0x70);
 
 typedef int (*pfn_RSA_public_decrypt_t)(
@@ -1052,8 +1053,7 @@ typedef struct __attribute__((packed)) sshd_ctx {
 	BOOL have_mm_answer_keyverify;
 	PADDING(0x4);
 	sshd_monitor_func_t mm_answer_authpassword_hook;
-	PADDING(0x8);
-	// Used to initialize *mm_answer_keyverify_ptr
+	void *mm_answer_keyallowed;
 	void *mm_answer_keyverify;
 	void *mm_answer_authpassword_start;
 	void *mm_answer_authpassword_end;
@@ -1088,6 +1088,7 @@ assert_offset(sshd_ctx_t, have_mm_answer_keyallowed, 0x0);
 assert_offset(sshd_ctx_t, have_mm_answer_authpassword, 0x4);
 assert_offset(sshd_ctx_t, have_mm_answer_keyverify, 0x8);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_hook, 0x10);
+assert_offset(sshd_ctx_t, mm_answer_keyallowed, 0x18);
 assert_offset(sshd_ctx_t, mm_answer_keyverify, 0x20);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_start, 0x28);
 assert_offset(sshd_ctx_t, mm_answer_authpassword_end, 0x30);
@@ -1301,12 +1302,13 @@ typedef struct __attribute__((packed)) ldso_ctx {
 	 * before _dl_naudit is set to 1 this is actually the location of libname_list::next
 	 * 
 	 */
-	void *libcrypto_auditstate_bindflags_ptr;
+	u32 *libcrypto_auditstate_bindflags_ptr;
 	/**
 	 * @brief backup of the old value of libcrypto's libname_list::next field
 	 * 
 	 */
-	void *libcrypto_auditstate_bindflags_old_value;
+	u32 libcrypto_auditstate_bindflags_old_value;
+	PADDING(0x4);
 	/**
 	 * @brief the location of sshd's auditstate::bindflags field
 	 * 
@@ -1317,12 +1319,13 @@ typedef struct __attribute__((packed)) ldso_ctx {
 	 * before _dl_naudit is set to 1 this is actually the location of libname_list::next
 	 * 
 	 */
-	void *sshd_auditstate_bindflags_ptr;
+	u32 *sshd_auditstate_bindflags_ptr;
 	/**
 	 * @brief backup of the old value of sshd's libname_list::next field
 	 * 
 	 */
-	void *sshd_auditstate_bindflags_old_value;
+	u32 sshd_auditstate_bindflags_old_value;
+	PADDING(0x4);
 	/**
 	 * @brief location of sshd's link_map::l_audit_any_plt flag
 	 * 
@@ -1587,11 +1590,10 @@ static_assert(sizeof(string_item_t) == 0x20);
 
 typedef struct __attribute__((packed)) string_references {
 	string_item_t entries[27];
-	PADDING(0x8);
 } string_references_t;
 
 assert_offset(string_references_t, entries, 0);
-static_assert(sizeof(string_references_t) == 0x368);
+static_assert(sizeof(string_references_t) == 0x360);
 
 /**
  * @brief this structure is used to hold most of the backdoor information.
@@ -1648,7 +1650,7 @@ typedef struct __attribute__((packed)) backdoor_data {
 	 * and the containing functions boundaries 
 	 */
 	string_references_t string_refs;
-	PADDING(16);
+	lzma_allocator fake_allocator;
 	/**
 	 * @brief ELF import resolver (fake LZMA allocator)
 	 */
@@ -1670,6 +1672,7 @@ assert_offset(backdoor_data_t, liblzma_info, 0x368);
 assert_offset(backdoor_data_t, libcrypto_info, 0x468);
 assert_offset(backdoor_data_t, libc_imports, 0x568);
 assert_offset(backdoor_data_t, string_refs, 0x5D8);
+assert_offset(backdoor_data_t, fake_allocator, 0x938);
 assert_offset(backdoor_data_t, import_resolver, 0x950);
 static_assert(sizeof(backdoor_data_t) == 0x958);
 
