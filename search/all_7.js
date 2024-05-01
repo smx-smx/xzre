@@ -13,6 +13,7 @@ var searchData=
   ['gnurelro_5ffound_136',['gnurelro_found',['../structelf__info.html#a66d75bbde3aa44519fd136a848e051da',1,'elf_info']]],
   ['gnurelro_5fmemsize_137',['gnurelro_memsize',['../structelf__info.html#a1783b21f972415e71d5cb7d8531de5e5',1,'elf_info']]],
   ['gnurelro_5fvaddr_138',['gnurelro_vaddr',['../structelf__info.html#a8500b4de03a9b9d44989375921b27f70',1,'elf_info']]],
-  ['got_5foffset_139',['got_offset',['../structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7',1,'elf_entry_ctx']]],
-  ['got_5fptr_140',['got_ptr',['../structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0',1,'elf_entry_ctx']]]
+  ['got_5fctx_139',['got_ctx',['../structgot__ctx.html',1,'']]],
+  ['got_5foffset_140',['got_offset',['../structgot__ctx.html#afc55b6f8c228b93eb08d1bdc061f4750',1,'got_ctx']]],
+  ['got_5fptr_141',['got_ptr',['../structgot__ctx.html#aac8a1b7398f74099e686177ae0a11a9b',1,'got_ctx']]]
 ];

@@ -113,9 +113,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>have_mm_answer_authpa
 <tr class="memitem:a1db951644c4ca4f95972a9565de6c2e1"><td class="memItemLeft" align="right" valign="top"><a id="a1db951644c4ca4f95972a9565de6c2e1"></a>
 BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>have_mm_answer_keyverify</b></td></tr>
 <tr class="separator:a1db951644c4ca4f95972a9565de6c2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e627e911cf2c4481cdb8de9f1cbb608"><td class="memItemLeft" align="right" valign="top"><a id="a4e627e911cf2c4481cdb8de9f1cbb608"></a>
-int(*&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_req_fn</b> )(struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
-<tr class="separator:a4e627e911cf2c4481cdb8de9f1cbb608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaab7dc5ef6e0a017717b8e826b18fae"><td class="memItemLeft" align="right" valign="top"><a id="abaab7dc5ef6e0a017717b8e826b18fae"></a>
+sshd_monitor_func_t&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_hook</b></td></tr>
+<tr class="separator:abaab7dc5ef6e0a017717b8e826b18fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28196be66a50545ec99d925097b1a5a2"><td class="memItemLeft" align="right" valign="top"><a id="a28196be66a50545ec99d925097b1a5a2"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_keyverify</b></td></tr>
 <tr class="separator:a28196be66a50545ec99d925097b1a5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,12 +125,12 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassw
 <tr class="memitem:a00e89e28c4fc317e8d60020e89dcba6a"><td class="memItemLeft" align="right" valign="top"><a id="a00e89e28c4fc317e8d60020e89dcba6a"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_end</b></td></tr>
 <tr class="separator:a00e89e28c4fc317e8d60020e89dcba6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae543ced7d581110ada50b2cb5ce9ffd5"><td class="memItemLeft" align="right" valign="top"><a id="ae543ced7d581110ada50b2cb5ce9ffd5"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_ptr</b></td></tr>
-<tr class="separator:ae543ced7d581110ada50b2cb5ce9ffd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3198eff80d003a9303c033ebd3d2f7e4"><td class="memItemLeft" align="right" valign="top"><a id="a3198eff80d003a9303c033ebd3d2f7e4"></a>
-u32&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_reqtype</b></td></tr>
-<tr class="separator:a3198eff80d003a9303c033ebd3d2f7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae91fa7c89edbd044a3f34637975413"><td class="memItemLeft" align="right" valign="top"><a id="a0ae91fa7c89edbd044a3f34637975413"></a>
+sshd_monitor_func_t *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_authpassword_ptr</b></td></tr>
+<tr class="separator:a0ae91fa7c89edbd044a3f34637975413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47d6685f6087d52dd8f302d9339fbdeb"><td class="memItemLeft" align="right" valign="top"><a id="a47d6685f6087d52dd8f302d9339fbdeb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_reqtype_authpassword</b></td></tr>
+<tr class="separator:a47d6685f6087d52dd8f302d9339fbdeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a059562ba10eb5ea090ec6398dcb5f98a"><td class="memItemLeft" align="right" valign="top"><a id="a059562ba10eb5ea090ec6398dcb5f98a"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>mm_answer_keyallowed_start</b></td></tr>
 <tr class="separator:a059562ba10eb5ea090ec6398dcb5f98a"><td class="memSeparator" colspan="2">&#160;</td></tr>

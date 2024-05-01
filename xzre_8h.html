@@ -111,6 +111,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshkey.html">sshkey</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct sshkey from openssh-portable  <a href="structsshkey.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgot__ctx.html">got_ctx</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdasm__ctx.html">dasm_ctx</a></td></tr>
@@ -218,6 +220,18 @@ Macros</h2></td></tr>
 <tr class="memitem:a3c7c6a69f690fc8d2abf0e385280a532"><td class="memItemLeft" align="right" valign="top"><a id="a3c7c6a69f690fc8d2abf0e385280a532"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ARRAY_SIZE</b>(arr)&#160;&#160;&#160;(sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))</td></tr>
 <tr class="separator:a3c7c6a69f690fc8d2abf0e385280a532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6896a846037d86082bae82ff5a3569cc"><td class="memItemLeft" align="right" valign="top"><a id="a6896a846037d86082bae82ff5a3569cc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHACHA20_KEY_SIZE</b>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:a6896a846037d86082bae82ff5a3569cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f80bde27fe7bda6e2d1242132dd0f15"><td class="memItemLeft" align="right" valign="top"><a id="a4f80bde27fe7bda6e2d1242132dd0f15"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHACHA20_IV_SIZE</b>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a4f80bde27fe7bda6e2d1242132dd0f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81efbc0fc101b06a914f7ff9e2fbc0e9"><td class="memItemLeft" align="right" valign="top"><a id="a81efbc0fc101b06a914f7ff9e2fbc0e9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SHA256_DIGEST_SIZE</b>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:a81efbc0fc101b06a914f7ff9e2fbc0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a518e532b039564adb2224c60f3d93757"><td class="memItemLeft" align="right" valign="top"><a id="a518e532b039564adb2224c60f3d93757"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ED448_KEY_SIZE</b>&#160;&#160;&#160;57</td></tr>
+<tr class="separator:a518e532b039564adb2224c60f3d93757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1974ecd89574bc861c90392b3d570dcb"><td class="memItemLeft" align="right" valign="top"><a id="a1974ecd89574bc861c90392b3d570dcb"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>XZDASM_OPC</b>(op)&#160;&#160;&#160;(op - 0x80)</td></tr>
 <tr class="separator:a1974ecd89574bc861c90392b3d570dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +253,21 @@ Macros</h2></td></tr>
 <tr class="memitem:a353d32e52768fa413b9d1f381a201efa"><td class="memItemLeft" align="right" valign="top"><a id="a353d32e52768fa413b9d1f381a201efa"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b>(size)&#160;&#160;&#160;u8 EXPAND(_unknown, __LINE__)[size]</td></tr>
 <tr class="separator:a353d32e52768fa413b9d1f381a201efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c6a0e01d7895d7fcebd10a1c543d6c"><td class="memItemLeft" align="right" valign="top"><a id="a01c6a0e01d7895d7fcebd10a1c543d6c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_NOT_SET</b>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a01c6a0e01d7895d7fcebd10a1c543d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc7f3aab6653d0f97e652965991e42e"><td class="memItemLeft" align="right" valign="top"><a id="a9fc7f3aab6653d0f97e652965991e42e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_NO</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a9fc7f3aab6653d0f97e652965991e42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf35b9ab41134233edfe5ab50571edfe"><td class="memItemLeft" align="right" valign="top"><a id="adf35b9ab41134233edfe5ab50571edfe"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_FORCED_ONLY</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:adf35b9ab41134233edfe5ab50571edfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95be59797ad9bdcb866b8e123dd2a6b7"><td class="memItemLeft" align="right" valign="top"><a id="a95be59797ad9bdcb866b8e123dd2a6b7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_NO_PASSWD</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a95be59797ad9bdcb866b8e123dd2a6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf693c060efdbc236980c16c4a7c351a"><td class="memItemLeft" align="right" valign="top"><a id="acf693c060efdbc236980c16c4a7c351a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_YES</b>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:acf693c060efdbc236980c16c4a7c351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -266,6 +295,9 @@ typedef struct link_map *&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a050c65e107f0c828f856a231f4b4e788"><td class="memItemLeft" align="right" valign="top"><a id="a050c65e107f0c828f856a231f4b4e788"></a>
 typedef int&#160;</td><td class="memItemRight" valign="bottom"><b>BOOL</b></td></tr>
 <tr class="separator:a050c65e107f0c828f856a231f4b4e788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94dd5658d3041ea81684f2ed45ac9ba"><td class="memItemLeft" align="right" valign="top"><a id="af94dd5658d3041ea81684f2ed45ac9ba"></a>
+typedef struct <a class="el" href="structgot__ctx.html">got_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>got_ctx_t</b></td></tr>
+<tr class="separator:af94dd5658d3041ea81684f2ed45ac9ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73f7e784872b0e3c60100a8f231b0636"><td class="memItemLeft" align="right" valign="top"><a id="a73f7e784872b0e3c60100a8f231b0636"></a>
 typedef struct <a class="el" href="structelf__entry__ctx.html">elf_entry_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>elf_entry_ctx_t</b></td></tr>
 <tr class="separator:a73f7e784872b0e3c60100a8f231b0636"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -290,6 +322,9 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>pfn_RSA_get
 <tr class="memitem:a6ff2f73b261edf1b4c22574b8bc6622e"><td class="memItemLeft" align="right" valign="top"><a id="a6ff2f73b261edf1b4c22574b8bc6622e"></a>
 typedef struct <a class="el" href="structimported__funcs.html">imported_funcs</a>&#160;</td><td class="memItemRight" valign="bottom"><b>imported_funcs_t</b></td></tr>
 <tr class="separator:a6ff2f73b261edf1b4c22574b8bc6622e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88322b8c78181f22ffedac582914ff71"><td class="memItemLeft" align="right" valign="top"><a id="a88322b8c78181f22ffedac582914ff71"></a>
+typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_monitor_func_t</b>) (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="separator:a88322b8c78181f22ffedac582914ff71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9daa34d6565ffe5f55796b4725f934c9"><td class="memItemLeft" align="right" valign="top"><a id="a9daa34d6565ffe5f55796b4725f934c9"></a>
 typedef struct <a class="el" href="structsshd__ctx.html">sshd_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_ctx_t</b></td></tr>
 <tr class="separator:a9daa34d6565ffe5f55796b4725f934c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -670,21 +705,24 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ab8c632203357dc8287b1853f9a7b8085"><td class="memItemLeft" align="right" valign="top"><a id="ab8c632203357dc8287b1853f9a7b8085"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structgot__ctx.html">got_ctx_t</a>, got_ptr, 0)</td></tr>
+<tr class="separator:ab8c632203357dc8287b1853f9a7b8085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71c63a171e69270e8cc3eb62c1b007ca"><td class="memItemLeft" align="right" valign="top"><a id="a71c63a171e69270e8cc3eb62c1b007ca"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structgot__ctx.html">got_ctx_t</a>, return_address, 0x8)</td></tr>
+<tr class="separator:a71c63a171e69270e8cc3eb62c1b007ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f46da093f69bcfa80f1311f3f1f30fe"><td class="memItemLeft" align="right" valign="top"><a id="a7f46da093f69bcfa80f1311f3f1f30fe"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structgot__ctx.html">got_ctx_t</a>, cpuid_fn, 0x10)</td></tr>
+<tr class="separator:a7f46da093f69bcfa80f1311f3f1f30fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d2c5c8b027cfc4c38badb34b0619158"><td class="memItemLeft" align="right" valign="top"><a id="a7d2c5c8b027cfc4c38badb34b0619158"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structgot__ctx.html">got_ctx_t</a>, got_offset, 0x18)</td></tr>
+<tr class="separator:a7d2c5c8b027cfc4c38badb34b0619158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memItemLeft" align="right" valign="top"><a id="a07340e0f8ca9df744bc24ed6a6d2414c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, symbol_ptr, 0)</td></tr>
 <tr class="separator:a07340e0f8ca9df744bc24ed6a6d2414c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e543602ec7511d624f8f3f7b83a1ee8"><td class="memItemLeft" align="right" valign="top"><a id="a4e543602ec7511d624f8f3f7b83a1ee8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, got_ptr, 8)</td></tr>
-<tr class="separator:a4e543602ec7511d624f8f3f7b83a1ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a238dfcc13519ae09f6ae9097691f41b9"><td class="memItemLeft" align="right" valign="top"><a id="a238dfcc13519ae09f6ae9097691f41b9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, return_address, 0x10)</td></tr>
-<tr class="separator:a238dfcc13519ae09f6ae9097691f41b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66d3cb2e332731ec072e1462a85884df"><td class="memItemLeft" align="right" valign="top"><a id="a66d3cb2e332731ec072e1462a85884df"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, cpuid_fn, 0x18)</td></tr>
-<tr class="separator:a66d3cb2e332731ec072e1462a85884df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12b5b3403c2bfcb1ad17f541f7c58761"><td class="memItemLeft" align="right" valign="top"><a id="a12b5b3403c2bfcb1ad17f541f7c58761"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, got_offset, 0x20)</td></tr>
-<tr class="separator:a12b5b3403c2bfcb1ad17f541f7c58761"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdcf5b14ec9346789eafb86f225d42c9"><td class="memItemLeft" align="right" valign="top"><a id="abdcf5b14ec9346789eafb86f225d42c9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, <a class="el" href="structgot__ctx.html">got_ctx</a>, 0x8)</td></tr>
+<tr class="separator:abdcf5b14ec9346789eafb86f225d42c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace8b543f9a35173e40d83faa3a895e17"><td class="memItemLeft" align="right" valign="top"><a id="ace8b543f9a35173e40d83faa3a895e17"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a>, frame_address, 0x28)</td></tr>
 <tr class="separator:ace8b543f9a35173e40d83faa3a895e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1030,9 +1068,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a11393a70c67fcd7345aa5d34ead60f86"><td class="memItemLeft" align="right" valign="top"><a id="a11393a70c67fcd7345aa5d34ead60f86"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, have_mm_answer_keyverify, 0x8)</td></tr>
 <tr class="separator:a11393a70c67fcd7345aa5d34ead60f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46097026aca7d769952ec835d99e7f55"><td class="memItemLeft" align="right" valign="top"><a id="a46097026aca7d769952ec835d99e7f55"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, monitor_req_fn, 0x10)</td></tr>
-<tr class="separator:a46097026aca7d769952ec835d99e7f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc415a0de06af39b531325fbce9c9ad5"><td class="memItemLeft" align="right" valign="top"><a id="abc415a0de06af39b531325fbce9c9ad5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, <a class="el" href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">mm_answer_authpassword_hook</a>, 0x10)</td></tr>
+<tr class="separator:abc415a0de06af39b531325fbce9c9ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac81174126899a7fe7c0d4336a733f64"><td class="memItemLeft" align="right" valign="top"><a id="aac81174126899a7fe7c0d4336a733f64"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, mm_answer_keyverify, 0x20)</td></tr>
 <tr class="separator:aac81174126899a7fe7c0d4336a733f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1045,9 +1083,9 @@ Functions</h2></td></tr>
 <tr class="memitem:acb52f57532e5205ec84965bee2daeb58"><td class="memItemLeft" align="right" valign="top"><a id="acb52f57532e5205ec84965bee2daeb58"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, mm_answer_authpassword_ptr, 0x38)</td></tr>
 <tr class="separator:acb52f57532e5205ec84965bee2daeb58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31c0050cf9b1e136d65014cffe5c4f64"><td class="memItemLeft" align="right" valign="top"><a id="a31c0050cf9b1e136d65014cffe5c4f64"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, monitor_reqtype, 0x40)</td></tr>
-<tr class="separator:a31c0050cf9b1e136d65014cffe5c4f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67c54ad6837c441de0e9959b7a66b85b"><td class="memItemLeft" align="right" valign="top"><a id="a67c54ad6837c441de0e9959b7a66b85b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, monitor_reqtype_authpassword, 0x40)</td></tr>
+<tr class="separator:a67c54ad6837c441de0e9959b7a66b85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead6a08aab3c9bd7ab2e9ba62c9c797c"><td class="memItemLeft" align="right" valign="top"><a id="aead6a08aab3c9bd7ab2e9ba62c9c797c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, mm_answer_keyallowed_start, 0x48)</td></tr>
 <tr class="separator:aead6a08aab3c9bd7ab2e9ba62c9c797c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2273,7 +2311,7 @@ Variables</h2></td></tr>
 
 <p>calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> by disguising it as a call to cpuid. </p>
 <p><a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> is called by replacing the _cpuid() GOT entry to point to <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a></p>
-<p>stores <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> - <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> in <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> which is the GOT address .</p>
+<p>stores <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> - elf_entry_ctx_t::got_offset in elf_entry_ctx_t::got_ptr which is the GOT address .</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>the entry context, filled by <a class="el" href="xzre_8h.html#a851b6ae19abb6961d0c6c21f382e0abc">backdoor_entry</a> </td></tr>
@@ -2281,7 +2319,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void* the value <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>void* the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
 
 </div>
 </div>
@@ -2331,7 +2369,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL the value <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL the value elf_entry_ctx_t::got_ptr if the cpuid() GOT entry was NULL, otherwise the return value of <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2()</a> </dd></dl>
 
 </div>
 </div>
@@ -4641,7 +4679,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>get the cpuid() GOT index </p>
-<p>stores the index in <a class="el" href="structelf__entry__ctx.html#ac57b21a9eadcd40b34305f45684cc2e9" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a></p>
+<p>stores the index in elf_entry_ctx_t::cpuid_fn</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td></td></tr>
@@ -4694,7 +4732,7 @@ Variables</h2></td></tr>
 
 <p>get the offset to the GOT </p>
 <p>the offset is relative to the address of the symbol cpuid_random_symbol</p>
-<p>stores the offset in <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a></p>
+<p>stores the offset in elf_entry_ctx_t::got_offset</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td></td></tr>
@@ -4811,7 +4849,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>get the tls_get_addr_random_symbol GOT offset </p>
-<p>sets <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> = 0x2600 stores the index in <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a></p>
+<p>sets elf_entry_ctx_t::got_ptr = 0x2600 stores the index in elf_entry_ctx_t::got_offset</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td></td></tr>
@@ -4839,7 +4877,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>initialises the elf_entry_ctx_t </p>
-<p>stores the address of the symbol cpuid_random_symbol in <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so calls <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> to update <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> calls <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> to update <a class="el" href="structelf__entry__ctx.html#ac57b21a9eadcd40b34305f45684cc2e9" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a></p>
+<p>stores the address of the symbol cpuid_random_symbol in <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so calls <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> to update elf_entry_ctx_t::got_offset calls <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> to update elf_entry_ctx_t::cpuid_fn</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td></td></tr>
@@ -6768,7 +6806,7 @@ Variables</h2></td></tr>
 <p>this function first computes the location of the __tls_get_addr() PLT trampoline function by using the PLT offset constant from tls_get_addr_reloc_consts</p>
 <p>then it decodes the PLT jmp instruction to get the address of the __tls_get_addr() GOT entry</p>
 <p>the __tls_get_addr() GOT entry is used in <a class="el" href="xzre_8h.html#a229ee0bd4111363061bc4230bc1f6423" title="the backdoor main method that installs the backdoor_symbind64() callback">backdoor_setup()</a> to find the ELF header at the start of the memory mapped ld.so</p>
-<p>calls <a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df" title="get the tls_get_addr_random_symbol GOT offset">get_tls_get_addr_random_symbol_got_offset()</a> to update <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a> and <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> sets <a class="el" href="structelf__entry__ctx.html#ab5aad4ce617c033e5e2d4740dc8551b7" title="holds the offset of the symbol relative to the GOT. used to derive the got_ptr">elf_entry_ctx_t::got_offset</a> = 0 sets <a class="el" href="structelf__entry__ctx.html#ac57b21a9eadcd40b34305f45684cc2e9" title="points to the real cpuid function">elf_entry_ctx_t::cpuid_fn</a> = 0 stores the address of the __tls_get_addr() GOT entry in <a class="el" href="structelf__entry__ctx.html#a88320cc048dda10c9063bac93f76b6a0" title="points to the Global Offset Table">elf_entry_ctx_t::got_ptr</a></p>
+<p>calls <a class="el" href="xzre_8h.html#ae20580c7a069afb3b578f060582867df" title="get the tls_get_addr_random_symbol GOT offset">get_tls_get_addr_random_symbol_got_offset()</a> to update elf_entry_ctx_t::got_ptr and elf_entry_ctx_t::got_offset sets elf_entry_ctx_t::got_offset = 0 sets elf_entry_ctx_t::cpuid_fn = 0 stores the address of the __tls_get_addr() GOT entry in elf_entry_ctx_t::got_ptr</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entry_ctx</td><td></td></tr>

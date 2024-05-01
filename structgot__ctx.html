@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>xzre: elf_entry_ctx Struct Reference</title>
+<title>xzre: got_ctx Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,23 +64,28 @@ $(function() {
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">elf_entry_ctx Struct Reference</div>  </div>
+<div class="title">got_ctx Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a286882a4d56155f97674460abe66b9cb"><td class="memItemLeft" align="right" valign="top"><a id="a286882a4d56155f97674460abe66b9cb"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb">symbol_ptr</a></td></tr>
-<tr class="memdesc:a286882a4d56155f97674460abe66b9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">points to a symbol in memory will be used to find the GOT value <br /></td></tr>
-<tr class="separator:a286882a4d56155f97674460abe66b9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d6d72a40d796dbb20e9f1dc5f10aaf8"><td class="memItemLeft" align="right" valign="top"><a id="a3d6d72a40d796dbb20e9f1dc5f10aaf8"></a>
-<a class="el" href="structgot__ctx.html">got_ctx_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>got_ctx</b></td></tr>
-<tr class="separator:a3d6d72a40d796dbb20e9f1dc5f10aaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae94828a49d53defaf1aadedfbd3da2f2"><td class="memItemLeft" align="right" valign="top"><a id="ae94828a49d53defaf1aadedfbd3da2f2"></a>
-u64 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structelf__entry__ctx.html#ae94828a49d53defaf1aadedfbd3da2f2">frame_address</a></td></tr>
-<tr class="memdesc:ae94828a49d53defaf1aadedfbd3da2f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores the value of __builtin_frame_address(0)-16 <br /></td></tr>
-<tr class="separator:ae94828a49d53defaf1aadedfbd3da2f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8a1b7398f74099e686177ae0a11a9b"><td class="memItemLeft" align="right" valign="top"><a id="aac8a1b7398f74099e686177ae0a11a9b"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgot__ctx.html#aac8a1b7398f74099e686177ae0a11a9b">got_ptr</a></td></tr>
+<tr class="memdesc:aac8a1b7398f74099e686177ae0a11a9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">points to the Global Offset Table <br /></td></tr>
+<tr class="separator:aac8a1b7398f74099e686177ae0a11a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09bcbc0f40125bda4b3c461c71085d2c"><td class="memItemLeft" align="right" valign="top"><a id="a09bcbc0f40125bda4b3c461c71085d2c"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgot__ctx.html#a09bcbc0f40125bda4b3c461c71085d2c">return_address</a></td></tr>
+<tr class="memdesc:a09bcbc0f40125bda4b3c461c71085d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">the return address value of the caller obtained from *(u64 *)(caller_locals+24) since the entrypoint passes __builtin_frame_address(0)-16, this results in an offset of +8 <br /></td></tr>
+<tr class="separator:a09bcbc0f40125bda4b3c461c71085d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556b4a0fdc51a1ad94d8fd5dcacc441e"><td class="memItemLeft" align="right" valign="top"><a id="a556b4a0fdc51a1ad94d8fd5dcacc441e"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgot__ctx.html#a556b4a0fdc51a1ad94d8fd5dcacc441e">cpuid_fn</a></td></tr>
+<tr class="memdesc:a556b4a0fdc51a1ad94d8fd5dcacc441e"><td class="mdescLeft">&#160;</td><td class="mdescRight">points to the real cpuid function <br /></td></tr>
+<tr class="separator:a556b4a0fdc51a1ad94d8fd5dcacc441e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc55b6f8c228b93eb08d1bdc061f4750"><td class="memItemLeft" align="right" valign="top"><a id="afc55b6f8c228b93eb08d1bdc061f4750"></a>
+ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgot__ctx.html#afc55b6f8c228b93eb08d1bdc061f4750">got_offset</a></td></tr>
+<tr class="memdesc:afc55b6f8c228b93eb08d1bdc061f4750"><td class="mdescLeft">&#160;</td><td class="mdescRight">holds the offset of the symbol relative to the GOT. used to derive the <a class="el" href="structgot__ctx.html#aac8a1b7398f74099e686177ae0a11a9b">got_ptr</a> <br /></td></tr>
+<tr class="separator:afc55b6f8c228b93eb08d1bdc061f4750"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="xzre_8h_source.html">xzre.h</a></li>
