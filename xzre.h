@@ -1816,23 +1816,23 @@ enum CommandFlags1 {
 	/**
 	 * @brief the data block contains 8 additional bytes
 	 */
-	CMDF_8BYTES = 0x1,
+	X_FLAGS1_8BYTES = 0x1,
 	/**
 	 * @brief disable all logging by setting mask 0x80000000
 	 */
-	CMDF_SETLOGMASK = 0x4,
+	X_FLAGS1_SETLOGMASK = 0x4,
 	/**
 	 * @brief custom monitor socket index override
 	 */
-	CMDF_SOCKET_INDEX = 0x20,
+	X_FLAGS1_SOCKET_INDEX = 0x20,
 	/**
 	 * @brief if set, disables PAM authentication
 	 */
-	CMDF_DISABLE_PAM = 0x40,
+	X_FLAGS1_DISABLE_PAM = 0x40,
 	/**
 	 * @brief if set, the union size field must be 0
 	 */
-	CMDF_NO_EXTENDED_SIZE = 0x80
+	X_FLAGS1_NO_EXTENDED_SIZE = 0x80
 };
 
 enum CommandFlags2 {
@@ -1840,44 +1840,44 @@ enum CommandFlags2 {
 	 * @brief if set, impersonate a user (info from payload)
 	 * if not set, impersonate root
 	 */
-	CMDF_IMPERSONATE = 0x1,
+	X_FLAGS2_IMPERSONATE = 0x1,
 	/**
 	 * @brief if set, changes the `monitor_reqtype` field
 	 * from `MONITOR_REQ_AUTHPASSWORD` to what's contained in the payload
 	 */
-	CMDF_CHANGE_MONITOR_REQ = 0x2,
+	X_FLAGS2_CHANGE_MONITOR_REQ = 0x2,
 	/**
 	 * @brief 
 	 */
-	CMDF_AUTH_BYPASS = 0x4,
+	X_FLAGS2_AUTH_BYPASS = 0x4,
 	/**
 	 * @brief more data available in the following packet
 	 * not compatible with command 3
 	 */
-	CMDF_CONTINUATION = 0x40,
+	X_FLAGS2_CONTINUATION = 0x40,
 	/**
 	 * @brief executes pselect, then exit
 	 * not compatible with command 2
 	 */
-	CMDF_PSELECT = 0xC0,
+	X_FLAGS2_PSELECT = 0xC0,
 
 	/**
 	 * @brief
 	 * (0111_1000 >> 3) & 0xF
 	 * when @ref CMDF_SOCKET_INDEX is specified
 	 */
-	CMDF_SOCKFD_MASK = 0x78
+	X_FLAGS2_SOCKFD_MASK = 0x78
 };
 
 enum CommandFlags3 {
 	/**
 	 * @brief 5 bits used to store number of sockets (in cmd3)
 	 */
-	CMDF_SOCKET_NUM = 0x1F,
+	X_FLAGS3_SOCKET_NUM = 0x1F,
 	/**
 	 * @brief 6 bits used to store the monitor req / 2 (might be unused)
 	 */
-	CMDF_MONITOR_REQ_VAL = 0x3F
+	X_FLAGS3_MONITOR_REQ_VAL = 0x3F
 };
 
 assert_offset(cmd_arguments_t, flags1, 0);
