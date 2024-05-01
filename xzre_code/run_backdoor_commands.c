@@ -12,6 +12,12 @@
 
 #define MONITOR_REQ_KEYALLOWED 22
 
+#define SIZE_STEP0 (sizeof(key_payload_hdr_t))
+#define SIZE_STEP1 (SIZE_STEP0 + ED448_SIGNATURE_SIZE)
+#define SIZE_STEP2 (SIZE_STEP1 + sizeof(cmd_arguments_t))
+#define SIZE_HEADERS SIZE_STEP2
+#define SIZE_SYSTEM_EXTRA (sizeof(uid_t) + sizeof(gid_t))
+
 // $FIXME: move to xzre.h
 extern BOOL sshd_set_log_handler(cmd_arguments_t *args, global_context_t *ctx);
 
@@ -84,10 +90,6 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 			if(!ctx->sshd_sensitive_data) break;
 			if(!ctx->imported_funcs) break;
 
-#define SIZE_STEP0 (sizeof(key_payload_hdr_t))
-#define SIZE_STEP1 (SIZE_STEP0 + ED448_SIGNATURE_SIZE)
-#define SIZE_STEP2 (SIZE_STEP1 + sizeof(cmd_arguments_t))
-#define SIZE_HEADERS SIZE_STEP2
 			static_assert(SIZE_HEADERS == 0x87);
 
 			if((num_n_bytes - SIZE_STEP0) < ED448_SIGNATURE_SIZE) break;
@@ -175,8 +177,6 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 					key_idx = f.key_prev_idx + 1;
 				} while(!sigcheck_result);
 				ctx->sshd_host_pubkey_idx = f.key_cur_idx;
-
-#define SIZE_SYSTEM_EXTRA (sizeof(uid_t) + sizeof(gid_t))
 
 				if(cmd_type == 2 && TEST_FLAG(f.kctx.args.flags1, CMDF_NO_EXTENDED_SIZE)){
 					if(!data_ptr) break;
