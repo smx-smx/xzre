@@ -1955,7 +1955,7 @@ typedef struct __attribute__((packed)) run_backdoor_commands_data {
 		struct __attribute__((packed)) {
 			int socket_fd;
 			u32 fd_recv_size;
-			u8 fd_recv_buf[16];
+			u8 fd_recv_buf[24];
 		} sock;
 		struct __attribute__((packed)) {
 			u64 num_host_keys;
