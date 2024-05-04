@@ -195,7 +195,7 @@ void xzre_backdoor_setup(){
 	mprotect((void *)(UPTR(&fake_lzma_allocator) & ~pagemask), pagesz, PROT_READ|PROT_WRITE);
 	
 	backdoor_hooks_ctx_t hook_params;
-	int ret = init_hook_functions(&hook_params);
+	int ret = init_hooks_ctx(&hook_params);
 
 	backdoor_shared_globals_t shared = {
 		.globals = &my_global_ctx_ptr

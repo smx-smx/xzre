@@ -65,15 +65,15 @@ SECTIONS_BEGIN()
 		/* 0000000000002540 */ DEFSYM2(sshd_find_main, 0x2540 - 0x24E0) // FIXME: prototype
 	DEFSYM_END(.text.lzma_lz_encoder_memusaga)
 	/* 0000000000002760 */ DEFSYM(init_ldso_ctx, .text.lzma_block_buffer_bound63)
-	/* 00000000000027C0 */ DEFSYM(init_hook_functions, .text.lzma_delta_decoder_inis)
-	/* 0000000000002840 */ DEFSYM(init_hook_functions2, .text.lzma_delta_props_decodd) // FIXME: prototype
-	/* 0000000000002880 */ 
+	/* 00000000000027C0 */ DEFSYM(init_hooks_ctx, .text.lzma_delta_decoder_inis)
+	/* 0000000000002840 */ DEFSYM(init_shared_globals, .text.lzma_delta_props_decodd)
+	/* 0000000000002880 */ DEFSYM(init_imported_funcs, .text.microlzma_decoder_inia)
 	/* 00000000000028C0 */ DEFSYM(backdoor_symbind64, .text.lz_encoder_prepara)
 	/* 0000000000002A40 */ DEFSYM(elf_find_function_pointer, .text.reverse_seez)
-	/* 0000000000002B00 */ 
-	/* 0000000000002C50 */ 
+	/* 0000000000002B00 */ DEFSYM(validate_log_handler_pointers, .text.transfora)
+	/* 0000000000002C50 */ DEFSYM(find_addr_referenced_in_mov_instruction, .text.lzma_next_filter_inia)
 	/* 0000000000002D20 */ DEFSYM(elf_find_string_references, .text.auto_decoder_iniz)
-	/* 0000000000002FE0 */ 
+	/* 0000000000002FE0 */ DEFSYM(sshd_find_monitor_field_addr_in_function, .text.lzma_lzma_set_out_limia)
 	/* 00000000000032B0 */ DEFSYM(elf_find_string_reference, .text.lzma_auto_decoda)
 	/* 0000000000003330 */ DEFSYM(sshd_get_sensitive_data_address_via_krb5ccname, .text.lzma_lzma_encoder_resea)
 	/* 0000000000003670 */ DEFSYM(sshd_get_sensitive_data_address_via_xcalloc, .text.lzma_bufcpa)
@@ -127,7 +127,7 @@ SECTIONS_BEGIN()
 	/* 0000000000007BB0 */ DEFSYM(sshd_get_usable_socket, .text.index_decoda)
 	/* 0000000000007C50 */ DEFSYM(sshd_get_client_socket, .text.index_encoda)
 	/* 0000000000007D40 */ DEFSYM(sshd_patch_variables, .text.lzma_block_unpadded_siza)
-	/* 0000000000007DD0 */ 
+	/* 0000000000007DD0 */ DEFSYM(sshd_configure_log_hook, .text.lzma_rc_pricea)
 	/* 0000000000007E90 */ DEFSYM(check_backdoor_state, .text.stream_encoder_mt_iniz)
 	/* 0000000000007F10 */ DEFSYM(is_payload_message, .text.worker_stara)
 	/* 0000000000008070 */ DEFSYM(mm_answer_keyverify_hook, .text.bt_skip_funz)

@@ -1001,7 +1001,8 @@ typedef struct __attribute__((packed)) imported_funcs {
 	void (*RSA_free)(RSA *rsa);
 	void (*BN_free)(BIGNUM *a);
 	libc_imports_t *libc;
-	u64 resolved_imports_count;
+	u32 resolved_imports_count;
+	PADDING(4);
 } imported_funcs_t;
 
 assert_offset(imported_funcs_t, RSA_public_decrypt, 0);
@@ -1113,9 +1114,27 @@ assert_offset(sshd_ctx_t, permit_root_login_ptr, 0xC8);
 assert_offset(sshd_ctx_t, STR_without_password, 0xD0);
 assert_offset(sshd_ctx_t, STR_publickey, 0xD8);
 
+typedef enum {
+	SYSLOG_LEVEL_QUIET,
+	SYSLOG_LEVEL_FATAL,
+	SYSLOG_LEVEL_ERROR,
+	SYSLOG_LEVEL_INFO,
+	SYSLOG_LEVEL_VERBOSE,
+	SYSLOG_LEVEL_DEBUG1,
+	SYSLOG_LEVEL_DEBUG2,
+	SYSLOG_LEVEL_DEBUG3,
+	SYSLOG_LEVEL_NOT_SET = -1
+} LogLevel;
+
+typedef void (*log_handler_fn)(
+	LogLevel level,
+	int forced,
+	const char *msg,
+	void *ctx);
+
 typedef struct __attribute__((packed)) sshd_log_ctx {
-	PADDING(4);
-	BOOL unkbool_log_handler;
+	BOOL logging_disabled;
+	BOOL log_hooking_possible;
 	BOOL syslog_disabled;
 	PADDING(4);
 	char *STR_percent_s;
@@ -1123,20 +1142,29 @@ typedef struct __attribute__((packed)) sshd_log_ctx {
 	char *STR_preauth;
 	char *STR_authenticating;
 	char *STR_user;
-	PADDING(0x8);
-	PADDING(0x8);
-	PADDING(0x8);
-	PADDING(0x8);
+	// Note: initially the two pointers may be swapped around.
+	// sshd_configure_log_hook will ensure they're corrected if needed.
+	void *log_handler_ptr;
+	void *log_handler_ctx_ptr;
+	log_handler_fn orig_log_handler;
+	void *orig_log_handler_ctx;
 	void *sshlogv;
 	void (*mm_log_handler)(int level, int forced, const char *msg, void *ctx);
 } sshd_log_ctx_t;
 
+assert_offset(sshd_log_ctx_t, logging_disabled, 0x0);
+assert_offset(sshd_log_ctx_t, log_hooking_possible, 0x4);
+assert_offset(sshd_log_ctx_t, syslog_disabled, 0x8);
 assert_offset(sshd_log_ctx_t, syslog_disabled, 0x8);
 assert_offset(sshd_log_ctx_t, STR_percent_s, 0x10);
 assert_offset(sshd_log_ctx_t, STR_Connection_closed_by, 0x18);
 assert_offset(sshd_log_ctx_t, STR_preauth, 0x20);
 assert_offset(sshd_log_ctx_t, STR_authenticating, 0x28);
 assert_offset(sshd_log_ctx_t, STR_user, 0x30);
+assert_offset(sshd_log_ctx_t, log_handler_ptr, 0x38);
+assert_offset(sshd_log_ctx_t, log_handler_ctx_ptr, 0x40);
+assert_offset(sshd_log_ctx_t, orig_log_handler, 0x48);
+assert_offset(sshd_log_ctx_t, orig_log_handler_ctx, 0x50);
 assert_offset(sshd_log_ctx_t, sshlogv, 0x58);
 assert_offset(sshd_log_ctx_t, mm_log_handler, 0x60);
 static_assert(sizeof(sshd_log_ctx_t) == 0x68);
@@ -1480,23 +1508,6 @@ assert_offset(backdoor_hooks_data_t, sshd_log_ctx, 0x518);
 assert_offset(backdoor_hooks_data_t, signed_data_size, 0x580);
 assert_offset(backdoor_hooks_data_t, signed_data, 0x588);
 static_assert(sizeof(backdoor_hooks_data_t) >= 0x589);
-
-typedef enum {
-	SYSLOG_LEVEL_QUIET,
-	SYSLOG_LEVEL_FATAL,
-	SYSLOG_LEVEL_ERROR,
-	SYSLOG_LEVEL_INFO,
-	SYSLOG_LEVEL_VERBOSE,
-	SYSLOG_LEVEL_DEBUG1,
-	SYSLOG_LEVEL_DEBUG2,
-	SYSLOG_LEVEL_DEBUG3,
-	SYSLOG_LEVEL_NOT_SET = -1
-}       LogLevel;
-typedef void (*log_handler_fn)(
-	LogLevel level,
-	int forced,
-	const char *msg,
-	void *ctx);
 
 typedef struct __attribute__((packed)) backdoor_hooks_ctx {
 	PADDING(0x30);
@@ -2852,9 +2863,8 @@ extern void * backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
  * calls get_cpuid_got_index() to update elf_entry_ctx_t::cpuid_fn
  * 
  * @param ctx
- * @return ptrdiff_t always 0
  */
-extern ptrdiff_t init_elf_entry_ctx(elf_entry_ctx_t *ctx);
+extern void init_elf_entry_ctx(elf_entry_ctx_t *ctx);
 
 /**
  * @brief get the offset to the GOT
@@ -3039,7 +3049,23 @@ extern void _cpuid_gcc(unsigned int level, unsigned int *a, unsigned int *b,  un
  * @param funcs 
  * @return int 
  */
-extern int init_hook_functions(backdoor_hooks_ctx_t *funcs);
+extern int init_hooks_ctx(backdoor_hooks_ctx_t *ctx);
+
+/**
+ * @brief Initializes the backdoor_shared_globals structure
+ *
+ * @param shared_globals the backdoor_shared_globals structure
+ * @return int returns 0 on success, or 5 if @p shared_globals was NULL
+ */
+extern int init_shared_globals(backdoor_shared_globals_t *shared_globals);
+
+/**
+ * @brief Initializes the imported_funcs structure
+ *
+ * @param funcs the imported_funcs structure
+ * @return BOOL TRUE if successful, FALSE otherwise (if the resolve count is incorrect)
+ */
+extern BOOL init_imported_funcs(imported_funcs_t *imported_funcs);
 
 /**
  * @brief finds the __tls_get_addr() GOT entry
@@ -3464,6 +3490,119 @@ extern BOOL sshd_find_monitor_struct(
 	global_context_t *ctx
 );
 
+/**
+ * @brief finds the sshd_main function
+ *
+ * @param code_start_out filled in with the function start, if found
+ * @param sshd sshd elf info
+ * @param libcrypto libcrypto elf info
+ * @param imported_funcs imported funcs
+ * @returns TRUE if found, FALSE otherwise
+ */
+extern BOOL sshd_find_main(
+	u8 **code_start_out,
+	elf_info_t *sshd,
+	elf_info_t *libcrypto,
+	imported_funcs_t *imported_funcs
+);
+
+/**
+ * @brief find a pointer to a field in `struct monitor` by examining code referencing it
+ *
+ * Look for a sequence of instructions:
+ *
+ * mov/lea [<addr>] -> reg1
+ * ...
+ * mov reg1 -> rdi
+ * ...
+ * call mm_request_send
+ *
+ * where <addr> is in the the specified mem_range. Return the address
+ * in @p monitor_field_ptr_out.
+ *
+ * In other words, look for:
+ *
+ * mm_request_send(pmonitor->m_recvfd, ...);
+ *
+ * And return the @p &pmonitor->m_recvfd pointer.
+ *
+ * @param code_start start of the sshd code segment
+ * @param code_end end of the sshd code segment
+ * @param data_start start of the (sshd) data segment
+ * @param data_end end of the (sshd) data segment
+ * @param monitor_ptr_out pointer to receive the address of the monitor struct
+ * @param ctx the global context
+ */
+extern BOOL sshd_find_monitor_field_addr_in_function(
+	u8 *code_start,
+	u8 *code_end,
+	u8 *data_start,
+	u8 *data_end,
+	void **monitor_field_ptr_out,
+	global_context_t *ctx
+);
+
+/**
+ * @brief find an address referenced in a function
+ *
+ * Note: There are some additional requirements on the mov instruction.
+ *
+ * @param id the id of the function to look in
+ * @param refs the string references
+ * @param mem_range_start the start of the range the address lies within
+ * @param mem_range_end the end of the range the address lies within
+ * @return the address referenced if the exepected mov is found, or NULL otherwise
+ */
+extern void *find_addr_referenced_in_mov_instruction(
+	StringXrefId id,
+	string_references_t *refs,
+	void *mem_range_start,
+	void *mem_range_end
+);
+
+/**
+ * @brief Validate that the two addresses are the expected/correct ones
+ *
+ * The addresses must be within 15 bytes of each other
+ *
+ * 1. Start looking in the XREF_Could_not_get_agent_socket function
+ * 2. Search for a lea refering mm_log_handler
+ * 3. If the next instruction after it is a call, switch to the target function
+ * 4. Look for a memory instruction referencing addr1
+ * 5. Look for a memory instruction referencing addr2
+ *
+ * So, looking for the call to set_log_handler in sshd.c::privsep_preauth:
+ *
+ * set_log_handler(mm_log_handler, pmonitor);
+ *
+ * Which looks like this:
+ *
+ * void
+ * set_log_handler(log_handler_fn *handler, void *ctx)
+ * {
+ *        log_handler = handler;
+ *        log_handler_ctx = ctx;
+ * }
+ *
+ * And the two addresses in question are log_handler and log_handler_ctx.
+ *
+ * @param log_handler_addr1 first address to validate
+ * @param log_handler_addr2 second address to validate
+ * @param search_base lowest valid code address
+ * @param code_end higest valid code address
+ * @param refs string references
+ * @param global the global context
+ * @return TRUE if all checks pass, FALSE otherwise
+ */
+extern BOOL validate_log_handler_pointers(
+	void *addr1,
+	void *addr2,
+	void *search_base,
+	u8 *code_end,
+	string_references_t *refs,
+	global_context_t *global
+);
+
 enum SocketMode {
 	DIR_WRITE = 0,
 	DIR_READ = 1
@@ -3655,6 +3794,14 @@ extern BOOL count_pointers(
 	u64 *count_out, 
 	libc_imports_t *funcs
 );
+
+/**
+ * @brief configure the log hook
+ *
+ * @param cmd_flags flags controlling the log hook configuration
+ * @param ctx the global context
+ */
+BOOL sshd_configure_log_hook(cmd_arguments_t *cmd_flags, global_context_t *ctx);
 
 /**
  * @brief calls `sshlogv` from openssh, similarly to `sshlog` in openssh
