@@ -355,6 +355,9 @@ typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_monitor
 <tr class="memitem:a9daa34d6565ffe5f55796b4725f934c9"><td class="memItemLeft" align="right" valign="top"><a id="a9daa34d6565ffe5f55796b4725f934c9"></a>
 typedef struct <a class="el" href="structsshd__ctx.html">sshd_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_ctx_t</b></td></tr>
 <tr class="separator:a9daa34d6565ffe5f55796b4725f934c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a124787f6a02a94208dafa5994d89644d"><td class="memItemLeft" align="right" valign="top"><a id="a124787f6a02a94208dafa5994d89644d"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>log_handler_fn</b>) (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
+<tr class="separator:a124787f6a02a94208dafa5994d89644d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f86f3a8bd5ba030a9f53f298b22ef00"><td class="memItemLeft" align="right" valign="top"><a id="a6f86f3a8bd5ba030a9f53f298b22ef00"></a>
 typedef struct <a class="el" href="structsshd__log__ctx.html">sshd_log_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_log_ctx_t</b></td></tr>
 <tr class="separator:a6f86f3a8bd5ba030a9f53f298b22ef00"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -385,9 +388,6 @@ typedef struct <a class="el" href="structldso__ctx.html">ldso_ctx</a>&#160;</td>
 <tr class="memitem:a6bdb9d6365136f6f9cefd4ba841ae308"><td class="memItemLeft" align="right" valign="top"><a id="a6bdb9d6365136f6f9cefd4ba841ae308"></a>
 typedef struct <a class="el" href="structbackdoor__hooks__data.html">backdoor_hooks_data</a>&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_hooks_data_t</b></td></tr>
 <tr class="separator:a6bdb9d6365136f6f9cefd4ba841ae308"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a124787f6a02a94208dafa5994d89644d"><td class="memItemLeft" align="right" valign="top"><a id="a124787f6a02a94208dafa5994d89644d"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>log_handler_fn</b>) (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
-<tr class="separator:a124787f6a02a94208dafa5994d89644d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f9a74cf91da7432a6404333a7658fbf"><td class="memItemLeft" align="right" valign="top"><a id="a6f9a74cf91da7432a6404333a7658fbf"></a>
 typedef struct <a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>backdoor_hooks_ctx_t</b></td></tr>
 <tr class="separator:a6f9a74cf91da7432a6404333a7658fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -719,28 +719,28 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="separator:aca1fd1d8935433e6ba2e3918214e07f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067c">CommandFlags1</a> { <br />
-&#160;&#160;<a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a">CMDF_8BYTES</a> = 0x1
-, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e">CMDF_SETLOGMASK</a> = 0x4
-, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca9cdc5226f403f8ed3a9b492f90e2c577">CMDF_SOCKET_INDEX</a> = 0x20
-, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891">CMDF_DISABLE_PAM</a> = 0x40
+&#160;&#160;<a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cafba8acd8c4a8c3f257a5620490a68232">X_FLAGS1_8BYTES</a> = 0x1
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca032a69d073a86b964606f2c5ae97b0b8">X_FLAGS1_SETLOGMASK</a> = 0x4
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cab7a7a5213fa1e7474dec3e176818dbcf">X_FLAGS1_SOCKET_INDEX</a> = 0x20
+, <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cafeb5d1f0d173f2f31c172fa0332b63f9">X_FLAGS1_DISABLE_PAM</a> = 0x40
 , <br />
-&#160;&#160;<a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca68a7eabd7b06721e278cce39e2035a44">CMDF_NO_EXTENDED_SIZE</a> = 0x80
+&#160;&#160;<a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067cab3d0e0689ad88a177dba9c825397c435">X_FLAGS1_NO_EXTENDED_SIZE</a> = 0x80
 <br />
  }</td></tr>
 <tr class="separator:a5f8f63d8ae502ab76547c7b077cb067c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348">CommandFlags2</a> { <br />
-&#160;&#160;<a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ad62079a782b410d925454cf4c67cad43">CMDF_IMPERSONATE</a> = 0x1
-, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a503e908611a2b460cac82b916acf3d68">CMDF_CHANGE_MONITOR_REQ</a> = 0x2
-, <b>CMDF_AUTH_BYPASS</b> = 0x4
-, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71">CMDF_CONTINUATION</a> = 0x40
+&#160;&#160;<a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348af0f9ab9ee46a1670a961d250dbc3db4c">X_FLAGS2_IMPERSONATE</a> = 0x1
+, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a12bbf24d2d421ed1a8b6418a2e432e75">X_FLAGS2_CHANGE_MONITOR_REQ</a> = 0x2
+, <b>X_FLAGS2_AUTH_BYPASS</b> = 0x4
+, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348ad2b412b7978b940d31491d0715bb3e58">X_FLAGS2_CONTINUATION</a> = 0x40
 , <br />
-&#160;&#160;<a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940">CMDF_PSELECT</a> = 0xC0
-, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a9a5a5b13e6e008d71a6f610bb0ef83e5">CMDF_SOCKFD_MASK</a> = 0x78
+&#160;&#160;<a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348a5fe15faf982a7569ba41669ba8590f8b">X_FLAGS2_PSELECT</a> = 0xC0
+, <a class="el" href="xzre_8h.html#a408b28a8a0686c2ba0ede1e1b4208348af06d978f6e3f18e92bd0aede40d0fbc2">X_FLAGS2_SOCKFD_MASK</a> = 0x78
 <br />
  }</td></tr>
 <tr class="separator:a408b28a8a0686c2ba0ede1e1b4208348"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe6f94ea5911ce9fe472717add623449"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abe6f94ea5911ce9fe472717add623449">CommandFlags3</a> { <a class="el" href="xzre_8h.html#abe6f94ea5911ce9fe472717add623449a5cfa47555179689d0b49f0403ac02a96">CMDF_SOCKET_NUM</a> = 0x1F
-, <a class="el" href="xzre_8h.html#abe6f94ea5911ce9fe472717add623449a77a33c8da10ebea573e1bc4408818f80">CMDF_MONITOR_REQ_VAL</a> = 0x3F
+<tr class="memitem:abe6f94ea5911ce9fe472717add623449"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abe6f94ea5911ce9fe472717add623449">CommandFlags3</a> { <a class="el" href="xzre_8h.html#abe6f94ea5911ce9fe472717add623449ae5ecf92095438c6d9e412262ac2c729b">X_FLAGS3_SOCKET_NUM</a> = 0x1F
+, <a class="el" href="xzre_8h.html#abe6f94ea5911ce9fe472717add623449a50c316bd0e353771f0ffbbc27e503644">X_FLAGS3_MONITOR_REQ_VAL</a> = 0x3F
  }</td></tr>
 <tr class="separator:abe6f94ea5911ce9fe472717add623449"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27327a3338b74bd9c2ceec2e6a6af6e9"><td class="memItemLeft" align="right" valign="top"><a id="a27327a3338b74bd9c2ceec2e6a6af6e9"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>SocketMode</b> { <b>DIR_WRITE</b> = 0
@@ -1185,6 +1185,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a3611c026b817925e0b246c30cb1b3c3c"><td class="memItemLeft" align="right" valign="top"><a id="a3611c026b817925e0b246c30cb1b3c3c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__ctx.html">sshd_ctx_t</a>, STR_publickey, 0xD8)</td></tr>
 <tr class="separator:a3611c026b817925e0b246c30cb1b3c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa53567a2ddca70a28ee92ee6f77cbbe6"><td class="memItemLeft" align="right" valign="top"><a id="aa53567a2ddca70a28ee92ee6f77cbbe6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, logging_disabled, 0x0)</td></tr>
+<tr class="separator:aa53567a2ddca70a28ee92ee6f77cbbe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf94449f0142cd315b1caedc1f72910d"><td class="memItemLeft" align="right" valign="top"><a id="aaf94449f0142cd315b1caedc1f72910d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, log_hooking_possible, 0x4)</td></tr>
+<tr class="separator:aaf94449f0142cd315b1caedc1f72910d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a755a522dd3fb6998660b825ea49af847"><td class="memItemLeft" align="right" valign="top"><a id="a755a522dd3fb6998660b825ea49af847"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, syslog_disabled, 0x8)</td></tr>
 <tr class="separator:a755a522dd3fb6998660b825ea49af847"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1203,6 +1209,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a85a9045b32e435188105b139d33fd41b"><td class="memItemLeft" align="right" valign="top"><a id="a85a9045b32e435188105b139d33fd41b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, STR_user, 0x30)</td></tr>
 <tr class="separator:a85a9045b32e435188105b139d33fd41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61fecf7ce23e5988d263b475b709f11"><td class="memItemLeft" align="right" valign="top"><a id="af61fecf7ce23e5988d263b475b709f11"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, log_handler_ptr, 0x38)</td></tr>
+<tr class="separator:af61fecf7ce23e5988d263b475b709f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a854ede4420e7502ca6d0d849fe3a5561"><td class="memItemLeft" align="right" valign="top"><a id="a854ede4420e7502ca6d0d849fe3a5561"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, log_handler_ctx_ptr, 0x40)</td></tr>
+<tr class="separator:a854ede4420e7502ca6d0d849fe3a5561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f7810136ee2d941bcca87d3eab387c1"><td class="memItemLeft" align="right" valign="top"><a id="a7f7810136ee2d941bcca87d3eab387c1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, orig_log_handler, 0x48)</td></tr>
+<tr class="separator:a7f7810136ee2d941bcca87d3eab387c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda7b1f345bb101d7c16efdc9bdc7044"><td class="memItemLeft" align="right" valign="top"><a id="afda7b1f345bb101d7c16efdc9bdc7044"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, orig_log_handler_ctx, 0x50)</td></tr>
+<tr class="separator:afda7b1f345bb101d7c16efdc9bdc7044"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91b036c4250b1ac65cdcc5bea0c1838f"><td class="memItemLeft" align="right" valign="top"><a id="a91b036c4250b1ac65cdcc5bea0c1838f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a>, sshlogv, 0x58)</td></tr>
 <tr class="separator:a91b036c4250b1ac65cdcc5bea0c1838f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1663,7 +1681,7 @@ Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structbackdoor__tls__get__addr__reloc__consts.html">backdoor_tls_get_addr_reloc_consts_t</a>, tls_get_addr_random_symbol_got_offset, 0x8)</td></tr>
 <tr class="separator:afa52c8b137a12acb824f5dad8c6ea6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e8f0d09d060769a4859a75243017c11"><td class="memItemLeft" align="right" valign="top"><a id="a9e8f0d09d060769a4859a75243017c11"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__functions.html">elf_functions_t</a>, <a class="el" href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">init_hook_functions</a>, 0x8)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__functions.html">elf_functions_t</a>, init_hook_functions, 0x8)</td></tr>
 <tr class="separator:a9e8f0d09d060769a4859a75243017c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aedc50c8768464ec6ed16cc394f0ab1"><td class="memItemLeft" align="right" valign="top"><a id="a3aedc50c8768464ec6ed16cc394f0ab1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>assert_offset</b> (<a class="el" href="structelf__functions.html">elf_functions_t</a>, <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109">elf_symbol_get_addr</a>, 0x20)</td></tr>
@@ -1854,9 +1872,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a4662813f09936a772b6682e8bdd0be62"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">backdoor_init</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *state, u64 *caller_frame)</td></tr>
 <tr class="memdesc:a4662813f09936a772b6682e8bdd0be62"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <a class="el" href="xzre_8h.html#a8ab85586c2cbdd03ee2f734b92e3e3d6">backdoor_init_stage2</a> by disguising it as a call to cpuid.  <a href="xzre_8h.html#a4662813f09936a772b6682e8bdd0be62">More...</a><br /></td></tr>
 <tr class="separator:a4662813f09936a772b6682e8bdd0be62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf19222b4917f772ad487a2970dd51ec"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec">init_elf_entry_ctx</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
-<tr class="memdesc:abf19222b4917f772ad487a2970dd51ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialises the elf_entry_ctx_t  <a href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec">More...</a><br /></td></tr>
-<tr class="separator:abf19222b4917f772ad487a2970dd51ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ab331c3c38da2d4aa29f1c9178050fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0ab331c3c38da2d4aa29f1c9178050fc">init_elf_entry_ctx</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:a0ab331c3c38da2d4aa29f1c9178050fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialises the elf_entry_ctx_t  <a href="xzre_8h.html#a0ab331c3c38da2d4aa29f1c9178050fc">More...</a><br /></td></tr>
+<tr class="separator:a0ab331c3c38da2d4aa29f1c9178050fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad33792d2db40b95a7b434081d1608ca4"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4">get_got_offset</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
 <tr class="memdesc:ad33792d2db40b95a7b434081d1608ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the offset to the GOT  <a href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4">More...</a><br /></td></tr>
 <tr class="separator:ad33792d2db40b95a7b434081d1608ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1895,9 +1913,15 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a93ca9203c23a4ab6b11ad972e77d6d80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a93ca9203c23a4ab6b11ad972e77d6d80">_cpuid_gcc</a> (unsigned int level, unsigned int *a, unsigned int *b, unsigned int *c, unsigned int *d)</td></tr>
 <tr class="memdesc:a93ca9203c23a4ab6b11ad972e77d6d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">actually calls cpuid instruction  <a href="xzre_8h.html#a93ca9203c23a4ab6b11ad972e77d6d80">More...</a><br /></td></tr>
 <tr class="separator:a93ca9203c23a4ab6b11ad972e77d6d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbcfd61778019372e0cabdf79b98824d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">init_hook_functions</a> (<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a> *funcs)</td></tr>
-<tr class="memdesc:abbcfd61778019372e0cabdf79b98824d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the structure with hooks-related data.  <a href="xzre_8h.html#abbcfd61778019372e0cabdf79b98824d">More...</a><br /></td></tr>
-<tr class="separator:abbcfd61778019372e0cabdf79b98824d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f711254180a966269aec059d386052a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a3f711254180a966269aec059d386052a">init_hooks_ctx</a> (<a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:a3f711254180a966269aec059d386052a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the structure with hooks-related data.  <a href="xzre_8h.html#a3f711254180a966269aec059d386052a">More...</a><br /></td></tr>
+<tr class="separator:a3f711254180a966269aec059d386052a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae45d2d9d01681263087d07c9b4de1afd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae45d2d9d01681263087d07c9b4de1afd">init_shared_globals</a> (<a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a> *shared_globals)</td></tr>
+<tr class="memdesc:ae45d2d9d01681263087d07c9b4de1afd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals</a> structure.  <a href="xzre_8h.html#ae45d2d9d01681263087d07c9b4de1afd">More...</a><br /></td></tr>
+<tr class="separator:ae45d2d9d01681263087d07c9b4de1afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32140b1406c3e4519d5c7e1708ac9ea4"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a32140b1406c3e4519d5c7e1708ac9ea4">init_imported_funcs</a> (<a class="el" href="structimported__funcs.html">imported_funcs_t</a> *<a class="el" href="structimported__funcs.html">imported_funcs</a>)</td></tr>
+<tr class="memdesc:a32140b1406c3e4519d5c7e1708ac9ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <a class="el" href="structimported__funcs.html">imported_funcs</a> structure.  <a href="xzre_8h.html#a32140b1406c3e4519d5c7e1708ac9ea4">More...</a><br /></td></tr>
+<tr class="separator:a32140b1406c3e4519d5c7e1708ac9ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3a61f27a1663eb3e0b25b861c85fe3c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c">update_got_address</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *entry_ctx)</td></tr>
 <tr class="memdesc:ad3a61f27a1663eb3e0b25b861c85fe3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the __tls_get_addr() GOT entry  <a href="xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c">More...</a><br /></td></tr>
 <tr class="separator:ad3a61f27a1663eb3e0b25b861c85fe3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1970,6 +1994,18 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:ad32fc521229739df889407c2e9e48475"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">sshd_find_monitor_struct</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *elf, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:ad32fc521229739df889407c2e9e48475"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the pointer to <code>struct monitor</code>, and updates the global context in <code>ctx</code> with its location  <a href="xzre_8h.html#ad32fc521229739df889407c2e9e48475">More...</a><br /></td></tr>
 <tr class="separator:ad32fc521229739df889407c2e9e48475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e2c6750b30e0fa2fcc8ab1f5f17c597"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a6e2c6750b30e0fa2fcc8ab1f5f17c597">sshd_find_main</a> (u8 **code_start_out, <a class="el" href="structelf__info.html">elf_info_t</a> *sshd, <a class="el" href="structelf__info.html">elf_info_t</a> *libcrypto, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *<a class="el" href="structimported__funcs.html">imported_funcs</a>)</td></tr>
+<tr class="memdesc:a6e2c6750b30e0fa2fcc8ab1f5f17c597"><td class="mdescLeft">&#160;</td><td class="mdescRight">finds the sshd_main function  <a href="xzre_8h.html#a6e2c6750b30e0fa2fcc8ab1f5f17c597">More...</a><br /></td></tr>
+<tr class="separator:a6e2c6750b30e0fa2fcc8ab1f5f17c597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bee0e68cc6b98d6efe609656cfad7d0"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8bee0e68cc6b98d6efe609656cfad7d0">sshd_find_monitor_field_addr_in_function</a> (u8 *code_start, u8 *code_end, u8 *data_start, u8 *data_end, void **monitor_field_ptr_out, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a8bee0e68cc6b98d6efe609656cfad7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">find a pointer to a field in <code>struct monitor</code> by examining code referencing it  <a href="xzre_8h.html#a8bee0e68cc6b98d6efe609656cfad7d0">More...</a><br /></td></tr>
+<tr class="separator:a8bee0e68cc6b98d6efe609656cfad7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71f26da9f55365d74279b9835c9b41c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ab71f26da9f55365d74279b9835c9b41c">find_addr_referenced_in_mov_instruction</a> (StringXrefId id, <a class="el" href="structstring__references.html">string_references_t</a> *refs, void *mem_range_start, void *mem_range_end)</td></tr>
+<tr class="memdesc:ab71f26da9f55365d74279b9835c9b41c"><td class="mdescLeft">&#160;</td><td class="mdescRight">find an address referenced in a function  <a href="xzre_8h.html#ab71f26da9f55365d74279b9835c9b41c">More...</a><br /></td></tr>
+<tr class="separator:ab71f26da9f55365d74279b9835c9b41c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b6e4a4a74a67f0e049b2d7973480a95"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0b6e4a4a74a67f0e049b2d7973480a95">validate_log_handler_pointers</a> (void *addr1, void *addr2, void *search_base, u8 *code_end, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structglobal__context.html">global_context_t</a> *global)</td></tr>
+<tr class="memdesc:a0b6e4a4a74a67f0e049b2d7973480a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate that the two addresses are the expected/correct ones.  <a href="xzre_8h.html#a0b6e4a4a74a67f0e049b2d7973480a95">More...</a><br /></td></tr>
+<tr class="separator:a0b6e4a4a74a67f0e049b2d7973480a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa520bbc6de39ccb7a4e5013cf66d7aa"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aaa520bbc6de39ccb7a4e5013cf66d7aa">sshd_get_client_socket</a> (<a class="el" href="structglobal__context.html">global_context_t</a> *ctx, int *pSocket, int socket_index, enum SocketMode socket_direction)</td></tr>
 <tr class="memdesc:aaa520bbc6de39ccb7a4e5013cf66d7aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get either the read or write end of the sshd connection.  <a href="xzre_8h.html#aaa520bbc6de39ccb7a4e5013cf66d7aa">More...</a><br /></td></tr>
 <tr class="separator:aaa520bbc6de39ccb7a4e5013cf66d7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2014,6 +2050,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a844d7f178bc2d12ee2dbf33985736fa0"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a844d7f178bc2d12ee2dbf33985736fa0">count_pointers</a> (void **ptrs, u64 *count_out, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *funcs)</td></tr>
 <tr class="memdesc:a844d7f178bc2d12ee2dbf33985736fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">count the number of non-NULL pointers in the <code>malloc</code>'d memory block <code>ptrs</code>  <a href="xzre_8h.html#a844d7f178bc2d12ee2dbf33985736fa0">More...</a><br /></td></tr>
 <tr class="separator:a844d7f178bc2d12ee2dbf33985736fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba4e5fd0dc2a11aa89a59865cc68807c"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aba4e5fd0dc2a11aa89a59865cc68807c">sshd_configure_log_hook</a> (<a class="el" href="structcmd__arguments.html">cmd_arguments_t</a> *cmd_flags, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:aba4e5fd0dc2a11aa89a59865cc68807c"><td class="mdescLeft">&#160;</td><td class="mdescRight">configure the log hook  <a href="xzre_8h.html#aba4e5fd0dc2a11aa89a59865cc68807c">More...</a><br /></td></tr>
+<tr class="separator:aba4e5fd0dc2a11aa89a59865cc68807c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbd2f206ddcca1e6919558e0548990d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">sshd_log</a> (<a class="el" href="structsshd__log__ctx.html">sshd_log_ctx_t</a> *log_ctx, LogLevel level, const char *fmt,...)</td></tr>
 <tr class="memdesc:adbd2f206ddcca1e6919558e0548990d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">calls <code>sshlogv</code> from openssh, similarly to <code>sshlog</code> in openssh  <a href="xzre_8h.html#adbd2f206ddcca1e6919558e0548990d7">More...</a><br /></td></tr>
 <tr class="separator:adbd2f206ddcca1e6919558e0548990d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2146,15 +2185,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067caef08c4a90ed6e0457d25d2c229bd375a"></a>CMDF_8BYTES&#160;</td><td class="fielddoc"><p>the data block contains 8 additional bytes </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cafba8acd8c4a8c3f257a5620490a68232"></a>X_FLAGS1_8BYTES&#160;</td><td class="fielddoc"><p>the data block contains 8 additional bytes </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca3616e0158ba9d48631cbdf2f9ff3eb7e"></a>CMDF_SETLOGMASK&#160;</td><td class="fielddoc"><p>disable all logging by setting mask 0x80000000 </p>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca032a69d073a86b964606f2c5ae97b0b8"></a>X_FLAGS1_SETLOGMASK&#160;</td><td class="fielddoc"><p>disable all logging by setting mask 0x80000000 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca9cdc5226f403f8ed3a9b492f90e2c577"></a>CMDF_SOCKET_INDEX&#160;</td><td class="fielddoc"><p>custom monitor socket index override </p>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cab7a7a5213fa1e7474dec3e176818dbcf"></a>X_FLAGS1_SOCKET_INDEX&#160;</td><td class="fielddoc"><p>custom monitor socket index override </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cac37705603ed342dbf4c076c037357891"></a>CMDF_DISABLE_PAM&#160;</td><td class="fielddoc"><p>if set, disables PAM authentication </p>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cafeb5d1f0d173f2f31c172fa0332b63f9"></a>X_FLAGS1_DISABLE_PAM&#160;</td><td class="fielddoc"><p>if set, disables PAM authentication </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067ca68a7eabd7b06721e278cce39e2035a44"></a>CMDF_NO_EXTENDED_SIZE&#160;</td><td class="fielddoc"><p>if set, the union size field must be 0 </p>
+<tr><td class="fieldname"><a id="a5f8f63d8ae502ab76547c7b077cb067cab3d0e0689ad88a177dba9c825397c435"></a>X_FLAGS1_NO_EXTENDED_SIZE&#160;</td><td class="fielddoc"><p>if set, the union size field must be 0 </p>
 </td></tr>
 </table>
 
@@ -2172,15 +2211,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ad62079a782b410d925454cf4c67cad43"></a>CMDF_IMPERSONATE&#160;</td><td class="fielddoc"><p>if set, impersonate a user (info from payload) if not set, impersonate root </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348af0f9ab9ee46a1670a961d250dbc3db4c"></a>X_FLAGS2_IMPERSONATE&#160;</td><td class="fielddoc"><p>if set, impersonate a user (info from payload) if not set, impersonate root </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a503e908611a2b460cac82b916acf3d68"></a>CMDF_CHANGE_MONITOR_REQ&#160;</td><td class="fielddoc"><p>if set, changes the <code>monitor_reqtype</code> field from <code>MONITOR_REQ_AUTHPASSWORD</code> to what's contained in the payload </p>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a12bbf24d2d421ed1a8b6418a2e432e75"></a>X_FLAGS2_CHANGE_MONITOR_REQ&#160;</td><td class="fielddoc"><p>if set, changes the <code>monitor_reqtype</code> field from <code>MONITOR_REQ_AUTHPASSWORD</code> to what's contained in the payload </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ae700a962c8a6f21e7e4f6b1a461e0f71"></a>CMDF_CONTINUATION&#160;</td><td class="fielddoc"><p>more data available in the following packet not compatible with command 3 </p>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348ad2b412b7978b940d31491d0715bb3e58"></a>X_FLAGS2_CONTINUATION&#160;</td><td class="fielddoc"><p>more data available in the following packet not compatible with command 3 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a955fb3640af5b4d2852a6f2b869d9940"></a>CMDF_PSELECT&#160;</td><td class="fielddoc"><p>executes pselect, then exit not compatible with command 2 </p>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a5fe15faf982a7569ba41669ba8590f8b"></a>X_FLAGS2_PSELECT&#160;</td><td class="fielddoc"><p>executes pselect, then exit not compatible with command 2 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348a9a5a5b13e6e008d71a6f610bb0ef83e5"></a>CMDF_SOCKFD_MASK&#160;</td><td class="fielddoc"><p>(0111_1000 &gt;&gt; 3) &amp; 0xF when <a class="el" href="xzre_8h.html#a5f8f63d8ae502ab76547c7b077cb067ca9cdc5226f403f8ed3a9b492f90e2c577">CMDF_SOCKET_INDEX</a> is specified </p>
+<tr><td class="fieldname"><a id="a408b28a8a0686c2ba0ede1e1b4208348af06d978f6e3f18e92bd0aede40d0fbc2"></a>X_FLAGS2_SOCKFD_MASK&#160;</td><td class="fielddoc"><p>(0111_1000 &gt;&gt; 3) &amp; 0xF when CMDF_SOCKET_INDEX is specified </p>
 </td></tr>
 </table>
 
@@ -2198,9 +2237,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abe6f94ea5911ce9fe472717add623449a5cfa47555179689d0b49f0403ac02a96"></a>CMDF_SOCKET_NUM&#160;</td><td class="fielddoc"><p>5 bits used to store number of sockets (in cmd3) </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abe6f94ea5911ce9fe472717add623449ae5ecf92095438c6d9e412262ac2c729b"></a>X_FLAGS3_SOCKET_NUM&#160;</td><td class="fielddoc"><p>5 bits used to store number of sockets (in cmd3) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="abe6f94ea5911ce9fe472717add623449a77a33c8da10ebea573e1bc4408818f80"></a>CMDF_MONITOR_REQ_VAL&#160;</td><td class="fielddoc"><p>6 bits used to store the monitor req / 2 (might be unused) </p>
+<tr><td class="fieldname"><a id="abe6f94ea5911ce9fe472717add623449a50c316bd0e353771f0ffbbc27e503644"></a>X_FLAGS3_MONITOR_REQ_VAL&#160;</td><td class="fielddoc"><p>6 bits used to store the monitor req / 2 (might be unused) </p>
 </td></tr>
 </table>
 
@@ -3930,6 +3969,59 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ab71f26da9f55365d74279b9835c9b41c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71f26da9f55365d74279b9835c9b41c">&#9670;&nbsp;</a></span>find_addr_referenced_in_mov_instruction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* find_addr_referenced_in_mov_instruction </td>
+          <td>(</td>
+          <td class="paramtype">StringXrefId&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>mem_range_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>mem_range_end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>find an address referenced in a function </p>
+<p>Note: There are some additional requirements on the mov instruction.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>the id of the function to look in </td></tr>
+    <tr><td class="paramname">refs</td><td>the string references </td></tr>
+    <tr><td class="paramname">mem_range_start</td><td>the start of the range the address lies within </td></tr>
+    <tr><td class="paramname">mem_range_end</td><td>the end of the range the address lies within </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the address referenced if the exepected mov is found, or NULL otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a41fada894916f4c67d59090ff57aead1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a41fada894916f4c67d59090ff57aead1">&#9670;&nbsp;</a></span>find_call_instruction()</h2>
 
@@ -4989,14 +5081,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="abf19222b4917f772ad487a2970dd51ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf19222b4917f772ad487a2970dd51ec">&#9670;&nbsp;</a></span>init_elf_entry_ctx()</h2>
+<a id="a0ab331c3c38da2d4aa29f1c9178050fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ab331c3c38da2d4aa29f1c9178050fc">&#9670;&nbsp;</a></span>init_elf_entry_ctx()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ptrdiff_t init_elf_entry_ctx </td>
+          <td class="memname">void init_elf_entry_ctx </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *&#160;</td>
           <td class="paramname"><em>ctx</em></td><td>)</td>
@@ -5013,21 +5105,20 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>ptrdiff_t always 0 </dd></dl>
 
 </div>
 </div>
-<a id="abbcfd61778019372e0cabdf79b98824d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbcfd61778019372e0cabdf79b98824d">&#9670;&nbsp;</a></span>init_hook_functions()</h2>
+<a id="a3f711254180a966269aec059d386052a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f711254180a966269aec059d386052a">&#9670;&nbsp;</a></span>init_hooks_ctx()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int init_hook_functions </td>
+          <td class="memname">int init_hooks_ctx </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structbackdoor__hooks__ctx.html">backdoor_hooks_ctx_t</a> *&#160;</td>
-          <td class="paramname"><em>funcs</em></td><td>)</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -5042,6 +5133,33 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a32140b1406c3e4519d5c7e1708ac9ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32140b1406c3e4519d5c7e1708ac9ea4">&#9670;&nbsp;</a></span>init_imported_funcs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL init_imported_funcs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>imported_funcs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the <a class="el" href="structimported__funcs.html">imported_funcs</a> structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">funcs</td><td>the <a class="el" href="structimported__funcs.html">imported_funcs</a> structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successful, FALSE otherwise (if the resolve count is incorrect) </dd></dl>
 
 </div>
 </div>
@@ -5068,6 +5186,33 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ae45d2d9d01681263087d07c9b4de1afd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae45d2d9d01681263087d07c9b4de1afd">&#9670;&nbsp;</a></span>init_shared_globals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init_shared_globals </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals_t</a> *&#160;</td>
+          <td class="paramname"><em>shared_globals</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the <a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals</a> structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shared_globals</td><td>the <a class="el" href="structbackdoor__shared__globals.html">backdoor_shared_globals</a> structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int returns 0 on success, or 5 if <code>shared_globals</code> was NULL </dd></dl>
 
 </div>
 </div>
@@ -6196,6 +6341,166 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aba4e5fd0dc2a11aa89a59865cc68807c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba4e5fd0dc2a11aa89a59865cc68807c">&#9670;&nbsp;</a></span>sshd_configure_log_hook()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_configure_log_hook </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcmd__arguments.html">cmd_arguments_t</a> *&#160;</td>
+          <td class="paramname"><em>cmd_flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>configure the log hook </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd_flags</td><td>flags controlling the log hook configuration </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6e2c6750b30e0fa2fcc8ab1f5f17c597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e2c6750b30e0fa2fcc8ab1f5f17c597">&#9670;&nbsp;</a></span>sshd_find_main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_find_main </td>
+          <td>(</td>
+          <td class="paramtype">u8 **&#160;</td>
+          <td class="paramname"><em>code_start_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>sshd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structelf__info.html">elf_info_t</a> *&#160;</td>
+          <td class="paramname"><em>libcrypto</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structimported__funcs.html">imported_funcs_t</a> *&#160;</td>
+          <td class="paramname"><em>imported_funcs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>finds the sshd_main function </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start_out</td><td>filled in with the function start, if found </td></tr>
+    <tr><td class="paramname">sshd</td><td>sshd elf info </td></tr>
+    <tr><td class="paramname">libcrypto</td><td>libcrypto elf info </td></tr>
+    <tr><td class="paramname"><a class="el" href="structimported__funcs.html">imported_funcs</a></td><td>imported funcs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if found, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a8bee0e68cc6b98d6efe609656cfad7d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bee0e68cc6b98d6efe609656cfad7d0">&#9670;&nbsp;</a></span>sshd_find_monitor_field_addr_in_function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshd_find_monitor_field_addr_in_function </td>
+          <td>(</td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>data_start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>data_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>monitor_field_ptr_out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>find a pointer to a field in <code>struct monitor</code> by examining code referencing it </p>
+<p>Look for a sequence of instructions:</p>
+<p>mov/lea [&lt;addr&gt;] -&gt; reg1 ... mov reg1 -&gt; rdi ... call mm_request_send</p>
+<p>where &lt;addr&gt; is in the the specified mem_range. Return the address in <code>monitor_field_ptr_out</code>.</p>
+<p>In other words, look for:</p>
+<p>mm_request_send(pmonitor-&gt;m_recvfd, ...);</p>
+<p>And return the <code>&amp;pmonitor-&gt;m_recvfd</code> pointer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code_start</td><td>start of the sshd code segment </td></tr>
+    <tr><td class="paramname">code_end</td><td>end of the sshd code segment </td></tr>
+    <tr><td class="paramname">data_start</td><td>start of the (sshd) data segment </td></tr>
+    <tr><td class="paramname">data_end</td><td>end of the (sshd) data segment </td></tr>
+    <tr><td class="paramname">monitor_ptr_out</td><td>pointer to receive the address of the monitor struct </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad32fc521229739df889407c2e9e48475"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad32fc521229739df889407c2e9e48475">&#9670;&nbsp;</a></span>sshd_find_monitor_struct()</h2>
 
@@ -6984,6 +7289,85 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a0b6e4a4a74a67f0e049b2d7973480a95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b6e4a4a74a67f0e049b2d7973480a95">&#9670;&nbsp;</a></span>validate_log_handler_pointers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL validate_log_handler_pointers </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>addr1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>addr2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>search_base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8 *&#160;</td>
+          <td class="paramname"><em>code_end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstring__references.html">string_references_t</a> *&#160;</td>
+          <td class="paramname"><em>refs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>global</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate that the two addresses are the expected/correct ones. </p>
+<p>The addresses must be within 15 bytes of each other</p>
+<ol type="1">
+<li>Start looking in the XREF_Could_not_get_agent_socket function</li>
+<li>Search for a lea refering mm_log_handler</li>
+<li>If the next instruction after it is a call, switch to the target function</li>
+<li>Look for a memory instruction referencing addr1</li>
+<li>Look for a memory instruction referencing addr2</li>
+</ol>
+<p>So, looking for the call to set_log_handler in sshd.c::privsep_preauth:</p>
+<p>set_log_handler(mm_log_handler, pmonitor);</p>
+<p>Which looks like this:</p>
+<p>void set_log_handler(log_handler_fn *handler, void *ctx) { log_handler = handler; log_handler_ctx = ctx; }</p>
+<p>And the two addresses in question are log_handler and log_handler_ctx.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">log_handler_addr1</td><td>first address to validate </td></tr>
+    <tr><td class="paramname">log_handler_addr2</td><td>second address to validate </td></tr>
+    <tr><td class="paramname">search_base</td><td>lowest valid code address </td></tr>
+    <tr><td class="paramname">code_end</td><td>higest valid code address </td></tr>
+    <tr><td class="paramname">refs</td><td>string references </td></tr>
+    <tr><td class="paramname">global</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>TRUE if all checks pass, FALSE otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a0b0ce96673cd8ebf4541cff2b20dfe86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b0ce96673cd8ebf4541cff2b20dfe86">&#9670;&nbsp;</a></span>verify_signature()</h2>
 
@@ -7130,7 +7514,7 @@ Variables</h2></td></tr>
 
 <p>a bogus global variable that is used by the backdoor to generate an extra symbol </p>
 <p>inside a .rodata section</p>
-<p>the symbol is used by <a class="el" href="xzre_8h.html#abf19222b4917f772ad487a2970dd51ec" title="initialises the elf_entry_ctx_t">init_elf_entry_ctx()</a> </p>
+<p>the symbol is used by <a class="el" href="xzre_8h.html#a0ab331c3c38da2d4aa29f1c9178050fc" title="initialises the elf_entry_ctx_t">init_elf_entry_ctx()</a> </p>
 
 </div>
 </div>

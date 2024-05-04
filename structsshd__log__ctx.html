@@ -74,27 +74,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b5b78086e283be2c6408656ced819a6"><td class="memItemLeft" align="right" valign="top"><a id="a9b5b78086e283be2c6408656ced819a6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
 <tr class="separator:a9b5b78086e283be2c6408656ced819a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b5b78086e283be2c6408656ced819a6"><td class="memItemLeft" align="right" valign="top"><a id="a9b5b78086e283be2c6408656ced819a6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (4)</td></tr>
-<tr class="separator:a9b5b78086e283be2c6408656ced819a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memItemLeft" align="right" valign="top"><a id="aed5aa1304e8e8e1137d8940568b6b42a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memItemLeft" align="right" valign="top"><a id="aed5aa1304e8e8e1137d8940568b6b42a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memItemLeft" align="right" valign="top"><a id="aed5aa1304e8e8e1137d8940568b6b42a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memItemLeft" align="right" valign="top"><a id="aed5aa1304e8e8e1137d8940568b6b42a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PADDING</b> (0x8)</td></tr>
-<tr class="separator:aed5aa1304e8e8e1137d8940568b6b42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a4fa43d393c3ff461bc18da16c2d048ab"><td class="memItemLeft" align="right" valign="top"><a id="a4fa43d393c3ff461bc18da16c2d048ab"></a>
-BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>unkbool_log_handler</b></td></tr>
-<tr class="separator:a4fa43d393c3ff461bc18da16c2d048ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad059e4fcc52e58566849fd197e380067"><td class="memItemLeft" align="right" valign="top"><a id="ad059e4fcc52e58566849fd197e380067"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>logging_disabled</b></td></tr>
+<tr class="separator:ad059e4fcc52e58566849fd197e380067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9564411c520afa01ac38a453e8597d8e"><td class="memItemLeft" align="right" valign="top"><a id="a9564411c520afa01ac38a453e8597d8e"></a>
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>log_hooking_possible</b></td></tr>
+<tr class="separator:a9564411c520afa01ac38a453e8597d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c9bbb58b4fa64778d15eef016ce23b1"><td class="memItemLeft" align="right" valign="top"><a id="a1c9bbb58b4fa64778d15eef016ce23b1"></a>
 BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>syslog_disabled</b></td></tr>
 <tr class="separator:a1c9bbb58b4fa64778d15eef016ce23b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,6 +101,18 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>STR_authenticating<
 <tr class="memitem:af51009bd2718a34fa32d79f3c8696736"><td class="memItemLeft" align="right" valign="top"><a id="af51009bd2718a34fa32d79f3c8696736"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>STR_user</b></td></tr>
 <tr class="separator:af51009bd2718a34fa32d79f3c8696736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4cda3b78d96f294dca6b25546a2af48"><td class="memItemLeft" align="right" valign="top"><a id="af4cda3b78d96f294dca6b25546a2af48"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>log_handler_ptr</b></td></tr>
+<tr class="separator:af4cda3b78d96f294dca6b25546a2af48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04fb695b91afcbfc620855cebbf584e"><td class="memItemLeft" align="right" valign="top"><a id="aa04fb695b91afcbfc620855cebbf584e"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>log_handler_ctx_ptr</b></td></tr>
+<tr class="separator:aa04fb695b91afcbfc620855cebbf584e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5fd64a60a0f0eecbc7f84f396a470c"><td class="memItemLeft" align="right" valign="top"><a id="aad5fd64a60a0f0eecbc7f84f396a470c"></a>
+log_handler_fn&#160;</td><td class="memItemRight" valign="bottom"><b>orig_log_handler</b></td></tr>
+<tr class="separator:aad5fd64a60a0f0eecbc7f84f396a470c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac1044226fd437220b1012cabf5a25c2"><td class="memItemLeft" align="right" valign="top"><a id="aac1044226fd437220b1012cabf5a25c2"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>orig_log_handler_ctx</b></td></tr>
+<tr class="separator:aac1044226fd437220b1012cabf5a25c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdfa92430f138585213a49c3113397f3"><td class="memItemLeft" align="right" valign="top"><a id="abdfa92430f138585213a49c3113397f3"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>sshlogv</b></td></tr>
 <tr class="separator:abdfa92430f138585213a49c3113397f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
