@@ -3833,6 +3833,42 @@ extern BOOL sshd_find_sensitive_data(
 	imported_funcs_t *funcs,
 	global_context_t *ctx);
 
+
+/**
+ * @brief returns length of c string
+ * 
+ * @param str pointer to c string
+ * @return ssize_t length of c string
+ */
+extern ssize_t c_strlen(
+	char *str
+);
+
+/**
+ * @brief returns length of c string with a maximum length
+ * 
+ * @param str pointer to c string
+ * @param max_len maximum length of c string
+ * @return ssize_t length of c string
+ */
+extern ssize_t c_strnlen(
+	char *str,
+	size_t max_len
+);
+
+/**
+ * @brief copies memory
+ * 
+ * @param dest destination buffer
+ * @param src source buffer
+ * @param cnt number of bytes to copy
+ */
+extern void c_memmove(
+	char *dest,
+	char *src,
+	size_t cnt
+);
+
 /**
  * @brief counts the number of times the IFUNC resolver is called
  * 

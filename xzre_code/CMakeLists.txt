@@ -15,6 +15,9 @@ add_library(xzre_code
 	secret_data_get_decrypted.c
 	sha256.c
 	sshd_patch_variables.c
+	c_memmove.c
+	c_strlen.c
+	c_strnlen.c
 )
 target_compile_options(xzre_code PRIVATE
 	-Os -fomit-frame-pointer
