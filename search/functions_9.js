@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['process_5fis_5fsshd_420',['process_is_sshd',['../xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e',1,'xzre.h']]],
-  ['process_5fshared_5flibraries_421',['process_shared_libraries',['../xzre_8h.html#a1cb8bb283baa56567d7b88b5fcfe7db7',1,'xzre.h']]],
-  ['process_5fshared_5flibraries_5fmap_422',['process_shared_libraries_map',['../xzre_8h.html#a1fcba1b3d069ccf76ee3cef4a3b9a682',1,'xzre.h']]]
+  ['main_5felf_5fparse_417',['main_elf_parse',['../xzre_8h.html#a642ed90d3ade30228b3286310de5e5c1',1,'xzre.h']]],
+  ['mm_5fanswer_5fauthpassword_5fhook_418',['mm_answer_authpassword_hook',['../xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79',1,'xzre.h']]],
+  ['mm_5fanswer_5fkeyallowed_5fhook_419',['mm_answer_keyallowed_hook',['../xzre_8h.html#a8ce260e9315b4afa70668391058ed484',1,'xzre.h']]],
+  ['mm_5fanswer_5fkeyverify_5fhook_420',['mm_answer_keyverify_hook',['../xzre_8h.html#a99eb76809c798f3bcae98526992e63ef',1,'xzre.h']]],
+  ['mm_5flog_5fhandler_5fhook_421',['mm_log_handler_hook',['../xzre_8h.html#a096fbb5b183337e44012a38910ea31eb',1,'xzre.h']]]
 ];

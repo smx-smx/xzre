@@ -8,8 +8,9 @@ var searchData=
   ['libcrypto_5finfo_162',['libcrypto_info',['../structbackdoor__data.html#a932329dfc876e64f123c922e55b30142',1,'backdoor_data']]],
   ['libcrypto_5fl_5fname_163',['libcrypto_l_name',['../structldso__ctx.html#a8f68b96010a76e72135e68cfad110542',1,'ldso_ctx']]],
   ['link_5fmap_5fl_5faudit_5fany_5fplt_5fbitmask_164',['link_map_l_audit_any_plt_bitmask',['../structldso__ctx.html#a5f52e1a88c3a17d61072f2d944f706e7',1,'ldso_ctx']]],
-  ['lzma_5fcheck_5fstate_165',['lzma_check_state',['../structlzma__check__state.html',1,'']]],
-  ['lzma_5fcode_5fend_166',['lzma_code_end',['../structglobal__context.html#a031805daad5b0f7f951ef58614533588',1,'global_context']]],
-  ['lzma_5fcode_5fstart_167',['lzma_code_start',['../structglobal__context.html#acf13081708c1c8ca5b3902d198419bd1',1,'global_context']]],
-  ['lzma_5fsha256_5fstate_168',['lzma_sha256_state',['../structlzma__sha256__state.html',1,'']]]
+  ['lzma_5falloc_165',['lzma_alloc',['../xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6',1,'xzre.h']]],
+  ['lzma_5fcheck_5fstate_166',['lzma_check_state',['../structlzma__check__state.html',1,'']]],
+  ['lzma_5fcode_5fend_167',['lzma_code_end',['../structglobal__context.html#a031805daad5b0f7f951ef58614533588',1,'global_context']]],
+  ['lzma_5fcode_5fstart_168',['lzma_code_start',['../structglobal__context.html#acf13081708c1c8ca5b3902d198419bd1',1,'global_context']]],
+  ['lzma_5fsha256_5fstate_169',['lzma_sha256_state',['../structlzma__sha256__state.html',1,'']]]
 ];

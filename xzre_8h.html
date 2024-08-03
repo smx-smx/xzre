@@ -468,26 +468,30 @@ typedef struct <a class="el" href="structdl__tls__index.html">dl_tls_index</a>&#
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:ae259c7a879227c0419a173e2fd605613"><td class="memItemLeft" align="right" valign="top"><a id="ae259c7a879227c0419a173e2fd605613"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>X86_OPCODE</b> { <b>X86_OPCODE_LEA</b> = 0x8D
+ }</td></tr>
+<tr class="separator:ae259c7a879227c0419a173e2fd605613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a28d9f889f70e46106eb6e946183605"><td class="memItemLeft" align="right" valign="top"><a id="a7a28d9f889f70e46106eb6e946183605"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InstructionFlags</b> { <br />
-&#160;&#160;<b>DF_LOCK_REP</b> = 1
-, <b>DF_SEG</b> = 2
-, <b>DF_OSIZE</b> = 4
-, <b>DF_ASIZE</b> = 8
+&#160;&#160;<b>DF1_LOCK_REP</b> = 1
+, <b>DF1_SEG</b> = 2
+, <b>DF1_OSIZE</b> = 4
+, <b>DF1_ASIZE</b> = 8
 , <br />
-&#160;&#160;<b>DF_VEX</b> = 0x10
-, <b>DF_REX</b> = 0x20
-, <b>DF_MODRM</b> = 0x40
-, <b>DF_SIB</b> = 0x80
+&#160;&#160;<b>DF1_VEX</b> = 0x10
+, <b>DF1_REX</b> = 0x20
+, <b>DF1_MODRM</b> = 0x40
+, <b>DF1_SIB</b> = 0x80
 <br />
  }</td></tr>
 <tr class="separator:a7a28d9f889f70e46106eb6e946183605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601dc05cbcee627f9a0439b294b3e11f"><td class="memItemLeft" align="right" valign="top"><a id="a601dc05cbcee627f9a0439b294b3e11f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InstructionFlags2</b> { <br />
-&#160;&#160;<b>DF_MEM_DISP</b> = 0x1
-, <b>DF_MEM_DISP8</b> = 0x2
-, <b>DF_MEM_SEG_OFFS</b> = 0x4
-, <b>DF_IMM</b> = 0x8
+&#160;&#160;<b>DF2_MEM_DISP</b> = 0x1
+, <b>DF2_MEM_DISP8</b> = 0x2
+, <b>DF2_MEM_SEG_OFFS</b> = 0x4
+, <b>DF2_FLAGS_MEM</b> = DF2_MEM_DISP | DF2_MEM_DISP8 | DF2_MEM_SEG_OFFS
 , <br />
-&#160;&#160;<b>DF_IMM64</b> = 0x10
+&#160;&#160;<b>DF2_IMM</b> = 0x8
+, <b>DF2_IMM64</b> = 0x10
 <br />
  }</td></tr>
 <tr class="separator:a601dc05cbcee627f9a0439b294b3e11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1831,7 +1835,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>check_argument</b> 
 <tr class="memdesc:a048b695303b409f486861de0c24d6097"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the address of the fake LZMA allocator  <a href="xzre_8h.html#a048b695303b409f486861de0c24d6097">More...</a><br /></td></tr>
 <tr class="separator:a048b695303b409f486861de0c24d6097"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584">fake_lzma_alloc</a> (void *opaque, size_t nmemb, size_t size)</td></tr>
-<tr class="memdesc:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="mdescLeft">&#160;</td><td class="mdescRight">a fake alloc function called by lzma_alloc() that then calls <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109" title="Looks up an ELF symbol from a parsed ELF, and returns its memory address.">elf_symbol_get_addr()</a>  <a href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584">More...</a><br /></td></tr>
+<tr class="memdesc:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="mdescLeft">&#160;</td><td class="mdescRight">a fake alloc function called by <a class="el" href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6" title="lzma_alloc function, used by the backdoor as an ELF symbol resolver the allocator &#39;s opaque field mus...">lzma_alloc()</a> that then calls <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109" title="Looks up an ELF symbol from a parsed ELF, and returns its memory address.">elf_symbol_get_addr()</a>  <a href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584">More...</a><br /></td></tr>
 <tr class="separator:aeb6b7e7363a9d706fdd3704ef5faf584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5565761b59b3ef6786b83a9b50f72b17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17">fake_lzma_free</a> (void *opaque, void *ptr)</td></tr>
 <tr class="memdesc:a5565761b59b3ef6786b83a9b50f72b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">a fake free function called by lzma_free()  <a href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17">More...</a><br /></td></tr>
@@ -2059,6 +2063,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a5f865a1a2eb6a32980c4336b2290e17e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">sshd_find_sensitive_data</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *sshd, <a class="el" href="structelf__info.html">elf_info_t</a> *libcrypto, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a5f865a1a2eb6a32980c4336b2290e17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> within sshd, and resolves some additional libcrypto functions  <a href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">More...</a><br /></td></tr>
 <tr class="separator:a5f865a1a2eb6a32980c4336b2290e17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de1fbaae1155f07add8fdf72089abe6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6">lzma_alloc</a> (size_t size, lzma_allocator *allocator)</td></tr>
+<tr class="memdesc:a2de1fbaae1155f07add8fdf72089abe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">lzma_alloc function, used by the backdoor as an ELF symbol resolver the <code>allocator</code> 's opaque field must point to a parsed elf_info_t  <a href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6">More...</a><br /></td></tr>
+<tr class="separator:a2de1fbaae1155f07add8fdf72089abe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -3762,7 +3769,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>a fake alloc function called by lzma_alloc() that then calls <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109" title="Looks up an ELF symbol from a parsed ELF, and returns its memory address.">elf_symbol_get_addr()</a> </p>
+<p>a fake alloc function called by <a class="el" href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6" title="lzma_alloc function, used by the backdoor as an ELF symbol resolver the allocator &#39;s opaque field mus...">lzma_alloc()</a> that then calls <a class="el" href="xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109" title="Looks up an ELF symbol from a parsed ELF, and returns its memory address.">elf_symbol_get_addr()</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">opaque</td><td>the parsed ELF context (elf_info_t*) </td></tr>
@@ -3802,7 +3809,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>a fake free function called by lzma_free() </p>
-<p>this function is a red herring as it is does nothing except make it look like lzma_alloc() is the real deal</p>
+<p>this function is a red herring as it is does nothing except make it look like <a class="el" href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6" title="lzma_alloc function, used by the backdoor as an ELF symbol resolver the allocator &#39;s opaque field mus...">lzma_alloc()</a> is the real deal</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">opaque</td><td>not used </td></tr>
@@ -5339,6 +5346,43 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the whole range is mapped, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a2de1fbaae1155f07add8fdf72089abe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2de1fbaae1155f07add8fdf72089abe6">&#9670;&nbsp;</a></span>lzma_alloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* lzma_alloc </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">lzma_allocator *&#160;</td>
+          <td class="paramname"><em>allocator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>lzma_alloc function, used by the backdoor as an ELF symbol resolver the <code>allocator</code> 's opaque field must point to a parsed elf_info_t </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>the encoded string ID of the function to resolve </td></tr>
+    <tr><td class="paramname">allocator</td><td>the fake lzma allocator referring to the elf_info_t to search into. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -7618,7 +7662,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>special .data.rel.ro section that contains a fake lzma_allocator </p>
-<p>the fake lzma_allocator makes lzma_alloc() call <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a></p>
+<p>the fake lzma_allocator makes <a class="el" href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6" title="lzma_alloc function, used by the backdoor as an ELF symbol resolver the allocator &#39;s opaque field mus...">lzma_alloc()</a> call <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a></p>
 <p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
 <p>lzma_allocator::alloc is the address of <a class="el" href="xzre_8h.html#aeb6b7e7363a9d706fdd3704ef5faf584" title="a fake alloc function called by lzma_alloc() that then calls elf_symbol_get_addr()">fake_lzma_alloc()</a> the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_alloc</p>
 <p>lzma_allocator::free is the address of <a class="el" href="xzre_8h.html#a5565761b59b3ef6786b83a9b50f72b17" title="a fake free function called by lzma_free()">fake_lzma_free()</a> the field maps to a relocation entry of type R_X86_64_64 and value fake_lzma_free</p>

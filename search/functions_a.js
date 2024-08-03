@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['resolve_5flibc_5fimports_423',['resolve_libc_imports',['../xzre_8h.html#a0d70747b6216270de07c783fc499938e',1,'xzre.h']]],
-  ['rsa_5fkey_5fhash_424',['rsa_key_hash',['../xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7',1,'xzre.h']]],
-  ['rsa_5fpublic_5fdecrypt_425',['RSA_public_decrypt',['../ssh__patch_8c.html#ae142ad01d213393458d1f4770b68555f',1,'ssh_patch.c']]],
-  ['run_5fbackdoor_5fcommands_426',['run_backdoor_commands',['../xzre_8h.html#add930f2364d6ac0711ec484781f00f03',1,'xzre.h']]]
+  ['process_5fis_5fsshd_422',['process_is_sshd',['../xzre_8h.html#a04a9f7dfab9ccac6d8407c906b7b2e2e',1,'xzre.h']]],
+  ['process_5fshared_5flibraries_423',['process_shared_libraries',['../xzre_8h.html#a1cb8bb283baa56567d7b88b5fcfe7db7',1,'xzre.h']]],
+  ['process_5fshared_5flibraries_5fmap_424',['process_shared_libraries_map',['../xzre_8h.html#a1fcba1b3d069ccf76ee3cef4a3b9a682',1,'xzre.h']]]
 ];
