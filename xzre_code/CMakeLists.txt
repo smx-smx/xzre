@@ -1,6 +1,7 @@
 add_library(xzre_code
 	backdoor_entry.c
 	chacha_decrypt.c
+	count_bits.c
 	count_pointers.c
 	elf_parse.c
 	elf_symbol_get_addr.c
