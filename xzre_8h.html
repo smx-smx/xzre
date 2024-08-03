@@ -255,7 +255,7 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>X_BN_num_bytes</b>(bits)&#160;&#160;&#160;(((bits)+7)/8)</td></tr>
 <tr class="separator:a1045acf85e8ae6f44f8bb1dfeb52ce48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1974ecd89574bc861c90392b3d570dcb"><td class="memItemLeft" align="right" valign="top"><a id="a1974ecd89574bc861c90392b3d570dcb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>XZDASM_OPC</b>(op)&#160;&#160;&#160;(op - 0x80)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>XZDASM_OPC</b>(op)&#160;&#160;&#160;((u8)(op) - 0x80)</td></tr>
 <tr class="separator:a1974ecd89574bc861c90392b3d570dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8cecfc5c5c054d2875c03e77b7be15d"><td class="memItemLeft" align="right" valign="top"><a id="aa8cecfc5c5c054d2875c03e77b7be15d"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TRUE</b>&#160;&#160;&#160;1</td></tr>
@@ -290,6 +290,15 @@ Macros</h2></td></tr>
 <tr class="memitem:acf693c060efdbc236980c16c4a7c351a"><td class="memItemLeft" align="right" valign="top"><a id="acf693c060efdbc236980c16c4a7c351a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>PERMIT_YES</b>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:acf693c060efdbc236980c16c4a7c351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7855f3e7ab564100f9f362b9305ad7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a>(mod,  reg,  rm)</td></tr>
+<tr class="separator:afb7855f3e7ab564100f9f362b9305ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c95889589df8aa9f0a6ed3d443bdd0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>X86_REX_BYTE</b>(w,  r,  x,  b)</td></tr>
+<tr class="separator:aa6c95889589df8aa9f0a6ed3d443bdd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f6659c9e7993b3e06cc388b5bb28247"><td class="memItemLeft" align="right" valign="top"><a id="a6f6659c9e7993b3e06cc388b5bb28247"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>X86_REX_W</b>&#160;&#160;&#160;X86_REX_BYTE(1,0,0,0)</td></tr>
+<tr class="separator:a6f6659c9e7993b3e06cc388b5bb28247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af52dcde56e3318fd8e0d462dd93d6378"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#af52dcde56e3318fd8e0d462dd93d6378">XZDASM_MODRM_MAKE</a>(mod,  reg,  rm)</td></tr>
+<tr class="separator:af52dcde56e3318fd8e0d462dd93d6378"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09db9213e4c2297bab479e6ac1cab9a0"><td class="memItemLeft" align="right" valign="top"><a id="a09db9213e4c2297bab479e6ac1cab9a0"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TEST_FLAG</b>(x,  flag)&#160;&#160;&#160;(((x) &amp; (flag)) != 0)</td></tr>
 <tr class="separator:a09db9213e4c2297bab479e6ac1cab9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -468,10 +477,19 @@ typedef struct <a class="el" href="structdl__tls__index.html">dl_tls_index</a>&#
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ae259c7a879227c0419a173e2fd605613"><td class="memItemLeft" align="right" valign="top"><a id="ae259c7a879227c0419a173e2fd605613"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>X86_OPCODE</b> { <b>X86_OPCODE_LEA</b> = 0x8D
+<tr class="memitem:ae259c7a879227c0419a173e2fd605613"><td class="memItemLeft" align="right" valign="top"><a id="ae259c7a879227c0419a173e2fd605613"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>X86_OPCODE</b> { <br />
+&#160;&#160;<b>X86_OPCODE_LEA</b> = 0x8D
 , <b>X86_OPCODE_CALL</b> = 0xE8
+, <b>X86_OPCODE_MOV</b> = 0x89
+, <b>X86_OPCODE_MOV_LOAD</b> = 0x8B
+, <br />
+&#160;&#160;<b>X86_OPCODE_MOV_STORE</b> = 0x8C
+<br />
  }</td></tr>
 <tr class="separator:ae259c7a879227c0419a173e2fd605613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d393b6e433720e63a6531c45d50ebba"><td class="memItemLeft" align="right" valign="top"><a id="a8d393b6e433720e63a6531c45d50ebba"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>X86_REG</b> { <b>X86_REG_RBP</b> = 5
+ }</td></tr>
+<tr class="separator:a8d393b6e433720e63a6531c45d50ebba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a28d9f889f70e46106eb6e946183605"><td class="memItemLeft" align="right" valign="top"><a id="a7a28d9f889f70e46106eb6e946183605"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InstructionFlags</b> { <br />
 &#160;&#160;<b>DF1_LOCK_REP</b> = 1
 , <b>DF1_SEG</b> = 2
@@ -708,6 +726,12 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:afde1d1c69b6bedd0626eee956c7111de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d9ad859f69765431df3a1c1189c9f5"><td class="memItemLeft" align="right" valign="top"><a id="a74d9ad859f69765431df3a1c1189c9f5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>dasm_modrm_mask</b> { <b>XZ_MODRM_RM</b> = 0xFF000000
+, <b>XZ_MODRM_REG</b> = 0x00FF0000
+, <b>XZ_MODRM_MOD</b> = 0x0000FF00
+, <b>XZ_MODRM_RAW</b> = 0x000000FF
+ }</td></tr>
+<tr class="separator:a74d9ad859f69765431df3a1c1189c9f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca1fd1d8935433e6ba2e3918214e07f9"><td class="memItemLeft" align="right" valign="top"><a id="aca1fd1d8935433e6ba2e3918214e07f9"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>LogLevel</b> { <br />
 &#160;&#160;<b>SYSLOG_LEVEL_QUIET</b>
 , <b>SYSLOG_LEVEL_FATAL</b>
@@ -2113,7 +2137,136 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>XZ backdoor structures and functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Stefano Moioli (<a href="#" onclick="location.href='mai'+'lto:'+'smx'+'de'+'v4@'+'gm'+'ail'+'.c'+'om'; return false;">smxde<span style="display: none;">.nosp@m.</span>v4@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a>) </dd></dl>
-</div><h2 class="groupheader">Typedef Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="afb7855f3e7ab564100f9f362b9305ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb7855f3e7ab564100f9f362b9305ad7">&#9670;&nbsp;</a></span>X86_MODRM_BYTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define X86_MODRM_BYTE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">mod, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">reg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">rm&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    ((u8)(0 \</div>
+<div class="line">        | (u8)(((mod) &amp; 3) &lt;&lt; 6) \</div>
+<div class="line">        | (u8)(((reg) &amp; 7) &lt;&lt; 3) \</div>
+<div class="line">        | (u8)(((rm) &amp; 7)) \</div>
+<div class="line">    ))</div>
+</div><!-- fragment --><p>creates the MOD.RM byte, given its components </p>
+
+</div>
+</div>
+<a id="aa6c95889589df8aa9f0a6ed3d443bdd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6c95889589df8aa9f0a6ed3d443bdd0">&#9670;&nbsp;</a></span>X86_REX_BYTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define X86_REX_BYTE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">w, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">r, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    ((u8)(0x40 \</div>
+<div class="line">        | (u8)(((w) &amp; 1) &lt;&lt; 3) \</div>
+<div class="line">        | (u8)(((r) &amp; 1) &lt;&lt; 2) \</div>
+<div class="line">        | (u8)(((x) &amp; 1) &lt;&lt; 1) \</div>
+<div class="line">        | (u8)(((b) &amp; 1) &lt;&lt; 0) \</div>
+<div class="line">    ))</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af52dcde56e3318fd8e0d462dd93d6378"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af52dcde56e3318fd8e0d462dd93d6378">&#9670;&nbsp;</a></span>XZDASM_MODRM_MAKE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define XZDASM_MODRM_MAKE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">mod, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">reg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">rm&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    ((u32)(0 \</div>
+<div class="line">        | (u32)(((rm) &amp; 0xFF)&lt;&lt; 24) \</div>
+<div class="line">        | (u32)(((reg) &amp; 0xFF) &lt;&lt; 16) \</div>
+<div class="line">        | (u32)(((mod) &amp; 0xFF) &lt;&lt; 8) \</div>
+<div class="line">        | <a class="code" href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a>(mod, reg, rm) \</div>
+<div class="line">    ))</div>
+<div class="ttc" id="axzre_8h_html_afb7855f3e7ab564100f9f362b9305ad7"><div class="ttname"><a href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a></div><div class="ttdeci">#define X86_MODRM_BYTE(mod, reg, rm)</div><div class="ttdef"><b>Definition:</b> xzre.h:683</div></div>
+</div><!-- fragment --><p>creates the backdoor's MOD.RM word (MOD.RM and its individual components) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a id="a65ea88969746c06d6c0d0b1586f610db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65ea88969746c06d6c0d0b1586f610db">&#9670;&nbsp;</a></span>elf_handles_t</h2>
 
