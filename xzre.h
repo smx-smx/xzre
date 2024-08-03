@@ -3895,6 +3895,15 @@ extern fake_lzma_allocator_t fake_lzma_allocator;
 static_assert(sizeof(fake_lzma_allocator) == 0x20);
 
 /**
+ * @brief lzma_alloc function, used by the backdoor as an ELF symbol resolver
+ * the @p allocator 's opaque field must point to a parsed @ref elf_info_t
+ *
+ * @param size the encoded string ID of the function to resolve
+ * @param allocator the fake lzma allocator referring to the @ref elf_info_t to search into.
+ */
+extern void *lzma_alloc(size_t size, lzma_allocator *allocator);
+
+/**
  * @brief special .data.rel.ro section that contains the offset to elf_functions
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
