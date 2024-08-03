@@ -1875,9 +1875,9 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a0ab331c3c38da2d4aa29f1c9178050fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0ab331c3c38da2d4aa29f1c9178050fc">init_elf_entry_ctx</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
 <tr class="memdesc:a0ab331c3c38da2d4aa29f1c9178050fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialises the elf_entry_ctx_t  <a href="xzre_8h.html#a0ab331c3c38da2d4aa29f1c9178050fc">More...</a><br /></td></tr>
 <tr class="separator:a0ab331c3c38da2d4aa29f1c9178050fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad33792d2db40b95a7b434081d1608ca4"><td class="memItemLeft" align="right" valign="top">ptrdiff_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4">get_got_offset</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
-<tr class="memdesc:ad33792d2db40b95a7b434081d1608ca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the offset to the GOT  <a href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4">More...</a><br /></td></tr>
-<tr class="separator:ad33792d2db40b95a7b434081d1608ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a127444706ffc25ccce1ee267c014957d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a127444706ffc25ccce1ee267c014957d">update_got_offset</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
+<tr class="memdesc:a127444706ffc25ccce1ee267c014957d"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the offset to the GOT  <a href="xzre_8h.html#a127444706ffc25ccce1ee267c014957d">More...</a><br /></td></tr>
+<tr class="separator:a127444706ffc25ccce1ee267c014957d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee7738c9cab5f6733c666e0a20e5ba99"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99">get_cpuid_got_index</a> (<a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *ctx)</td></tr>
 <tr class="memdesc:aee7738c9cab5f6733c666e0a20e5ba99"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the cpuid() GOT index  <a href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99">More...</a><br /></td></tr>
 <tr class="separator:aee7738c9cab5f6733c666e0a20e5ba99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -4935,35 +4935,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad33792d2db40b95a7b434081d1608ca4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad33792d2db40b95a7b434081d1608ca4">&#9670;&nbsp;</a></span>get_got_offset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ptrdiff_t get_got_offset </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *&#160;</td>
-          <td class="paramname"><em>ctx</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>get the offset to the GOT </p>
-<p>the offset is relative to the address of the symbol cpuid_random_symbol</p>
-<p>stores the offset in elf_entry_ctx_t::got_offset</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ctx</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ptrdiff_t offset to GOT from the symbol cpuid_random_symbol </dd></dl>
-
-</div>
-</div>
 <a id="afca457dee8895eff6b7fdeffd6bc279a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afca457dee8895eff6b7fdeffd6bc279a">&#9670;&nbsp;</a></span>get_lzma_allocator()</h2>
 
@@ -5098,7 +5069,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>initialises the elf_entry_ctx_t </p>
-<p>stores the address of the symbol cpuid_random_symbol in <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so calls <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> to update elf_entry_ctx_t::got_offset calls <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> to update elf_entry_ctx_t::cpuid_fn</p>
+<p>stores the address of the symbol cpuid_random_symbol in <a class="el" href="structelf__entry__ctx.html#a286882a4d56155f97674460abe66b9cb" title="points to a symbol in memory will be used to find the GOT value">elf_entry_ctx_t::symbol_ptr</a> stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so calls <a class="el" href="xzre_8h.html#a127444706ffc25ccce1ee267c014957d" title="updates the offset to the GOT">update_got_offset()</a> to update elf_entry_ctx_t::got_offset calls <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> to update elf_entry_ctx_t.got_ctx.cpuid_fn</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td></td></tr>
@@ -7289,6 +7260,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a127444706ffc25ccce1ee267c014957d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a127444706ffc25ccce1ee267c014957d">&#9670;&nbsp;</a></span>update_got_offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_got_offset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structelf__entry__ctx.html">elf_entry_ctx_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates the offset to the GOT </p>
+<p>the offset is the distance to the GOT relative to the address of the symbol cpuid_random_symbol this value is stored in elf_entry_ctx_t.got_ctx.got_offset</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ptrdiff_t </dd></dl>
+
+</div>
+</div>
 <a id="a0b6e4a4a74a67f0e049b2d7973480a95"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b6e4a4a74a67f0e049b2d7973480a95">&#9670;&nbsp;</a></span>validate_log_handler_pointers()</h2>
 
@@ -7540,7 +7539,7 @@ Variables</h2></td></tr>
 
 <p>special .rodata section that contains _cpuid() related GOT offsets </p>
 <p>liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets</p>
-<p>used by call_backdoor_init_stage2(), <a class="el" href="xzre_8h.html#ad33792d2db40b95a7b434081d1608ca4" title="get the offset to the GOT">get_got_offset()</a> and <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> </p>
+<p>used by call_backdoor_init_stage2(), <a class="el" href="xzre_8h.html#a127444706ffc25ccce1ee267c014957d" title="updates the offset to the GOT">update_got_offset()</a> and <a class="el" href="xzre_8h.html#aee7738c9cab5f6733c666e0a20e5ba99" title="get the cpuid() GOT index">get_cpuid_got_index()</a> </p>
 
 </div>
 </div>
