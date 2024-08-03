@@ -16,6 +16,9 @@
 #include <sapi/embed/php_embed.h>
 #endif
 
+extern const char *X86_OPCODE_NAMES[];
+extern const int X86_OPCODE_NAMES_COUNT;
+
 const char *StringXrefName[] = {
 	"XREF_xcalloc_zero_size",
 	"XREF_Could_not_chdir_to_home_directory_s_s",
@@ -338,8 +341,32 @@ void main_shared(){
 }
 
 
+void print_opcode_mask(u64 mask, int mask_offset){
+	for(unsigned i=0x80 + mask_offset; mask; mask >>= 1, i++){
+		// bit 1: this opcode is forbidden
+		BOOL allowed = (mask & 1) == 0;
+		printf("%s 0x%"PRIX8" (0x%"PRIX8") -> %s\n",
+			(allowed) ? "+" : "-",
+			(u8)i, XZDASM_OPC(i),
+			XZDASM_OPC(i) < X86_OPCODE_NAMES_COUNT
+				? X86_OPCODE_NAMES[XZDASM_OPC(i)]
+				: "?"
+		);
+	}
+}
+
+void print_opcode_masks(){
+	puts("find_reg2reg_instruction instruction mask");
+	print_opcode_mask(0x505050500000505, 1);
+	puts("secret_data_append_from_instruction mask");
+	print_opcode_mask(0x410100000101, 3);
+}
+
 int main(int argc, char *argv[]){
 	puts("xzre 0.1 by Smx :)");
+
+	print_opcode_masks();
+
 	dasm_ctx_t ctx = {0};
 	u8 *start = (u8 *)&dasm_sample;
 	for(int i=0;; start += ctx.instruction_size, i++){

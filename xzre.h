@@ -299,11 +299,13 @@ typedef struct {
 #define X_BN_num_bytes(bits) (((bits)+7)/8)
 
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
-#define XZDASM_OPC(op) (op - 0x80)
+#define XZDASM_OPC(op) ((u8)(op) - 0x80)
 
 enum X86_OPCODE {
 	X86_OPCODE_LEA = 0x8D,
 	X86_OPCODE_CALL = 0xE8,
+	// MOV 	r/m16/32/64 	r16/32/64
+	X86_OPCODE_MOV = 0x89,
 	// MOV 	r16/32/64 	r/m16/32/64
 	X86_OPCODE_MOV_LOAD = 0x8B,
 	// MOV 	m16 	Sreg 									Move
