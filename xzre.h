@@ -2859,24 +2859,23 @@ extern void * backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
  * 
  * stores the address of the symbol cpuid_random_symbol in elf_entry_ctx_t::symbol_ptr
  * stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so
- * calls get_got_offset() to update elf_entry_ctx_t::got_offset 
- * calls get_cpuid_got_index() to update elf_entry_ctx_t::cpuid_fn
+ * calls update_got_offset() to update elf_entry_ctx_t::got_offset 
+ * calls get_cpuid_got_index() to update @ref elf_entry_ctx_t.got_ctx.cpuid_fn
  * 
  * @param ctx
  */
 extern void init_elf_entry_ctx(elf_entry_ctx_t *ctx);
 
 /**
- * @brief get the offset to the GOT
+ * @brief updates the offset to the GOT
  * 
- * the offset is relative to the address of the symbol cpuid_random_symbol
- * 
- * stores the offset in elf_entry_ctx_t::got_offset
+ * the offset is the distance to the GOT relative to the address of the symbol cpuid_random_symbol
+ * this value is stored in @ref elf_entry_ctx_t.got_ctx.got_offset
  * 
  * @param ctx
- * @return ptrdiff_t offset to GOT from the symbol cpuid_random_symbol
+ * @return ptrdiff_t 
  */
-extern ptrdiff_t get_got_offset(elf_entry_ctx_t *ctx);
+extern void update_got_offset(elf_entry_ctx_t *ctx);
 
 /**
  * @brief get the cpuid() GOT index
@@ -3940,7 +3939,7 @@ static_assert(sizeof(tls_get_addr_random_symbol) == 0x8);
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
  * 
- * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
+ * used by call_backdoor_init_stage2(), update_got_offset() and get_cpuid_got_index()
  * 
  */
 extern const backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;
