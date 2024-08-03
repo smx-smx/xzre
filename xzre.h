@@ -301,6 +301,10 @@ typedef struct {
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
 #define XZDASM_OPC(op) (op - 0x80)
 
+enum X86_OPCODE {
+	X86_OPCODE_LEA = 0x8D
+};
+
 typedef int BOOL;
 
 #define TRUE 1
@@ -308,34 +312,38 @@ typedef int BOOL;
 
 typedef enum {
 	// has lock or rep prefix
-	DF_LOCK_REP = 1,
-	// has segment override
-	DF_SEG = 2,
-	// has operand size override
-	DF_OSIZE = 4,
-	// has address size override
-	DF_ASIZE = 8,
-	// vex instruction
-	DF_VEX = 0x10,
-	// has rex
-	DF_REX = 0x20,
-	// has modrm
-	DF_MODRM = 0x40,
-	// has sib
-	DF_SIB = 0x80
+	DF1_LOCK_REP = 1,
+	//1 has segment override
+	DF1_SEG = 2,
+	//1 has operand size override
+	DF1_OSIZE = 4,
+	//1 has address size override
+	DF1_ASIZE = 8,
+	//1 vex instruction
+	DF1_VEX = 0x10,
+	//1 has rex
+	DF1_REX = 0x20,
+	//1 has modrm
+	DF1_MODRM = 0x40,
+	//1 has sib
+	DF1_SIB = 0x80
 } InstructionFlags;
 
 typedef enum {
 	// memory with displacement
-	DF_MEM_DISP = 0x1,
-	// 8-bit displacement
-	DF_MEM_DISP8 = 0x2,
-	// memory seg+offs (0xa0-0xa3)
-	DF_MEM_SEG_OFFS = 0x4,
-	// has immediate
-	DF_IMM = 0x8,
-	// 64-bit immediate (movabs)
-	DF_IMM64 = 0x10
+	DF2_MEM_DISP = 0x1,
+	//2 8-bit displacement
+	DF2_MEM_DISP8 = 0x2,
+	//2 memory seg+offs (0xa0-0xa3)
+	DF2_MEM_SEG_OFFS = 0x4,
+
+	// mask to check for memory flags
+	DF2_FLAGS_MEM = DF2_MEM_DISP | DF2_MEM_DISP8 | DF2_MEM_SEG_OFFS,
+
+	//2 has immediate
+	DF2_IMM = 0x8,
+	//2 64-bit immediate (movabs)
+	DF2_IMM64 = 0x10
 } InstructionFlags2;
 
 typedef enum {
