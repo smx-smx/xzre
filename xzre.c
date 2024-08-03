@@ -348,13 +348,16 @@ int main(int argc, char *argv[]){
 		//hexdump(&ctx, sizeof(ctx));
 		printf(
 			"[%2d]: opcode: 0x%08"PRIx32" (orig:0x%08"PRIX32")  (l: %2"PRIu64") -- "
-			"modrm: 0x%02"PRIx8" (%"PRId8", %"PRId8", %"PRId8"), operand: %"PRIx64", mem_disp: %"PRIx64", rex.br: %d, f: %02"PRIx8"\n",
+			"modrm: 0x%02"PRIx8" (mod:%"PRId8", reg:%"PRId8", rm:%"PRId8") -> 0x%08"PRIx32", operand: %"PRIx64", mem_disp: %"PRIx64", rex: 0x%"PRIX8", rex.br: %d, f: %02"PRIx8"\n",
 			i,
 			XZDASM_OPC(ctx.opcode), ctx.opcode,
 			ctx.instruction_size,
-			ctx.modrm, ctx.modrm_mod, ctx.modrm_reg, ctx.modrm_rm,
+			ctx.modrm,
+			ctx.modrm_mod, ctx.modrm_reg, ctx.modrm_rm,
+			ctx.modrm_word,
 			ctx.operand,
 			ctx.mem_disp,
+			ctx.rex_byte,
 			// 1: has rex.br, 0 otherwise
 			(ctx.rex_byte & 5) != 0,
 			ctx.flags);
