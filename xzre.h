@@ -304,6 +304,8 @@ typedef struct {
 enum X86_OPCODE {
 	X86_OPCODE_LEA = 0x8D,
 	X86_OPCODE_CALL = 0xE8,
+	// CMP 	r16/32/64 	r/m16/32/64
+	X86_OPCODE_CMP = 0x3B,
 	// MOV 	r/m16/32/64 	r16/32/64
 	X86_OPCODE_MOV = 0x89,
 	// MOV 	r16/32/64 	r/m16/32/64
@@ -312,6 +314,9 @@ enum X86_OPCODE {
 	// MOV 	r16/32/64 	Sreg
 	X86_OPCODE_MOV_STORE = 0x8C
 };
+
+#define XZDASM_TEST_MASK(mask, offset, opcode) \
+	(((mask >> ((u8)(XZDASM_OPC(opcode) + offset))) & 1) == 1)
 
 enum X86_REG {
 	X86_REG_RBP = 5

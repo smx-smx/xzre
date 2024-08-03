@@ -19,6 +19,7 @@ add_library(xzre_code
 	rsa_key_hash.c
 	run_backdoor_commands.c
 	secret_data_append_from_address.c
+	secret_data_append_from_instruction.c
 	secret_data_append_item.c
 	secret_data_append_singleton.c
 	secret_data_get_decrypted.c
