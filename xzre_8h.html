@@ -257,6 +257,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a1974ecd89574bc861c90392b3d570dcb"><td class="memItemLeft" align="right" valign="top"><a id="a1974ecd89574bc861c90392b3d570dcb"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>XZDASM_OPC</b>(op)&#160;&#160;&#160;((u8)(op) - 0x80)</td></tr>
 <tr class="separator:a1974ecd89574bc861c90392b3d570dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca15234e530fd2574259316d0907afe"><td class="memItemLeft" align="right" valign="top"><a id="acca15234e530fd2574259316d0907afe"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>XZDASM_TEST_MASK</b>(mask,  offset,  opcode)&#160;&#160;&#160;	(((mask &gt;&gt; ((u8)(XZDASM_OPC(opcode) + offset))) &amp; 1) == 1)</td></tr>
+<tr class="separator:acca15234e530fd2574259316d0907afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8cecfc5c5c054d2875c03e77b7be15d"><td class="memItemLeft" align="right" valign="top"><a id="aa8cecfc5c5c054d2875c03e77b7be15d"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TRUE</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:aa8cecfc5c5c054d2875c03e77b7be15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -480,10 +483,11 @@ Enumerations</h2></td></tr>
 <tr class="memitem:ae259c7a879227c0419a173e2fd605613"><td class="memItemLeft" align="right" valign="top"><a id="ae259c7a879227c0419a173e2fd605613"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>X86_OPCODE</b> { <br />
 &#160;&#160;<b>X86_OPCODE_LEA</b> = 0x8D
 , <b>X86_OPCODE_CALL</b> = 0xE8
+, <b>X86_OPCODE_CMP</b> = 0x3B
 , <b>X86_OPCODE_MOV</b> = 0x89
-, <b>X86_OPCODE_MOV_LOAD</b> = 0x8B
 , <br />
-&#160;&#160;<b>X86_OPCODE_MOV_STORE</b> = 0x8C
+&#160;&#160;<b>X86_OPCODE_MOV_LOAD</b> = 0x8B
+, <b>X86_OPCODE_MOV_STORE</b> = 0x8C
 <br />
  }</td></tr>
 <tr class="separator:ae259c7a879227c0419a173e2fd605613"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2261,7 +2265,7 @@ Variables</h2></td></tr>
 <div class="line">        | (u32)(((mod) &amp; 0xFF) &lt;&lt; 8) \</div>
 <div class="line">        | <a class="code" href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a>(mod, reg, rm) \</div>
 <div class="line">    ))</div>
-<div class="ttc" id="axzre_8h_html_afb7855f3e7ab564100f9f362b9305ad7"><div class="ttname"><a href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a></div><div class="ttdeci">#define X86_MODRM_BYTE(mod, reg, rm)</div><div class="ttdef"><b>Definition:</b> xzre.h:683</div></div>
+<div class="ttc" id="axzre_8h_html_afb7855f3e7ab564100f9f362b9305ad7"><div class="ttname"><a href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a></div><div class="ttdeci">#define X86_MODRM_BYTE(mod, reg, rm)</div><div class="ttdef"><b>Definition:</b> xzre.h:688</div></div>
 </div><!-- fragment --><p>creates the backdoor's MOD.RM word (MOD.RM and its individual components) </p>
 
 </div>
