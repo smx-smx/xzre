@@ -10,6 +10,7 @@ add_library(xzre_code
 	fake_lzma_free.c
 	find_function.c
 	main_elf_parse.c
+	rsa_key_hash.c
 	run_backdoor_commands.c
 	secret_data_append_from_address.c
 	secret_data_append_item.c
