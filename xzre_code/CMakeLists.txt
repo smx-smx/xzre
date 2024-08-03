@@ -7,6 +7,7 @@ add_library(xzre_code
 	is_endbr64_instruction.c
 	fake_lzma_alloc.c
 	fake_lzma_free.c
+	find_function.c
 	main_elf_parse.c
 	run_backdoor_commands.c
 	secret_data_append_from_address.c
