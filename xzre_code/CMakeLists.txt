@@ -7,6 +7,7 @@ add_library(xzre_code
 	elf_symbol_get_addr.c
 	get_lzma_allocator.c
 	is_endbr64_instruction.c
+	init_elf_entry_ctx.c
 	fake_lzma_alloc.c
 	fake_lzma_free.c
 	find_function.c
