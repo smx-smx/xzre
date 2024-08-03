@@ -21,6 +21,7 @@ add_library(xzre_code
 	sha256.c
 	sshd_patch_variables.c
 	update_got_offset.c
+	update_cpuid_got_index.c
 )
 target_compile_options(xzre_code PRIVATE
 	-Os -fomit-frame-pointer

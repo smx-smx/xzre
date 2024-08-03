@@ -2860,7 +2860,7 @@ extern void * backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
  * stores the address of the symbol cpuid_random_symbol in elf_entry_ctx_t::symbol_ptr
  * stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so
  * calls update_got_offset() to update elf_entry_ctx_t::got_offset 
- * calls get_cpuid_got_index() to update @ref elf_entry_ctx_t.got_ctx.cpuid_fn
+ * calls update_cpuid_got_index() to update @ref elf_entry_ctx_t.got_ctx.cpuid_fn
  * 
  * @param ctx
  */
@@ -2885,7 +2885,7 @@ extern void update_got_offset(elf_entry_ctx_t *ctx);
  * @param ctx
  * @return u64 cpuid() GOT index
  */
-extern u64 get_cpuid_got_index(elf_entry_ctx_t *ctx);
+extern void update_cpuid_got_index(elf_entry_ctx_t *ctx);
 
 /**
  * @brief
