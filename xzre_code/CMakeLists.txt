@@ -6,6 +6,7 @@ add_library(xzre_code
 	elf_parse.c
 	elf_symbol_get_addr.c
 	get_lzma_allocator.c
+	find_call_instruction.c
 	find_lea_instruction.c
 	find_string_reference.c
 	is_endbr64_instruction.c

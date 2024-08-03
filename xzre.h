@@ -302,7 +302,8 @@ typedef struct {
 #define XZDASM_OPC(op) (op - 0x80)
 
 enum X86_OPCODE {
-	X86_OPCODE_LEA = 0x8D
+	X86_OPCODE_LEA = 0x8D,
+	X86_OPCODE_CALL = 0xE8
 };
 
 typedef int BOOL;
