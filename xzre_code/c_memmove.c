@@ -3,7 +3,7 @@
  **/
 #include "xzre.h"
 
-void c_memmove(char *dest, char *src, size_t cnt) {
+void *c_memmove(char *dest, char *src, size_t cnt) {
     if ((src < dest) && (dest < (src + cnt))) {
         size_t curr = cnt - 1;
         if (cnt != 0) {
@@ -11,16 +11,16 @@ void c_memmove(char *dest, char *src, size_t cnt) {
                 *(dest + curr) = *(src + curr);
                 --curr;
             } while (curr != -1);
-            return;
+            return dest;
         }
     } else {
         if (cnt == 0)
-            return;
+            return dest;
         size_t curr = 0;
         do {
             *(dest + curr) = *(src + curr);
             ++curr;
         } while (cnt != curr);
     }
-    return;
+    return dest;
 }

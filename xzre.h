@@ -3935,7 +3935,7 @@ extern ssize_t c_strnlen(
  * @param src source buffer
  * @param cnt number of bytes to copy
  */
-extern void c_memmove(
+extern void* c_memmove(
 	char *dest,
 	char *src,
 	size_t cnt
