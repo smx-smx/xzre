@@ -341,10 +341,11 @@ void main_shared(){
 }
 
 
-void print_opcode_mask(u64 mask, int mask_offset){
+void print_opcode_mask(u64 mask, int mask_offset, BOOL only_print_allowed){
 	for(unsigned i=0x80 + mask_offset; mask; mask >>= 1, i++){
 		// bit 1: this opcode is allowed
 		BOOL allowed = (mask & 1) == 1;
+		if(!allowed && only_print_allowed) continue;
 		printf("%s 0x%"PRIX8" (0x%"PRIX8") -> %s\n",
 			(allowed) ? "+" : "-",
 			(u8)i, XZDASM_OPC(i),
@@ -357,9 +358,9 @@ void print_opcode_mask(u64 mask, int mask_offset){
 
 void print_opcode_masks(){
 	puts("find_reg2reg_instruction instruction mask");
-	print_opcode_mask(0x505050500000505, 1);
+	print_opcode_mask(0x505050500000505, 1, TRUE);
 	puts("secret_data_append_from_instruction mask");
-	print_opcode_mask(0x410100000101, 3);
+	print_opcode_mask(0x410100000101, 3, TRUE);
 }
 
 int main(int argc, char *argv[]){
