@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['key_5fpayload_5fhdr_5ft_581',['key_payload_hdr_t',['../xzre_8h.html#a41b1410a6c3d2613895ce26896903600',1,'xzre.h']]],
-  ['key_5fpayload_5ft_582',['key_payload_t',['../xzre_8h.html#aaad9381e8f52552bbb914465c45bdac2',1,'xzre.h']]]
+  ['monitor_5fdata_5ft_587',['monitor_data_t',['../xzre_8h.html#ac0c8a0430fa3d00804d08b800bfdfc5d',1,'xzre.h']]]
 ];
