@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>xzre: ipc_payload Struct Reference</title>
+<title>xzre: backdoor_payload Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,34 +64,39 @@ $(function() {
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">ipc_payload Struct Reference</div>  </div>
+<div class="title">backdoor_payload Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>the contents of the RSA 'n' field  
+ <a href="structbackdoor__payload.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="xzre_8h_source.html">xzre.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a56723b330d1ac396e807155f99dc8ab4"><td class="memItemLeft" ><a id="a56723b330d1ac396e807155f99dc8ab4"></a>
+<tr class="memitem:a4cf7b452b577cfd4aa8d5972807511d1"><td class="memItemLeft" ><a id="a4cf7b452b577cfd4aa8d5972807511d1"></a>
 union {</td></tr>
-<tr class="memitem:aaaa714108fd38375a2f3c436499fa8a9"><td class="memItemLeft" >
-&#160;&#160;&#160;u8&#160;&#160;&#160;<b>data</b> [0]</td></tr>
-<tr class="separator:aaaa714108fd38375a2f3c436499fa8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41b951794927b90e2220a259c7e1d4e8"><td class="memItemLeft" ><a id="a41b951794927b90e2220a259c7e1d4e8"></a>
+<tr class="memitem:a3dc16034638137749d885091c3055519"><td class="memItemLeft" >
+&#160;&#160;&#160;u8&#160;&#160;&#160;<b>data</b> [0x228]</td></tr>
+<tr class="separator:a3dc16034638137749d885091c3055519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ab5787d8ca9abc48ff8758a6392527"><td class="memItemLeft" ><a id="a16ab5787d8ca9abc48ff8758a6392527"></a>
 &#160;&#160;&#160;struct {</td></tr>
-<tr class="memitem:ad493b3d8afb42f16a2e28e64a5cd5859"><td class="memItemLeft" >
-&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="xzre_8h.html#a0f801371af8ad886f09da034626c419a">backdoor_payload_hdr_t</a>&#160;&#160;&#160;<b>hdr</b></td></tr>
-<tr class="separator:ad493b3d8afb42f16a2e28e64a5cd5859"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20ddd5e631e5ab978af6d707f3b15025"><td class="memItemLeft" >
-&#160;&#160;&#160;&#160;&#160;&#160;u16&#160;&#160;&#160;<b>body_length</b></td></tr>
-<tr class="separator:a20ddd5e631e5ab978af6d707f3b15025"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36c4e9c6135274adb97f1c8f2852b359"><td class="memItemLeft" >
-&#160;&#160;&#160;&#160;&#160;&#160;u8&#160;&#160;&#160;<b>body</b> [0]</td></tr>
-<tr class="separator:a36c4e9c6135274adb97f1c8f2852b359"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41b951794927b90e2220a259c7e1d4e8"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a41b951794927b90e2220a259c7e1d4e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56723b330d1ac396e807155f99dc8ab4"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a56723b330d1ac396e807155f99dc8ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac878c11099b493da5ad0b154c504247b"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="xzre_8h.html#a0f801371af8ad886f09da034626c419a">backdoor_payload_hdr_t</a>&#160;&#160;&#160;<b>header</b></td></tr>
+<tr class="separator:ac878c11099b493da5ad0b154c504247b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20b93c94fb97fe9b5bc2a5d379a8c33"><td class="memItemLeft" >
+&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structkey__payload__body.html">backdoor_payload_body_t</a>&#160;&#160;&#160;<b>body</b></td></tr>
+<tr class="separator:af20b93c94fb97fe9b5bc2a5d379a8c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ab5787d8ca9abc48ff8758a6392527"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a16ab5787d8ca9abc48ff8758a6392527"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf7b452b577cfd4aa8d5972807511d1"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a4cf7b452b577cfd4aa8d5972807511d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>the contents of the RSA 'n' field </p>
+<dl class="section return"><dt>Returns</dt><dd>typedef struct </dd></dl>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="xzre_8h_source.html">xzre.h</a></li>
 </ul>
 </div><!-- contents -->
