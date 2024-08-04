@@ -43,7 +43,7 @@ SECTIONS_BEGIN()
 	/* 0000000000001870 */ DEFSYM(elf_symbol_get, .text.crc_inia)
 	DEFSYM_START(.text.crc64_generia)
 		/* 0000000000001AF0 */ DEFSYM2(elf_symbol_get_addr, 0)
-		/* 0000000000001B20 */ DEFSYM2(c_memmove, 0x1B20 - 0x1AF0) // FIXME: prototype
+		/* 0000000000001B20 */ DEFSYM2(c_memmove, 0x1B20 - 0x1AF0)
 	DEFSYM_END(.text.crc64_generia)
 	/* 0000000000001B70 */ DEFSYM(fake_lzma_alloc, .text.init_pric_tabla)
 	/* 0000000000001B80 */ DEFSYM(elf_find_rela_reloc, .text.stream_encoder_updata) // FIXME: prototype
@@ -106,8 +106,8 @@ SECTIONS_BEGIN()
 	/* 0000000000005820 */ DEFSYM(backdoor_setup, .text.microlzma_encoder_inia)
 	/* 0000000000006F20 */ DEFSYM(backdoor_init_stage2, .text.lzma_validate_chaia)
 	DEFSYM_START(.text.parse_optiona)
-		/* 0000000000007020 */ DEFSYM2(c_strlen, 0) // FIXME: prototype
-		/* 0000000000007040 */ DEFSYM2(c_strnlen, 0x7040 - 0x7020) // FIXME: prototype
+		/* 0000000000007020 */ DEFSYM2(c_strlen, 0)
+		/* 0000000000007040 */ DEFSYM2(c_strnlen, 0x7040 - 0x7020)
 	DEFSYM_END(.text.parse_optiona)
 	/* 0000000000007070 */ DEFSYM(fd_read, .text.auto_decoder_inia)
 	DEFSYM_START(.text.bt_find_funa)

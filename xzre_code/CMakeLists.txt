@@ -1,5 +1,8 @@
 add_library(xzre_code
 	backdoor_entry.c
+  c_memmove.c
+	c_strlen.c
+	c_strnlen.c
 	chacha_decrypt.c
 	count_bits.c
 	count_pointers.c
