@@ -2092,6 +2092,15 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a5f865a1a2eb6a32980c4336b2290e17e"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">sshd_find_sensitive_data</a> (<a class="el" href="structelf__info.html">elf_info_t</a> *sshd, <a class="el" href="structelf__info.html">elf_info_t</a> *libcrypto, <a class="el" href="structstring__references.html">string_references_t</a> *refs, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a5f865a1a2eb6a32980c4336b2290e17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates <code><a class="el" href="structsensitive__data.html" title="struct sensitive_data from openssh-portable">sensitive_data</a></code> within sshd, and resolves some additional libcrypto functions  <a href="xzre_8h.html#a5f865a1a2eb6a32980c4336b2290e17e">More...</a><br /></td></tr>
 <tr class="separator:a5f865a1a2eb6a32980c4336b2290e17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec582dde549320e2d6f455b3e9625437"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#aec582dde549320e2d6f455b3e9625437">c_strlen</a> (char *str)</td></tr>
+<tr class="memdesc:aec582dde549320e2d6f455b3e9625437"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns length of c string  <a href="xzre_8h.html#aec582dde549320e2d6f455b3e9625437">More...</a><br /></td></tr>
+<tr class="separator:aec582dde549320e2d6f455b3e9625437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aac695db741993832b76ddda4f735b4"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0aac695db741993832b76ddda4f735b4">c_strnlen</a> (char *str, size_t max_len)</td></tr>
+<tr class="memdesc:a0aac695db741993832b76ddda4f735b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns length of c string with a maximum length  <a href="xzre_8h.html#a0aac695db741993832b76ddda4f735b4">More...</a><br /></td></tr>
+<tr class="separator:a0aac695db741993832b76ddda4f735b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24efc7542387a49bfef1ab5b8194193d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a24efc7542387a49bfef1ab5b8194193d">c_memmove</a> (char *dest, char *src, size_t cnt)</td></tr>
+<tr class="memdesc:a24efc7542387a49bfef1ab5b8194193d"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies memory  <a href="xzre_8h.html#a24efc7542387a49bfef1ab5b8194193d">More...</a><br /></td></tr>
+<tr class="separator:a24efc7542387a49bfef1ab5b8194193d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2de1fbaae1155f07add8fdf72089abe6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6">lzma_alloc</a> (size_t size, lzma_allocator *allocator)</td></tr>
 <tr class="memdesc:a2de1fbaae1155f07add8fdf72089abe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">lzma_alloc function, used by the backdoor as an ELF symbol resolver the <code>allocator</code> 's opaque field must point to a parsed elf_info_t  <a href="xzre_8h.html#a2de1fbaae1155f07add8fdf72089abe6">More...</a><br /></td></tr>
 <tr class="separator:a2de1fbaae1155f07add8fdf72089abe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2865,6 +2874,115 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if successfully serialized, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a24efc7542387a49bfef1ab5b8194193d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24efc7542387a49bfef1ab5b8194193d">&#9670;&nbsp;</a></span>c_memmove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c_memmove </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>cnt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>copies memory </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>destination buffer </td></tr>
+    <tr><td class="paramname">src</td><td>source buffer </td></tr>
+    <tr><td class="paramname">cnt</td><td>number of bytes to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aec582dde549320e2d6f455b3e9625437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec582dde549320e2d6f455b3e9625437">&#9670;&nbsp;</a></span>c_strlen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t c_strlen </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>returns length of c string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>pointer to c string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t length of c string </dd></dl>
+
+</div>
+</div>
+<a id="a0aac695db741993832b76ddda4f735b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aac695db741993832b76ddda4f735b4">&#9670;&nbsp;</a></span>c_strnlen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t c_strnlen </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>max_len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>returns length of c string with a maximum length </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>pointer to c string </td></tr>
+    <tr><td class="paramname">max_len</td><td>maximum length of c string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ssize_t length of c string </dd></dl>
 
 </div>
 </div>
