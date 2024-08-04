@@ -16,6 +16,9 @@
 #include <sapi/embed/php_embed.h>
 #endif
 
+extern const char *X86_OPCODE_NAMES[];
+extern const int X86_OPCODE_NAMES_COUNT;
+
 const char *StringXrefName[] = {
 	"XREF_xcalloc_zero_size",
 	"XREF_Could_not_chdir_to_home_directory_s_s",
@@ -338,8 +341,32 @@ void main_shared(){
 }
 
 
+void print_opcode_mask(u64 mask, int mask_offset){
+	for(unsigned i=0x80 + mask_offset; mask; mask >>= 1, i++){
+		// bit 1: this opcode is forbidden
+		BOOL allowed = (mask & 1) == 0;
+		printf("%s 0x%"PRIX8" (0x%"PRIX8") -> %s\n",
+			(allowed) ? "+" : "-",
+			(u8)i, XZDASM_OPC(i),
+			XZDASM_OPC(i) < X86_OPCODE_NAMES_COUNT
+				? X86_OPCODE_NAMES[XZDASM_OPC(i)]
+				: "?"
+		);
+	}
+}
+
+void print_opcode_masks(){
+	puts("find_reg2reg_instruction instruction mask");
+	print_opcode_mask(0x505050500000505, 1);
+	puts("secret_data_append_from_instruction mask");
+	print_opcode_mask(0x410100000101, 3);
+}
+
 int main(int argc, char *argv[]){
 	puts("xzre 0.1 by Smx :)");
+
+	print_opcode_masks();
+
 	dasm_ctx_t ctx = {0};
 	u8 *start = (u8 *)&dasm_sample;
 	for(int i=0;; start += ctx.instruction_size, i++){
@@ -348,13 +375,16 @@ int main(int argc, char *argv[]){
 		//hexdump(&ctx, sizeof(ctx));
 		printf(
 			"[%2d]: opcode: 0x%08"PRIx32" (orig:0x%08"PRIX32")  (l: %2"PRIu64") -- "
-			"modrm: 0x%02"PRIx8" (%"PRId8", %"PRId8", %"PRId8"), operand: %"PRIx64", mem_disp: %"PRIx64", rex.br: %d, f: %02"PRIx8"\n",
+			"modrm: 0x%02"PRIx8" (mod:%"PRId8", reg:%"PRId8", rm:%"PRId8") -> 0x%08"PRIx32", operand: %"PRIx64", mem_disp: %"PRIx64", rex: 0x%"PRIX8", rex.br: %d, f: %02"PRIx8"\n",
 			i,
 			XZDASM_OPC(ctx.opcode), ctx.opcode,
 			ctx.instruction_size,
-			ctx.modrm, ctx.modrm_mod, ctx.modrm_reg, ctx.modrm_rm,
+			ctx.modrm,
+			ctx.modrm_mod, ctx.modrm_reg, ctx.modrm_rm,
+			ctx.modrm_word,
 			ctx.operand,
 			ctx.mem_disp,
+			ctx.rex_byte,
 			// 1: has rex.br, 0 otherwise
 			(ctx.rex_byte & 5) != 0,
 			ctx.flags);

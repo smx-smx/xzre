@@ -1,3 +1,5 @@
+#warning "this function is WIP / needs validation"
+
 /**
  * Copyright (C) 2024 Stefano Moioli <smxdev4@gmail.com>
  **/

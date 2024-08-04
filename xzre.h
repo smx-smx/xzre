@@ -299,7 +299,28 @@ typedef struct {
 #define X_BN_num_bytes(bits) (((bits)+7)/8)
 
 // opcode is always +0x80 for the sake of it (yet another obfuscation)
-#define XZDASM_OPC(op) (op - 0x80)
+#define XZDASM_OPC(op) ((u8)(op) - 0x80)
+
+enum X86_OPCODE {
+	X86_OPCODE_LEA = 0x8D,
+	X86_OPCODE_CALL = 0xE8,
+	// CMP 	r16/32/64 	r/m16/32/64
+	X86_OPCODE_CMP = 0x3B,
+	// MOV 	r/m16/32/64 	r16/32/64
+	X86_OPCODE_MOV = 0x89,
+	// MOV 	r16/32/64 	r/m16/32/64
+	X86_OPCODE_MOV_LOAD = 0x8B,
+	// MOV 	m16 	Sreg 									Move
+	// MOV 	r16/32/64 	Sreg
+	X86_OPCODE_MOV_STORE = 0x8C
+};
+
+#define XZDASM_TEST_MASK(mask, offset, opcode) \
+	(((mask >> ((u8)(XZDASM_OPC(opcode) + offset))) & 1) == 1)
+
+enum X86_REG {
+	X86_REG_RBP = 5
+};
 
 typedef int BOOL;
 
@@ -308,34 +329,38 @@ typedef int BOOL;
 
 typedef enum {
 	// has lock or rep prefix
-	DF_LOCK_REP = 1,
-	// has segment override
-	DF_SEG = 2,
-	// has operand size override
-	DF_OSIZE = 4,
-	// has address size override
-	DF_ASIZE = 8,
-	// vex instruction
-	DF_VEX = 0x10,
-	// has rex
-	DF_REX = 0x20,
-	// has modrm
-	DF_MODRM = 0x40,
-	// has sib
-	DF_SIB = 0x80
+	DF1_LOCK_REP = 1,
+	//1 has segment override
+	DF1_SEG = 2,
+	//1 has operand size override
+	DF1_OSIZE = 4,
+	//1 has address size override
+	DF1_ASIZE = 8,
+	//1 vex instruction
+	DF1_VEX = 0x10,
+	//1 has rex
+	DF1_REX = 0x20,
+	//1 has modrm
+	DF1_MODRM = 0x40,
+	//1 has sib
+	DF1_SIB = 0x80
 } InstructionFlags;
 
 typedef enum {
 	// memory with displacement
-	DF_MEM_DISP = 0x1,
-	// 8-bit displacement
-	DF_MEM_DISP8 = 0x2,
-	// memory seg+offs (0xa0-0xa3)
-	DF_MEM_SEG_OFFS = 0x4,
-	// has immediate
-	DF_IMM = 0x8,
-	// 64-bit immediate (movabs)
-	DF_IMM64 = 0x10
+	DF2_MEM_DISP = 0x1,
+	//2 8-bit displacement
+	DF2_MEM_DISP8 = 0x2,
+	//2 memory seg+offs (0xa0-0xa3)
+	DF2_MEM_SEG_OFFS = 0x4,
+
+	// mask to check for memory flags
+	DF2_FLAGS_MEM = DF2_MEM_DISP | DF2_MEM_DISP8 | DF2_MEM_SEG_OFFS,
+
+	//2 has immediate
+	DF2_IMM = 0x8,
+	//2 64-bit immediate (movabs)
+	DF2_IMM64 = 0x10
 } InstructionFlags2;
 
 typedef enum {
@@ -657,6 +682,44 @@ assert_offset(elf_entry_ctx_t, symbol_ptr, 0);
 assert_offset(elf_entry_ctx_t, got_ctx, 0x8);
 assert_offset(elf_entry_ctx_t, frame_address, 0x28);
 
+/**
+ * creates the MOD.RM byte, given its components
+ */
+#define X86_MODRM_BYTE(mod, reg, rm) \
+	((u8)(0 \
+		| (u8)(((mod) & 3) << 6) \
+		| (u8)(((reg) & 7) << 3) \
+		| (u8)(((rm) & 7)) \
+	))
+
+#define X86_REX_BYTE(w,r,x,b) \
+	((u8)(0x40 \
+		| (u8)(((w) & 1) << 3) \
+		| (u8)(((r) & 1) << 2) \
+		| (u8)(((x) & 1) << 1) \
+		| (u8)(((b) & 1) << 0) \
+	))
+
+#define X86_REX_W X86_REX_BYTE(1,0,0,0)
+
+/**
+ * creates the backdoor's MOD.RM word (MOD.RM and its individual components)
+ */
+#define XZDASM_MODRM_MAKE(mod, reg, rm) \
+	((u32)(0 \
+		| (u32)(((rm) & 0xFF)<< 24) \
+		| (u32)(((reg) & 0xFF) << 16) \
+		| (u32)(((mod) & 0xFF) << 8) \
+		| X86_MODRM_BYTE(mod, reg, rm) \
+	))
+
+enum dasm_modrm_mask {
+	XZ_MODRM_RM  = 0xFF000000,
+	XZ_MODRM_REG = 0x00FF0000,
+	XZ_MODRM_MOD = 0x0000FF00,
+	XZ_MODRM_RAW = 0x000000FF
+};
+
 typedef struct __attribute__((packed)) dasm_ctx {
 	u8* instruction;
 	u64 instruction_size;
@@ -678,13 +741,23 @@ typedef struct __attribute__((packed)) dasm_ctx {
 			u8 vex_byte;
 			u8 vex_byte2;
 			u8 vex_byte3;
-			u8 rex_byte;
 			union {
 				struct __attribute__((packed)) {
-					u8 modrm;
-					u8 modrm_mod;
-					u8 modrm_reg;
-					u8 modrm_rm;
+					u8 B : 1;
+					u8 X : 1;
+					u8 R : 1;
+					u8 W : 1;
+					u8 BitPattern : 4; // always 0100b
+				};
+				u8 rex_byte;
+			};
+			union {
+				// in little endian order
+				struct __attribute__((packed)) {
+					/* 3 */ u8 modrm;
+					/* 2 */ u8 modrm_mod;
+					/* 1 */ u8 modrm_reg;
+					/* 0 */ u8 modrm_rm;
 				};
 				u32 modrm_word;
 			};
@@ -2859,24 +2932,23 @@ extern void * backdoor_init(elf_entry_ctx_t *state, u64 *caller_frame);
  * 
  * stores the address of the symbol cpuid_random_symbol in elf_entry_ctx_t::symbol_ptr
  * stores the return address of the function that called the IFUNC resolver which is a stack address in ld.so
- * calls get_got_offset() to update elf_entry_ctx_t::got_offset 
- * calls get_cpuid_got_index() to update elf_entry_ctx_t::cpuid_fn
+ * calls update_got_offset() to update elf_entry_ctx_t::got_offset 
+ * calls update_cpuid_got_index() to update @ref elf_entry_ctx_t.got_ctx.cpuid_fn
  * 
  * @param ctx
  */
 extern void init_elf_entry_ctx(elf_entry_ctx_t *ctx);
 
 /**
- * @brief get the offset to the GOT
+ * @brief updates the offset to the GOT
  * 
- * the offset is relative to the address of the symbol cpuid_random_symbol
- * 
- * stores the offset in elf_entry_ctx_t::got_offset
+ * the offset is the distance to the GOT relative to the address of the symbol cpuid_random_symbol
+ * this value is stored in @ref elf_entry_ctx_t.got_ctx.got_offset
  * 
  * @param ctx
- * @return ptrdiff_t offset to GOT from the symbol cpuid_random_symbol
+ * @return ptrdiff_t 
  */
-extern ptrdiff_t get_got_offset(elf_entry_ctx_t *ctx);
+extern void update_got_offset(elf_entry_ctx_t *ctx);
 
 /**
  * @brief get the cpuid() GOT index
@@ -2886,7 +2958,7 @@ extern ptrdiff_t get_got_offset(elf_entry_ctx_t *ctx);
  * @param ctx
  * @return u64 cpuid() GOT index
  */
-extern u64 get_cpuid_got_index(elf_entry_ctx_t *ctx);
+extern void update_cpuid_got_index(elf_entry_ctx_t *ctx);
 
 /**
  * @brief
@@ -3924,6 +3996,15 @@ extern fake_lzma_allocator_t fake_lzma_allocator;
 static_assert(sizeof(fake_lzma_allocator) == 0x20);
 
 /**
+ * @brief lzma_alloc function, used by the backdoor as an ELF symbol resolver
+ * the @p allocator 's opaque field must point to a parsed @ref elf_info_t
+ *
+ * @param size the encoded string ID of the function to resolve
+ * @param allocator the fake lzma allocator referring to the @ref elf_info_t to search into.
+ */
+extern void *lzma_alloc(size_t size, lzma_allocator *allocator);
+
+/**
  * @brief special .data.rel.ro section that contains the offset to elf_functions
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
@@ -3976,7 +4057,7 @@ static_assert(sizeof(tls_get_addr_random_symbol) == 0x8);
  * 
  * liblzma_la-crc64-fast.o lists the fields in the relocation table so that the linker fills out the fields with the offsets
  * 
- * used by call_backdoor_init_stage2(), get_got_offset() and get_cpuid_got_index()
+ * used by call_backdoor_init_stage2(), update_got_offset() and get_cpuid_got_index()
  * 
  */
 extern const backdoor_cpuid_reloc_consts_t cpuid_reloc_consts;

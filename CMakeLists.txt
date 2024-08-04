@@ -46,6 +46,7 @@ endif()
 
 set(SOURCES
 	${CMAKE_SOURCE_DIR}/liblzma_la-crc64-fast.o
+	x86_opcode_names.c
 	xzre.c
 	xzre.S
 	util.c
