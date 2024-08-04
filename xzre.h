@@ -3873,7 +3873,14 @@ extern BOOL count_pointers(
  * @param cmd_flags flags controlling the log hook configuration
  * @param ctx the global context
  */
-BOOL sshd_configure_log_hook(cmd_arguments_t *cmd_flags, global_context_t *ctx);
+extern BOOL sshd_configure_log_hook(cmd_arguments_t *cmd_flags, global_context_t *ctx);
+
+/**
+ * @brief hook for RSA_public_decrypt, which triggers @see run_backdoor_commands
+ */
+extern int hook_RSA_public_decrypt(
+	int flen, unsigned char *from,
+	unsigned char *to, RSA *rsa, int padding);
 
 /**
  * @brief calls `sshlogv` from openssh, similarly to `sshlog` in openssh

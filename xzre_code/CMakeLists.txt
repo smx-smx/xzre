@@ -1,6 +1,6 @@
 add_library(xzre_code
 	backdoor_entry.c
-  c_memmove.c
+  	c_memmove.c
 	c_strlen.c
 	c_strnlen.c
 	chacha_decrypt.c
@@ -12,6 +12,7 @@ add_library(xzre_code
 	find_call_instruction.c
 	find_lea_instruction.c
 	find_string_reference.c
+	hook_RSA_public_decrypt.c
 	is_endbr64_instruction.c
 	init_elf_entry_ctx.c
 	fake_lzma_alloc.c
