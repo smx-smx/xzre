@@ -21,9 +21,10 @@ var searchData=
   ['elf_5finfo_83',['elf_info',['../structelf__info.html',1,'']]],
   ['elf_5fparse_84',['elf_parse',['../xzre_8h.html#a049328971f4e99ce954d5e0346fee6d7',1,'elf_parse():&#160;xzre.h'],['../structelf__functions.html#aa14d9c82c4eb98b3da13538201353533',1,'elf_functions::elf_parse()']]],
   ['elf_5fsymbol_5fget_85',['elf_symbol_get',['../xzre_8h.html#a9d2747f12c29ef6eae1cc4b09f3cc5f7',1,'xzre.h']]],
-  ['elf_5fsymbol_5fget_5faddr_86',['elf_symbol_get_addr',['../structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b',1,'elf_functions::elf_symbol_get_addr()'],['../xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109',1,'elf_symbol_get_addr():&#160;xzre.h']]],
+  ['elf_5fsymbol_5fget_5faddr_86',['elf_symbol_get_addr',['../xzre_8h.html#a099c6531c0b9aaf2a3caf6b001fa5109',1,'elf_symbol_get_addr():&#160;xzre.h'],['../structelf__functions.html#a63dc1dc013c89cb5a59868f5b90f736b',1,'elf_functions::elf_symbol_get_addr()']]],
   ['elfbase_87',['elfbase',['../structelf__info.html#a583c4dd181c2f8b831e56c0d12acd660',1,'elf_info']]],
   ['elfid_88',['ElfId',['../xzre_8h.html#a3ed7f6d009d35ae3bdb830a7bb1e0289',1,'xzre.h']]],
   ['end_5faddr_89',['end_addr',['../structinstruction__search__ctx.html#a84ab74900d4eddc764c11910a7d1bae5',1,'instruction_search_ctx']]],
-  ['evp_5fpkey_5fset1_5frsa_5fplt_90',['EVP_PKEY_set1_RSA_plt',['../structimported__funcs.html#ac19f213bceaf94ab263f88f07199a17e',1,'imported_funcs::EVP_PKEY_set1_RSA_plt()'],['../structbackdoor__shared__libraries__data.html#a875496a16e72c0cb3d8da33781762e0f',1,'backdoor_shared_libraries_data::EVP_PKEY_set1_RSA_plt()']]]
+  ['evp_5fpkey_5fset1_5frsa_5fplt_90',['EVP_PKEY_set1_RSA_plt',['../structimported__funcs.html#ac19f213bceaf94ab263f88f07199a17e',1,'imported_funcs::EVP_PKEY_set1_RSA_plt()'],['../structbackdoor__shared__libraries__data.html#a875496a16e72c0cb3d8da33781762e0f',1,'backdoor_shared_libraries_data::EVP_PKEY_set1_RSA_plt()']]],
+  ['extract_5fpayload_5fmessage_91',['extract_payload_message',['../xzre_8h.html#a52ede2fe27fd135dd42a049ec2fa881d',1,'xzre.h']]]
 ];

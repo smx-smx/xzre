@@ -105,6 +105,8 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlzma__check__state.html">lzma_check_state</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure to hold internal state of the check being calculated.  <a href="structlzma__check__state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsshbuf.html">sshbuf</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonitor.html">monitor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct monitor from openssh-portable  <a href="structmonitor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -364,7 +366,7 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>pfn_RSA_get
 typedef struct <a class="el" href="structimported__funcs.html">imported_funcs</a>&#160;</td><td class="memItemRight" valign="bottom"><b>imported_funcs_t</b></td></tr>
 <tr class="separator:a6ff2f73b261edf1b4c22574b8bc6622e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88322b8c78181f22ffedac582914ff71"><td class="memItemLeft" align="right" valign="top"><a id="a88322b8c78181f22ffedac582914ff71"></a>
-typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_monitor_func_t</b>) (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_monitor_func_t</b>) (struct ssh *ssh, int sock, struct <a class="el" href="structsshbuf.html">sshbuf</a> *m)</td></tr>
 <tr class="separator:a88322b8c78181f22ffedac582914ff71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9daa34d6565ffe5f55796b4725f934c9"><td class="memItemLeft" align="right" valign="top"><a id="a9daa34d6565ffe5f55796b4725f934c9"></a>
 typedef struct <a class="el" href="structsshd__ctx.html">sshd_ctx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sshd_ctx_t</b></td></tr>
@@ -735,7 +737,7 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:afde1d1c69b6bedd0626eee956c7111de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb24a3053ec9f3b4a53d528db5da77db"><td class="memItemLeft" align="right" valign="top"><a id="adb24a3053ec9f3b4a53d528db5da77db"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>PayloadState</b> { <b>PAYLOAD_STATE_INVALID</b> = -1
+<tr class="memitem:adb24a3053ec9f3b4a53d528db5da77db"><td class="memItemLeft" align="right" valign="top"><a id="adb24a3053ec9f3b4a53d528db5da77db"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>PayloadState</b> { <b>PAYLOAD_STATE_INITIAL</b> = -1
  }</td></tr>
 <tr class="separator:adb24a3053ec9f3b4a53d528db5da77db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74d9ad859f69765431df3a1c1189c9f5"><td class="memItemLeft" align="right" valign="top"><a id="a74d9ad859f69765431df3a1c1189c9f5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>dasm_modrm_mask</b> { <b>XZ_MODRM_RM</b> = 0xFF000000
@@ -2029,7 +2031,7 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a966b189602e0af0053053e8405d39fa2"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a966b189602e0af0053053e8405d39fa2">bignum_serialize</a> (u8 *buffer, u64 bufferSize, u64 *pOutSize, const BIGNUM *bn, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
 <tr class="memdesc:a966b189602e0af0053053e8405d39fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the BIGNUM <code>bn</code> to the buffer <code>buffer</code>.  <a href="xzre_8h.html#a966b189602e0af0053053e8405d39fa2">More...</a><br /></td></tr>
 <tr class="separator:a966b189602e0af0053053e8405d39fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4488f858b97dc690b41cf9a5d20ef44"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae4488f858b97dc690b41cf9a5d20ef44">sshbuf_bignum_is_negative</a> (struct sshbuf *buf)</td></tr>
+<tr class="memitem:ae4488f858b97dc690b41cf9a5d20ef44"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ae4488f858b97dc690b41cf9a5d20ef44">sshbuf_bignum_is_negative</a> (struct <a class="el" href="structsshbuf.html">sshbuf</a> *buf)</td></tr>
 <tr class="memdesc:ae4488f858b97dc690b41cf9a5d20ef44"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given serialized BIGNUM is negative  <a href="xzre_8h.html#ae4488f858b97dc690b41cf9a5d20ef44">More...</a><br /></td></tr>
 <tr class="separator:ae4488f858b97dc690b41cf9a5d20ef44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642b0366b943daba60d004a6a46fb7c7"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a642b0366b943daba60d004a6a46fb7c7">rsa_key_hash</a> (const RSA *rsa, u8 *mdBuf, u64 mdBufSize, <a class="el" href="structimported__funcs.html">imported_funcs_t</a> *funcs)</td></tr>
@@ -2068,28 +2070,28 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><b>secret_data_append_fr
 <tr class="memitem:a077a435ef7c8a7960451ff5c0cc5dc43"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a077a435ef7c8a7960451ff5c0cc5dc43">sshd_get_usable_socket</a> (int *pSock, int socket_index, <a class="el" href="structlibc__imports.html">libc_imports_t</a> *imports)</td></tr>
 <tr class="memdesc:a077a435ef7c8a7960451ff5c0cc5dc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the first usable socket fd  <a href="xzre_8h.html#a077a435ef7c8a7960451ff5c0cc5dc43">More...</a><br /></td></tr>
 <tr class="separator:a077a435ef7c8a7960451ff5c0cc5dc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">sshd_get_sshbuf</a> (struct sshbuf *sshbuf, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memitem:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">sshd_get_sshbuf</a> (struct <a class="el" href="structsshbuf.html">sshbuf</a> *<a class="el" href="structsshbuf.html">sshbuf</a>, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a44abb1c444c5d0428c6d67b9e8e38276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the right <code>sshbuf</code> (FIXME: which?), starting from: <code>(*(ctx-&gt;struct_monitor_ptr_address))-&gt;kex-&gt;my</code>  <a href="xzre_8h.html#a44abb1c444c5d0428c6d67b9e8e38276">More...</a><br /></td></tr>
 <tr class="separator:a44abb1c444c5d0428c6d67b9e8e38276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a657f411379e9d088996d8722b82eeefd"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a657f411379e9d088996d8722b82eeefd">sshd_kex_sshbuf_get</a> (void *kex, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx, void **pOutputData, size_t *pOutputSize)</td></tr>
-<tr class="memdesc:a657f411379e9d088996d8722b82eeefd"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates an sshbuf within <code>struct kex</code> (FIXME: which?)  <a href="xzre_8h.html#a657f411379e9d088996d8722b82eeefd">More...</a><br /></td></tr>
-<tr class="separator:a657f411379e9d088996d8722b82eeefd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c558b4d23018ab4e177dfd14f186be9"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a0c558b4d23018ab4e177dfd14f186be9">is_payload_message</a> (u8 *sshbuf_data, size_t sshbuf_size, size_t *pOutPayloadSize, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
-<tr class="memdesc:a0c558b4d23018ab4e177dfd14f186be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the given sshbuf buffer contains a backdoor payload message  <a href="xzre_8h.html#a0c558b4d23018ab4e177dfd14f186be9">More...</a><br /></td></tr>
-<tr class="separator:a0c558b4d23018ab4e177dfd14f186be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9125b8fbfe6e9b620925226966f59e55"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a9125b8fbfe6e9b620925226966f59e55">sshbuf_extract</a> (struct <a class="el" href="structsshbuf.html">sshbuf</a> *buf, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx, void **p_sshbuf_d, size_t *p_sshbuf_size)</td></tr>
+<tr class="memdesc:a9125b8fbfe6e9b620925226966f59e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the provided <code>buf</code> is sane, then decomposes it into <code>p_sshbuf_d</code> and <code>p_sshbuf_size</code>  <a href="xzre_8h.html#a9125b8fbfe6e9b620925226966f59e55">More...</a><br /></td></tr>
+<tr class="separator:a9125b8fbfe6e9b620925226966f59e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ede2fe27fd135dd42a049ec2fa881d"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a52ede2fe27fd135dd42a049ec2fa881d">extract_payload_message</a> (struct <a class="el" href="structsshbuf.html">sshbuf</a> *sshbuf_data, size_t sshbuf_size, size_t *out_payload_size, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
+<tr class="memdesc:a52ede2fe27fd135dd42a049ec2fa881d"><td class="mdescLeft">&#160;</td><td class="mdescRight">locates the RSA modulus from the given sshbuf. if found, the given <code>sshbuf_data</code> will be updated to point to the modulus data. additionally, the length of the modulus will be written to <code>out_payload_size</code>  <a href="xzre_8h.html#a52ede2fe27fd135dd42a049ec2fa881d">More...</a><br /></td></tr>
+<tr class="separator:a52ede2fe27fd135dd42a049ec2fa881d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7522d86213f3cc1309b800601c7073d1"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a7522d86213f3cc1309b800601c7073d1">decrypt_payload_message</a> (<a class="el" href="structkey__payload.html">key_payload_t</a> *payload, size_t payload_size, <a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a7522d86213f3cc1309b800601c7073d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">decrypts the given backdoor payload  <a href="xzre_8h.html#a7522d86213f3cc1309b800601c7073d1">More...</a><br /></td></tr>
 <tr class="separator:a7522d86213f3cc1309b800601c7073d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8412cd4edc81e13f4041a11dd7a59f33"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">check_backdoor_state</a> (<a class="el" href="structglobal__context.html">global_context_t</a> *ctx)</td></tr>
 <tr class="memdesc:a8412cd4edc81e13f4041a11dd7a59f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the backdoor state is the expected one (FIXME: which?)  <a href="xzre_8h.html#a8412cd4edc81e13f4041a11dd7a59f33">More...</a><br /></td></tr>
 <tr class="separator:a8412cd4edc81e13f4041a11dd7a59f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ce260e9315b4afa70668391058ed484"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="memitem:a8ce260e9315b4afa70668391058ed484"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> (struct ssh *ssh, int sock, struct <a class="el" href="structsshbuf.html">sshbuf</a> *m)</td></tr>
 <tr class="memdesc:a8ce260e9315b4afa70668391058ed484"><td class="mdescLeft">&#160;</td><td class="mdescRight">runs the payload received from <a class="el" href="xzre_8h.html#a60b93ed64ba904012e9fa9477e97a244">sshd_proxy_elevate</a>, and then runs the original <code>mm_answer_keyallowed</code> function  <a href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">More...</a><br /></td></tr>
 <tr class="separator:a8ce260e9315b4afa70668391058ed484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99eb76809c798f3bcae98526992e63ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">mm_answer_keyverify_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="memitem:a99eb76809c798f3bcae98526992e63ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">mm_answer_keyverify_hook</a> (struct ssh *ssh, int sock, struct <a class="el" href="structsshbuf.html">sshbuf</a> *m)</td></tr>
 <tr class="memdesc:a99eb76809c798f3bcae98526992e63ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">used in conjunction with <a class="el" href="xzre_8h.html#a8ce260e9315b4afa70668391058ed484">mm_answer_keyallowed_hook</a> to bypass the key validity check  <a href="xzre_8h.html#a99eb76809c798f3bcae98526992e63ef">More...</a><br /></td></tr>
 <tr class="separator:a99eb76809c798f3bcae98526992e63ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace15703b7d962e9d6be778e4d8066f79"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">mm_answer_authpassword_hook</a> (struct ssh *ssh, int sock, struct sshbuf *m)</td></tr>
+<tr class="memitem:ace15703b7d962e9d6be778e4d8066f79"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">mm_answer_authpassword_hook</a> (struct ssh *ssh, int sock, struct <a class="el" href="structsshbuf.html">sshbuf</a> *m)</td></tr>
 <tr class="memdesc:ace15703b7d962e9d6be778e4d8066f79"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to bypass password authentication by replying with a successful <code>MONITOR_ANS_AUTHPASSWORD</code>  <a href="xzre_8h.html#ace15703b7d962e9d6be778e4d8066f79">More...</a><br /></td></tr>
 <tr class="separator:ace15703b7d962e9d6be778e4d8066f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a096fbb5b183337e44012a38910ea31eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xzre_8h.html#a096fbb5b183337e44012a38910ea31eb">mm_log_handler_hook</a> (LogLevel level, int forced, const char *msg, void *ctx)</td></tr>
@@ -2303,7 +2305,7 @@ Variables</h2></td></tr>
 <div class="line">        | (u32)(((mod) &amp; 0xFF) &lt;&lt; 8) \</div>
 <div class="line">        | <a class="code" href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a>(mod, reg, rm) \</div>
 <div class="line">    ))</div>
-<div class="ttc" id="axzre_8h_html_afb7855f3e7ab564100f9f362b9305ad7"><div class="ttname"><a href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a></div><div class="ttdeci">#define X86_MODRM_BYTE(mod, reg, rm)</div><div class="ttdef"><b>Definition:</b> xzre.h:692</div></div>
+<div class="ttc" id="axzre_8h_html_afb7855f3e7ab564100f9f362b9305ad7"><div class="ttname"><a href="xzre_8h.html#afb7855f3e7ab564100f9f362b9305ad7">X86_MODRM_BYTE</a></div><div class="ttdeci">#define X86_MODRM_BYTE(mod, reg, rm)</div><div class="ttdef"><b>Definition:</b> xzre.h:704</div></div>
 </div><!-- fragment --><p>creates the backdoor's MOD.RM word (MOD.RM and its individual components) </p>
 
 </div>
@@ -4042,6 +4044,58 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a52ede2fe27fd135dd42a049ec2fa881d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ede2fe27fd135dd42a049ec2fa881d">&#9670;&nbsp;</a></span>extract_payload_message()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL extract_payload_message </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
+          <td class="paramname"><em>sshbuf_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>sshbuf_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>out_payload_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>locates the RSA modulus from the given sshbuf. if found, the given <code>sshbuf_data</code> will be updated to point to the modulus data. additionally, the length of the modulus will be written to <code>out_payload_size</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sshbuf_data</td><td>sshbuf containing the payload message </td></tr>
+    <tr><td class="paramname">sshbuf_size</td><td>size of sshbuf data </td></tr>
+    <tr><td class="paramname">out_payload_size</td><td>output variable that will be populated with the size of the backdoor payload, if found </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the payload was successfully located, FALSE otherwise </dd></dl>
+
+</div>
+</div>
 <a id="aeb6b7e7363a9d706fdd3704ef5faf584"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb6b7e7363a9d706fdd3704ef5faf584">&#9670;&nbsp;</a></span>fake_lzma_alloc()</h2>
 
@@ -5606,58 +5660,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a0c558b4d23018ab4e177dfd14f186be9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c558b4d23018ab4e177dfd14f186be9">&#9670;&nbsp;</a></span>is_payload_message()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BOOL is_payload_message </td>
-          <td>(</td>
-          <td class="paramtype">u8 *&#160;</td>
-          <td class="paramname"><em>sshbuf_data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>sshbuf_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>pOutPayloadSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
-          <td class="paramname"><em>ctx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>checks if the given sshbuf buffer contains a backdoor payload message </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sshbuf_data</td><td>sshbuf data pointer </td></tr>
-    <tr><td class="paramname">sshbuf_size</td><td>size of sshbuf data </td></tr>
-    <tr><td class="paramname">pOutPayloadSize</td><td>output variable that will be populated with the size of the backdoor payload, if found </td></tr>
-    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the given sshbuf contains a backdoor payload message, FALSE otherwise </dd></dl>
-
-</div>
-</div>
 <a id="a5d94ba8c95f0333dc53ef8432156b0ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d94ba8c95f0333dc53ef8432156b0ca">&#9670;&nbsp;</a></span>is_range_mapped()</h2>
 
@@ -5790,7 +5792,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
           <td class="paramname"><em>m</em>&#160;</td>
         </tr>
         <tr>
@@ -5835,7 +5837,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
           <td class="paramname"><em>m</em>&#160;</td>
         </tr>
         <tr>
@@ -5880,7 +5882,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
           <td class="paramname"><em>m</em>&#160;</td>
         </tr>
         <tr>
@@ -6664,7 +6666,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">BOOL sshbuf_bignum_is_negative </td>
           <td>(</td>
-          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
           <td class="paramname"><em>buf</em></td><td>)</td>
           <td></td>
         </tr>
@@ -6679,6 +6681,58 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the serialized BIGNUM is negative, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a9125b8fbfe6e9b620925226966f59e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9125b8fbfe6e9b620925226966f59e55">&#9670;&nbsp;</a></span>sshbuf_extract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL sshbuf_extract </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>p_sshbuf_d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>p_sshbuf_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the provided <code>buf</code> is sane, then decomposes it into <code>p_sshbuf_d</code> and <code>p_sshbuf_size</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buf</td><td>pointer to <code>struct sshbuf</code> to decompose </td></tr>
+    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
+    <tr><td class="paramname">p_sshbuf_d</td><td>output variable that will receive the address of the sshbuf data </td></tr>
+    <tr><td class="paramname">p_sshbuf_size</td><td>output variable that will receive the size of the sshbuf data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the sshbuf was decomposed successfully, FALSE otherwise </dd></dl>
 
 </div>
 </div>
@@ -7322,7 +7376,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">BOOL sshd_get_sshbuf </td>
           <td>(</td>
-          <td class="paramtype">struct sshbuf *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structsshbuf.html">sshbuf</a> *&#160;</td>
           <td class="paramname"><em>sshbuf</em>, </td>
         </tr>
         <tr>
@@ -7393,58 +7447,6 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the socket was found, FALSE otherwise </dd></dl>
-
-</div>
-</div>
-<a id="a657f411379e9d088996d8722b82eeefd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a657f411379e9d088996d8722b82eeefd">&#9670;&nbsp;</a></span>sshd_kex_sshbuf_get()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">BOOL sshd_kex_sshbuf_get </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>kex</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structglobal__context.html">global_context_t</a> *&#160;</td>
-          <td class="paramname"><em>ctx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>pOutputData</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>pOutputSize</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>locates an sshbuf within <code>struct kex</code> (FIXME: which?) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">kex</td><td>pointer to <code>struct kex</code> to search in </td></tr>
-    <tr><td class="paramname">ctx</td><td>the global context </td></tr>
-    <tr><td class="paramname">pOutputData</td><td>output variable that will receive the address of the sshbuf data </td></tr>
-    <tr><td class="paramname">pOutputSize</td><td>output variable that will receive the size of the sshbuf data </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>BOOL TRUE if the sshbuf was found, FALSE otherwise </dd></dl>
 
 </div>
 </div>
