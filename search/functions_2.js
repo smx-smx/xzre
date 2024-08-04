@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['c_5fmemmove_362',['c_memmove',['../xzre_8h.html#a24efc7542387a49bfef1ab5b8194193d',1,'xzre.h']]],
+  ['c_5fmemmove_362',['c_memmove',['../xzre_8h.html#a830d551c8e6524cdca4a43bbdb8c1682',1,'xzre.h']]],
   ['c_5fstrlen_363',['c_strlen',['../xzre_8h.html#aec582dde549320e2d6f455b3e9625437',1,'xzre.h']]],
   ['c_5fstrnlen_364',['c_strnlen',['../xzre_8h.html#a0aac695db741993832b76ddda4f735b4',1,'xzre.h']]],
   ['chacha_5fdecrypt_365',['chacha_decrypt',['../xzre_8h.html#a8eb41e1828a73dd4ce8f82a0d42dceb5',1,'xzre.h']]],

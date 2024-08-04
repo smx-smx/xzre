@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['validate_5flog_5fhandler_5fpointers_467',['validate_log_handler_pointers',['../xzre_8h.html#a0b6e4a4a74a67f0e049b2d7973480a95',1,'xzre.h']]],
-  ['verify_5fsignature_468',['verify_signature',['../xzre_8h.html#a0b0ce96673cd8ebf4541cff2b20dfe86',1,'xzre.h']]]
+  ['update_5fcpuid_5fgot_5findex_465',['update_cpuid_got_index',['../xzre_8h.html#a6054014f4f0127eb7236c250dbc16762',1,'xzre.h']]],
+  ['update_5fgot_5faddress_466',['update_got_address',['../xzre_8h.html#ad3a61f27a1663eb3e0b25b861c85fe3c',1,'xzre.h']]],
+  ['update_5fgot_5foffset_467',['update_got_offset',['../xzre_8h.html#a127444706ffc25ccce1ee267c014957d',1,'xzre.h']]]
 ];
