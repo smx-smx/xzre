@@ -7,6 +7,7 @@ add_library(xzre_code
 	chacha_decrypt.c
 	count_bits.c
 	count_pointers.c
+	decrypt_payload_message.c
 	elf_parse.c
 	elf_symbol_get_addr.c
 	get_lzma_allocator.c

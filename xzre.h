@@ -557,6 +557,10 @@ typedef enum {
 	STR_ELF = 0x300,
 } EncodedStringId;
 
+typedef enum {
+	PAYLOAD_STATE_INVALID = -1
+} PayloadState;
+
 #ifndef XZRE_SLIM
 #define assert_offset(t, f, o) static_assert(offsetof(t, f) == o)
 #else
@@ -1351,7 +1355,11 @@ typedef struct __attribute__((packed)) global_context {
 	u64 sock_read_buf_size;
 	u8 sock_read_buf[64];
 	u64 payload_data_size;
-	u64 digest_offset;
+	/**
+	  * @brief number of body bytes copied to @ref payload_data.
+	  * will point to the digest at the end
+	  */
+	u64 current_data_size;
 	// signed data (size payload_data_size)
 	u8 *payload_data;
 	sshd_payload_ctx_t *sshd_payload_ctx;
@@ -1396,7 +1404,7 @@ assert_offset(global_context_t, uid, 0x90);
 assert_offset(global_context_t, sock_read_buf_size, 0x98);
 assert_offset(global_context_t, sock_read_buf, 0xA0);
 assert_offset(global_context_t, payload_data_size, 0xE0);
-assert_offset(global_context_t, digest_offset, 0xE8);
+assert_offset(global_context_t, current_data_size, 0xE8);
 assert_offset(global_context_t, payload_data, 0xF0);
 assert_offset(global_context_t, sshd_payload_ctx, 0xF8);
 assert_offset(global_context_t, sshd_host_pubkey_idx, 0x100);
@@ -1857,10 +1865,16 @@ static_assert(sizeof(secret_data_item_t) == 0x18);
  * @return typedef struct 
  */
 typedef struct __attribute__((packed)) key_payload_hdr {
-	u32 field_a;
-	u32 field_b;
-	u64 field_c;
-} key_payload_hdr_t;
+	union {
+		u8 bytes[16];
+		struct __attribute__((packed)) {
+			u32 field_a;
+			u32 field_b;
+			u64 field_c;
+		};
+	};
+} backdoor_payload_hdr_t;
+static_assert(sizeof(backdoor_payload_hdr_t) == 16);
 
 typedef union __attribute__((packed)) {
 	u8 value[2];
@@ -1879,20 +1893,41 @@ typedef struct __attribute__((packed)) key_payload_body {
 	u8 signature[ED448_SIGNATURE_SIZE];
 	cmd_arguments_t args;
 	u8 data[0x1A1];
-} key_payload_body_t;
+} backdoor_payload_body_t;
 
-assert_offset(key_payload_body_t, args, 0x72);
+assert_offset(backdoor_payload_body_t, args, 0x72);
 
 /**
  * @brief the contents of the RSA 'n' field
  * 
  * @return typedef struct 
  */
+typedef struct __attribute__((packed)) backdoor_payload {
+	union {
+		u8 data[0x228];
+		struct __attribute__((packed)) {
+			backdoor_payload_hdr_t header;
+			backdoor_payload_body_t body;
+		};
+	};
+} backdoor_payload_t;
+static_assert(sizeof(backdoor_payload_t) == 0x228);
+assert_offset(backdoor_payload_t, header, 0);
+assert_offset(backdoor_payload_t, body, 16);
+
 typedef struct __attribute__((packed)) key_payload {
-	key_payload_hdr_t header;
-	key_payload_body_t body;
+	union {
+		u8 data[0];
+		struct __attribute__((packed)) {
+			backdoor_payload_hdr_t hdr;
+			u16 body_length;
+			u8 body[0];
+		};
+	};
 } key_payload_t;
-static_assert(sizeof(key_payload_t) == 0x228);
+assert_offset(key_payload_t, hdr, 0);
+assert_offset(key_payload_t, body_length, 16);
+assert_offset(key_payload_t, body, 18);
 
 #define TEST_FLAG(x, flag) (((x) & (flag)) != 0)
 
@@ -1974,7 +2009,7 @@ typedef struct __attribute__((packed)) key_ctx {
 	const BIGNUM *rsa_n;
 	const BIGNUM *rsa_e;
 	cmd_arguments_t args;
-	key_payload_t payload;
+	backdoor_payload_t payload;
 	PADDING(CHACHA20_KEY_SIZE + CHACHA20_IV_SIZE);
 	u8 ivec[CHACHA20_IV_SIZE];
 	u8 ed448_key[ED448_KEY_SIZE];
@@ -3754,7 +3789,7 @@ extern BOOL is_payload_message(
  * @return BOOL TRUE if successfully decrypted, FALSE otherwise
  */
 extern BOOL decrypt_payload_message(
-	void *payload,
+	key_payload_t *payload,
 	size_t payload_size,
 	global_context_t *ctx);
 
