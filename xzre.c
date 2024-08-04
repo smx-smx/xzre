@@ -343,8 +343,8 @@ void main_shared(){
 
 void print_opcode_mask(u64 mask, int mask_offset){
 	for(unsigned i=0x80 + mask_offset; mask; mask >>= 1, i++){
-		// bit 1: this opcode is forbidden
-		BOOL allowed = (mask & 1) == 0;
+		// bit 1: this opcode is allowed
+		BOOL allowed = (mask & 1) == 1;
 		printf("%s 0x%"PRIX8" (0x%"PRIX8") -> %s\n",
 			(allowed) ? "+" : "-",
 			(u8)i, XZDASM_OPC(i),
