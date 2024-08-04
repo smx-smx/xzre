@@ -1013,17 +1013,17 @@ typedef struct __attribute__((packed)) imported_funcs {
 	 * @brief address of the PLT for RSA_public_decrypt() in sshd
 	 * 
 	 */
-	void *RSA_public_decrypt_plt;
+	pfn_RSA_public_decrypt_t *RSA_public_decrypt_plt;
 	/**
 	 * @brief address of the PLT for EVP_PKEY_set1_RSA() in sshd
 	 * 
 	 */
-	void *EVP_PKEY_set1_RSA_plt;
+	pfn_EVP_PKEY_set1_RSA_t *EVP_PKEY_set1_RSA_plt;
 	/**
 	 * @brief address of the PLT for RSA_get0_key() in sshd
 	 * 
 	 */
-	void *RSA_get0_key_plt;
+	pfn_RSA_get0_key_t *RSA_get0_key_plt;
 	void (*DSA_get0_pqg)(
 		const DSA *d, const BIGNUM **p,
 		const BIGNUM **q, const BIGNUM **g);
@@ -3958,7 +3958,10 @@ extern u32 resolver_call_count;
 static_assert(sizeof(resolver_call_count) == 0x4);
 
 extern global_context_t *global_ctx;
-static_assert(sizeof(global_ctx) == 0x8);
+static_assert(sizeof(global_ctx) == sizeof(void *));
+
+extern backdoor_hooks_data_t *hooks_data;
+static_assert(sizeof(hooks_data) == sizeof(void *));
 
 /**
  * @brief location of backdoor_hooks_data_t

@@ -192,7 +192,7 @@ SECTIONS_BEGIN()
 SECTIONS_END(.data.rel.ro)
 
 SECTIONS_BEGIN()
-	/* 000000000000CB10 */ DEFSYM(hooks_data_addr, .bss.filter_optionz)
+	/* 000000000000CB10 */ DEFSYM(hooks_data, .bss.filter_optionz)
 	/* 000000000000CB18 */ DEFSYM(global_ctx, .bss.lzma12_codez)
 	/* 000000000000CB20 */ DEFSYM(resolver_call_count, .bss.__intr2)
 SECTIONS_END(.bss)

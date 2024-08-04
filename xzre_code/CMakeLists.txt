@@ -1,5 +1,6 @@
 add_library(xzre_code
 	backdoor_entry.c
+	backdoor_symbind64.c
   	c_memmove.c
 	c_strlen.c
 	c_strnlen.c
