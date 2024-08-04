@@ -15,7 +15,7 @@ BOOL decrypt_payload_message(
 
 	if(!payload){
 		if(!ctx) return FALSE;
-		goto set_state_invalid;
+		goto set_state_reset;
 	}
 
 	const size_t header_size = sizeof(payload->hdr) + sizeof(payload->body_length);
@@ -64,8 +64,8 @@ BOOL decrypt_payload_message(
 		return TRUE;
 	} while(0);
 
-	set_state_invalid:
-	ctx->payload_state = PAYLOAD_STATE_INVALID;
+	set_state_reset:
+	ctx->payload_state = PAYLOAD_STATE_INITIAL;
 
 	return FALSE;
 }

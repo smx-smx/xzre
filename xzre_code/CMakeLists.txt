@@ -10,6 +10,7 @@ add_library(xzre_code
 	decrypt_payload_message.c
 	elf_parse.c
 	elf_symbol_get_addr.c
+	extract_payload_message.c
 	get_lzma_allocator.c
 	find_call_instruction.c
 	find_lea_instruction.c

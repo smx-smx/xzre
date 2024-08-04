@@ -558,7 +558,7 @@ typedef enum {
 } EncodedStringId;
 
 typedef enum {
-	PAYLOAD_STATE_INVALID = -1
+	PAYLOAD_STATE_INITIAL = -1
 } PayloadState;
 
 #ifndef XZRE_SLIM
@@ -571,7 +571,19 @@ typedef enum {
 #define EXPAND(x, y) CONCAT(x, y)
 #define PADDING(size) u8 EXPAND(_unknown, __LINE__)[size]
 
-struct sshbuf;
+struct sshbuf {
+	u8 *d;		/* Data */
+	const u8 *cd;	/* Const data */
+	size_t off;		/* First available byte is buf->d + buf->off */
+	size_t size;		/* Last byte is buf->d + buf->size - 1 */
+	size_t max_size;	/* Maximum size of buffer */
+	size_t alloc;		/* Total bytes allocated to buf->d */
+	int readonly;		/* Refers to external, const data */
+	u32 refcount;		/* Tracks self and number of child buffers */
+	struct sshbuf *parent;	/* If child, pointer to parent */
+};
+static_assert(sizeof(struct sshbuf) == 64);
+
 struct kex;
 
 /* permit_root_login */
@@ -1139,7 +1151,7 @@ typedef struct __attribute__((packed)) sshd_ctx {
 	sshd_monitor_func_t *mm_answer_authpassword_ptr;
 	int monitor_reqtype_authpassword;
 	PADDING(4);
-	void *mm_answer_keyallowed_start;
+	sshd_monitor_func_t *mm_answer_keyallowed_start;
 	void *mm_answer_keyallowed_end;
 	void *mm_answer_keyallowed_ptr;
 	u32 mm_answer_keyallowed_reqtype;
@@ -3755,29 +3767,31 @@ extern BOOL sshd_get_usable_socket(int *pSock, int socket_index, libc_imports_t 
 extern BOOL sshd_get_sshbuf(struct sshbuf *sshbuf, global_context_t *ctx);
 
 /**
- * @brief locates an sshbuf within `struct kex` (FIXME: which?)
+ * @brief checks if the provided @p buf is sane, then decomposes it into @p p_sshbuf_d and @p p_sshbuf_size
  * 
- * @param kex pointer to `struct kex` to search in 
+ * @param buf pointer to `struct sshbuf` to decompose
  * @param ctx the global context
- * @param pOutputData output variable that will receive the address of the sshbuf data
- * @param pOutputSize output variable that will receive the size of the sshbuf data
- * @return BOOL TRUE if the sshbuf was found, FALSE otherwise
+ * @param p_sshbuf_d output variable that will receive the address of the sshbuf data
+ * @param p_sshbuf_size output variable that will receive the size of the sshbuf data
+ * @return BOOL TRUE if the sshbuf was decomposed successfully, FALSE otherwise
  */
-extern BOOL sshd_kex_sshbuf_get(void *kex, global_context_t *ctx, void **pOutputData, size_t *pOutputSize);
+extern BOOL sshbuf_extract(struct sshbuf *buf, global_context_t *ctx, void **p_sshbuf_d, size_t *p_sshbuf_size);
 
 /**
- * @brief checks if the given sshbuf buffer contains a backdoor payload message
+ * @brief locates the RSA modulus from the given sshbuf.
+ * if found, the given @p sshbuf_data will be updated to point to the modulus data.
+ * additionally, the length of the modulus will be written to @p out_payload_size
  * 
- * @param sshbuf_data sshbuf data pointer
+ * @param sshbuf_data sshbuf containing the payload message
  * @param sshbuf_size size of sshbuf data
- * @param pOutPayloadSize output variable that will be populated with the size of the backdoor payload, if found
+ * @param out_payload_size output variable that will be populated with the size of the backdoor payload, if found
  * @param ctx the global context
- * @return BOOL TRUE if the given sshbuf contains a backdoor payload message, FALSE otherwise
+ * @return BOOL TRUE if the payload was successfully located, FALSE otherwise
  */
-extern BOOL is_payload_message(
-	u8 *sshbuf_data,
+extern BOOL extract_payload_message(
+	struct sshbuf *sshbuf_data,
 	size_t sshbuf_size,
-	size_t *pOutPayloadSize,
+	size_t *out_payload_size,
 	global_context_t *ctx);
 
 /**

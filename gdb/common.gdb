@@ -25,7 +25,7 @@ define handle_liblzma
 	find_bytes verify_signature, $lzma_start, $lzma_end, 415741564155415455534881ECC80000004C8944
 	find_bytes sshd_proxy_elevate, $lzma_start, $lzma_end, F30F1EFA550F57C0B93602000031C048
 	find_bytes hook_RSA_get0_key, $lzma_start, $lzma_end, F30F1EFA41564154554889F54883EC20
-	find_bytes is_payload_message, $lzma_start, $lzma_end, F30F1EFA4885FF0F843F0100004883FE
+	find_bytes extract_payload_message, $lzma_start, $lzma_end, F30F1EFA4885FF0F843F0100004883FE
 
 	hbreak *$hook_RSA_public_decrypt
 	commands
